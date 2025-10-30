@@ -1,0 +1,181 @@
+---
+import Navbar from "../components/navbar.astro";
+import ProductsPanel from "../components/productsPanel.astro";
+import "../styles/navbar.css";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Zelify Page 7 — TX</title>
+  </head>
+
+  <body
+    style="
+      background-color: #e6edf4;
+      background-image: url('/images/FONDO 9.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+      margin: 0;
+    "
+  >
+    <Navbar
+      logoSrc="/images/zelify_logo.png"
+      colors={{
+        text: "#004195",
+        textHover: "#000000",
+        background: "transparent",
+        highlightBg: "#6AFF00",
+        highlightText: "#0b132b",
+        btnLightBg: "transparent",
+        btnLightHoverBg: "rgba(255,255,255,0.1)",
+        btnLightText: "#004195",
+        btnLightBorder: "#00419566",
+        btnOutline: "#004195",
+        btnOutlineHover: "#6AFF00",
+        dropdownBg: "#ffffff",
+        dropdownLink: "#1e2b3a",
+        dropdownHoverBg: "#EEF3F9",
+        radius: "22px",
+      }}
+      buttons={{
+        first: { label: "Work with us", href: "/" },
+        second: { label: "Bank access", href: "/" },
+        third: { label: "EN", href: "/" },
+      }}
+    />
+    <ProductsPanel />
+
+    <section class="hero">
+      <div class="content">
+        <span class="band-text">TX</span>
+
+        <h1 class="title">
+          Seamless Cross-Border<br />
+          Transfers, Instantly.
+        </h1>
+
+        <p class="description">
+          Zelify International Transfers enables instant B2C, B2B, and P2P
+          transactions between Latin America and the United States, delivering
+          speed, security, and efficiency for global money movement.
+        </p>
+
+        <div class="cta">
+          <a href="/" class="btn">Let’s talk</a>
+          <a href="/" class="btn">View API Docs</a>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
+
+<style>
+  @font-face {
+    font-family: "NataSans";
+    src: url("/fonts/NataSans-VariableFont_wght.ttf") format("truetype");
+    font-weight: 100 900;
+    font-display: swap;
+  }
+
+  body {
+    font-family:
+      "NataSans",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      sans-serif;
+    color: #0b132b;
+  }
+
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; 
+    min-height: calc(100vh - 80px);
+    padding: 6rem 8%;
+  }
+
+  .content {
+    max-width: 720px;
+    text-align: center; 
+    position: relative;
+    margin-right: 6%;
+  }
+
+  
+  .band-text {
+    position: absolute;
+    top: 5rem; 
+    right: 7.2rem;
+    font-weight: 400;
+    font-size: 1.05rem;
+    letter-spacing: 0.6px;
+    color: #0b132b; 
+    background: transparent;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .title {
+    color: #1b4b97; 
+    font-weight: 500;
+    line-height: 1.18;
+    font-size: clamp(2rem, 4.6vw, 3.2rem);
+    margin: 7.75rem 0 1rem 0; 
+  }
+
+  .description {
+    color: #1b4b97;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    max-width: 520px; 
+    text-align: center; 
+    margin: 0 auto 2.5rem auto; 
+    font-weight: 400;
+  }
+
+  .cta {
+    display: flex;
+    gap: 0.9rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    background: #6aff00;
+    color: #0b132b;
+    text-decoration: none;
+    font-weight: 800;
+    padding: 0.65rem 1.2rem;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    transition:
+      background-color 0.2s ease,
+      transform 0.15s ease;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .btn:hover {
+    background: #87ff4b;
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 960px) {
+    .hero {
+      justify-content: center;
+      padding: 4rem 6%;
+    }
+    .content {
+      margin-right: 0;
+    }
+    .band-text {
+      position: static;
+      display: inline-block;
+      margin-bottom: 0.75rem;
+    }
+  }
+</style>

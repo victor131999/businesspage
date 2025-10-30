@@ -1,0 +1,187 @@
+---
+import Navbar from "../components/navbar.astro";
+import ProductsPanel from "../components/productsPanel.astro";
+import "../styles/navbar.css";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Zelify Page 5 — Cards</title>
+  </head>
+
+  <body
+    style="
+      background-color: #020b18;
+      background-image: url('/images/FONDO 7.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+      margin: 0;
+      position: relative;
+      overflow: hidden;
+    "
+  >
+    <Navbar
+      logoSrc="/images/zelify_logo2.png"
+      colors={{
+        text: "#ffffff",
+        textHover: "#ffffff",
+        highlightBg: "#6AFF00",
+        highlightText: "#0b132b",
+        btnLightBg: "#E7EDF6",
+        btnLightHoverBg: "#DAE4F1",
+        btnLightText: "#004195",
+        btnOutline: "#E7EDF6",
+        btnOutlineHover: "#ffffff",
+        dropdownBg: "#ffffff",
+        dropdownLink: "#1e2b3a",
+        dropdownHoverBg: "#EEF3F9",
+        radius: "22px",
+      }}
+      buttons={{
+        first: { label: "Work with us", href: "/" },
+        second: { label: "Bank access", href: "/" },
+        third: { label: "EN", href: "/" },
+      }}
+    />
+<ProductsPanel />
+    <section class="hero">
+      <div class="content">
+        <span class="band-text">Cards</span>
+
+        <h1 class="title">
+          Powering the Future<br />
+          of Card Solutions.
+        </h1>
+
+        <p class="description">
+          A comprehensive platform to issue, process, and manage physical and
+          virtual cards, designed to help your business grow, innovate, and
+          scale with ease.
+        </p>
+
+        <div class="cta">
+          <a href="/" class="btn">Let’s talk</a>
+          <a href="/" class="btn">View API Docs</a>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
+
+<style>
+  @font-face {
+    font-family: "NataSans";
+    src: url("/fonts/NataSans-VariableFont_wght.ttf") format("truetype");
+    font-weight: 100 900;
+    font-display: swap;
+  }
+
+  body {
+    font-family:
+      "NataSans",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      sans-serif;
+    color: #e9eff7;
+  }
+
+  .hero {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    
+    justify-content: flex-end;
+    padding: 6rem 50% 6rem 4%;
+    position: relative;
+  }
+
+  .content {
+    max-width: 640px;
+    text-align: left;
+    position: relative;
+  }
+
+  .band-text {
+  position: absolute;
+  top: 4rem; 
+  left: 2rem;
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: #0b132b;
+  letter-spacing: 0.3px;
+}
+
+  .title {
+  color: #b8ff2a;
+  font-weight: 800;
+  line-height: 1.15;
+  font-size: clamp(2rem, 4.6vw, 3.1rem);
+  margin: 6.5rem 0 1rem 0; 
+}
+
+  .description {
+    
+    color: #bfcfe4;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    max-width: 520px;
+    margin: 0 0 3rem 0;
+  }
+
+  .cta {
+    display: flex;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    background: rgba(231, 237, 246, 0.95);
+    color: #1f4d93;
+    text-decoration: none;
+    font-weight: 700;
+    padding: 0.7rem 1.2rem;
+    border-radius: 10px;
+    font-size: 0.98rem;
+    transition:
+      background-color 0.2s ease,
+      transform 0.15s ease;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  }
+  .btn:hover {
+    background: rgba(215, 224, 236, 0.98);
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 960px) {
+    .hero {
+      padding: 4rem 6%;
+    }
+
+    .content {
+      max-width: 100%;
+    }
+
+    .band-text {
+      position: static;
+      display: block;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .title {
+      text-align: center;
+    }
+
+    .description,
+    .cta {
+      text-align: center;
+      justify-content: center;
+    }
+  }
+</style>

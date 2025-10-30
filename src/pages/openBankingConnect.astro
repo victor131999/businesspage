@@ -1,0 +1,174 @@
+---
+import Navbar from "../components/navbar.astro";
+import ProductsPanel from "../components/productsPanel.astro";
+import "../styles/navbar.css";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Zelify Page 4 — Connect</title>
+  </head>
+
+  <body
+    style="
+      background-color: #020b18;
+      background-image: url('/images/FONDO 6.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+      margin: 0;
+    "
+  >
+    <Navbar
+      logoSrc="/images/zelify_logo.png"
+      colors={{
+        text: "#004195",
+        textHover: "#000000",
+        highlightBg: "#6AFF00",
+        highlightText: "#0b132b",
+        btnLightBg: "#6AFF00",
+        btnLightHoverBg: "#DAE4F1",
+        btnLightText: "#004195",
+        btnOutline: "#004195",
+        btnOutlineHover: "#6AFF00",
+        dropdownBg: "#ffffff",
+        dropdownLink: "#1e2b3a",
+        dropdownHoverBg: "#EEF3F9",
+        radius: "22px",
+      }}
+      buttons={{
+        first: { label: "Work with us", href: "/" },
+        second: { label: "Bank access", href: "/" },
+        third: { label: "EN", href: "/" },
+      }}
+    />
+    <ProductsPanel />
+
+    <section class="hero">
+      <div class="content">
+        <span class="band">Connect</span>
+
+        <h1 class="title">
+          Seamless Banking<br />
+          Connections with<br />
+          no frontiers.
+        </h1>
+
+        <p class="description">
+          Allow users to connect their bank accounts, safely authorize access to their data, and generate secure tokens,
+          making it easy for your app to read information and initiate payments with confidence.
+        </p>
+
+        <div class="cta">
+          <a href="/" class="btn">Let’s talk</a>
+          <a href="/" class="btn">View API Docs</a>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
+
+<style>
+  @font-face {
+    font-family: "NataSans";
+    src: url("/fonts/NataSans-VariableFont_wght.ttf") format("truetype");
+    font-weight: 100 900;
+    font-display: swap;
+  }
+
+  body {
+    font-family: "NataSans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #0b132b;
+  }
+
+  .hero {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 6rem 8%;
+  }
+
+  .content {
+    max-width: 640px;
+    text-align: right;
+    margin-right: 8%;
+  }
+
+  .band {
+    display: block;
+    background: #6AFF00;
+    color: #0b132b;
+    padding: 0.85rem 2.2rem;
+    border-radius: 40px;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+    margin-bottom: 2rem;
+    max-width: 540px;
+    margin-left: auto;
+  }
+
+  .title {
+    color: #0b132b;
+    font-weight: 600;
+    line-height: 1.2;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    margin: 0 0 1rem 0;
+  }
+
+  .description {
+    color: #004195;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    max-width: 520px;
+    margin: 0 0 2rem auto;
+  }
+
+  .cta {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    background: #6AFF00;
+    color: #0b132b;
+    text-decoration: none;
+    font-weight: 700;
+    padding: 0.65rem 1.2rem;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+  }
+
+  .btn:hover {
+    background: #87ff4b;
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 960px) {
+    .hero {
+      justify-content: center;
+      padding: 4rem 6%;
+      text-align: center;
+    }
+
+    .content {
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    .band {
+      margin: 0 auto 2rem;
+      text-align: center;
+    }
+
+    .cta {
+      justify-content: center;
+    }
+  }
+</style>

@@ -1,0 +1,169 @@
+---
+import Navbar from "../components/navbar.astro";
+import ProductsPanel from "../components/productsPanel.astro";
+import "../styles/navbar.css";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Zelify Page 8 — Payments</title>
+  </head>
+
+  <body
+    style="
+      background-color: #081525;
+      background-image: url('/images/FONDO 10.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+      margin: 0;
+    "
+  >
+   <Navbar
+      logoSrc="/images/zelify_logo2.png"
+      colors={{
+        text: "#ffffff",
+        textHover: "#ffffff",
+        highlightBg: "#6AFF00",
+        highlightText: "#0b132b",
+        btnLightBg: "#E7EDF6",
+        btnLightHoverBg: "#DAE4F1",
+        btnLightText: "#004195",
+        btnOutline: "#E7EDF6",
+        btnOutlineHover: "#ffffff",
+        dropdownBg: "#ffffff",
+        dropdownLink: "#1e2b3a",
+        dropdownHoverBg: "#EEF3F9",
+        radius: "22px",
+      }}
+      buttons={{
+        first: { label: "Work with us", href: "/" },
+        second: { label: "Bank access", href: "/" },
+        third: { label: "EN", href: "/" },
+      }}
+    />
+    <ProductsPanel />
+
+    <section class="hero">
+      <div class="content">
+        <div class="band">
+          <span class="band-text">Payments</span>
+        </div>
+
+        <h1 class="title">
+          Unified Payment<br />
+          Processing, Simplified.
+        </h1>
+
+        <p class="description">
+          A unified payment processor that accepts multiple methods: cards,
+          custom keys, or contactless options. Includes advanced features like
+          recurring payments, express checkout, tokenization, and custom APIs
+          for seamless integration.
+        </p>
+
+        <div class="cta">
+          <a href="/" class="btn">Let’s talk</a>
+          <a href="/" class="btn">View API Docs</a>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
+
+<style>
+  @font-face {
+    font-family: "NataSans";
+    src: url("/fonts/NataSans-VariableFont_wght.ttf") format("truetype");
+    font-weight: 100 900;
+    font-display: swap;
+  }
+
+  body {
+    font-family: "NataSans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #ffffff;
+  }
+
+  .hero {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; 
+    padding: 6rem 8%;
+  }
+
+  .content {
+    text-align: right; 
+    max-width: 600px; /* un poco más ancho */
+  }
+
+  /* Banda (agrandada y más visible) */
+  /* Banda (más grande y horizontalmente extendida) */
+.band {
+  background-color: #d9e0eb;
+  height: 60px; /* más alta */
+  width: 700px; /* ocupa todo el ancho disponible */
+  max-width: 1200px; /* puedes subir a 1300px si la pantalla lo permite */
+  border-radius: 50px; /* bordes más suaves tipo píldora */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* texto pegado a la derecha */
+  padding: 0 3rem; /* más espacio lateral derecho */
+  margin-left: auto; /* alinea completamente a la derecha */
+  margin-bottom: 2.5rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+
+
+  .band-text {
+    font-weight: 500;
+    font-size: 1.4rem; /* más grande */
+    color: #0b132b;
+    letter-spacing: 0.5px;
+  }
+
+  .title {
+    color: #6aff00;
+    font-weight: 600;
+    line-height: 1.15;
+    font-size: clamp(2.4rem, 3.8vw, 3rem);
+    margin: 1.8rem 0 1.2rem 0;
+    letter-spacing: -0.3px;
+  }
+
+  .description {
+    color: #bcd0e6;
+    font-size: 1.15rem;
+    line-height: 1.65;
+    font-weight: 400;
+    margin: 0 0 2rem 0;
+  }
+
+  .cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end; /* botones también alineados a la derecha */
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    background: #6aff00;
+    color: #0b132b;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.75rem 1.4rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .btn:hover {
+    background: #87ff4b;
+    transform: translateY(-1px);
+  }
+</style>

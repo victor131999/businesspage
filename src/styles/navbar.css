@@ -1,0 +1,203 @@
+/* ===============================
+   Products Panel (overlay)
+   =============================== */
+
+/* Estado oculto */
+.products-panel.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -10px);
+}
+
+/* Contenedor */
+.products-panel {
+  position: fixed;
+  top: 57px; /* debajo del navbar */
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1120px, 92vw);
+  height: 560px;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 0;
+  padding: 0;
+
+  border-radius: 22px;
+  background: rgba(205, 209, 221, 0.82); /* #CDD1DD con transparencia */
+  backdrop-filter: blur(8px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  z-index: 1000;
+
+  opacity: 1;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* ===============================
+   Sidebar
+   =============================== */
+
+.pp-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 10px;
+  backdrop-filter: blur(8px);
+  background: rgba(205, 209, 221, 0.82);
+  border-top-left-radius: 22px;
+  border-bottom-left-radius: 22px;
+}
+
+.pp-item {
+  appearance: none;
+  border: 0;    
+  border-radius: 12px;
+  padding: 10px 14px;
+
+  background: transparent;
+  color: #000000;
+  font-size: 0.98rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.12s ease;
+}
+
+.pp-item:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.pp-item.is-active {
+  background: #6bfd02;
+  color: #0b132b;
+}
+
+/* Indicador al costado del activo */
+.pp-item.is-active::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -10px;
+  width: 1px;
+  height: 100%;
+  border-radius: 0 6px 6px 0;
+  background: #6aff00;
+}
+
+/* ===============================
+   Contenido
+   =============================== */
+
+.pp-content {
+  overflow: auto;
+  padding: 24px 30px 28px 28px;
+
+  background: transparent;
+  color: #0b2e6e;
+  border-left: 1px solid rgba(12, 58, 134, 0.25);
+  border-top-right-radius: 22px;
+  border-bottom-right-radius: 22px;
+}
+
+.pp-head .pp-title {
+  margin: 0 0 6px 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+.pp-head .pp-sub {
+  margin: 0 0 12px 0;
+  color: #34548a;
+  font-size: 0.98rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.pp-rule {
+  margin: 6px 0 16px 0;
+  border: 0;
+  border-top: 3px solid #1f56ae;
+}
+
+/* Lista de features */
+.pp-features {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pp-feature {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 14px;
+  align-items: center;
+}
+
+.pp-icon {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+
+  border-radius: 14px;
+  background: #6aff00;
+  color: #0b132b;
+  box-shadow: 0 10px 18px rgba(106, 255, 0, 0.25);
+}
+/* Solo el ícono del mundo dentro de .pp-icon */
+.pp-icon img[alt="World icon"] {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+}
+.pp-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.pp-ft-title {
+  margin: 0 0 4px 0;
+  color: #0b2e6e;
+  font-weight: 800;
+}
+
+.pp-ft-desc {
+  margin: 0;
+  color: #3b5a8f;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+/* ===============================
+   Botón de trigger (Products)
+   =============================== */
+
+#products-trigger {
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  padding: 0.6rem 1.2rem;
+
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+}
+
+#products-trigger:hover {
+  background-color: #cdd1dd;
+}
+
+#products-trigger.active {
+  background-color: #cdd1dd;
+  color: #0b132b;
+  border-radius: 12px;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+.pp-content { opacity: 1; transition: opacity .18s; }
+.pp-content.is-fading { opacity: .45; }   /* solo cuando queramos atenuar */

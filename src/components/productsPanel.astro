@@ -1,0 +1,390 @@
+---
+import "../styles/navbar.css";
+---
+
+<div id="products-panel" class="products-panel hidden">
+  <aside class="pp-sidebar" role="tablist" aria-label="Products">
+    <button role="tab" class="pp-item is-active" data-key="register"
+      >Register</button
+    >
+    <button role="tab" class="pp-item" data-key="identity">Identity</button>
+    <button role="tab" class="pp-item" data-key="aml">AML</button>
+    <button role="tab" class="pp-item" data-key="linking">Linking</button>
+    <button role="tab" class="pp-item" data-key="cards">Cards</button>
+    <button role="tab" class="pp-item" data-key="transfers">Transfers</button>
+    <button role="tab" class="pp-item" data-key="international"
+      >International Transfers</button
+    >
+    <button role="tab" class="pp-item" data-key="biz"
+      >Business & Organizations</button
+    >
+    <button role="tab" class="pp-item" data-key="matilda"
+      >Matilda AI Fintech Core</button
+    >
+  </aside>
+
+  <section class="pp-content" aria-live="polite">
+    <header class="pp-head">
+      <h3 class="pp-title">Overview</h3>
+      <p class="pp-sub">
+        A product that enables initial registration through email and password,
+        ensuring access security, traceability, and device data capture to
+        prevent fraud and connect the user to a trusted environment.
+      </p>
+      <hr class="pp-rule" />
+    </header>
+
+    <ul id="pp-features" class="pp-features">
+      <li class="pp-feature">
+        <span class="pp-icon">
+          <!-- icono placeholder -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            ><path d="M9 11l3 3L22 4" stroke-width="2"></path></svg
+          >
+        </span>
+        <div>
+          <h4 class="pp-ft-title">Authentication</h4>
+          <p class="pp-ft-desc">
+            Allows register, authenticate, and authorize users.
+          </p>
+        </div>
+      </li>
+      <li class="pp-feature">
+        <span class="pp-icon">
+          <img src="/icons/Worldicon.svg" alt="World icon" />
+        </span>
+        <div>
+          <h4 class="pp-ft-title">Geolocation</h4>
+          <p class="pp-ft-desc">
+            Locate, map, or analyze locations with precision.
+          </p>
+        </div>
+      </li>
+      <li class="pp-feature">
+        <span class="pp-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            ><rect x="3" y="4" width="18" height="14" rx="2" stroke-width="2"
+            ></rect><path d="M7 8h10" stroke-width="2"></path></svg
+          >
+        </span>
+        <div>
+          <h4 class="pp-ft-title">Device information</h4>
+          <p class="pp-ft-desc">
+            Collects device information for security and analytics.
+          </p>
+        </div>
+      </li>
+    </ul>
+  </section>
+</div>
+
+<script type="module">
+  // Referencias dentro del panel
+  const panel = document.getElementById("products-panel");
+  const sidebar = panel.querySelector(".pp-sidebar");
+  const titleEl = panel.querySelector(".pp-title");
+  const subEl = panel.querySelector(".pp-sub");
+  const listEl = panel.querySelector("#pp-features");
+  // 1) Ruta destino por sección (ajusta si cambian tus paths)
+  const KEY_TO_ROUTE = {
+    register: "/auth",
+    identity: "/identity",
+    aml: "/amlCompliance",
+    linking: "/openBankingConnect",
+    cards: "/cardIssuing",
+    transfers: "/moneyTransfers",
+    international: "/transactions", // cámbialo cuando tengas /internationalTransfers
+    biz: "/discountsCoupons", // o la página que decidas para “Business & Organizations”
+    matilda: "/matildaAI",
+  };
+
+  // Pequeño catálogo de contenidos por pestaña
+  const DATA = {
+    register: {
+      title: "Overview",
+      sub: "A product that enables initial registration through email and password, ensuring access security, traceability, and device data capture to prevent fraud and connect the user to a trusted environment.",
+      features: [
+        {
+          icon: "check",
+          t: "Authentication",
+          d: "Allows register, authenticate, and authorize users.",
+        },
+        {
+          icon: "globe",
+          t: "Geolocation",
+          d: "Locate, map, or analyze locations with precision.",
+        },
+        {
+          icon: "device",
+          t: "Device information",
+          d: "Collects device information for security and analytics.",
+        },
+      ],
+    },
+    identity: {
+      title: "Identity",
+      sub: "Identity proofing, liveness and document checks to reduce fraud and friction.",
+      features: [
+        {
+          icon: "id",
+          t: "Identity",
+          d: "Verify identity using documents and authoritative data.",
+        },
+        {
+          icon: "face",
+          t: "Liveness",
+          d: "Biometric checks ensure the person is present and real.",
+        },
+        {
+          icon: "shield",
+          t: "Watchlists",
+          d: "Screen against sanctions, PEP and adverse media.",
+        },
+      ],
+    },
+    aml: {
+      title: "AML Compliance",
+      sub: "Real-time monitoring, risk scoring and workflows that help you meet regulations.",
+      features: [
+        {
+          icon: "rules",
+          t: "AML",
+          d: "Configurable policies with alerts and audit trails.",
+        },
+        {
+          icon: "score",
+          t: "Risk Scoring",
+          d: "Spot suspicious behaviour across transactions.",
+        },
+        {
+          icon: "case",
+          t: "Case Management",
+          d: "Investigate, escalate and resolve alerts efficiently.",
+        },
+      ],
+    },
+    linking: {
+      title: "Open Banking / Linking",
+      sub: "Connect user accounts securely to enable data access and payments initiation.",
+      features: [
+        {
+          icon: "link",
+          t: "Connections",
+          d: "Bank-grade linking flows with consent management.",
+        },
+        {
+          icon: "sync",
+          t: "Data Sync",
+          d: "Balances, transactions and holdings, normalized.",
+        },
+        {
+          icon: "key",
+          t: "Tokens",
+          d: "Short-lived tokens and rotation for secure access.",
+        },
+      ],
+    },
+    cards: {
+      title: "Card Issuing",
+      sub: "Issue, manage and control virtual and physical cards with granular rules.",
+      features: [
+        {
+          icon: "card",
+          t: "Card",
+          d: "Instantly create cards and set spend limits.",
+        },
+        {
+          icon: "lock",
+          t: "Controls",
+          d: "MCC, location and velocity controls per card.",
+        },
+        {
+          icon: "gear",
+          t: "Lifecycle",
+          d: "Activate, pause, replace and reissue seamlessly.",
+        },
+      ],
+    },
+    transfers: {
+      title: "Money Transfers",
+      sub: "Reliable pay-ins and pay-outs with tracking and reconciliation at scale.",
+      features: [
+        {
+          icon: "send",
+          t: "Pay-ins",
+          d: "Accept bank transfers and faster payments.",
+        },
+        {
+          icon: "receive",
+          t: "Pay-outs",
+          d: "Disburse funds programmatically, with webhooks.",
+        },
+        {
+          icon: "report",
+          t: "Reconciliation",
+          d: "Match statements to ledgers automatically.",
+        },
+      ],
+    },
+    international: {
+      title: "International Transfers",
+      sub: "Cross-border payments, FX and compliance in a single interface.",
+      features: [
+        {
+          icon: "globe",
+          t: "TX",
+          d: "Competitive rates with transparent fees.",
+        },
+        {
+          icon: "shield",
+          t: "Compliance",
+          d: "Sanctions screening and travel-rule data.",
+        },
+        {
+          icon: "track",
+          t: "Tracking",
+          d: "Know where your payment is at any time.",
+        },
+      ],
+    },
+    biz: {
+      title: "Business & Organizations",
+      sub: "Multi-entity accounts, roles and permissions for teams and partners.",
+      features: [
+        {
+          icon: "Discounts & Coupons",
+          t: "Empowering Businesses Within the Zelify Ecosystem.",
+          d: "Separate finances by business unit or client.",
+        },
+        {
+          icon: "users",
+          t: "Roles",
+          d: "Granular permissions with audit logging.",
+        },
+        {
+          icon: "api",
+          t: "APIs & Webhooks",
+          d: "Automate workflows safely and predictably.",
+        },
+      ],
+    },
+    matilda: {
+      title: "Matilda AI Fintech Core",
+      sub: "AI assistance for financial analysis, education and support across the suite.",
+      features: [
+        {
+          icon: "spark",
+          t: "Matilda AI Fintech Core",
+          d: "Explain anomalies and surface opportunities.",
+        },
+
+        {
+          icon: "chat",
+          t: "Assistant",
+          d: "Context-aware answers from your financial data.",
+        },
+        {
+          icon: "bolt",
+          t: "Automation",
+          d: "Trigger actions and drafts from natural language.",
+        },
+      ],
+    },
+  };
+
+  // Iconos inline (ligeros). Para "globe" usamos tu SVG como <img>.
+  function iconSVG(name) {
+    switch (name) {
+      case "globe":
+        return `<img src="/icons/Worldicon.svg" alt="World icon" />`;
+      case "check":
+        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/></svg>`;
+      case "device":
+        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M7 8h10"/></svg>`;
+      case "id":
+        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="9" cy="12" r="2"/><path d="M13 11h5M13 14h5"/></svg>`;
+      case "face":
+        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01M8 15c1.5 1 6.5 1 8 0"/></svg>`;
+      case "shield":
+        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 4v5c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V7l7-4z"/></svg>`;
+      case "rules":
+        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M5 6h.01M5 12h.01M5 18h.01"/></svg>`;
+      case "score":
+        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 20v-6l4 2 4-8 4 6 4-10"/></svg>`;
+      case "case":
+        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V6a3 3 0 0 1 6 0v1"/></svg>`;
+      case "link":
+        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 1 7 0l1 1a5 5 0 0 1-7 7l-1-1"/><path d="M14 11a5 5 0 0 1-7 0l-1-1a5 5 0 0 1 7-7l1 1"/></svg>`;
+      case "sync":
+        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 15-6l3 3M21 12a9 9 0 0 1-15 6l-3-3"/><path d="M3 9v3h3M21 15v-3h-3"/></svg>`;
+      case "key":
+        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7.5" cy="11.5" r="3.5"/><path d="M11 11.5h10M18 8.5v6"/></svg>`;
+      case "card":
+        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>`;
+      case "lock":
+        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>`;
+      case "gear":
+        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06A2 2 0 1 1 7.04 2.3l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06A2 2 0 1 1 21.7 7.04l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.69.18 1.2.79 1.2 1.53S20.69 12 20 12h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>`;
+      case "send":
+        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>`;
+      case "receive":
+        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v7h7"/><path d="M21 21v-7h-7"/><path d="M3 10L13 0M11 24l10-10"/></svg>`;
+      case "report":
+        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3z"/><path d="M7 17v-6M12 17V7M17 17v-3"/></svg>`;
+      case "org":
+        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v6m0 0L7 15m5-6 5 6"/><rect x="2" y="15" width="20" height="6" rx="2"/></svg>`;
+      case "users":
+        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M17 11a4 4 0 1 0-4 4h6"/><path d="M3 21a6 6 0 0 1 12 0"/></svg>`;
+      case "api":
+        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h10M4 17h7"/></svg>`;
+      case "spark":
+        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v8M12 22v-8M2 12h8M22 12h-8M5 5l5 3M19 19l-5-3M19 5l-5 3M5 19l5-3"/></svg>`;
+      case "chat":
+        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>`;
+      case "bolt":
+        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`;
+      default:
+        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg>`;
+    }
+  }
+
+  // Render del contenido según pestaña
+  function render(key) {
+    const section = DATA[key] ?? DATA.register;
+
+    titleEl.textContent = section.title;
+    subEl.textContent = section.sub;
+
+    listEl.innerHTML = section.features
+      .map((f, idx) => {
+        const icon = iconSVG(f.icon);
+        const card = `
+        <span class="pp-icon">${icon}</span>
+        <div>
+          <h4 class="pp-ft-title">${f.t}</h4>
+          <p class="pp-ft-desc">${f.d}</p>
+        </div>
+      `;
+
+        // 👉 El PRIMER feature (idx === 0) se vuelve link a la página de la sección
+        if (idx === 0 && KEY_TO_ROUTE[key]) {
+          return `<a class="pp-feature" href="${KEY_TO_ROUTE[key]}">${card}</a>`;
+        }
+        // Los demás quedan como items normales
+        return `<li class="pp-feature">${card}</li>`;
+      })
+      .join("");
+  }
+
+  // Click en la barra izquierda
+  sidebar.addEventListener("click", (e) => {
+    const btn = e.target.closest(".pp-item");
+    if (!btn) return;
+    sidebar.querySelector(".is-active")?.classList.remove("is-active");
+    btn.classList.add("is-active");
+    render(btn.dataset.key);
+  });
+
+  // Estado inicial
+  render("register");
+</script>

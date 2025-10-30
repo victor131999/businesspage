@@ -1,0 +1,209 @@
+---
+import Navbar from "../components/navbar.astro";
+import ProductsPanel from "../components/productsPanel.astro";
+import "../styles/navbar.css";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Zelify Page 11 — Discounts & Coupons</title>
+    <style>:root { --nav-h: 80px; }</style>
+  </head>
+
+  <body
+    style="
+      background-color:#081525;
+      background-image:url('/images/FONDO 14.jpg'); 
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+      min-height:100vh;
+      margin:0;
+    "
+  >
+    <Navbar
+      logoSrc="/images/zelify_logo2.png"
+      colors={{
+        text: "#ffffff",
+        textHover: "#ffffff",
+        highlightBg: "#ffffff",
+        highlightText: "#0b132b",
+        btnLightBg: "#6AFF00",
+        btnLightHoverBg: "#ffffff",
+        btnLightText: "#004195",
+        btnOutline: "#6AFF00",
+        btnOutlineHover: "#ffffff",
+        dropdownBg: "#ffffff",
+        dropdownLink: "#1e2b3a",
+        dropdownHoverBg: "#EEF3F9",
+        radius: "22px",
+      }}
+      buttons={{
+        first: { label: "Work with us", href: "/" },
+        second: { label: "Bank access", href: "/" },
+        third: { label: "EN", href: "/" },
+      }}
+    />
+<ProductsPanel />
+    <section class="hero">
+      <div class="content">
+        <!-- Banda -->
+        <div class="band">
+          <span class="band-text">Discounts & Coupons</span>
+        </div>
+
+        <!-- Título -->
+        <h1 class="title">
+          Empowering Businesses<br />
+          Within the Zelify<br />
+          Ecosystem.
+        </h1>
+
+        <!-- Descripción -->
+        <p class="description">
+          A platform designed for merchants, restaurants, partners, and companies
+          looking to join the Zelify ecosystem to offer benefits, discounts, and
+          financial services to end users.
+        </p>
+
+        <!-- CTAs -->
+        <div class="cta">
+          <a href="/" class="btn-light">Let’s talk</a>
+          <a href="/" class="btn-light">View API Docs</a>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
+
+<style>
+  @font-face {
+    font-family: "NataSans";
+    src: url("/fonts/NataSans-VariableFont_wght.ttf") format("truetype");
+    font-weight: 100 900;
+    font-display: swap;
+  }
+
+  body {
+    font-family: "NataSans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color:#fff;
+    overflow-x:hidden;
+  }
+
+  /* Layout principal: textos a la izquierda */
+.hero {
+  min-height: calc(100vh - var(--nav-h));
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 6rem 8% 6rem 10%; /* más espacio a la izquierda */
+}
+
+.content {
+  text-align: left;
+  max-width: 720px;
+  position: relative;
+  top: 60px;     /* 🔽 baja el bloque más */
+  left: 180px;   /* ➡️ empuja ligeramente a la derecha */
+  margin: 0;
+}
+
+/* Banda verde larga */
+.band {
+  height: 64px;
+  width: clamp(700px, 60vw, 1200px);
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 2.5rem;
+  margin: 0 0 1.8rem 0;
+}
+
+.band-text {
+  color: #004195;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.3px;
+}
+
+/* Título */
+.title {
+  color: #6AFF00;
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: 0.2px;
+  font-size: clamp(2.4rem, 4vw, 3.2rem);
+  margin: 0.8rem 0 1.1rem 0;
+  text-align: left;
+}
+
+/* Descripción más compacta */
+.description {
+  color: #bcd0e6;
+  font-size: 1.02rem;
+  line-height: 1.55; /* más compacto */
+  margin: 0 0 1.8rem 0;
+  max-width: 480px; /* ajusta a 4 líneas aprox */
+  text-wrap: balance;
+  text-align: left;
+}
+
+/* Botones alineados a la izquierda */
+.cta {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.btn-light {
+  background: #E7EDF6;
+  color: #004195;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.5rem 1.4rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  border: 1px solid #D3DEEE;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+.btn-light:hover {
+  background: #DAE4F1;
+  transform: translateY(-1px);
+}
+
+/* Responsivo */
+@media (max-width: 1000px) {
+  .hero {
+    justify-content: center;
+    padding: 5rem 6%;
+  }
+  .content {
+    text-align: center;
+    left: 0;
+    top: 40px;
+  }
+  .band {
+    width: 100%;
+    justify-content: center;
+  }
+  .cta {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 4rem 5%;
+  }
+  .content {
+    max-width: 100%;
+    left: 0;
+    top: 20px;
+  }
+}
+</style>
