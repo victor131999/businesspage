@@ -9,21 +9,10 @@ import "../styles/navbar.css";
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Zelify — Business Finances</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css" />
   </head>
 
-  <body
-    style="
-    background-color: #020b18;
-    background-image: url('/images/FONDO%201.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100vh;             /* ocupa exactamente la ventana visible */
-    width: 100vw;              /* ocupa todo el ancho de la ventana */
-    margin: 0;
-    overflow: hidden;          /* evita desplazamiento vertical u horizontal */
-  "
-  >
+  <body>
     <Navbar />
     <ProductsPanel />
     <!-- ← antes estaba <productsPanel /> y NO renderiza -->
@@ -33,10 +22,10 @@ import "../styles/navbar.css";
         <h2 class="subtitle">The New Standard in</h2>
         <h1 class="title">Business<br />Finances</h1>
         <p class="description">
-          Zelify simplifies business finance: <br />connecting payments, credit,
+          Zelify simplifies business finance: <br />connecting payments, credit,<br />
           and cash flow in one smart platform.
         </p>
-        <a href="/" class="btn-primary">Let’s start</a>
+        <a href="https://documentations.zelify.com" class="btn-primary hvr-grow">Let's start</a>
       </div>
     </section>
     <!-- 🔥 Línea verde translúcida -->
@@ -61,6 +50,16 @@ import "../styles/navbar.css";
       Roboto,
       sans-serif;
     color: #fff;
+    background-color: #020b18;
+    background-image: url('/images/FONDO%201.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    overflow: hidden;
   }
 
   .hero {
@@ -76,7 +75,7 @@ import "../styles/navbar.css";
   /* Aquí controlas la posición manual del contenido */
   .hero-content {
     position: absolute;
-    top: 20%; /* mueve hacia abajo */
+    top: 15%; /* mueve hacia abajo */
     left: 20%; /* mueve hacia la derecha */
     transform: translate(0, 0); /* puedes ajustar manualmente con translate */
     max-width: 600px;
@@ -84,22 +83,22 @@ import "../styles/navbar.css";
 
   .subtitle {
     font-size: 2.5rem;
-    font-weight: 600;
-    color: #6aff00;
+    font-weight: normal;
+    color: #95FF0B;
     margin-bottom: 0.5rem;
   }
 
   .title {
     font-size: 6.5rem;
     font-weight: 800;
-    line-height: 1.1;
+    line-height: 0.95;
     color: #f8f9fa;
     margin-bottom: 1.5rem;
   }
 
   .description {
-    font-size: 1.1rem;
-    line-height: 1.55;
+    font-size: 1.25rem;
+    line-height: 1.4;
     color: #ced4da;
     margin-bottom: 2rem;
     max-width: 520px;
@@ -108,18 +107,19 @@ import "../styles/navbar.css";
   }
 
   .btn-primary {
-    background-color: #6aff00;
+    background-color: #95FF0B;
     color: #0d1117;
     text-decoration: none;
     font-weight: 600;
+    font-size: 1.25rem;
     padding: 0.3rem 1.5rem;
     border-radius: 8px;
     display: inline-block;
-    transition: background-color 0.2s ease;
+    cursor: pointer;
   }
 
   .btn-primary:hover {
-    background-color: #6aff00;
+    background-color: #85ef00;
   }
   .green-line {
     position: absolute;
@@ -127,15 +127,161 @@ import "../styles/navbar.css";
     left: 0;
     width: 100%;
     height: 50px; /* grosor de la franja */
-    background: rgba(106, 255, 0, 0.15); /* verde translúcido */
-    box-shadow: 0 0 5px rgba(106, 255, 0, 0.6); /* brillo suave */
+    background: linear-gradient(
+      to right,
+      rgba(149, 255, 11, 0.05) 0%,
+      rgba(149, 255, 11, 0.3) 50%,
+      rgba(149, 255, 11, 0.05) 100%
+    );
+    box-shadow: 0 0 5px rgba(149, 255, 11, 0.6); /* brillo suave */
     backdrop-filter: blur(1px); /* efecto translúcido elegante */
     z-index: 1; /* detrás del texto pero visible sobre el fondo */
   }
-  background: linear-gradient(
-    to right,
-    rgba(106, 255, 0, 0.05) 0%,
-    rgba(106, 255, 0, 0.3) 50%,
-    rgba(106, 255, 0, 0.05) 100%
-  );
+
+  /* Tablet/iPad */
+  @media (max-width: 1024px) {
+    .hero-content {
+      top: 18%;
+      left: 10%;
+      max-width: 500px;
+    }
+
+    .subtitle {
+      font-size: 2rem;
+    }
+
+    .title {
+      font-size: 4.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .description {
+      font-size: 1.1rem;
+      max-width: 450px;
+    }
+
+    .btn-primary {
+      font-size: 1.1rem;
+      padding: 0.4rem 1.3rem;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    body {
+      overflow: auto;
+      min-height: 100vh;
+      background-size: cover;
+      background-position: 60% bottom;
+      background-attachment: scroll;
+    }
+
+    .hero {
+      overflow: auto;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 0;
+      padding-top: 1rem;
+    }
+
+    .hero-content {
+      position: relative;
+      top: auto;
+      left: auto;
+      padding: 1rem 1.5rem 2rem;
+      margin: 0 auto;
+      max-width: 100%;
+      width: 100%;
+      transform: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .subtitle {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      text-align: center;
+      width: 100%;
+    }
+
+    .title {
+      font-size: 3rem;
+      line-height: 1;
+      margin-bottom: 1rem;
+      text-align: center;
+      width: 100%;
+    }
+
+    .description {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+      max-width: 100%;
+      width: 100%;
+      text-align: center;
+      padding: 0 1rem;
+    }
+
+    .btn-primary {
+      font-size: 1rem;
+      padding: 0.75rem 2rem;
+      display: block;
+      text-align: center;
+      width: fit-content;
+      margin: 0 auto;
+    }
+
+    .green-line {
+      position: relative;
+      bottom: auto;
+      margin-top: 3rem;
+      height: 30px;
+      width: 100%;
+    }
+  }
+
+  /* Small mobile */
+  @media (max-width: 480px) {
+    body {
+      background-size: cover;
+      background-position: 60% bottom;
+    }
+
+    .hero {
+      padding: 0;
+      padding-top: 0.5rem;
+    }
+
+    .hero-content {
+      padding: 0.5rem 1rem 1.5rem;
+      width: 100%;
+    }
+
+    .subtitle {
+      font-size: 1.25rem;
+      width: 100%;
+    }
+
+    .title {
+      font-size: 2.5rem;
+      width: 100%;
+    }
+
+    .description {
+      font-size: 0.95rem;
+      width: 100%;
+      padding: 0 0.5rem;
+    }
+
+    .btn-primary {
+      font-size: 0.95rem;
+      padding: 0.65rem 1.8rem;
+      width: fit-content;
+    }
+  }
 </style>
+
