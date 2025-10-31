@@ -43,14 +43,14 @@ import "../styles/navbar.css";
       }}
       buttons={{
         first: { label: "Work with us", href: "/" },
-        second: { label: "Bank access", href: "/" },
+        second: { label: "Bank access", href: "https://www.zelify.io/" },
         third: { label: "EN", href: "/" },
       }}
     />
 <ProductsPanel />
     <section class="hero">
       <div class="content">
-        <span class="band-text">Cards</span>
+        <span class="badge">Cards</span>
 
         <h1 class="title">
           Powering the Future<br />
@@ -64,8 +64,8 @@ import "../styles/navbar.css";
         </p>
 
         <div class="cta">
-          <a href="/" class="btn">Let’s talk</a>
-          <a href="/" class="btn">View API Docs</a>
+          <a href="/hablemos" class="btn">Let's talk</a>
+          <a href="https://documentations.zelify.com/zelify-servicios-financieros/zelify-cards" class="btn">View API Docs</a>
         </div>
       </div>
     </section>
@@ -107,23 +107,27 @@ import "../styles/navbar.css";
     position: relative;
   }
 
-  .band-text {
-  position: absolute;
-  top: 4rem; 
-  left: 2rem;
-  font-weight: 800;
-  font-size: 1.25rem;
-  color: #0b132b;
-  letter-spacing: 0.3px;
-}
+  .badge {
+    display: inline-block;
+    max-width: 280px;
+    background: #6AFF00;
+    color: #0b132b;
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    text-align: left;
+    box-shadow: 0 0 12px rgba(184, 255, 42, 0.4);
+  }
 
   .title {
-  color: #b8ff2a;
-  font-weight: 800;
-  line-height: 1.15;
-  font-size: clamp(2rem, 4.6vw, 3.1rem);
-  margin: 6.5rem 0 1rem 0; 
-}
+    color: #b8ff2a;
+    font-weight: 800;
+    line-height: 1.15;
+    font-size: clamp(2rem, 4.6vw, 3.1rem);
+    margin: 0 0 1rem 0;
+  }
 
   .description {
     
@@ -167,11 +171,10 @@ import "../styles/navbar.css";
       max-width: 100%;
     }
 
-    .band-text {
-      position: static;
-      display: block;
+    .badge {
+      margin: 0 auto 2rem;
       text-align: center;
-      margin-bottom: 1.5rem;
+      max-width: 280px;
     }
 
     .title {

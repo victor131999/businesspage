@@ -175,6 +175,12 @@
   list-style: none;
 }
 
+/* Cards: dos columnas */
+.pp-features.cards-grid {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px 20px;
+}
+
 .pp-feature {
   display: grid;
   grid-template-columns: 52px 1fr;

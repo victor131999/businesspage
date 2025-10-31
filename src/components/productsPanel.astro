@@ -176,44 +176,104 @@ import "../styles/navbar.css";
       ],
     },
     linking: {
-      title: "Open Banking / Linking",
-      sub: "Connect user accounts securely to enable data access and payments initiation.",
+      title: "Overview",
+      sub: "Allows users to link their bank account, authorize data access, and generate a secure token for apps (e.g., fintechs) to read information or initiate payments.",
       features: [
         {
-          icon: "link",
-          t: "Connections",
-          d: "Bank-grade linking flows with consent management.",
+          icon: "bankAccount",
+          t: "Bank Account Linking",
+          d: "Links bank accounts through temporary tokens or OAuth authentication.",
         },
         {
-          icon: "sync",
-          t: "Data Sync",
-          d: "Balances, transactions and holdings, normalized.",
+          icon: "linkingSdk",
+          t: "Linking SDK",
+          d: "Identifies negative news, reports, and public mentions.",
         },
         {
-          icon: "key",
-          t: "Tokens",
-          d: "Short-lived tokens and rotation for secure access.",
+          icon: "accountOwnerVerify",
+          t: "Account and Ownership Verification",
+          d: "Allows companies to upload their own lists.",
+        },
+        {
+          icon: "accessFinancialData",
+          t: "Access to Financial Data",
+          d: "Collects device information for security and analytics.",
+        },
+        {
+          icon: "digitalAccount",
+          t: "Digital Accounts",
+          d: "Allows creating digital accounts for a user.",
+        },
+        {
+          icon: "creationClabeAc",
+          t: "Creation of CLABE Accounts",
+          d: "In Mexico, allows creating CLABE accounts.",
         },
       ],
     },
     cards: {
-      title: "Card Issuing",
-      sub: "Issue, manage and control virtual and physical cards with granular rules.",
+      title: "Overview",
+      sub: "Comprehensive platform for issuing, processing, managing, and expanding physical and virtual cards.",
       features: [
         {
-          icon: "card",
-          t: "Card",
-          d: "Instantly create cards and set spend limits.",
+          icon: "issuing",
+          t: "Issuing",
+          d: "Allows register, authenticate, and authorize users.",
         },
         {
-          icon: "lock",
-          t: "Controls",
-          d: "MCC, location and velocity controls per card.",
+          icon: "processingPlatform",
+          t: "Processing & Platform",
+          d: "Manages the complete transaction flow.",
         },
         {
-          icon: "gear",
-          t: "Lifecycle",
-          d: "Activate, pause, replace and reissue seamlessly.",
+          icon: "tokenization",
+          t: "Tokenization",
+          d: "A financial security process that replaces sensitive data with a token.",
+        },
+        {
+          icon: "3ds",
+          t: "3DS",
+          d: "3DS authentication verifies transactions through OTP codes.",
+        },
+        {
+          icon: "disputesChargebacks",
+          t: "Disputes & Chargebacks",
+          d: "Automates dispute management.",
+        },
+        {
+          icon: "accountAggregation",
+          t: "Account Aggregation with Card",
+          d: "Allows a card to be linked as a validation source.",
+        },
+        {
+          icon: "digitalWallets",
+          t: "Digital Wallets",
+          d: "Supports Apple Pay, Google Pay, and other wallets.",
+        },
+        {
+          icon: "corporateCards",
+          t: "Corporate Cards",
+          d: "Issues corporate credit or debit cards.",
+        },
+        {
+          icon: "cashbackService",
+          t: "Cashback Service",
+          d: "Enables cards to offer benefits.",
+        },
+        {
+          icon: "subscriptionManagement",
+          t: "Subscription Management",
+          d: "Automates recurring payments, renewals, and reminders.",
+        },
+        {
+          icon: "riskControlDynamic",
+          t: "Risk Control & Dynamic Rules",
+          d: "Custom client rules for spending limits, automatic blocking, and real-time alerts.",
+        },
+        {
+          icon: "reportingAuditAnalytics",
+          t: "Reporting, Audit & Analytics",
+          d: "Dashboards, reconciliations, and real-time analytics.",
         },
       ],
     },
@@ -373,6 +433,42 @@ import "../styles/navbar.css";
         return `<img src="/icons/aml/amlTransactionMonitoring.svg" alt="Transaction monitoring icon" />`;
       case "amlAdverseMedia":
         return `<img src="/icons/aml/amlAdverseMedia.svg" alt="Adverse Media and Risk Intelligence icon" />`;
+      case "bankAccount":
+        return `<img src="/icons/connect/bankAccount.svg" alt="Bank Account Linking icon" />`;
+      case "linkingSdk":
+        return `<img src="/icons/connect/linkingSdk.svg" alt="Linking SDK icon" />`;
+      case "accountOwnerVerify":
+        return `<img src="/icons/connect/accountOwnerVerify.svg" alt="Account and Ownership Verification icon" />`;
+      case "accessFinancialData":
+        return `<img src="/icons/connect/accessFinancialData.svg" alt="Access to Financial Data icon" />`;
+      case "digitalAccount":
+        return `<img src="/icons/connect/digitalAccount.svg" alt="Digital Accounts icon" />`;
+      case "creationClabeAc":
+        return `<img src="/icons/connect/creationClabeAc.svg" alt="Creation of CLABE Accounts icon" />`;
+      case "issuing":
+        return `<img src="/icons/cards/Issuing.svg" alt="Issuing icon" />`;
+      case "processingPlatform":
+        return `<img src="/icons/cards/processingPlatform.svg" alt="Processing & Platform icon" />`;
+      case "tokenization":
+        return `<img src="/icons/cards/tokenization.svg" alt="Tokenization icon" />`;
+      case "3ds":
+        return `<img src="/icons/cards/3ds.svg" alt="3DS icon" />`;
+      case "disputesChargebacks":
+        return `<img src="/icons/cards/disputesChargebacks.svg" alt="Disputes & Chargebacks icon" />`;
+      case "accountAggregation":
+        return `<img src="/icons/cards/accountAggregation.svg" alt="Account Aggregation with Card icon" />`;
+      case "digitalWallets":
+        return `<img src="/icons/cards/digitalWallets.svg" alt="Digital Wallets icon" />`;
+      case "corporateCards":
+        return `<img src="/icons/cards/corporateCards.svg" alt="Corporate Cards icon" />`;
+      case "cashbackService":
+        return `<img src="/icons/cards/cashbackService.svg" alt="Cashback Service icon" />`;
+      case "subscriptionManagement":
+        return `<img src="/icons/cards/subscriptionManagement.svg" alt="Subscription Management icon" />`;
+      case "riskControlDynamic":
+        return `<img src="/icons/cards/riskControlDynamic.svg" alt="Risk Control & Dynamic Rules icon" />`;
+      case "reportingAuditAnalytics":
+        return `<img src="/icons/cards/reportingAuditAnalytics.svg" alt="Reporting, Audit & Analytics icon" />`;
       case "id":
         return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="9" cy="12" r="2"/><path d="M13 11h5M13 14h5"/></svg>`;
       case "face":
@@ -443,21 +539,58 @@ import "../styles/navbar.css";
     "Adverse Media and Risk Intelligence": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-aml#zelify-aml__medios-adversos-e-inteligencia-de-riesgo"
   };
 
+  // Mapeo de features de Connect a URLs de documentación
+  const CONNECT_FEATURE_LINKS = {
+    "Bank Account Linking": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-connect#zelify-connect__vinculaci%C3%B3n-de-cuentas-bancarias",
+    "Linking SDK": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-connect#zelify-connect__linking-sdk",
+    "Account and Ownership Verification": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-connect#zelify-connect__verificaci%C3%B3n-de-cuenta-y-titularidad",
+    "Access to Financial Data": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-connect#zelify-connect__acceso-a-datos-financieros",
+    "Digital Accounts": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-connect#zelify-connect__cuentas-digitales",
+    "Creation of CLABE Accounts": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-connect#zelify-connect__creaci%C3%B3n-de-cuentas-clabe"
+  };
+
+  // Mapeo de features de Cards a URLs de documentación
+  const CARDS_FEATURE_LINKS = {
+    "Issuing": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-cards#zelify-cards__emisi%C3%B3n-issuing",
+    "Processing & Platform": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-cards#zelify-cards__procesamiento-plataforma",
+    "Tokenization": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-cards#zelify-cards__tokenizaci%C3%B3n",
+    "3DS": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-cards#zelify-cards__3ds",
+    "Disputes & Chargebacks": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-cards#zelify-cards__disputas-contracargos",
+    "Account Aggregation with Card": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-cards#zelify-cards__agregaci%C3%B3n-de-cuenta-con-tarjeta",
+    "Digital Wallets": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-cards#zelify-cards__wallets-digitales",
+    "Corporate Cards": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-cards#zelify-cards__tarjetas-corporativas",
+    "Cashback Service": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-cards#zelify-cards__servicio-de-cashback",
+    "Subscription Management": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-cards#zelify-cards__gesti%C3%B3n-de-suscripciones",
+    "Risk Control & Dynamic Rules": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-cards#zelify-cards__control-de-riesgo-reglas-din%C3%A1micas",
+    "Reporting, Audit & Analytics": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-cards#zelify-cards__reportes-auditor%C3%ADa-analytics"
+  };
+
   // Render del contenido según pestaña
   function render(key) {
     const section = DATA[key] ?? DATA.register;
 
-    // Si es register (Auth), identity o aml, hacer el título un enlace a su página principal
+    // Si es register (Auth), identity, aml, linking o cards, hacer el título un enlace a su página principal
     if (key === "register") {
       titleEl.innerHTML = `<a href="/auth" class="pp-title-link">${section.title} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;"><path d="M7 17L17 7M7 7h10v10"/></svg></a>`;
     } else if (key === "identity") {
       titleEl.innerHTML = `<a href="/identity" class="pp-title-link">${section.title} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;"><path d="M7 17L17 7M7 7h10v10"/></svg></a>`;
     } else if (key === "aml") {
       titleEl.innerHTML = `<a href="/amlCompliance" class="pp-title-link">${section.title} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;"><path d="M7 17L17 7M7 7h10v10"/></svg></a>`;
+    } else if (key === "linking") {
+      titleEl.innerHTML = `<a href="/openBankingConnect" class="pp-title-link">${section.title} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;"><path d="M7 17L17 7M7 7h10v10"/></svg></a>`;
+    } else if (key === "cards") {
+      titleEl.innerHTML = `<a href="/cardIssuing" class="pp-title-link">${section.title} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;"><path d="M7 17L17 7M7 7h10v10"/></svg></a>`;
     } else {
       titleEl.textContent = section.title;
     }
     subEl.textContent = section.sub;
+
+    // Para Cards, agregar clase especial para dos columnas
+    if (key === "cards") {
+      listEl.classList.add("cards-grid");
+    } else {
+      listEl.classList.remove("cards-grid");
+    }
 
     listEl.innerHTML = section.features
       .map((f, idx) => {
@@ -483,6 +616,16 @@ import "../styles/navbar.css";
         // Para AML, todas las features son enlaces a documentación
         if (key === "aml" && AML_FEATURE_LINKS[f.t]) {
           return `<a class="pp-feature" href="${AML_FEATURE_LINKS[f.t]}" target="_blank" rel="noopener noreferrer">${card}</a>`;
+        }
+        
+        // Para Connect (linking), todas las features son enlaces a documentación
+        if (key === "linking" && CONNECT_FEATURE_LINKS[f.t]) {
+          return `<a class="pp-feature" href="${CONNECT_FEATURE_LINKS[f.t]}" target="_blank" rel="noopener noreferrer">${card}</a>`;
+        }
+        
+        // Para Cards, todas las features son enlaces a documentación
+        if (key === "cards" && CARDS_FEATURE_LINKS[f.t]) {
+          return `<a class="pp-feature" href="${CARDS_FEATURE_LINKS[f.t]}" target="_blank" rel="noopener noreferrer">${card}</a>`;
         }
         
         // 👉 El PRIMER feature (idx === 0) se vuelve link a la página de la sección para otros productos
