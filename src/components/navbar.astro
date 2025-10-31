@@ -7,6 +7,12 @@ const {
   buttons = {},
 } = Astro.props;
 
+// Importar el script de traducciones
+const translationsScript = `
+  import { initializeTranslations } from '/src/scripts/translations.js';
+  document.addEventListener('DOMContentLoaded', initializeTranslations);
+`;
+
 // Variables CSS (colores + tipografía)
 const cssVars = `
    --nav-text: ${colors.text ?? "#ffffff"};
@@ -43,55 +49,37 @@ const cssVars = `
   <ul class="nav-links">
     <li class="dropdown-container">
       <button id="products-trigger" class="dropdown-trigger" type="button"
-        >Products</button
+        ><span data-i18n="nav.products">Products</span></button
       >
     </li>
-    <li><a href="/">Resources</a></li>
-    <li><a href="/">Developers</a></li>
-    <li><a href="/" class="highlight">personal</a></li>
+    <li><a href="/" data-i18n="nav.resources">Resources</a></li>
+    <li><a href="/" data-i18n="nav.developers">Developers</a></li>
+    <li><a href="/" class="highlight" data-i18n="nav.personal">personal</a></li>
   </ul>
 
   <div class="action-links">
     <a href={buttons.first?.href ?? "/"} class="btn btn-light">
-      <svg
-        class="icon"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-      >
-        <!-- cuerpo del maletín -->
-        <rect x="3" y="7" width="18" height="13" rx="3"></rect>
-        <!-- manija -->
-        <path d="M9 7V6a3 3 0 0 1 6 0v1"></path>
-        <!-- cerradura (punto central) -->
-        <circle cx="12" cy="13" r="1.7" fill="currentColor" stroke="none"
-        ></circle>
-      </svg>
-      {buttons.first?.label ?? "Work with us"}
+            <span data-i18n="nav.workWithUs">{buttons.first?.label ?? "Work with us"}</span>
+      <img src="/icons/maletin.svg" alt="Work with us" class="btn-icon btn-icon--after" />
     </a>
 
     <a href={buttons.second?.href ?? "/"} class="btn btn-light">
-      <svg
-        class="icon"
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M10 17L15 12L10 7V10H3V14H10V17ZM20 19H12V21H20C21.1 21 22 20.1 22 19V5C22 3.9 21.1 3 20 3H12V5H20V19Z"
-        ></path>
-      </svg>
-      {buttons.second?.label ?? "Bank access"}
+      <img src="/icons/acceso.svg" alt="Bank access" class="btn-icon" />
+      <span data-i18n="nav.bankAccess">{buttons.second?.label ?? "Bank access"}</span>
     </a>
 
-    <a href={buttons.third?.href ?? "/"} class="btn btn-outline">
-      {buttons.third?.label ?? "EN"}
-    </a>
+    <button
+      type="button"
+      class="lang-toggle"
+      aria-label="Switch language to Spanish"
+      aria-pressed="false"
+      data-language={(buttons.third?.label ?? "EN").toUpperCase()}
+    >
+      <span class="lang-toggle__thumb">
+        <span class="lang-label">{(buttons.third?.label ?? "EN").toUpperCase()}</span>
+      </span>
+      <span class="lang-toggle__flag" aria-hidden="true">🇲🇽</span>
+    </button>
   </div>
 
   <!-- Mobile menu wrapper -->
@@ -99,51 +87,36 @@ const cssVars = `
     <ul class="nav-links-mobile">
       <li class="dropdown-container">
         <button id="products-trigger-mobile" class="dropdown-trigger" type="button"
-          >Products</button
+          ><span data-i18n="nav.products">Products</span></button
         >
       </li>
-      <li><a href="/">Resources</a></li>
-      <li><a href="/">Developers</a></li>
-      <li><a href="/" class="highlight">personal</a></li>
+      <li><a href="/" data-i18n="nav.resources">Resources</a></li>
+      <li><a href="/" data-i18n="nav.developers">Developers</a></li>
+      <li><a href="/" class="highlight" data-i18n="nav.personal">personal</a></li>
     </ul>
     <div class="action-links-mobile">
       <a href={buttons.first?.href ?? "/"} class="btn btn-light">
-        <svg
-          class="icon"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <rect x="3" y="7" width="18" height="13" rx="3"></rect>
-          <path d="M9 7V6a3 3 0 0 1 6 0v1"></path>
-          <circle cx="12" cy="13" r="1.7" fill="currentColor" stroke="none"
-          ></circle>
-        </svg>
-        {buttons.first?.label ?? "Work with us"}
+                {buttons.first?.label ?? "Work with us"}
+        <img src="/icons/maletin.svg" alt="Work with us" class="btn-icon btn-icon--after" />
       </a>
 
       <a href={buttons.second?.href ?? "/"} class="btn btn-light">
-        <svg
-          class="icon"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M10 17L15 12L10 7V10H3V14H10V17ZM20 19H12V21H20C21.1 21 22 20.1 22 19V5C22 3.9 21.1 3 20 3H12V5H20V19Z"
-          ></path>
-        </svg>
-        {buttons.second?.label ?? "Bank access"}
+        <img src="/icons/acceso.svg" alt="Bank access" class="btn-icon" />
+        <span data-i18n="nav.bankAccess">{buttons.second?.label ?? "Bank access"}</span>
       </a>
 
-      <a href={buttons.third?.href ?? "/"} class="btn btn-outline">
-        {buttons.third?.label ?? "EN"}
-      </a>
+      <button
+        type="button"
+        class="lang-toggle"
+        aria-label="Switch language to Spanish"
+        aria-pressed="false"
+        data-language={(buttons.third?.label ?? "EN").toUpperCase()}
+      >
+        <span class="lang-toggle__thumb">
+          <span class="lang-label">{(buttons.third?.label ?? "EN").toUpperCase()}</span>
+        </span>
+        <span class="lang-toggle__flag" aria-hidden="true">🇲🇽</span>
+      </button>
     </div>
   </div>
 </nav>
@@ -156,20 +129,25 @@ const cssVars = `
   }
   /* Limita el ancho del navbar y céntralo */
   nav {
-    max-width: 1200px; /* o lo que prefieras */
-    width: min(1200px, 92vw); /* respeta márgenes laterales */
-    margin: 0 auto; /* centra el nav en la página */
-    padding-inline: clamp(16px, 2vw, 32px); /* respiro lateral responsivo */
+    max-width: 1200px;
+    width: min(1200px, 92vw);
+    margin: 0 auto;
+    padding-inline: clamp(16px, 2vw, 32px);
   }
 
-  /* Opcional: en pantallas grandes puedes dar un pelín más de aire */
-  @media (min-width: 1440px) {
+  @media (min-width: 1600px) {
     nav {
-      width: min(1280px, 90vw);
+      width: min(1000px, 70vw);
     }
   }
 
-  /* En móviles, que use casi todo el ancho */
+  @media (max-width: 1024px) {
+    nav {
+      width: min(94vw, 720px);
+      padding-inline: clamp(12px, 4vw, 24px);
+    }
+  }
+
   @media (max-width: 640px) {
     nav {
       width: 100%;
@@ -207,11 +185,11 @@ const cssVars = `
   /* NAV LINKS */
   .nav-links {
     display: flex;
-    gap: 1.2rem;
+    gap: clamp(1.2rem, 2vw, 2.2rem);
     list-style: none;
     margin: 0;
     padding: 0;
-    margin-left: 0.5rem;
+    margin-left: clamp(0.3rem, 1vw, 1rem);
   }
 
   .nav-links a,
@@ -237,12 +215,18 @@ const cssVars = `
     color: var(--nav-text-hover);
   }
 
+  .nav-links .highlight:hover {
+    color: var(--highlight-text);
+  }
+
   .nav-links .highlight {
     background-color: var(--highlight-bg);
     color: var(--highlight-text);
-    font-weight: normal;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
+    font-weight: 600;
+    padding: 0.45rem 1.4rem;
+    border-radius: 14px;
+    letter-spacing: 0.03em;
+    box-shadow: 0 10px 24px rgba(70, 255, 0, 0.28);
   }
 
   /* DROPDOWN */
@@ -300,45 +284,153 @@ const cssVars = `
   .action-links {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: clamp(0.8rem, 1.6vw, 1.2rem);
   }
 
   .btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
-    padding: 0.6rem 1rem;
-    font-weight: normal;
-    font-size: 0.9rem;
+    gap: 0.5rem;
+    padding: 0.5rem 1.5rem;
+    font-weight: 600;
+    font-size: 0.94rem;
     text-decoration: none;
-    border-radius: 8px;
-    transition: all 0.2s ease;
+    border-radius: 16px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .action-links .btn + .btn {
+    margin-left: 0.6rem;
   }
 
   .btn-light {
-    background-color: var(--btn-light-bg);
-    color: var(--btn-light-text);
-    border: 1px solid var(--btn-light-border);
+    background: linear-gradient(145deg, rgba(128, 255, 0, 0.95), rgba(88, 220, 0, 0.88));
+    color: #10220a;
+    border: none;
+    box-shadow: 0 12px 28px rgba(80, 220, 0, 0.32);
   }
   .btn-light:hover {
-    background-color: var(--btn-light-hover-bg);
+    transform: translateY(-1px);
+    box-shadow: 0 16px 32px rgba(80, 220, 0, 0.38);
   }
 
   .btn-outline {
-    background-color: transparent;
-    color: var(--btn-outline);
-    border: 2px solid var(--btn-outline);
+    background: linear-gradient(145deg, #f1f3f6 0%, #dfe3ea 100%);
+    color: #172a45;
+    border: none;
+    padding: 0.55rem 1.4rem;
+    box-shadow: 0 10px 26px rgba(15, 28, 46, 0.22);
   }
   .btn-outline:hover {
-    color: var(--btn-outline-hover);
-    border-color: var(--btn-outline-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 14px 30px rgba(15, 28, 46, 0.3);
   }
+
+  .lang-toggle {
+    position: relative;
+    width: 84px;
+    height: 40px;
+    padding: 6px;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(145deg, #f1f3f6 0%, #dfe3ea 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.9),
+      0 12px 24px rgba(12, 24, 42, 0.22);
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: box-shadow 0.25s ease, transform 0.2s ease;
+    color: #14253d;
+  }
+
+  .lang-toggle:hover {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      0 18px 30px rgba(12, 24, 42, 0.3);
+    transform: translateY(-1px);
+  }
+
+  .lang-toggle:focus-visible {
+    outline: 2px solid rgba(149, 255, 11, 0.6);
+    outline-offset: 3px;
+  }
+
+  .lang-toggle__thumb {
+    position: absolute;
+    top: 6px;
+    left: 8px;
+    width: 28px;
+    height: 30px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow:
+      0 6px 16px rgba(21, 45, 76, 0.2),
+      inset 0 0 12px rgba(240, 244, 255, 0.75);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: left 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .lang-toggle[data-language="ES"] .lang-toggle__thumb {
+    left: 8px;
+  }
+
+  .lang-toggle[data-language="EN"] .lang-toggle__thumb {
+    left: calc(100% - 8px - 28px);
+  }
+
+  .lang-label {
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #172a45;
+  }
+
+  .lang-toggle__flag {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    font-size: 0.8rem;
+    filter: saturate(1.1) drop-shadow(0 3px 5px rgba(16, 33, 51, 0.15));
+    pointer-events: none;
+    transition: left 0.25s cubic-bezier(0.4, 0, 0.2, 1), right 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .lang-toggle[data-language="EN"] .lang-toggle__flag {
+    right: auto;
+    left: 12px;
+  }
+*** End Patch
 
   .icon {
     width: 18px;
     height: 18px;
     color: currentColor;
     flex-shrink: 0;
+  }
+  .btn-icon {
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+  }
+
+  /* Ajustes de espaciado entre íconos y texto */
+  .btn-icon {
+    margin-left: 0rem;
+  }
+
+  /* Mueve ligeramente el botón "Work with us" a la derecha */
+  .action-links a:first-child {
+    margin-left: 1.5rem;
+  }
+
+  .btn-light .btn-icon {
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
   }
 
   /* Desktop: nav-wrapper visible siempre */
@@ -499,19 +591,19 @@ const cssVars = `
   document.addEventListener("DOMContentLoaded", () => {
     const trigger = document.getElementById("products-trigger");
     const panel = document.getElementById("products-panel");
-    if (!trigger || !panel) return;
+    if (trigger && panel) {
+      trigger.addEventListener("click", () => {
+        trigger.classList.toggle("active");
+        panel.classList.toggle("hidden");
+      });
 
-    trigger.addEventListener("click", () => {
-      trigger.classList.toggle("active");
-      panel.classList.toggle("hidden");
-    });
-
-    document.addEventListener("click", (e) => {
-      if (!panel.contains(e.target) && !trigger.contains(e.target)) {
-        trigger.classList.remove("active");
-        panel.classList.add("hidden");
-      }
-    });
+      document.addEventListener("click", (e) => {
+        if (!panel.contains(e.target) && !trigger.contains(e.target)) {
+          trigger.classList.remove("active");
+          panel.classList.add("hidden");
+        }
+      });
+    }
 
     // Mobile menu toggle
     const menuToggle = document.querySelector(".mobile-menu-toggle");
@@ -532,13 +624,108 @@ const cssVars = `
       });
 
       // Close menu when clicking on a link
-      const navLinks = navWrapper.querySelectorAll("a");
+      const navLinks = navWrapper.querySelectorAll("a, button");
       navLinks.forEach(link => {
         link.addEventListener("click", () => {
           menuToggle.classList.remove("active");
           navWrapper.classList.remove("active");
         });
       });
+    }
+
+    const navTranslations = {
+      EN: {
+        "nav.products": "Products",
+        "nav.resources": "Resources",
+        "nav.developers": "Developers",
+        "nav.personal": "personal",
+        "nav.workWithUs": "Work with us",
+        "nav.bankAccess": "Bank access",
+      },
+      ES: {
+        "nav.products": "Productos",
+        "nav.resources": "Recursos",
+        "nav.developers": "Desarrolladores",
+        "nav.personal": "personal",
+        "nav.workWithUs": "Únete",
+        "nav.bankAccess": "Acceso bancario",
+      },
+    };
+
+    const applyNavTranslations = (lang) => {
+      const dictionary = navTranslations[lang] ?? navTranslations.EN;
+      document.querySelectorAll('[data-i18n]').forEach((node) => {
+        const key = node.dataset.i18n;
+        if (!key || !key.startsWith('nav.')) return;
+        const value = dictionary[key];
+        if (!value) return;
+        node.textContent = value;
+      });
+    };
+    const languageButtons = document.querySelectorAll(".lang-toggle");
+    if (languageButtons.length) {
+      let currentLang = "EN";
+
+      try {
+        const stored = localStorage.getItem("ui-language");
+        if (stored) {
+          currentLang = stored.toUpperCase() === "ES" ? "ES" : "EN";
+        } else {
+          const initial = languageButtons[0].dataset.language?.toUpperCase();
+          if (initial === "ES" || initial === "EN") {
+            currentLang = initial;
+          }
+        }
+      } catch (error) {
+        console.warn("Unable to read stored language preference.", error);
+      }
+
+      const updateToggleUI = (lang) => {
+        applyNavTranslations(lang);
+        languageButtons.forEach((btn) => {
+          btn.dataset.language = lang;
+          const label = btn.querySelector(".lang-label");
+          const flag = btn.querySelector(".lang-toggle__flag");
+          if (label) label.textContent = lang;
+          if (flag) flag.textContent = lang === "EN" ? "🇲🇽" : "🇺🇸";
+          btn.setAttribute(
+            "aria-label",
+            lang === "EN" ? "Switch language to Spanish" : "Cambiar idioma a inglés",
+          );
+          btn.setAttribute("aria-pressed", lang === "ES" ? "true" : "false");
+        });
+      };
+
+      const propagateLanguage = (lang) => {
+        window.__uiLanguage = lang;
+        document.documentElement.setAttribute("lang", lang.toLowerCase());
+        window.dispatchEvent(
+          new CustomEvent("ui:languagechange", {
+            detail: { language: lang },
+          }),
+        );
+      };
+
+      const setLanguage = (lang) => {
+        const normalized = lang === "ES" ? "ES" : "EN";
+        currentLang = normalized;
+        updateToggleUI(currentLang);
+        try {
+          localStorage.setItem("ui-language", currentLang);
+        } catch (error) {
+          console.warn("Unable to persist language preference.", error);
+        }
+        propagateLanguage(currentLang);
+      };
+
+      languageButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          setLanguage(currentLang === "EN" ? "ES" : "EN");
+        });
+      });
+
+      updateToggleUI(currentLang);
+      propagateLanguage(currentLang);
     }
   });
 </script>
