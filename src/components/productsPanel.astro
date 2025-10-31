@@ -279,44 +279,104 @@ import "../styles/navbar.css";
       ],
     },
     transfers: {
-      title: "Money Transfers",
-      sub: "Reliable pay-ins and pay-outs with tracking and reconciliation at scale.",
+      title: "Overview",
+      sub: "Module responsible for instant money movements between digital accounts within the Zelify ecosystem.",
       features: [
         {
-          icon: "send",
-          t: "Pay-ins",
-          d: "Accept bank transfers and faster payments.",
+          icon: "transferQuoteValidation",
+          t: "Transfer Quote & Validation",
+          d: "Generates a pre-simulation of national and international transfers.",
         },
         {
-          icon: "receive",
-          t: "Pay-outs",
-          d: "Disburse funds programmatically, with webhooks.",
+          icon: "internalTransfers",
+          t: "Internal Transfers",
+          d: "Enables transfers between linked accounts.",
         },
         {
-          icon: "report",
-          t: "Reconciliation",
-          d: "Match statements to ledgers automatically.",
+          icon: "interbankLocaltransfer",
+          t: "Interbank / Local Transfers",
+          d: "Allows transfers between different banks in several countries.",
+        },
+        {
+          icon: "accountBalanceValidation",
+          t: "Account & Balance Validation",
+          d: "Checks if an account exists, is enabled for transfers, and shows the current balance.",
+        },
+        {
+          icon: "processingReconciliation",
+          t: "Processing & Reconciliation",
+          d: "Provides real-time updates on the status of transactions.",
+        },
+        {
+          icon: "transactionalNotification",
+          t: "Transactional Notifications",
+          d: "Notifies users via SMS, email, or WhatsApp for any transfer or account movement.",
+        },
+        {
+          icon: "transactionLimits",
+          t: "Transaction Limits",
+          d: "Allows setting custom rules and limits for account types within an organization.",
+        },
+        {
+          icon: "payIn",
+          t: "Pay-in / Cash-in Notifications",
+          d: "Manages notifications when money is received via transfer or deposit.",
+        },
+        {
+          icon: "cashOut",
+          t: "Cash-out / Pay-out Notifications",
+          d: "Manages notifications for outgoing transfers once completed or updated.",
+        },
+        {
+          icon: "serviceProvideListing",
+          t: "Service Provider Listing",
+          d: "Lists all approved companies in a country for making basic service payments.",
+        },
+        {
+          icon: "basicServicePayments",
+          t: "Basic Service Payments",
+          d: "Executes payments, debiting user funds for services with minimal info.",
+        },
+        {
+          icon: "favoriteServicePaymentSetup",
+          t: "Favorites Setup for Service Payments",
+          d: "Allows users to create a list of favorite service providers for quick payments.",
+        },
+        {
+          icon: "accountStatements",
+          t: "Account Statements & PDF Reports",
+          d: "Provides account statements in PDF format and other report types.",
         },
       ],
     },
     international: {
-      title: "International Transfers",
-      sub: "Cross-border payments, FX and compliance in a single interface.",
+      title: "Overview",
+      sub: "Solution for managing and executing international B2C, B2B, and P2P transfers between Latin America and the United States instantly.",
       features: [
         {
-          icon: "globe",
-          t: "TX",
-          d: "Competitive rates with transparent fees.",
+          icon: "fxQuote",
+          t: "FX Quote & Currency Conversion",
+          d: "Provides dynamic exchange rates between local and international currencies.",
         },
         {
-          icon: "shield",
-          t: "Compliance",
-          d: "Sanctions screening and travel-rule data.",
+          icon: "internationalAccount",
+          t: "International Account Validation",
+          d: "Verifies that recipient accounts comply with IBAN, CLABE or SWIFT.",
         },
         {
-          icon: "track",
-          t: "Tracking",
-          d: "Know where your payment is at any time.",
+          icon: "transferInitiation",
+          t: "Transfer Initiation",
+          d: "Creates the international transfer operation with sender and recipient details.",
+        },
+        {
+          icon: "trackingConfirmation",
+          t: "Tracking & Confirmation",
+          d: "Tracks the transfer status in real time.",
+        },
+        {
+          icon: "internationalSettlement",
+          t: "International Settlement & Reconciliation",
+          d: "Performs automatic reconciliation with international payment networks.",
         },
       ],
     },
@@ -364,23 +424,48 @@ import "../styles/navbar.css";
       ],
     },
     payments: {
-      title: "Payments",
-      sub: "Secure and fast payment processing with multiple methods and real-time verification.",
+      title: "Overview",
+      sub: "Unified payment processor supporting multiple methods: cards, custom keys, or contact methods. Includes advanced features such as recurring payments, express checkout, tokenization, and custom APIs.",
       features: [
         {
-          icon: "card",
-          t: "Payment Methods",
-          d: "Accept cards, bank transfers, and digital wallets.",
+          icon: "multiPlatform",
+          t: "Multi-Platform Processing",
+          d: "Unified acceptance of payments via cards, digital wallets, transfers, and alternative methods.",
         },
         {
-          icon: "shield",
-          t: "Security",
-          d: "PCI-compliant processing with fraud detection.",
+          icon: "qrSdk",
+          t: "QR SDK",
+          d: "Development library that integrates QR code generation.",
         },
         {
-          icon: "sync",
-          t: "Real-time",
-          d: "Instant payment confirmation and webhooks.",
+          icon: "tokenizationPayments",
+          t: "Tokenization",
+          d: "Secure storage of payment data using tokens.",
+        },
+        {
+          icon: "recurringPayments",
+          t: "Recurring Payments",
+          d: "Intelligent system for subscriptions and automatic billing.",
+        },
+        {
+          icon: "expressCheckout",
+          t: "Express Checkout",
+          d: "Optimized payment experience that reduces steps and boosts conversion.",
+        },
+        {
+          icon: "customKeys",
+          t: "Custom Keys",
+          d: "Unique user identification system that enables fast payments without repeatedly entering data.",
+        },
+        {
+          icon: "contactMethods",
+          t: "Contact Methods",
+          d: "Payment processing through multiple identification channels.",
+        },
+        {
+          icon: "sdkPayments",
+          t: "SDK",
+          d: "Pre-built development libraries for fast, customizable integration into digital applications.",
         },
       ],
     },
@@ -500,6 +585,58 @@ import "../styles/navbar.css";
         return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v7h7"/><path d="M21 21v-7h-7"/><path d="M3 10L13 0M11 24l10-10"/></svg>`;
       case "report":
         return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3z"/><path d="M7 17v-6M12 17V7M17 17v-3"/></svg>`;
+      case "transferQuoteValidation":
+        return `<img src="/icons/transfers/transferQuoteValidation.svg" alt="Transfer Quote & Validation icon" />`;
+      case "internalTransfers":
+        return `<img src="/icons/transfers/internalTransfers.svg" alt="Internal Transfers icon" />`;
+      case "interbankLocaltransfer":
+        return `<img src="/icons/transfers/interbankLocaltransfer.svg" alt="Interbank / Local Transfers icon" />`;
+      case "accountBalanceValidation":
+        return `<img src="/icons/transfers/accountBalanceValidation.svg" alt="Account & Balance Validation icon" />`;
+      case "processingReconciliation":
+        return `<img src="/icons/transfers/processingReconciliation.svg" alt="Processing & Reconciliation icon" />`;
+      case "transactionalNotification":
+        return `<img src="/icons/transfers/transactionalNotification.svg" alt="Transactional Notifications icon" />`;
+      case "transactionLimits":
+        return `<img src="/icons/transfers/transactionLimits.svg" alt="Transaction Limits icon" />`;
+      case "payIn":
+        return `<img src="/icons/transfers/payIn.svg" alt="Pay-in / Cash-in Notifications icon" />`;
+      case "cashOut":
+        return `<img src="/icons/transfers/cashOut.svg" alt="Cash-out / Pay-out Notifications icon" />`;
+      case "serviceProvideListing":
+        return `<img src="/icons/transfers/serviceProvideListing.svg" alt="Service Provider Listing icon" />`;
+      case "basicServicePayments":
+        return `<img src="/icons/transfers/basicServicePayments.svg" alt="Basic Service Payments icon" />`;
+      case "favoriteServicePaymentSetup":
+        return `<img src="/icons/transfers/favoriteServicePaymentSetup.svg" alt="Favorites Setup for Service Payments icon" />`;
+      case "accountStatements":
+        return `<img src="/icons/transfers/accountStatements.svg" alt="Account Statements & PDF Reports icon" />`;
+      case "fxQuote":
+        return `<img src="/icons/tx/fxQuote.svg" alt="FX Quote & Currency Conversion icon" />`;
+      case "internationalAccount":
+        return `<img src="/icons/tx/internationalAccount.svg" alt="International Account Validation icon" />`;
+      case "transferInitiation":
+        return `<img src="/icons/tx/transferInitiation.svg" alt="Transfer Initiation icon" />`;
+      case "trackingConfirmation":
+        return `<img src="/icons/tx/trackingConfirmation.svg" alt="Tracking & Confirmation icon" />`;
+      case "internationalSettlement":
+        return `<img src="/icons/tx/internationalSettlement.svg" alt="International Settlement & Reconciliation icon" />`;
+      case "multiPlatform":
+        return `<img src="/icons/payments/multiPlatform.svg" alt="Multi-Platform Processing icon" />`;
+      case "qrSdk":
+        return `<img src="/icons/payments/qrSdk.svg" alt="QR SDK icon" />`;
+      case "tokenizationPayments":
+        return `<img src="/icons/payments/tokenization.svg" alt="Tokenization icon" />`;
+      case "recurringPayments":
+        return `<img src="/icons/payments/recurringPayments.svg" alt="Recurring Payments icon" />`;
+      case "expressCheckout":
+        return `<img src="/icons/payments/expressCheckout.svg" alt="Express Checkout icon" />`;
+      case "customKeys":
+        return `<img src="/icons/payments/customKeys.svg" alt="Custom Keys icon" />`;
+      case "contactMethods":
+        return `<img src="/icons/payments/contactMethods.svg" alt="Contact Methods icon" />`;
+      case "sdkPayments":
+        return `<img src="/icons/payments/sdk.svg" alt="SDK icon" />`;
       case "org":
         return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v6m0 0L7 15m5-6 5 6"/><rect x="2" y="15" width="20" height="6" rx="2"/></svg>`;
       case "users":
@@ -566,6 +703,44 @@ import "../styles/navbar.css";
     "Reporting, Audit & Analytics": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-cards#zelify-cards__reportes-auditor%C3%ADa-analytics"
   };
 
+  // Mapeo de features de Transfers a URLs de documentación
+  const TRANSFERS_FEATURE_LINKS = {
+    "Transfer Quote & Validation": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-transfers#zelify-transfers__cotizaci%C3%B3n-y-validaci%C3%B3n-de-transferencias-quote",
+    "Internal Transfers": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-transfers#zelify-transfers__transferencias-internas",
+    "Interbank / Local Transfers": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-transfers#zelify-transfers__transferencias-interbancarias-o-locales",
+    "Account & Balance Validation": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-transfers#zelify-transfers__validaci%C3%B3n-de-cuentas-y-saldos",
+    "Processing & Reconciliation": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-transfers#zelify-transfers__procesamiento-y-conciliaci%C3%B3n",
+    "Transactional Notifications": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-transfers#zelify-transfers__notificaciones-transaccionales",
+    "Transaction Limits": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-transfers#zelify-transfers__limites-transaccionales",
+    "Pay-in / Cash-in Notifications": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-transfers#zelify-transfers__notificaciones-pay-ins-cash-ins",
+    "Cash-out / Pay-out Notifications": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-transfers#zelify-transfers__notificaciones-cash-outpay-outs",
+    "Service Provider Listing": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-transfers#zelify-transfers__obtener-compa%C3%B1%C3%ADas-para-pagos-de-servicios-en-un-pa%C3%ADs",
+    "Basic Service Payments": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-transfers#zelify-transfers__pagos-de-servicios-b%C3%A1sicos",
+    "Favorites Setup for Service Payments": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-transfers#zelify-transfers__configurar-favoritos-para-pagos-de-servicios",
+    "Account Statements & PDF Reports": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-transfers#zelify-transfers__estados-de-cuentas-y-reportes-pdfs"
+  };
+
+  // Mapeo de features de TX (International) a URLs de documentación
+  const TX_FEATURE_LINKS = {
+    "FX Quote & Currency Conversion": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-tx#zelify-tx__cotizaci%C3%B3n-y-conversi%C3%B3n-de-divisas-fx-quote",
+    "International Account Validation": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-tx#zelify-tx__validaci%C3%B3n-de-cuentas-internacionales",
+    "Transfer Initiation": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-tx#zelify-tx__inicio-de-transferencia-transfer-initiation",
+    "Tracking & Confirmation": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-tx#zelify-tx__seguimiento-y-confirmaci%C3%B3n-journey-operations",
+    "International Settlement & Reconciliation": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-tx#zelify-tx__liquidaci%C3%B3n-internacional-y-reconciliaci%C3%B3n"
+  };
+
+  // Mapeo de features de Payments a URLs de documentación
+  const PAYMENTS_FEATURE_LINKS = {
+    "Multi-Platform Processing": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-payments#zelify-payments__procesamiento-multi-plataforma",
+    "QR SDK": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-payments#zelify-payments__sdk-con-qr",
+    "Tokenization": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-payments#zelify-payments__tokenizaci%C3%B3n",
+    "Recurring Payments": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-payments#zelify-payments__pagos-recurrentes",
+    "Express Checkout": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-payments#zelify-payments__checkout-express",
+    "Custom Keys": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-payments#zelify-payments__llaves-personalizadas",
+    "Contact Methods": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-payments#zelify-payments__medios-de-contacto",
+    "SDK": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-payments#zelify-payments__sdk"
+  };
+
   // Render del contenido según pestaña
   function render(key) {
     const section = DATA[key] ?? DATA.register;
@@ -581,13 +756,19 @@ import "../styles/navbar.css";
       titleEl.innerHTML = `<a href="/openBankingConnect" class="pp-title-link">${section.title} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;"><path d="M7 17L17 7M7 7h10v10"/></svg></a>`;
     } else if (key === "cards") {
       titleEl.innerHTML = `<a href="/cardIssuing" class="pp-title-link">${section.title} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;"><path d="M7 17L17 7M7 7h10v10"/></svg></a>`;
+    } else if (key === "transfers") {
+      titleEl.innerHTML = `<a href="/moneyTransfers" class="pp-title-link">${section.title} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;"><path d="M7 17L17 7M7 7h10v10"/></svg></a>`;
+    } else if (key === "international") {
+      titleEl.innerHTML = `<a href="/transactions" class="pp-title-link">${section.title} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;"><path d="M7 17L17 7M7 7h10v10"/></svg></a>`;
+    } else if (key === "payments") {
+      titleEl.innerHTML = `<a href="/payments" class="pp-title-link">${section.title} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;"><path d="M7 17L17 7M7 7h10v10"/></svg></a>`;
     } else {
       titleEl.textContent = section.title;
     }
     subEl.textContent = section.sub;
 
-    // Para Cards, agregar clase especial para dos columnas
-    if (key === "cards") {
+    // Para Cards, Transfers, International (TX) y Payments, agregar clase especial para dos columnas
+    if (key === "cards" || key === "transfers" || key === "international" || key === "payments") {
       listEl.classList.add("cards-grid");
     } else {
       listEl.classList.remove("cards-grid");
@@ -627,6 +808,21 @@ import "../styles/navbar.css";
         // Para Cards, todas las features son enlaces a documentación
         if (key === "cards" && CARDS_FEATURE_LINKS[f.t]) {
           return `<a class="pp-feature" href="${CARDS_FEATURE_LINKS[f.t]}" target="_blank" rel="noopener noreferrer">${card}</a>`;
+        }
+        
+        // Para Transfers, todas las features son enlaces a documentación
+        if (key === "transfers" && TRANSFERS_FEATURE_LINKS[f.t]) {
+          return `<a class="pp-feature" href="${TRANSFERS_FEATURE_LINKS[f.t]}" target="_blank" rel="noopener noreferrer">${card}</a>`;
+        }
+        
+        // Para TX (International), todas las features son enlaces a documentación
+        if (key === "international" && TX_FEATURE_LINKS[f.t]) {
+          return `<a class="pp-feature" href="${TX_FEATURE_LINKS[f.t]}" target="_blank" rel="noopener noreferrer">${card}</a>`;
+        }
+        
+        // Para Payments, todas las features son enlaces a documentación
+        if (key === "payments" && PAYMENTS_FEATURE_LINKS[f.t]) {
+          return `<a class="pp-feature" href="${PAYMENTS_FEATURE_LINKS[f.t]}" target="_blank" rel="noopener noreferrer">${card}</a>`;
         }
         
         // 👉 El PRIMER feature (idx === 0) se vuelve link a la página de la sección para otros productos

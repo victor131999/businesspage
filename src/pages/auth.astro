@@ -97,7 +97,8 @@ import "../styles/navbar.css";
     padding: 0;
     height: 100%;
     width: 100%;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   body {
@@ -115,32 +116,35 @@ import "../styles/navbar.css";
     background-position: center top;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    height: 100vh;
-    width: 100vw;
+    min-height: 100vh;
+    width: 100%;
     overflow-x: hidden;
-    overflow-y: hidden;
+    overflow-y: auto;
   }
 
   .hero {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    height: calc(100vh - 80px);
-    max-height: calc(100vh - 80px);
-    padding: 0 8% 0 15%;
+    min-height: calc(100vh - 80px);
+    padding: 0 clamp(4%, 8vw, 8%) 0 clamp(6%, 15vw, 15%);
     position: relative;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
   }
 
   .content {
-    max-width: 900px;
+    max-width: min(900px, 90%);
     width: 100%;
     background: transparent;
+    box-sizing: border-box;
   }
   .badge {
     display: inline-block;
-    max-width: 500px;
+    max-width: min(500px, 100%);
     background: #6aff00;
     color: #0b132b;
     padding: 0.8rem 2rem;
@@ -150,6 +154,9 @@ import "../styles/navbar.css";
     margin-bottom: 2rem;
     text-align: left;
     box-shadow: 0 0 12px rgba(184, 255, 42, 0.4);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
   }
 
   .title {
@@ -159,17 +166,23 @@ import "../styles/navbar.css";
     margin: 0 0 1.5rem 0;
     font-weight: 400;
     text-align: left;
-    max-width: 900px;
+    max-width: min(900px, 100%);
     width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
   }
 
   .description {
     color: #004195;
     font-size: 1.1rem;
     line-height: 1.65;
-    max-width: 600px;
+    max-width: min(600px, 100%);
     margin: 0 0 2.5rem 0;
     text-align: left;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
   }
 
   .cta {
@@ -211,15 +224,32 @@ import "../styles/navbar.css";
   /* Tablet */
   @media (max-width: 1024px) {
     .hero {
-      padding: 0 10% 0 12%;
+      padding: 2rem clamp(4%, 10vw, 10%) 2rem clamp(5%, 12vw, 12%);
+      min-height: auto;
+      overflow-x: hidden;
+      overflow-y: auto;
     }
 
     .content {
-      max-width: 85%;
+      max-width: 100%;
+      width: 100%;
+      padding-right: 0;
     }
 
     .title {
       font-size: clamp(1.8rem, 2.2vw, 2.5rem);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    .description {
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    .badge {
+      max-width: 100%;
+      word-wrap: break-word;
     }
   }
 

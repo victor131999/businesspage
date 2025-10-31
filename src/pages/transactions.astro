@@ -51,9 +51,8 @@ import "../styles/navbar.css";
 
     <section class="hero">
       <div class="content">
-        <span class="band-text">TX</span>
-
         <h1 class="title">
+          <span class="badge">TX</span>
           Seamless Cross-Border<br />
           Transfers, Instantly.
         </h1>
@@ -65,8 +64,8 @@ import "../styles/navbar.css";
         </p>
 
         <div class="cta">
-          <a href="/" class="btn">Let’s talk</a>
-          <a href="/" class="btn">View API Docs</a>
+          <a href="/hablemos" class="btn">Let's talk</a>
+          <a href="https://documentations.zelify.com/zelify-servicios-financieros/zelify-tx" target="_blank" rel="noopener noreferrer" class="btn">View API Docs</a>
         </div>
       </div>
     </section>
@@ -107,25 +106,35 @@ import "../styles/navbar.css";
     margin-right: 6%;
   }
 
-  
-  .band-text {
-    position: absolute;
-    top: 5rem; 
-    right: 7.2rem;
-    font-weight: 400;
-    font-size: 1.05rem;
-    letter-spacing: 0.6px;
-    color: #0b132b; 
-    background: transparent;
-    padding: 0.4rem 0.8rem;
-  }
-
   .title {
     color: #1b4b97; 
     font-weight: 500;
     line-height: 1.18;
     font-size: clamp(2rem, 4.6vw, 3.2rem);
-    margin: 7.75rem 0 1rem 0; 
+    margin: 0 0 1rem 0;
+    position: relative;
+    padding-right: 0;
+  }
+
+  .badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: inline-block;
+    background: #6aff00;
+    color: #0b132b;
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-align: center;
+    box-shadow: 0 0 12px rgba(184, 255, 42, 0.4);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
+    transform: translateY(-100%);
+    margin-bottom: 0.5rem;
+    white-space: nowrap;
   }
 
   .description {
@@ -171,11 +180,23 @@ import "../styles/navbar.css";
     }
     .content {
       margin-right: 0;
+      text-align: center;
     }
-    .band-text {
+    .badge {
       position: static;
+      top: auto;
+      right: auto;
+      transform: none;
       display: inline-block;
-      margin-bottom: 0.75rem;
+      max-width: 100%;
+      text-align: center;
+      margin: 0 auto 2rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .title {
+      margin-top: 0;
     }
   }
 </style>

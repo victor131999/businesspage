@@ -437,6 +437,8 @@ const cssVars = `
     width: 18px;
     height: 18px;
     display: inline-block;
+    flex-shrink: 0;
+    min-width: 18px;
   }
 
   /* Ajustes de espaciado entre íconos y texto */
@@ -461,8 +463,40 @@ const cssVars = `
     margin-left: auto;
   }
 
+  /* Tablet Styles */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .nav-wrapper {
+      display: none;
+    }
+
+    .action-links {
+      gap: clamp(0.5rem, 1.2vw, 0.8rem);
+    }
+
+    .btn {
+      padding: 0.5rem 1.2rem;
+      font-size: 0.88rem;
+      gap: 0.4rem;
+    }
+
+    .btn-icon {
+      width: 16px;
+      height: 16px;
+      min-width: 16px;
+    }
+
+    .action-links .btn + .btn {
+      margin-left: 0.4rem;
+    }
+
+    .lang-toggle {
+      width: 76px;
+      height: 36px;
+    }
+  }
+
   /* En desktop, ocultar nav-wrapper ya que movimos los elementos */
-  @media (min-width: 769px) {
+  @media (min-width: 1025px) {
     .nav-wrapper {
       display: none;
     }

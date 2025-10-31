@@ -64,8 +64,8 @@ import "../styles/navbar.css";
         </p>
 
         <div class="cta">
-          <a href="/" class="btn">Let’s talk</a>
-          <a href="/" class="btn">View API Docs</a>
+          <a href="/hablemos" class="btn">Let's talk</a>
+          <a href="https://documentations.zelify.com/zelify-servicios-financieros/zelify-transfers" target="_blank" rel="noopener noreferrer" class="btn">View API Docs</a>
         </div>
       </div>
     </section>
@@ -80,55 +80,85 @@ import "../styles/navbar.css";
     font-display: swap;
   }
 
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
   body {
     font-family: "NataSans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     color: #0b132b;
+    min-height: 100vh;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .hero {
     display: flex;
     align-items: center;
-    justify-content: flex-end; /* 👈 contenido hacia la derecha */
+    justify-content: flex-end;
     min-height: calc(100vh - 80px);
-    padding: 6rem 6% 4rem 8%;
+    padding: 6rem clamp(4%, 6vw, 6%) 4rem clamp(5%, 8vw, 8%);
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
   }
 
   .content {
-    max-width: 640px;
+    max-width: min(640px, 90%);
     text-align: left;
     position: relative;
-    margin-right: 8%;
+    margin-right: clamp(4%, 8vw, 8%);
+    width: 100%;
+    box-sizing: border-box;
   }
 
- .band-text {
-  display: inline-block;
-  position: relative;
-  transform: translate(0, 5.8rem); /* 👈 baja el texto a la mitad de la barra */
-  left: 16.5rem; /* 👈 posición exacta a la derecha */
-  font-weight: 800;
-  font-size: 1.1rem;
-  color: #ffffff;
-  background: transparent;
-  letter-spacing: 0.3px;
-  margin-bottom: 2.8rem; /* 👈 separa bien del título */
-}
+  .band-text {
+    display: inline-block;
+    position: relative;
+    transform: translate(0, 5.8rem);
+    left: clamp(8rem, 16.5vw, 16.5rem);
+    font-weight: 800;
+    font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+    color: #ffffff;
+    background: transparent;
+    letter-spacing: 0.3px;
+    margin-bottom: 2.8rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
 
-.title {
-  color: #0b132b;
-  font-weight: 700;
-  line-height: 1.22;
-  font-size: clamp(2rem, 4vw, 3.1rem);
-  margin-top: 4.5rem; /* 👈 más separación del band-text */
-  margin-bottom: 1.4rem;
-}
+  .title {
+    color: #0b132b;
+    font-weight: 700;
+    line-height: 1.22;
+    font-size: clamp(2rem, 4vw, 3.1rem);
+    margin-top: 4.5rem;
+    margin-bottom: 1.4rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
+  }
 
-.description {
-  color: #00223E;
-  font-size: 1.05rem;
-  line-height: 1.65;
-  max-width: 540px;
-  margin: 0 0 2.8rem 0;
-}
+  .description {
+    color: #00223E;
+    font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+    line-height: 1.65;
+    max-width: min(540px, 100%);
+    margin: 0 0 2.8rem 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
+  }
+
   .cta {
     display: flex;
     gap: 0.8rem;
@@ -140,11 +170,13 @@ import "../styles/navbar.css";
     color: #0b2a15;
     font-weight: 700;
     text-decoration: none;
-    padding: 0.8rem 1.4rem;
+    padding: clamp(0.7rem, 1.2vw, 0.8rem) clamp(1.2rem, 2vw, 1.4rem);
     border-radius: 10px;
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 1.2vw, 1rem);
     transition: all 0.2s ease;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+    box-sizing: border-box;
   }
 
   .btn:hover {
@@ -152,20 +184,144 @@ import "../styles/navbar.css";
     transform: translateY(-1px);
   }
 
-  @media (max-width: 960px) {
+  /* Tablet */
+  @media (max-width: 1024px) {
     .hero {
       justify-content: center;
-      padding: 4rem 2rem;
-      text-align: center;
+      padding: 4rem clamp(3%, 6vw, 6%);
+      align-items: flex-start;
     }
 
     .content {
+      max-width: 100%;
+      margin: 0 auto;
+      text-align: center;
+      padding: 0 1rem;
+    }
+
+    .band-text {
+      position: static;
+      transform: none;
+      left: auto;
+      margin-bottom: 1.5rem;
+      margin-top: 0;
+      display: block;
+      text-align: center;
+    }
+
+    .title {
+      margin-top: 0;
+      text-align: center;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+    }
+
+    .description {
+      text-align: center;
+      margin: 0 auto 2rem;
+      max-width: 100%;
+    }
+
+    .cta {
+      justify-content: center;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    html,
+    body {
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    .hero {
+      min-height: calc(100vh - 80px);
+      padding: 2rem 1.5rem;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .content {
+      max-width: 100%;
+      width: 100%;
       margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    .band-text {
+      position: static;
+      transform: none;
+      left: auto;
+      margin-bottom: 1.5rem;
+      margin-top: 0;
+      font-size: 1rem;
+      text-align: center;
+      display: block;
+    }
+
+    .title {
+      font-size: clamp(1.75rem, 6vw, 2.5rem);
+      line-height: 1.2;
+      margin-top: 0;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .description {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      padding: 0 0.5rem;
       text-align: center;
     }
 
     .cta {
       justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      font-size: 0.9rem;
+      padding: 0.75rem 1.3rem;
+      width: fit-content;
+    }
+  }
+
+  /* Small mobile */
+  @media (max-width: 480px) {
+    .hero {
+      padding: 1.5rem 1rem;
+    }
+
+    .band-text {
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .title {
+      font-size: 1.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .description {
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      padding: 0;
+    }
+
+    .btn {
+      font-size: 0.85rem;
+      padding: 0.65rem 1.2rem;
+      width: 100%;
+      max-width: 280px;
+    }
+
+    .cta {
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
     }
   }
 </style>
