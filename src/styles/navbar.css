@@ -271,3 +271,163 @@ a.pp-feature:hover {
 }
 .pp-content { opacity: 1; transition: opacity .18s; }
 .pp-content.is-fading { opacity: .45; }   /* solo cuando queramos atenuar */
+
+/* ===============================
+   Media Queries - Mobile
+   =============================== */
+
+@media (max-width: 768px) {
+  /* Panel completo: cambiar de grid 2 columnas a 1 columna */
+  .products-panel {
+    width: min(95vw, 100%);
+    max-width: 100vw;
+    height: auto;
+    max-height: 90vh;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    border-radius: 16px;
+    top: 57px;
+    left: 50%;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* Sidebar: hacer horizontal scrollable */
+  .pp-sidebar {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 8px;
+    padding: 12px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    border-bottom-left-radius: 0;
+    border-bottom: 1px solid rgba(61, 107, 176, 0.15);
+    /* Ocultar scrollbar pero mantener funcionalidad */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(61, 107, 176, 0.3) transparent;
+  }
+
+  .pp-sidebar::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .pp-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .pp-sidebar::-webkit-scrollbar-thumb {
+    background: rgba(61, 107, 176, 0.3);
+    border-radius: 2px;
+  }
+
+  /* Items del sidebar: mantener tamaño mínimo */
+  .pp-item {
+    white-space: nowrap;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+
+  .pp-item:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Eliminar indicador ::after en mobile */
+  .pp-item.is-active::after {
+    display: none;
+  }
+
+  /* Indicador inferior para item activo */
+  .pp-item.is-active {
+    border-bottom: 3px solid #95FF0B;
+    margin-bottom: -1px;
+  }
+
+  /* Contenido: ajustar padding y remover border izquierdo */
+  .pp-content {
+    padding: 20px 18px;
+    border-left: none;
+    border-top: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 16px;
+    border-bottom-left-radius: 16px;
+    overflow-y: auto;
+    max-height: calc(90vh - 60px);
+  }
+
+  /* Título y subtítulo */
+  .pp-head .pp-title {
+    font-size: 1.1rem;
+  }
+
+  .pp-head .pp-sub {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  /* Features: cambiar de 2 columnas a 1 columna */
+  .pp-features.cards-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .pp-feature {
+    grid-template-columns: 48px 1fr;
+    gap: 12px;
+  }
+
+  /* Iconos más pequeños en mobile */
+  .pp-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .pp-icon img,
+  .pp-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Títulos y descripciones */
+  .pp-ft-title {
+    font-size: 0.95rem;
+  }
+
+  .pp-ft-desc {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  /* Rule más delgado */
+  .pp-rule {
+    margin: 8px 0 12px 0;
+    border-top-width: 2px;
+  }
+}
+
+/* Tablet: ajustes intermedios */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .products-panel {
+    width: min(95vw, 1000px);
+    max-height: 75vh;
+    height: auto;
+  }
+
+  .pp-sidebar {
+    padding: 14px 10px;
+  }
+
+  .pp-item {
+    font-size: 0.95rem;
+    padding: 9px 12px;
+  }
+
+  .pp-content {
+    padding: 20px 24px;
+  }
+
+  .pp-features.cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
