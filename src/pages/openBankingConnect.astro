@@ -4,6 +4,71 @@ import ProductsPanel from "../components/productsPanel.astro";
 import "../styles/navbar.css";
 ---
 
+<script>
+  type Translation = {
+    badge: string;
+    title: string;
+    description: string;
+    ctaTalk: string;
+    ctaDocs: string;
+  };
+
+  type Translations = {
+    en: Translation;
+    es: Translation;
+  };
+
+  const translations: Translations = {
+    en: {
+      badge: "Connect",
+      title: "Seamless Banking\nConnections with\nno frontiers.",
+      description: "Allow users to connect their bank accounts, safely authorize access to their data, and generate secure tokens, making it easy for your app to read information and initiate payments with confidence.",
+      ctaTalk: "Let's talk",
+      ctaDocs: "View API Docs"
+    },
+    es: {
+      badge: "Connect",
+      title: "Conexiones Bancarias\nFluidas sin\nFronteras.",
+      description: "Permite a los usuarios conectar sus cuentas bancarias, autorizar de forma segura el acceso a sus datos y generar tokens seguros, facilitando que tu aplicación lea información e inicie pagos con confianza.",
+      ctaTalk: "Hablemos",
+      ctaDocs: "Ver documentación API"
+    }
+  };
+
+  function updateContent(rawLang: string) {
+    const lang = rawLang.toLowerCase() as keyof Translations;
+    const content = translations[lang] || translations.en;
+    
+    const elements = {
+      badge: document.querySelector('.badge'),
+      title: document.querySelector('.title'),
+      description: document.querySelector('.description'),
+      ctaTalk: document.querySelector('.cta .btn:first-child'),
+      ctaDocs: document.querySelector('.cta .btn:last-child')
+    };
+
+    if (elements.badge) elements.badge.textContent = content.badge;
+    if (elements.title) elements.title.innerHTML = content.title.replace(/\n/g, '<br>');
+    if (elements.description) elements.description.textContent = content.description;
+    if (elements.ctaTalk) elements.ctaTalk.textContent = content.ctaTalk;
+    if (elements.ctaDocs) elements.ctaDocs.textContent = content.ctaDocs;
+  }
+
+  // Escuchar cambios de idioma desde el navbar
+  window.addEventListener('ui:languagechange', ((event) => {
+    const customEvent = event as CustomEvent<{language: string}>;
+    if (customEvent.detail?.language) {
+      updateContent(customEvent.detail.language);
+    }
+  }) as EventListener);
+
+  // Aplicar traducciones iniciales
+  document.addEventListener('DOMContentLoaded', () => {
+    const storedLang = localStorage.getItem('ui-language') || 'EN';
+    updateContent(storedLang);
+  });
+</script>
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -49,22 +114,15 @@ import "../styles/navbar.css";
 
     <section class="hero">
       <div class="content">
-        <span class="badge">Connect</span>
+        <span class="badge"></span>
 
-        <h1 class="title">
-          Seamless Banking<br />
-          Connections with<br />
-          no frontiers.
-        </h1>
+        <h1 class="title"></h1>
 
-        <p class="description">
-          Allow users to connect their bank accounts, safely authorize access to their data, and generate secure tokens,
-          making it easy for your app to read information and initiate payments with confidence.
-        </p>
+        <p class="description"></p>
 
         <div class="cta">
-          <a href="/hablemos" class="btn">Let's talk</a>
-          <a href="https://documentations.zelify.com/zelify-servicios-financieros/zelify-connect" class="btn">View API Docs</a>
+          <a href="/hablemos" class="btn"></a>
+          <a href="https://documentations.zelify.com/zelify-servicios-financieros/zelify-connect" class="btn"></a>
         </div>
       </div>
     </section>

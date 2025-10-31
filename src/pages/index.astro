@@ -165,10 +165,18 @@ import "../styles/navbar.css";
     border-radius: 8px;
     display: inline-block;
     cursor: pointer;
+    box-shadow:
+      0 6px 16px rgba(80, 220, 0, 0.35),
+      0 0 20px rgba(149, 255, 11, 0.35);
+    transition: all 0.25s ease-in-out;
   }
 
   .btn-primary:hover {
-    background-color: #85ef00;
+    background: linear-gradient(145deg, rgba(128, 255, 0, 0.95), rgba(88, 220, 0, 0.88));
+    color: #10220a;
+    transform: translateY(-1px);
+    box-shadow: 0 16px 32px rgba(80, 220, 0, 0.38);
+    transition: all 0.25s ease-in-out;
   }
   .green-line {
     position: absolute;
