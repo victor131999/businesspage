@@ -4,6 +4,31 @@ import ProductsPanel from "../components/productsPanel.astro";
 import "../styles/navbar.css";
 ---
 
+<script>
+  import { updateContent } from '../scripts/authTranslations.js';
+
+  function handleLanguageChange(lang: string) {
+    // Convertir ES/EN a es/en
+    const normalizedLang = lang.toLowerCase();
+    updateContent(normalizedLang);
+  }
+
+  // Escuchar cambios de idioma desde el navbar
+  window.addEventListener('ui:languagechange', ((event: Event) => {
+    const customEvent = event as CustomEvent<{language: string}>;
+    if (customEvent.detail?.language) {
+      handleLanguageChange(customEvent.detail.language);
+    }
+  }) as EventListener);
+
+  // Aplicar traducciones iniciales
+  document.addEventListener('DOMContentLoaded', () => {
+    // Intentar obtener el idioma actual del localStorage (que usa el navbar)
+    const storedLang = localStorage.getItem('ui-language') || 'EN';
+    handleLanguageChange(storedLang);
+  });
+</script>
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />

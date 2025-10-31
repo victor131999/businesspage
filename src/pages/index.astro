@@ -4,6 +4,55 @@ import ProductsPanel from "../components/productsPanel.astro";
 import "../styles/navbar.css";
 ---
 
+<script>
+  const homeTranslations = {
+    en: {
+        subtitle: "The New Standard in",
+        title: "Business\nFinances",
+        description: "Zelify simplifies business finance:\nconnecting payments, credit,\nand cash flow in one smart platform.",
+        ctaButton: "Let's start"
+    },
+    es: {
+        subtitle: "El Nuevo Estándar en",
+        title: "Finanzas\nEmpresariales",
+        description: "Zelify simplifica las finanzas empresariales:\nconectando pagos, crédito\ny flujo de caja en una plataforma inteligente.",
+        ctaButton: "Hablemos"
+    }
+  };
+
+  function updateContent(rawLang: string) {
+    const lang = rawLang.toLowerCase() as 'en' | 'es';
+    const content = homeTranslations[lang] || homeTranslations.en;
+    
+    // Actualizar elementos
+    const elements = {
+      subtitle: document.querySelector('.subtitle'),
+      title: document.querySelector('.title'),
+      description: document.querySelector('.description'),
+      ctaButton: document.querySelector('.btn-primary')
+    };
+
+    if (elements.subtitle) elements.subtitle.textContent = content.subtitle;
+    if (elements.title) elements.title.innerHTML = content.title.replace(/\n/g, '<br>');
+    if (elements.description) elements.description.innerHTML = content.description.replace(/\n/g, '<br>');
+    if (elements.ctaButton) elements.ctaButton.textContent = content.ctaButton;
+  }
+
+  // Escuchar cambios de idioma desde el navbar
+  window.addEventListener('ui:languagechange', ((event: Event) => {
+    const customEvent = event as CustomEvent<{language: string}>;
+    if (customEvent.detail?.language) {
+      updateContent(customEvent.detail.language);
+    }
+  }) as EventListener);
+
+  // Aplicar traducciones iniciales
+  document.addEventListener('DOMContentLoaded', () => {
+    const storedLang = localStorage.getItem('ui-language') || 'EN';
+    updateContent(storedLang);
+  });
+</script>
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
