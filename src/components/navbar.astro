@@ -48,7 +48,7 @@ const cssVars = `
     </li>
     <li><a href="/">Resources</a></li>
     <li><a href="/">Developers</a></li>
-    <li><a href="/" class="highlight">personal</a></li>
+    <li><a href="https://www.zelify.com" class="highlight">Personal</a></li>
   </ul>
 
   <div class="action-links">
@@ -104,7 +104,7 @@ const cssVars = `
       </li>
       <li><a href="/">Resources</a></li>
       <li><a href="/">Developers</a></li>
-      <li><a href="/" class="highlight">personal</a></li>
+      <li><a href="https://www.zelify.com" class="highlight">Personal</a></li>
     </ul>
     <div class="action-links-mobile">
       <a href={buttons.first?.href ?? "/"} class="btn btn-light">
@@ -186,6 +186,12 @@ const cssVars = `
     background: var(--nav-bg);
   }
 
+  /* Cursor pointer para todos los elementos clickeables */
+  nav a,
+  nav button {
+    cursor: pointer;
+  }
+
   .logo-container {
     margin-right: 0;
   }
@@ -196,6 +202,17 @@ const cssVars = `
     display: flex;
     align-items: center;
     gap: 1rem;
+  }
+
+  .logo-container a {
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    display: inline-block;
+  }
+
+  .logo-container a:hover {
+    opacity: 0.8;
+    transform: scale(1.05);
   }
 
   .logo-image {
@@ -224,17 +241,20 @@ const cssVars = `
     font-weight: normal;
     padding: 0.5rem;
     cursor: pointer;
-    transition: color 0.2s ease;
+    transition: all 0.2s ease;
     font-family: inherit;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     line-height: 1;
+    border-radius: 6px;
   }
 
   .nav-links a:hover,
   .nav-links button:hover {
     color: var(--nav-text-hover);
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
   }
 
   .nav-links .highlight {
@@ -243,6 +263,14 @@ const cssVars = `
     font-weight: normal;
     padding: 0.5rem 1rem;
     border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .nav-links .highlight:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(149, 255, 11, 0.3);
   }
 
   /* DROPDOWN */
@@ -313,6 +341,7 @@ const cssVars = `
     text-decoration: none;
     border-radius: 8px;
     transition: all 0.2s ease;
+    cursor: pointer;
   }
 
   .btn-light {
@@ -322,6 +351,8 @@ const cssVars = `
   }
   .btn-light:hover {
     background-color: var(--btn-light-hover-bg);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
   .btn-outline {
@@ -332,6 +363,9 @@ const cssVars = `
   .btn-outline:hover {
     color: var(--btn-outline-hover);
     border-color: var(--btn-outline-hover);
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
   .icon {

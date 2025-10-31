@@ -1,4 +1,12 @@
 /* ===============================
+   Cursor pointer para elementos clickeables
+   =============================== */
+.products-panel a,
+.products-panel button {
+  cursor: pointer;
+}
+
+/* ===============================
    Products Panel (overlay)
    =============================== */
 
@@ -6,7 +14,12 @@
 .products-panel.hidden {
   opacity: 0;
   pointer-events: none;
-  transform: translate(-50%, -10px);
+  transform: translateX(-50%) translateY(-10px);
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0;
+  overflow: hidden;
 }
 
 /* Contenedor */
@@ -14,22 +27,29 @@
   position: fixed;
   top: 57px; /* debajo del navbar */
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(0);
+  transform-origin: top center;
   width: min(1120px, 92vw);
+  max-height: 560px;
   height: 560px;
   display: grid;
   grid-template-columns: 260px 1fr;
   gap: 0;
   padding: 0;
+  margin-top: 0;
 
   border-radius: 22px;
-  background: rgba(205, 209, 221, 0.82); /* #CDD1DD con transparencia */
+  background: rgba(230, 232, 240, 0.92); /* fondo más blanco y suave */
   backdrop-filter: blur(8px);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
   z-index: 1000;
 
   opacity: 1;
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
 }
 
 /* ===============================
@@ -42,7 +62,7 @@
   gap: 6px;
   padding: 16px 10px;
   backdrop-filter: blur(8px);
-  background: rgba(205, 209, 221, 0.82);
+  background: rgba(230, 232, 240, 0.92);
   border-top-left-radius: 22px;
   border-bottom-left-radius: 22px;
 }
@@ -64,7 +84,8 @@
 }
 
 .pp-item:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(4px);
 }
 
 .pp-item.is-active {
@@ -93,8 +114,8 @@
   padding: 24px 30px 28px 28px;
 
   background: transparent;
-  color: #0b2e6e;
-  border-left: 1px solid rgba(12, 58, 134, 0.25);
+  color: #3d6bb0;
+  border-left: 1px solid rgba(61, 107, 176, 0.25);
   border-top-right-radius: 22px;
   border-bottom-right-radius: 22px;
 }
@@ -102,22 +123,47 @@
 .pp-head .pp-title {
   margin: 0 0 6px 0;
   font-size: 1.25rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.2px;
+}
+
+.pp-title-link {
+  text-decoration: none;
+  color: #004195;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.2s ease;
+  border-bottom: 2px solid transparent;
+}
+
+.pp-title-link:hover {
+  color: #002B62;
+  border-bottom-color: #004195;
+}
+
+.pp-title-link svg {
+  transition: transform 0.2s ease;
+  color: #3d6bb0;
+}
+
+.pp-title-link:hover svg {
+  transform: translate(2px, -2px);
+  color: #004195;
 }
 
 .pp-head .pp-sub {
   margin: 0 0 12px 0;
-  color: #34548a;
+  color: #3d6bb0;
   font-size: 0.98rem;
-  font-weight: 600;
+  font-weight: normal;
   line-height: 1.5;
 }
 
 .pp-rule {
   margin: 6px 0 16px 0;
   border: 0;
-  border-top: 3px solid #1f56ae;
+  border-top: 3px solid #3d6bb0;
 }
 
 /* Lista de features */
@@ -136,6 +182,22 @@
   align-items: center;
 }
 
+/* Si pp-feature es un link, agregar estilos hover */
+a.pp-feature {
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  border-radius: 8px;
+  padding: 4px;
+  margin: -4px;
+}
+
+a.pp-feature:hover {
+  opacity: 0.85;
+  transform: translateX(4px);
+  background: rgba(61, 107, 176, 0.05);
+}
+
 .pp-icon {
   width: 52px;
   height: 52px;
@@ -147,10 +209,10 @@
   color: #0b132b;
   box-shadow: 0 10px 18px rgba(149, 255, 11, 0.25);
 }
-/* Solo el ícono del mundo dentro de .pp-icon */
-.pp-icon img[alt="World icon"] {
-  width: 25px;
-  height: 25px;
+/* Iconos dentro de .pp-icon */
+.pp-icon img {
+  width: 26px;
+  height: 26px;
   object-fit: contain;
 }
 .pp-icon svg {
@@ -160,14 +222,14 @@
 
 .pp-ft-title {
   margin: 0 0 4px 0;
-  color: #0b2e6e;
-  font-weight: 800;
+  color: #3d6bb0;
+  font-weight: 700;
 }
 
 .pp-ft-desc {
   margin: 0;
-  color: #3b5a8f;
-  font-weight: 600;
+  color: #3d6bb0;
+  font-weight: normal;
   line-height: 1.45;
 }
 
@@ -189,15 +251,17 @@
 }
 
 #products-trigger:hover {
-  background-color: #cdd1dd;
+  background-color: rgba(205, 209, 221, 0.5);
+  transform: translateY(-1px);
 }
 
 #products-trigger.active {
-  background-color: #cdd1dd;
+  background-color: rgba(205, 209, 221, 0.7);
   color: #0b132b;
   border-radius: 12px;
   font-weight: normal;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
 }
 .pp-content { opacity: 1; transition: opacity .18s; }
 .pp-content.is-fading { opacity: .45; }   /* solo cuando queramos atenuar */

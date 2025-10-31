@@ -5,22 +5,22 @@ import "../styles/navbar.css";
 <div id="products-panel" class="products-panel hidden">
   <aside class="pp-sidebar" role="tablist" aria-label="Products">
     <button role="tab" class="pp-item is-active" data-key="register"
-      >Register</button
+      >Auth</button
     >
     <button role="tab" class="pp-item" data-key="identity">Identity</button>
     <button role="tab" class="pp-item" data-key="aml">AML</button>
-    <button role="tab" class="pp-item" data-key="linking">Linking</button>
+    <button role="tab" class="pp-item" data-key="linking">Connect</button>
     <button role="tab" class="pp-item" data-key="cards">Cards</button>
     <button role="tab" class="pp-item" data-key="transfers">Transfers</button>
-    <button role="tab" class="pp-item" data-key="international"
-      >International Transfers</button
-    >
+    <button role="tab" class="pp-item" data-key="international">TX</button>
+    <button role="tab" class="pp-item" data-key="payments">Payments</button>
     <button role="tab" class="pp-item" data-key="biz"
-      >Business & Organizations</button
+      >Discounts & Coupons</button
     >
     <button role="tab" class="pp-item" data-key="matilda"
       >Matilda AI Fintech Core</button
     >
+    <button role="tab" class="pp-item" data-key="insurance">Insurance</button>
   </aside>
 
   <section class="pp-content" aria-live="polite">
@@ -93,19 +93,21 @@ import "../styles/navbar.css";
     linking: "/openBankingConnect",
     cards: "/cardIssuing",
     transfers: "/moneyTransfers",
-    international: "/transactions", // cámbialo cuando tengas /internationalTransfers
-    biz: "/discountsCoupons", // o la página que decidas para “Business & Organizations”
+    international: "/transactions",
+    payments: "/payments",
+    biz: "/discountsCoupons",
     matilda: "/matildaAI",
+    insurance: "/insurance",
   };
 
   // Pequeño catálogo de contenidos por pestaña
   const DATA = {
     register: {
       title: "Overview",
-      sub: "A product that enables initial registration through email and password, ensuring access security, traceability, and device data capture to prevent fraud and connect the user to a trusted environment.",
+      sub: "Enables initial registration via email and password, ensuring traceability, secure access, and device data capture to prevent fraud and link users to a trusted environment.",
       features: [
         {
-          icon: "check",
+          icon: "auth",
           t: "Authentication",
           d: "Allows register, authenticate, and authorize users.",
         },
@@ -122,44 +124,54 @@ import "../styles/navbar.css";
       ],
     },
     identity: {
-      title: "Identity",
-      sub: "Identity proofing, liveness and document checks to reduce fraud and friction.",
+      title: "Overview",
+      sub: "Verifies user identity through facial recognition, document validation, and liveness checks, ensuring authenticity. Compliant with standards (ISO 30107-3, LOPDP, PCI DSS) and integrates with Register, AML, and Cards for trust and compliance.",
       features: [
         {
-          icon: "id",
-          t: "Identity",
-          d: "Verify identity using documents and authoritative data.",
+          icon: "documentExtraction",
+          t: "Document extraction",
+          d: "Optical Character Recognition (OCR).",
         },
         {
-          icon: "face",
-          t: "Liveness",
-          d: "Biometric checks ensure the person is present and real.",
+          icon: "biometricVerification",
+          t: "Biometric verification",
+          d: "Facial comparison and biometric validation.",
         },
         {
-          icon: "shield",
-          t: "Watchlists",
-          d: "Screen against sanctions, PEP and adverse media.",
+          icon: "videoVerification",
+          t: "Video verification",
+          d: "Facial comparison and even voice enrollment.",
+        },
+        {
+          icon: "integrationLayer",
+          t: "Integration Layer (SDK/API)",
+          d: "Centralize digital identity.",
         },
       ],
     },
     aml: {
-      title: "AML Compliance",
-      sub: "Real-time monitoring, risk scoring and workflows that help you meet regulations.",
+      title: "Overview",
+      sub: "Assesses user risk through automated checks against PEP lists, international sanctions, and adverse media. Prevents money laundering and illicit financing, ensuring regulatory compliance (FATF, LOPDP, ISO 37301, etc.).",
       features: [
         {
-          icon: "rules",
-          t: "AML",
-          d: "Configurable policies with alerts and audit trails.",
+          icon: "amlGlobalList",
+          t: "Global list screening",
+          d: "Checks for matches across more than 32 international lists.",
         },
         {
-          icon: "score",
-          t: "Risk Scoring",
-          d: "Spot suspicious behaviour across transactions.",
+          icon: "amlInternalList",
+          t: "Internal list screening",
+          d: "Upload of custom lists for additional validation.",
         },
         {
-          icon: "case",
-          t: "Case Management",
-          d: "Investigate, escalate and resolve alerts efficiently.",
+          icon: "amlTransactionMonitoring",
+          t: "Transaction monitoring",
+          d: "Monitors transactions and suspicious financial behavior.",
+        },
+        {
+          icon: "amlAdverseMedia",
+          t: "Adverse Media and Risk Intelligence",
+          d: "Identifies parameters that could compromise the client's reputation.",
         },
       ],
     },
@@ -290,17 +302,77 @@ import "../styles/navbar.css";
         },
       ],
     },
+    payments: {
+      title: "Payments",
+      sub: "Secure and fast payment processing with multiple methods and real-time verification.",
+      features: [
+        {
+          icon: "card",
+          t: "Payment Methods",
+          d: "Accept cards, bank transfers, and digital wallets.",
+        },
+        {
+          icon: "shield",
+          t: "Security",
+          d: "PCI-compliant processing with fraud detection.",
+        },
+        {
+          icon: "sync",
+          t: "Real-time",
+          d: "Instant payment confirmation and webhooks.",
+        },
+      ],
+    },
+    insurance: {
+      title: "Insurance",
+      sub: "Comprehensive insurance solutions integrated into your financial platform.",
+      features: [
+        {
+          icon: "shield",
+          t: "Coverage",
+          d: "Multiple insurance products tailored to your needs.",
+        },
+        {
+          icon: "case",
+          t: "Claims",
+          d: "Streamlined claims processing and management.",
+        },
+        {
+          icon: "sync",
+          t: "Integration",
+          d: "Seamless integration with your existing workflows.",
+        },
+      ],
+    },
   };
 
   // Iconos inline (ligeros). Para "globe" usamos tu SVG como <img>.
   function iconSVG(name) {
     switch (name) {
       case "globe":
-        return `<img src="/icons/Worldicon.svg" alt="World icon" />`;
+        return `<img src="/icons/auth/geolocation.svg" alt="Geolocation icon" />`;
+      case "auth":
+        return `<img src="/icons/auth/authentication.svg" alt="Authentication icon" />`;
       case "check":
         return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/></svg>`;
       case "device":
-        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M7 8h10"/></svg>`;
+        return `<img src="/icons/auth/deviceInf.svg" alt="Device information icon" />`;
+      case "documentExtraction":
+        return `<img src="/icons/identity/documentExtraction.svg" alt="Document extraction icon" />`;
+      case "biometricVerification":
+        return `<img src="/icons/identity/biometricVerification.svg" alt="Biometric verification icon" />`;
+      case "videoVerification":
+        return `<img src="/icons/identity/videoVerification.svg" alt="Video verification icon" />`;
+      case "integrationLayer":
+        return `<img src="/icons/identity/integrationLayer.svg" alt="Integration Layer icon" />`;
+      case "amlGlobalList":
+        return `<img src="/icons/aml/amlGlobalList.svg" alt="Global list screening icon" />`;
+      case "amlInternalList":
+        return `<img src="/icons/aml/amlInternalList.svg" alt="Internal list screening icon" />`;
+      case "amlTransactionMonitoring":
+        return `<img src="/icons/aml/amlTransactionMonitoring.svg" alt="Transaction monitoring icon" />`;
+      case "amlAdverseMedia":
+        return `<img src="/icons/aml/amlAdverseMedia.svg" alt="Adverse Media and Risk Intelligence icon" />`;
       case "id":
         return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="9" cy="12" r="2"/><path d="M13 11h5M13 14h5"/></svg>`;
       case "face":
@@ -348,11 +420,43 @@ import "../styles/navbar.css";
     }
   }
 
+  // Mapeo de features de Auth a URLs de documentación
+  const AUTH_FEATURE_LINKS = {
+    "Authentication": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-auth#zelify-auth__autenticaci%C3%B3n",
+    "Geolocation": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-auth#zelify-auth__geolocalizaci%C3%B3n",
+    "Device information": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-auth#zelify-auth__informaci%C3%B3n-de-dispositivo"
+  };
+
+  // Mapeo de features de Identity a URLs de documentación
+  const IDENTITY_FEATURE_LINKS = {
+    "Document extraction": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-identity#zelify-identity__extracci%C3%B3n-documental",
+    "Biometric verification": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-identity#zelify-identity__verificaci%C3%B3n-biom%C3%A9trica",
+    "Video verification": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-identity#zelify-identity__verificaci%C3%B3n-de-v%C3%ADdeo",
+    "Integration Layer (SDK/API)": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-identity#zelify-identity__integration-layer-sdkapi"
+  };
+
+  // Mapeo de features de AML a URLs de documentación
+  const AML_FEATURE_LINKS = {
+    "Global list screening": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-aml#zelify-aml__evaluaci%C3%B3n-en-listas-globales",
+    "Internal list screening": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-aml#zelify-aml__evaluaci%C3%B3n-en-listas-internas",
+    "Transaction monitoring": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-aml#zelify-aml__monitoreo-de-operaciones",
+    "Adverse Media and Risk Intelligence": "https://documentations.zelify.com/zelify-servicios-financieros/zelify-aml#zelify-aml__medios-adversos-e-inteligencia-de-riesgo"
+  };
+
   // Render del contenido según pestaña
   function render(key) {
     const section = DATA[key] ?? DATA.register;
 
-    titleEl.textContent = section.title;
+    // Si es register (Auth), identity o aml, hacer el título un enlace a su página principal
+    if (key === "register") {
+      titleEl.innerHTML = `<a href="/auth" class="pp-title-link">${section.title} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;"><path d="M7 17L17 7M7 7h10v10"/></svg></a>`;
+    } else if (key === "identity") {
+      titleEl.innerHTML = `<a href="/identity" class="pp-title-link">${section.title} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;"><path d="M7 17L17 7M7 7h10v10"/></svg></a>`;
+    } else if (key === "aml") {
+      titleEl.innerHTML = `<a href="/amlCompliance" class="pp-title-link">${section.title} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;"><path d="M7 17L17 7M7 7h10v10"/></svg></a>`;
+    } else {
+      titleEl.textContent = section.title;
+    }
     subEl.textContent = section.sub;
 
     listEl.innerHTML = section.features
@@ -366,7 +470,22 @@ import "../styles/navbar.css";
         </div>
       `;
 
-        // 👉 El PRIMER feature (idx === 0) se vuelve link a la página de la sección
+        // Para Auth (register), todas las features son enlaces a documentación
+        if (key === "register" && AUTH_FEATURE_LINKS[f.t]) {
+          return `<a class="pp-feature" href="${AUTH_FEATURE_LINKS[f.t]}" target="_blank" rel="noopener noreferrer">${card}</a>`;
+        }
+        
+        // Para Identity, todas las features son enlaces a documentación
+        if (key === "identity" && IDENTITY_FEATURE_LINKS[f.t]) {
+          return `<a class="pp-feature" href="${IDENTITY_FEATURE_LINKS[f.t]}" target="_blank" rel="noopener noreferrer">${card}</a>`;
+        }
+        
+        // Para AML, todas las features son enlaces a documentación
+        if (key === "aml" && AML_FEATURE_LINKS[f.t]) {
+          return `<a class="pp-feature" href="${AML_FEATURE_LINKS[f.t]}" target="_blank" rel="noopener noreferrer">${card}</a>`;
+        }
+        
+        // 👉 El PRIMER feature (idx === 0) se vuelve link a la página de la sección para otros productos
         if (idx === 0 && KEY_TO_ROUTE[key]) {
           return `<a class="pp-feature" href="${KEY_TO_ROUTE[key]}">${card}</a>`;
         }

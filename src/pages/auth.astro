@@ -11,17 +11,7 @@ import "../styles/navbar.css";
     <title>Zelify — Auth</title>
   </head>
 
-  <body
-    style="
-      background-color: #e8ecf3;
-      background-image: url('/images/FONDO 2.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      min-height: 100vh;
-      margin: 0;
-    "
-  >
+  <body>
     <Navbar
       logoSrc="/images/zelify_logo.png"
       colors={{
@@ -51,8 +41,7 @@ import "../styles/navbar.css";
         <span class="badge">Auth</span>
 
         <h1 class="title">
-          Allows secure user registration, authentication, and authorization in
-          web and mobile applications.
+          Allows secure user registration,<br />authentication, and authorization<br />in web and mobile applications.
         </h1>
 
         <p class="description">
@@ -61,8 +50,8 @@ import "../styles/navbar.css";
         </p>
 
         <div class="cta">
-          <a href="/" class="btn btn-solid">Let’s talk</a>
-          <a href="/" class="btn btn-solid">View API Docs</a>
+          <a href="/hablemos" class="btn btn-solid">Let's talk</a>
+          <a href="https://documentations.zelify.com/zelify-servicios-financieros/zelify-auth" target="_blank" rel="noopener noreferrer" class="btn btn-solid">View API Docs</a>
         </div>
       </div>
     </section>
@@ -77,6 +66,15 @@ import "../styles/navbar.css";
     font-display: swap;
   }
 
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+
   body {
     font-family:
       "NataSans",
@@ -86,25 +84,38 @@ import "../styles/navbar.css";
       Roboto,
       sans-serif;
     color: #0b132b;
+    background-color: #e8ecf3;
+    background-image: url('/images/FONDO 2.jpg');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    overflow-y: hidden;
   }
 
   .hero {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    min-height: 100vh;
-    padding: 6rem 8%;
+    height: calc(100vh - 80px);
+    max-height: calc(100vh - 80px);
+    padding: 0 8% 0 15%;
     position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
   }
 
   .content {
-    max-width: 620px;
+    max-width: 900px;
+    width: 100%;
     background: transparent;
   }
   .badge {
-    display: block;
-    width: 100%;
-    max-width: 920px;
+    display: inline-block;
+    max-width: 500px;
     background: #6aff00;
     color: #0b132b;
     padding: 0.8rem 2rem;
@@ -118,12 +129,13 @@ import "../styles/navbar.css";
 
   .title {
     font-size: clamp(2rem, 2.5vw, 2.9rem);
-    line-height: 1;
+    line-height: 1.4;
     color: #004195;
     margin: 0 0 1.5rem 0;
     font-weight: 400;
     text-align: left;
-    max-width: 750px;
+    max-width: 900px;
+    width: 100%;
   }
 
   .description {
@@ -171,19 +183,130 @@ import "../styles/navbar.css";
     background: rgba(184, 255, 42, 0.15);
   }
 
-  @media (max-width: 900px) {
+  /* Tablet */
+  @media (max-width: 1024px) {
     .hero {
-      justify-content: center;
-      text-align: center;
-      padding: 4rem 2rem;
+      padding: 0 10% 0 12%;
     }
 
     .content {
-      max-width: 90%;
+      max-width: 85%;
+    }
+
+    .title {
+      font-size: clamp(1.8rem, 2.2vw, 2.5rem);
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    html,
+    body {
+      overflow: auto;
+      height: auto;
+      min-height: 100vh;
+    }
+
+    body {
+      overflow-y: auto;
+      background-attachment: scroll;
+    }
+
+    .hero {
+      min-height: calc(100vh - 80px);
+      height: auto;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      align-items: flex-start;
+    }
+
+    .content {
+      max-width: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .badge {
+      max-width: 280px;
+      margin: 0 auto 2rem;
+      text-align: center;
+    }
+
+    .title {
+      font-size: 2rem;
+      line-height: 1.3;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      max-width: 100%;
+    }
+
+    .description {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      max-width: 100%;
+      text-align: center;
+      padding: 0 1rem;
     }
 
     .cta {
       justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      font-size: 0.9rem;
+      padding: 0.75rem 1.5rem;
+      width: fit-content;
+    }
+  }
+
+  /* Small mobile */
+  @media (max-width: 480px) {
+    .hero {
+      padding: 1rem 1rem;
+      padding-top: 1rem;
+    }
+
+    .content {
+      padding: 0;
+    }
+
+    .badge {
+      max-width: 200px;
+      padding: 0.7rem 1.5rem;
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .title {
+      font-size: 1.75rem;
+      line-height: 1.25;
+      margin-bottom: 1rem;
+      padding: 0 0.5rem;
+    }
+
+    .description {
+      font-size: 0.95rem;
+      padding: 0 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      font-size: 0.85rem;
+      padding: 0.65rem 1.3rem;
+      width: 100%;
+      max-width: 280px;
+    }
+
+    .cta {
+      width: 100%;
+      align-items: center;
     }
   }
 </style>
