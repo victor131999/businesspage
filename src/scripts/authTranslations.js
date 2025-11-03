@@ -2,15 +2,15 @@
 const authTranslations = {
     en: {
         badge: "Auth",
-        title: "Unshakeable Identity Security: Face, Document & Liveness Verification",
-        description: "Advanced face and document verification meets liveness detection for total authenticity. Compliant and seamlessly connected to onboarding, AML, and card issuance for secure, trusted user identity.",
+        title: "Allows secure user registration, authentication,\n and authorization in web and mobile applications.",
+        description: "managing login with proprietary or third-party credentials (Google, Apple, Facebook, etc.).",
         ctaTalk: "Let's talk",
         ctaDocs: "View API Docs"
     },
     es: {
-        badge: "Autenticación",
-        title: "Seguridad de Identidad Inquebrantable: Verificación Facial, Documental y de Presencia",
-        description: "La verificación avanzada de rostros y documentos se combina con la detección de vida para una autenticidad total. Compatible y conectado perfectamente con el onboarding, AML y emisión de tarjetas para una identidad de usuario segura y confiable.",
+        badge: "Auth",
+        title: "Permite el registroseguro de usuarios,\n autenticación, y autorización en \n aplicaciones\nweb y móviles.",
+        description: "gestiona el inicio de sesión con credenciales propias o de terceros (Google, Apple, Facebook, etc.).",
         ctaTalk: "Hablemos",
         ctaDocs: "Ver documentación API"
     }

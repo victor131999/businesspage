@@ -66,7 +66,9 @@ import "../styles/navbar.css";
         <span class="badge">Auth</span>
 
         <h1 class="title">
-          Allows secure user registration,<br />authentication, and authorization<br />in web and mobile applications.
+          Allows secure user registration,<br/>
+          authentication, and authorization<br/>
+          in web and mobile applications.
         </h1>
 
         <p class="description">
@@ -321,47 +323,18 @@ import "../styles/navbar.css";
     }
   }
 
-  /* Small mobile */
-  @media (max-width: 480px) {
-    .hero {
-      padding: 1rem 1rem;
-      padding-top: 1rem;
+  /* Prevent text from colliding with the phone image at desktop zoom levels */
+  @media (max-width: 1600px) {
+    .hero .content {
+      max-width: 52%;
+      padding-right: 3rem;
     }
+  }
 
-    .content {
-      padding: 0;
-    }
-
-    .badge {
-      max-width: 200px;
-      padding: 0.7rem 1.5rem;
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .title {
-      font-size: 1.75rem;
-      line-height: 1.25;
-      margin-bottom: 1rem;
-      padding: 0 0.5rem;
-    }
-
-    .description {
-      font-size: 0.95rem;
-      padding: 0 0.5rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .btn {
-      font-size: 0.85rem;
-      padding: 0.65rem 1.3rem;
-      width: 100%;
-      max-width: 280px;
-    }
-
-    .cta {
-      width: 100%;
-      align-items: center;
+  @media (max-width: 1400px) {
+    .hero .content {
+      max-width: 50%;
+      padding-right: 2rem;
     }
   }
 </style>
