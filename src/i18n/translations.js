@@ -6,7 +6,7 @@ export const translations = {
     "nav.developers": "Developers",
     "nav.personal": "Personal",
     "nav.workWithUs": "Work with us",
-    "nav.bankAccess": "Bank access",
+    "nav.bankAccess": "Business access",
     
     // Products Panel
     "products.register": "Register",
@@ -43,7 +43,7 @@ export const translations = {
     "nav.developers": "Desarrolladores",
     "nav.personal": "Personal",
     "nav.workWithUs": "Trabaja con nosotros",
-    "nav.bankAccess": "Acceso bancario",
+    "nav.bankAccess": "Acceso empresarial",
     
     // Products Panel (nombres de productos se mantienen en inglés)
     "products.register": "Register",

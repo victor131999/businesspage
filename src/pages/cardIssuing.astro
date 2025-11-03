@@ -4,6 +4,71 @@ import ProductsPanel from "../components/productsPanel.astro";
 import "../styles/navbar.css";
 ---
 
+<script>
+  type Translation = {
+    badge: string;
+    title: string;
+    description: string;
+    ctaTalk: string;
+    ctaDocs: string;
+  };
+
+  type Translations = {
+    en: Translation;
+    es: Translation;
+  };
+
+  const translations: Translations = {
+    en: {
+      badge: "Cards",
+      title: "Powering the Future\nof Card Solutions.",
+      description: "A comprehensive platform to issue, process, and manage physical and virtual cards, designed to help your business grow, innovate, and scale with ease.",
+      ctaTalk: "Let's talk",
+      ctaDocs: "View API Docs"
+    },
+    es: {
+      badge: "Cards",
+      title: "Potenciar el Futuro de\n Soluciones de Tarjetas.",
+      description: "Una plataforma integral para emitir, procesar y gestionar tarjetas físicas y virtuales, diseñada para ayudar a tu negocio a crecer, innovar y escalar con facilidad.",
+      ctaTalk: "Hablemos",
+      ctaDocs: "Ver documentación API"
+    }
+  };
+
+  function updateContent(rawLang: string) {
+    const lang = rawLang.toLowerCase() as keyof Translations;
+    const content = translations[lang] || translations.en;
+    
+    const elements = {
+      badge: document.querySelector('.badge'),
+      title: document.querySelector('.title'),
+      description: document.querySelector('.description'),
+      ctaTalk: document.querySelector('.cta .btn:first-child'),
+      ctaDocs: document.querySelector('.cta .btn:last-child')
+    };
+
+    if (elements.badge) elements.badge.textContent = content.badge;
+    if (elements.title) elements.title.innerHTML = content.title.replace(/\n/g, '<br>');
+    if (elements.description) elements.description.textContent = content.description;
+    if (elements.ctaTalk) elements.ctaTalk.textContent = content.ctaTalk;
+    if (elements.ctaDocs) elements.ctaDocs.textContent = content.ctaDocs;
+  }
+
+  // Escuchar cambios de idioma desde el navbar
+  window.addEventListener('ui:languagechange', ((event) => {
+    const customEvent = event as CustomEvent<{language: string}>;
+    if (customEvent.detail?.language) {
+      updateContent(customEvent.detail.language);
+    }
+  }) as EventListener);
+
+  // Aplicar traducciones iniciales
+  document.addEventListener('DOMContentLoaded', () => {
+    const storedLang = localStorage.getItem('ui-language') || 'EN';
+    updateContent(storedLang);
+  });
+</script>
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -42,30 +107,23 @@ import "../styles/navbar.css";
         radius: "22px",
       }}
       buttons={{
-        first: { label: "Work with us", href: "/" },
-        second: { label: "Bank access", href: "https://www.zelify.io/" },
+        first: { label: "Work with us", href: "https://www.zelify.com/jobs" },
+        second: { label: "Business access", href: "about:blank" },
         third: { label: "EN", href: "/" },
       }}
     />
 <ProductsPanel />
     <section class="hero">
       <div class="content">
-        <span class="badge">Cards</span>
+        <span class="badge"></span>
 
-        <h1 class="title">
-          Powering the Future<br />
-          of Card Solutions.
-        </h1>
+        <h1 class="title"></h1>
 
-        <p class="description">
-          A comprehensive platform to issue, process, and manage physical and
-          virtual cards, designed to help your business grow, innovate, and
-          scale with ease.
-        </p>
+        <p class="description"></p>
 
         <div class="cta">
-          <a href="/hablemos" class="btn">Let's talk</a>
-          <a href="https://documentations.zelify.com/zelify-servicios-financieros/zelify-cards" class="btn">View API Docs</a>
+          <a href="/hablemos" class="btn"></a>
+          <a href="https://documentations.zelify.com/zelify-servicios-financieros/zelify-cards" class="btn"></a>
         </div>
       </div>
     </section>
