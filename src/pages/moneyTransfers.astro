@@ -4,6 +4,71 @@ import ProductsPanel from "../components/productsPanel.astro";
 import "../styles/navbar.css";
 ---
 
+<script>
+  type Translation = {
+    badge: string;
+    title: string;
+    description: string;
+    ctaTalk: string;
+    ctaDocs: string;
+  };
+
+  type Translations = {
+    en: Translation;
+    es: Translation;
+  };
+
+  const translations: Translations = {
+    en: {
+      badge: "Transfers",
+      title: "Instant Transfers<br />Within the Zelify<br />Ecosystem.",
+      description: "Zelify Transfers enables real-time money movement between digital accounts, ensuring speed, security, and seamless integration across the entire platform.",
+      ctaTalk: "Let's talk",
+      ctaDocs: "View API Docs"
+    },
+    es: {
+      badge: "Transfers",
+      title: "Transferencias Instantáneas<br />Dentro del Ecosistema<br />Zelify.",
+      description: "Zelify Transfers permite el movimiento de dinero en tiempo real entre cuentas digitales, garantizando velocidad, seguridad e integración sin problemas en toda la plataforma.",
+      ctaTalk: "Hablemos",
+      ctaDocs: "Ver documentación API"
+    }
+  };
+
+  function updateContent(rawLang: string) {
+    const lang = rawLang.toLowerCase() as keyof Translations;
+    const content = translations[lang] || translations.en;
+    
+    const elements = {
+      badge: document.querySelector('.band-text'),
+      title: document.querySelector('.title'),
+      description: document.querySelector('.description'),
+      ctaTalk: document.querySelector('.cta a:first-child'),
+      ctaDocs: document.querySelector('.cta a:last-child')
+    };
+
+    if (elements.badge) elements.badge.textContent = content.badge;
+    if (elements.title) elements.title.innerHTML = content.title.replace(/\n/g, '<br>');
+    if (elements.description) elements.description.textContent = content.description;
+    if (elements.ctaTalk) elements.ctaTalk.textContent = content.ctaTalk;
+    if (elements.ctaDocs) elements.ctaDocs.textContent = content.ctaDocs;
+  }
+
+  // Escuchar cambios de idioma desde el navbar
+  window.addEventListener('ui:languagechange', ((event: Event) => {
+    const customEvent = event as CustomEvent<{language: string}>;
+    if (customEvent.detail?.language) {
+      updateContent(customEvent.detail.language);
+    }
+  }) as EventListener);
+
+  // Aplicar traducciones iniciales
+  document.addEventListener('DOMContentLoaded', () => {
+    const storedLang = localStorage.getItem('ui-language') || 'EN';
+    updateContent(storedLang);
+  });
+</script>
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />

@@ -4,6 +4,71 @@ import ProductsPanel from "../components/productsPanel.astro";
 import "../styles/navbar.css";
 ---
 
+<script>
+  type Translation = {
+    badge: string;
+    title: string;
+    description: string;
+    ctaTalk: string;
+    ctaDocs: string;
+  };
+
+  type Translations = {
+    en: Translation;
+    es: Translation;
+  };
+
+  const translations: Translations = {
+    en: {
+      badge: "Matilda AI Fintech Core",
+      title: "AI-Powered<br />Financial<br />Intelligence.",
+      description: "A central Artificial Intelligence module designed to enhance the user financial experience through behavioral analysis, automated education, and intelligent support.",
+      ctaTalk: "Let's talk",
+      ctaDocs: "View API Docs"
+    },
+    es: {
+      badge: "Matilda AI Fintech Core",
+      title: "Inteligencia Financiera<br />Impulsada por<br />IA.",
+      description: "Módulo central de Inteligencia Artificial diseñado para mejorar la experiencia financiera del usuario mediante análisis de comportamiento, educación automatizada y soporte inteligente.",
+      ctaTalk: "Hablemos",
+      ctaDocs: "Ver documentación API"
+    }
+  };
+
+  function updateContent(rawLang: string) {
+    const lang = rawLang.toLowerCase() as keyof Translations;
+    const content = translations[lang] || translations.en;
+    
+    const elements = {
+      badge: document.querySelector('.band-text'),
+      title: document.querySelector('.title'),
+      description: document.querySelector('.description'),
+      ctaTalk: document.querySelector('.cta a:first-child'),
+      ctaDocs: document.querySelector('.cta a:last-child')
+    };
+
+    if (elements.badge) elements.badge.textContent = content.badge;
+    if (elements.title) elements.title.innerHTML = content.title.replace(/\n/g, '<br>');
+    if (elements.description) elements.description.textContent = content.description;
+    if (elements.ctaTalk) elements.ctaTalk.textContent = content.ctaTalk;
+    if (elements.ctaDocs) elements.ctaDocs.textContent = content.ctaDocs;
+  }
+
+  // Escuchar cambios de idioma desde el navbar
+  window.addEventListener('ui:languagechange', ((event: Event) => {
+    const customEvent = event as CustomEvent<{language: string}>;
+    if (customEvent.detail?.language) {
+      updateContent(customEvent.detail.language);
+    }
+  }) as EventListener);
+
+  // Aplicar traducciones iniciales
+  document.addEventListener('DOMContentLoaded', () => {
+    const storedLang = localStorage.getItem('ui-language') || 'EN';
+    updateContent(storedLang);
+  });
+</script>
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -67,8 +132,8 @@ import "../styles/navbar.css";
         </p>
 
         <div class="cta">
-          <a href="/" class="btn">Let’s talk</a>
-          <a href="/" class="btn">View API Docs</a>
+          <a href="/hablemos" class="btn">Let's talk</a>
+          <a href="https://documentations.zelify.com/zelify-servicios-financieros/matilda-ai-core-for-fintech" target="_blank" rel="noopener noreferrer" class="btn">View API Docs</a>
         </div>
       </div>
     </section>

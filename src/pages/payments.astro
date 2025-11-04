@@ -4,6 +4,71 @@ import ProductsPanel from "../components/productsPanel.astro";
 import "../styles/navbar.css";
 ---
 
+<script>
+  type Translation = {
+    badge: string;
+    title: string;
+    description: string;
+    ctaTalk: string;
+    ctaDocs: string;
+  };
+
+  type Translations = {
+    en: Translation;
+    es: Translation;
+  };
+
+  const translations: Translations = {
+    en: {
+      badge: "Payments",
+      title: "Unified Payment<br />Processing, Simplified.",
+      description: "A unified payment processor that accepts multiple methods: cards, custom keys, or contactless options. Includes advanced features like recurring payments, express checkout, tokenization, and custom APIs for seamless integration.",
+      ctaTalk: "Let's talk",
+      ctaDocs: "View API Docs"
+    },
+    es: {
+      badge: "Payments",
+      title: "Procesamiento de Pagos<br />Unificado, Simplificado.",
+      description: "Procesador de pagos unificado que acepta múltiples métodos: tarjetas, llaves personalizadas u opciones sin contacto. Incluye características avanzadas como pagos recurrentes, checkout express, tokenización y APIs personalizadas para integración sin problemas.",
+      ctaTalk: "Hablemos",
+      ctaDocs: "Ver documentación API"
+    }
+  };
+
+  function updateContent(rawLang: string) {
+    const lang = rawLang.toLowerCase() as keyof Translations;
+    const content = translations[lang] || translations.en;
+    
+    const elements = {
+      badge: document.querySelector('.band-text'),
+      title: document.querySelector('.title'),
+      description: document.querySelector('.description'),
+      ctaTalk: document.querySelector('.cta a:first-child'),
+      ctaDocs: document.querySelector('.cta a:last-child')
+    };
+
+    if (elements.badge) elements.badge.textContent = content.badge;
+    if (elements.title) elements.title.innerHTML = content.title.replace(/\n/g, '<br>');
+    if (elements.description) elements.description.textContent = content.description;
+    if (elements.ctaTalk) elements.ctaTalk.textContent = content.ctaTalk;
+    if (elements.ctaDocs) elements.ctaDocs.textContent = content.ctaDocs;
+  }
+
+  // Escuchar cambios de idioma desde el navbar
+  window.addEventListener('ui:languagechange', ((event: Event) => {
+    const customEvent = event as CustomEvent<{language: string}>;
+    if (customEvent.detail?.language) {
+      updateContent(customEvent.detail.language);
+    }
+  }) as EventListener);
+
+  // Aplicar traducciones iniciales
+  document.addEventListener('DOMContentLoaded', () => {
+    const storedLang = localStorage.getItem('ui-language') || 'EN';
+    updateContent(storedLang);
+  });
+</script>
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -66,8 +131,8 @@ import "../styles/navbar.css";
         </p>
 
         <div class="cta">
-          <a href="/" class="btn">Let’s talk</a>
-          <a href="/" class="btn">View API Docs</a>
+          <a href="/hablemos" class="btn">Let's talk</a>
+          <a href="https://documentations.zelify.com/zelify-servicios-financieros/zelify-payments" target="_blank" rel="noopener noreferrer" class="btn">View API Docs</a>
         </div>
       </div>
     </section>

@@ -4,6 +4,75 @@ import ProductsPanel from "../components/productsPanel.astro";
 import "../styles/navbar.css";
 ---
 
+<script>
+  type Translation = {
+    badge: string;
+    title: string;
+    description: string;
+    ctaTalk: string;
+    ctaDocs: string;
+  };
+
+  type Translations = {
+    en: Translation;
+    es: Translation;
+  };
+
+  const translations: Translations = {
+    en: {
+      badge: "TX",
+      title: "Seamless Cross-Border<br />Transfers, Instantly.",
+      description: "Zelify International Transfers enables instant B2C, B2B, and P2P transactions between Latin America and the United States, delivering speed, security, and efficiency for global money movement.",
+      ctaTalk: "Let's talk",
+      ctaDocs: "View API Docs"
+    },
+    es: {
+      badge: "TX",
+      title: "Transferencias Transfronterizas<br />Sin Fricción, Instantáneas.",
+      description: "Zelify International Transfers permite transacciones instantáneas B2C, B2B y P2P entre Latinoamérica y Estados Unidos, ofreciendo velocidad, seguridad y eficiencia para el movimiento global de dinero.",
+      ctaTalk: "Hablemos",
+      ctaDocs: "Ver documentación API"
+    }
+  };
+
+  function updateContent(rawLang: string) {
+    const lang = rawLang.toLowerCase() as keyof Translations;
+    const content = translations[lang] || translations.en;
+    
+    const elements = {
+      badge: document.querySelector('.badge'),
+      title: document.querySelector('.title'),
+      description: document.querySelector('.description'),
+      ctaTalk: document.querySelector('.cta a:first-child'),
+      ctaDocs: document.querySelector('.cta a:last-child')
+    };
+
+    if (elements.badge) elements.badge.textContent = content.badge;
+    if (elements.title) {
+      const titleHTML = content.title.replace(/\n/g, '<br>');
+      const badgeHTML = elements.badge ? `<span class="badge">${content.badge}</span> ` : '';
+      elements.title.innerHTML = badgeHTML + titleHTML;
+    }
+    if (elements.description) elements.description.textContent = content.description;
+    if (elements.ctaTalk) elements.ctaTalk.textContent = content.ctaTalk;
+    if (elements.ctaDocs) elements.ctaDocs.textContent = content.ctaDocs;
+  }
+
+  // Escuchar cambios de idioma desde el navbar
+  window.addEventListener('ui:languagechange', ((event: Event) => {
+    const customEvent = event as CustomEvent<{language: string}>;
+    if (customEvent.detail?.language) {
+      updateContent(customEvent.detail.language);
+    }
+  }) as EventListener);
+
+  // Aplicar traducciones iniciales
+  document.addEventListener('DOMContentLoaded', () => {
+    const storedLang = localStorage.getItem('ui-language') || 'EN';
+    updateContent(storedLang);
+  });
+</script>
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />

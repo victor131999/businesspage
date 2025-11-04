@@ -4,6 +4,71 @@ import ProductsPanel from "../components/productsPanel.astro";
 import "../styles/navbar.css";
 ---
 
+<script>
+  type Translation = {
+    badge: string;
+    title: string;
+    description: string;
+    ctaTalk: string;
+    ctaDocs: string;
+  };
+
+  type Translations = {
+    en: Translation;
+    es: Translation;
+  };
+
+  const translations: Translations = {
+    en: {
+      badge: "Insurance",
+      title: "Smart Insurance and<br />Assistance Management.",
+      description: "Handles the quoting, selling, and purchasing of insurance and assistance services efficiently and securely.",
+      ctaTalk: "Let's talk",
+      ctaDocs: "View API Docs"
+    },
+    es: {
+      badge: "Insurance",
+      title: "Gestión Inteligente de<br />Seguros y Asistencia.",
+      description: "Gestiona la cotización, venta y compra de seguros y servicios de asistencia de manera eficiente y segura.",
+      ctaTalk: "Hablemos",
+      ctaDocs: "Ver documentación API"
+    }
+  };
+
+  function updateContent(rawLang: string) {
+    const lang = rawLang.toLowerCase() as keyof Translations;
+    const content = translations[lang] || translations.en;
+    
+    const elements = {
+      badge: document.querySelector('.band-text'),
+      title: document.querySelector('.title'),
+      description: document.querySelector('.description'),
+      ctaTalk: document.querySelector('.cta a:first-child'),
+      ctaDocs: document.querySelector('.cta a:last-child')
+    };
+
+    if (elements.badge) elements.badge.textContent = content.badge;
+    if (elements.title) elements.title.innerHTML = content.title.replace(/\n/g, '<br>');
+    if (elements.description) elements.description.textContent = content.description;
+    if (elements.ctaTalk) elements.ctaTalk.textContent = content.ctaTalk;
+    if (elements.ctaDocs) elements.ctaDocs.textContent = content.ctaDocs;
+  }
+
+  // Escuchar cambios de idioma desde el navbar
+  window.addEventListener('ui:languagechange', ((event: Event) => {
+    const customEvent = event as CustomEvent<{language: string}>;
+    if (customEvent.detail?.language) {
+      updateContent(customEvent.detail.language);
+    }
+  }) as EventListener);
+
+  // Aplicar traducciones iniciales
+  document.addEventListener('DOMContentLoaded', () => {
+    const storedLang = localStorage.getItem('ui-language') || 'EN';
+    updateContent(storedLang);
+  });
+</script>
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -73,8 +138,8 @@ import "../styles/navbar.css";
 
         <!-- CTA -->
         <div class="cta">
-          <a href="/" class="btn-light">Let’s talk</a>
-          <a href="/" class="btn-light">View API Docs</a>
+          <a href="/hablemos" class="btn-light">Let's talk</a>
+          <a href="https://documentations.zelify.com/zelify-servicios-financieros/zelify-insurance" target="_blank" rel="noopener noreferrer" class="btn-light">View API Docs</a>
         </div>
       </div>
     </section>
