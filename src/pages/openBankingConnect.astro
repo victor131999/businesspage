@@ -9,6 +9,7 @@ import "../styles/navbar.css";
     badge: string;
     title: string;
     description: string;
+    descriptionDesktop?: string;
     ctaTalk: string;
     ctaDocs: string;
   };
@@ -23,6 +24,7 @@ import "../styles/navbar.css";
       badge: "Connect",
       title: "Seamless Banking\nConnections with\nno frontiers.",
       description: "Allow users to connect their bank accounts, safely authorize access to their data, and generate secure tokens, making it easy for your app to read information and initiate payments with confidence.",
+      descriptionDesktop: "Allow users to connect their bank accounts, safely authorize access to their data, and generate secure tokens, making it easy for your app to read information and initiate<br/>payments with confidence.",
       ctaTalk: "Let's talk",
       ctaDocs: "View API Docs"
     },
@@ -30,13 +32,30 @@ import "../styles/navbar.css";
       badge: "Connect",
       title: "Conexiones Bancarias\nFluidas sin\nFronteras.",
       description: "Permite a los usuarios conectar sus cuentas bancarias, autorizar de forma segura el acceso a sus datos y generar tokens seguros, facilitando que tu aplicación lea información e inicie pagos con confianza.",
+      descriptionDesktop: "Permite a los usuarios conectar sus cuentas bancarias, autorizar de forma segura el acceso a sus datos y generar tokens seguros, facilitando que tu aplicación lea información e inicie<br/>pagos con confianza.",
       ctaTalk: "Hablemos",
       ctaDocs: "Ver documentación API"
     }
   };
 
+  function updateDescription(lang: keyof Translations) {
+    const content = translations[lang] || translations.en;
+    const descriptionElement = document.querySelector('.description');
+    if (descriptionElement) {
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
+      if (isMobile) {
+        descriptionElement.textContent = content.description;
+      } else {
+        descriptionElement.innerHTML = (content as any).descriptionDesktop || content.description;
+      }
+    }
+  }
+
+  let currentLang: keyof Translations = 'en';
+
   function updateContent(rawLang: string) {
     const lang = rawLang.toLowerCase() as keyof Translations;
+    currentLang = lang;
     const content = translations[lang] || translations.en;
     
     const elements = {
@@ -49,7 +68,10 @@ import "../styles/navbar.css";
 
     if (elements.badge) elements.badge.textContent = content.badge;
     if (elements.title) elements.title.innerHTML = content.title.replace(/\n/g, '<br>');
-    if (elements.description) elements.description.textContent = content.description;
+    
+    // Update description with responsive logic
+    updateDescription(lang);
+    
     if (elements.ctaTalk) elements.ctaTalk.textContent = content.ctaTalk;
     if (elements.ctaDocs) elements.ctaDocs.textContent = content.ctaDocs;
   }
@@ -66,6 +88,11 @@ import "../styles/navbar.css";
   document.addEventListener('DOMContentLoaded', () => {
     const storedLang = localStorage.getItem('ui-language') || 'EN';
     updateContent(storedLang);
+  });
+
+  // Handle window resize to update description
+  window.addEventListener('resize', () => {
+    updateDescription(currentLang);
   });
 </script>
 
@@ -173,7 +200,7 @@ import "../styles/navbar.css";
 
   .title {
     color: #b8ff2a;
-    font-weight: 800;
+    font-weight: 400;
     line-height: 1.15;
     font-size: clamp(2rem, 4.6vw, 3.1rem);
     margin: 0 0 1rem 0;

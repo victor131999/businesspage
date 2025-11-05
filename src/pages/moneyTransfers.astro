@@ -97,6 +97,7 @@ import "../styles/navbar.css";
         btnLightBg: "#00223E",
         btnLightHoverBg: "#DAE4F1",
         btnLightText: "#66FF00",
+        btnLightIconFilter: "brightness(0) saturate(100%) invert(77%) sepia(97%) saturate(1352%) hue-rotate(47deg) brightness(107%) contrast(107%)",
         btnOutline: "#00223E",
         btnOutlineHover: "#ffffff",
         dropdownBg: "#ffffff",
@@ -179,34 +180,36 @@ import "../styles/navbar.css";
 
   .content {
     max-width: min(640px, 90%);
-    text-align: left;
+    text-align: right;
     position: relative;
-    margin-right: clamp(4%, 8vw, 8%);
+    margin-left: auto;
+    margin-right: clamp(12%, 16vw, 20%);
     width: 100%;
     box-sizing: border-box;
   }
 
   .band-text {
     display: inline-block;
-    position: relative;
-    transform: translate(0, 5.8rem);
-    left: clamp(8rem, 16.5vw, 16.5rem);
-    font-weight: 800;
-    font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+    font-weight: 700;
+    font-size: 1.1rem;
     color: #ffffff;
-    background: transparent;
+    background: #004195;
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
     letter-spacing: 0.3px;
-    margin-bottom: 2.8rem;
+    margin-bottom: 0.5rem;
+    margin-left: auto;
     word-wrap: break-word;
     overflow-wrap: break-word;
+    text-align: right;
   }
 
   .title {
     color: #0b132b;
-    font-weight: 700;
+    font-weight: 400;
     line-height: 1.22;
     font-size: clamp(2rem, 4vw, 3.1rem);
-    margin-top: 4.5rem;
+    margin-top: 1rem;
     margin-bottom: 1.4rem;
     word-wrap: break-word;
     overflow-wrap: break-word;
@@ -218,7 +221,9 @@ import "../styles/navbar.css";
     font-size: clamp(0.95rem, 1.5vw, 1.05rem);
     line-height: 1.65;
     max-width: min(540px, 100%);
-    margin: 0 0 2.8rem 0;
+    margin-left: auto;
+    margin-right: 0;
+    margin-bottom: 2.8rem;
     word-wrap: break-word;
     overflow-wrap: break-word;
     box-sizing: border-box;
@@ -228,6 +233,7 @@ import "../styles/navbar.css";
     display: flex;
     gap: 0.8rem;
     flex-wrap: wrap;
+    justify-content: flex-end;
   }
 
   .btn {
@@ -270,8 +276,10 @@ import "../styles/navbar.css";
       left: auto;
       margin-bottom: 1.5rem;
       margin-top: 0;
-      display: block;
+      display: inline-block;
       text-align: center;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .title {
@@ -322,7 +330,9 @@ import "../styles/navbar.css";
       margin-top: 0;
       font-size: 1rem;
       text-align: center;
-      display: block;
+      display: inline-block;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .title {

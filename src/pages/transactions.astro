@@ -8,7 +8,9 @@ import "../styles/navbar.css";
   type Translation = {
     badge: string;
     title: string;
+    titleDesktop?: string;
     description: string;
+    descriptionDesktop?: string;
     ctaTalk: string;
     ctaDocs: string;
   };
@@ -22,21 +24,54 @@ import "../styles/navbar.css";
     en: {
       badge: "TX",
       title: "Seamless Cross-Border<br />Transfers, Instantly.",
+      titleDesktop: "Seamless<br/>Cross-Border<br/>Transfers, Instantly.",
       description: "Zelify International Transfers enables instant B2C, B2B, and P2P transactions between Latin America and the United States, delivering speed, security, and efficiency for global money movement.",
+      descriptionDesktop: "Zelify International Transfers enables instant B2C, B2B, and P2P transactions between Latin America and the United States, delivering speed, security, and efficiency<br/>for global money movement.",
       ctaTalk: "Let's talk",
       ctaDocs: "View API Docs"
     },
     es: {
       badge: "TX",
       title: "Transferencias Transfronterizas<br />Sin Fricción, Instantáneas.",
+      titleDesktop: "Transferencias Transfronterizas<br />Sin Fricción, Instantáneas.",
       description: "Zelify International Transfers permite transacciones instantáneas B2C, B2B y P2P entre Latinoamérica y Estados Unidos, ofreciendo velocidad, seguridad y eficiencia para el movimiento global de dinero.",
+      descriptionDesktop: "Zelify International Transfers permite transacciones instantáneas B2C, B2B y P2P entre Latinoamérica y Estados Unidos, ofreciendo velocidad, seguridad y eficiencia<br/>para el movimiento global de dinero.",
       ctaTalk: "Hablemos",
       ctaDocs: "Ver documentación API"
     }
   };
 
+  function updateTitle(lang: keyof Translations) {
+    const content = translations[lang] || translations.en;
+    const titleElement = document.querySelector('.title');
+    if (titleElement) {
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
+      if (isMobile) {
+        titleElement.innerHTML = content.title.replace(/\n/g, '<br>');
+      } else {
+        titleElement.innerHTML = (content as any).titleDesktop || content.title.replace(/\n/g, '<br>');
+      }
+    }
+  }
+
+  function updateDescription(lang: keyof Translations) {
+    const content = translations[lang] || translations.en;
+    const descriptionElement = document.querySelector('.description');
+    if (descriptionElement) {
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
+      if (isMobile) {
+        descriptionElement.textContent = content.description;
+      } else {
+        descriptionElement.innerHTML = (content as any).descriptionDesktop || content.description;
+      }
+    }
+  }
+
+  let currentLang: keyof Translations = 'en';
+
   function updateContent(rawLang: string) {
     const lang = rawLang.toLowerCase() as keyof Translations;
+    currentLang = lang;
     const content = translations[lang] || translations.en;
     
     const elements = {
@@ -48,12 +83,11 @@ import "../styles/navbar.css";
     };
 
     if (elements.badge) elements.badge.textContent = content.badge;
-    if (elements.title) {
-      const titleHTML = content.title.replace(/\n/g, '<br>');
-      const badgeHTML = elements.badge ? `<span class="badge">${content.badge}</span> ` : '';
-      elements.title.innerHTML = badgeHTML + titleHTML;
-    }
-    if (elements.description) elements.description.textContent = content.description;
+    
+    // Update title and description with responsive logic
+    updateTitle(lang);
+    updateDescription(lang);
+    
     if (elements.ctaTalk) elements.ctaTalk.textContent = content.ctaTalk;
     if (elements.ctaDocs) elements.ctaDocs.textContent = content.ctaDocs;
   }
@@ -70,6 +104,12 @@ import "../styles/navbar.css";
   document.addEventListener('DOMContentLoaded', () => {
     const storedLang = localStorage.getItem('ui-language') || 'EN';
     updateContent(storedLang);
+  });
+
+  // Handle window resize to update title and description
+  window.addEventListener('resize', () => {
+    updateTitle(currentLang);
+    updateDescription(currentLang);
   });
 </script>
 
@@ -120,16 +160,19 @@ import "../styles/navbar.css";
 
     <section class="hero">
       <div class="content">
+        <span class="badge">TX</span>
+
         <h1 class="title">
-          <span class="badge">TX</span>
-          Seamless Cross-Border<br />
+          Seamless<br/>
+          Cross-Border<br/>
           Transfers, Instantly.
         </h1>
 
         <p class="description">
           Zelify International Transfers enables instant B2C, B2B, and P2P
           transactions between Latin America and the United States, delivering
-          speed, security, and efficiency for global money movement.
+          speed, security, and efficiency<br/>
+          for global money movement.
         </p>
 
         <div class="cta">
@@ -170,9 +213,26 @@ import "../styles/navbar.css";
 
   .content {
     max-width: 720px;
-    text-align: center; 
+    text-align: right;
     position: relative;
-    margin-right: 6%;
+    margin-left: auto;
+    margin-right: clamp(8%, 12vw, 15%);
+  }
+
+  .badge {
+    display: inline-block;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #ffffff;
+    background: #004195;
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
+    letter-spacing: 0.3px;
+    margin-bottom: 0.5rem;
+    margin-left: auto;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    text-align: right;
   }
 
   .title {
@@ -180,30 +240,9 @@ import "../styles/navbar.css";
     font-weight: 500;
     line-height: 1.18;
     font-size: clamp(2rem, 4.6vw, 3.2rem);
-    margin: 0 0 1rem 0;
-    position: relative;
-    padding-right: 0;
-  }
-
-  .badge {
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: inline-block;
-    background: #6aff00;
-    color: #0b132b;
-    padding: 0.8rem 2rem;
-    border-radius: 25px;
-    font-weight: 700;
-    font-size: 1.1rem;
-    text-align: center;
-    box-shadow: 0 0 12px rgba(184, 255, 42, 0.4);
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    box-sizing: border-box;
-    transform: translateY(-100%);
-    margin-bottom: 0.5rem;
-    white-space: nowrap;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    text-align: right;
   }
 
   .description {
@@ -211,15 +250,17 @@ import "../styles/navbar.css";
     font-size: 1.05rem;
     line-height: 1.5;
     max-width: 520px; 
-    text-align: center; 
-    margin: 0 auto 2.5rem auto; 
+    text-align: right; 
+    margin-left: auto;
+    margin-right: 0;
+    margin-bottom: 2.5rem; 
     font-weight: 400;
   }
 
   .cta {
     display: flex;
     gap: 0.9rem;
-    justify-content: center;
+    justify-content: flex-end;
     flex-wrap: wrap;
   }
 
@@ -252,12 +293,7 @@ import "../styles/navbar.css";
       text-align: center;
     }
     .badge {
-      position: static;
-      top: auto;
-      right: auto;
-      transform: none;
       display: inline-block;
-      max-width: 100%;
       text-align: center;
       margin: 0 auto 2rem;
       margin-left: auto;
@@ -266,6 +302,16 @@ import "../styles/navbar.css";
     
     .title {
       margin-top: 0;
+      text-align: center;
+    }
+
+    .description {
+      text-align: center;
+      margin: 0 auto 2.5rem;
+    }
+
+    .cta {
+      justify-content: center;
     }
   }
 </style>

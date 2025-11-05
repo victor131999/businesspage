@@ -25,6 +25,7 @@ const cssVars = `
    --btn-light-bg: ${colors.btnLightBg ?? "#69FE00"};
    --btn-light-hover-bg: ${colors.btnLightHoverBg ?? "#d6dbe0"};
    --btn-light-text: ${colors.btnLightText ?? "#212529"};
+   --btn-light-icon-filter: ${colors.btnLightIconFilter ?? "none"};
 +  --btn-light-border: ${colors.btnLightBorder ?? "var(--btn-light-bg)"};
    --dropdown-bg: ${colors.dropdownBg ?? "#CDD1DD"};
    --dropdown-link: ${colors.dropdownLink ?? "#212529"};
@@ -350,10 +351,10 @@ const cssVars = `
   }
 
   .btn-light {
-    background: linear-gradient(145deg, rgba(128, 255, 0, 0.95), rgba(88, 220, 0, 0.88));
-    color: #10220a;
+    background: var(--btn-light-bg);
+    color: var(--btn-light-text);
     border: none;
-    box-shadow: 0 10px 20px rgba(80, 220, 0, 0.32);
+    box-shadow: 0 10px 20px rgba(15, 28, 46, 0.22);
     padding: 0.35rem 1.5rem;
     height: 32px;
     display: inline-flex;
@@ -361,8 +362,9 @@ const cssVars = `
     justify-content: center;
   }
   .btn-light:hover {
+    background: var(--btn-light-hover-bg);
     transform: translateY(-1px);
-    box-shadow: 0 16px 32px rgba(80, 220, 0, 0.38);
+    box-shadow: 0 16px 32px rgba(15, 28, 46, 0.3);
   }
 
   .btn-outline {
@@ -500,7 +502,7 @@ const cssVars = `
 
 
   .btn-light .btn-icon {
-    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2)) var(--btn-light-icon-filter, none);
   }
 
   /* Desktop: nav-wrapper visible siempre */
