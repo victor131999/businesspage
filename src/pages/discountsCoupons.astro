@@ -177,27 +177,24 @@ import "../styles/navbar.css";
 
 /* Banda verde larga */
 .band {
-  height: 64px;
-  width: clamp(700px, 60vw, 1200px);
-  border-radius: 9999px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 0 2.5rem;
+  display: inline-block;
+  background-color: #6aff00;
+  padding: 0.8rem 2rem;
+  border-radius: 25px;
   margin: 0 0 1.8rem 0;
 }
 
 .band-text {
-  color: #004195;
+  color: #0b132b;
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   letter-spacing: 0.3px;
 }
 
 /* Título */
 .title {
   color: #6AFF00;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1.12;
   letter-spacing: 0.2px;
   font-size: clamp(2.4rem, 4vw, 3.2rem);
@@ -253,8 +250,8 @@ import "../styles/navbar.css";
     top: 40px;
   }
   .band {
-    width: 100%;
-    justify-content: center;
+    display: inline-block;
+    margin: 0 auto 1.8rem;
   }
   .cta {
     justify-content: center;

@@ -156,48 +156,44 @@ import "../styles/navbar.css";
     min-height: calc(100vh - 80px);
     display: flex;
     align-items: center;
-    justify-content: flex-end; 
+    justify-content: flex-start; 
     padding: 6rem 8%;
   }
 
   .content {
-    text-align: right; 
-    max-width: 600px; /* un poco más ancho */
+    text-align: left; 
+    max-width: 600px;
+    margin-left: clamp(5%, 8vw, 10%);
   }
 
   /* Banda (agrandada y más visible) */
   /* Banda (más grande y horizontalmente extendida) */
-.band {
+  .band {
+  display: inline-block;
   background-color: #d9e0eb;
-  height: 60px; /* más alta */
-  width: 700px; /* ocupa todo el ancho disponible */
-  max-width: 1200px; /* puedes subir a 1300px si la pantalla lo permite */
-  border-radius: 50px; /* bordes más suaves tipo píldora */
-  display: flex;
-  align-items: center;
-  justify-content: flex-end; /* texto pegado a la derecha */
-  padding: 0 3rem; /* más espacio lateral derecho */
-  margin-left: auto; /* alinea completamente a la derecha */
-  margin-bottom: 2.5rem;
+  padding: 0.8rem 2rem;
+  border-radius: 25px;
+  margin-bottom: 0.5rem;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 
 
   .band-text {
-    font-weight: 500;
-    font-size: 1.4rem; /* más grande */
+    font-weight: 700;
+    font-size: 1.1rem;
     color: #0b132b;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
   }
 
   .title {
     color: #6aff00;
-    font-weight: 600;
+    font-weight: 400;
     line-height: 1.15;
     font-size: clamp(2.4rem, 3.8vw, 3rem);
-    margin: 1.8rem 0 1.2rem 0;
+    margin: 1rem 0 1.2rem 0;
     letter-spacing: -0.3px;
+    text-align: left;
   }
 
   .description {
@@ -206,12 +202,13 @@ import "../styles/navbar.css";
     line-height: 1.65;
     font-weight: 400;
     margin: 0 0 2rem 0;
+    text-align: left;
   }
 
   .cta {
     display: flex;
     gap: 1rem;
-    justify-content: flex-end; /* botones también alineados a la derecha */
+    justify-content: flex-start;
     flex-wrap: wrap;
   }
 

@@ -22,7 +22,7 @@ import "../styles/navbar.css";
     en: {
       badge: "Matilda AI Fintech Core",
       title: "AI-Powered<br />Financial<br />Intelligence.",
-      description: "A central Artificial Intelligence module designed to enhance the user financial experience through behavioral analysis, automated education, and intelligent support.",
+      description: "A central Artificial Intelligence module designed to enhance users' financial experience through behavioral analysis, automated education, and intelligent support.",
       ctaTalk: "Let's talk",
       ctaDocs: "View API Docs"
     },
@@ -126,7 +126,7 @@ import "../styles/navbar.css";
         </h1>
 
         <p class="description">
-          A central Artificial Intelligence module designed to enhance the user
+          A central Artificial Intelligence module designed to enhance users'
           financial experience through behavioral analysis, automated education,
           and intelligent support.
         </p>
@@ -174,40 +174,40 @@ import "../styles/navbar.css";
   max-width: 560px;
   margin-left: auto;         /* empuja el bloque hacia el borde derecho */
   position: relative;
-  top: 70px;                 /* 🔽 mueve todo el bloque hacia abajo */
+  top: 20px;                 /* 🔽 mueve todo el bloque hacia abajo */
   right: 200px;               /* ⬅️ mueve todo el bloque hacia la izquierda */
 }
 
-  /* Solo texto sobre la franja (sin fondo adicional) */
+  /* Badge ajustado al ancho del texto */
   .band {
-    position: relative;
-    top: -10px;
-    width: 100%;
-    display: flex;
-    justify-content: flex-end; /* texto dentro alineado al borde derecho */
-    margin-bottom: 1.6rem;
+    display: inline-block;
+    background-color: #6aff00;
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
+    margin-bottom: 0.5rem;
+    margin-left: auto;
   }
 
   .band-text {
     color: #0b132b;
-    font-weight: 800;
-    font-size: 1.05rem;
-    background: transparent;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.3px;
   }
 
   /* Título alineado al borde derecho */
   .title {
     color: #1f3f86;
-    font-weight: 900;
+    font-weight: 400;
     line-height: 1.1;
     font-size: clamp(2.8rem, 4vw, 3.4rem);
-    margin: 1rem 0 1.2rem 0;
+    margin: 0.5rem 0 1.2rem 0;
     text-align: right; /* fuerza la alineación */
   }
 
   /* Descripción alineada al borde derecho */
   .description {
-    color: #91a4c2;
+    color: #1f3f86;
     font-size: 1.05rem;
     line-height: 1.7;
     margin-bottom: 2rem;
@@ -254,8 +254,8 @@ import "../styles/navbar.css";
       text-align: center;
     }
     .band {
-      justify-content: center;
-      margin-bottom: 1rem;
+      display: inline-block;
+      margin: 0 auto 1rem;
     }
     .cta {
       justify-content: center;

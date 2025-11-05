@@ -185,28 +185,25 @@ import "../styles/navbar.css";
     position: relative;
   }
 
-  /* Banda grande tipo píldora */
+  /* Badge ajustado al ancho del texto */
   .band {
-    height: 60px;
-    width: clamp(680px, 58vw, 1100px);
-    border-radius: 9999px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 0 2.2rem;
+    display: inline-block;
+    background-color: #6aff00;
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
     margin: 0 0 1.8rem 0;
   }
   .band-text {
     color: #0b132b;
-    font-weight: 600;
-    font-size: 1.05rem;
-    letter-spacing: 0.2px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.3px;
   }
 
   /* Título verde como el mockup */
   .title {
     color: #84ff11;
-    font-weight: 600;
+    font-weight: 400;
     line-height: 1.12;
     letter-spacing: 0.1px;
     font-size: clamp(2.2rem, 4vw, 3rem);
@@ -266,8 +263,8 @@ import "../styles/navbar.css";
       text-align: center;
     }
     .band {
-      width: 100%;
-      justify-content: center;
+      display: inline-block;
+      margin: 0 auto 1.8rem;
     }
     .cta {
       justify-content: center;
