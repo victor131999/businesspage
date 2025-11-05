@@ -77,8 +77,6 @@ import "../styles/navbar.css";
         <a href="https://documentations.zelify.com" class="btn-primary hvr-grow">Let's start</a>
       </div>
     </section>
-    <!-- 🔥 Línea verde translúcida -->
-    <div class="green-line"></div>
   </body>
 </html>
 
@@ -134,13 +132,13 @@ import "../styles/navbar.css";
     font-size: 2.5rem;
     font-weight: normal;
     color: #95FF0B;
-    margin-bottom: 0.5rem;
+    margin-bottom: -0.2rem;
   }
 
   .title {
     font-size: 6.5rem;
     font-weight: 800;
-    line-height: 0.95;
+    line-height: 0.85;
     color: #f8f9fa;
     margin-bottom: 1.5rem;
   }
@@ -178,22 +176,6 @@ import "../styles/navbar.css";
     box-shadow: 0 16px 32px rgba(80, 220, 0, 0.38);
     transition: all 0.25s ease-in-out;
   }
-  .green-line {
-    position: absolute;
-    bottom: 10%; /* controla la altura de la línea (ajústala a gusto) */
-    left: 0;
-    width: 100%;
-    height: 50px; /* grosor de la franja */
-    background: linear-gradient(
-      to right,
-      rgba(149, 255, 11, 0.05) 0%,
-      rgba(149, 255, 11, 0.3) 50%,
-      rgba(149, 255, 11, 0.05) 100%
-    );
-    box-shadow: 0 0 5px rgba(149, 255, 11, 0.6); /* brillo suave */
-    backdrop-filter: blur(1px); /* efecto translúcido elegante */
-    z-index: 1; /* detrás del texto pero visible sobre el fondo */
-  }
 
   /* Tablet/iPad */
   @media (max-width: 1024px) {
@@ -209,6 +191,7 @@ import "../styles/navbar.css";
 
     .title {
       font-size: 4.5rem;
+      line-height: 0.85;
       margin-bottom: 1rem;
     }
 
@@ -260,14 +243,14 @@ import "../styles/navbar.css";
 
     .subtitle {
       font-size: 1.5rem;
-      margin-bottom: 0.5rem;
+      margin-bottom: -0.2rem;
       text-align: center;
       width: 100%;
     }
 
     .title {
       font-size: 3rem;
-      line-height: 1;
+      line-height: 0.85;
       margin-bottom: 1rem;
       text-align: center;
       width: 100%;
@@ -292,13 +275,6 @@ import "../styles/navbar.css";
       margin: 0 auto;
     }
 
-    .green-line {
-      position: relative;
-      bottom: auto;
-      margin-top: 3rem;
-      height: 30px;
-      width: 100%;
-    }
   }
 
   /* Small mobile */

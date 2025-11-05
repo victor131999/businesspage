@@ -7,7 +7,7 @@ export const translations = {
     "nav.personal": "Personal",
     "nav.workWithUs": "Work with us",
     "nav.bankAccess": "Business access",
-    
+
     // Products Panel
     "products.register": "Register",
     "products.identity": "Identity",
@@ -18,7 +18,7 @@ export const translations = {
     "products.international": "International Transfers",
     "products.biz": "Business & Organizations",
     "products.matilda": "Matilda AI Fintech Core",
-    
+
     // Products Panel Content
     "products.register.title": "Overview",
     "products.register.sub": "A product that enables initial registration through email and password, ensuring access security, traceability, and device data capture to prevent fraud and connect the user to a trusted environment.",
@@ -28,11 +28,11 @@ export const translations = {
     "products.aml.sub": "Real-time monitoring, risk scoring and workflows that help you meet regulations.",
     "products.linking.title": "Open Banking / Linking",
     "products.linking.sub": "Connect user accounts securely to enable data access and payments initiation.",
-    
+
     // Auth Page
     "auth.badge": "Auth",
     "auth.title": "Allows secure user registration, authentication, and authorization in web and mobile applications.",
-    "auth.description": "managing login with proprietary or third-party credentials (Google, Apple, Facebook, etc.).",
+    "auth.description": "Managing login with proprietary or third-party credentials (Google, Apple, Facebook, etc.).",
     "auth.cta.talk": "Let's talk",
     "auth.cta.docs": "View API Docs"
   },
@@ -44,7 +44,7 @@ export const translations = {
     "nav.personal": "Personal",
     "nav.workWithUs": "Trabaja con nosotros",
     "nav.bankAccess": "Acceso empresarial",
-    
+
     // Products Panel (nombres de productos se mantienen en inglés)
     "products.register": "Register",
     "products.identity": "Identity",
@@ -55,14 +55,14 @@ export const translations = {
     "products.international": "International Transfers",
     "products.biz": "Business & Organizations",
     "products.matilda": "Matilda AI Fintech Core",
-    
+
     // Auth Page
     "auth.badge": "Autenticación",
     "auth.title": "Permite el registro seguro de usuarios, autenticación y autorización en aplicaciones web y móviles.",
     "auth.description": "gestión de inicio de sesión con credenciales propias o de terceros (Google, Apple, Facebook, etc.).",
     "auth.cta.talk": "Hablemos",
     "auth.cta.docs": "Ver documentación API"
-    
+
     // Products Panel Content
     "products.register.title": "Descripción General",
     "products.register.sub": "Un producto que permite el registro inicial mediante correo electrónico y contraseña, garantizando la seguridad de acceso, trazabilidad y captura de datos del dispositivo para prevenir fraudes y conectar al usuario a un entorno confiable.",

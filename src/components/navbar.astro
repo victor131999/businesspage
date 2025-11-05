@@ -78,7 +78,8 @@ const cssVars = `
       <span class="lang-toggle__thumb">
         <span class="lang-label">{(buttons.third?.label ?? "EN").toUpperCase()}</span>
       </span>
-      <span class="lang-toggle__flag" aria-hidden="true">🇲🇽</span>
+      <span class="lang-toggle__option lang-toggle__option--left">ES</span>
+      <span class="lang-toggle__option lang-toggle__option--right">EN</span>
     </button>
   </div>
 
@@ -115,7 +116,8 @@ const cssVars = `
         <span class="lang-toggle__thumb">
           <span class="lang-label">{(buttons.third?.label ?? "EN").toUpperCase()}</span>
         </span>
-        <span class="lang-toggle__flag" aria-hidden="true">🇲🇽</span>
+        <span class="lang-toggle__option lang-toggle__option--left">ES</span>
+        <span class="lang-toggle__option lang-toggle__option--right">EN</span>
       </button>
     </div>
   </div>
@@ -268,7 +270,7 @@ const cssVars = `
     color: var(--highlight-text);
     font-weight: 600;
     padding: 0.45rem 1.4rem;
-    border-radius: 14px;
+    border-radius: 6px;
     letter-spacing: 0.03em;
     box-shadow: 0 10px 24px rgba(70, 255, 0, 0.28);
   }
@@ -341,7 +343,7 @@ const cssVars = `
     font-weight: 600;
     font-size: 0.94rem;
     text-decoration: none;
-    border-radius: 16px;
+    border-radius: 6px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     white-space: nowrap;
     flex-shrink: 0;
@@ -443,20 +445,42 @@ const cssVars = `
     color: #172a45;
   }
 
-  .lang-toggle__flag {
+  .lang-toggle__option {
     position: absolute;
     top: 50%;
-    right: 12px;
     transform: translateY(-50%);
-    font-size: 0.8rem;
-    filter: saturate(1.1) drop-shadow(0 3px 5px rgba(16, 33, 51, 0.15));
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #172a45;
     pointer-events: none;
-    transition: left 0.25s cubic-bezier(0.4, 0, 0.2, 1), right 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.2s ease;
   }
 
-  .lang-toggle[data-language="EN"] .lang-toggle__flag {
-    right: auto;
+  .lang-toggle__option--left {
     left: 12px;
+  }
+
+  .lang-toggle__option--right {
+    right: 12px;
+  }
+
+  /* Cuando está en EN, mostrar ES a la izquierda y ocultar EN a la derecha */
+  .lang-toggle[data-language="EN"] .lang-toggle__option--left {
+    opacity: 1;
+  }
+
+  .lang-toggle[data-language="EN"] .lang-toggle__option--right {
+    opacity: 0;
+  }
+
+  /* Cuando está en ES, mostrar EN a la derecha y ocultar ES a la izquierda */
+  .lang-toggle[data-language="ES"] .lang-toggle__option--left {
+    opacity: 0;
+  }
+
+  .lang-toggle[data-language="ES"] .lang-toggle__option--right {
+    opacity: 1;
   }
 
   .icon {
@@ -730,7 +754,7 @@ const cssVars = `
         "nav.developers": "Desarrolladores",
         "nav.personal": "Personal",
         "nav.workWithUs": "Únete",
-        "nav.bankAccess": "Acceso bancario",
+        "nav.bankAccess": "Acceso de negocios",
       },
     };
 
@@ -767,9 +791,7 @@ const cssVars = `
         languageButtons.forEach((btn) => {
           btn.dataset.language = lang;
           const label = btn.querySelector(".lang-label");
-          const flag = btn.querySelector(".lang-toggle__flag");
           if (label) label.textContent = lang;
-          if (flag) flag.textContent = lang === "EN" ? "🇲🇽" : "🇺🇸";
           btn.setAttribute(
             "aria-label",
             lang === "EN" ? "Switch language to Spanish" : "Cambiar idioma a inglés",
