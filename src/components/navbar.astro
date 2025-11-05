@@ -53,7 +53,15 @@ const cssVars = `
         ><span data-i18n="nav.products">Products</span></button
       >
     </li>
-    <li><a href="/" data-i18n="nav.resources">Resources</a></li>
+    <li class="dropdown-container">
+      <button id="resources-trigger" class="dropdown-trigger" type="button">
+        <span data-i18n="nav.resources">Resources</span>
+      </button>
+      <!-- Aquí empieza el dropdown -->
+      <ul class="dropdown-menu hidden" id="resources-panel">
+        <li><a href="/blog" data-i18n="nav.businessBlog">Business Blog</a></li>
+      </ul>
+    </li>
     <li><a href="https://documentations.zelify.com/" data-i18n="nav.developers">Developers</a></li>
     <li><a href="https://www.zelify.com" class="highlight" data-i18n="nav.personal">personal</a></li>
   </ul>
@@ -92,7 +100,16 @@ const cssVars = `
           ><span data-i18n="nav.products">Products</span></button
         >
       </li>
-      <li><a href="/" data-i18n="nav.resources">Resources</a></li>
+      <!-- Dropdown para Resources en móvil -->
+      <li class="dropdown-container">
+        <button id="resources-trigger-mobile" class="dropdown-trigger" type="button">
+          <span data-i18n="nav.resources">Resources</span>
+        </button>
+        <!-- Dropdown de Resources -->
+        <ul class="dropdown-menu hidden" id="resources-panel-mobile">
+          <li><a href="/blog" data-i18n="nav.businessBlog">Business Blog</a></li>
+        </ul>
+      </li>
       <li><a href="https://documentations.zelify.com/" data-i18n="nav.developers">Developers</a></li>
       <li><a href="https://www.zelify.com" class="highlight" data-i18n="nav.personal">personal</a></li>
     </ul>
@@ -694,6 +711,73 @@ const cssVars = `
       opacity: 1 !important;
     }
   }
+/* Cuando el dropdown está activo, se muestra */
+.dropdown-container.active .dropdown-menu {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0); /* Ajusta el valor si deseas un desplazamiento adicional */
+  pointer-events: auto;
+}
+
+/* El dropdown menú está inicialmente oculto */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 220px; /* Ajusta este valor si lo necesitas */
+  margin: 0.5rem 0 0 0;
+  padding: 0.5rem 0;
+  list-style: none;
+  background-color: var(--dropdown-bg);
+  border: 1px solid #0381ff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(10px); /* Ajusta el valor si deseas un desplazamiento adicional */
+  transition: all 0.2s ease-in-out;
+  pointer-events: none;
+}
+
+/* Específico para la versión móvil: */
+@media (max-width: 768px) {
+  /* El dropdown móvil debe ser más ancho y ocupar todo el ancho del menú */
+  .dropdown-menu {
+    min-width: 100%; /* Asegura que el menú ocupe todo el ancho disponible */
+    left: 0;
+    box-shadow: none; /* Puedes quitar el box-shadow si prefieres un diseño más plano */
+    margin: 0; /* Ajuste del margen para evitar desplazamiento innecesario */
+  }
+
+  /* Para el botón de recursos móvil (ajustes para que sea fácilmente clickeable) */
+  .dropdown-container button {
+    width: 100%;
+    text-align: left;
+    padding: 1rem 1.5rem; /* Asegúrate de que el botón sea más fácil de clicar */
+  }
+
+  .dropdown-menu a {
+    padding: 1rem 2rem; /* Aumenta el padding en los enlaces para facilitar el clic en pantallas pequeñas */
+  }
+}
+
+/* Además, si el dropdown se utiliza para el menú hamburguesa en móvil */
+@media (max-width: 768px) {
+  .dropdown-menu {
+    width: 100%;
+    left: 0;
+    top: 100%;
+  }
+
+  /* Los elementos dentro del dropdown se alinearán mejor para pantallas pequeñas */
+  .dropdown-menu a {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+}
 </style>
 <script is:inline>
   document.addEventListener("DOMContentLoaded", () => {
@@ -857,4 +941,38 @@ const cssVars = `
       propagateLanguage(currentLang);
     }
   });
+  document.addEventListener("DOMContentLoaded", () => {
+  // Lógica para el dropdown en desktop
+  const triggerDesktop = document.getElementById("resources-trigger");
+  const panelDesktop = document.getElementById("resources-panel");
+
+  // Lógica para el dropdown en móvil
+  const triggerMobile = document.getElementById("resources-trigger-mobile");
+  const panelMobile = document.getElementById("resources-panel-mobile");
+
+  // Función para mostrar u ocultar el dropdown
+  const toggleDropdown = (trigger, panel) => {
+    trigger.addEventListener("click", (e) => {
+      e.stopPropagation();
+      trigger.classList.toggle("active");
+      panel.classList.toggle("hidden"); // Cambiar para manejar "hidden" como el estado inicial
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!panel.contains(e.target) && !trigger.contains(e.target)) {
+        trigger.classList.remove("active");
+        panel.classList.add("hidden");
+      }
+    });
+  };
+
+  // Verificar y agregar la funcionalidad a los triggers
+  if (triggerDesktop && panelDesktop) {
+    toggleDropdown(triggerDesktop, panelDesktop);
+  }
+
+  if (triggerMobile && panelMobile) {
+    toggleDropdown(triggerMobile, panelMobile);
+  }
+});
 </script>

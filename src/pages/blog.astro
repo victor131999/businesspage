@@ -1,0 +1,1356 @@
+---
+import Navbar from "../components/navbar.astro";
+import ProductsPanel from "../components/productsPanel.astro";
+import "../styles/navbar.css";
+---
+
+<script>
+    const blogTranslations = {
+      en: {
+        // Meta / Head
+        pageTitle: "Zelify — Business Blog",
+  
+        // Img alts
+        heroImgAlt: "Blog image: person facing camera",
+        fingerprintAlt: "Fingerprint",
+        securityFingerprintAlt: "Security fingerprint",
+  
+        // Section 1: Hero
+        blogTitle1: "How\nZelify Auth\nReinvents\nSecure\nOnboarding\nfor Fintechs.",
+        blogDate: "27 October 2025",
+        blogAuthor: "by Ale Llanganates",
+  
+        // Section 2: Intro
+        blogIntro:
+          "Authentication is the pillar of the fintech ecosystem, where security and user experience must coexist. Modern financial platforms rely on advanced methods such as OAuth, biometric validation, and OTP codes to ensure secure access, prevent fraud, and maintain compliance with international regulations, all while keeping the customer journey frictionless.",
+  
+        // Section 3: Challenge
+        blogTitle3: "The Challenge of\nAuthentication\nin Fintech",
+        blogText3:
+          "Traditional authentication methods like passwords or simple PINs are no longer enough. Fintechs now face advanced threats such as account takeover, phishing, synthetic identities, and remote fraud. To protect both users and compliance integrity, authentication systems must evolve with smarter and layered protection.",
+  
+        // Section 4: Building trust
+        blogTitle4: "Building trust through secure innovation",
+        blogDesc4:
+          "Zelify Auth integrates multiple authentication technologies to deliver a secure and scalable identity experience:",
+        featureOAuth: "OAuth Integration:",
+        featureOAuthDesc:
+          "Connect and authenticate users through trusted providers like Google, Apple, or Facebook, reducing login friction.",
+        featureOTP: "OTP Validation:",
+        featureOTPDesc:
+          "Confirm transactions or critical actions with one-time passcodes sent securely via email or SMS.",
+        featureGeolocation: "Geolocation:",
+        featureGeolocationDesc:
+          "Detects login anomalies or high-risk areas to trigger adaptive verification.",
+        featureDevice: "Device Intelligence:",
+        featureDeviceDesc:
+          "Collects secure device data (IP, OS version, permissions) to identify suspicious devices.",
+  
+        // Section 5: Benefits
+        blogTitle5: "Benefits for\nFinancial\nPlatforms",
+        benefit1: "Reduced fraud and identity theft through multi-factor verification.",
+        benefit2: "Frictionless user experience with one-click or biometric login.",
+        benefit3: "Regulatory compliance (ISO 30107-3, PCI DSS, LOPDP).",
+        benefit4: "Easy integration via APIs and SDKs for web or mobile apps.",
+        trustTitle: "Why Trust Zelify?",
+        trustDesc:
+          "Zelify Auth is designed with a \"security by design\" mindset, combining encryption, behavioral analysis, and regional compliance for fintechs across Latin America. With flexible APIs and SDKs, businesses can quickly integrate strong authentication without sacrificing agility or user experience.",
+        btnDemo: "Request a Demo",
+        btnIntegration: "Start Integration",
+      },
+      es: {
+        // Meta / Head
+        pageTitle: "Zelify — Blog de Negocios",
+  
+        // Img alts
+        heroImgAlt: "Imagen del blog: persona de frente",
+        fingerprintAlt: "Huella dactilar",
+        securityFingerprintAlt: "Huella de seguridad",
+  
+        // Sección 1: Hero
+        blogTitle1: "Cómo\nZelify Auth\nReinventa\nEl Onboarding\nSeguro\npara Fintechs.",
+        blogDate: "27 de Octubre 2025",
+        blogAuthor: "por Ale Llanganates",
+  
+        // Sección 2: Intro
+        blogIntro:
+          "La autenticación es el pilar del ecosistema fintech, donde la seguridad y la experiencia del usuario deben coexistir. Las plataformas financieras modernas dependen de métodos avanzados como OAuth, validación biométrica y códigos OTP para asegurar el acceso, prevenir fraudes y mantener el cumplimiento con regulaciones internacionales, todo mientras mantienen el recorrido del cliente sin fricciones.",
+  
+        // Sección 3: Desafío
+        blogTitle3: "El Desafío de la\nAutenticación\nen Fintech",
+        blogText3:
+          "Los métodos tradicionales de autenticación como contraseñas o PINs simples ya no son suficientes. Las fintechs ahora enfrentan amenazas avanzadas como la toma de cuentas, phishing, identidades sintéticas y fraude remoto. Para proteger tanto a los usuarios como la integridad del cumplimiento, los sistemas de autenticación deben evolucionar con protección más inteligente y en capas.",
+  
+        // Sección 4: Confianza
+        blogTitle4: "Generando confianza a través de la innovación segura",
+        blogDesc4:
+          "Zelify Auth integra múltiples tecnologías de autenticación para ofrecer una experiencia de identidad escalable y segura:",
+        featureOAuth: "Integración OAuth:",
+        featureOAuthDesc:
+          "Conecta y autentica usuarios mediante proveedores confiables como Google, Apple o Facebook, reduciendo la fricción de inicio de sesión.",
+        featureOTP: "Validación OTP:",
+        featureOTPDesc:
+          "Confirma transacciones o acciones críticas con códigos de un solo uso enviados de forma segura por email o SMS.",
+        featureGeolocation: "Geolocalización:",
+        featureGeolocationDesc:
+          "Detecta anomalías de inicio de sesión o áreas de alto riesgo para activar verificación adaptativa.",
+        featureDevice: "Inteligencia de Dispositivo:",
+        featureDeviceDesc:
+          "Recopila datos seguros del dispositivo (IP, versión del SO, permisos) para identificar posibles amenazas.",
+  
+        // Sección 5: Beneficios
+        blogTitle5: "Beneficios para\nPlataformas\nFinancieras",
+        benefit1: "Menos fraude e identidad protegida mediante verificación multifactorial.",
+        benefit2: "Experiencia de usuario sin fricción: acceso con un clic o login biométrico.",
+        benefit3: "Cumplimiento regulatorio (ISO 30107-3, PCI DSS, LOPDP).",
+        benefit4: "Fácil integración vía API o SDK para web y apps móviles.",
+        trustTitle: "¿Por qué confiar en Zelify?",
+        trustDesc:
+          "Zelify Auth está diseñado con una mentalidad \"security by design\", combinando cifrado, análisis de comportamiento y cumplimiento regulatorio para fintechs de Latinoamérica. Con APIs y SDK flexibles, integra autenticación fuerte sin sacrificar agilidad ni experiencia del usuario.",
+        btnDemo: "Solicitar Demo",
+        btnIntegration: "Empezar Integración",
+      },
+    };
+  
+    function updateBlogContent(rawLang: string | undefined) {
+      const lang = String(rawLang || "en").toLowerCase() === "es" ? "es" : "en";
+      const content = blogTranslations[lang];
+
+      // Helpers
+      const updateWithBreaks = (el: Element | null, text: string) => {
+        if (el) el.innerHTML = String(text).replace(/\n/g, "<br />");
+      };
+      const updateText = (el: Element | null, text: string) => {
+        if (el) el.textContent = String(text);
+      };
+      const updateAlt = (selector: string, text: string) => {
+        const img = document.querySelector(selector);
+        if (img) img.setAttribute("alt", String(text));
+      };
+  
+      // Head title
+      document.title = content.pageTitle;
+  
+      // Section 1: Hero
+      updateWithBreaks(document.querySelector(".blog-title1"), content.blogTitle1);
+      updateText(document.querySelector(".blog-date"), content.blogDate);
+      updateText(document.querySelector(".blog-author"), content.blogAuthor);
+  
+      // Section 2: Intro (bold first sentence)
+      const introElement = document.querySelector(".blog-intro");
+      if (introElement) {
+        const firstSentence = content.blogIntro.split(".")[0] + ".";
+        const restOfText = content.blogIntro.substring(firstSentence.length);
+        introElement.innerHTML = `<strong>${firstSentence}</strong>${restOfText}`;
+      }
+  
+      // Section 3: Challenge
+      updateWithBreaks(document.querySelector(".blog-title3"), content.blogTitle3);
+      updateText(document.querySelector(".blog-text3-p"), content.blogText3);
+  
+      // Section 4: Building trust
+      updateText(document.querySelector(".blog-title4"), content.blogTitle4);
+      updateText(document.querySelector(".blog-desc4"), content.blogDesc4);
+      updateText(document.querySelector(".feature-oauth-title"), content.featureOAuth);
+      updateText(document.querySelector(".feature-oauth-desc"), content.featureOAuthDesc);
+      updateText(document.querySelector(".feature-otp-title"), content.featureOTP);
+      updateText(document.querySelector(".feature-otp-desc"), content.featureOTPDesc);
+      updateText(document.querySelector(".feature-geolocation-title"), content.featureGeolocation);
+      updateText(document.querySelector(".feature-geolocation-desc"), content.featureGeolocationDesc);
+      updateText(document.querySelector(".feature-device-title"), content.featureDevice);
+      updateText(document.querySelector(".feature-device-desc"), content.featureDeviceDesc);
+  
+      // Section 5: Benefits + Trust (fix selector names in markup)
+      updateWithBreaks(document.querySelector(".blog-title5"), content.blogTitle5);
+      updateText(document.querySelector(".benefit-1"), content.benefit1);
+      updateText(document.querySelector(".benefit-2"), content.benefit2);
+      updateText(document.querySelector(".benefit-3"), content.benefit3);
+      updateText(document.querySelector(".benefit-4"), content.benefit4);
+      updateText(document.querySelector(".trust-title5"), content.trustTitle); // was .trust-title
+      updateText(document.querySelector(".trust-desc5"), content.trustDesc);   // was .trust-desc
+      updateText(document.querySelector(".btn-demo"), content.btnDemo);
+      updateText(document.querySelector(".btn-integration"), content.btnIntegration);
+  
+      // Img alts
+      updateAlt("img.blog-img", content.heroImgAlt);
+      updateAlt("img.blog-img3", content.fingerprintAlt);
+      updateAlt("img.blog-img5", content.securityFingerprintAlt);
+    }
+  
+    // Listen for language changes from Navbar
+    window.addEventListener("ui:languagechange", ((event: Event) => {
+      const customEvent = event as CustomEvent<{ language: string }>;
+      if (customEvent.detail?.language) {
+        updateBlogContent(customEvent.detail.language);
+      }
+    }) as EventListener);
+  
+    // Initial translations
+    document.addEventListener("DOMContentLoaded", () => {
+      const storedLang = localStorage.getItem("ui-language") || "EN";
+      updateBlogContent(storedLang);
+    });
+  </script>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Zelify — Business Blog</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css"
+    />
+  </head>
+
+  <body>
+    <Navbar />
+    <ProductsPanel />
+    <!-- Contenido del blog para la pagina -->
+    <main>
+      <section class="blog-content">
+        <div class="blog-container1">
+          <!-- Left column with image -->
+          <div class="blog-image">
+            <img
+              src="/images/img-blog-face.png"
+              alt="Blog Image"
+              class="blog-img"
+            />
+          </div>
+
+          <!-- Right column with text -->
+          <div class="blog-text">
+            <h1 class="blog-title1">
+              How <br /> Zelify Auth <br /> Reinvents<br /> Secure<br /> Onboarding<br
+              />for Fintechs.
+            </h1>
+
+            <!-- Información adicional debajo del título -->
+            <div class="meta-info">
+              <span class="blog-date">27 October 2025</span>
+              <span class="blog-author">by Ale Llanganates</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="blog-container2">
+          <!-- Columna izquierda con imagen (removido, solo se usa texto ahora) -->
+          <div class="blog-text2">
+            <p class="blog-intro">
+              <strong
+                >Authentication is the pillar of the fintech ecosystem</strong
+              >, where security and user experience must coexist. Modern
+              financial platforms rely on advanced methods such as OAuth,
+              biometric validation, and OTP codes to ensure secure access,
+              prevent fraud, and maintain compliance with international
+              regulations, all while keeping the customer journey frictionless.
+            </p>
+          </div>
+        </div>
+        <div class="blog-container3">
+          <!-- Columna de texto alineada a la izquierda -->
+          <div class="blog-text3">
+            <h1 class="blog-title3">
+              The Challenge of<br />
+              Authentication<br />
+              in Fintech
+            </h1>
+            <p class="blog-text3-p">
+              Traditional authentication methods like passwords or simple PINs
+              are no longer enough. Fintechs now face advanced threats such as
+              account takeover, phishing, synthetic identities, and remote
+              fraud. To protect both users and compliance integrity,
+              authentication systems must evolve with smarter and layered
+              protection.
+            </p>
+          </div>
+
+          <!-- Columna de la imagen -->
+          <div class="blog-image3">
+            <img
+              src="/images/img-blog-fingerprint.png"
+              alt="Fingerprint"
+              class="blog-img3"
+            />
+          </div>
+        </div>
+        <!-- SECCION: Building trust through secure innovation -->
+        <div class="blog-container4">
+          <div class="blog-text4">
+            <h1 class="blog-title4">Building trust through secure innovation</h1>
+            <p class="blog-desc4">
+              Zelify Auth integrates multiple authentication technologies to
+              deliver a secure and scalable identity experience:
+            </p>
+            <div class="blog-features">
+              <div class="blog-feature">
+                <span class="feature-icon"></span>
+                <div class="feature-content">
+                  <h3 class="feature-oauth-title">OAuth Integration:</h3>
+                  <p class="feature-oauth-desc">
+                    Connect and authenticate users through trusted providers like
+                    Google, Apple, or Facebook, reducing login friction.
+                  </p>
+                </div>
+              </div>
+              <div class="blog-feature">
+                <span class="feature-icon"></span>
+                <div class="feature-content">
+                  <h3 class="feature-otp-title">OTP Validation:</h3>
+                  <p class="feature-otp-desc">
+                    Confirm transactions or critical actions with one-time
+                    passcodes sent securely via email or SMS.
+                  </p>
+                </div>
+              </div>
+              <div class="blog-feature">
+                <span class="feature-icon"></span>
+                <div class="feature-content">
+                  <h3 class="feature-geolocation-title">Geolocation:</h3>
+                  <p class="feature-geolocation-desc">
+                    Detects login anomalies or high-risk areas to trigger adaptive
+                    verification.
+                  </p>
+                </div>
+              </div>
+              <div class="blog-feature">
+                <span class="feature-icon"></span>
+                <div class="feature-content">
+                  <h3 class="feature-device-title">Device Intelligence:</h3>
+                  <p class="feature-device-desc">
+                    Collects secure device data (IP, OS version, permissions) to
+                    identify suspicious devices.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECCION: Beneficios y confianza -->
+        <div class="blog-container5">
+          <!-- Parte superior: Imagen y beneficios -->
+          <div class="blog-container5-top">
+            <!-- Imagen a la izquierda -->
+            <div class="blog-image5">
+              <img
+                src="/images/img-blog-sec.png"
+                alt="Security Fingerprint"
+                class="blog-img5"
+              />
+            </div>
+            <!-- Texto y beneficios a la derecha -->
+            <div class="blog-text5">
+              <h2 class="benefits-title5 blog-title5">
+                Benefits for<br />
+                Financial<br />
+                Platforms
+              </h2>
+              <ul class="benefits-list5">
+                <li>
+                  <span class="benefit-square5"></span>
+                  <span class="benefit-1">Reduced fraud and identity theft through multi-factor
+                  verification.</span>
+                </li>
+                <li>
+                  <span class="benefit-square5"></span>
+                  <span class="benefit-2">Frictionless user experience with one-click or biometric login.</span>
+                </li>
+                <li>
+                  <span class="benefit-square5"></span>
+                  <span class="benefit-3">Regulatory compliance (ISO 30107-3, PCI DSS, LOPDP).</span>
+                </li>
+                <li>
+                  <span class="benefit-square5"></span>
+                  <span class="benefit-4">Easy integration via APIs and SDKs for web or mobile apps.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Parte inferior: Why Trust Zelify -->
+          <div class="blog-container5-bottom">
+            <div class="trust-content5">
+              <h2 class="trust-title5">Why Trust Zelify?</h2>
+              <p class="trust-desc5">
+                Zelify Auth is designed with a "security by design" mindset,
+                combining encryption, behavioral analysis, and regional
+                compliance for fintechs across Latin America. With flexible APIs
+                and SDKs, businesses can quickly integrate strong authentication
+                without sacrificing agility or user experience.
+              </p>
+              <div class="trust-buttons5">
+                <a href="https://business.zelify.com/hablemos/" class="btn-primary5 btn-demo">Request a Demo</a>
+                <a href="https://documentations.zelify.com/api-reference" class="btn-primary5 btn-integration">Start Integration</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Products Panel Component -->
+      <ProductsPanel />
+    </main>
+  </body>
+</html>
+
+<style>
+  @font-face {
+    font-family: "NataSans";
+    src: url("/fonts/NataSans-VariableFont_wght.ttf") format("truetype");
+    font-weight: 100 900;
+    font-display: swap;
+  }
+
+  body {
+    font-family:
+      "NataSans",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      sans-serif;
+    color: #fff;
+    background-color: #020b18;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: auto; /* Cambio: altura automática */
+    width: 100vw;
+    margin: 0;
+    overflow-y: auto; /* Permite el desplazamiento vertical */
+    overflow-x: hidden; /* Opcional: previene el desplazamiento horizontal */
+  }
+
+  .hero {
+    display: flex;
+    align-items: flex-start; /* puedes cambiar a center o flex-end */
+    justify-content: flex-start; /* puedes cambiar a center o flex-end */
+    height: 100vh; /* ocupa toda la ventana */
+    width: 100vw;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Aquí controlas la posición manual del contenido */
+  .hero-content {
+    position: absolute;
+    top: 15%; /* mueve hacia abajo */
+    left: 20%; /* mueve hacia la derecha */
+    transform: translate(0, 0); /* puedes ajustar manualmente con translate */
+    max-width: 600px;
+  }
+
+  .subtitle {
+    font-size: 2.5rem;
+    font-weight: normal;
+    color: #95ff0b;
+    margin-bottom: -0.2rem;
+  }
+
+  .title {
+    font-size: 6.5rem;
+    font-weight: 800;
+    line-height: 0.85;
+    color: #f8f9fa;
+    margin-bottom: 1.5rem;
+  }
+
+  .description {
+    font-size: 1.25rem;
+    line-height: 1.4;
+    color: #ced4da;
+    margin-bottom: 2rem;
+    max-width: 520px;
+    text-align: left;
+    text-wrap: balance;
+  }
+
+  .btn-primary {
+    background-color: #95ff0b;
+    color: #0d1117;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.25rem;
+    padding: 0.3rem 1.5rem;
+    border-radius: 8px;
+    display: inline-block;
+    cursor: pointer;
+    box-shadow:
+      0 6px 16px rgba(80, 220, 0, 0.35),
+      0 0 20px rgba(149, 255, 11, 0.35);
+    transition: all 0.25s ease-in-out;
+  }
+
+  .btn-primary:hover {
+    background: linear-gradient(
+      145deg,
+      rgba(128, 255, 0, 0.95),
+      rgba(88, 220, 0, 0.88)
+    );
+    color: #10220a;
+    transform: translateY(-1px);
+    box-shadow: 0 16px 32px rgba(80, 220, 0, 0.38);
+    transition: all 0.25s ease-in-out;
+  }
+
+  /* Tablet/iPad */
+  @media (max-width: 1024px) {
+    .hero-content {
+      top: 18%;
+      left: 10%;
+      max-width: 500px;
+    }
+
+    .subtitle {
+      font-size: 2rem;
+    }
+
+    .title {
+      font-size: 4.5rem;
+      line-height: 0.85;
+      margin-bottom: 1rem;
+    }
+
+    .description {
+      font-size: 1.1rem;
+      max-width: 450px;
+    }
+
+    .btn-primary {
+      font-size: 1.1rem;
+      padding: 0.4rem 1.3rem;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    body {
+      overflow: auto;
+      min-height: 100vh;
+      background-size: cover;
+      background-position: 60% bottom;
+      background-attachment: scroll;
+    }
+
+    .hero {
+      overflow: auto;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 0;
+      padding-top: 1rem;
+    }
+
+    .hero-content {
+      position: relative;
+      top: auto;
+      left: auto;
+      padding: 1rem 1.5rem 2rem;
+      margin: 0 auto;
+      max-width: 100%;
+      width: 100%;
+      transform: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .subtitle {
+      font-size: 1.5rem;
+      margin-bottom: -0.2rem;
+      text-align: center;
+      width: 100%;
+    }
+
+    .title {
+      font-size: 3rem;
+      line-height: 0.85;
+      margin-bottom: 1rem;
+      text-align: center;
+      width: 100%;
+    }
+
+    .description {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+      max-width: 100%;
+      width: 100%;
+      text-align: center;
+      padding: 0 1rem;
+    }
+
+    .btn-primary {
+      font-size: 1rem;
+      padding: 0.75rem 2rem;
+      display: block;
+      text-align: center;
+      width: fit-content;
+      margin: 0 auto;
+    }
+  }
+
+  /* Small mobile */
+  @media (max-width: 480px) {
+    body {
+      background-size: cover;
+      background-position: 60% bottom;
+    }
+
+    .hero {
+      padding: 0;
+      padding-top: 0.5rem;
+    }
+
+    .hero-content {
+      padding: 0.5rem 1rem 1.5rem;
+      width: 100%;
+    }
+
+    .subtitle {
+      font-size: 1.25rem;
+      width: 100%;
+    }
+
+    .title {
+      font-size: 2.5rem;
+      width: 100%;
+    }
+
+    .description {
+      font-size: 0.95rem;
+      width: 100%;
+      padding: 0 0.5rem;
+    }
+
+    .btn-primary {
+      font-size: 0.95rem;
+      padding: 0.65rem 1.8rem;
+      width: fit-content;
+    }
+  }
+
+  /* ------------------------------- */
+  /* Inicio de la Section 1: Blog     */
+  /* ------------------------------- */
+
+  /* Estilos generales para el contenido del blog */
+  .blog-content {
+    padding: 0; /* Eliminar padding general alrededor de la sección */
+    background-color: #d7dadf; /* Fondo gris claro para la sección del blog */
+    margin-top: 0; /* Asegurar que no haya margen arriba, pegado al navbar */
+    height: 100vh; /* Asegura que la sección del blog ocupe todo el alto de la pantalla */
+  }
+
+  /* Contenedor que agrupa la imagen y el texto */
+  .blog-container1 {
+    display: flex; /* Usamos Flexbox para alinear la imagen y el texto */
+    flex-direction: row; /* Coloca la imagen y el texto en fila */
+    gap: 0; /* No hay espacio entre la imagen y el texto */
+    height: 100%; /* Asegura que el contenedor ocupe todo el alto de la pantalla */
+    align-items: stretch; /* Asegura que los elementos ocupen el mismo alto */
+  }
+
+  /* Estilos para la columna de la izquierda con la imagen */
+  .blog-image {
+    flex: 1; /* La imagen ocupa la mitad del espacio disponible */
+    height: 100%; /* Asegura que la imagen ocupe todo el alto del div */
+    margin: 0; /* Eliminar margen alrededor de la imagen */
+    overflow: hidden; /* Evitar que la imagen se desborde */
+  }
+
+  .blog-img {
+    width: 100%; /* La imagen ocupa todo el ancho del contenedor */
+    height: 100%; /* La imagen ocupa todo el alto del contenedor */
+    object-fit: cover; /* Hace que la imagen cubra todo el espacio disponible sin distorsionarse */
+    border-radius: 0; /* Sin bordes redondeados */
+    box-shadow: none; /* Eliminamos la sombra de la imagen */
+  }
+
+  /* Estilos para la columna de la derecha con el texto */
+  .blog-text {
+    flex: 1; /* El texto ocupa la otra mitad del espacio disponible */
+    display: flex;
+    flex-direction: column; /* Coloca los elementos en columna */
+    gap: 1.5rem; /* Espacio entre los elementos del texto */
+    padding: 3%; /* Agregar padding a la derecha para no pegar el texto a los bordes */
+
+    /* Centrado tanto vertical como horizontal */
+    justify-content: center; /* Centra el contenido verticalmente */
+    align-items: center; /* Centra el contenido horizontalmente */
+    text-align: center; /* Centra el texto dentro de su contenedor */
+  }
+
+  /* Título principal */
+  .blog-text h1 {
+    font-family: "NataSans", sans-serif; /* Usamos la fuente NataSans */
+    font-size: 6rem; /* Ajuste el tamaño del título para mejor legibilidad */
+    font-weight: 800; /* Negrita */
+    color: #09213c; /* Azul oscuro para el título */
+    line-height: 1.1; /* Ajuste de altura de línea para mejorar la legibilidad */
+    text-align: left; /* Alineamos el título a la izquierda */
+  }
+
+  /* Subtítulo con la fecha y autor */
+  .blog-text .subtitle {
+    font-family: "NataSans", sans-serif; /* Usamos la fuente NataSans */
+    font-size: 1.1rem; /* Tamaño pequeño para el subtítulo */
+    color: #6c757d; /* Gris claro */
+    font-weight: 400; /* Peso normal para el subtítulo */
+    line-height: 1.4; /* Altura de línea para separar un poco las líneas */
+    text-align: left; /* Alineamos el texto a la izquierda */
+    margin: 0; /* Eliminamos márgenes */
+  }
+
+  /* Sección de "Fecha" y "Autor" debajo del título */
+  .blog-text .meta-info {
+    display: flex;
+    justify-content: space-between; /* Alinea los textos a los extremos de la pantalla */
+    font-size: 1rem; /* Tamaño de fuente para la fecha y autor */
+    color: #184090; /* Gris claro para la meta información */
+    font-weight: 400; /* Peso normal */
+    padding-top: 0.5rem; /* Espacio superior */
+    text-align: left; /* Alineamos los textos a la izquierda */
+    width: 100%; /* Asegura que ocupe todo el ancho disponible */
+    margin-top: 1rem; /* Agrega espacio entre el título y la fecha/autor */
+  }
+
+  /* Responsividad para pantallas más pequeñas */
+  @media (max-width: 768px) {
+    .blog-container1 {
+      flex-direction: column; /* En pantallas pequeñas, los elementos se apilan verticalmente */
+      align-items: center; /* Centramos el contenido */
+    }
+
+    .blog-image {
+      margin-bottom: 2rem; /* Añadimos espacio entre la imagen y el texto */
+    }
+
+    .blog-text {
+      text-align: center; /* Centramos el texto en pantallas pequeñas */
+    }
+
+    .blog-text h1 {
+      font-size: 2rem; /* Reducimos el tamaño del título en pantallas pequeñas */
+    }
+
+    .blog-text p {
+      font-size: 1rem; /* Ajustamos el tamaño de los párrafos */
+    }
+  }
+
+  /* Pantallas más pequeñas (móviles) */
+  @media (max-width: 480px) {
+    .blog-text h1 {
+      font-size: 1.75rem; /* Título más pequeño para pantallas de móviles */
+    }
+
+    .blog-text .meta-info {
+      font-size: 0.9rem; /* Reducimos el tamaño de la meta información */
+    }
+  }
+
+  /* ------------------------------- */
+  /* Fin de la Section 1: Blog        */
+  /* ------------------------------- */
+
+  /* ------------------------------- */
+  /* Estilos para la nueva sección: Blog Container 2 (solo texto) */
+  /* ------------------------------- */
+
+  /* Contenedor general para la nueva sección */
+  .blog-container2 {
+    background-color: #d7dadf;
+    display: flex;
+    gap: 1.5rem; /* Añade espacio entre los elementos */
+    height: auto; /* Ajusta el alto automáticamente */
+    align-items: center; /* Centra el texto */
+    padding: 2rem 5%; /* Agrega padding para dar espacio */
+  }
+
+  /* Estilo para la columna de texto */
+  .blog-text2 {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Espacio entre los elementos */
+    padding: 1% 15%; /* Añade padding a la derecha e izquierda */
+    text-align: center; /* Alinea el texto */
+  }
+
+  .blog-text2 p {
+    font-family: "NataSans", sans-serif; /* Usamos la fuente NataSans */
+    font-size: 1.4rem;
+    font-weight: 200; /*controlar el grosor de la letra */
+    color: #184090;
+    line-height: 1.6;
+    text-align: justify; /* Justificamos el texto para mayor legibilidad */
+  }
+
+  /* Responsividad para pantallas más pequeñas */
+  @media (max-width: 768px) {
+    .blog-container2 {
+      flex-direction: column; /* Los elementos se apilan verticalmente */
+      align-items: center; /* Centramos los elementos */
+    }
+
+    .blog-text2 {
+      text-align: center; /* Centramos el texto */
+      padding: 0 1rem; /* Menos padding en pantallas pequeñas */
+    }
+
+    .blog-text2 p {
+      font-size: 1rem; /* Ajusta el tamaño de fuente en pantallas pequeñas */
+    }
+  }
+
+  /* ------------------------------- */
+  /* Fin de la Section 2: Blog Container 2 (solo texto) */
+  /* ------------------------------- */
+
+  /* ------------------------------- */
+  /* Inicio de la Section 3: Blog Container 3 */
+  /* ------------------------------- */
+
+  /* Contenedor general para la nueva sección */
+  .blog-container3 {
+    background-color: #d7dadf;
+    display: flex; /* Usamos Flexbox para alinear la imagen y el texto */
+    flex-direction: row; /* Coloca la imagen y el texto en fila */
+    gap: 0; /* No hay espacio entre la imagen y el texto */
+    height: 100%; /* Asegura que el contenedor ocupe todo el alto de la pantalla */
+    align-items: center; /* Alinea los elementos verticalmente */
+  }
+
+  /* Estilo para la columna de texto */
+  .blog-text3 {
+    flex: 1; /* El texto ocupa la mitad del espacio */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Espacio entre los elementos */
+    padding: 5% 5%; /* Padding alrededor del texto */
+    text-align: left; /* Alinea el texto a la izquierda */
+    justify-content: center; /* Centra verticalmente el contenido */
+  }
+
+  /* Texto de la columna izquierda */
+  .blog-text3 h1 {
+    font-family: "NataSans", sans-serif; /* Usamos la fuente NataSans */
+    font-size: 5rem; /* Ajuste el tamaño del título para mejor legibilidad */
+    font-weight: 800; /* Negrita */
+    color: #09213c; /* Azul oscuro para el título */
+    line-height: 1.1; /* Ajuste de altura de línea para mejorar la legibilidad */
+    text-align: left; /* Alineamos el título a la izquierda */
+    margin: 0; /* Eliminamos márgenes */
+  }
+  
+  /* Párrafo de la columna izquierda */
+  .blog-text3-p {
+    font-family: "NataSans", sans-serif; /* Usamos la fuente NataSans */
+    font-size: 1.1rem;
+    color: #09213c; /* Azul oscuro para el texto */
+    line-height: 1.6;
+    text-align: left; /* Alinea el texto a la izquierda */
+    margin: 0; /* Eliminamos márgenes */
+  }
+
+  /* Estilo para la columna de imagen */
+  .blog-image3 {
+    flex: 1; /* La imagen ocupa la otra mitad del espacio disponible */
+    height: 100%; /* Asegura que la imagen ocupe todo el alto del div */
+    margin: 0; /* Eliminar margen alrededor de la imagen */
+    overflow: hidden; /* Evitar que la imagen se desborde */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Estilo de la imagen */
+  .blog-img3 {
+    width: 100%; /* La imagen ocupa todo el ancho del contenedor */
+    height: 100%; /* La imagen ocupa todo el alto del contenedor */
+    object-fit: contain; /* Hace que la imagen se ajuste sin recortarse */
+    border-radius: 0; /* Sin bordes redondeados */
+    box-shadow: none; /* Eliminamos la sombra de la imagen */
+  }
+
+  /* Responsividad para pantallas más pequeñas */
+  @media (max-width: 768px) {
+    .blog-container3 {
+      flex-direction: column; /* En pantallas pequeñas, los elementos se apilan verticalmente */
+      align-items: stretch; /* Los elementos se estiran para ocupar todo el ancho */
+      padding: 0; /* Sin padding adicional */
+    }
+
+    .blog-text3 {
+      text-align: left; /* Mantenemos el texto alineado a la izquierda */
+      padding: 5% 5%; /* Padding consistente */
+    }
+
+    .blog-text3 h1 {
+      font-size: 3rem; /* Título más pequeño en móviles */
+    }
+
+    .blog-text3-p {
+      font-size: 1rem; /* Texto más pequeño en móviles */
+    }
+
+    .blog-image3 {
+      height: 400px; /* Altura fija para la imagen en móviles */
+      min-height: 400px;
+    }
+
+    .blog-img3 {
+      width: 100%; /* Asegura que la imagen ocupe todo el espacio disponible */
+      height: 100%; /* La imagen ocupa todo el alto del contenedor */
+      object-fit: contain; /* Mantiene la proporción de la imagen */
+    }
+  }
+
+  /* ------------------------------- */
+  /* Fin de la Section 3: Blog Container 3 */
+  /* ------------------------------- */
+  /* ------------------------------- */
+  /* Estilos para seccion 4: Building trust through secure innovation */
+  /* ------------------------------- */
+
+  .blog-container4 {
+    display: flex; /* Usamos flexbox para distribuir el espacio entre los elementos */
+    flex-direction: row; /* Los elementos se colocan en fila */
+    gap: 0; /* No hay espacio entre la imagen y el texto */
+    height: auto; /* Altura automática */
+    align-items: center; /* Alinea verticalmente los elementos */
+    padding: 5% 15%; /* Padding alrededor del contenido */
+    background-color: #94FD0B; /* Fondo verde lima */
+    min-height: auto;
+  }
+
+  /* Estilo para la columna de texto en la nueva sección */
+  .blog-text4 {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    display: flex;
+    flex-direction: column; /* Los elementos en la columna se ordenan verticalmente */
+    gap: 2rem; /* Espacio entre el título y el contenido */
+    padding: 0; /* Sin padding lateral adicional */
+    text-align: left; /* El texto se alinea a la izquierda */
+  }
+
+  /* Título principal */
+  .blog-text4 h1 {
+    font-family: "NataSans", sans-serif; /* Usamos la fuente NataSans */
+    font-size: 4.5rem; /* Tamaño del título */
+    font-weight: 800; /* Negrita */
+    color: #09213c; /* Azul oscuro para el título */
+    line-height: 1.1; /* Ajuste de altura de línea para mejorar la legibilidad */
+    text-align: left; /* Alineamos el título a la izquierda */
+    margin: 0; /* Sin márgenes */
+  }
+
+  /* Párrafo descriptivo bajo el título */
+  .blog-text4 > p {
+    font-family: "NataSans", sans-serif;
+    font-size: 1.25rem; /* Ajuste de tamaño de fuente */
+    color: #09213c; /* Azul oscuro */
+    margin: 0; /* Sin márgenes */
+    max-width: 100%; /* Ocupa todo el ancho disponible */
+    line-height: 1.6;
+  }
+
+  /* Estilo para las características del blog (las tecnologías utilizadas) */
+  .blog-features {
+    display: grid; /* Usamos grid para colocar las características */
+    grid-template-columns: repeat(3, 1fr); /* Dos columnas en cada fila */
+    gap: 2.5rem; /* Espacio entre las características */
+    margin-top: 2rem; /* Margen superior */
+  }
+
+  /* Estilo de cada característica */
+  .blog-feature {
+    display: flex; /* Flexbox para alinear ícono y contenido */
+    gap: 1rem; /* Espacio entre el ícono y el contenido */
+    align-items: flex-start; /* Alinea los elementos al inicio */
+  }
+
+  /* Ícono cuadrado gris */
+  .feature-icon {
+    width: 40px;
+    height: 40px;
+    background-color: #d7dadf; /* Gris claro */
+    flex-shrink: 0; /* No se encoge */
+    border-radius: 4px; /* Bordes ligeramente redondeados */
+  }
+
+  /* Contenedor del contenido de la feature */
+  .feature-content {
+    flex: 1; /* Ocupa el resto del espacio */
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .blog-feature h3 {
+    font-family: "NataSans", sans-serif;
+    font-size: 1.25rem; /* Tamaño de fuente para el título de cada característica */
+    font-weight: 700; /* Negrita */
+    color: #09213c; /* Azul oscuro */
+    margin: 0; /* Sin márgenes */
+    line-height: 1.3;
+  }
+
+  .blog-feature p {
+    font-family: "NataSans", sans-serif;
+    font-size: 0.95rem; /* Ajuste del tamaño del párrafo */
+    color: #09213c; /* Azul oscuro */
+    line-height: 1.6; /* Espaciado entre líneas */
+    margin: 0; /* Sin márgenes */
+    font-weight: 400; /* Peso normal */
+  }
+
+  /* Responsividad para pantallas más pequeñas */
+  @media (max-width: 768px) {
+    .blog-container4 {
+      padding: 5% 5%; /* Menos padding en móviles */
+    }
+
+    .blog-text4 {
+      gap: 1.5rem; /* Menos espacio entre elementos */
+    }
+
+    .blog-text4 h1 {
+      font-size: 2.5rem; /* Título más pequeño */
+    }
+
+    .blog-text4 > p {
+      font-size: 1rem; /* Párrafos más pequeños */
+    }
+
+    .blog-features {
+      grid-template-columns: 1fr; /* Coloca las características en una columna */
+      gap: 2rem; /* Espacio entre las características */
+      margin-top: 1.5rem;
+    }
+
+    .blog-feature {
+      gap: 1rem; /* Mantiene el espacio entre ícono y contenido */
+    }
+
+    .feature-icon {
+      width: 35px;
+      height: 35px;
+    }
+
+    .blog-feature h3 {
+      font-size: 1.1rem; /* Título más pequeño */
+    }
+
+    .blog-feature p {
+      font-size: 0.9rem; /* Párrafos más pequeños */
+    }
+  }
+
+  /* Pantallas muy pequeñas */
+  @media (max-width: 480px) {
+    .blog-container4 {
+      padding: 5% 3%;
+    }
+
+    .blog-text4 h1 {
+      font-size: 2rem;
+    }
+
+    .blog-text4 > p {
+      font-size: 0.95rem;
+    }
+
+    .blog-features {
+      gap: 1.5rem;
+    }
+
+    .feature-icon {
+      width: 30px;
+      height: 30px;
+    }
+
+    .blog-feature h3 {
+      font-size: 1rem;
+    }
+
+    .blog-feature p {
+      font-size: 0.85rem;
+    }
+  }
+
+  /* ------------------------------- */
+  /* Fin de la Section 4: Building trust through secure innovation */
+  /* ------------------------------- */
+
+  /* ------------------------------- */
+  /* Estilos para la nueva sección 5: Benefits for Financial Platforms / Why Trust Zelify */
+  /* ------------------------------- */
+
+  /* Contenedor principal de la sección 5 */
+  .blog-container5 {
+    background-color: #d7dadf; /* Fondo gris claro */
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+  }
+
+  /* Parte superior: Imagen y beneficios */
+  .blog-container5-top {
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+    align-items: center;
+    padding: 5% 0;
+  }
+
+  /* Imagen a la izquierda */
+  .blog-image5 {
+    flex: 1;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .blog-img5 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-height: 600px;
+  }
+
+  /* Texto y beneficios a la derecha */
+  .blog-text5 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0 5%;
+    text-align: left;
+  }
+
+  /* Título "Benefits for Financial Platforms" */
+  .benefits-title5 {
+    font-family: "NataSans", sans-serif;
+    font-size: 4.5rem;
+    font-weight: 800;
+    color: #09213c; /* Azul oscuro */
+    line-height: 1.1;
+    text-align: right;
+    margin-bottom: 2rem;
+  }
+
+  /* Lista de beneficios */
+  .benefits-list5 {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: right;
+  }
+
+  .benefits-list5 li {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    font-family: "NataSans", sans-serif;
+    font-size: 1.1rem;
+    color: #09213c;
+    line-height: 1.6;
+    text-align: right;
+  }
+
+  /* Cuadrado verde como viñeta */
+  .benefit-square5 {
+    width: 15px;
+    height: 15px;
+    background-color: #95ff0b; /* Verde lima */
+    flex-shrink: 0;
+    margin-top: 0.3rem;
+  }
+
+  /* Parte inferior: Why Trust Zelify */
+  .blog-container5-bottom {
+    background-color: #d7dadf;
+    padding: 5% 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .trust-content5 {
+    max-width: 900px;
+    width: 100%;
+    text-align: left;
+  }
+
+  /* Título "Why Trust Zelify?" */
+  .trust-title5 {
+    font-family: "NataSans", sans-serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #09213c;
+    line-height: 1.1;
+    text-align: left;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Descripción */
+  .trust-desc5 {
+    font-family: "NataSans", sans-serif;
+    font-size: 1.1rem;
+    color: #09213c;
+    line-height: 1.6;
+    text-align: left;
+    margin-bottom: 2rem;
+  }
+
+  /* Contenedor de botones */
+  .trust-buttons5 {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  /* Botones */
+  .btn-primary5 {
+    background-color: #95ff0b; /* Verde lima */
+    color: #09213c; /* Azul oscuro */
+    text-decoration: none;
+    font-family: "NataSans", sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    display: inline-block;
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
+    flex: 1;
+    text-align: center;
+    max-width: 250px;
+  }
+
+  .btn-primary5:hover {
+    background: linear-gradient(
+      145deg,
+      rgba(128, 255, 0, 0.95),
+      rgba(88, 220, 0, 0.88)
+    );
+    transform: translateY(-1px);
+    box-shadow: 0 8px 16px rgba(80, 220, 0, 0.3);
+  }
+
+  /* Responsividad para tablet */
+  @media (max-width: 1024px) {
+    .benefits-title5 {
+      font-size: 3.5rem;
+    }
+
+    .trust-title5 {
+      font-size: 2.8rem;
+    }
+
+    .blog-container5-bottom {
+      padding: 5% 10%;
+    }
+  }
+
+  /* Responsividad para móviles */
+  @media (max-width: 768px) {
+    .blog-container5-top {
+      flex-direction: column;
+      padding: 5% 0;
+    }
+
+    .blog-image5 {
+      width: 100%;
+      height: auto;
+      max-height: 400px;
+    }
+
+    .blog-img5 {
+      max-height: 400px;
+      object-fit: cover;
+    }
+
+    .blog-text5 {
+      padding: 5% 5%;
+      text-align: left;
+    }
+
+    .benefits-title5 {
+      font-size: 2.5rem;
+      text-align: left;
+      margin-bottom: 1.5rem;
+    }
+
+    .benefits-list5 {
+      text-align: left;
+    }
+
+    .benefits-list5 li {
+      justify-content: flex-start;
+      text-align: left;
+      font-size: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .blog-container5-bottom {
+      padding: 5% 5%;
+    }
+
+    .trust-title5 {
+      font-size: 2.2rem;
+    }
+
+    .trust-desc5 {
+      font-size: 1rem;
+    }
+
+    .trust-buttons5 {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .btn-primary5 {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  /* Pantallas muy pequeñas */
+  @media (max-width: 480px) {
+    .benefits-title5 {
+      font-size: 2rem;
+    }
+
+    .trust-title5 {
+      font-size: 1.8rem;
+    }
+
+    .benefits-list5 li {
+      font-size: 0.9rem;
+    }
+
+    .trust-desc5 {
+      font-size: 0.95rem;
+    }
+
+    .btn-primary5 {
+      font-size: 1rem;
+      padding: 0.65rem 1.5rem;
+    }
+  }
+
+  /* ------------------------------- */
+  /* Fin de la Section 5: Benefits for Financial Platforms / Why Trust Zelify */
+  /* ------------------------------- */
+</style>
