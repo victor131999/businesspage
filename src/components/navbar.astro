@@ -594,7 +594,7 @@ const cssVars = `
       backdrop-filter: blur(10px);
       padding: 5rem 2rem 2rem;
       transition: right 0.3s ease;
-      z-index: 1000;
+      z-index: 999;
       overflow-y: auto;
       box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
       flex-direction: column;
@@ -698,9 +698,13 @@ const cssVars = `
 <script is:inline>
   document.addEventListener("DOMContentLoaded", () => {
     const trigger = document.getElementById("products-trigger");
+    const triggerMobile = document.getElementById("products-trigger-mobile");
     const panel = document.getElementById("products-panel");
+    
+    // Desktop trigger
     if (trigger && panel) {
-      trigger.addEventListener("click", () => {
+      trigger.addEventListener("click", (e) => {
+        e.stopPropagation();
         trigger.classList.toggle("active");
         panel.classList.toggle("hidden");
       });
@@ -708,6 +712,23 @@ const cssVars = `
       document.addEventListener("click", (e) => {
         if (!panel.contains(e.target) && !trigger.contains(e.target)) {
           trigger.classList.remove("active");
+          panel.classList.add("hidden");
+        }
+      });
+    }
+
+    // Mobile trigger
+    if (triggerMobile && panel) {
+      triggerMobile.addEventListener("click", (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        triggerMobile.classList.toggle("active");
+        panel.classList.toggle("hidden");
+      });
+
+      document.addEventListener("click", (e) => {
+        if (!panel.contains(e.target) && !triggerMobile.contains(e.target) && !trigger?.contains(e.target)) {
+          triggerMobile.classList.remove("active");
           panel.classList.add("hidden");
         }
       });
@@ -725,19 +746,21 @@ const cssVars = `
 
       // Close menu when clicking outside
       document.addEventListener("click", (e) => {
-        if (!navWrapper.contains(e.target) && !menuToggle.contains(e.target)) {
+        if (!navWrapper.contains(e.target) && !menuToggle.contains(e.target) && !panel?.contains(e.target)) {
           menuToggle.classList.remove("active");
           navWrapper.classList.remove("active");
         }
       });
 
-      // Close menu when clicking on a link
+      // Close menu when clicking on a link (but not on Products button)
       const navLinks = navWrapper.querySelectorAll("a, button");
       navLinks.forEach(link => {
-        link.addEventListener("click", () => {
-          menuToggle.classList.remove("active");
-          navWrapper.classList.remove("active");
-        });
+        if (link.id !== "products-trigger-mobile") {
+          link.addEventListener("click", () => {
+            menuToggle.classList.remove("active");
+            navWrapper.classList.remove("active");
+          });
+        }
       });
     }
 

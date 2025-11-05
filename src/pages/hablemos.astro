@@ -23,7 +23,7 @@ import "../styles/navbar.css";
   const translations: Translations = {
     en: {
       title: "Let's talk!",
-      subtitle: "Tell us about your project and we'll get in touch with you",
+      subtitle: "Tell us about your project<br/>and we'll get in touch with you",
       email: "email",
       phone: "phone number",
       interest: "What are you interested in?",
@@ -32,7 +32,7 @@ import "../styles/navbar.css";
     },
     es: {
       title: "¡Hablemos!",
-      subtitle: "Cuéntanos sobre tu proyecto y nos pondremos en contacto contigo",
+      subtitle: "Cuéntanos sobre tu proyecto<br/>y nos pondremos en contacto contigo",
       email: "correo electrónico",
       phone: "número de teléfono",
       interest: "¿En qué estás interesado?",
@@ -55,7 +55,7 @@ import "../styles/navbar.css";
     };
 
     if (elements.title) elements.title.textContent = content.title;
-    if (elements.subtitle) elements.subtitle.textContent = content.subtitle;
+    if (elements.subtitle) elements.subtitle.innerHTML = content.subtitle;
     if (elements.emailLabel) elements.emailLabel.textContent = content.email;
     if (elements.phoneLabel) elements.phoneLabel.textContent = content.phone;
     if (elements.interestLabel) elements.interestLabel.textContent = content.interest;
@@ -113,7 +113,7 @@ import "../styles/navbar.css";
     <section class="contact-section">
       <div class="form-container">
         <h1 class="form-title">Let's Talk!</h1>
-        <p class="form-subtitle">Tell us about your project and we'll get in touch with you</p>
+        <p class="form-subtitle">Tell us about your project<br/>and we'll get in touch with you</p>
         
         <form id="contact-form" class="contact-form">
           <div class="form-row">
