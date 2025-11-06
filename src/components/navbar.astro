@@ -58,7 +58,7 @@ const cssVars = `
         <span data-i18n="nav.resources">Resources</span>
       </button>
       <!-- Aquí empieza el dropdown -->
-      <ul class="dropdown-menu hidden" id="resources-panel">
+      <ul class="dropdown-menu" id="resources-panel">
         <li><a href="/blog" data-i18n="nav.businessBlog">Business Blog</a></li>
       </ul>
     </li>
@@ -106,7 +106,7 @@ const cssVars = `
           <span data-i18n="nav.resources">Resources</span>
         </button>
         <!-- Dropdown de Resources -->
-        <ul class="dropdown-menu hidden" id="resources-panel-mobile">
+        <ul class="dropdown-menu" id="resources-panel-mobile">
           <li><a href="/blog" data-i18n="nav.businessBlog">Business Blog</a></li>
         </ul>
       </li>
@@ -297,51 +297,56 @@ const cssVars = `
   .dropdown-container {
     position: relative;
   }
+
   .dropdown-trigger {
     padding: 0.5rem;
     margin: 0;
-    cursor: default;
+    cursor: pointer;
   }
 
   .dropdown-menu {
     position: absolute;
-    top: 100%;
+    top: calc(100% + 0.5rem);
     left: 0;
     min-width: 220px;
-    margin: 0.5rem 0 0 0;
     padding: 0.5rem 0;
     list-style: none;
     background-color: var(--dropdown-bg);
     border: 1px solid #e9ecef;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    z-index: 10;
-
-    visibility: hidden;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: all 0.2s ease-in-out;
-    pointer-events: none;
+    z-index: 1000;
+    display: none;
   }
 
-  .dropdown-container:hover .dropdown-menu,
-  .dropdown-container:focus-within .dropdown-menu {
-    visibility: visible;
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
+  .dropdown-menu.show {
+    display: block;
+    animation: dropdownFadeIn 0.2s ease-out;
+  }
+
+  @keyframes dropdownFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .dropdown-menu a {
     display: block;
     padding: 0.75rem 1.5rem;
     color: var(--dropdown-link);
+    text-decoration: none;
     white-space: nowrap;
+    transition: background-color 0.15s ease;
   }
 
   .dropdown-menu a:hover {
     background-color: var(--dropdown-hover-bg);
-    color: #cdd1dd;
+    color: #212529;
   }
 
   /* ACTION BUTTONS */
@@ -711,73 +716,25 @@ const cssVars = `
       opacity: 1 !important;
     }
   }
-/* Cuando el dropdown está activo, se muestra */
-.dropdown-container.active .dropdown-menu {
-  visibility: visible;
-  opacity: 1;
-  transform: translateY(0); /* Ajusta el valor si deseas un desplazamiento adicional */
-  pointer-events: auto;
-}
 
-/* El dropdown menú está inicialmente oculto */
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  min-width: 220px; /* Ajusta este valor si lo necesitas */
-  margin: 0.5rem 0 0 0;
-  padding: 0.5rem 0;
-  list-style: none;
-  background-color: var(--dropdown-bg);
-  border: 1px solid #0381ff;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  z-index: 10;
+  /* Dropdown responsive para móvil */
+  @media (max-width: 768px) {
+    .dropdown-menu {
+      min-width: 100%;
+      left: 0;
+      top: calc(100% + 0.25rem);
+    }
 
-  visibility: hidden;
-  opacity: 0;
-  transform: translateY(10px); /* Ajusta el valor si deseas un desplazamiento adicional */
-  transition: all 0.2s ease-in-out;
-  pointer-events: none;
-}
+    .dropdown-container button {
+      width: 100%;
+      text-align: left;
+      padding: 0.75rem;
+    }
 
-/* Específico para la versión móvil: */
-@media (max-width: 768px) {
-  /* El dropdown móvil debe ser más ancho y ocupar todo el ancho del menú */
-  .dropdown-menu {
-    min-width: 100%; /* Asegura que el menú ocupe todo el ancho disponible */
-    left: 0;
-    box-shadow: none; /* Puedes quitar el box-shadow si prefieres un diseño más plano */
-    margin: 0; /* Ajuste del margen para evitar desplazamiento innecesario */
+    .dropdown-menu a {
+      padding: 1rem 1.5rem;
+    }
   }
-
-  /* Para el botón de recursos móvil (ajustes para que sea fácilmente clickeable) */
-  .dropdown-container button {
-    width: 100%;
-    text-align: left;
-    padding: 1rem 1.5rem; /* Asegúrate de que el botón sea más fácil de clicar */
-  }
-
-  .dropdown-menu a {
-    padding: 1rem 2rem; /* Aumenta el padding en los enlaces para facilitar el clic en pantallas pequeñas */
-  }
-}
-
-/* Además, si el dropdown se utiliza para el menú hamburguesa en móvil */
-@media (max-width: 768px) {
-  .dropdown-menu {
-    width: 100%;
-    left: 0;
-    top: 100%;
-  }
-
-  /* Los elementos dentro del dropdown se alinearán mejor para pantallas pequeñas */
-  .dropdown-menu a {
-    display: block;
-    width: 100%;
-    text-align: left;
-  }
-}
 </style>
 <script is:inline>
   document.addEventListener("DOMContentLoaded", () => {
@@ -940,39 +897,69 @@ const cssVars = `
       updateToggleUI(currentLang);
       propagateLanguage(currentLang);
     }
-  });
-  document.addEventListener("DOMContentLoaded", () => {
-  // Lógica para el dropdown en desktop
-  const triggerDesktop = document.getElementById("resources-trigger");
-  const panelDesktop = document.getElementById("resources-panel");
 
-  // Lógica para el dropdown en móvil
-  const triggerMobile = document.getElementById("resources-trigger-mobile");
-  const panelMobile = document.getElementById("resources-panel-mobile");
+    // Dropdown de Resources - Solución simple y robusta
+    function initResourcesDropdown() {
+      const triggerDesktop = document.getElementById("resources-trigger");
+      const panelDesktop = document.getElementById("resources-panel");
+      const triggerMobile = document.getElementById("resources-trigger-mobile");
+      const panelMobile = document.getElementById("resources-panel-mobile");
 
-  // Función para mostrar u ocultar el dropdown
-  const toggleDropdown = (trigger, panel) => {
-    trigger.addEventListener("click", (e) => {
-      e.stopPropagation();
-      trigger.classList.toggle("active");
-      panel.classList.toggle("hidden"); // Cambiar para manejar "hidden" como el estado inicial
-    });
+      function setupDropdown(trigger, panel) {
+        if (!trigger || !panel) return;
 
-    document.addEventListener("click", (e) => {
-      if (!panel.contains(e.target) && !trigger.contains(e.target)) {
-        trigger.classList.remove("active");
-        panel.classList.add("hidden");
+        let isOpen = false;
+
+        function openDropdown() {
+          panel.classList.add("show");
+          trigger.classList.add("active");
+          isOpen = true;
+        }
+
+        function closeDropdown() {
+          panel.classList.remove("show");
+          trigger.classList.remove("active");
+          isOpen = false;
+        }
+
+        // Click en el trigger
+        trigger.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (isOpen) {
+            closeDropdown();
+          } else {
+            // Cerrar otros dropdowns abiertos primero
+            document.querySelectorAll(".dropdown-menu.show").forEach((menu) => {
+              if (menu !== panel) {
+                menu.classList.remove("show");
+                const otherTrigger = menu.closest(".dropdown-container")?.querySelector(".dropdown-trigger");
+                if (otherTrigger) otherTrigger.classList.remove("active");
+              }
+            });
+            openDropdown();
+          }
+        });
+
+        // Click fuera para cerrar
+        document.addEventListener("click", (e) => {
+          if (isOpen && !panel.contains(e.target) && !trigger.contains(e.target)) {
+            closeDropdown();
+          }
+        });
+
+        // Cerrar al hacer click en un enlace del dropdown
+        panel.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => {
+            setTimeout(() => closeDropdown(), 100);
+          });
+        });
       }
-    });
-  };
 
-  // Verificar y agregar la funcionalidad a los triggers
-  if (triggerDesktop && panelDesktop) {
-    toggleDropdown(triggerDesktop, panelDesktop);
-  }
+      setupDropdown(triggerDesktop, panelDesktop);
+      setupDropdown(triggerMobile, panelMobile);
+    }
 
-  if (triggerMobile && panelMobile) {
-    toggleDropdown(triggerMobile, panelMobile);
-  }
-});
+    initResourcesDropdown();
+  });
 </script>

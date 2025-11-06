@@ -18,7 +18,7 @@ import "../styles/navbar.css";
         // Section 1: Hero
         blogTitle1: "How\nZelify Auth\nReinvents\nSecure\nOnboarding\nfor Fintechs.",
         blogDate: "27 October 2025",
-        blogAuthor: "by Ale Llanganates",
+        blogAuthor: " ",
   
         // Section 2: Intro
         blogIntro:
@@ -70,7 +70,7 @@ import "../styles/navbar.css";
         // Sección 1: Hero
         blogTitle1: "Cómo\nZelify Auth\nReinventa\nEl Onboarding\nSeguro\npara Fintechs.",
         blogDate: "27 de Octubre 2025",
-        blogAuthor: "por Ale Llanganates",
+        blogAuthor: " ",
   
         // Sección 2: Intro
         blogIntro:
@@ -229,7 +229,7 @@ import "../styles/navbar.css";
             <!-- Información adicional debajo del título -->
             <div class="meta-info">
               <span class="blog-date">27 October 2025</span>
-              <span class="blog-author">by Ale Llanganates</span>
+              <span class="blog-author"> </span>
             </div>
           </div>
         </div>
@@ -644,7 +644,7 @@ import "../styles/navbar.css";
     padding: 0; /* Eliminar padding general alrededor de la sección */
     background-color: #d7dadf; /* Fondo gris claro para la sección del blog */
     margin-top: 0; /* Asegurar que no haya margen arriba, pegado al navbar */
-    height: 100vh; /* Asegura que la sección del blog ocupe todo el alto de la pantalla */
+    min-height: 100vh; /* Altura mínima de la pantalla */
   }
 
   /* Contenedor que agrupa la imagen y el texto */
@@ -652,48 +652,51 @@ import "../styles/navbar.css";
     display: flex; /* Usamos Flexbox para alinear la imagen y el texto */
     flex-direction: row; /* Coloca la imagen y el texto en fila */
     gap: 0; /* No hay espacio entre la imagen y el texto */
-    height: 100%; /* Asegura que el contenedor ocupe todo el alto de la pantalla */
+    min-height: 100vh; /* Altura mínima de la pantalla */
     align-items: stretch; /* Asegura que los elementos ocupen el mismo alto */
   }
 
   /* Estilos para la columna de la izquierda con la imagen */
   .blog-image {
-    flex: 1; /* La imagen ocupa la mitad del espacio disponible */
+    flex: 0 0 42%; /* La imagen ocupa aproximadamente 42% del espacio (40-45%) */
     height: 100%; /* Asegura que la imagen ocupe todo el alto del div */
+    min-height: 100vh; /* Altura mínima de la pantalla */
     margin: 0; /* Eliminar margen alrededor de la imagen */
     overflow: hidden; /* Evitar que la imagen se desborde */
+    position: relative; /* Para posicionar elementos internos */
   }
 
   .blog-img {
     width: 100%; /* La imagen ocupa todo el ancho del contenedor */
     height: 100%; /* La imagen ocupa todo el alto del contenedor */
     object-fit: cover; /* Hace que la imagen cubra todo el espacio disponible sin distorsionarse */
-    border-radius: 0; /* Sin bordes redondeados */
     box-shadow: none; /* Eliminamos la sombra de la imagen */
+    display: block; /* Elimina espacio debajo de la imagen */
   }
 
   /* Estilos para la columna de la derecha con el texto */
   .blog-text {
-    flex: 1; /* El texto ocupa la otra mitad del espacio disponible */
+    flex: 0 0 58%; /* El texto ocupa aproximadamente 58% del espacio (55-60%) */
     display: flex;
     flex-direction: column; /* Coloca los elementos en columna */
     gap: 1.5rem; /* Espacio entre los elementos del texto */
-    padding: 3%; /* Agregar padding a la derecha para no pegar el texto a los bordes */
-
-    /* Centrado tanto vertical como horizontal */
+    padding: 5% 8%; /* Padding generoso alrededor del texto */
+    background-color: #d7dadf; /* Fondo gris claro */
     justify-content: center; /* Centra el contenido verticalmente */
-    align-items: center; /* Centra el contenido horizontalmente */
-    text-align: center; /* Centra el texto dentro de su contenedor */
+    align-items: flex-start; /* Alinea el contenido a la izquierda */
+    text-align: left; /* Alinea el texto a la izquierda */
   }
 
   /* Título principal */
   .blog-text h1 {
     font-family: "NataSans", sans-serif; /* Usamos la fuente NataSans */
-    font-size: 6rem; /* Ajuste el tamaño del título para mejor legibilidad */
+    font-size: 5.5rem; /* Tamaño del título */
     font-weight: 800; /* Negrita */
     color: #09213c; /* Azul oscuro para el título */
     line-height: 1.1; /* Ajuste de altura de línea para mejorar la legibilidad */
     text-align: left; /* Alineamos el título a la izquierda */
+    margin: 0; /* Sin márgenes */
+    width: 100%; /* Ocupa todo el ancho disponible */
   }
 
   /* Subtítulo con la fecha y autor */
@@ -710,48 +713,108 @@ import "../styles/navbar.css";
   /* Sección de "Fecha" y "Autor" debajo del título */
   .blog-text .meta-info {
     display: flex;
-    justify-content: space-between; /* Alinea los textos a los extremos de la pantalla */
+    gap: 1.5rem; /* Espacio entre fecha y autor */
     font-size: 1rem; /* Tamaño de fuente para la fecha y autor */
-    color: #184090; /* Gris claro para la meta información */
+    color: #09213c; /* Azul oscuro para la meta información */
     font-weight: 400; /* Peso normal */
+    font-family: "NataSans", sans-serif;
     padding-top: 0.5rem; /* Espacio superior */
     text-align: left; /* Alineamos los textos a la izquierda */
     width: 100%; /* Asegura que ocupe todo el ancho disponible */
-    margin-top: 1rem; /* Agrega espacio entre el título y la fecha/autor */
+    margin-top: 0.5rem; /* Espacio entre el título y la fecha/autor */
+    align-items: center; /* Alinea verticalmente los elementos */
+  }
+
+  .blog-text .meta-info .blog-date {
+    color: #09213c; /* Azul oscuro */
+  }
+
+  .blog-text .meta-info .blog-author {
+    color: #09213c; /* Azul oscuro */
+  }
+
+  /* Responsividad para tablets */
+  @media (max-width: 1024px) {
+    .blog-image {
+      flex: 0 0 45%; /* Ajuste para tablets */
+    }
+
+    .blog-text {
+      flex: 0 0 55%; /* Ajuste para tablets */
+      padding: 5% 6%;
+    }
+
+    .blog-text h1 {
+      font-size: 4rem; /* Título más pequeño en tablets */
+    }
   }
 
   /* Responsividad para pantallas más pequeñas */
   @media (max-width: 768px) {
+    .blog-content {
+      min-height: auto; /* Altura automática en móviles */
+    }
+
     .blog-container1 {
       flex-direction: column; /* En pantallas pequeñas, los elementos se apilan verticalmente */
-      align-items: center; /* Centramos el contenido */
+      align-items: stretch; /* Los elementos se estiran */
+      min-height: auto; /* Altura automática */
     }
 
     .blog-image {
-      margin-bottom: 2rem; /* Añadimos espacio entre la imagen y el texto */
+      flex: 1 1 auto; /* Ocupa el espacio necesario */
+      width: 100%; /* Ancho completo */
+      min-height: 50vh; /* Altura mínima de la mitad de la pantalla */
+      height: auto; /* Altura automática */
+    }
+
+    .blog-img {
+      border-radius: 0; /* Sin bordes curvos en móviles */
+      height: 100%;
+      min-height: 50vh;
     }
 
     .blog-text {
-      text-align: center; /* Centramos el texto en pantallas pequeñas */
+      flex: 1 1 auto; /* Ocupa el espacio necesario */
+      width: 100%; /* Ancho completo */
+      padding: 8% 5%; /* Padding ajustado para móviles */
+      text-align: left; /* Mantiene alineación izquierda */
+      align-items: flex-start; /* Alinea a la izquierda */
     }
 
     .blog-text h1 {
-      font-size: 2rem; /* Reducimos el tamaño del título en pantallas pequeñas */
+      font-size: 2.5rem; /* Título más pequeño en pantallas pequeñas */
+      line-height: 1.1;
     }
 
-    .blog-text p {
-      font-size: 1rem; /* Ajustamos el tamaño de los párrafos */
+    .blog-text .meta-info {
+      font-size: 0.95rem; /* Tamaño de fuente ajustado */
+      flex-wrap: wrap; /* Permite que se envuelva si es necesario */
     }
   }
 
-  /* Pantallas más pequeñas (móviles) */
+  /* Pantallas muy pequeñas (móviles pequeños) */
   @media (max-width: 480px) {
+    .blog-image {
+      min-height: 40vh; /* Altura mínima más pequeña */
+    }
+
+    .blog-img {
+      min-height: 40vh;
+    }
+
+    .blog-text {
+      padding: 6% 4%; /* Menos padding en pantallas muy pequeñas */
+    }
+
     .blog-text h1 {
-      font-size: 1.75rem; /* Título más pequeño para pantallas de móviles */
+      font-size: 2rem; /* Título más pequeño para pantallas de móviles */
+      line-height: 1.1;
     }
 
     .blog-text .meta-info {
       font-size: 0.9rem; /* Reducimos el tamaño de la meta información */
+      gap: 1rem; /* Menos espacio entre elementos */
     }
   }
 
