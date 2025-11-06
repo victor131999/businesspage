@@ -787,16 +787,26 @@ const cssVars = `
 
       // Close menu when clicking outside
       document.addEventListener("click", (e) => {
-        if (!navWrapper.contains(e.target) && !menuToggle.contains(e.target) && !panel?.contains(e.target)) {
+        const target = e.target;
+        const resourcesPanel = document.getElementById("resources-panel-mobile");
+        const resourcesTrigger = document.getElementById("resources-trigger-mobile");
+        
+        // No cerrar si el click es en el trigger o panel de Resources
+        if (resourcesTrigger?.contains(target) || resourcesPanel?.contains(target)) {
+          return;
+        }
+        
+        if (!navWrapper.contains(target) && !menuToggle.contains(target) && !panel?.contains(target)) {
           menuToggle.classList.remove("active");
           navWrapper.classList.remove("active");
         }
       });
 
-      // Close menu when clicking on a link (but not on Products button)
+      // Close menu when clicking on a link (but not on Products or Resources dropdown buttons)
       const navLinks = navWrapper.querySelectorAll("a, button");
       navLinks.forEach(link => {
-        if (link.id !== "products-trigger-mobile") {
+        // No cerrar el menú si es un botón de dropdown (Products o Resources)
+        if (link.id !== "products-trigger-mobile" && link.id !== "resources-trigger-mobile") {
           link.addEventListener("click", () => {
             menuToggle.classList.remove("active");
             navWrapper.classList.remove("active");
@@ -905,10 +915,11 @@ const cssVars = `
       const triggerMobile = document.getElementById("resources-trigger-mobile");
       const panelMobile = document.getElementById("resources-panel-mobile");
 
-      function setupDropdown(trigger, panel) {
+      function setupDropdown(trigger, panel, isMobile = false) {
         if (!trigger || !panel) return;
 
         let isOpen = false;
+        let isProcessingClick = false;
 
         function openDropdown() {
           panel.classList.add("show");
@@ -926,8 +937,13 @@ const cssVars = `
         trigger.addEventListener("click", (e) => {
           e.preventDefault();
           e.stopPropagation();
+          
+          // Marcar que estamos procesando el click
+          isProcessingClick = true;
+          
           if (isOpen) {
             closeDropdown();
+            isProcessingClick = false;
           } else {
             // Cerrar otros dropdowns abiertos primero
             document.querySelectorAll(".dropdown-menu.show").forEach((menu) => {
@@ -938,26 +954,87 @@ const cssVars = `
               }
             });
             openDropdown();
+            
+            // En móviles, esperar más tiempo antes de permitir que el click fuera funcione
+            if (isMobile) {
+              // Delay más largo en móviles para evitar cierre prematuro
+              setTimeout(() => {
+                isProcessingClick = false;
+              }, 400);
+            } else {
+              setTimeout(() => {
+                isProcessingClick = false;
+              }, 100);
+            }
           }
         });
 
+        // Para móviles: prevenir eventos táctiles adicionales
+        if (isMobile) {
+          trigger.addEventListener("touchend", (e) => {
+            e.stopPropagation();
+          });
+          
+          // Prevenir que el panel se cierre cuando se toca
+          panel.addEventListener("touchstart", (e) => {
+            e.stopPropagation();
+            isProcessingClick = false; // Permitir interacción con el panel
+          });
+          
+          panel.addEventListener("touchend", (e) => {
+            e.stopPropagation();
+          });
+          
+          // Prevenir clicks en el panel que puedan cerrarlo (excepto en enlaces)
+          panel.addEventListener("click", (e) => {
+            // Solo prevenir si no es un enlace
+            if (e.target.tagName !== "A") {
+              e.stopPropagation();
+            }
+          });
+        }
+
         // Click fuera para cerrar
         document.addEventListener("click", (e) => {
-          if (isOpen && !panel.contains(e.target) && !trigger.contains(e.target)) {
-            closeDropdown();
-          }
+          // Capturar el target inmediatamente
+          const target = e.target;
+          
+          // Ejecutar en el siguiente tick para que el evento del trigger se procese primero
+          setTimeout(() => {
+            // No hacer nada si estamos procesando un click en el trigger
+            if (isProcessingClick) {
+              return;
+            }
+            
+            // Verificar que el click no sea en el trigger o panel
+            if (isOpen && !panel.contains(target) && !trigger.contains(target)) {
+              closeDropdown();
+            }
+          }, 0);
         });
 
         // Cerrar al hacer click en un enlace del dropdown
         panel.querySelectorAll("a").forEach((link) => {
-          link.addEventListener("click", () => {
-            setTimeout(() => closeDropdown(), 100);
+          link.addEventListener("click", (e) => {
+            e.stopPropagation();
+            setTimeout(() => {
+              closeDropdown();
+              // Si es móvil, también cerrar el menú móvil completo
+              if (isMobile) {
+                const menuToggle = document.querySelector(".mobile-menu-toggle");
+                const navWrapper = document.querySelector(".nav-wrapper");
+                if (menuToggle && navWrapper) {
+                  menuToggle.classList.remove("active");
+                  navWrapper.classList.remove("active");
+                }
+              }
+            }, 150);
           });
         });
       }
 
-      setupDropdown(triggerDesktop, panelDesktop);
-      setupDropdown(triggerMobile, panelMobile);
+      setupDropdown(triggerDesktop, panelDesktop, false);
+      setupDropdown(triggerMobile, panelMobile, true);
     }
 
     initResourcesDropdown();
