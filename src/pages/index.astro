@@ -39,32 +39,6 @@ import "../styles/navbar.css";
     if (elements.ctaButton) elements.ctaButton.textContent = content.ctaButton;
   }
 
-  function initializeLatamModal() {
-    const modal = document.querySelector('.latam-modal-overlay') as HTMLElement | null;
-    if (!modal) return;
-
-    const hideModal = () => {
-      modal.classList.remove('is-visible');
-      modal.setAttribute('aria-hidden', 'true');
-    };
-
-    const showModal = () => {
-      modal.classList.add('is-visible');
-      modal.removeAttribute('aria-hidden');
-    };
-
-    const closeButtons = modal.querySelectorAll<HTMLElement>('[data-modal-close]');
-    closeButtons.forEach((btn) => btn.addEventListener('click', hideModal));
-
-    modal.addEventListener('click', (event) => {
-      if (event.target === modal) {
-        hideModal();
-      }
-    });
-
-    requestAnimationFrame(showModal);
-  }
-
   // Escuchar cambios de idioma desde el navbar
   window.addEventListener('ui:languagechange', ((event: Event) => {
     const customEvent = event as CustomEvent<{language: string}>;
@@ -93,12 +67,10 @@ import "../styles/navbar.css";
     <ProductsPanel />
     <div
       class="latam-modal-overlay"
-      role="dialog"
-      aria-modal="true"
-      aria-describedby="latam-modal-description"
       aria-hidden="true"
     >
-      <AnimatedHalftone isDark={true} fullScreen={true} intensity={0.15} />
+      <AnimatedHalftone isDark={true} fullScreen={true} intensity={0.25} />
+    </div>
     <!-- ← antes estaba <productsPanel /> y NO renderiza -->
 
     <section class="hero">
@@ -152,6 +124,7 @@ import "../styles/navbar.css";
     width: 100vw;
     position: relative;
     overflow: hidden;
+    z-index: 1;
   }
 
   /* Aquí controlas la posición manual del contenido */
@@ -212,7 +185,12 @@ import "../styles/navbar.css";
     transition: all 0.25s ease-in-out;
   }
 
-  /* LATAM modal removed — styles deleted to keep stylesheet trimmed. */
+  .latam-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
 
   /* Tablet/iPad */
   @media (max-width: 1024px) {
