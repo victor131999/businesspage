@@ -1,0 +1,150 @@
+---
+// AnimatedHalftone.astro
+// Props:
+// - isDark (boolean): choose color/alpha presets
+// - fullScreen (boolean): if true, render fixed full-viewport backdrop
+// - intensity (number 0..1): scale visual intensity (1 = default, <1 = softer)
+const { isDark = false, fullScreen = false, intensity = 1 } = Astro.props;
+
+const halftoneColor = isDark ? '255,255,255' : '58,82,190';
+const baseAlpha = isDark ? 0.06 : 0.2;
+const pulseAlpha = isDark ? 0.45 : 0.75;
+const fadeColor = isDark ? 'rgba(8,11,25,1)' : 'rgba(250,252,255,1)';
+---
+
+{/** container class changes if fullScreen */}
+<div class={`animated-halftone ${fullScreen ? 'fixed inset-0 z-[998]' : 'relative overflow-hidden rounded-3xl'}`}
+  data-halftone-color={halftoneColor}
+  data-base-alpha={baseAlpha}
+  data-pulse-alpha={pulseAlpha}
+  data-intensity={intensity}
+>
+  <canvas class="halftone-canvas absolute inset-0 w-full h-full" aria-hidden="true"></canvas>
+  <div class={`edge-fade absolute inset-0 ${fullScreen ? '' : 'rounded-3xl'} pointer-events-none`} style={`background: radial-gradient(circle at center, rgba(0,0,0,0) 60%, ${fadeColor} 100%)`}></div>
+  <slot />
+</div>
+
+<script type="module">
+// Vanilla JS initialization for each component instance
+(function () {
+  const instances = new WeakMap();
+
+  function initContainer(container) {
+    if (!container) return;
+    if (instances.has(container)) return; // already initialized
+
+    const canvas = container.querySelector('.halftone-canvas');
+    if (!canvas) return;
+
+    const dataset = container.dataset;
+    const colorParts = (dataset.halftoneColor || '58,82,190').split(',').map(Number);
+    const baseAlphaRaw = parseFloat(dataset.baseAlpha || '0.2');
+    const pulseAlphaRaw = parseFloat(dataset.pulseAlpha || '0.75');
+    const intensity = parseFloat(dataset.intensity || '1');
+    // scale alphas by intensity (clamped)
+    const baseAlpha = Math.max(0, Math.min(1, baseAlphaRaw * intensity));
+    const pulseAlpha = Math.max(0, Math.min(1, pulseAlphaRaw * intensity));
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const dpr = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
+
+    function resize() {
+      const rect = container.getBoundingClientRect();
+      const width = Math.max(1, Math.floor(rect.width * dpr));
+      const height = Math.max(1, Math.floor(rect.height * dpr));
+      if (canvas.width !== width || canvas.height !== height) {
+        canvas.width = width;
+        canvas.height = height;
+        canvas.style.width = `${rect.width}px`;
+        canvas.style.height = `${rect.height}px`;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+    }
+
+    // initial resize
+    resize();
+
+    const resizeObserver = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(resize) : null;
+    if (resizeObserver) resizeObserver.observe(container);
+
+    let rafId;
+    let start = performance.now();
+
+    const spacing = 26;
+    const waveFrequency = 1.35;
+    const waveSpeed = 0.35;
+
+    function render(time) {
+      const elapsed = (time - start) / 1000;
+      const logicalWidth = canvas.width / dpr;
+      const logicalHeight = canvas.height / dpr;
+      ctx.clearRect(0, 0, logicalWidth, logicalHeight);
+
+      const centerX = logicalWidth / 2;
+      const centerY = logicalHeight / 2;
+      const maxDistance = Math.sqrt(centerX * centerX + centerY * centerY);
+      const [r,g,b] = colorParts;
+
+      for (let y = -spacing; y <= logicalHeight + spacing; y += spacing) {
+        for (let x = -spacing; x <= logicalWidth + spacing; x += spacing) {
+          const dx = x - centerX;
+          const dy = y - centerY;
+          const distance = Math.sqrt(dx*dx + dy*dy);
+          const normalizedDistance = distance / maxDistance;
+          const wavePhase = (normalizedDistance * waveFrequency - elapsed * waveSpeed) * Math.PI * 2;
+          const pulse = (Math.cos(wavePhase) + 1) / 2;
+          const edgeFade = Math.pow(Math.max(0, 1 - normalizedDistance), 1.4);
+          const alpha = (baseAlpha + pulse * pulseAlpha) * edgeFade;
+          ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+          ctx.beginPath();
+          ctx.arc(x, y, 1.4 + pulse * 0.6, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      rafId = requestAnimationFrame(render);
+    }
+
+    rafId = requestAnimationFrame(render);
+
+    instances.set(container, { rafId, resizeObserver });
+
+    // cleanup when element is removed from DOM
+    const mo = new MutationObserver(() => {
+      if (!document.contains(container)) {
+        cleanup();
+      }
+    });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+
+    function cleanup() {
+      if (rafId) cancelAnimationFrame(rafId);
+      if (resizeObserver) resizeObserver.disconnect();
+      mo.disconnect();
+      instances.delete(container);
+    }
+  }
+
+  // initialize existing nodes
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.animated-halftone').forEach(initContainer);
+  });
+
+  // initialize any future nodes (in case component is injected later)
+  if (typeof MutationObserver !== 'undefined') {
+    const attachObserver = new MutationObserver((mutations) => {
+      for (const m of mutations) {
+        for (const n of Array.from(m.addedNodes || [])) {
+          if (n.nodeType === 1) {
+            if (n.classList && n.classList.contains('animated-halftone')) initContainer(n);
+            n.querySelectorAll && n.querySelectorAll('.animated-halftone').forEach(initContainer);
+          }
+        }
+      }
+    });
+    attachObserver.observe(document.body || document.documentElement, { childList: true, subtree: true });
+  }
+})();
+</script>

@@ -1,6 +1,7 @@
 ---
 import Navbar from "../components/navbar.astro";
 import ProductsPanel from "../components/productsPanel.astro";
+import AnimatedHalftone from "../components/AnimatedHalftone.astro";
 import "../styles/navbar.css";
 ---
 
@@ -38,6 +39,32 @@ import "../styles/navbar.css";
     if (elements.ctaButton) elements.ctaButton.textContent = content.ctaButton;
   }
 
+  function initializeLatamModal() {
+    const modal = document.querySelector('.latam-modal-overlay') as HTMLElement | null;
+    if (!modal) return;
+
+    const hideModal = () => {
+      modal.classList.remove('is-visible');
+      modal.setAttribute('aria-hidden', 'true');
+    };
+
+    const showModal = () => {
+      modal.classList.add('is-visible');
+      modal.removeAttribute('aria-hidden');
+    };
+
+    const closeButtons = modal.querySelectorAll<HTMLElement>('[data-modal-close]');
+    closeButtons.forEach((btn) => btn.addEventListener('click', hideModal));
+
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        hideModal();
+      }
+    });
+
+    requestAnimationFrame(showModal);
+  }
+
   // Escuchar cambios de idioma desde el navbar
   window.addEventListener('ui:languagechange', ((event: Event) => {
     const customEvent = event as CustomEvent<{language: string}>;
@@ -64,6 +91,14 @@ import "../styles/navbar.css";
   <body>
     <Navbar />
     <ProductsPanel />
+    <div
+      class="latam-modal-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-describedby="latam-modal-description"
+      aria-hidden="true"
+    >
+      <AnimatedHalftone isDark={true} fullScreen={true} intensity={0.15} />
     <!-- ← antes estaba <productsPanel /> y NO renderiza -->
 
     <section class="hero">
@@ -177,6 +212,8 @@ import "../styles/navbar.css";
     transition: all 0.25s ease-in-out;
   }
 
+  /* LATAM modal removed — styles deleted to keep stylesheet trimmed. */
+
   /* Tablet/iPad */
   @media (max-width: 1024px) {
     .hero-content {
@@ -241,6 +278,14 @@ import "../styles/navbar.css";
       text-align: center;
     }
 
+    .latam-modal-card {
+      padding: 2rem 1.5rem;
+    }
+
+    .latam-modal-title {
+      font-size: 1.35rem;
+    }
+
     .subtitle {
       font-size: 1.5rem;
       margin-bottom: -0.2rem;
@@ -294,6 +339,14 @@ import "../styles/navbar.css";
       width: 100%;
     }
 
+    .latam-modal-card {
+      padding: 1.85rem 1.2rem;
+    }
+
+    .latam-modal-description {
+      font-size: 0.95rem;
+    }
+
     .subtitle {
       font-size: 1.25rem;
       width: 100%;
@@ -317,4 +370,3 @@ import "../styles/navbar.css";
     }
   }
 </style>
-

@@ -16,8 +16,8 @@ const translationsScript = `
 // Variables CSS (colores + tipografía)
 const cssVars = `
    --nav-text: ${colors.text ?? "#ffffff"};
-  --nav-text-hover: ${colors.textHover ?? "#ffffff"};
-  --nav-bg: ${colors.background ?? "transparent"};
+   --nav-text-hover: ${colors.textHover ?? "#ffffff"};
++  --nav-bg: ${colors.background ?? "transparent"};
    --highlight-bg: ${colors.highlightBg ?? "#95FF0B"};
    --highlight-text: ${colors.highlightText ?? "#0d1117"};
    --btn-outline: ${colors.btnOutline ?? "#ffffff"};
@@ -25,8 +25,7 @@ const cssVars = `
    --btn-light-bg: ${colors.btnLightBg ?? "#69FE00"};
    --btn-light-hover-bg: ${colors.btnLightHoverBg ?? "#d6dbe0"};
    --btn-light-text: ${colors.btnLightText ?? "#212529"};
-  --btn-light-icon-filter: ${colors.btnLightIconFilter ?? "none"};
-  --btn-light-border: ${colors.btnLightBorder ?? "var(--btn-light-bg)"};
++  --btn-light-border: ${colors.btnLightBorder ?? "var(--btn-light-bg)"};
    --dropdown-bg: ${colors.dropdownBg ?? "#CDD1DD"};
    --dropdown-link: ${colors.dropdownLink ?? "#212529"};
    --dropdown-hover-bg: ${colors.dropdownHoverBg ?? "#CDD1DD"};
@@ -53,17 +52,9 @@ const cssVars = `
         ><span data-i18n="nav.products">Products</span></button
       >
     </li>
-    <li class="dropdown-container">
-      <button id="resources-trigger" class="dropdown-trigger" type="button">
-        <span data-i18n="nav.resources">Resources</span>
-      </button>
-      <!-- Aquí empieza el dropdown -->
-      <ul class="dropdown-menu" id="resources-panel">
-        <li><a href="/blog" data-i18n="nav.businessBlog">Business Blog</a></li>
-      </ul>
-    </li>
-    <li><a href="https://documentations.zelify.com/" data-i18n="nav.developers">Developers</a></li>
-    <li><a href="https://www.zelify.com" class="highlight" data-i18n="nav.personal">personal</a></li>
+    <li><a href="/" data-i18n="nav.resources">Resources</a></li>
+    <li><a href="/" data-i18n="nav.developers">Developers</a></li>
+    <li><a href="https://www.zelify.com" class="highlight" data-i18n="nav.personal">Natalia</a></li>
   </ul>
 
   <div class="action-links">
@@ -87,8 +78,7 @@ const cssVars = `
       <span class="lang-toggle__thumb">
         <span class="lang-label">{(buttons.third?.label ?? "EN").toUpperCase()}</span>
       </span>
-      <span class="lang-toggle__option lang-toggle__option--left">ES</span>
-      <span class="lang-toggle__option lang-toggle__option--right">EN</span>
+      <span class="lang-toggle__flag" aria-hidden="true">🇪🇸</span>
     </button>
   </div>
 
@@ -100,18 +90,9 @@ const cssVars = `
           ><span data-i18n="nav.products">Products</span></button
         >
       </li>
-      <!-- Dropdown para Resources en móvil -->
-      <li class="dropdown-container">
-        <button id="resources-trigger-mobile" class="dropdown-trigger" type="button">
-          <span data-i18n="nav.resources">Resources</span>
-        </button>
-        <!-- Dropdown de Resources -->
-        <ul class="dropdown-menu" id="resources-panel-mobile">
-          <li><a href="/blog" data-i18n="nav.businessBlog">Business Blog</a></li>
-        </ul>
-      </li>
-      <li><a href="https://documentations.zelify.com/" data-i18n="nav.developers">Developers</a></li>
-      <li><a href="https://www.zelify.com" class="highlight" data-i18n="nav.personal">personal</a></li>
+      <li><a href="/" data-i18n="nav.resources">Resources</a></li>
+      <li><a href="/" data-i18n="nav.developers">Developers</a></li>
+      <li><a href="https://www.zelify.com" class="highlight" data-i18n="nav.personal">Natalia</a></li>
     </ul>
     <div class="action-links-mobile">
       <a href={buttons.first?.href ?? "https://www.zelify.com/jobs"} class="btn btn-light">
@@ -134,8 +115,7 @@ const cssVars = `
         <span class="lang-toggle__thumb">
           <span class="lang-label">{(buttons.third?.label ?? "EN").toUpperCase()}</span>
         </span>
-        <span class="lang-toggle__option lang-toggle__option--left">ES</span>
-        <span class="lang-toggle__option lang-toggle__option--right">EN</span>
+        <span class="lang-toggle__flag" aria-hidden="true">🇪🇸</span>
       </button>
     </div>
   </div>
@@ -288,7 +268,7 @@ const cssVars = `
     color: var(--highlight-text);
     font-weight: 600;
     padding: 0.45rem 1.4rem;
-    border-radius: 6px;
+    border-radius: 14px;
     letter-spacing: 0.03em;
     box-shadow: 0 10px 24px rgba(70, 255, 0, 0.28);
   }
@@ -297,56 +277,51 @@ const cssVars = `
   .dropdown-container {
     position: relative;
   }
-
   .dropdown-trigger {
     padding: 0.5rem;
     margin: 0;
-    cursor: pointer;
+    cursor: default;
   }
 
   .dropdown-menu {
     position: absolute;
-    top: calc(100% + 0.5rem);
+    top: 100%;
     left: 0;
     min-width: 220px;
+    margin: 0.5rem 0 0 0;
     padding: 0.5rem 0;
     list-style: none;
     background-color: var(--dropdown-bg);
     border: 1px solid #e9ecef;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    display: none;
+    z-index: 10;
+
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.2s ease-in-out;
+    pointer-events: none;
   }
 
-  .dropdown-menu.show {
-    display: block;
-    animation: dropdownFadeIn 0.2s ease-out;
-  }
-
-  @keyframes dropdownFadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-5px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .dropdown-container:hover .dropdown-menu,
+  .dropdown-container:focus-within .dropdown-menu {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
   }
 
   .dropdown-menu a {
     display: block;
     padding: 0.75rem 1.5rem;
     color: var(--dropdown-link);
-    text-decoration: none;
     white-space: nowrap;
-    transition: background-color 0.15s ease;
   }
 
   .dropdown-menu a:hover {
     background-color: var(--dropdown-hover-bg);
-    color: #212529;
+    color: #cdd1dd;
   }
 
   /* ACTION BUTTONS */
@@ -366,17 +341,17 @@ const cssVars = `
     font-weight: 600;
     font-size: 0.94rem;
     text-decoration: none;
-    border-radius: 6px;
+    border-radius: 16px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     white-space: nowrap;
     flex-shrink: 0;
   }
 
   .btn-light {
-    background: var(--btn-light-bg);
-    color: var(--btn-light-text);
+    background: linear-gradient(145deg, rgba(128, 255, 0, 0.95), rgba(88, 220, 0, 0.88));
+    color: #10220a;
     border: none;
-    box-shadow: 0 10px 20px rgba(15, 28, 46, 0.22);
+    box-shadow: 0 10px 20px rgba(80, 220, 0, 0.32);
     padding: 0.35rem 1.5rem;
     height: 32px;
     display: inline-flex;
@@ -384,9 +359,8 @@ const cssVars = `
     justify-content: center;
   }
   .btn-light:hover {
-    background: var(--btn-light-hover-bg);
     transform: translateY(-1px);
-    box-shadow: 0 16px 32px rgba(15, 28, 46, 0.3);
+    box-shadow: 0 16px 32px rgba(80, 220, 0, 0.38);
   }
 
   .btn-outline {
@@ -469,42 +443,20 @@ const cssVars = `
     color: #172a45;
   }
 
-  .lang-toggle__option {
+  .lang-toggle__flag {
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
-    font-size: 0.76rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    color: #172a45;
-    pointer-events: none;
-    transition: opacity 0.2s ease;
-  }
-
-  .lang-toggle__option--left {
-    left: 12px;
-  }
-
-  .lang-toggle__option--right {
     right: 12px;
+    transform: translateY(-50%);
+    font-size: 0.8rem;
+    filter: saturate(1.1) drop-shadow(0 3px 5px rgba(16, 33, 51, 0.15));
+    pointer-events: none;
+    transition: left 0.25s cubic-bezier(0.4, 0, 0.2, 1), right 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Cuando está en EN, mostrar ES a la izquierda y ocultar EN a la derecha */
-  .lang-toggle[data-language="EN"] .lang-toggle__option--left {
-    opacity: 1;
-  }
-
-  .lang-toggle[data-language="EN"] .lang-toggle__option--right {
-    opacity: 0;
-  }
-
-  /* Cuando está en ES, mostrar EN a la derecha y ocultar ES a la izquierda */
-  .lang-toggle[data-language="ES"] .lang-toggle__option--left {
-    opacity: 0;
-  }
-
-  .lang-toggle[data-language="ES"] .lang-toggle__option--right {
-    opacity: 1;
+  .lang-toggle[data-language="EN"] .lang-toggle__flag {
+    right: auto;
+    left: 12px;
   }
 
   .icon {
@@ -524,7 +476,7 @@ const cssVars = `
 
 
   .btn-light .btn-icon {
-    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2)) var(--btn-light-icon-filter, none);
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
   }
 
   /* Desktop: nav-wrapper visible siempre */
@@ -616,7 +568,7 @@ const cssVars = `
       backdrop-filter: blur(10px);
       padding: 5rem 2rem 2rem;
       transition: right 0.3s ease;
-      z-index: 999;
+      z-index: 1000;
       overflow-y: auto;
       box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
       flex-direction: column;
@@ -716,36 +668,13 @@ const cssVars = `
       opacity: 1 !important;
     }
   }
-
-  /* Dropdown responsive para móvil */
-  @media (max-width: 768px) {
-    .dropdown-menu {
-      min-width: 100%;
-      left: 0;
-      top: calc(100% + 0.25rem);
-    }
-
-    .dropdown-container button {
-      width: 100%;
-      text-align: left;
-      padding: 0.75rem;
-    }
-
-    .dropdown-menu a {
-      padding: 1rem 1.5rem;
-    }
-  }
 </style>
 <script is:inline>
   document.addEventListener("DOMContentLoaded", () => {
     const trigger = document.getElementById("products-trigger");
-    const triggerMobile = document.getElementById("products-trigger-mobile");
     const panel = document.getElementById("products-panel");
-    
-    // Desktop trigger
     if (trigger && panel) {
-      trigger.addEventListener("click", (e) => {
-        e.stopPropagation();
+      trigger.addEventListener("click", () => {
         trigger.classList.toggle("active");
         panel.classList.toggle("hidden");
       });
@@ -753,23 +682,6 @@ const cssVars = `
       document.addEventListener("click", (e) => {
         if (!panel.contains(e.target) && !trigger.contains(e.target)) {
           trigger.classList.remove("active");
-          panel.classList.add("hidden");
-        }
-      });
-    }
-
-    // Mobile trigger
-    if (triggerMobile && panel) {
-      triggerMobile.addEventListener("click", (e) => {
-        e.stopPropagation();
-        e.preventDefault();
-        triggerMobile.classList.toggle("active");
-        panel.classList.toggle("hidden");
-      });
-
-      document.addEventListener("click", (e) => {
-        if (!panel.contains(e.target) && !triggerMobile.contains(e.target) && !trigger?.contains(e.target)) {
-          triggerMobile.classList.remove("active");
           panel.classList.add("hidden");
         }
       });
@@ -787,31 +699,19 @@ const cssVars = `
 
       // Close menu when clicking outside
       document.addEventListener("click", (e) => {
-        const target = e.target;
-        const resourcesPanel = document.getElementById("resources-panel-mobile");
-        const resourcesTrigger = document.getElementById("resources-trigger-mobile");
-        
-        // No cerrar si el click es en el trigger o panel de Resources
-        if (resourcesTrigger?.contains(target) || resourcesPanel?.contains(target)) {
-          return;
-        }
-        
-        if (!navWrapper.contains(target) && !menuToggle.contains(target) && !panel?.contains(target)) {
+        if (!navWrapper.contains(e.target) && !menuToggle.contains(e.target)) {
           menuToggle.classList.remove("active");
           navWrapper.classList.remove("active");
         }
       });
 
-      // Close menu when clicking on a link (but not on Products or Resources dropdown buttons)
+      // Close menu when clicking on a link
       const navLinks = navWrapper.querySelectorAll("a, button");
       navLinks.forEach(link => {
-        // No cerrar el menú si es un botón de dropdown (Products o Resources)
-        if (link.id !== "products-trigger-mobile" && link.id !== "resources-trigger-mobile") {
-          link.addEventListener("click", () => {
-            menuToggle.classList.remove("active");
-            navWrapper.classList.remove("active");
-          });
-        }
+        link.addEventListener("click", () => {
+          menuToggle.classList.remove("active");
+          navWrapper.classList.remove("active");
+        });
       });
     }
 
@@ -820,7 +720,7 @@ const cssVars = `
         "nav.products": "Products",
         "nav.resources": "Resources",
         "nav.developers": "Developers",
-        "nav.personal": "Personal",
+        "nav.personal": "Natalia",
         "nav.workWithUs": "Work with us",
         "nav.bankAccess": "Business access",
       },
@@ -828,9 +728,9 @@ const cssVars = `
         "nav.products": "Productos",
         "nav.resources": "Recursos",
         "nav.developers": "Desarrolladores",
-        "nav.personal": "Personal",
+        "nav.personal": "Natalia",
         "nav.workWithUs": "Únete",
-        "nav.bankAccess": "Acceso de negocios",
+        "nav.bankAccess": "Acceso bancario",
       },
     };
 
@@ -867,7 +767,9 @@ const cssVars = `
         languageButtons.forEach((btn) => {
           btn.dataset.language = lang;
           const label = btn.querySelector(".lang-label");
+          const flag = btn.querySelector(".lang-toggle__flag");
           if (label) label.textContent = lang;
+          if (flag) flag.textContent = lang === "EN" ? "🇲🇽" : "🇺🇸";
           btn.setAttribute(
             "aria-label",
             lang === "EN" ? "Switch language to Spanish" : "Cambiar idioma a inglés",
@@ -907,136 +809,5 @@ const cssVars = `
       updateToggleUI(currentLang);
       propagateLanguage(currentLang);
     }
-
-    // Dropdown de Resources - Solución simple y robusta
-    function initResourcesDropdown() {
-      const triggerDesktop = document.getElementById("resources-trigger");
-      const panelDesktop = document.getElementById("resources-panel");
-      const triggerMobile = document.getElementById("resources-trigger-mobile");
-      const panelMobile = document.getElementById("resources-panel-mobile");
-
-      function setupDropdown(trigger, panel, isMobile = false) {
-        if (!trigger || !panel) return;
-
-        let isOpen = false;
-        let isProcessingClick = false;
-
-        function openDropdown() {
-          panel.classList.add("show");
-          trigger.classList.add("active");
-          isOpen = true;
-        }
-
-        function closeDropdown() {
-          panel.classList.remove("show");
-          trigger.classList.remove("active");
-          isOpen = false;
-        }
-
-        // Click en el trigger
-        trigger.addEventListener("click", (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          
-          // Marcar que estamos procesando el click
-          isProcessingClick = true;
-          
-          if (isOpen) {
-            closeDropdown();
-            isProcessingClick = false;
-          } else {
-            // Cerrar otros dropdowns abiertos primero
-            document.querySelectorAll(".dropdown-menu.show").forEach((menu) => {
-              if (menu !== panel) {
-                menu.classList.remove("show");
-                const otherTrigger = menu.closest(".dropdown-container")?.querySelector(".dropdown-trigger");
-                if (otherTrigger) otherTrigger.classList.remove("active");
-              }
-            });
-            openDropdown();
-            
-            // En móviles, esperar más tiempo antes de permitir que el click fuera funcione
-            if (isMobile) {
-              // Delay más largo en móviles para evitar cierre prematuro
-              setTimeout(() => {
-                isProcessingClick = false;
-              }, 400);
-            } else {
-              setTimeout(() => {
-                isProcessingClick = false;
-              }, 100);
-            }
-          }
-        });
-
-        // Para móviles: prevenir eventos táctiles adicionales
-        if (isMobile) {
-          trigger.addEventListener("touchend", (e) => {
-            e.stopPropagation();
-          });
-          
-          // Prevenir que el panel se cierre cuando se toca
-          panel.addEventListener("touchstart", (e) => {
-            e.stopPropagation();
-            isProcessingClick = false; // Permitir interacción con el panel
-          });
-          
-          panel.addEventListener("touchend", (e) => {
-            e.stopPropagation();
-          });
-          
-          // Prevenir clicks en el panel que puedan cerrarlo (excepto en enlaces)
-          panel.addEventListener("click", (e) => {
-            // Solo prevenir si no es un enlace
-            if (e.target.tagName !== "A") {
-              e.stopPropagation();
-            }
-          });
-        }
-
-        // Click fuera para cerrar
-        document.addEventListener("click", (e) => {
-          // Capturar el target inmediatamente
-          const target = e.target;
-          
-          // Ejecutar en el siguiente tick para que el evento del trigger se procese primero
-          setTimeout(() => {
-            // No hacer nada si estamos procesando un click en el trigger
-            if (isProcessingClick) {
-              return;
-            }
-            
-            // Verificar que el click no sea en el trigger o panel
-            if (isOpen && !panel.contains(target) && !trigger.contains(target)) {
-              closeDropdown();
-            }
-          }, 0);
-        });
-
-        // Cerrar al hacer click en un enlace del dropdown
-        panel.querySelectorAll("a").forEach((link) => {
-          link.addEventListener("click", (e) => {
-            e.stopPropagation();
-            setTimeout(() => {
-              closeDropdown();
-              // Si es móvil, también cerrar el menú móvil completo
-              if (isMobile) {
-                const menuToggle = document.querySelector(".mobile-menu-toggle");
-                const navWrapper = document.querySelector(".nav-wrapper");
-                if (menuToggle && navWrapper) {
-                  menuToggle.classList.remove("active");
-                  navWrapper.classList.remove("active");
-                }
-              }
-            }, 150);
-          });
-        });
-      }
-
-      setupDropdown(triggerDesktop, panelDesktop, false);
-      setupDropdown(triggerMobile, panelMobile, true);
-    }
-
-    initResourcesDropdown();
   });
 </script>
