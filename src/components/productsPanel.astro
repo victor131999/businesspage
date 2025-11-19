@@ -18,7 +18,7 @@ import "../styles/navbar.css";
       >Discounts & Coupons</button
     >
     <button role="tab" class="pp-item" data-key="matilda"
-      >Matilda AI Fintech Core</button
+      >Alaiza AI Fintech Core</button
     >
     <button role="tab" class="pp-item" data-key="insurance">Insurance</button>
   </aside>
@@ -1316,7 +1316,7 @@ import "../styles/navbar.css";
     "Commercial Analysis & Reporting": "https://documentations.zelify.com/servicios-financieros/zelify-discounts-coupons#zelify-discounts-coupons__an%C3%A1lisis-y-reportes-comerciales"
   };
 
-  // Mapeo de features de Matilda AI a URLs de documentación (bilingüe)
+  // Mapeo de features de Alaiza AI a URLs de documentación (bilingüe)
   const MATILDA_FEATURE_LINKS = {
     "Análisis de Comportamiento": "https://documentations.zelify.com/servicios-financieros/matilda-ai-core-for-fintech#matilda-ai-core-for-fintech__behavior-analysis",
     "Behavior Analysis": "https://documentations.zelify.com/servicios-financieros/matilda-ai-core-for-fintech#matilda-ai-core-for-fintech__behavior-analysis",
@@ -1442,7 +1442,7 @@ import "../styles/navbar.css";
           return `<a class="pp-feature" href="${DISCOUNTS_FEATURE_LINKS[f.t]}" target="_blank" rel="noopener noreferrer">${card}</a>`;
         }
         
-        // Para Matilda AI, todas las features son enlaces a documentación
+        // Para Alaiza AI, todas las features son enlaces a documentación
         if (key === "matilda" && MATILDA_FEATURE_LINKS[f.t]) {
           return `<a class="pp-feature" href="${MATILDA_FEATURE_LINKS[f.t]}" target="_blank" rel="noopener noreferrer">${card}</a>`;
         }

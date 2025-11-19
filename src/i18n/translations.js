@@ -17,7 +17,7 @@ export const translations = {
     "products.transfers": "Transfers",
     "products.international": "International Transfers",
     "products.biz": "Business & Organizations",
-    "products.matilda": "Matilda AI Fintech Core",
+    "products.matilda": "Alaiza AI Fintech Core",
 
     // Products Panel Content
     "products.register.title": "Overview",
@@ -54,7 +54,7 @@ export const translations = {
     "products.transfers": "Transfers",
     "products.international": "International Transfers",
     "products.biz": "Business & Organizations",
-    "products.matilda": "Matilda AI Fintech Core",
+    "products.matilda": "Alaiza AI Fintech Core",
 
     // Auth Page
     "auth.badge": "Autenticación",
