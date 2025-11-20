@@ -30,8 +30,8 @@
   transform: translateX(-50%) translateY(0);
   transform-origin: top center;
   width: min(1120px, 92vw);
-  max-height: 560px;
-  height: 560px;
+  max-height: min(560px, calc(100vh - 80px));
+  height: min(560px, calc(100vh - 80px));
   display: grid;
   grid-template-columns: 260px 1fr;
   gap: 0;
@@ -65,6 +65,28 @@
   background: rgba(230, 232, 240, 0.92);
   border-top-left-radius: 22px;
   border-bottom-left-radius: 22px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* Estilos de scrollbar personalizados */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(61, 107, 176, 0.3) transparent;
+}
+
+.pp-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.pp-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.pp-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(61, 107, 176, 0.3);
+  border-radius: 3px;
+}
+
+.pp-sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(61, 107, 176, 0.5);
 }
 
 .pp-item {
@@ -110,7 +132,8 @@
    =============================== */
 
 .pp-content {
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   padding: 24px 30px 28px 28px;
 
   background: transparent;
@@ -118,6 +141,26 @@
   border-left: 1px solid rgba(61, 107, 176, 0.25);
   border-top-right-radius: 22px;
   border-bottom-right-radius: 22px;
+  /* Estilos de scrollbar personalizados */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(61, 107, 176, 0.3) transparent;
+}
+
+.pp-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.pp-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.pp-content::-webkit-scrollbar-thumb {
+  background: rgba(61, 107, 176, 0.3);
+  border-radius: 4px;
+}
+
+.pp-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(61, 107, 176, 0.5);
 }
 
 .pp-head .pp-title {
@@ -410,12 +453,14 @@ a.pp-feature:hover {
 @media (min-width: 769px) and (max-width: 1024px) {
   .products-panel {
     width: min(95vw, 1000px);
-    max-height: 75vh;
-    height: auto;
+    max-height: min(75vh, calc(100vh - 80px));
+    height: min(75vh, calc(100vh - 80px));
   }
 
   .pp-sidebar {
     padding: 14px 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .pp-item {
@@ -425,6 +470,8 @@ a.pp-feature:hover {
 
   .pp-content {
     padding: 20px 24px;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .pp-features.cards-grid {
