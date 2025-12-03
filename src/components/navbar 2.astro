@@ -17,7 +17,7 @@ const translationsScript = `
 const cssVars = `
    --nav-text: ${colors.text ?? "#ffffff"};
    --nav-text-hover: ${colors.textHover ?? "#ffffff"};
-+  --nav-bg: ${colors.background ?? "transparent"};
+   --nav-bg: ${colors.background ?? "transparent"};
    --highlight-bg: ${colors.highlightBg ?? "#95FF0B"};
    --highlight-text: ${colors.highlightText ?? "#0d1117"};
    --btn-outline: ${colors.btnOutline ?? "#ffffff"};
@@ -25,7 +25,7 @@ const cssVars = `
    --btn-light-bg: ${colors.btnLightBg ?? "#69FE00"};
    --btn-light-hover-bg: ${colors.btnLightHoverBg ?? "#d6dbe0"};
    --btn-light-text: ${colors.btnLightText ?? "#212529"};
-+  --btn-light-border: ${colors.btnLightBorder ?? "var(--btn-light-bg)"};
+   --btn-light-border: ${colors.btnLightBorder ?? "var(--btn-light-bg)"};
    --dropdown-bg: ${colors.dropdownBg ?? "#CDD1DD"};
    --dropdown-link: ${colors.dropdownLink ?? "#212529"};
    --dropdown-hover-bg: ${colors.dropdownHoverBg ?? "#CDD1DD"};
@@ -33,7 +33,8 @@ const cssVars = `
 `;
 ---
 
-<nav style={cssVars}>
+<header class="navbar-shell">
+  <nav style={cssVars}>
   <div class="logo-container">
     <a href="/">
       <img src={logoSrc} alt={logoAlt} class="logo-image" />
@@ -118,7 +119,8 @@ const cssVars = `
       </button>
     </div>
   </div>
-</nav>
+  </nav>
+</header>
 <style>
   @font-face {
     font-family: "NataSans";
@@ -126,6 +128,14 @@ const cssVars = `
     font-weight: 100 900;
     font-display: swap;
   }
+  .navbar-shell {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    padding-top: 1.5rem;
+  }
+
   /* Limita el ancho del navbar y céntralo */
   nav {
     max-width: 1200px;
@@ -133,6 +143,8 @@ const cssVars = `
     margin: 0 auto;
     padding-inline: clamp(16px, 2vw, 32px);
     padding-block: 2.5rem 1rem;
+    padding-top: 2.5rem;
+    padding-bottom: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;

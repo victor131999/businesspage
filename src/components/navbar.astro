@@ -34,7 +34,8 @@ const cssVars = `
 `;
 ---
 
-<nav style={cssVars}>
+<header class="navbar-shell">
+  <nav style={cssVars}>
   <div class="logo-container">
     <a href="/">
       <img src={logoSrc} alt={logoAlt} class="logo-image" />
@@ -137,7 +138,8 @@ const cssVars = `
       </button>
     </div>
   </div>
-</nav>
+  </nav>
+</header>
 <style>
   @font-face {
     font-family: "NataSans";
@@ -145,6 +147,14 @@ const cssVars = `
     font-weight: 100 900;
     font-display: swap;
   }
+  .navbar-shell {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    padding-top: 1.5rem;
+  }
+
   /* Limita el ancho del navbar y céntralo */
   nav {
     max-width: 1200px;
@@ -152,6 +162,8 @@ const cssVars = `
     margin: 0 auto;
     padding-inline: clamp(16px, 2vw, 32px);
     padding-block: 2.5rem 1rem;
+    padding-top: 2.5rem;
+    padding-bottom: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
