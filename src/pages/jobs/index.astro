@@ -1,0 +1,572 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/navbar.astro';
+import ProductsPanel from '../../components/productsPanel.astro';
+import '../../styles/global.css';
+import '../../styles/navbar.css';
+
+const defaultLanguage = 'en';
+
+const jobOpenings = [
+  {
+    slug: "backend-developer",
+    title: {
+      en: "Backend Developer",
+      es: "Desarrollador Backend",
+    },
+    summary: {
+      en: "Design resilient services in Node.js and ship the rails that power instant, borderless payments.",
+      es: "Diseña servicios resilientes en Node.js y construye la infraestructura que permite pagos instantáneos y sin fronteras.",
+    },
+    location: {
+      en: "Remote",
+      es: "Remoto",
+    },
+    type: {
+      en: "Full-time",
+      es: "Tiempo completo",
+    },
+    tags: {
+      en: ["Engineering", "Node.js", "AWS"],
+      es: ["Ingeniería", "Node.js", "AWS"],
+    },
+  },
+  {
+    slug: "semi-senior-software-engineer",
+    title: {
+      en: "Semi Senior Software Engineer",
+      es: "Semi Senior Software Engineer",
+    },
+    summary: {
+      en: "Scale our microservices platform, connecting institutions and users across Latin America.",
+      es: "Escala nuestra plataforma de microservicios conectando instituciones y usuarios en toda Latinoamérica.",
+    },
+    location: {
+      en: "Remote",
+      es: "Remoto",
+    },
+    type: {
+      en: "Full-time",
+      es: "Tiempo completo",
+    },
+    tags: {
+      en: ["Microservices", "Kafka", "Fintech"],
+      es: ["Microservicios", "Kafka", "Fintech"],
+    },
+  },
+  {
+    slug: "senior-frontend",
+    title: {
+      en: "Senior Frontend Developer",
+      es: "Senior Frontend Developer",
+    },
+    summary: {
+      en: "Lead the experiences that make finance simple, fast, and beautiful for businesses.",
+      es: "Lidera las experiencias que vuelven las finanzas simples, rápidas y atractivas para las empresas.",
+    },
+    location: {
+      en: "Remote",
+      es: "Remoto",
+    },
+    type: {
+      en: "Full-time",
+      es: "Tiempo completo",
+    },
+    tags: {
+      en: ["Frontend", "React", "Leadership"],
+      es: ["Frontend", "React", "Liderazgo"],
+    },
+  },
+  {
+    slug: "ui-designer",
+    title: {
+      en: "UI/UX Designer",
+      es: "Diseñador UI/UX",
+    },
+    summary: {
+      en: "Transform complex financial flows into intuitive journeys that customers love.",
+      es: "Transforma flujos financieros complejos en recorridos intuitivos que los clientes disfrutan.",
+    },
+    location: {
+      en: "Remote",
+      es: "Remoto",
+    },
+    type: {
+      en: "Full-time",
+      es: "Tiempo completo",
+    },
+    tags: {
+      en: ["Design", "Product", "CX"],
+      es: ["Diseño", "Producto", "CX"],
+    },
+  },
+  {
+    slug: "head-producto-digitalizacion-alianzas",
+    title: {
+      en: "Head of Product, Digitalization & Alliances",
+      es: "Head de Producto, Digitalización y Alianzas",
+    },
+    summary: {
+      en: "Define the roadmap, unlock partnerships, and orchestrate bold launches with our clients.",
+      es: "Define la hoja de ruta, desbloquea alianzas y coordina lanzamientos ambiciosos con nuestros clientes.",
+    },
+    location: {
+      en: "LATAM",
+      es: "Latinoamérica",
+    },
+    type: {
+      en: "Full-time / Part-time",
+      es: "Tiempo completo / Medio tiempo",
+    },
+    tags: {
+      en: ["Leadership", "Strategy", "Alliances"],
+      es: ["Liderazgo", "Estrategia", "Alianzas"],
+    },
+  },
+];
+
+const heroCopy = {
+  badge: {
+    en: "Careers at Zelify",
+    es: "Carreras en Zelify",
+  },
+  title: {
+    en: "Build the infrastructure that powers instant money movement in Latin America.",
+    es: "Construye la infraestructura que impulsa el movimiento instantáneo de dinero en Latinoamérica.",
+  },
+  description: {
+    en: "We are a remote-first team creating a platform that lets people and businesses open accounts, move money, and stay compliant without friction. If you love solving hard problems that unlock opportunity for millions, you'll feel at home here.",
+    es: "Somos un equipo remoto que crea una plataforma para que personas y empresas abran cuentas, muevan dinero y se mantengan en cumplimiento sin fricción. Si te apasiona resolver retos complejos que generan oportunidades para millones, este es tu lugar.",
+  },
+  primaryCta: {
+    en: "See open roles",
+    es: "Ver vacantes",
+  },
+  secondaryCta: {
+    en: "Send us your profile",
+    es: "Envíanos tu perfil",
+  },
+};
+
+const heroHighlights = [
+  { value: "2018", label: { en: "Founded", es: "Fundada" } },
+  { value: "10+", label: { en: "Countries connected", es: "Países conectados" } },
+  { value: jobOpenings.length.toString(), label: { en: "Open roles today", es: "Vacantes activas" } },
+];
+
+const openRolesCopy = {
+  label: {
+    en: "Open roles",
+    es: "Vacantes abiertas",
+  },
+  title: {
+    en: `${jobOpenings.length} opportunities to make an impact`,
+    es: `${jobOpenings.length} oportunidades para generar impacto`,
+  },
+  description: {
+    en: "Engineering, product, and go-to-market teams work in English and Spanish, across time zones from Mexico City to Buenos Aires.",
+    es: "Los equipos de ingeniería, producto y go-to-market trabajan en inglés y español, distribuidos desde Ciudad de México hasta Buenos Aires.",
+  },
+  cardCta: {
+    en: "View role",
+    es: "Ver vacante",
+  },
+};
+
+const culturePillars = [
+  {
+    title: {
+      en: "Borderless mindset",
+      es: "Mentalidad sin fronteras",
+    },
+    copy: {
+      en: "We build for LATAM and work from wherever talent thrives. Our rhythm is async, transparent, and bias-free.",
+      es: "Construimos para LATAM y trabajamos desde donde florece el talento. Nuestro ritmo es asíncrono, transparente y libre de sesgos.",
+    },
+  },
+  {
+    title: {
+      en: "Autonomy with impact",
+      es: "Autonomía con impacto",
+    },
+    copy: {
+      en: "Owning problems end-to-end means architects, designers, and operators ship measurable outcomes faster.",
+      es: "Ser dueños de los problemas de principio a fin nos permite entregar resultados medibles con más velocidad.",
+    },
+  },
+  {
+    title: {
+      en: "Learning loop",
+      es: "Bucle de aprendizaje",
+    },
+    copy: {
+      en: "Weekly demos, customer interviews, and pairing keep us curious and ready to reinvent financial services.",
+      es: "Demos semanales, entrevistas con clientes y sesiones de pairing nos mantienen curiosos y listos para reinventar los servicios financieros.",
+    },
+  },
+];
+
+const generalApplicationCopy = {
+  prompt: {
+    en: "Didn't find what you were looking for?",
+    es: "¿No encontraste la vacante ideal?",
+  },
+  title: {
+    en: "Send a general application",
+    es: "Envía una postulación general",
+  },
+  description: {
+    en: "We add new roles often. Share your profile and we'll reach out when there's a match with your skills and ambitions.",
+    es: "Agregamos nuevas vacantes seguido. Compártenos tu perfil y te contactaremos cuando exista una oportunidad alineada a tus habilidades y ambiciones.",
+  },
+  button: {
+    en: "Start application",
+    es: "Enviar aplicación",
+  },
+};
+
+const jobPageCopy = {
+  hero: heroCopy,
+  stats: heroHighlights,
+  openRoles: openRolesCopy,
+  culture: culturePillars,
+  jobs: jobOpenings,
+  general: generalApplicationCopy,
+};
+---
+
+<script
+  type="application/json"
+  id="jobs-page-copy"
+  set:html={JSON.stringify(jobPageCopy).replace(/</g, '\\u003C')}
+/>
+
+<script is:inline>
+  const JOB_PAGE_COPY = JSON.parse(document.getElementById('jobs-page-copy')?.textContent ?? '{}');
+  const fallbackLang = 'en';
+  const supportedLangs = ['en', 'es'];
+  const tagClass =
+    'rounded-full border border-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white/70';
+
+  const resolveLang = (rawLang) => {
+    const normalized = (rawLang || fallbackLang).toLowerCase();
+    return supportedLangs.includes(normalized) ? normalized : fallbackLang;
+  };
+
+  const translate = (dictionary, lang) => {
+    if (!dictionary) return '';
+    return dictionary[lang] ?? dictionary[fallbackLang] ?? '';
+  };
+
+  const updateJobLinks = (rawLang) => {
+    const lang = resolveLang(rawLang);
+    const shouldAppend = lang !== fallbackLang;
+    document.querySelectorAll('[data-job-link]').forEach((anchor) => {
+      const href = anchor.getAttribute('href');
+      if (!href) return;
+      try {
+        const url = new URL(href, window.location.origin);
+        if (shouldAppend) {
+          url.searchParams.set('lang', lang);
+        } else {
+          url.searchParams.delete('lang');
+        }
+        anchor.setAttribute('href', url.pathname + url.search + url.hash);
+      } catch (error) {
+        console.warn('Unable to update job link', error);
+      }
+    });
+  };
+
+  const updateJobsPage = (rawLang) => {
+    const lang = resolveLang(rawLang);
+    const { hero, stats, openRoles, jobs, culture, general } = JOB_PAGE_COPY;
+
+    const heroBadge = document.querySelector('[data-i18n="hero.badge"]');
+    if (heroBadge) heroBadge.textContent = translate(hero.badge, lang);
+
+    const heroTitle = document.querySelector('[data-i18n="hero.title"]');
+    if (heroTitle) heroTitle.innerHTML = translate(hero.title, lang);
+
+    const heroDescription = document.querySelector('[data-i18n="hero.description"]');
+    if (heroDescription) heroDescription.textContent = translate(hero.description, lang);
+
+    const primaryCta = document.querySelector('[data-i18n="hero.primaryCta"]');
+    if (primaryCta) primaryCta.textContent = translate(hero.primaryCta, lang);
+
+    const secondaryCta = document.querySelector('[data-i18n="hero.secondaryCta"]');
+    if (secondaryCta) secondaryCta.textContent = translate(hero.secondaryCta, lang);
+
+    stats?.forEach((stat, index) => {
+      const label = document.querySelector(`[data-stat-label-index="${index}"]`);
+      if (label) label.textContent = translate(stat.label, lang);
+    });
+
+    const openRolesLabel = document.querySelector('[data-i18n="openRoles.label"]');
+    if (openRolesLabel) openRolesLabel.textContent = translate(openRoles.label, lang);
+
+    const openRolesTitle = document.querySelector('[data-i18n="openRoles.title"]');
+    if (openRolesTitle) openRolesTitle.textContent = translate(openRoles.title, lang);
+
+    const openRolesDescription = document.querySelector('[data-i18n="openRoles.description"]');
+    if (openRolesDescription) openRolesDescription.textContent = translate(openRoles.description, lang);
+
+    document.querySelectorAll('[data-job-card-cta]').forEach((node) => {
+      node.textContent = translate(openRoles.cardCta, lang);
+    });
+
+    jobs?.forEach((job) => {
+      const card = document.querySelector(`[data-job-card="${job.slug}"]`);
+      if (!card) return;
+
+      const setField = (field) => {
+        const target = card.querySelector(`[data-job-field="${field}"]`);
+        if (!target) return;
+        target.textContent = translate(job[field], lang);
+      };
+
+      ['location', 'type', 'title', 'summary'].forEach(setField);
+
+      const tagsContainer = card.querySelector('[data-job-tags]');
+      if (tagsContainer && job.tags) {
+        const tags = job.tags[lang] ?? job.tags[fallbackLang] ?? [];
+        tagsContainer.innerHTML = tags
+          .map((tag) => `<span class="${tagClass}">${tag}</span>`)
+          .join('');
+      }
+    });
+
+    culture?.forEach((pillar, index) => {
+      const title = document.querySelector(`[data-culture-title="${index}"]`);
+      if (title) title.textContent = translate(pillar.title, lang);
+      const copy = document.querySelector(`[data-culture-copy="${index}"]`);
+      if (copy) copy.textContent = translate(pillar.copy, lang);
+    });
+
+    const generalPrompt = document.querySelector('[data-i18n="general.prompt"]');
+    if (generalPrompt) generalPrompt.textContent = translate(general.prompt, lang);
+
+    const generalTitle = document.querySelector('[data-i18n="general.title"]');
+    if (generalTitle) generalTitle.textContent = translate(general.title, lang);
+
+    const generalDescription = document.querySelector('[data-i18n="general.description"]');
+    if (generalDescription) generalDescription.textContent = translate(general.description, lang);
+
+    const generalButton = document.querySelector('[data-i18n="general.button"]');
+    if (generalButton) generalButton.textContent = translate(general.button, lang);
+
+    updateJobLinks(lang);
+  };
+
+  window.addEventListener('ui:languagechange', (event) => {
+    const language = event?.detail?.language;
+    if (language) updateJobsPage(language);
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const storedLang = localStorage.getItem('ui-language') || fallbackLang;
+    updateJobsPage(storedLang);
+  });
+</script>
+
+<Layout
+  title="Work with us | Zelify"
+  description="Join Zelify and help us build the financial operating system that connects payments, credit, and compliance across Latin America."
+>
+  <div class="relative min-h-screen overflow-hidden bg-[#020b18] text-white">
+    <div class="jobs-bg" aria-hidden="true"></div>
+
+    <div class="relative z-10 flex min-h-screen flex-col">
+      <Navbar
+        logoSrc="/images/zelify_logo2.png"
+        buttons={{
+          first: { label: 'Work with us', href: '/jobs' },
+          second: { label: 'Business access', href: 'https://www.zelify.io/' },
+          third: { label: 'EN', href: '/' },
+        }}
+      />
+      <ProductsPanel />
+
+      <main class="flex-1">
+        <section class="px-6 pt-24 pb-16">
+          <div class="mx-auto max-w-5xl text-center sm:text-left">
+            <p class="text-xs font-semibold uppercase tracking-[0.4em] text-[#95FF0B]" data-i18n="hero.badge">
+              {heroCopy.badge[defaultLanguage]}
+            </p>
+            <h1
+              class="mt-6 text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl"
+              data-i18n="hero.title"
+              set:html={heroCopy.title[defaultLanguage]}
+            ></h1>
+            <p class="mt-6 text-base text-white/80 sm:text-lg lg:text-xl" data-i18n="hero.description">
+              {heroCopy.description[defaultLanguage]}
+            </p>
+
+            <div class="mt-10 flex flex-col gap-4 text-sm sm:flex-row">
+              <a
+                href="#jobs-list"
+                class="inline-flex items-center justify-center rounded-2xl bg-[#95FF0B] px-6 py-3 font-semibold text-[#031005] transition hover:translate-y-[-2px]"
+                data-i18n="hero.primaryCta"
+              >
+                {heroCopy.primaryCta[defaultLanguage]}
+              </a>
+              <a
+                href="/jobs/apply"
+                class="inline-flex items-center justify-center rounded-2xl border border-white/30 px-6 py-3 font-semibold text-white transition hover:border-[#95FF0B] hover:text-[#95FF0B]"
+                data-i18n="hero.secondaryCta"
+              >
+                {heroCopy.secondaryCta[defaultLanguage]}
+              </a>
+            </div>
+          </div>
+
+          <div class="mx-auto mt-12 grid max-w-4xl gap-6 sm:grid-cols-3">
+            {heroHighlights.map((item, index) => (
+              <div class="rounded-2xl border border-white/10 bg-white/5 p-6 text-center backdrop-blur">
+                <p class="text-3xl font-bold text-white">{item.value}</p>
+                <p class="mt-2 text-sm uppercase tracking-[0.2em] text-white/70" data-stat-label-index={index}>
+                  {item.label[defaultLanguage]}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section id="jobs-list" class="px-6 pb-16">
+          <div class="mx-auto max-w-6xl">
+            <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p class="text-sm uppercase tracking-[0.3em] text-white/70" data-i18n="openRoles.label">
+                  {openRolesCopy.label[defaultLanguage]}
+                </p>
+                <h2 class="mt-2 text-3xl font-semibold" data-i18n="openRoles.title">
+                  {openRolesCopy.title[defaultLanguage]}
+                </h2>
+                <p class="mt-3 text-base text-white/70" data-i18n="openRoles.description">
+                  {openRolesCopy.description[defaultLanguage]}
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-10 grid gap-6 md:grid-cols-2">
+              {jobOpenings.map((job) => (
+                <a
+                  href={`/jobs/${job.slug}`}
+                  class="group flex h-full flex-col justify-between rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur transition hover:border-[#95FF0B] hover:bg-white/10"
+                  data-job-card={job.slug}
+                  data-job-link
+                >
+                  <div>
+                    <div class="flex flex-wrap items-center gap-4 text-sm text-white/70">
+                      <span class="inline-flex items-center gap-2">
+                        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M17.657 16.657 13.414 20.9a2 2 0 0 1-2.828 0l-4.243-4.243a8 8 0 1 1 11.314 0Z" />
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M15 11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                        </svg>
+                        <span data-job-field="location">{job.location[defaultLanguage]}</span>
+                      </span>
+                      <span class="inline-flex items-center gap-2">
+                        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M2 7h20M2 12h20M2 17h20M5 7V5h14v2M5 17v2h14v-2" />
+                        </svg>
+                        <span data-job-field="type">{job.type[defaultLanguage]}</span>
+                      </span>
+                    </div>
+
+                    <h3 class="mt-5 text-2xl font-semibold" data-job-field="title">
+                      {job.title[defaultLanguage]}
+                    </h3>
+                    <p class="mt-3 text-base text-white/80" data-job-field="summary">
+                      {job.summary[defaultLanguage]}
+                    </p>
+
+                    <div class="mt-4 flex flex-wrap gap-2" data-job-tags>
+                      {job.tags[defaultLanguage].map((tag) => (
+                        <span class="rounded-full border border-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white/70">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div class="mt-8 flex items-center gap-2 font-semibold text-[#95FF0B]">
+                    <span data-job-card-cta>{openRolesCopy.cardCta[defaultLanguage]}</span>
+                    <svg
+                      class="h-5 w-5 transition group-hover:translate-x-1"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      viewBox="0 0 24 24"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" />
+                    </svg>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section class="px-6 pb-12">
+          <div class="mx-auto max-w-6xl rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur">
+            <div class="grid gap-8 md:grid-cols-3">
+              {culturePillars.map((pillar, index) => (
+                <div>
+                  <p class="text-sm uppercase tracking-[0.3em] text-[#95FF0B]" data-culture-title={index}>
+                    {pillar.title[defaultLanguage]}
+                  </p>
+                  <p class="mt-4 text-base text-white/80" data-culture-copy={index}>
+                    {pillar.copy[defaultLanguage]}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section class="px-6 pb-24">
+          <div class="mx-auto max-w-4xl rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-8 text-center backdrop-blur">
+            <p class="text-sm font-semibold uppercase tracking-[0.3em] text-[#95FF0B]" data-i18n="general.prompt">
+              {generalApplicationCopy.prompt[defaultLanguage]}
+            </p>
+            <h3 class="mt-4 text-3xl font-semibold" data-i18n="general.title">
+              {generalApplicationCopy.title[defaultLanguage]}
+            </h3>
+            <p class="mt-3 text-base text-white/80" data-i18n="general.description">
+              {generalApplicationCopy.description[defaultLanguage]}
+            </p>
+            <a
+              href="/jobs/apply"
+              class="mt-8 inline-flex items-center justify-center rounded-2xl bg-[#95FF0B] px-8 py-3 font-semibold text-[#031005] transition hover:translate-y-[-2px]"
+              data-i18n="general.button"
+            >
+              {generalApplicationCopy.button[defaultLanguage]}
+            </a>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .jobs-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(149, 255, 11, 0.18), transparent 55%),
+      radial-gradient(circle at 80% 0%, rgba(0, 166, 255, 0.15), transparent 55%),
+      linear-gradient(160deg, rgba(2, 9, 20, 1), rgba(1, 5, 14, 1));
+    opacity: 0.95;
+    pointer-events: none;
+  }
+
+  .jobs-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.4;
+  }
+</style>

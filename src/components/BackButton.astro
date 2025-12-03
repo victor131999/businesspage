@@ -1,0 +1,27 @@
+---
+export interface Props {
+  href?: string;
+  label?: string;
+  i18nKey?: string;
+}
+
+const { href = '/jobs', label = 'Back to roles', i18nKey } = Astro.props;
+---
+
+<a
+  href={href}
+  class="inline-flex items-center text-blue-600 transition hover:text-blue-800"
+>
+  <svg
+    class="mr-2 h-5 w-5"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    aria-hidden="true"
+  >
+    <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7 7-7" />
+    <path stroke-linecap="round" stroke-linejoin="round" d="M3 12h18" />
+  </svg>
+  <span class="job-back-label" data-i18n={i18nKey}>{label}</span>
+</a>

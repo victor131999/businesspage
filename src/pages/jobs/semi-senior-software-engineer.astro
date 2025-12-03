@@ -1,0 +1,323 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BackButton from '../../components/BackButton.astro';
+import JobPageTranslations from '../../components/JobPageTranslations.astro';
+
+const currentPath = Astro.url.pathname;
+const jobId = currentPath.split('/').pop();
+const selectedLang = Astro.url.searchParams.get('lang')?.toLowerCase();
+const defaultLanguage: 'en' | 'es' = selectedLang === 'es' ? 'es' : 'en';
+const jobsHref = `/jobs${defaultLanguage === 'es' ? '?lang=es' : ''}`;
+
+const jobContent = {
+  supportedLanguages: ['en', 'es'],
+  hero: {
+    title: {
+      en: 'Semi Senior Software Engineer',
+      es: 'Semi Senior Software Engineer',
+    },
+    location: {
+      en: 'Remote',
+      es: 'Remoto',
+    },
+    type: {
+      en: 'Full-time',
+      es: 'Tiempo completo',
+    },
+  },
+  sections: {
+    about: {
+      title: {
+        en: 'About Us',
+        es: 'Sobre nosotros',
+      },
+      paragraphs: {
+        en: [
+          "Founded in 2018, we're on a mission to combat complexity and empower people by reinventing financial services and facilitating international transfers in Latin America. Zelify transforms banking for personal and business users, enabling you to send, split, or gift money instantly, without complications or waiting. With fluid transactions as easy as sending a message, you have the power to connect, pay, and share instantly.",
+        ],
+        es: [
+          'Fundada en 2018, nuestra misión es combatir la complejidad y empoderar a las personas reinventando los servicios financieros y facilitando transferencias internacionales en Latinoamérica. Zelify transforma la banca para usuarios personales y empresas, permitiendo enviar, dividir o regalar dinero al instante, sin complicaciones ni esperas. Con transacciones tan fluidas como enviar un mensaje, puedes conectar, pagar y compartir de inmediato.',
+        ],
+      },
+    },
+    workModel: {
+      title: {
+        en: 'Our Work Model',
+        es: 'Nuestro modelo de trabajo',
+      },
+      paragraphs: {
+        en: [
+          'At Zelify, we create multifunctional, diverse, and inclusive teams, attracting the best talent to develop revolutionary technology. Our engineering team uses advanced technologies and agile methodologies that allow rapid adaptation to market needs. Our hybrid model provides independence and promotes professional responsibility to meet goals aligned with our global objectives. Our Engineering team transforms technology into high-impact financial solutions.',
+        ],
+        es: [
+          'En Zelify formamos equipos multifuncionales, diversos e inclusivos, atrayendo el mejor talento para desarrollar tecnología revolucionaria. Nuestro equipo de ingeniería utiliza tecnologías avanzadas y metodologías ágiles que permiten adaptarse rápidamente a las necesidades del mercado. Nuestro modelo híbrido brinda independencia y fomenta la responsabilidad profesional para cumplir metas alineadas a nuestros objetivos globales.',
+        ],
+      },
+    },
+    culture: {
+      title: {
+        en: 'Our Culture',
+        es: 'Nuestra cultura',
+      },
+      paragraphs: {
+        en: [
+          "At Zelify, we've created an international neo-banking platform centered on the user, constantly challenging the limits of technology. Our promise is to connect payments and unite people, empowering our users to pay, share, and connect instantly. We cultivate a culture of professional growth, innovation, and entrepreneurship, promoting autonomy and responsibility where engineers own their projects from conception to implementation.",
+        ],
+        es: [
+          'En Zelify hemos creado una plataforma de neobanca internacional centrada en el usuario, desafiando constantemente los límites de la tecnología. Nuestra promesa es conectar pagos y unir personas, empoderando a nuestros usuarios para pagar, compartir y conectar al instante. Fomentamos una cultura de crecimiento profesional, innovación y emprendimiento, promoviendo autonomía y responsabilidad.',
+        ],
+      },
+    },
+    technicalRequirements: {
+      title: {
+        en: 'Technical Requirements',
+        es: 'Requisitos técnicos',
+      },
+      items: {
+        en: [
+          'Experience with horizontally scalable microservices (NodeJS, NestJS, PostgreSQL, WebSocket, Java v11, Spring Boot)',
+          'Knowledge of service communication using Kafka',
+          'Deep knowledge of Docker',
+          'Advanced knowledge in bank integration services through REST APIs and the use of an API Gateway',
+          'Continuous integration and deployment in AWS',
+          'Experience with AWS cloud technologies, especially AWS RDS and AWS ECS',
+          'At least two years of experience in backend services development and general software development',
+        ],
+        es: [
+          'Experiencia con microservicios escalables horizontalmente (NodeJS, NestJS, PostgreSQL, WebSocket, Java v11, Spring Boot)',
+          'Conocimiento de comunicación entre servicios usando Kafka',
+          'Dominio profundo de Docker',
+          'Conocimiento avanzado en servicios de integración bancaria mediante APIs REST y uso de un API Gateway',
+          'Integración y despliegue continuo en AWS',
+          'Experiencia con tecnologías de nube AWS, especialmente AWS RDS y AWS ECS',
+          'Al menos dos años de experiencia en desarrollo de servicios backend y desarrollo de software en general',
+        ],
+      },
+    },
+    integrations: {
+      title: {
+        en: 'Integrations',
+        es: 'Integraciones',
+      },
+      items: {
+        en: [
+          'Comprehensive experience in REST API integrations and microservices architecture',
+          'Previous experience in banking integrations, including financial services such as transactions, account creation, and core banking systems',
+          'Implementation of secure integration mechanisms using API Gateway, JWT, and API keys',
+          'Proficiency in Postman collections and API documentation best practices',
+        ],
+        es: [
+          'Experiencia integral en integraciones REST API y arquitectura de microservicios',
+          'Experiencia previa en integraciones bancarias, incluyendo servicios financieros como transacciones, apertura de cuentas y sistemas core bancarios',
+          'Implementación de mecanismos de integración segura usando API Gateway, JWT y API keys',
+          'Dominio de colecciones en Postman y mejores prácticas de documentación de APIs',
+        ],
+      },
+    },
+    expectations: {
+      title: {
+        en: 'What We Expect',
+        es: 'Lo que esperamos',
+      },
+      items: {
+        en: [
+          'Focus on backend applications oriented to continuous creation and delivery of microservices',
+          'Plan and execute complete functions, collaborating with peers while planning future work',
+          'Write, test, instrument, document, and maintain code',
+          'Request clear code reviews to integrate changes into project development',
+          'Report incidents early and request support only when necessary',
+          'Experience in teams that define asynchronous integrations using event-based architectures',
+          'Practical knowledge of agile software development methodologies',
+          'Ability to execute multiple integrations simultaneously',
+        ],
+        es: [
+          'Enfoque en aplicaciones backend orientadas a la creación y entrega continua de microservicios',
+          'Planear y ejecutar funcionalidades completas, colaborando con los pares y planificando el trabajo futuro',
+          'Escribir, probar, instrumentar, documentar y mantener el código',
+          'Solicitar revisiones de código claras para integrar cambios en el desarrollo del proyecto',
+          'Reportar incidentes con anticipación y solicitar apoyo solo cuando sea necesario',
+          'Experiencia en equipos que definen integraciones asíncronas usando arquitecturas basadas en eventos',
+          'Conocimiento práctico de metodologías ágiles de desarrollo de software',
+          'Capacidad para llevar a cabo múltiples integraciones',
+        ],
+      },
+    },
+    niceToHave: {
+      title: {
+        en: 'Nice to Have',
+        es: 'Deseable',
+      },
+      items: {
+        en: [
+          'Infrastructure management with Terraform and Ansible',
+          'Practical experience in CI/CD automation flows with Jenkins, Shell, AWS CLI, Nexus, Docker, Testing, SSL, and Nginx',
+          'Analysis and design of distributed architecture for transactional applications using Traefik and ELK',
+          'Knowledge of non-relational databases',
+        ],
+        es: [
+          'Gestión de infraestructura con Terraform y Ansible',
+          'Experiencia práctica en automatización de CI/CD con Jenkins, Shell, AWS CLI, Nexus, Docker, Testing, SSL y Nginx',
+          'Análisis y diseño de arquitectura distribuida para aplicaciones transaccionales usando Traefik y ELK',
+          'Conocimiento de bases de datos no relacionales',
+        ],
+      },
+    },
+  },
+  applyCta: {
+    en: 'Apply for this position',
+    es: 'Postúlate a esta vacante',
+  },
+  backCta: {
+    en: 'Back to roles',
+    es: 'Volver a vacantes',
+  },
+};
+---
+
+<Layout title="Semi Senior Software Engineer | Zelify">
+  <JobPageTranslations contentId="job-semi-senior-content" content={jobContent} initialLanguage={defaultLanguage} />
+  <div class="min-h-screen bg-gray-50">
+    <!-- Banner -->
+    <div class="relative h-64 bg-gradient-to-r from-blue-600 to-blue-800">
+      <div class="absolute inset-0 bg-black/20"></div>
+      <div class="absolute inset-0 flex flex-col items-center justify-center">
+        <div class="text-center">
+          <h1 class="text-4xl font-bold text-white mb-4" data-hero="title">
+            {jobContent.hero.title[defaultLanguage]}
+          </h1>
+          <div class="flex items-center justify-center gap-4 text-sm text-white/90">
+            <span class="flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <span data-hero="location">{jobContent.hero.location[defaultLanguage]}</span>
+            </span>
+            <span class="flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <span data-hero="type">{jobContent.hero.type[defaultLanguage]}</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="max-w-4xl mx-auto px-4 py-12">
+      <div class="bg-white rounded-xl shadow-sm p-8">
+        <!-- About Us -->
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4" data-heading="about">
+            {jobContent.sections.about.title[defaultLanguage]}
+          </h2>
+          <div data-paragraphs="about">
+            {jobContent.sections.about.paragraphs[defaultLanguage].map((paragraph) => (
+              <p class="text-gray-600 mb-6">{paragraph}</p>
+            ))}
+          </div>
+        </section>
+
+        <!-- Our Work Model -->
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4" data-heading="workModel">
+            {jobContent.sections.workModel.title[defaultLanguage]}
+          </h2>
+          <div data-paragraphs="workModel">
+            {jobContent.sections.workModel.paragraphs[defaultLanguage].map((paragraph) => (
+              <p class="text-gray-600 mb-6">{paragraph}</p>
+            ))}
+          </div>
+        </section>
+
+        <!-- Our Culture -->
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4" data-heading="culture">
+            {jobContent.sections.culture.title[defaultLanguage]}
+          </h2>
+          <div data-paragraphs="culture">
+            {jobContent.sections.culture.paragraphs[defaultLanguage].map((paragraph) => (
+              <p class="text-gray-600 mb-6">{paragraph}</p>
+            ))}
+          </div>
+        </section>
+
+        <!-- Technical Requirements -->
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4" data-heading="technicalRequirements">
+            {jobContent.sections.technicalRequirements.title[defaultLanguage]}
+          </h2>
+          <ul class="list-disc list-inside text-gray-600 space-y-3" data-list="technicalRequirements">
+            {jobContent.sections.technicalRequirements.items[defaultLanguage].map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </section>
+
+        <!-- Integrations -->
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4" data-heading="integrations">
+            {jobContent.sections.integrations.title[defaultLanguage]}
+          </h2>
+          <ul class="list-disc list-inside text-gray-600 space-y-3" data-list="integrations">
+            {jobContent.sections.integrations.items[defaultLanguage].map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </section>
+
+        <!-- Role Expectations -->
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4" data-heading="expectations">
+            {jobContent.sections.expectations.title[defaultLanguage]}
+          </h2>
+          <ul class="list-disc list-inside text-gray-600 space-y-3" data-list="expectations">
+            {jobContent.sections.expectations.items[defaultLanguage].map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </section>
+
+        <!-- Nice to Have -->
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4" data-heading="niceToHave">
+            {jobContent.sections.niceToHave.title[defaultLanguage]}
+          </h2>
+          <ul class="list-disc list-inside text-gray-600 space-y-3" data-list="niceToHave">
+            {jobContent.sections.niceToHave.items[defaultLanguage].map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </section>
+
+        <!-- Apply Button -->
+        <div class="flex justify-center">
+          <a
+            href={`/jobs/apply?position=${jobId}`}
+            class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 transition-colors duration-300 shadow-sm hover:shadow-md"
+            aria-label={jobContent.applyCta[defaultLanguage]}
+          >
+            <span class="job-apply-label" data-i18n="job.apply">
+              {jobContent.applyCta[defaultLanguage]}
+            </span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <BackButton href={jobsHref} label={jobContent.backCta[defaultLanguage]} i18nKey="job.back" />
+</Layout>
+
+<style>
+  /* Smooth transitions */
+  .transition-colors {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
+</style> 

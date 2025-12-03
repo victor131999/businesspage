@@ -61,7 +61,7 @@ export const translations = {
     "auth.title": "Permite el registro seguro de usuarios, autenticación y autorización en aplicaciones web y móviles.",
     "auth.description": "gestión de inicio de sesión con credenciales propias o de terceros (Google, Apple, Facebook, etc.).",
     "auth.cta.talk": "Hablemos",
-    "auth.cta.docs": "Ver documentación API"
+    "auth.cta.docs": "Ver documentación API",
 
     // Products Panel Content
     "products.register.title": "Descripción General",

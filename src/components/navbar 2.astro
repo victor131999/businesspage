@@ -54,11 +54,10 @@ const cssVars = `
     </li>
     <li><a href="/" data-i18n="nav.resources">Resources</a></li>
     <li><a href="/" data-i18n="nav.developers">Developers</a></li>
-    <li><a href="https://www.zelify.com" class="highlight" data-i18n="nav.personal">Natalia</a></li>
   </ul>
 
   <div class="action-links">
-    <a href={buttons.first?.href ?? "https://www.zelify.com/jobs"} class="btn btn-light">
+    <a href={buttons.first?.href ?? "/jobs"} class="btn btn-light">
       <img src="/icons/maletin.svg" alt="Work with us" class="btn-icon" />
       <span data-i18n="nav.workWithUs">{buttons.first?.label ?? "Work with us"}</span>
     </a>
@@ -92,10 +91,10 @@ const cssVars = `
       </li>
       <li><a href="/" data-i18n="nav.resources">Resources</a></li>
       <li><a href="/" data-i18n="nav.developers">Developers</a></li>
-      <li><a href="https://www.zelify.com" class="highlight" data-i18n="nav.personal">Natalia</a></li>
+      <li><a href="https://www.zelify.com" data-i18n="nav.personal">Natalia</a></li>
     </ul>
     <div class="action-links-mobile">
-      <a href={buttons.first?.href ?? "https://www.zelify.com/jobs"} class="btn btn-light">
+      <a href={buttons.first?.href ?? "/jobs"} class="btn btn-light">
         <img src="/icons/maletin.svg" alt="Work with us" class="btn-icon" />
         <span data-i18n="nav.workWithUs">{buttons.first?.label ?? "Work with us"}</span>
       </a>

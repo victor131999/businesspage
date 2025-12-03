@@ -1,0 +1,157 @@
+---
+const {
+  contentId = 'job-page-content',
+  content = {},
+  fallbackLang = 'en',
+  initialLanguage = 'en',
+} = Astro.props;
+const safeJson = JSON.stringify(content).replace(/</g, '\\u003C');
+---
+
+<script type="application/json" id={contentId} set:html={safeJson} />
+<script
+  is:inline
+  data-content-id={contentId}
+  data-fallback={fallbackLang}
+  data-initial={initialLanguage}
+>
+  (function () {
+    const scriptTag = document.currentScript;
+    if (!scriptTag) return;
+    const contentId = scriptTag.dataset.contentId || 'job-page-content';
+    const fallbackLang = scriptTag.dataset.fallback || 'en';
+    const initialLanguage = scriptTag.dataset.initial || fallbackLang;
+    const rawContent = document.getElementById(contentId)?.textContent ?? "{}";
+    let CONTENT;
+
+    try {
+      CONTENT = JSON.parse(rawContent);
+    } catch (error) {
+      console.warn("Unable to parse job content translations.", error);
+      CONTENT = {};
+    }
+
+    const resolveLang = (rawLang) => {
+      const normalized = (rawLang || fallbackLang).toLowerCase();
+      const supported = CONTENT.supportedLanguages || ["en", "es"];
+      return supported.includes(normalized) ? normalized : fallbackLang;
+    };
+
+    const renderParagraphs = (sectionKey, lang) => {
+      const paragraphs =
+        CONTENT.sections?.[sectionKey]?.paragraphs?.[lang] ??
+        CONTENT.sections?.[sectionKey]?.paragraphs?.[fallbackLang] ??
+        [];
+      const container = document.querySelector(`[data-paragraphs="${sectionKey}"]`);
+      if (!container) return;
+      container.innerHTML = paragraphs
+        .map(
+          (text) =>
+            `<p class="text-gray-600 mb-6">${text}</p>`
+        )
+        .join("");
+    };
+
+    const renderLists = (sectionKey, lang) => {
+      const items =
+        CONTENT.sections?.[sectionKey]?.items?.[lang] ??
+        CONTENT.sections?.[sectionKey]?.items?.[fallbackLang] ??
+        [];
+      const list = document.querySelector(`[data-list="${sectionKey}"]`);
+      if (!list) return;
+      list.innerHTML = items.map((item) => `<li>${item}</li>`).join("");
+    };
+
+    const updateHeadings = (sectionKey, lang) => {
+      const heading = document.querySelector(`[data-heading="${sectionKey}"]`);
+      if (!heading) return;
+      heading.textContent =
+        CONTENT.sections?.[sectionKey]?.title?.[lang] ??
+        CONTENT.sections?.[sectionKey]?.title?.[fallbackLang] ??
+        heading.textContent;
+    };
+
+    const updateHero = (lang) => {
+      ["title", "location", "type"].forEach((field) => {
+        const node = document.querySelector(`[data-hero="${field}"]`);
+        if (!node) return;
+        node.textContent =
+          CONTENT.hero?.[field]?.[lang] ??
+          CONTENT.hero?.[field]?.[fallbackLang] ??
+          node.textContent;
+      });
+    };
+
+    const updateCTA = (lang) => {
+      const applyButton = document.querySelector('[data-i18n="job.apply"]');
+      if (applyButton) {
+        const label =
+          CONTENT.applyCta?.[lang] ??
+          CONTENT.applyCta?.[fallbackLang] ??
+          applyButton.textContent;
+        applyButton.textContent = label;
+        const applyAnchor = applyButton.closest('a');
+        if (applyAnchor) {
+          applyAnchor.setAttribute('aria-label', label);
+        }
+      }
+
+      const backLink = document.querySelector('[data-i18n="job.back"]');
+      if (backLink) {
+        backLink.textContent =
+          CONTENT.backCta?.[lang] ??
+          CONTENT.backCta?.[fallbackLang] ??
+          backLink.textContent;
+      }
+    };
+
+    const updateSections = (lang) => {
+      if (!CONTENT.sections) return;
+      Object.keys(CONTENT.sections).forEach((sectionKey) => {
+        updateHeadings(sectionKey, lang);
+        if (CONTENT.sections[sectionKey].paragraphs) {
+          renderParagraphs(sectionKey, lang);
+        }
+        if (CONTENT.sections[sectionKey].items) {
+          renderLists(sectionKey, lang);
+        }
+      });
+    };
+
+    const updateJobPage = (rawLang) => {
+      const lang = resolveLang(rawLang);
+      updateHero(lang);
+      updateSections(lang);
+      updateCTA(lang);
+    };
+
+    window.addEventListener("ui:languagechange", (event) => {
+      const language = event?.detail?.language;
+      if (language) updateJobPage(language);
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const searchParams = new URL(window.location.href).searchParams;
+      const urlLang = searchParams.get("lang");
+      if (urlLang) {
+        const normalized = resolveLang(urlLang);
+        try {
+          localStorage.setItem("ui-language", normalized.toUpperCase());
+        } catch (error) {
+          console.warn("Unable to persist language preference.", error);
+        }
+        updateJobPage(normalized);
+        return;
+      }
+
+      let stored = null;
+      try {
+        stored = localStorage.getItem("ui-language");
+      } catch (error) {
+        console.warn("Unable to access language preference.", error);
+      }
+      const langToUse = stored || initialLanguage || fallbackLang;
+      updateJobPage(langToUse);
+    });
+  })();
+</script>

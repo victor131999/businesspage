@@ -81,6 +81,7 @@ import "../styles/navbar.css";
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/png" href="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/ISO-ZELIFY-2025.png" />
     <title>Zelify — Let's Talk</title>
   </head>
 
@@ -103,7 +104,7 @@ import "../styles/navbar.css";
         radius: "22px",
       }}
       buttons={{
-        first: { label: "Work with us", href: "https://www.zelify.com/jobs" },
+        first: { label: "Work with us", href: "/jobs" },
         second: { label: "Business access", href: "https://www.zelify.io/" },
         third: { label: "EN", href: "/" },
       }}
@@ -353,7 +354,7 @@ import "../styles/navbar.css";
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("contact-form");
+    const form = document.getElementById("contact-form") as HTMLFormElement | null;
     
     if (form) {
       form.addEventListener("submit", (e) => {
@@ -371,8 +372,8 @@ import "../styles/navbar.css";
         
         // Obtener el idioma actual para el mensaje
         const currentLang = localStorage.getItem('ui-language') || 'EN';
-        const lang = currentLang.toLowerCase();
-        const translations = {
+        const lang = currentLang.toLowerCase() === 'es' ? 'es' : 'en';
+        const translations: Record<'en' | 'es', string> = {
           en: "Thank you for contacting us! We'll get in touch with you soon.",
           es: "¡Gracias por contactarnos! Nos pondremos en contacto contigo pronto."
         };
@@ -386,4 +387,3 @@ import "../styles/navbar.css";
     }
   });
 </script>
-
