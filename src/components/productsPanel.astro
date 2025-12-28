@@ -20,7 +20,9 @@ import "../styles/navbar.css";
     <button role="tab" class="pp-item" data-key="matilda"
       >Alaiza AI Fintech Core</button
     >
+    <!-- Insurance comentado - ya no se ofrece este servicio
     <button role="tab" class="pp-item" data-key="insurance">Insurance</button>
+    -->
   </aside>
 
   <section class="pp-content" aria-live="polite">
@@ -98,7 +100,7 @@ import "../styles/navbar.css";
     payments: "/payments",
     biz: "/discountsCoupons",
     matilda: "/matildaAI",
-    insurance: "/insurance",
+    // insurance: "/insurance", // Comentado - ya no se ofrece este servicio
   };
 
   // Catálogo de contenidos por pestaña - Versión en Español
@@ -488,6 +490,8 @@ import "../styles/navbar.css";
         },
       ],
     },
+    // Insurance comentado - ya no se ofrece este servicio
+    /*
     insurance: {
       title: "Descripción General",
       sub: "Gestión integral del ciclo de seguros: cotización multicotizador, propuestas, venta digital, catálogo de productos, webhooks, renovaciones y administración de siniestros.",
@@ -529,6 +533,7 @@ import "../styles/navbar.css";
         },
       ],
     },
+    */
   };
 
   // Catálogo de contenidos por pestaña - Versión en Inglés
@@ -918,6 +923,8 @@ import "../styles/navbar.css";
         },
       ],
     },
+    // Insurance comentado - ya no se ofrece este servicio
+    /*
     insurance: {
       title: "Overview",
       sub: "Comprehensive insurance cycle management: multi-quote engine, proposals, digital sales, product catalog, webhooks, renewals, and claims administration.",
@@ -959,6 +966,7 @@ import "../styles/navbar.css";
         },
       ],
     },
+    */
   };
 
   // Variable para mantener el idioma actual y el DATA activo
@@ -1168,6 +1176,8 @@ import "../styles/navbar.css";
         return `<img src="/icons/matilda/personalFinance.svg" alt="Personal Finance icon" />`;
       case "promptBasedReporting":
         return `<img src="/icons/matilda/promptBasedReporting.svg" alt="Prompt-Based Reporting icon" />`;
+      // Iconos de Insurance comentados - ya no se ofrece este servicio
+      /*
       case "smartQuoting":
         return `<img src="/icons/insurance/smartQuoting.svg" alt="Smart Quoting icon" />`;
       case "proposals":
@@ -1182,6 +1192,7 @@ import "../styles/navbar.css";
         return `<img src="/icons/insurance/renewals.svg" alt="Renewals icon" />`;
       case "claims":
         return `<img src="/icons/insurance/claims.svg" alt="Claims icon" />`;
+      */
       default:
         return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg>`;
     }
@@ -1330,7 +1341,8 @@ import "../styles/navbar.css";
     "Prompt-Based Reporting": "https://docs.zelify.com/servicios-financieros/alaiza-ia#reportes-basados-en-prompts"
   };
 
-  // Mapeo de features de Insurance a URLs de documentación (bilingüe)
+  // Mapeo de features de Insurance a URLs de documentación (bilingüe) - Comentado - ya no se ofrece este servicio
+  /*
   const INSURANCE_FEATURE_LINKS = {
     "Cotización Inteligente": "https://docs.zelify.com/servicios-financieros/insurance#cotizaci%C3%B3n-inteligente",
     "Smart Quoting": "https://docs.zelify.com/servicios-financieros/insurance#cotizaci%C3%B3n-inteligente",
@@ -1346,6 +1358,7 @@ import "../styles/navbar.css";
     "Siniestros": "https://docs.zelify.com/servicios-financieros/insurance#siniestros",
     "Claims": "https://docs.zelify.com/servicios-financieros/insurance#siniestros"
   };
+  */
 
   // Render del contenido según pestaña
   function render(key) {
@@ -1372,15 +1385,18 @@ import "../styles/navbar.css";
       titleEl.innerHTML = `<a href="/discountsCoupons" class="pp-title-link">${section.title} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;"><path d="M7 17L17 7M7 7h10v10"/></svg></a>`;
     } else if (key === "matilda") {
       titleEl.innerHTML = `<a href="/matildaAI" class="pp-title-link">${section.title} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;"><path d="M7 17L17 7M7 7h10v10"/></svg></a>`;
+    // Insurance comentado - ya no se ofrece este servicio
+    /*
     } else if (key === "insurance") {
       titleEl.innerHTML = `<a href="/insurance" class="pp-title-link">${section.title} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;"><path d="M7 17L17 7M7 7h10v10"/></svg></a>`;
+    */
     } else {
       titleEl.textContent = section.title;
     }
     subEl.textContent = section.sub;
 
-    // Para Cards, Transfers, International (TX), Payments e Insurance, agregar clase especial para dos columnas
-    if (key === "cards" || key === "transfers" || key === "international" || key === "payments" || key === "insurance") {
+    // Para Cards, Transfers, International (TX), Payments (Insurance comentado - ya no se ofrece)
+    if (key === "cards" || key === "transfers" || key === "international" || key === "payments" /* || key === "insurance" */) {
       listEl.classList.add("cards-grid");
     } else {
       listEl.classList.remove("cards-grid");
@@ -1447,10 +1463,13 @@ import "../styles/navbar.css";
           return `<a class="pp-feature" href="${ALAIZA_FEATURE_LINKS[f.t]}" target="_blank" rel="noopener noreferrer">${card}</a>`;
         }
         
+        // Insurance comentado - ya no se ofrece este servicio
+        /*
         // Para Insurance, todas las features son enlaces a documentación
         if (key === "insurance" && INSURANCE_FEATURE_LINKS[f.t]) {
           return `<a class="pp-feature" href="${INSURANCE_FEATURE_LINKS[f.t]}" target="_blank" rel="noopener noreferrer">${card}</a>`;
         }
+        */
         
         // 👉 El PRIMER feature (idx === 0) se vuelve link a la página de la sección para otros productos
         if (idx === 0 && KEY_TO_ROUTE[key]) {

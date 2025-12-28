@@ -1,9 +1,129 @@
 ---
-import Navbar from "../components/navbar.astro";
-import ProductsPanel from "../components/productsPanel.astro";
-import "../styles/navbar.css";
+// Insurance comentado - ya no se ofrece este servicio
+// Esta página ya no está disponible
 ---
+<!-- 
+  Insurance ya no se ofrece como servicio.
+  Todo el contenido ha sido comentado.
+  
+  Si necesitas restaurar este servicio, descomenta el código a continuación.
+-->
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Insurance - Servicio no disponible</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
+      @font-face {
+        font-family: "NataSans";
+        src: url("/fonts/NataSans-VariableFont_wght.ttf") format("truetype");
+        font-weight: 100 900;
+        font-display: swap;
+      }
+
+      body {
+        font-family: "NataSans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: linear-gradient(135deg, #081525 0%, #0b132b 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        color: #ffffff;
+        position: relative;
+        overflow: hidden;
+      }
+
+      body::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url('/images/FONDO 13.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        opacity: 0.3;
+        z-index: 0;
+      }
+
+      .container {
+        text-align: center;
+        z-index: 1;
+        position: relative;
+        max-width: 600px;
+        animation: fadeInUp 0.6s ease-out;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .icon {
+        font-size: 4rem;
+        margin-bottom: 1.5rem;
+        opacity: 0.8;
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+
+      h1 {
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 400;
+        color: #84ff11;
+        line-height: 1.2;
+        letter-spacing: 0.5px;
+      }
+
+      @media (max-width: 640px) {
+        .icon {
+          font-size: 3rem;
+        }
+
+        h1 {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="icon">⚠️</div>
+      <h1>Redirigiendo a la página principal...</h1>
+    </div>
+    <script>
+      // Redirigir automáticamente después de 1.5 segundos
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 500);
+    </script>
+  </body>
+</html>
+
+<!--
 <script>
   type Translation = {
     badge: string;
@@ -85,7 +205,7 @@ import "../styles/navbar.css";
   <body
     style="
       background-color:#081525;
-      background-image:url('/images/FONDO 13.jpg'); /* usa tu fondo con el escudo a la derecha */
+      background-image:url('/images/FONDO 13.jpg');
       background-size:cover;
       background-position:center;
       background-repeat:no-repeat;
@@ -120,24 +240,20 @@ import "../styles/navbar.css";
 
     <section class="hero">
       <div class="content">
-        <!-- Banda superior -->
         <div class="band">
           <span class="band-text">Insurance</span>
         </div>
 
-        <!-- Título -->
         <h1 class="title">
           Smart Insurance and<br />
           Assistance Management.
         </h1>
 
-        <!-- Descripción -->
         <p class="description">
           Handles the quoting, selling, and purchasing of insurance and
           assistance services efficiently and securely.
         </p>
 
-        <!-- CTA -->
         <div class="cta">
           <a href="/hablemos" class="btn-light">Let's talk</a>
           <a href="https://docs.zelify.com/servicios-financieros/insurance" target="_blank" rel="noopener noreferrer" class="btn-light">View API Docs</a>
@@ -167,26 +283,23 @@ import "../styles/navbar.css";
     overflow-x: hidden;
   }
 
-  /* Sección hero: textos a la izquierda, imagen al fondo a la derecha */
   .hero {
     min-height: calc(100vh - var(--nav-h));
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* izquierda */
+    justify-content: flex-start;
     padding: 6rem 8%;
   }
 
   .content {
     text-align: left;
     max-width: 680px;
-    margin-right: auto; /* ancla a la izquierda */
-
+    margin-right: auto;
     top: 15px;
     left: 250px;
     position: relative;
   }
 
-  /* Badge ajustado al ancho del texto */
   .band {
     display: inline-block;
     background-color: #6aff00;
@@ -201,7 +314,6 @@ import "../styles/navbar.css";
     letter-spacing: 0.3px;
   }
 
-  /* Título verde como el mockup */
   .title {
     color: #84ff11;
     font-weight: 400;
@@ -214,10 +326,10 @@ import "../styles/navbar.css";
  .description {
   color: #bcd0e6;
   font-size: 1.05rem;
-  line-height: 1.55;       /* 🔽 menos espacio entre líneas */
+  line-height: 1.55;
   margin-bottom: 2rem;
-  max-width: 430px;         /* 🔽 reduce ancho para forzar 4 líneas */
-  text-wrap: balance;       /* mejora saltos de línea */
+  max-width: 430px;
+  text-wrap: balance;
 }
 
   .cta {
@@ -246,14 +358,12 @@ import "../styles/navbar.css";
     transform: translateY(-1px);
   }
 
-  /* Ajustes finos para que no tape el escudo (mover todo si hace falta) */
   @media (min-width: 1200px) {
     .content {
       transform: translate(0px, -10px);
-    } /* mueve vertical/horizontal si necesitas */
+    }
   }
 
-  /* Responsivo */
   @media (max-width: 1000px) {
     .hero {
       justify-content: center;
@@ -280,3 +390,4 @@ import "../styles/navbar.css";
     }
   }
 </style>
+-->
