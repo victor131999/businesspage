@@ -88,7 +88,7 @@ import "../styles/navbar.css";
   const subEl = panel.querySelector(".pp-sub");
   const listEl = panel.querySelector("#pp-features");
 
-  // 1) Ruta destino por sección (ajusta si cambian tus paths)
+  // 1) Ruta destino por sección (para el título principal)
   const KEY_TO_ROUTE = {
     register: "/auth",
     identity: "/identity",
@@ -100,7 +100,6 @@ import "../styles/navbar.css";
     payments: "/payments",
     biz: "/discountsCoupons",
     matilda: "/matildaAI",
-    // insurance: "/insurance", // Comentado - ya no se ofrece este servicio
   };
 
   // Catálogo de contenidos por pestaña - Versión en Español
@@ -112,17 +111,20 @@ import "../styles/navbar.css";
         {
           icon: "auth",
           t: "Autenticación",
-          d: "Permite registrar, autenticar y autorizar usuarios.",
+          d: "OTP email, OTP SMS, registro dinámico, login credenciales, SSO, login social, biometría.",
+          href: "https://docs.zelify.com/servicios-financieros/auth#autenticaci%C3%B3n"
         },
         {
           icon: "globe",
           t: "Geolocalización",
-          d: "Localiza, mapea y analiza ubicaciones con precisión.",
+          d: "Geocoding directo e inverso.",
+          href: "https://docs.zelify.com/servicios-financieros/auth#geolocalizaci%C3%B3n"
         },
         {
           icon: "device",
           t: "Información del dispositivo",
-          d: "Recopila información del dispositivo para seguridad y análisis.",
+          d: "Metadatos, detección de VPN.",
+          href: "https://docs.zelify.com/servicios-financieros/auth#informaci%C3%B3n-de-dispositivo"
         },
       ],
     },
@@ -132,85 +134,339 @@ import "../styles/navbar.css";
       features: [
         {
           icon: "documentExtraction",
-          t: "Extracción de documentos",
-          d: "Reconocimiento Óptico de Caracteres (OCR).",
+          t: "Extracción documental",
+          d: "Cédula, pasaporte, licencia de conducir.",
+          href: "https://docs.zelify.com/servicios-financieros/identity#extracci%C3%B3n-documental"
         },
         {
           icon: "biometricVerification",
           t: "Verificación biométrica",
-          d: "Comparación facial y validación biométrica.",
+          d: "Prueba de vida por foto.",
+          href: "https://docs.zelify.com/servicios-financieros/identity#verificaci%C3%B3n-biom%C3%A9trica"
         },
         {
           icon: "videoVerification",
           t: "Verificación por video",
-          d: "Comparación facial e incluso registro de voz.",
+          d: "Prueba de vida en tiempo real.",
+          href: "https://docs.zelify.com/servicios-financieros/identity#verificaci%C3%B3n-de-v%C3%ADdeo"
         },
         {
           icon: "integrationLayer",
-          t: "Capa de Integración (SDK/API)",
+          t: "Capa de integración (SDK/API)",
           d: "Centraliza la identidad digital.",
+          href: "https://docs.zelify.com/servicios-financieros/identity#integration-layer-sdkapi"
         },
       ],
     },
     aml: {
       title: "Descripción General",
-      sub: "Evaluación de riesgo mediante verificaciones automatizadas contra listas PEP, sanciones internacionales y medios adversos. Previene lavado de dinero y financiamiento ilícito.",
+      sub: "Evaluación de riesgo mediante verificaciones automatizadas contra listas PEP, sanciones internacionales y medios adversos.",
       features: [
         {
           icon: "amlGlobalList",
-          t: "Evaluación en listas globales",
-          d: "Verifica coincidencias en más de 32 listas internacionales.",
-        },
-        {
-          icon: "amlInternalList",
-          t: "Evaluación en listas internas",
-          d: "Carga de listas personalizadas para validación adicional.",
+          t: "Evaluación de listas globales",
+          d: "Globales, PEP, listas internas, estado AML.",
+          href: "https://docs.zelify.com/servicios-financieros/aml#evaluaci%C3%B3n-de-listas-globales"
         },
         {
           icon: "amlTransactionMonitoring",
-          t: "Monitoreo de transacciones",
-          d: "Monitorea transacciones y comportamiento financiero sospechoso.",
+          t: "Monitoreo y Operaciones",
+          d: "Transacciones, alertas, perfil de riesgo.",
+          href: "https://docs.zelify.com/servicios-financieros/aml#monitoreo-y-operaciones"
         },
         {
           icon: "amlAdverseMedia",
-          t: "Medios Adversos e Inteligencia de Riesgo",
-          d: "Identifica parámetros que podrían comprometer la reputación del cliente.",
+          t: "Medios adversos e inteligencia",
+          d: "Reputación, inteligencia de riesgo.",
+          href: "https://docs.zelify.com/servicios-financieros/aml#medios-adversos-e-inteligencia-de-riesgo"
+        },
+        {
+          icon: "amlInternalList",
+          t: "Evaluación de listas internas",
+          d: "Carga de listas personalizadas para validación adicional.",
+          href: "https://docs.zelify.com/servicios-financieros/aml#evaluaci%C3%B3n-de-listas-internas"
         },
       ],
     },
     linking: {
       title: "Descripción General",
-      sub: "Permite vincular cuentas bancarias, autorizar acceso a datos y generar tokens seguros para que aplicaciones lean información o inicien pagos.",
+      sub: "Permite vincular cuentas bancarias, autorizar acceso a datos y generar tokens seguros.",
       features: [
         {
           icon: "bankAccount",
-          t: "Vinculación de Cuentas Bancarias",
-          d: "Vincula cuentas bancarias mediante tokens temporales o autenticación OAuth.",
-        },
-        {
-          icon: "linkingSdk",
-          t: "SDK de Vinculación",
-          d: "Identifica noticias negativas, informes y menciones públicas.",
+          t: "Vinculación de cuentas bancarias",
+          d: "Vincular, desvincular, bancos soportados.",
+          href: "https://docs.zelify.com/servicios-financieros/connect#vinculaci%C3%B3n-de-cuentas-bancarias"
         },
         {
           icon: "accountOwnerVerify",
-          t: "Verificación de Cuenta y Titularidad",
-          d: "Permite a las empresas cargar sus propias listas.",
-        },
-        {
-          icon: "accessFinancialData",
-          t: "Acceso a Datos Financieros",
-          d: "Recopila información del dispositivo para seguridad y análisis.",
+          t: "Verificación de cuenta y titularidad",
+          d: "Microdepósitos, estado e historial.",
+          href: "https://docs.zelify.com/servicios-financieros/connect#verificaci%C3%B3n-de-cuenta-y-titularidad"
         },
         {
           icon: "digitalAccount",
           t: "Cuentas Digitales",
-          d: "Permite crear cuentas digitales para un usuario.",
+          d: "Crear, actualizar, activar, desactivar, eliminar.",
+          href: "https://docs.zelify.com/servicios-financieros/connect#cuentas-digitales"
         },
         {
           icon: "creationClabeAc",
-          t: "Creación de Cuentas CLABE",
-          d: "En México, permite crear cuentas CLABE.",
+          t: "Creación de cuentas CLABE",
+          d: "Creación individual y masiva, consulta y detalle.",
+          href: "https://docs.zelify.com/servicios-financieros/connect#creaci%C3%B3n-de-cuentas-clabe"
+        },
+        {
+          icon: "linkingSdk",
+          t: "SDK de vinculación",
+          d: "Librerías de desarrollo para integración rápida.",
+          href: "https://docs.zelify.com/servicios-financieros/connect#linking-sdk"
+        },
+      ],
+    },
+    transfers: {
+      title: "Descripción General",
+      sub: "Módulo para movimientos instantáneos de dinero entre cuentas digitales del ecosistema Zelify.",
+      features: [
+        {
+          icon: "transferQuoteValidation",
+          t: "Cotización y validación",
+          d: "Genera una pre-simulación de transferencias.",
+          href: "https://docs.zelify.com/servicios-financieros/transfers#cotizaci%C3%B3n-y-validaci%C3%B3n-de-transferencias"
+        },
+        {
+          icon: "internalTransfers",
+          t: "Transferencias internas",
+          d: "Habilita transferencias entre cuentas vinculadas.",
+          href: "https://docs.zelify.com/servicios-financieros/transfers#transferencias-internas"
+        },
+        {
+          icon: "interbankLocaltransfer",
+          t: "Transferencias interbancarias",
+          d: "Permite transferencias entre diferentes bancos.",
+          href: "https://docs.zelify.com/servicios-financieros/transfers#transferencias-interbancarias-y-locales"
+        },
+        {
+          icon: "payIn",
+          t: "Notificaciones Pay-in / Cash-in",
+          d: "Gestiona notificaciones de dinero recibido.",
+          href: "https://docs.zelify.com/servicios-financieros/transfers#notificaciones-pay-in-cash-in"
+        },
+        {
+          icon: "cashOut",
+          t: "Notificaciones Pay-out / Cash-out",
+          d: "Gestiona notificaciones de transferencias salientes.",
+          href: "https://docs.zelify.com/servicios-financieros/transfers#notificaciones-pay-out-cash-out"
+        },
+        {
+          icon: "basicServicePayments",
+          t: "Pagos de servicios básicos",
+          d: "Ejecuta pagos de servicios con información mínima.",
+          href: "https://docs.zelify.com/servicios-financieros/transfers#pagos-de-servicios-b%C3%A1sicos-y-digitales"
+        },
+        {
+          icon: "giftcards",
+          t: "Giftcards",
+          d: "Compra y gestión de tarjetas de regalo.",
+          href: "https://docs.zelify.com/servicios-financieros/transfers#pagos-de-servicios-b%C3%A1sicos-y-digitales__giftcards"
+        },
+        {
+          icon: "accountBalanceValidation",
+          t: "Validación de cuentas y saldos",
+          d: "Verifica si una cuenta existe y muestra el saldo.",
+          href: "https://docs.zelify.com/servicios-financieros/transfers#validaci%C3%B3n-de-cuenta-y-saldo"
+        },
+        {
+          icon: "processingReconciliation",
+          t: "Procesamiento y conciliación",
+          d: "Actualizaciones en tiempo real del estado de transacciones.",
+          href: "https://docs.zelify.com/servicios-financieros/transfers#procesamiento-y-conciliaci%C3%B3n"
+        },
+        {
+          icon: "transactionLimits",
+          t: "Límites transaccionales",
+          d: "Permite configurar reglas y límites personalizados.",
+          href: "https://docs.zelify.com/servicios-financieros/transfers#l%C3%ADmites-transaccionales"
+        },
+        {
+          icon: "accountStatements",
+          t: "Estados de cuenta y reportes PDF",
+          d: "Provee estados de cuenta en formato PDF.",
+          href: "https://docs.zelify.com/servicios-financieros/transfers#estados-de-cuenta-y-reportes-pdf"
+        },
+        {
+          icon: "sdkTransfers",
+          t: "SDK Transferencias",
+          d: "Librerías para integración de transferencias.",
+          href: "https://docs.zelify.com/servicios-financieros/transfers#sdk-transfers"
+        },
+      ],
+    },
+    international: {
+      title: "Descripción General",
+      sub: "Solución para gestionar y ejecutar transferencias internacionales B2C, B2B y P2P.",
+      features: [
+        {
+          icon: "fxQuote",
+          t: "Cotización y conversión (FX)",
+          d: "Provee tasas de cambio dinámicas.",
+          href: "https://docs.zelify.com/servicios-financieros/tx#cotizaci%C3%B3n-y-conversi%C3%B3n-de-divisas"
+        },
+        {
+          icon: "internationalAccount",
+          t: "Validación de cuentas internacionales",
+          d: "Verifica cumplimiento con IBAN, CLABE o SWIFT.",
+          href: "https://docs.zelify.com/servicios-financieros/tx#validaci%C3%B3n-de-cuentas-internacionales"
+        },
+        {
+          icon: "transferInitiation",
+          t: "Inicio de transferencia",
+          d: "Crea la operación con detalles del remitente y destinatario.",
+          href: "https://docs.zelify.com/servicios-financieros/tx#inicio-de-transferencia"
+        },
+        {
+          icon: "trackingConfirmation",
+          t: "Seguimiento y confirmación",
+          d: "Rastrea el estado de la transferencia en tiempo real.",
+          href: "https://docs.zelify.com/servicios-financieros/tx#seguimiento-y-confirmaci%C3%B3n"
+        },
+        {
+          icon: "internationalSettlement",
+          t: "Liquidación y reconciliación",
+          d: "Conciliación automática con redes de pago internacionales.",
+          href: "https://docs.zelify.com/servicios-financieros/tx#liquidacion-internacional-y-reconciliaciones"
+        },
+        {
+          icon: "sdkTx",
+          t: "SDK Tx",
+          d: "Librerías para integración de transferencias internacionales.",
+          href: "https://docs.zelify.com/servicios-financieros/tx#sdk-tx"
+        },
+      ],
+    },
+    payments: {
+      title: "Descripción General",
+      sub: "Procesador de pagos unificado que soporta múltiples métodos: tarjetas, llaves personalizadas o métodos de contacto.",
+      features: [
+        {
+          icon: "multiPlatform",
+          t: "Procesamiento Multiplataforma",
+          d: "Tarjeta, billetera, transferencia.",
+          href: "https://docs.zelify.com/servicios-financieros/payments#procesamiento-multiplataforma"
+        },
+        {
+          icon: "qrSdk",
+          t: "SDK con QR",
+          d: "Pagos con códigos QR.",
+          href: "https://docs.zelify.com/servicios-financieros/payments#sdk-con-qr"
+        },
+        {
+          icon: "recurringPayments",
+          t: "Pagos recurrentes",
+          d: "Sistema inteligente para suscripciones.",
+          href: "https://docs.zelify.com/servicios-financieros/payments#pagos-recurrentes"
+        },
+        {
+          icon: "customKeys",
+          t: "Llaves personalizadas",
+          d: "Identificación única de usuario para pagos rápidos.",
+          href: "https://docs.zelify.com/servicios-financieros/payments#llaves-personalizadas"
+        },
+        {
+          icon: "sdkPayments",
+          t: "SDK",
+          d: "Librerías pre-construidas para integración.",
+          href: "https://docs.zelify.com/servicios-financieros/payments#sdk"
+        },
+      ],
+    },
+    biz: {
+      title: "Descripción General",
+      sub: "Plataforma para que comerciantes gestionen sus negocios, productos y promociones en el ecosistema.",
+      features: [
+        {
+          icon: "merchantRegistration",
+          t: "Registro de comercios",
+          d: "Permite a las empresas crear su perfil.",
+          href: "https://docs.zelify.com/servicios-financieros/discounts#registro-de-comercios"
+        },
+        {
+          icon: "categoryManagement",
+          t: "Gestión de categorías",
+          d: "Organización de catálogo de productos y servicios.",
+          href: "https://docs.zelify.com/servicios-financieros/discounts#gesti%C3%B3n-de-categor%C3%ADas"
+        },
+        {
+          icon: "productManagement",
+          t: "Gestión de productos",
+          d: "Administración de inventario y detalles de productos.",
+          href: "https://docs.zelify.com/servicios-financieros/discounts#gesti%C3%B3n-de-productos"
+        },
+        {
+          icon: "discountPromotion",
+          t: "Gestión de descuentos",
+          d: "Diseño y publicación de campañas promocionales.",
+          href: "https://docs.zelify.com/servicios-financieros/discounts#gesti%C3%B3n-de-descuentos-y-promociones"
+        },
+        {
+          icon: "merchantGeolocation",
+          t: "Geolocalización de Comercios",
+          d: "Muestra establecimientos en el mapa interactivo.",
+          href: "https://docs.zelify.com/servicios-financieros/discounts#geolocalizaci%C3%B3n-de-comercios"
+        },
+        {
+          icon: "paymentsCommercial",
+          t: "Pagos y Liquidación Comercial",
+          d: "Recepción de pagos y gestión de flujo de efectivo.",
+          href: "https://docs.zelify.com/servicios-financieros/discounts#pagos-y-liquidaci%C3%B3n-comercial"
+        },
+        {
+          icon: "commercialAnalysis",
+          t: "Análisis y Reportes",
+          d: "Conciliaciones automáticas y métricas.",
+          href: "https://docs.zelify.com/servicios-financieros/discounts#an%C3%A1lisis-y-reportes-comerciales"
+        },
+        {
+          icon: "sdkDiscount",
+          t: "SDK Discount",
+          d: "Herramientas de desarrollo para integración comercial.",
+          href: "https://docs.zelify.com/servicios-financieros/discounts#sdk-discount"
+        },
+      ],
+    },
+    matilda: {
+      title: "Descripción General",
+      sub: "Plataforma de IA para finanzas que analiza comportamiento, ofrece soporte y genera reportes.",
+      features: [
+        {
+          icon: "behaviorAnalysis",
+          t: "Análisis de comportamiento",
+          d: "Analiza patrones de gasto mediante IA.",
+          href: "https://docs.zelify.com/servicios-financieros/alaiza-ia#an%C3%A1lisis-de-comportamiento"
+        },
+        {
+          icon: "smartSupportChat",
+          t: "Chat de soporte - Smart Support",
+          d: "Asistencia automática basada en IA conversacional.",
+          href: "https://docs.zelify.com/servicios-financieros/alaiza-ia#chat-de-soporte-smart-support"
+        },
+        {
+          icon: "personalFinance",
+          t: "Finanzas Personales",
+          d: "Visión integral de ingresos, gastos y metas.",
+          href: "https://docs.zelify.com/servicios-financieros/alaiza-ia#finanzas-personales"
+        },
+        {
+          icon: "promptBasedReporting",
+          t: "Reportes Basados en Prompts",
+          d: "Generación de reportes con lenguaje natural.",
+          href: "https://docs.zelify.com/servicios-financieros/alaiza-ia#reportes-basados-en-prompts"
+        },
+        {
+          icon: "sdkAlaiza",
+          t: "SDK",
+          d: "Integración de capacidades de IA.",
+          href: "https://docs.zelify.com/servicios-financieros/alaiza-ia#sdk"
         },
       ],
     },
@@ -219,321 +475,37 @@ import "../styles/navbar.css";
       sub: "Plataforma integral para emisión, procesamiento y gestión de tarjetas físicas y virtuales.",
       features: [
         {
-          icon: "issuing",
-          t: "Emisión",
-          d: "Permite registrar, autenticar y autorizar usuarios.",
+          icon: "binSponsorship",
+          t: "BIN Sponsorship",
+          d: "Patrocinio de BIN para emisión de tarjetas.",
+          href: "https://docs.zelify.com/servicios-financieros/cards#bin-sponsorship"
         },
         {
-          icon: "processingPlatform",
-          t: "Procesamiento y Plataforma",
-          d: "Gestiona el flujo completo de transacciones.",
+          icon: "processing",
+          t: "Procesamiento",
+          d: "Consumer.",
+          href: "https://docs.zelify.com/servicios-financieros/cards#procesamiento"
         },
         {
-          icon: "tokenization",
-          t: "Tokenización",
-          d: "Proceso de seguridad financiera que reemplaza datos sensibles con un token.",
+          icon: "corporateProcessing",
+          t: "Procesamiento Corporativo",
+          d: "Corporate.",
+          href: "https://docs.zelify.com/servicios-financieros/cards#procesamiento-corporativo"
         },
         {
-          icon: "3ds",
-          t: "3DS",
-          d: "Autenticación 3DS verifica transacciones mediante códigos OTP.",
+          icon: "additionalModules",
+          t: "Módulos adicionales",
+          d: "Seguridad y operación.",
+          href: "https://docs.zelify.com/servicios-financieros/cards#m%C3%B3dulos-adicionales"
         },
         {
-          icon: "disputesChargebacks",
-          t: "Disputas y Contracargos",
-          d: "Automatiza la gestión de disputas.",
-        },
-        {
-          icon: "accountAggregation",
-          t: "Agregación de Cuenta con Tarjeta",
-          d: "Permite vincular una tarjeta como fuente de validación.",
-        },
-        {
-          icon: "digitalWallets",
-          t: "Carteras Digitales",
-          d: "Compatible con Apple Pay, Google Pay y otras carteras.",
-        },
-        {
-          icon: "corporateCards",
-          t: "Tarjetas Corporativas",
-          d: "Emite tarjetas de crédito o débito corporativas.",
-        },
-        {
-          icon: "cashbackService",
-          t: "Servicio de Cashback",
-          d: "Permite que las tarjetas ofrezcan beneficios.",
-        },
-        {
-          icon: "subscriptionManagement",
-          t: "Gestión de Suscripciones",
-          d: "Automatiza pagos recurrentes, renovaciones y recordatorios.",
-        },
-        {
-          icon: "riskControlDynamic",
-          t: "Control de Riesgo y Reglas Dinámicas",
-          d: "Reglas personalizadas para límites de gasto, bloqueo automático y alertas en tiempo real.",
-        },
-        {
-          icon: "reportingAuditAnalytics",
-          t: "Reportes, Auditoría y Análisis",
-          d: "Tableros, conciliaciones y análisis en tiempo real.",
+          icon: "collaterals",
+          t: "Colaterales",
+          d: "Programas especiales.",
+          href: "https://docs.zelify.com/servicios-financieros/cards#colaterales"
         },
       ],
     },
-    transfers: {
-      title: "Overview",
-      sub: "Módulo para movimientos instantáneos de dinero entre cuentas digitales del ecosistema Zelify.",
-      features: [
-        {
-          icon: "transferQuoteValidation",
-          t: "Transfer Quote & Validation",
-          d: "Generates a pre-simulation of national and international transfers.",
-        },
-        {
-          icon: "internalTransfers",
-          t: "Internal Transfers",
-          d: "Enables transfers between linked accounts.",
-        },
-        {
-          icon: "interbankLocaltransfer",
-          t: "Interbank / Local Transfers",
-          d: "Allows transfers between different banks in several countries.",
-        },
-        {
-          icon: "accountBalanceValidation",
-          t: "Account & Balance Validation",
-          d: "Checks if an account exists, is enabled for transfers, and shows the current balance.",
-        },
-        {
-          icon: "processingReconciliation",
-          t: "Processing & Reconciliation",
-          d: "Provides real-time updates on the status of transactions.",
-        },
-        {
-          icon: "transactionalNotification",
-          t: "Transactional Notifications",
-          d: "Notifies users via SMS, email, or WhatsApp for any transfer or account movement.",
-        },
-        {
-          icon: "transactionLimits",
-          t: "Transaction Limits",
-          d: "Allows setting custom rules and limits for account types within an organization.",
-        },
-        {
-          icon: "payIn",
-          t: "Pay-in / Cash-in Notifications",
-          d: "Manages notifications when money is received via transfer or deposit.",
-        },
-        {
-          icon: "cashOut",
-          t: "Cash-out / Pay-out Notifications",
-          d: "Manages notifications for outgoing transfers once completed or updated.",
-        },
-        {
-          icon: "serviceProvideListing",
-          t: "Service Provider Listing",
-          d: "Lists all approved companies in a country for making basic service payments.",
-        },
-        {
-          icon: "basicServicePayments",
-          t: "Basic Service Payments",
-          d: "Executes payments, debiting user funds for services with minimal info.",
-        },
-        {
-          icon: "favoriteServicePaymentSetup",
-          t: "Favorites Setup for Service Payments",
-          d: "Allows users to create a list of favorite service providers for quick payments.",
-        },
-        {
-          icon: "accountStatements",
-          t: "Account Statements & PDF Reports",
-          d: "Provides account statements in PDF format and other report types.",
-        },
-      ],
-    },
-    international: {
-      title: "Overview",
-      sub: "Solución para gestionar y ejecutar transferencias internacionales B2C, B2B y P2P entre Latinoamérica y Estados Unidos.",
-      features: [
-        {
-          icon: "fxQuote",
-          t: "FX Quote & Currency Conversion",
-          d: "Provides dynamic exchange rates between local and international currencies.",
-        },
-        {
-          icon: "internationalAccount",
-          t: "International Account Validation",
-          d: "Verifies that recipient accounts comply with IBAN, CLABE or SWIFT.",
-        },
-        {
-          icon: "transferInitiation",
-          t: "Transfer Initiation",
-          d: "Creates the international transfer operation with sender and recipient details.",
-        },
-        {
-          icon: "trackingConfirmation",
-          t: "Tracking & Confirmation",
-          d: "Tracks the transfer status in real time.",
-        },
-        {
-          icon: "internationalSettlement",
-          t: "International Settlement & Reconciliation",
-          d: "Performs automatic reconciliation with international payment networks.",
-        },
-      ],
-    },
-    biz: {
-      title: "Descripción General",
-      sub: "Plataforma para que comerciantes, restaurantes y empresas se unan al ecosistema Zelify y ofrezcan beneficios, descuentos y servicios financieros.",
-      features: [
-        {
-          icon: "merchantRegistration",
-          t: "Registro de Comerciante - Solución Propietaria",
-          d: "Permite a las empresas crear su perfil dentro de Zelify.",
-        },
-        {
-          icon: "discountPromotion",
-          t: "Gestión de Descuentos y Promociones",
-          d: "Permite a los comerciantes diseñar, publicar y gestionar descuentos exclusivos o campañas promocionales.",
-        },
-        {
-          icon: "merchantGeolocation",
-          t: "Geolocalización de Comerciantes",
-          d: "Muestra los establecimientos en el mapa interactivo de Zelify.",
-        },
-        {
-          icon: "paymentsCommercial",
-          t: "Pagos y Liquidación Comercial",
-          d: "Permite a los comerciantes recibir pagos electrónicos, gestionar el flujo de efectivo y realizar conciliaciones automáticas.",
-        },
-        {
-          icon: "commercialAnalysis",
-          t: "Análisis Comercial e Informes",
-          d: "Realiza conciliaciones automáticas con redes de pago.",
-        },
-      ],
-    },
-    matilda: {
-      title: "Descripción General",
-      sub: "Plataforma de IA para finanzas que analiza comportamiento de usuarios, ofrece soporte conversacional, genera contenido de marca y herramientas de finanzas personales con reportes basados en lenguaje natural.",
-      features: [
-        {
-          icon: "behaviorAnalysis",
-          t: "Análisis de Comportamiento",
-          d: "Analiza patrones de gasto, ahorro e interacción financiera mediante IA. Detecta hábitos, anticipa necesidades y ayuda a prevenir riesgos de endeudamiento o fraude.",
-        },
-        {
-          icon: "smartSupportChat",
-          t: "Chat de Soporte - Smart Support",
-          d: "Sistema de asistencia automática basado en IA conversacional que resuelve dudas sobre productos financieros, transacciones o servicios a través de un SDK.",
-        },
-        {
-          icon: "contentMarketing",
-          t: "Marketing de Contenido",
-          d: "Utiliza modelos de lenguaje para crear contenido relevante, coherente con la identidad de marca y optimizado para canales digitales y redes sociales.",
-        },
-        {
-          icon: "personalFinance",
-          t: "Finanzas Personales",
-          d: "Ofrece a los usuarios una visión integral de sus ingresos, gastos, deudas y metas financieras. A través de algoritmos de predicción, Alaiza sugiere presupuestos, recordatorios de pagos y estrategias de ahorro inteligentes.",
-        },
-        {
-          icon: "promptBasedReporting",
-          t: "Reportes Basados en Prompts",
-          d: "Permite generar reportes financieros, de comportamiento o desempeño a partir de simples instrucciones en lenguaje natural.",
-        },
-      ],
-    },
-    payments: {
-      title: "Overview",
-      sub: "Procesador de pagos unificado que soporta múltiples métodos: tarjetas, llaves personalizadas o métodos de contacto. Incluye pagos recurrentes, checkout express y tokenización.",
-      features: [
-        {
-          icon: "multiPlatform",
-          t: "Multi-Platform Processing",
-          d: "Unified acceptance of payments via cards, digital wallets, transfers, and alternative methods.",
-        },
-        {
-          icon: "qrSdk",
-          t: "QR SDK",
-          d: "Development library that integrates QR code generation.",
-        },
-        {
-          icon: "tokenizationPayments",
-          t: "Tokenization",
-          d: "Secure storage of payment data using tokens.",
-        },
-        {
-          icon: "recurringPayments",
-          t: "Recurring Payments",
-          d: "Intelligent system for subscriptions and automatic billing.",
-        },
-        {
-          icon: "expressCheckout",
-          t: "Express Checkout",
-          d: "Optimized payment experience that reduces steps and boosts conversion.",
-        },
-        {
-          icon: "customKeys",
-          t: "Custom Keys",
-          d: "Unique user identification system that enables fast payments without repeatedly entering data.",
-        },
-        {
-          icon: "contactMethods",
-          t: "Contact Methods",
-          d: "Payment processing through multiple identification channels.",
-        },
-        {
-          icon: "sdkPayments",
-          t: "SDK",
-          d: "Pre-built development libraries for fast, customizable integration into digital applications.",
-        },
-      ],
-    },
-    // Insurance comentado - ya no se ofrece este servicio
-    /*
-    insurance: {
-      title: "Descripción General",
-      sub: "Gestión integral del ciclo de seguros: cotización multicotizador, propuestas, venta digital, catálogo de productos, webhooks, renovaciones y administración de siniestros.",
-      features: [
-        {
-          icon: "smartQuoting",
-          t: "Cotización Inteligente",
-          d: "Motor multicotizador que consulta múltiples aseguradoras en tiempo real.",
-        },
-        {
-          icon: "proposals",
-          t: "Propuestas",
-          d: "Generación y gestión de propuestas comerciales personalizadas con validación automática y pre-aprobación.",
-        },
-        {
-          icon: "digitalSales",
-          t: "Venta Digital",
-          d: "Proceso de compra embebido con checkout optimizado y múltiples métodos de pago.",
-        },
-        {
-          icon: "products",
-          t: "Productos",
-          d: "Catálogo digital completo con todos los seguros disponibles, coberturas, precios y exclusiones.",
-        },
-        {
-          icon: "webhooks",
-          t: "Webhooks",
-          d: "Notificaciones automáticas en tiempo real sobre cambios de estado y eventos del ciclo del seguro.",
-        },
-        {
-          icon: "renewals",
-          t: "Renovaciones",
-          d: "Gestión automatizada del proceso de renovación con recordatorios programados y actualización de información.",
-        },
-        {
-          icon: "claims",
-          t: "Siniestros",
-          d: "Plataforma digital para reportar, documentar y realizar seguimiento en tiempo real de reclamos.",
-        },
-      ],
-    },
-    */
   };
 
   // Catálogo de contenidos por pestaña - Versión en Inglés
@@ -545,171 +517,116 @@ import "../styles/navbar.css";
         {
           icon: "auth",
           t: "Authentication",
-          d: "Allows register, authenticate, and authorize users.",
+          d: "OTP email, OTP SMS, dynamic registration, credentials login, SSO, social login, biometrics.",
+          href: "https://docs.zelify.com/financial-services/auth#authentication"
         },
         {
           icon: "globe",
           t: "Geolocation",
-          d: "Locates, maps, and analyzes locations with precision.",
+          d: "Direct and reverse geocoding.",
+          href: "https://docs.zelify.com/financial-services/auth#geolocation"
         },
         {
           icon: "device",
-          t: "Device information",
-          d: "Collects device information for security and analytics.",
+          t: "Device Information",
+          d: "Metadata, VPN detection.",
+          href: "https://docs.zelify.com/financial-services/auth#device-information"
         },
       ],
     },
     identity: {
       title: "Overview",
-      sub: "User identity verification through facial recognition, document validation, and biometric checks. Compatible with international standards.",
+      sub: "User identity verification through facial recognition, document validation, and biometric checks.",
       features: [
         {
           icon: "documentExtraction",
-          t: "Document extraction",
-          d: "Optical Character Recognition (OCR).",
+          t: "Document Extraction",
+          d: "ID, passport, driver's license.",
+          href: "https://docs.zelify.com/financial-services/identity#document-extraction"
         },
         {
           icon: "biometricVerification",
-          t: "Biometric verification",
-          d: "Facial comparison and biometric validation.",
+          t: "Biometric Verification",
+          d: "Photo liveness check.",
+          href: "https://docs.zelify.com/financial-services/identity#biometric-verification"
         },
         {
           icon: "videoVerification",
-          t: "Video verification",
-          d: "Facial comparison and even voice recording.",
+          t: "Video Verification",
+          d: "Real-time liveness check.",
+          href: "https://docs.zelify.com/financial-services/identity#video-verification"
         },
         {
           icon: "integrationLayer",
           t: "Integration Layer (SDK/API)",
           d: "Centralizes digital identity.",
+          href: "https://docs.zelify.com/financial-services/identity#integration-layer-sdkapi"
         },
       ],
     },
     aml: {
       title: "Overview",
-      sub: "Risk assessment through automated verifications against PEP lists, international sanctions, and adverse media. Prevents money laundering and illicit financing.",
+      sub: "Risk assessment through automated verifications against PEP lists, international sanctions, and adverse media.",
       features: [
         {
           icon: "amlGlobalList",
-          t: "Global list screening",
-          d: "Verifies matches in more than 32 international lists.",
-        },
-        {
-          icon: "amlInternalList",
-          t: "Internal list screening",
-          d: "Custom list upload for additional validation.",
+          t: "Global Lists Evaluation",
+          d: "Global, PEP, internal lists, AML status.",
+          href: "https://docs.zelify.com/financial-services/aml#global-lists-evaluation"
         },
         {
           icon: "amlTransactionMonitoring",
-          t: "Transaction monitoring",
-          d: "Monitors transactions and suspicious financial behavior.",
+          t: "Monitoring & Operations",
+          d: "Transactions, alerts, risk profile.",
+          href: "https://docs.zelify.com/financial-services/aml#monitoring-operations"
         },
         {
           icon: "amlAdverseMedia",
-          t: "Adverse Media and Risk Intelligence",
-          d: "Identifies parameters that could compromise the client's reputation.",
+          t: "Adverse Media & Risk Intelligence",
+          d: "Reputation, risk intelligence.",
+          href: "https://docs.zelify.com/financial-services/aml#adverse-media-risk-intelligence"
+        },
+        {
+          icon: "amlInternalList",
+          t: "Internal Lists Evaluation",
+          d: "Custom list upload for additional validation.",
+          href: "https://docs.zelify.com/financial-services/aml#internal-lists-evaluation"
         },
       ],
     },
     linking: {
       title: "Overview",
-      sub: "Allows linking bank accounts, authorizing data access, and generating secure tokens for applications to read information or initiate payments.",
+      sub: "Allows linking bank accounts, authorizing data access, and generating secure tokens.",
       features: [
         {
           icon: "bankAccount",
           t: "Bank Account Linking",
-          d: "Links bank accounts through temporary tokens or OAuth authentication.",
-        },
-        {
-          icon: "linkingSdk",
-          t: "Linking SDK",
-          d: "Identifies negative news, reports, and public mentions.",
+          d: "Link, unlink, supported banks.",
+          href: "https://docs.zelify.com/financial-services/connect#bank-account-linking"
         },
         {
           icon: "accountOwnerVerify",
-          t: "Account and Ownership Verification",
-          d: "Allows companies to upload their own lists.",
-        },
-        {
-          icon: "accessFinancialData",
-          t: "Access to Financial Data",
-          d: "Collects device information for security and analytics.",
+          t: "Account & Ownership Verification",
+          d: "Micro-deposits, status, and history.",
+          href: "https://docs.zelify.com/financial-services/connect#account-ownership-verification"
         },
         {
           icon: "digitalAccount",
           t: "Digital Accounts",
-          d: "Allows creating digital accounts for a user.",
+          d: "Create, update, activate, deactivate, delete.",
+          href: "https://docs.zelify.com/financial-services/connect#digital-accounts"
         },
         {
           icon: "creationClabeAc",
-          t: "Creation of CLABE Accounts",
-          d: "In Mexico, allows creating CLABE accounts.",
-        },
-      ],
-    },
-    cards: {
-      title: "Overview",
-      sub: "Comprehensive platform for issuing, processing, and managing physical and virtual cards.",
-      features: [
-        {
-          icon: "issuing",
-          t: "Issuing",
-          d: "Allows register, authenticate, and authorize users.",
+          t: "CLABE Account Creation",
+          d: "Individual and bulk creation, query, and detail.",
+          href: "https://docs.zelify.com/financial-services/connect#clabe-account-creation"
         },
         {
-          icon: "processingPlatform",
-          t: "Processing & Platform",
-          d: "Manages the complete transaction flow.",
-        },
-        {
-          icon: "tokenization",
-          t: "Tokenization",
-          d: "Financial security process that replaces sensitive data with a token.",
-        },
-        {
-          icon: "3ds",
-          t: "3DS",
-          d: "3DS authentication verifies transactions through OTP codes.",
-        },
-        {
-          icon: "disputesChargebacks",
-          t: "Disputes & Chargebacks",
-          d: "Automates dispute management.",
-        },
-        {
-          icon: "accountAggregation",
-          t: "Account Aggregation with Card",
-          d: "Allows linking a card as a validation source.",
-        },
-        {
-          icon: "digitalWallets",
-          t: "Digital Wallets",
-          d: "Compatible with Apple Pay, Google Pay, and other wallets.",
-        },
-        {
-          icon: "corporateCards",
-          t: "Corporate Cards",
-          d: "Issues corporate credit or debit cards.",
-        },
-        {
-          icon: "cashbackService",
-          t: "Cashback Service",
-          d: "Allows cards to offer benefits.",
-        },
-        {
-          icon: "subscriptionManagement",
-          t: "Subscription Management",
-          d: "Automates recurring payments, renewals, and reminders.",
-        },
-        {
-          icon: "riskControlDynamic",
-          t: "Risk Control & Dynamic Rules",
-          d: "Custom rules for spending limits, automatic blocking, and real-time alerts.",
-        },
-        {
-          icon: "reportingAuditAnalytics",
-          t: "Reporting, Audit & Analytics",
-          d: "Dashboards, reconciliations, and real-time analytics.",
+          icon: "linkingSdk",
+          t: "Linking SDK",
+          d: "Development libraries for fast integration.",
+          href: "https://docs.zelify.com/financial-services/connect#linking-sdk"
         },
       ],
     },
@@ -719,254 +636,282 @@ import "../styles/navbar.css";
       features: [
         {
           icon: "transferQuoteValidation",
-          t: "Transfer Quote & Validation",
-          d: "Generates a pre-simulation of national and international transfers.",
+          t: "Quote & Transfer Validation",
+          d: "Generates transfer pre-simulation.",
+          href: "https://docs.zelify.com/financial-services/transfers#quote-transfer-validation"
         },
         {
           icon: "internalTransfers",
           t: "Internal Transfers",
           d: "Enables transfers between linked accounts.",
+          href: "https://docs.zelify.com/financial-services/transfers#internal-transfers"
         },
         {
           icon: "interbankLocaltransfer",
-          t: "Interbank / Local Transfers",
-          d: "Allows transfers between different banks in several countries.",
-        },
-        {
-          icon: "accountBalanceValidation",
-          t: "Account & Balance Validation",
-          d: "Checks if an account exists, is enabled for transfers, and shows the current balance.",
-        },
-        {
-          icon: "processingReconciliation",
-          t: "Processing & Reconciliation",
-          d: "Provides real-time updates on the status of transactions.",
-        },
-        {
-          icon: "transactionalNotification",
-          t: "Transactional Notifications",
-          d: "Notifies users via SMS, email, or WhatsApp for any transfer or account movement.",
-        },
-        {
-          icon: "transactionLimits",
-          t: "Transaction Limits",
-          d: "Allows setting custom rules and limits for account types within an organization.",
+          t: "Interbank & Local Transfers",
+          d: "Allows transfers between different banks.",
+          href: "https://docs.zelify.com/financial-services/transfers#interbank-local-transfers"
         },
         {
           icon: "payIn",
           t: "Pay-in / Cash-in Notifications",
-          d: "Manages notifications when money is received via transfer or deposit.",
+          d: "Manages incoming money notifications.",
+          href: "https://docs.zelify.com/financial-services/transfers#pay-in-cash-in-notifications"
         },
         {
           icon: "cashOut",
-          t: "Cash-out / Pay-out Notifications",
-          d: "Manages notifications for outgoing transfers once completed or updated.",
-        },
-        {
-          icon: "serviceProvideListing",
-          t: "Service Provider Listing",
-          d: "Lists all approved companies in a country for making basic service payments.",
+          t: "Pay-out / Cash-out Notifications",
+          d: "Manages outgoing transfer notifications.",
+          href: "https://docs.zelify.com/financial-services/transfers#pay-out-cash-out-notifications"
         },
         {
           icon: "basicServicePayments",
-          t: "Basic Service Payments",
-          d: "Executes payments, debiting user funds for services with minimal info.",
+          t: "Basic & Digital Service Payments",
+          d: "Executes service payments with minimal info.",
+          href: "https://docs.zelify.com/financial-services/transfers#basic-digital-service-payments"
         },
         {
-          icon: "favoriteServicePaymentSetup",
-          t: "Favorites Setup for Service Payments",
-          d: "Allows users to create a list of favorite service providers for quick payments.",
+          icon: "giftcards",
+          t: "Giftcards",
+          d: "Gift card purchase and management.",
+          href: "https://docs.zelify.com/financial-services/transfers#basic-digital-service-payments__giftcards"
+        },
+        {
+          icon: "accountBalanceValidation",
+          t: "Account & Balance Validation",
+          d: "Checks if an account exists and shows balance.",
+          href: "https://docs.zelify.com/financial-services/transfers#account-balance-validation"
+        },
+        {
+          icon: "processingReconciliation",
+          t: "Processing & Reconciliation",
+          d: "Real-time updates on transaction status.",
+          href: "https://docs.zelify.com/financial-services/transfers#processing-reconciliation"
+        },
+        {
+          icon: "transactionLimits",
+          t: "Transactional Limits",
+          d: "Allows setting custom rules and limits.",
+          href: "https://docs.zelify.com/financial-services/transfers#transactional-limits"
         },
         {
           icon: "accountStatements",
           t: "Account Statements & PDF Reports",
-          d: "Provides account statements in PDF format and other report types.",
+          d: "Provides account statements in PDF.",
+          href: "https://docs.zelify.com/financial-services/transfers#account-statements-pdf-reports"
+        },
+        {
+          icon: "sdkTransfers",
+          t: "SDK Transfers",
+          d: "Libraries for transfer integration.",
+          href: "https://docs.zelify.com/financial-services/transfers#sdk-transfers"
         },
       ],
     },
     international: {
       title: "Overview",
-      sub: "Solution for managing and executing international B2C, B2B, and P2P transfers between Latin America and the United States.",
+      sub: "Solution for managing and executing international B2C, B2B, and P2P transfers.",
       features: [
         {
           icon: "fxQuote",
-          t: "FX Quote & Currency Conversion",
-          d: "Provides dynamic exchange rates between local and international currencies.",
+          t: "Quote & Currency Conversion",
+          d: "Provides dynamic exchange rates.",
+          href: "https://docs.zelify.com/financial-services/tx#quote-currency-conversion"
         },
         {
           icon: "internationalAccount",
           t: "International Account Validation",
-          d: "Verifies that recipient accounts comply with IBAN, CLABE or SWIFT.",
+          d: "Verifies IBAN, CLABE, or SWIFT compliance.",
+          href: "https://docs.zelify.com/financial-services/tx#international-account-validation"
         },
         {
           icon: "transferInitiation",
           t: "Transfer Initiation",
-          d: "Creates the international transfer operation with sender and recipient details.",
+          d: "Creates operation with sender/recipient details.",
+          href: "https://docs.zelify.com/financial-services/tx#transfer-initiation"
         },
         {
           icon: "trackingConfirmation",
           t: "Tracking & Confirmation",
-          d: "Tracks the transfer status in real time.",
+          d: "Tracks transfer status in real time.",
+          href: "https://docs.zelify.com/financial-services/tx#tracking-confirmation"
         },
         {
           icon: "internationalSettlement",
           t: "International Settlement & Reconciliation",
-          d: "Performs automatic reconciliation with international payment networks.",
-        },
-      ],
-    },
-    biz: {
-      title: "Overview",
-      sub: "Platform for merchants, restaurants, and companies to join the Zelify ecosystem and offer benefits, discounts, and financial services.",
-      features: [
-        {
-          icon: "merchantRegistration",
-          t: "Merchant Registration - Proprietary Solution",
-          d: "Allows businesses to create their profile within Zelify.",
+          d: "Automatic reconciliation with payment networks.",
+          href: "https://docs.zelify.com/financial-services/tx#international-settlement-reconciliation"
         },
         {
-          icon: "discountPromotion",
-          t: "Discount & Promotion Management",
-          d: "Allows merchants to design, publish, and manage exclusive discounts or promotional campaigns.",
-        },
-        {
-          icon: "merchantGeolocation",
-          t: "Merchant Geolocation",
-          d: "Displays establishments on Zelify's interactive map.",
-        },
-        {
-          icon: "paymentsCommercial",
-          t: "Payments & Commercial Settlement",
-          d: "Allows merchants to receive electronic payments, manage cash flow, and perform automatic reconciliations.",
-        },
-        {
-          icon: "commercialAnalysis",
-          t: "Commercial Analysis & Reporting",
-          d: "Performs automatic reconciliations with payment networks.",
-        },
-      ],
-    },
-    matilda: {
-      title: "Overview",
-      sub: "AI platform for finance that analyzes user behavior, offers conversational support, generates brand content, and personal finance tools with natural language-based reports.",
-      features: [
-        {
-          icon: "behaviorAnalysis",
-          t: "Behavior Analysis",
-          d: "Analyzes spending, saving, and financial interaction patterns through AI. Detects habits, anticipates needs, and helps prevent debt or fraud risks.",
-        },
-        {
-          icon: "smartSupportChat",
-          t: "Smart Support Chat",
-          d: "Automated assistance system based on conversational AI that resolves questions about financial products, transactions, or services through an SDK.",
-        },
-        {
-          icon: "contentMarketing",
-          t: "Content Marketing",
-          d: "Uses language models to create relevant content, aligned with brand identity and optimized for digital channels and social networks.",
-        },
-        {
-          icon: "personalFinance",
-          t: "Personal Finance",
-          d: "Offers users a comprehensive view of their income, expenses, debts, and financial goals. Through prediction algorithms, Alaiza suggests budgets, payment reminders, and smart savings strategies.",
-        },
-        {
-          icon: "promptBasedReporting",
-          t: "Prompt-Based Reporting",
-          d: "Allows generating financial, behavioral, or performance reports from simple natural language instructions.",
+          icon: "sdkTx",
+          t: "SDK Tx",
+          d: "Libraries for international transfer integration.",
+          href: "https://docs.zelify.com/financial-services/tx#sdk-tx"
         },
       ],
     },
     payments: {
       title: "Overview",
-      sub: "Unified payment processor supporting multiple methods: cards, custom keys, or contact methods. Includes recurring payments, express checkout, and tokenization.",
+      sub: "Unified payment processor supporting multiple methods: cards, custom keys, or contact methods.",
       features: [
         {
           icon: "multiPlatform",
-          t: "Multi-Platform Processing",
-          d: "Unified acceptance of payments via cards, digital wallets, transfers, and alternative methods.",
+          t: "Multi-platform Processing",
+          d: "Card, wallet, transfer.",
+          href: "https://docs.zelify.com/financial-services/payments#multi-platform-processing"
         },
         {
           icon: "qrSdk",
-          t: "QR SDK",
-          d: "Development library that integrates QR code generation.",
-        },
-        {
-          icon: "tokenizationPayments",
-          t: "Tokenization",
-          d: "Secure storage of payment data using tokens.",
+          t: "SDK with QR",
+          d: "Payments with QR codes.",
+          href: "https://docs.zelify.com/financial-services/payments#sdk-with-qr"
         },
         {
           icon: "recurringPayments",
           t: "Recurring Payments",
-          d: "Intelligent system for subscriptions and automatic billing.",
-        },
-        {
-          icon: "expressCheckout",
-          t: "Express Checkout",
-          d: "Optimized payment experience that reduces steps and boosts conversion.",
+          d: "Intelligent system for subscriptions.",
+          href: "https://docs.zelify.com/financial-services/payments#recurring-payments"
         },
         {
           icon: "customKeys",
           t: "Custom Keys",
-          d: "Unique user identification system that enables fast payments without repeatedly entering data.",
-        },
-        {
-          icon: "contactMethods",
-          t: "Contact Methods",
-          d: "Payment processing through multiple identification channels.",
+          d: "Unique user identification for fast payments.",
+          href: "https://docs.zelify.com/financial-services/payments#custom-keys"
         },
         {
           icon: "sdkPayments",
           t: "SDK",
-          d: "Pre-built development libraries for fast, customizable integration into digital applications.",
+          d: "Pre-built libraries for integration.",
+          href: "https://docs.zelify.com/financial-services/payments#sdk"
         },
       ],
     },
-    // Insurance comentado - ya no se ofrece este servicio
-    /*
-    insurance: {
+    biz: {
       title: "Overview",
-      sub: "Comprehensive insurance cycle management: multi-quote engine, proposals, digital sales, product catalog, webhooks, renewals, and claims administration.",
+      sub: "Platform for merchants to manage their business, products, and promotions in the ecosystem.",
       features: [
         {
-          icon: "smartQuoting",
-          t: "Smart Quoting",
-          d: "Multi-quote engine that queries multiple insurers in real time.",
+          icon: "merchantRegistration",
+          t: "Merchant Registration",
+          d: "Allows businesses to create their profile.",
+          href: "https://docs.zelify.com/financial-services/discounts#merchant-registration"
         },
         {
-          icon: "proposals",
-          t: "Proposals",
-          d: "Generation and management of personalized commercial proposals with automatic validation and pre-approval.",
+          icon: "categoryManagement",
+          t: "Category Management",
+          d: "Organization of product and service catalogs.",
+          href: "https://docs.zelify.com/financial-services/discounts#category-management"
         },
         {
-          icon: "digitalSales",
-          t: "Digital Sales",
-          d: "Embedded purchase process with optimized checkout and multiple payment methods.",
+          icon: "productManagement",
+          t: "Product Management",
+          d: "Inventory and product detail administration.",
+          href: "https://docs.zelify.com/financial-services/discounts#product-management"
         },
         {
-          icon: "products",
-          t: "Products",
-          d: "Complete digital catalog with all available insurance products, coverages, prices, and exclusions.",
+          icon: "discountPromotion",
+          t: "Discounts & Promotions Management",
+          d: "Design and publish promotional campaigns.",
+          href: "https://docs.zelify.com/financial-services/discounts#discounts-promotions-management"
         },
         {
-          icon: "webhooks",
-          t: "Webhooks",
-          d: "Automatic notifications in real time about status changes and insurance cycle events.",
+          icon: "merchantGeolocation",
+          t: "Merchant Geolocation",
+          d: "Displays establishments on the interactive map.",
+          href: "https://docs.zelify.com/financial-services/discounts#merchant-geolocation"
         },
         {
-          icon: "renewals",
-          t: "Renewals",
-          d: "Automated management of the renewal process with scheduled reminders and information updates.",
+          icon: "paymentsCommercial",
+          t: "Payments & Commercial Settlement",
+          d: "Payment reception and cash flow management.",
+          href: "https://docs.zelify.com/financial-services/discounts#payments-commercial-settlement"
         },
         {
-          icon: "claims",
-          t: "Claims",
-          d: "Digital platform to report, document, and track claims in real time.",
+          icon: "commercialAnalysis",
+          t: "Analytics & Commercial Reports",
+          d: "Automatic reconciliation and metrics.",
+          href: "https://docs.zelify.com/financial-services/discounts#analytics-commercial-reports"
+        },
+        {
+          icon: "sdkDiscount",
+          t: "SDK Discount",
+          d: "Development tools for commercial integration.",
+          href: "https://docs.zelify.com/financial-services/discounts#sdk-discount"
         },
       ],
     },
-    */
+    matilda: {
+      title: "Overview",
+      sub: "AI platform for finance that analyzes behavior, offers support, and generates reports.",
+      features: [
+        {
+          icon: "behaviorAnalysis",
+          t: "Behavior Analysis",
+          d: "Analyzes spending patterns using AI.",
+          href: "https://docs.zelify.com/financial-services/alaiza-ia#behavior-analysis"
+        },
+        {
+          icon: "smartSupportChat",
+          t: "Smart Support Chat",
+          d: "Automated assistance based on conversational AI.",
+          href: "https://docs.zelify.com/financial-services/alaiza-ia#smart-support-chat"
+        },
+        {
+          icon: "personalFinance",
+          t: "Personal Finance",
+          d: "Comprehensive view of income, expenses, and goals.",
+          href: "https://docs.zelify.com/financial-services/alaiza-ia#personal-finance"
+        },
+        {
+          icon: "promptBasedReporting",
+          t: "Prompt-Based Reports",
+          d: "Natural language report generation.",
+          href: "https://docs.zelify.com/financial-services/alaiza-ia#prompt-based-reports"
+        },
+        {
+          icon: "sdkAlaiza",
+          t: "SDK",
+          d: "AI capabilities integration.",
+          href: "https://docs.zelify.com/financial-services/alaiza-ia#sdk"
+        },
+      ],
+    },
+    cards: {
+      title: "Overview",
+      sub: "Comprehensive platform for issuing, processing, and managing physical and virtual cards.",
+      features: [
+        {
+          icon: "binSponsorship",
+          t: "BIN Sponsorship",
+          d: "BIN sponsorship for card issuing.",
+          href: "https://docs.zelify.com/financial-services/cards#bin-sponsorship"
+        },
+        {
+          icon: "processing",
+          t: "Processing",
+          d: "Consumer.",
+          href: "https://docs.zelify.com/financial-services/cards#processing"
+        },
+        {
+          icon: "corporateProcessing",
+          t: "Corporate Processing",
+          d: "Corporate.",
+          href: "https://docs.zelify.com/financial-services/cards#corporate-processing"
+        },
+        {
+          icon: "additionalModules",
+          t: "Additional Modules",
+          d: "Security and operation.",
+          href: "https://docs.zelify.com/financial-services/cards#additional-modules"
+        },
+        {
+          icon: "collaterals",
+          t: "Collaterals",
+          d: "Special programs.",
+          href: "https://docs.zelify.com/financial-services/cards#collaterals"
+        },
+      ],
+    },
   };
 
   // Variable para mantener el idioma actual y el DATA activo
@@ -1029,7 +974,12 @@ import "../styles/navbar.css";
       case "bankAccount":
         return `<img src="/icons/connect/bankAccount.svg" alt="Bank Account Linking icon" />`;
       case "linkingSdk":
-        return `<img src="/icons/connect/linkingSdk.svg" alt="Linking SDK icon" />`;
+      case "sdkTransfers":
+      case "sdkTx":
+      case "sdkPayments":
+      case "sdkDiscount":
+      case "sdkAlaiza":
+        return `<img src="/icons/connect/linkingSdk.svg" alt="SDK icon" />`;
       case "accountOwnerVerify":
         return `<img src="/icons/connect/accountOwnerVerify.svg" alt="Account and Ownership Verification icon" />`;
       case "accessFinancialData":
@@ -1038,98 +988,85 @@ import "../styles/navbar.css";
         return `<img src="/icons/connect/digitalAccount.svg" alt="Digital Accounts icon" />`;
       case "creationClabeAc":
         return `<img src="/icons/connect/creationClabeAc.svg" alt="Creation of CLABE Accounts icon" />`;
+      // Cards icons used for multiple purposes
       case "issuing":
-        return `<img src="/icons/cards/Issuing.svg" alt="Issuing icon" />`;
+      case "binSponsorship":
+        return `<img src="/icons/cards/Issuing.svg" alt="Issuing/BIN Sponsorship icon" />`;
       case "processingPlatform":
-        return `<img src="/icons/cards/processingPlatform.svg" alt="Processing & Platform icon" />`;
+      case "processing":
+      case "cardProcessing":
+        return `<img src="/icons/cards/processingPlatform.svg" alt="Processing icon" />`;
       case "tokenization":
         return `<img src="/icons/cards/tokenization.svg" alt="Tokenization icon" />`;
       case "3ds":
         return `<img src="/icons/cards/3ds.svg" alt="3DS icon" />`;
       case "disputesChargebacks":
-        return `<img src="/icons/cards/disputesChargebacks.svg" alt="Disputes & Chargebacks icon" />`;
+        return `<img src="/icons/cards/disputesChargebacks.svg" alt="Disputes icon" />`;
       case "accountAggregation":
-        return `<img src="/icons/cards/accountAggregation.svg" alt="Account Aggregation with Card icon" />`;
+        return `<img src="/icons/cards/accountAggregation.svg" alt="Account Aggregation icon" />`;
       case "digitalWallets":
         return `<img src="/icons/cards/digitalWallets.svg" alt="Digital Wallets icon" />`;
       case "corporateCards":
+      case "corporateProcessing":
         return `<img src="/icons/cards/corporateCards.svg" alt="Corporate Cards icon" />`;
       case "cashbackService":
-        return `<img src="/icons/cards/cashbackService.svg" alt="Cashback Service icon" />`;
+        return `<img src="/icons/cards/cashbackService.svg" alt="Cashback icon" />`;
       case "subscriptionManagement":
-        return `<img src="/icons/cards/subscriptionManagement.svg" alt="Subscription Management icon" />`;
+        return `<img src="/icons/cards/subscriptionManagement.svg" alt="Subscription icon" />`;
       case "riskControlDynamic":
-        return `<img src="/icons/cards/riskControlDynamic.svg" alt="Risk Control & Dynamic Rules icon" />`;
+        return `<img src="/icons/cards/riskControlDynamic.svg" alt="Risk Control icon" />`;
       case "reportingAuditAnalytics":
-        return `<img src="/icons/cards/reportingAuditAnalytics.svg" alt="Reporting, Audit & Analytics icon" />`;
-      case "id":
-        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="9" cy="12" r="2"/><path d="M13 11h5M13 14h5"/></svg>`;
-      case "face":
-        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01M8 15c1.5 1 6.5 1 8 0"/></svg>`;
-      case "shield":
-        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 4v5c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V7l7-4z"/></svg>`;
-      case "rules":
-        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M5 6h.01M5 12h.01M5 18h.01"/></svg>`;
-      case "score":
-        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 20v-6l4 2 4-8 4 6 4-10"/></svg>`;
-      case "case":
-        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V6a3 3 0 0 1 6 0v1"/></svg>`;
-      case "link":
-        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 1 7 0l1 1a5 5 0 0 1-7 7l-1-1"/><path d="M14 11a5 5 0 0 1-7 0l-1-1a5 5 0 0 1 7-7l1 1"/></svg>`;
-      case "sync":
-        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 15-6l3 3M21 12a9 9 0 0 1-15 6l-3-3"/><path d="M3 9v3h3M21 15v-3h-3"/></svg>`;
-      case "key":
-        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7.5" cy="11.5" r="3.5"/><path d="M11 11.5h10M18 8.5v6"/></svg>`;
-      case "card":
-        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>`;
-      case "lock":
-        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>`;
-      case "gear":
-        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06A2 2 0 1 1 7.04 2.3l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06A2 2 0 1 1 21.7 7.04l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.69.18 1.2.79 1.2 1.53S20.69 12 20 12h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>`;
-      case "send":
-        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>`;
-      case "receive":
-        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v7h7"/><path d="M21 21v-7h-7"/><path d="M3 10L13 0M11 24l10-10"/></svg>`;
-      case "report":
-        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3z"/><path d="M7 17v-6M12 17V7M17 17v-3"/></svg>`;
+        return `<img src="/icons/cards/reportingAuditAnalytics.svg" alt="Reporting icon" />`;
+      case "additionalModules":
+        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`; // Shield-like / Lock
+      case "collaterals":
+        return `<img src="/icons/insurance/proposals.svg" alt="Collaterals icon" />`;
+      
+      // Transfers reused icons
       case "transferQuoteValidation":
-        return `<img src="/icons/transfers/transferQuoteValidation.svg" alt="Transfer Quote & Validation icon" />`;
+        return `<img src="/icons/transfers/transferQuoteValidation.svg" alt="Transfer Quote icon" />`;
       case "internalTransfers":
         return `<img src="/icons/transfers/internalTransfers.svg" alt="Internal Transfers icon" />`;
       case "interbankLocaltransfer":
-        return `<img src="/icons/transfers/interbankLocaltransfer.svg" alt="Interbank / Local Transfers icon" />`;
+        return `<img src="/icons/transfers/interbankLocaltransfer.svg" alt="Interbank Transfers icon" />`;
       case "accountBalanceValidation":
-        return `<img src="/icons/transfers/accountBalanceValidation.svg" alt="Account & Balance Validation icon" />`;
+        return `<img src="/icons/transfers/accountBalanceValidation.svg" alt="Account Balance icon" />`;
       case "processingReconciliation":
-        return `<img src="/icons/transfers/processingReconciliation.svg" alt="Processing & Reconciliation icon" />`;
+        return `<img src="/icons/transfers/processingReconciliation.svg" alt="Processing Reconciliation icon" />`;
       case "transactionalNotification":
-        return `<img src="/icons/transfers/transactionalNotification.svg" alt="Transactional Notifications icon" />`;
+        return `<img src="/icons/transfers/transactionalNotification.svg" alt="Transactional Notification icon" />`;
       case "transactionLimits":
         return `<img src="/icons/transfers/transactionLimits.svg" alt="Transaction Limits icon" />`;
       case "payIn":
-        return `<img src="/icons/transfers/payIn.svg" alt="Pay-in / Cash-in Notifications icon" />`;
+        return `<img src="/icons/transfers/payIn.svg" alt="Pay-in icon" />`;
       case "cashOut":
-        return `<img src="/icons/transfers/cashOut.svg" alt="Cash-out / Pay-out Notifications icon" />`;
+        return `<img src="/icons/transfers/cashOut.svg" alt="Cash-out icon" />`;
       case "serviceProvideListing":
-        return `<img src="/icons/transfers/serviceProvideListing.svg" alt="Service Provider Listing icon" />`;
+        return `<img src="/icons/transfers/serviceProvideListing.svg" alt="Service Provider icon" />`;
       case "basicServicePayments":
         return `<img src="/icons/transfers/basicServicePayments.svg" alt="Basic Service Payments icon" />`;
       case "favoriteServicePaymentSetup":
-        return `<img src="/icons/transfers/favoriteServicePaymentSetup.svg" alt="Favorites Setup for Service Payments icon" />`;
+        return `<img src="/icons/transfers/favoriteServicePaymentSetup.svg" alt="Favorites Setup icon" />`;
       case "accountStatements":
-        return `<img src="/icons/transfers/accountStatements.svg" alt="Account Statements & PDF Reports icon" />`;
+        return `<img src="/icons/transfers/accountStatements.svg" alt="Account Statements icon" />`;
+      case "giftcards":
+        return `<img src="/icons/cards/tokenization.svg" alt="Giftcards icon" />`; // Reusing tokenization which looks like a chip/card
+
+      // Tx reused icons
       case "fxQuote":
-        return `<img src="/icons/tx/fxQuote.svg" alt="FX Quote & Currency Conversion icon" />`;
+        return `<img src="/icons/tx/fxQuote.svg" alt="FX Quote icon" />`;
       case "internationalAccount":
-        return `<img src="/icons/tx/internationalAccount.svg" alt="International Account Validation icon" />`;
+        return `<img src="/icons/tx/internationalAccount.svg" alt="International Account icon" />`;
       case "transferInitiation":
         return `<img src="/icons/tx/transferInitiation.svg" alt="Transfer Initiation icon" />`;
       case "trackingConfirmation":
-        return `<img src="/icons/tx/trackingConfirmation.svg" alt="Tracking & Confirmation icon" />`;
+        return `<img src="/icons/tx/trackingConfirmation.svg" alt="Tracking icon" />`;
       case "internationalSettlement":
-        return `<img src="/icons/tx/internationalSettlement.svg" alt="International Settlement & Reconciliation icon" />`;
+        return `<img src="/icons/tx/internationalSettlement.svg" alt="International Settlement icon" />`;
+
+      // Payments reused icons
       case "multiPlatform":
-        return `<img src="/icons/payments/multiPlatform.svg" alt="Multi-Platform Processing icon" />`;
+        return `<img src="/icons/payments/multiPlatform.svg" alt="Multi-Platform icon" />`;
       case "qrSdk":
         return `<img src="/icons/payments/qrSdk.svg" alt="QR SDK icon" />`;
       case "tokenizationPayments":
@@ -1142,30 +1079,24 @@ import "../styles/navbar.css";
         return `<img src="/icons/payments/customKeys.svg" alt="Custom Keys icon" />`;
       case "contactMethods":
         return `<img src="/icons/payments/contactMethods.svg" alt="Contact Methods icon" />`;
-      case "sdkPayments":
-        return `<img src="/icons/payments/sdk.svg" alt="SDK icon" />`;
-      case "org":
-        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v6m0 0L7 15m5-6 5 6"/><rect x="2" y="15" width="20" height="6" rx="2"/></svg>`;
-      case "users":
-        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M17 11a4 4 0 1 0-4 4h6"/><path d="M3 21a6 6 0 0 1 12 0"/></svg>`;
-      case "api":
-        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h10M4 17h7"/></svg>`;
-      case "spark":
-        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v8M12 22v-8M2 12h8M22 12h-8M5 5l5 3M19 19l-5-3M19 5l-5 3M5 19l5-3"/></svg>`;
-      case "chat":
-        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>`;
-      case "bolt":
-        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`;
+      
+      // Discounts / Biz icons
       case "merchantRegistration":
         return `<img src="/icons/discount/merchantGeo.svg" alt="Merchant Registration icon" />`;
       case "discountPromotion":
-        return `<img src="/icons/discount/discountPromotion.svg" alt="Discount & Promotion Management icon" />`;
+        return `<img src="/icons/discount/discountPromotion.svg" alt="Discount Management icon" />`;
       case "merchantGeolocation":
         return `<img src="/icons/discount/merchantGeolocation.svg" alt="Merchant Geolocation icon" />`;
       case "paymentsCommercial":
-        return `<img src="/icons/discount/paymentsCommercial.svg" alt="Payments & Commercial Settlement icon" />`;
+        return `<img src="/icons/discount/paymentsCommercial.svg" alt="Payments Commercial icon" />`;
       case "commercialAnalysis":
-        return `<img src="/icons/discount/commercialAnalysis.svg" alt="Commercial Analysis & Reporting icon" />`;
+        return `<img src="/icons/discount/commercialAnalysis.svg" alt="Commercial Analysis icon" />`;
+      case "categoryManagement":
+        return `<img src="/icons/insurance/products.svg" alt="Category Management icon" />`; // Reuse products icon
+      case "productManagement":
+         return `<img src="/icons/insurance/products.svg" alt="Product Management icon" />`; // Reuse products icon
+
+      // Matilda icons
       case "behaviorAnalysis":
         return `<img src="/icons/matilda/behaviorAnalysis.svg" alt="Behavior Analysis icon" />`;
       case "smartSupportChat":
@@ -1176,227 +1107,26 @@ import "../styles/navbar.css";
         return `<img src="/icons/matilda/personalFinance.svg" alt="Personal Finance icon" />`;
       case "promptBasedReporting":
         return `<img src="/icons/matilda/promptBasedReporting.svg" alt="Prompt-Based Reporting icon" />`;
-      // Iconos de Insurance comentados - ya no se ofrece este servicio
-      /*
-      case "smartQuoting":
-        return `<img src="/icons/insurance/smartQuoting.svg" alt="Smart Quoting icon" />`;
-      case "proposals":
-        return `<img src="/icons/insurance/proposals.svg" alt="Proposals icon" />`;
-      case "digitalSales":
-        return `<img src="/icons/insurance/digitalSales.svg" alt="Digital Sales icon" />`;
-      case "products":
-        return `<img src="/icons/insurance/products.svg" alt="Products icon" />`;
-      case "webhooks":
-        return `<img src="/icons/insurance/webhooks.svg" alt="Webhooks icon" />`;
-      case "renewals":
-        return `<img src="/icons/insurance/renewals.svg" alt="Renewals icon" />`;
-      case "claims":
-        return `<img src="/icons/insurance/claims.svg" alt="Claims icon" />`;
-      */
+
       default:
         return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg>`;
     }
   }
 
-  // Mapeo de features de Auth a URLs de documentación (bilingüe)
-  const AUTH_FEATURE_LINKS = {
-    "Autenticación": "https://docs.zelify.com/servicios-financieros/auth#autenticaci%C3%B3n",
-    "Authentication": "https://docs.zelify.com/servicios-financieros/auth#autenticaci%C3%B3n",
-    "Geolocalización": "https://docs.zelify.com/servicios-financieros/auth#geolocalizaci%C3%B3n",
-    "Geolocation": "https://docs.zelify.com/servicios-financieros/auth#geolocalizaci%C3%B3n",
-    "Información del dispositivo": "https://docs.zelify.com/servicios-financieros/auth#informaci%C3%B3n-de-dispositivo",
-    "Device information": "https://docs.zelify.com/servicios-financieros/auth#informaci%C3%B3n-de-dispositivo"
-  };
-
-  // Mapeo de features de Identity a URLs de documentación (bilingüe)
-  const IDENTITY_FEATURE_LINKS = {
-    "Extracción de documentos": "https://docs.zelify.com/servicios-financieros/identity#extracci%C3%B3n-documental",
-    "Document extraction": "https://docs.zelify.com/servicios-financieros/identity#extracci%C3%B3n-documental",
-    "Verificación biométrica": "https://docs.zelify.com/servicios-financieros/identity#verificaci%C3%B3n-biom%C3%A9trica",
-    "Biometric verification": "https://docs.zelify.com/servicios-financieros/identity#verificaci%C3%B3n-biom%C3%A9trica",
-    "Verificación por video": "https://docs.zelify.com/servicios-financieros/identity#verificaci%C3%B3n-de-v%C3%ADdeo",
-    "Video verification": "https://docs.zelify.com/servicios-financieros/identity#verificaci%C3%B3n-de-v%C3%ADdeo",
-    "Capa de Integración (SDK/API)": "https://docs.zelify.com/servicios-financieros/identity#integration-layer-sdkapi",
-    "Integration Layer (SDK/API)": "https://docs.zelify.com/servicios-financieros/identity#integration-layer-sdkapi"
-  };
-
-  // Mapeo de features de AML a URLs de documentación (bilingüe)
-  const AML_FEATURE_LINKS = {
-    "Evaluación en listas globales": "https://docs.zelify.com/servicios-financieros/aml#evaluaci%C3%B3n-en-listas-globales",
-    "Global list screening": "https://docs.zelify.com/servicios-financieros/aml#evaluaci%C3%B3n-en-listas-globales",
-    "Evaluación en listas internas": "https://docs.zelify.com/servicios-financieros/aml#evaluaci%C3%B3n-en-listas-internas",
-    "Internal list screening": "https://docs.zelify.com/servicios-financieros/aml#evaluaci%C3%B3n-en-listas-internas",
-    "Monitoreo de transacciones": "https://docs.zelify.com/servicios-financieros/aml#monitoreo-de-operaciones",
-    "Transaction monitoring": "https://docs.zelify.com/servicios-financieros/aml#monitoreo-de-operaciones",
-    "Medios Adversos e Inteligencia de Riesgo": "https://docs.zelify.com/servicios-financieros/aml#medios-adversos-e-inteligencia-de-riesgo",
-    "Adverse Media and Risk Intelligence": "https://docs.zelify.com/servicios-financieros/aml#medios-adversos-e-inteligencia-de-riesgo"
-  };
-
-  // Mapeo de features de Connect a URLs de documentación (bilingüe)
-  const CONNECT_FEATURE_LINKS = {
-    "Vinculación de Cuentas Bancarias": "https://docs.zelify.com/servicios-financieros/connect#vinculaci%C3%B3n-de-cuentas-bancarias",
-    "Bank Account Linking": "https://docs.zelify.com/servicios-financieros/connect#vinculaci%C3%B3n-de-cuentas-bancarias",
-    "SDK de Vinculación": "https://docs.zelify.com/servicios-financieros/connect#linking-sdk",
-    "Linking SDK": "https://docs.zelify.com/servicios-financieros/connect#linking-sdk",
-    "Verificación de Cuenta y Titularidad": "https://docs.zelify.com/servicios-financieros/connect#verificaci%C3%B3n-de-cuenta-y-titularidad",
-    "Account and Ownership Verification": "https://docs.zelify.com/servicios-financieros/connect#verificaci%C3%B3n-de-cuenta-y-titularidad",
-    "Acceso a Datos Financieros": "https://docs.zelify.com/servicios-financieros/connect#acceso-a-datos-financieros",
-    "Access to Financial Data": "https://docs.zelify.com/servicios-financieros/connect#acceso-a-datos-financieros",
-    "Cuentas Digitales": "https://docs.zelify.com/servicios-financieros/connect#cuentas-digitales",
-    "Digital Accounts": "https://docs.zelify.com/servicios-financieros/connect#cuentas-digitales",
-    "Creación de Cuentas CLABE": "https://docs.zelify.com/servicios-financieros/connect#creaci%C3%B3n-de-cuentas-clabe",
-    "Creation of CLABE Accounts": "https://docs.zelify.com/servicios-financieros/connect#creaci%C3%B3n-de-cuentas-clabe"
-  };
-
-  // Mapeo de features de Cards a URLs de documentación (bilingüe)
-  const CARDS_FEATURE_LINKS = {
-    "Emisión": "https://docs.zelify.com/servicios-financieros/cards#emisi%C3%B3n-issuing",
-    "Issuing": "https://docs.zelify.com/servicios-financieros/cards#emisi%C3%B3n-issuing",
-    "Procesamiento y Plataforma": "https://docs.zelify.com/servicios-financieros/cards#procesamiento-plataforma",
-    "Processing & Platform": "https://docs.zelify.com/servicios-financieros/cards#procesamiento-plataforma",
-    "Tokenización": "https://docs.zelify.com/servicios-financieros/cards#tokenizaci%C3%B3n",
-    "Tokenization": "https://docs.zelify.com/servicios-financieros/cards#tokenizaci%C3%B3n",
-    "3DS": "https://docs.zelify.com/servicios-financieros/cards#3ds",
-    "Disputas y Contracargos": "https://docs.zelify.com/servicios-financieros/cards#disputas-contracargos",
-    "Disputes & Chargebacks": "https://docs.zelify.com/servicios-financieros/cards#disputas-contracargos",
-    "Agregación de Cuenta con Tarjeta": "https://docs.zelify.com/servicios-financieros/cards#agregaci%C3%B3n-de-cuenta-con-tarjeta",
-    "Account Aggregation with Card": "https://docs.zelify.com/servicios-financieros/cards#agregaci%C3%B3n-de-cuenta-con-tarjeta",
-    "Carteras Digitales": "https://docs.zelify.com/servicios-financieros/cards#wallets-digitales",
-    "Digital Wallets": "https://docs.zelify.com/servicios-financieros/cards#wallets-digitales",
-    "Tarjetas Corporativas": "https://docs.zelify.com/servicios-financieros/cards#tarjetas-corporativas",
-    "Corporate Cards": "https://docs.zelify.com/servicios-financieros/cards#tarjetas-corporativas",
-    "Servicio de Cashback": "https://docs.zelify.com/servicios-financieros/cards#servicio-de-cashback",
-    "Cashback Service": "https://docs.zelify.com/servicios-financieros/cards#servicio-de-cashback",
-    "Gestión de Suscripciones": "https://docs.zelify.com/servicios-financieros/cards#gesti%C3%B3n-de-suscripciones",
-    "Subscription Management": "https://docs.zelify.com/servicios-financieros/cards#gesti%C3%B3n-de-suscripciones",
-    "Control de Riesgo y Reglas Dinámicas": "https://docs.zelify.com/servicios-financieros/cards#control-de-riesgo-reglas-din%C3%A1micas",
-    "Risk Control & Dynamic Rules": "https://docs.zelify.com/servicios-financieros/cards#control-de-riesgo-reglas-din%C3%A1micas",
-    "Reportes, Auditoría y Análisis": "https://docs.zelify.com/servicios-financieros/cards#reportes-auditor%C3%ADa-analytics",
-    "Reporting, Audit & Analytics": "https://docs.zelify.com/servicios-financieros/cards#reportes-auditor%C3%ADa-analytics"
-  };
-
-  // Mapeo de features de Transfers a URLs de documentación
-  const TRANSFERS_FEATURE_LINKS = {
-    "Transfer Quote & Validation": "https://docs.zelify.com/servicios-financieros/transfers#cotizaci%C3%B3n-y-validaci%C3%B3n-de-transferencias-quote",
-    "Internal Transfers": "https://docs.zelify.com/servicios-financieros/transfers#transferencias-internas",
-    "Interbank / Local Transfers": "https://docs.zelify.com/servicios-financieros/transfers#transferencias-interbancarias-o-locales",
-    "Account & Balance Validation": "https://docs.zelify.com/servicios-financieros/transfers#validaci%C3%B3n-de-cuentas-y-saldos",
-    "Processing & Reconciliation": "https://docs.zelify.com/servicios-financieros/transfers#procesamiento-y-conciliaci%C3%B3n",
-    "Transactional Notifications": "https://docs.zelify.com/servicios-financieros/transfers#notificaciones-transaccionales",
-    "Transaction Limits": "https://docs.zelify.com/servicios-financieros/transfers#limites-transaccionales",
-    "Pay-in / Cash-in Notifications": "https://docs.zelify.com/servicios-financieros/transfers#notificaciones-pay-ins-cash-ins",
-    "Cash-out / Pay-out Notifications": "https://docs.zelify.com/servicios-financieros/transfers#notificaciones-cash-outpay-outs",
-    "Service Provider Listing": "https://docs.zelify.com/servicios-financieros/transfers#obtener-compa%C3%B1%C3%ADas-para-pagos-de-servicios-en-un-pa%C3%ADs",
-    "Basic Service Payments": "https://docs.zelify.com/servicios-financieros/transfers#pagos-de-servicios-b%C3%A1sicos",
-    "Favorites Setup for Service Payments": "https://docs.zelify.com/servicios-financieros/transfers#configurar-favoritos-para-pagos-de-servicios",
-    "Account Statements & PDF Reports": "https://docs.zelify.com/servicios-financieros/transfers#estados-de-cuentas-y-reportes-pdfs"
-  };
-
-  // Mapeo de features de TX (International) a URLs de documentación
-  const TX_FEATURE_LINKS = {
-    "FX Quote & Currency Conversion": "https://docs.zelify.com/servicios-financieros/tx#cotizaci%C3%B3n-y-conversi%C3%B3n-de-divisas-fx-quote",
-    "International Account Validation": "https://docs.zelify.com/servicios-financieros/tx#validaci%C3%B3n-de-cuentas-internacionales",
-    "Transfer Initiation": "https://docs.zelify.com/servicios-financieros/tx#inicio-de-transferencia-transfer-initiation",
-    "Tracking & Confirmation": "https://docs.zelify.com/servicios-financieros/tx#seguimiento-y-confirmaci%C3%B3n-journey-operations",
-    "International Settlement & Reconciliation": "https://docs.zelify.com/servicios-financieros/tx#liquidaci%C3%B3n-internacional-y-reconciliaci%C3%B3n"
-  };
-
-  // Mapeo de features de Payments a URLs de documentación
-  const PAYMENTS_FEATURE_LINKS = {
-    "Multi-Platform Processing": "https://docs.zelify.com/servicios-financieros/payments#procesamiento-multi-plataforma",
-    "QR SDK": "https://docs.zelify.com/servicios-financieros/payments#sdk-con-qr",
-    "Tokenization": "https://docs.zelify.com/servicios-financieros/payments#tokenizaci%C3%B3n",
-    "Recurring Payments": "https://docs.zelify.com/servicios-financieros/payments#pagos-recurrentes",
-    "Express Checkout": "https://docs.zelify.com/servicios-financieros/payments#checkout-express",
-    "Custom Keys": "https://docs.zelify.com/servicios-financieros/payments#llaves-personalizadas",
-    "Contact Methods": "https://docs.zelify.com/servicios-financieros/payments#medios-de-contacto",
-    "SDK": "https://docs.zelify.com/servicios-financieros/payments#sdk"
-  };
-
-  // Mapeo de features de Discounts & Coupons a URLs de documentación (bilingüe)
-  const DISCOUNTS_FEATURE_LINKS = {
-    "Registro de Comerciante - Solución Propietaria": "https://docs.zelify.com/servicios-financieros/discounts#registro-de-comercios",
-    "Merchant Registration - Proprietary Solution": "https://docs.zelify.com/servicios-financieros/discounts#registro-de-comercios",
-    "Gestión de Descuentos y Promociones": "https://docs.zelify.com/servicios-financieros/discounts#gesti%C3%B3n-de-descuentos-y-promociones",
-    "Discount & Promotion Management": "https://docs.zelify.com/servicios-financieros/discounts#gesti%C3%B3n-de-descuentos-y-promociones",
-    "Geolocalización de Comerciantes": "https://docs.zelify.com/servicios-financieros/discounts#geolocalizaci%C3%B3n-de-comercios",
-    "Merchant Geolocation": "https://docs.zelify.com/servicios-financieros/discounts#geolocalizaci%C3%B3n-de-comercios",
-    "Pagos y Liquidación Comercial": "https://docs.zelify.com/servicios-financieros/discounts#pagos-y-liquidaci%C3%B3n-comercial",
-    "Payments & Commercial Settlement": "https://docs.zelify.com/servicios-financieros/discounts#pagos-y-liquidaci%C3%B3n-comercial",
-    "Análisis Comercial e Informes": "https://docs.zelify.com/servicios-financieros/discounts#an%C3%A1lisis-y-reportes-comerciales",
-    "Commercial Analysis & Reporting": "https://docs.zelify.com/servicios-financieros/discounts#an%C3%A1lisis-y-reportes-comerciales"
-  };
-
-  // Mapeo de features de Alaiza AI a URLs de documentación (bilingüe)
-  const ALAIZA_FEATURE_LINKS = {
-    "Análisis de Comportamiento": "https://docs.zelify.com/servicios-financieros/alaiza-ia#behavior-analysis",
-    "Behavior Analysis": "https://docs.zelify.com/servicios-financieros/alaiza-ia#behavior-analysis",
-    "Chat de Soporte - Smart Support": "https://docs.zelify.com/servicios-financieros/alaiza-ia#chat-de-soporte-smart-support",
-    "Smart Support Chat": "https://docs.zelify.com/servicios-financieros/alaiza-ia#chat-de-soporte-smart-support",
-    "Marketing de Contenido": "https://docs.zelify.com/servicios-financieros/alaiza-ia#content-marketing",
-    "Content Marketing": "https://docs.zelify.com/servicios-financieros/alaiza-ia#content-marketing",
-    "Finanzas Personales": "https://docs.zelify.com/servicios-financieros/alaiza-ia#finanzas-personales",
-    "Personal Finance": "https://docs.zelify.com/servicios-financieros/alaiza-ia#finanzas-personales",
-    "Reportes Basados en Prompts": "https://docs.zelify.com/servicios-financieros/alaiza-ia#reportes-basados-en-prompts",
-    "Prompt-Based Reporting": "https://docs.zelify.com/servicios-financieros/alaiza-ia#reportes-basados-en-prompts"
-  };
-
-  // Mapeo de features de Insurance a URLs de documentación (bilingüe) - Comentado - ya no se ofrece este servicio
-  /*
-  const INSURANCE_FEATURE_LINKS = {
-    "Cotización Inteligente": "https://docs.zelify.com/servicios-financieros/insurance#cotizaci%C3%B3n-inteligente",
-    "Smart Quoting": "https://docs.zelify.com/servicios-financieros/insurance#cotizaci%C3%B3n-inteligente",
-    "Propuestas": "https://docs.zelify.com/servicios-financieros/insurance#propuestas",
-    "Proposals": "https://docs.zelify.com/servicios-financieros/insurance#propuestas",
-    "Venta Digital": "https://docs.zelify.com/servicios-financieros/insurance#venta-digital",
-    "Digital Sales": "https://docs.zelify.com/servicios-financieros/insurance#venta-digital",
-    "Productos": "https://docs.zelify.com/servicios-financieros/insurance#productos",
-    "Products": "https://docs.zelify.com/servicios-financieros/insurance#productos",
-    "Webhooks": "https://docs.zelify.com/servicios-financieros/insurance#webhooks",
-    "Renovaciones": "https://docs.zelify.com/servicios-financieros/insurance#renovaciones",
-    "Renewals": "https://docs.zelify.com/servicios-financieros/insurance#renovaciones",
-    "Siniestros": "https://docs.zelify.com/servicios-financieros/insurance#siniestros",
-    "Claims": "https://docs.zelify.com/servicios-financieros/insurance#siniestros"
-  };
-  */
-
   // Render del contenido según pestaña
   function render(key) {
     const section = DATA[key] ?? DATA.register;
 
-    // Si es register (Auth), identity, aml, linking o cards, hacer el título un enlace a su página principal
-    if (key === "register") {
-      titleEl.innerHTML = `<a href="/auth" class="pp-title-link">${section.title} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;"><path d="M7 17L17 7M7 7h10v10"/></svg></a>`;
-    } else if (key === "identity") {
-      titleEl.innerHTML = `<a href="/identity" class="pp-title-link">${section.title} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;"><path d="M7 17L17 7M7 7h10v10"/></svg></a>`;
-    } else if (key === "aml") {
-      titleEl.innerHTML = `<a href="/amlCompliance" class="pp-title-link">${section.title} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;"><path d="M7 17L17 7M7 7h10v10"/></svg></a>`;
-    } else if (key === "linking") {
-      titleEl.innerHTML = `<a href="/openBankingConnect" class="pp-title-link">${section.title} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;"><path d="M7 17L17 7M7 7h10v10"/></svg></a>`;
-    } else if (key === "cards") {
-      titleEl.innerHTML = `<a href="/cardIssuing" class="pp-title-link">${section.title} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;"><path d="M7 17L17 7M7 7h10v10"/></svg></a>`;
-    } else if (key === "transfers") {
-      titleEl.innerHTML = `<a href="/moneyTransfers" class="pp-title-link">${section.title} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;"><path d="M7 17L17 7M7 7h10v10"/></svg></a>`;
-    } else if (key === "international") {
-      titleEl.innerHTML = `<a href="/transactions" class="pp-title-link">${section.title} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;"><path d="M7 17L17 7M7 7h10v10"/></svg></a>`;
-    } else if (key === "payments") {
-      titleEl.innerHTML = `<a href="/payments" class="pp-title-link">${section.title} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;"><path d="M7 17L17 7M7 7h10v10"/></svg></a>`;
-    } else if (key === "biz") {
-      titleEl.innerHTML = `<a href="/discountsCoupons" class="pp-title-link">${section.title} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;"><path d="M7 17L17 7M7 7h10v10"/></svg></a>`;
-    } else if (key === "matilda") {
-      titleEl.innerHTML = `<a href="/matildaAI" class="pp-title-link">${section.title} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;"><path d="M7 17L17 7M7 7h10v10"/></svg></a>`;
-    // Insurance comentado - ya no se ofrece este servicio
-    /*
-    } else if (key === "insurance") {
-      titleEl.innerHTML = `<a href="/insurance" class="pp-title-link">${section.title} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;"><path d="M7 17L17 7M7 7h10v10"/></svg></a>`;
-    */
+    // Crear el enlace del título principal si tiene ruta
+    if (KEY_TO_ROUTE[key]) {
+      titleEl.innerHTML = `<a href="${KEY_TO_ROUTE[key]}" class="pp-title-link">${section.title} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;"><path d="M7 17L17 7M7 7h10v10"/></svg></a>`;
     } else {
       titleEl.textContent = section.title;
     }
     subEl.textContent = section.sub;
 
-    // Para Cards, Transfers, International (TX), Payments (Insurance comentado - ya no se ofrece)
-    if (key === "cards" || key === "transfers" || key === "international" || key === "payments" /* || key === "insurance" */) {
+    // Aplicar clase grid si corresponde (para la mayoría de los módulos con muchos items)
+    if (section.features.length > 4) {
       listEl.classList.add("cards-grid");
     } else {
       listEl.classList.remove("cards-grid");
@@ -1405,7 +1135,7 @@ import "../styles/navbar.css";
     listEl.innerHTML = section.features
       .map((f, idx) => {
         const icon = iconSVG(f.icon);
-        const card = `
+        const cardContent = `
         <span class="pp-icon">${icon}</span>
         <div>
           <h4 class="pp-ft-title">${f.t}</h4>
@@ -1413,70 +1143,13 @@ import "../styles/navbar.css";
         </div>
       `;
 
-        // Para Auth (register), todas las features son enlaces a documentación
-        if (key === "register" && AUTH_FEATURE_LINKS[f.t]) {
-          return `<a class="pp-feature" href="${AUTH_FEATURE_LINKS[f.t]}" target="_blank" rel="noopener noreferrer">${card}</a>`;
+        // Si tiene href, es un enlace
+        if (f.href) {
+          return `<a class="pp-feature" href="${f.href}" target="_blank" rel="noopener noreferrer">${cardContent}</a>`;
+        } else {
+          // Fallback para items sin enlace (aunque ahora todos tienen)
+          return `<li class="pp-feature">${cardContent}</li>`;
         }
-        
-        // Para Identity, todas las features son enlaces a documentación
-        if (key === "identity" && IDENTITY_FEATURE_LINKS[f.t]) {
-          return `<a class="pp-feature" href="${IDENTITY_FEATURE_LINKS[f.t]}" target="_blank" rel="noopener noreferrer">${card}</a>`;
-        }
-        
-        // Para AML, todas las features son enlaces a documentación
-        if (key === "aml" && AML_FEATURE_LINKS[f.t]) {
-          return `<a class="pp-feature" href="${AML_FEATURE_LINKS[f.t]}" target="_blank" rel="noopener noreferrer">${card}</a>`;
-        }
-        
-        // Para Connect (linking), todas las features son enlaces a documentación
-        if (key === "linking" && CONNECT_FEATURE_LINKS[f.t]) {
-          return `<a class="pp-feature" href="${CONNECT_FEATURE_LINKS[f.t]}" target="_blank" rel="noopener noreferrer">${card}</a>`;
-        }
-        
-        // Para Cards, todas las features son enlaces a documentación
-        if (key === "cards" && CARDS_FEATURE_LINKS[f.t]) {
-          return `<a class="pp-feature" href="${CARDS_FEATURE_LINKS[f.t]}" target="_blank" rel="noopener noreferrer">${card}</a>`;
-        }
-        
-        // Para Transfers, todas las features son enlaces a documentación
-        if (key === "transfers" && TRANSFERS_FEATURE_LINKS[f.t]) {
-          return `<a class="pp-feature" href="${TRANSFERS_FEATURE_LINKS[f.t]}" target="_blank" rel="noopener noreferrer">${card}</a>`;
-        }
-        
-        // Para TX (International), todas las features son enlaces a documentación
-        if (key === "international" && TX_FEATURE_LINKS[f.t]) {
-          return `<a class="pp-feature" href="${TX_FEATURE_LINKS[f.t]}" target="_blank" rel="noopener noreferrer">${card}</a>`;
-        }
-        
-        // Para Payments, todas las features son enlaces a documentación
-        if (key === "payments" && PAYMENTS_FEATURE_LINKS[f.t]) {
-          return `<a class="pp-feature" href="${PAYMENTS_FEATURE_LINKS[f.t]}" target="_blank" rel="noopener noreferrer">${card}</a>`;
-        }
-        
-        // Para Discounts & Coupons (biz), todas las features son enlaces a documentación
-        if (key === "biz" && DISCOUNTS_FEATURE_LINKS[f.t]) {
-          return `<a class="pp-feature" href="${DISCOUNTS_FEATURE_LINKS[f.t]}" target="_blank" rel="noopener noreferrer">${card}</a>`;
-        }
-        
-        // Para Alaiza AI, todas las features son enlaces a documentación
-        if (key === "matilda" && ALAIZA_FEATURE_LINKS[f.t]) {
-          return `<a class="pp-feature" href="${ALAIZA_FEATURE_LINKS[f.t]}" target="_blank" rel="noopener noreferrer">${card}</a>`;
-        }
-        
-        // Insurance comentado - ya no se ofrece este servicio
-        /*
-        // Para Insurance, todas las features son enlaces a documentación
-        if (key === "insurance" && INSURANCE_FEATURE_LINKS[f.t]) {
-          return `<a class="pp-feature" href="${INSURANCE_FEATURE_LINKS[f.t]}" target="_blank" rel="noopener noreferrer">${card}</a>`;
-        }
-        */
-        
-        // 👉 El PRIMER feature (idx === 0) se vuelve link a la página de la sección para otros productos
-        if (idx === 0 && KEY_TO_ROUTE[key]) {
-          return `<a class="pp-feature" href="${KEY_TO_ROUTE[key]}">${card}</a>`;
-        }
-        // Los demás quedan como items normales
-        return `<li class="pp-feature">${card}</li>`;
       })
       .join("");
   }
