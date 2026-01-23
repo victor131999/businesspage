@@ -51,3 +51,7 @@ jspm_packages/
 # Yarn Integrity file
 .yarn-integrity
 
+# Large media files
+public/ANIMACION 1.gif
+public/home.svg
+public/images/img-blog-sec.png
