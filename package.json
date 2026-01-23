@@ -10,7 +10,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.16.1"
+    "astro": "^5.16.1",
+    "three": "^0.182.0"
   },
   "devDependencies": {
     "@astrojs/tailwind": "^5.0.0",

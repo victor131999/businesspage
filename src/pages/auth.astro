@@ -1,88 +1,707 @@
 ---
-import Navbar from "../components/navbar.astro";
-import ProductsPanel from "../components/productsPanel.astro";
-import "../styles/navbar.css";
 ---
 
-<script>
-  import { updateContent } from '../scripts/authTranslations.js';
-
-  function handleLanguageChange(lang: string) {
-    // Convertir ES/EN a es/en
-    const normalizedLang = lang.toLowerCase();
-    updateContent(normalizedLang);
-  }
-
-  // Escuchar cambios de idioma desde el navbar
-  window.addEventListener('ui:languagechange', ((event: Event) => {
-    const customEvent = event as CustomEvent<{language: string}>;
-    if (customEvent.detail?.language) {
-      handleLanguageChange(customEvent.detail.language);
-    }
-  }) as EventListener);
-
-  // Aplicar traducciones iniciales
-  document.addEventListener('DOMContentLoaded', () => {
-    // Intentar obtener el idioma actual del localStorage (que usa el navbar)
-    const storedLang = localStorage.getItem('ui-language') || 'EN';
-    handleLanguageChange(storedLang);
-  });
-</script>
-
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/png" href="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/ISO-ZELIFY-2025.png" />
     <title>Zelify — Auth</title>
   </head>
 
   <body>
-    <Navbar
-      logoSrc="/images/zelify_logo.png"
-      colors={{
-        text: "#004195",
-        textHover: "#002B62",
-        highlightBg: "#6AFF00",
-        highlightText: "#0b132b",
-        btnLightBg: "#E7EDF6",
-        btnLightHoverBg: "#DAE4F1",
-        btnLightText: "#004195",
-        btnOutline: "#E7EDF6",
-        btnOutlineHover: "#ffffff",
-        dropdownBg: "#ffffff",
-        dropdownLink: "#1e2b3a",
-        dropdownHoverBg: "#EEF3F9",
-        radius: "22px",
-      }}
-      buttons={{
-        first: { label: "Work with us", href: "/jobs" },
-        second: { label: "Business access", href: "https://www.zelify.io/" },
-        third: { label: "EN", href: "/" },
-      }}
-    />
-    <ProductsPanel />
-    <section class="hero">
-      <div class="content">
-        <span class="badge">Auth</span>
+    <header class="auth-header">
+      <a class="auth-logo" href="/">
+        <img src="/images/zelify_logo.png" alt="Zelify" />
+      </a>
+      <nav class="auth-nav" aria-label="Main navigation">
+        <a href="/products">Productos</a>
+        <a href="/nosotros">Nosotros</a>
+        <a href="/desarrollo">Desarrollo</a>
+        <a href="/otros">Otros</a>
+      </nav>
+      <div class="auth-actions">
+        <a href="https://www.zelify.com/clips" class="btn-demo" target="_blank" rel="noopener noreferrer">demo</a>
+        <button class="lang-pill" aria-label="Idioma actual español">ES</button>
+      </div>
+    </header>
 
-        <h1 class="title">
-          Allows secure user registration,<br/>
-          authentication, and authorization<br/>
-          in web and mobile applications.
+    <main class="auth-main">
+      <section class="auth-hero">
+        <h1 class="auth-title">
+          Entrada simple, control<br />
+          total, cero fricción.
         </h1>
-
-        <p class="description">
-          Managing login with proprietary or third-party credentials<br/>
-          (Google, Apple, Facebook, etc.).
+        <p class="auth-description">
+          Autenticación avanzada con biometría y doble factor,<br />
+          captura inteligente de datos del dispositivo y detección<br />
+          temprana de tráfico inusual para prevenir fraudes<br />
+          y garantizar usuarios confiables.
         </p>
+        <div class="auth-cta">
+          <input type="email" placeholder="ingresa tu correo" aria-label="Correo electrónico" />
+          <a href="https://alaiza.zelify.com" class="btn-cotizar" target="_blank" rel="noopener noreferrer">cotizar</a>
+          <a href="https://www.zelify.com/clips" class="btn-demo-hero" target="_blank" rel="noopener noreferrer">demo</a>
+        </div>
+      </section>
+    </main>
 
-        <div class="cta">
-          <a href="/hablemos" class="btn btn-solid">Let's talk</a>
-          <a href="https://docs.zelify.com/servicios-financieros/auth" target="_blank" rel="noopener noreferrer" class="btn btn-solid">View API Docs</a>
+    <div class="auth-background-section">
+      <div class="auth-background-image">
+        <img src="/background.jpeg" alt="Background pattern" />
+      </div>
+      
+      <!-- Contenedor del dispositivo móvil -->
+      <div class="device-container">
+        <!-- Frame del iPhone -->
+        <div class="device-frame-wrapper">
+          <div class="device-frame">
+            <!-- Pantalla del dispositivo -->
+            <div class="device-screen">
+              <!-- Status Bar con Dynamic Island -->
+              <div class="device-status-bar">
+                <div class="status-time">9:41</div>
+                <div class="dynamic-island">
+                  <div class="island-shape"></div>
+                  <div class="island-speaker"></div>
+                </div>
+                <div class="status-icons">
+                  <svg class="signal-icon" fill="none" viewBox="0 0 20 12">
+                    <path d="M1 8h2v2H1V8zm3-2h2v4H4V6zm3-2h2v6H7V4zm3-1h2v7h-2V3z" fill="currentColor"/>
+                  </svg>
+                  <div class="battery-icon">
+                    <div class="battery-level"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Contenido del dispositivo -->
+              <div class="device-content">
+                <!-- Header con back y logo -->
+                <div class="device-header">
+                  <button class="device-back-btn">&lt; back</button>
+                  <div class="device-logo">
+                    <img src="/images/zelify_logo.png" alt="Zelify" />
+                  </div>
+                  <div class="device-header-spacer"></div>
+                </div>
+
+                <!-- Animación GIF -->
+                <div class="device-animation">
+                  <img src="/ANIMACION 1.gif" alt="Auth animation" />
+                </div>
+
+                <!-- Tarjeta con fondo translúcido -->
+                <div class="device-card">
+                  <div class="auth-phone-card">
+                    <!-- Indicador de progreso -->
+                    <div class="phone-card-dots">
+                      <span class="dot active"></span>
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                    </div>
+                    
+                    <h2 class="phone-card-title" id="step-title">Crear Cuenta</h2>
+                    <p class="phone-card-description" id="step-description">
+                      Ingresa tu nombre y correo electrónico para empezar. Te enviaremos un código de verificación.
+                    </p>
+                    
+                    <button class="btn-google">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19.6 10.2273C19.6 9.51818 19.5364 8.83636 19.4182 8.18182H10V12.05H15.3818C15.15 13.3 14.4455 14.3591 13.3864 15.0682V17.5773H16.6182C18.5091 15.8364 19.6 13.2727 19.6 10.2273Z" fill="#4285F4"/>
+            <path d="M10 20C12.7 20 14.9636 19.1045 16.6182 17.5773L13.3864 15.0682C12.4909 15.6682 11.3455 16.0227 10 16.0227C7.39545 16.0227 5.19091 14.2636 4.40455 11.9H1.06364V14.4909C2.70909 17.7591 6.09091 20 10 20Z" fill="#34A853"/>
+            <path d="M4.40455 11.9C4.20455 11.3 4.09091 10.6591 4.09091 10C4.09091 9.34091 4.20455 8.7 4.40455 8.1V5.50909H1.06364C0.386364 6.85909 0 8.38636 0 10C0 11.6136 0.386364 13.1409 1.06364 14.4909L4.40455 11.9Z" fill="#FBBC05"/>
+            <path d="M10 3.97727C11.4682 3.97727 12.7864 4.46818 13.8227 5.42273L16.6909 2.55455C14.9591 0.940909 12.6955 0 10 0C6.09091 0 2.70909 2.24091 1.06364 5.50909L4.40455 8.1C5.19091 5.73636 7.39545 3.97727 10 3.97727Z" fill="#EA4335"/>
+          </svg>
+          Crear cuenta con Google
+        </button>
+
+        <div class="phone-card-divider">
+          <span class="divider-line"></span>
+          <span class="divider-text">O crea cuenta con correo</span>
+          <span class="divider-line"></span>
+        </div>
+
+        <!-- Paso 1: Crear Cuenta -->
+        <div id="step-1" class="auth-step">
+          <form class="phone-card-form" id="form-step-1">
+            <div class="form-field">
+              <label>Nombre Completo<span class="required">*</span></label>
+              <input type="text" id="fullName" placeholder="John Doe" required />
+              <span class="field-error-message"></span>
+      </div>
+            <div class="form-field">
+              <label>Correo<span class="required">*</span></label>
+              <input type="email" id="email" placeholder="email@example.com" required />
+              <span class="field-error-message"></span>
+            </div>
+            <button type="submit" class="btn-continuar">
+              Continuar →
+            </button>
+          </form>
+        </div>
+
+        <!-- Paso 2: Verificar Email -->
+        <div id="step-2" class="auth-step" style="display: none;">
+          <form class="phone-card-form" id="form-step-2">
+            <div class="otp-container">
+              <div class="otp-inputs" id="otp-email">
+                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" />
+                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" />
+                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" />
+                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" />
+                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" />
+                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" />
+              </div>
+            </div>
+            <button type="submit" class="btn-continuar">
+              Verificar →
+            </button>
+            <p class="resend-code">
+              ¿No recibiste el código? <a href="#" id="resend-email">Reenviar</a>
+            </p>
+          </form>
+        </div>
+
+        <!-- Paso 3: Agregar Teléfono -->
+        <div id="step-3" class="auth-step" style="display: none;">
+          <form class="phone-card-form" id="form-step-3">
+            <div class="form-field">
+              <label>Número de Teléfono<span class="required">*</span></label>
+              <input type="tel" id="phone" placeholder="+1 234 567 8900" required />
+              <span class="field-error-message"></span>
+            </div>
+            <button type="submit" class="btn-continuar">
+              Continuar →
+            </button>
+          </form>
+        </div>
+
+        <!-- Paso 4: Verificar Teléfono -->
+        <div id="step-4" class="auth-step" style="display: none;">
+          <form class="phone-card-form" id="form-step-4">
+            <div class="otp-container">
+              <div class="otp-inputs" id="otp-phone">
+                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" />
+                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" />
+                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" />
+                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" />
+                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" />
+                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" />
+              </div>
+            </div>
+            <button type="submit" class="btn-continuar">
+              Verificar →
+            </button>
+            <p class="resend-code">
+              ¿No recibiste el código? <a href="#" id="resend-phone">Reenviar</a>
+            </p>
+          </form>
+        </div>
+
+        <!-- Paso 5: Completar Perfil -->
+        <div id="step-5" class="auth-step" style="display: none;">
+          <form class="phone-card-form" id="form-step-5">
+            <div class="form-field">
+              <label>Contraseña<span class="required">*</span></label>
+              <input type="password" id="password" placeholder="Mínimo 8 caracteres" required />
+              <span class="field-error-message"></span>
+            </div>
+            <div class="form-field">
+              <label>Confirmar Contraseña<span class="required">*</span></label>
+              <input type="password" id="confirmPassword" placeholder="Confirma tu contraseña" required />
+              <span class="field-error-message"></span>
+            </div>
+            <button type="submit" class="btn-continuar">
+              Crear Cuenta →
+            </button>
+          </form>
+        </div>
+        
+        <p class="phone-card-login" id="login-link" style="display: none;">
+          ¿Ya tienes una cuenta? <a href="#">Ingresa</a>
+        </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Home Indicator -->
+              <div class="device-home-indicator"></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sección de Seguridad Inteligente -->
+    <section class="security-section">
+      <div class="security-container">
+        <h2 class="security-title">
+          Seguridad inteligente<br />
+          desde el primer acceso.
+        </h2>
+        
+        <div class="security-features">
+          <!-- Feature 1: Registro a tu medida -->
+          <div class="security-feature">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <path d="M14 2v6h6"/>
+                <path d="M16 13H8"/>
+                <path d="M16 17H8"/>
+                <path d="M10 9H8"/>
+                <circle cx="19" cy="5" r="1.5" fill="currentColor"/>
+                <path d="M19 4v2M19 6h-1M19 6h1" stroke-width="1"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">Registro a tu medida</h3>
+            <p class="feature-description">Campos personalizados que se adaptan a tu negocio y a tus usuarios.</p>
+          </div>
+
+          <!-- Feature 2: Acceso rápido y seguro -->
+          <div class="security-feature">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M12 1v4M12 19v4M1 12h4M19 12h4"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">Acceso rápido y seguro</h3>
+            <p class="feature-description">Biometría y autenticación multifactor sin fricciones.</p>
+          </div>
+
+          <!-- Feature 3: Seguridad desde el primer clic -->
+          <div class="security-feature">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.3"/>
+                <path d="M9 12l2 2 4-4" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">Seguridad desde el primer clic</h3>
+            <p class="feature-description">Protección avanzada en cada inicio de sesión.</p>
+          </div>
+
+          <!-- Feature 4: Inteligencia del dispositivo -->
+          <div class="security-feature">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <circle cx="12" cy="12" r="6"/>
+                <circle cx="12" cy="12" r="2" fill="currentColor"/>
+                <path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>
+                <path d="M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">Inteligencia del dispositivo</h3>
+            <p class="feature-description">Validación automática del entorno desde donde se conecta el usuario.</p>
+          </div>
+
+          <!-- Feature 5: Usuarios verificados -->
+          <div class="security-feature">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+                <path d="M12 11v6M9 14h6"/>
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" opacity="0.3"/>
+                <path d="M9 12l2 2 4-4" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">Usuarios verificados</h3>
+            <p class="feature-description">Cada usuario vinculado a un entorno confiable y trazable.</p>
+          </div>
+
+          <!-- Feature 6: Detección temprana de fraude -->
+          <div class="security-feature">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <circle cx="12" cy="12" r="6"/>
+                <path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>
+                <circle cx="12" cy="12" r="2" fill="currentColor"/>
+                <path d="M8 8l8 8M16 8l-8 8" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">Detección temprana de fraude</h3>
+            <p class="feature-description">Identifica tráfico inusual, VPNs y accesos sospechosos en tiempo real.</p>
+          </div>
         </div>
       </div>
     </section>
+
+    <!-- Sección de Control Total -->
+    <section class="control-section">
+      <div class="control-container">
+        <div class="control-divider"></div>
+        <h2 class="control-title">Control total del acceso a tu plataforma</h2>
+        
+        <div class="control-features">
+          <!-- Feature 1: Autenticación -->
+          <div class="control-feature">
+            <div class="control-feature-card">
+              <div class="control-feature-front">
+                <div class="control-feature-image">
+                  <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=500&fit=crop&q=80" alt="Autenticación" />
+                </div>
+                <h3 class="control-feature-title">Autenticación</h3>
+                <p class="control-feature-description">Registro de usuarios, inicios de sesión seguros y validación de correo y número de teléfono.</p>
+                <button class="control-feature-btn" data-feature="auth">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </button>
+              </div>
+              <div class="control-feature-back">
+                <h3 class="control-feature-title">Beneficios de Autenticación</h3>
+                <ul class="control-feature-benefits">
+                  <li>Registro personalizado con campos adaptables</li>
+                  <li>Verificación de email y teléfono en tiempo real</li>
+                  <li>Autenticación multifactor sin fricciones</li>
+                  <li>Biometría integrada para acceso rápido</li>
+                  <li>Gestión segura de sesiones</li>
+                </ul>
+                <button class="control-feature-btn control-feature-btn-close" data-feature="auth">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature 2: Información de dispositivo -->
+          <div class="control-feature">
+            <div class="control-feature-card">
+              <div class="control-feature-front">
+                <div class="control-feature-image">
+                  <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=500&fit=crop&q=80" alt="Información de dispositivo" />
+                </div>
+                <h3 class="control-feature-title">Información de dispositivo</h3>
+                <p class="control-feature-description">Servicio de inteligencia para identificar información del dispositivo desde básica hasta avanzada.</p>
+                <button class="control-feature-btn" data-feature="device">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </button>
+              </div>
+              <div class="control-feature-back">
+                <h3 class="control-feature-title">Beneficios de Información de Dispositivo</h3>
+                <ul class="control-feature-benefits">
+                  <li>Identificación automática del dispositivo</li>
+                  <li>Detección de características avanzadas</li>
+                  <li>Análisis de entorno y configuración</li>
+                  <li>Validación de seguridad del dispositivo</li>
+                  <li>Información detallada en tiempo real</li>
+                </ul>
+                <button class="control-feature-btn control-feature-btn-close" data-feature="device">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature 3: Geolocalización -->
+          <div class="control-feature">
+            <div class="control-feature-card">
+              <div class="control-feature-front">
+                <div class="control-feature-image">
+                  <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&h=500&fit=crop&q=80" alt="Geolocalización" />
+                </div>
+                <h3 class="control-feature-title">Geolocalización</h3>
+                <p class="control-feature-description">Convierte coordenadas en información estratégica y de valor.</p>
+                <button class="control-feature-btn" data-feature="geo">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </button>
+              </div>
+              <div class="control-feature-back">
+                <h3 class="control-feature-title">Beneficios de Geolocalización</h3>
+                <ul class="control-feature-benefits">
+                  <li>Análisis de ubicación en tiempo real</li>
+                  <li>Detección de accesos sospechosos</li>
+                  <li>Información estratégica de coordenadas</li>
+                  <li>Validación de entorno geográfico</li>
+                  <li>Prevención de fraudes por ubicación</li>
+                </ul>
+                <button class="control-feature-btn control-feature-btn-close" data-feature="geo">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature 4: SDK de integración -->
+          <div class="control-feature">
+            <div class="control-feature-card">
+              <div class="control-feature-front">
+                <div class="control-feature-image">
+                  <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=500&fit=crop&q=80" alt="SDK de integración" />
+                </div>
+                <h3 class="control-feature-title">SDK de integración</h3>
+                <p class="control-feature-description">Incorpora estas interfaces mediante una única integración ágil y sencilla.</p>
+                <button class="control-feature-btn" data-feature="sdk">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </button>
+              </div>
+              <div class="control-feature-back">
+                <h3 class="control-feature-title">Beneficios del SDK</h3>
+                <ul class="control-feature-benefits">
+                  <li>Integración rápida y sencilla</li>
+                  <li>Una sola línea de código</li>
+                  <li>Documentación completa y ejemplos</li>
+                  <li>Soporte técnico especializado</li>
+                  <li>Actualizaciones automáticas</li>
+                </ul>
+                <button class="control-feature-btn control-feature-btn-close" data-feature="sdk">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección de Contacto -->
+    <section class="contact-section">
+      <div class="contact-container">
+        <div class="contact-content">
+          <!-- Texto izquierdo -->
+          <div class="contact-text">
+            <h2 class="contact-title">
+              Empieza hoy<br />
+              y protege tu<br />
+              plataforma.
+            </h2>
+          </div>
+
+          <!-- Formulario derecho -->
+          <div class="contact-form-wrapper">
+            <div class="contact-form-card">
+              <h3 class="contact-form-title">Habla con nuestro equipo</h3>
+              
+              <form class="contact-form" id="contactForm">
+                <div class="form-row">
+                  <div class="form-group">
+                    <input type="text" id="nombres" placeholder="Nombres" required />
+                  </div>
+                  <div class="form-group">
+                    <input type="text" id="apellidos" placeholder="Apellidos" required />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <input type="text" id="compania" placeholder="Nombre de la compañía" required />
+                  </div>
+                  <div class="form-group">
+                    <input type="email" id="email" placeholder="Email de la compañía" required />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <select id="pais" required>
+                      <option value="">País</option>
+                      <option value="mx">México</option>
+                      <option value="co">Colombia</option>
+                      <option value="ar">Argentina</option>
+                      <option value="cl">Chile</option>
+                      <option value="pe">Perú</option>
+                      <option value="es">España</option>
+                      <option value="us">Estados Unidos</option>
+                    </select>
+                    <svg class="select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </div>
+                  <div class="form-group">
+                    <input type="tel" id="telefono" placeholder="Teléfono (opcional)" />
+                  </div>
+                </div>
+
+                <p class="contact-legal">
+                  Al enviar este formulario, aceptas nuestros <a href="#">Términos de Servicio</a> y <a href="#">Política de Privacidad</a>.
+                </p>
+
+                <button type="submit" class="contact-submit-btn">
+                  Hablemos
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección de FAQ -->
+    <section class="faq-section">
+      <div class="faq-container">
+        <h2 class="faq-title">Preguntas frecuentes</h2>
+        
+        <div class="faq-list">
+          <!-- FAQ 1 -->
+          <div class="faq-item">
+            <button class="faq-question" data-faq="1">
+              <span>¿Qué funcionalidades incluye el producto?</span>
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>Nuestro producto incluye autenticación avanzada con biometría, registro personalizable de usuarios, validación de email y teléfono, información detallada del dispositivo, geolocalización estratégica, detección temprana de fraudes, y un SDK de integración sencillo para incorporar todas estas funcionalidades en una sola línea de código.</p>
+            </div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="faq-item">
+            <button class="faq-question" data-faq="2">
+              <span>¿Es seguro usar biometría y doble factor?</span>
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>Sí, es completamente seguro. La biometría y la autenticación de doble factor (2FA) son estándares de la industria que proporcionan capas adicionales de seguridad. Nuestro sistema utiliza encriptación de extremo a extremo y cumple con los más altos estándares de seguridad para proteger los datos biométricos y las credenciales de tus usuarios.</p>
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="faq-item">
+            <button class="faq-question" data-faq="3">
+              <span>¿Puedo personalizar los campos de registro para mis usuarios?</span>
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>Absolutamente. Nuestro sistema de registro es completamente personalizable. Puedes agregar, eliminar o modificar campos según las necesidades de tu negocio. Los campos se adaptan dinámicamente a tus usuarios, permitiéndote crear experiencias de registro únicas y relevantes para tu plataforma.</p>
+            </div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="faq-item">
+            <button class="faq-question" data-faq="4">
+              <span>¿Cómo detecta fraudes y accesos sospechosos?</span>
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>Nuestro sistema utiliza inteligencia artificial y machine learning para analizar patrones de comportamiento, detectar tráfico inusual, identificar el uso de VPNs, analizar la geolocalización de accesos, y monitorear información del dispositivo en tiempo real. Todo esto permite identificar y prevenir accesos sospechosos antes de que representen una amenaza.</p>
+            </div>
+          </div>
+
+          <!-- FAQ 5 -->
+          <div class="faq-item">
+            <button class="faq-question" data-faq="5">
+              <span>¿Funciona en cualquier dispositivo?</span>
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>Sí, nuestro producto es multiplataforma y funciona en cualquier dispositivo: smartphones (iOS y Android), tablets, computadoras de escritorio y laptops. La interfaz se adapta automáticamente a cada dispositivo, proporcionando una experiencia óptima sin importar desde dónde accedan tus usuarios.</p>
+            </div>
+          </div>
+
+          <!-- FAQ 6 -->
+          <div class="faq-item">
+            <button class="faq-question" data-faq="6">
+              <span>¿Es fácil de integrar a mi sistema actual?</span>
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>Muy fácil. Nuestro SDK de integración está diseñado para ser implementado con una sola línea de código. Proporcionamos documentación completa, ejemplos de código, y soporte técnico especializado para ayudarte en el proceso de integración. La mayoría de nuestros clientes completan la integración en menos de una hora.</p>
+            </div>
+          </div>
+
+          <!-- FAQ 7 -->
+          <div class="faq-item">
+            <button class="faq-question" data-faq="7">
+              <span>¿Puedo escalar la seguridad a medida que crece mi plataforma?</span>
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>Definitivamente. Nuestra arquitectura está construida para escalar automáticamente. A medida que tu plataforma crece, nuestro sistema se adapta sin necesidad de cambios adicionales. Puedes manejar desde cientos hasta millones de usuarios sin preocuparte por la capacidad o el rendimiento del sistema de seguridad.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección CTA Final -->
+    <section class="cta-section">
+      <div class="cta-container">
+        <h2 class="cta-title">
+          Comienza hoy y<br />
+          asegura cada acceso.
+        </h2>
+        <a href="https://alaiza.zelify.com" class="cta-button" target="_blank" rel="noopener noreferrer">cotizar</a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="auth-footer">
+      <div class="footer-container">
+        <div class="footer-content">
+          <!-- Logo -->
+          <div class="footer-logo">
+            <img src="/images/zelify_logo2.png" alt="Zelify" />
+          </div>
+
+          <!-- Quick Links -->
+          <div class="footer-links">
+            <h3 class="footer-links-title">Quick links</h3>
+            <nav class="footer-nav">
+              <a href="/products">Products</a>
+              <a href="/nosotros">About us</a>
+              <a href="/desarrollo">Developers</a>
+              <a href="/otros">Others</a>
+            </nav>
+          </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <p class="footer-disclaimer">
+          Zelify is a technology platform currently in a development phase, not yet deployed or operational, and does not provide or process financial services directly;
+          all financial operations are conducted exclusively through regulated third-party partners.
+        </p>
+
+        <!-- Copyright -->
+        <p class="footer-copyright">
+          © 2025 Zelify. All rights reserved.
+        </p>
+      </div>
+    </footer>
   </body>
 </html>
 
@@ -100,242 +719,2064 @@ import "../styles/navbar.css";
     padding: 0;
     height: 100%;
     width: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
   }
 
   body {
-    font-family:
-      "NataSans",
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      Roboto,
-      sans-serif;
-    color: #0b132b;
-    background-color: #e8ecf3;
-    background-image: url('/images/FONDO 2.jpg');
-    background-size: cover;
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    min-height: 100vh;
-    width: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
+    font-family: "NataSans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #ffffff;
+    color: #0a203f;
   }
 
-  .hero {
+  .auth-header {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    min-height: calc(100vh - 80px);
-    padding: 0 clamp(4%, 8vw, 8%) 0 clamp(6%, 15vw, 15%);
-    position: relative;
-    overflow-x: hidden;
-    overflow-y: auto;
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .content {
-    max-width: min(900px, 90%);
-    width: 100%;
-    background: transparent;
-    box-sizing: border-box;
-  }
-  .badge {
-    display: inline-block;
-    max-width: min(500px, 100%);
-    background: #6aff00;
-    color: #0b132b;
-    padding: 0.8rem 2rem;
-    border-radius: 25px;
-    font-weight: 700;
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
-    text-align: left;
-    box-shadow: 0 0 12px rgba(184, 255, 42, 0.4);
-    word-wrap: break-word;
-    overflow-wrap: break-word;
+    justify-content: space-between;
+    padding: 0.75rem 3rem;
+    background: #ffffff;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    max-width: 1400px;
+    margin: 0 auto;
     box-sizing: border-box;
   }
 
-  .title {
-    font-size: clamp(2rem, 2.5vw, 2.9rem);
-    line-height: 1;
-    color: #004195;
-    margin: 0 0 1.5rem 0;
-    font-weight: 400;
-    text-align: left;
-    max-width: min(900px, 100%);
-    width: 100%;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    box-sizing: border-box;
-  }
-
-  .description {
-    color: #004195;
-    font-size: 1.1rem;
-    line-height: 1.65;
-    max-width: min(600px, 100%);
-    margin: 0 0 2.5rem 0;
-    text-align: left;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    box-sizing: border-box;
-  }
-
-  .cta {
+  .auth-logo {
     display: flex;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .auth-logo img {
+    height: 36px;
+    width: auto;
+    display: block;
+  }
+
+  .auth-nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(2rem, 3vw, 3rem);
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0 auto;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .auth-nav a {
+    color: #0a203f;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .auth-nav a:hover {
+    color: #1488fe;
+  }
+
+  .auth-actions {
+    display: flex;
+    align-items: center;
     gap: 1rem;
+    flex-shrink: 0;
+  }
+
+  .btn-demo {
+    border: none;
+    background: #8dff2b;
+    color: #082436;
+    text-transform: lowercase;
+    padding: 0.55rem 1.75rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(141, 255, 43, 0.45);
+    transition: all 0.2s ease;
+  }
+
+  .btn-demo:hover {
+    background: #a5ff4d;
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px rgba(141, 255, 43, 0.5);
+  }
+
+  .lang-pill {
+    border: 1px solid #0a203f;
+    background: #ffffff;
+    color: #0a203f;
+    border-radius: 999px;
+    padding: 0.55rem 1rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .lang-pill:hover {
+    background: #f5f5f5;
+    border-color: #1488fe;
+  }
+
+  .auth-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2rem 2rem;
+  }
+
+  .auth-hero {
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .auth-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.2;
+    color: #0a203f;
+    margin: 0 0 2rem 0;
+    font-weight: 400;
+  }
+
+  .auth-title br {
+    display: block;
+  }
+
+  .auth-description {
+    font-size: clamp(1rem, 2vw, 1.1rem);
+    line-height: 1.6;
+    color: #213F8C;
+    margin: 0 0 3rem 0;
+  }
+
+  .auth-description br {
+    display: block;
+  }
+
+  .auth-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
     flex-wrap: wrap;
   }
 
-  .btn {
-    display: inline-block;
-    padding: 0.85rem 1.4rem;
-    border-radius: 10px;
-    font-weight: 700;
+  .auth-cta input {
+    border: 1px solid rgba(10, 32, 63, 0.2);
+    border-radius: 999px;
+    padding: 0.65rem 1.5rem;
+    min-width: 260px;
+    font-size: 1rem;
+    outline: none;
+    background: #fff;
+    color: #0a203f;
+    font-family: inherit;
+  }
+
+  .auth-cta input::placeholder {
+    color: rgba(10, 32, 63, 0.5);
+  }
+
+  .btn-cotizar {
+    border: none;
+    background: #0a203f;
+    color: #ffffff;
+    border-radius: 999px;
+    padding: 0.65rem 1.75rem;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    text-transform: lowercase;
+    transition: all 0.2s ease;
     text-decoration: none;
-    font-size: 0.95rem;
-    transition:
-      transform 0.15s ease,
-      background-color 0.2s ease,
-      color 0.2s ease;
+    display: inline-block;
   }
 
-  .btn:hover {
-    transform: translateY(-2px);
+  .btn-cotizar:hover {
+    background: #0d2a4f;
+    transform: translateY(-1px);
   }
 
-  .btn-solid {
-    background: #6aff00;
-    color: #0b132b;
+  .btn-demo-hero {
+    border: none;
+    background: #8dff2b;
+    color: #082436;
+    text-transform: lowercase;
+    padding: 0.65rem 1.75rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: 0 10px 20px rgba(141, 255, 43, 0.45);
+    transition: all 0.2s ease;
   }
 
-  .btn-solid:hover {
-    background: #caff4a;
+  .btn-demo-hero:hover {
+    background: #a5ff4d;
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px rgba(141, 255, 43, 0.5);
   }
 
-  .btn-ghost:hover {
-    background: rgba(184, 255, 42, 0.15);
+  .auth-background-section {
+    position: relative;
+    width: 100%;
+    background: #ffffff;
+    padding: 4rem 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .auth-background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  .auth-background-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Contenedor del dispositivo */
+  .device-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    z-index: 10;
+    padding: 1rem 0 2rem;
+  }
+
+
+  /* Frame del iPhone */
+  .device-frame-wrapper {
+    position: relative;
+    z-index: 10;
+  }
+
+  .device-frame {
+    position: relative;
+    overflow: hidden;
+    border-radius: 3rem;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  /* Pantalla del dispositivo */
+  .device-screen {
+    position: relative;
+    height: 750px;
+    overflow: hidden;
+    border-radius: 2.5rem;
+    background: #ffffff;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.05), 0 20px 60px rgba(0,0,0,0.15);
+  }
+
+  /* Status Bar */
+  .device-status-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #ffffff;
+    padding: 2.5rem 1.5rem 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .status-time {
+    position: absolute;
+    left: 1.5rem;
+    top: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #000000;
+  }
+
+  .dynamic-island {
+    position: absolute;
+    left: 50%;
+    top: 0.75rem;
+    transform: translateX(-50%);
+  }
+
+  .island-shape {
+    width: 96px;
+    height: 20px;
+    border-radius: 999px;
+    background: #000000;
+  }
+
+  .island-speaker {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 2px;
+    border-radius: 999px;
+    background: rgba(31, 41, 55, 0.3);
+  }
+
+  .status-icons {
+    position: absolute;
+    right: 1.5rem;
+    top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+  }
+
+  .signal-icon {
+    width: 20px;
+    height: 12px;
+    color: #000000;
+  }
+
+  .battery-icon {
+    width: 24px;
+    height: 10px;
+    border: 1px solid #000000;
+    border-radius: 2px;
+    padding: 1px;
+  }
+
+  .battery-level {
+    width: 80%;
+    height: 100%;
+    background: #000000;
+    border-radius: 1px;
+  }
+
+  /* Contenido del dispositivo */
+  .device-content {
+    flex: 1;
+    min-height: 0;
+    background: #ffffff;
+    padding: 1rem 1.25rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* Header del dispositivo */
+  .device-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .device-back-btn {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #6b7280;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .device-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .device-logo img {
+    height: 32px;
+    width: auto;
+  }
+
+  .device-header-spacer {
+    width: 48px;
+  }
+
+  /* Animación GIF */
+  .device-animation {
+    position: relative;
+    margin-bottom: -3.5rem;
+    z-index: 0;
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .device-animation img {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+    opacity: 0.9;
+  }
+
+  /* Tarjeta translúcida */
+  .device-card {
+    position: relative;
+    z-index: 10;
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-radius: 1rem;
+    padding: 1rem 1.25rem;
+    backdrop-filter: blur(4px);
+    background: rgba(255, 255, 255, 0.35);
+    min-height: 0;
+  }
+
+  .auth-phone-card {
+    width: 100%;
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    position: relative;
+  }
+
+  /* Home Indicator */
+  .device-home-indicator {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 128px;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.3);
+    flex-shrink: 0;
+  }
+
+
+  .phone-card-dots {
+    display: flex;
+      justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .phone-card-dots .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #d0d0d0;
+    transition: background 0.3s ease;
+  }
+
+  .phone-card-dots .dot.active {
+    background: #213F8C;
+  }
+
+  .phone-card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0a203f;
+    margin: 0 0 0.5rem 0;
+      text-align: center;
+  }
+
+  .phone-card-description {
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin: 0 0 1rem 0;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .btn-google {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    border: 1px solid #e5e7eb;
+    background: #f9fafb;
+    border-radius: 12px;
+    padding: 0.75rem 1.25rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: 1rem;
+    color: #0a203f;
+  }
+
+  .btn-google:hover {
+    background: #f3f4f6;
+    border-color: #d1d5db;
+  }
+
+  .phone-card-divider {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: #e5e7eb;
+  }
+
+  .divider-text {
+    font-size: 0.75rem;
+    color: #6b7280;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .phone-card-form {
+      display: flex;
+      flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-field label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #374151;
+  }
+
+  .form-field .required {
+    color: #ef4444;
+    margin-left: 2px;
+  }
+
+  .form-field input {
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 0.625rem 0.875rem;
+    font-size: 0.875rem;
+    outline: none;
+    background: #f9fafb;
+    color: #0a203f;
+    font-family: inherit;
+    transition: border-color 0.2s ease;
+  }
+
+  .form-field input:focus {
+    border-color: #213F8C;
+    background: #ffffff;
+  }
+
+  .form-field input.field-error {
+    border-color: #ef4444;
+    background: #fef2f2;
+  }
+
+  .form-field input.field-error:focus {
+    border-color: #ef4444;
+    background: #fef2f2;
+  }
+
+  .field-error-message {
+    display: none;
+    margin-top: 0.25rem;
+    font-size: 0.7rem;
+    color: #ef4444;
+  }
+
+  .form-field input::placeholder {
+    color: #9ca3af;
+  }
+
+  .otp-input.otp-verifying {
+    border-color: #213F8C;
+    animation: otp-pulse 1s ease-in-out infinite;
+  }
+
+  .otp-input.otp-success {
+    border-color: #10b981;
+    background: #f0fdf4;
+  }
+
+  .otp-input.otp-error {
+    border-color: #ef4444;
+    background: #fef2f2;
+    animation: otp-shake 0.5s ease-in-out;
+  }
+
+  @keyframes otp-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+
+  @keyframes otp-shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+  }
+
+  .btn-continuar {
+    position: relative;
+    border: none;
+    background: linear-gradient(to right, #213F8C 0%, #1a2f6b 40%, #0f1f4d 70%, #0a203f 100%);
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 0.85rem 1.5rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    cursor: pointer;
+    display: flex;
+      align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+    margin-top: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 4px 14px 0 rgba(33, 63, 140, 0.4);
+    animation: cta-pulse-glow 2s ease-in-out infinite, cta-button-pulse 2.5s ease-in-out infinite;
+  }
+
+  .btn-continuar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    opacity: 0.6;
+    background: #213F8C;
+    filter: blur(8px);
+    z-index: -1;
+    animation: cta-pulse-ring 2s ease-in-out infinite;
+  }
+
+  .btn-continuar::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+    transform: translateX(-100%);
+    animation: cta-shine-sweep 2.5s linear infinite;
+    z-index: 1;
+  }
+
+  .btn-continuar:hover {
+    transform: translateY(-1px);
+  }
+
+  .btn-continuar:active {
+    transform: scale(0.98);
+  }
+
+  @keyframes cta-pulse-glow {
+    0%, 100% {
+      box-shadow: 0 4px 14px 0 rgba(33, 63, 140, 0.4);
+    }
+    50% {
+      box-shadow: 0 4px 20px 0 rgba(33, 63, 140, 0.8), 0 0 30px 0 rgba(33, 63, 140, 0.4);
+    }
+  }
+
+  @keyframes cta-button-pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.02);
+    }
+  }
+
+  @keyframes cta-pulse-ring {
+    0%, 100% {
+      opacity: 0.4;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.7;
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes cta-shine-sweep {
+    0% {
+      transform: translateX(-100%) skewX(-15deg);
+    }
+    100% {
+      transform: translateX(200%) skewX(-15deg);
+    }
+  }
+
+  .phone-card-login {
+      text-align: center;
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin: 0.5rem 0 0 0;
+  }
+
+  .phone-card-login a {
+    color: #213F8C;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .phone-card-login a:hover {
+    text-decoration: underline;
   }
 
   /* Tablet */
   @media (max-width: 1024px) {
-    .hero {
-      padding: 2rem clamp(4%, 10vw, 10%) 2rem clamp(5%, 12vw, 12%);
-      min-height: auto;
-      overflow-x: hidden;
-      overflow-y: auto;
+    .auth-header {
+      padding: 1.25rem 2rem;
     }
 
-    .content {
-      max-width: 100%;
-      width: 100%;
-      padding-right: 0;
-    }
-
-    .title {
-      font-size: clamp(1.8rem, 2.2vw, 2.5rem);
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-    }
-
-    .description {
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-    }
-
-    .badge {
-      max-width: 100%;
-      word-wrap: break-word;
+    .auth-nav {
+      gap: clamp(1.5rem, 2vw, 2.5rem);
+      font-size: 0.95rem;
     }
   }
 
   /* Mobile */
   @media (max-width: 768px) {
-    html,
-    body {
-      overflow: auto;
-      height: auto;
-      min-height: 100vh;
+    .auth-header {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1.25rem 1.5rem;
     }
 
-    body {
-      overflow-y: auto;
-      background-attachment: scroll;
-    }
-
-    .hero {
-      min-height: calc(100vh - 80px);
-      height: auto;
+    .auth-nav {
+      flex-wrap: wrap;
       justify-content: center;
-      text-align: center;
-      padding: 2rem 1.5rem;
-      align-items: flex-start;
+      gap: 1rem;
+      font-size: 0.9rem;
     }
 
-    .content {
-      max-width: 100%;
+    .auth-actions {
       width: 100%;
+      justify-content: center;
+    }
+
+    .auth-main {
+      padding: 2rem 1.5rem;
+    }
+
+    .auth-title {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .auth-description {
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+
+    .auth-cta {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .auth-cta input {
+      width: 100%;
+      min-width: auto;
+    }
+
+    .btn-cotizar,
+    .btn-demo-hero {
+      width: 100%;
+    }
+
+    .auth-phone-card {
+      position: relative;
+      top: auto;
+      left: auto;
+      transform: none;
+      margin: 2rem auto;
+      max-width: 100%;
+      width: calc(100% - 2rem);
+    }
+
+    .auth-background-section {
+      padding: 2rem 0;
+    }
+
+    .otp-inputs {
+      gap: 0.5rem;
+    }
+
+    .otp-input {
+      width: 42px;
+      height: 42px;
+      font-size: 1.1rem;
+    }
+  }
+
+  /* Sección de Seguridad Inteligente */
+  .security-section {
+      width: 100%;
+    background: #ffffff;
+    padding: 5rem 2rem;
+  }
+
+  .security-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .security-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    line-height: 1.2;
+    color: #0a203f;
+      text-align: center;
+    margin: 0 0 4rem 0;
+    font-weight: 400;
+  }
+
+  .security-title br {
+    display: block;
+  }
+
+  .security-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem 2rem;
+    margin-top: 3rem;
+  }
+
+  .security-feature {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
     }
 
-    .badge {
-      max-width: 280px;
-      margin: 0 auto 2rem;
-      text-align: center;
+  .feature-icon {
+    width: 72px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border-radius: 18px;
+    margin-bottom: 1.5rem;
+    color: #213F8C;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+  }
+
+  .security-feature:hover .feature-icon {
+    transform: translateY(-2px);
+  }
+
+  .feature-icon svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  .feature-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #0a203f;
+    margin: 0 0 0.75rem 0;
+    line-height: 1.3;
+  }
+
+  .feature-description {
+    font-size: 0.95rem;
+      line-height: 1.6;
+    color: #6b7280;
+    margin: 0;
+  }
+
+  /* Tablet */
+  @media (max-width: 1024px) {
+    .security-section {
+      padding: 4rem 2rem;
     }
 
-    .title {
+    .security-features {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.5rem 2rem;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .security-section {
+      padding: 3rem 1.5rem;
+    }
+
+    .security-title {
       font-size: 2rem;
-      line-height: 0.85;
-      margin-bottom: 1.5rem;
-      text-align: center;
-      max-width: 100%;
+      margin-bottom: 3rem;
     }
 
-    .description {
+    .security-features {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      margin-bottom: 1.25rem;
+    }
+
+    .feature-icon svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .feature-title {
+      font-size: 1.1rem;
+    }
+
+    .feature-description {
+      font-size: 0.9rem;
+    }
+  }
+
+  /* Sección de Control Total */
+  .control-section {
+    width: 100%;
+    background: #ffffff;
+    padding: 5rem 2rem;
+  }
+
+  .control-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .control-divider {
+    width: 100%;
+    max-width: 200px;
+    height: 2px;
+    background: #1488fe;
+    margin: 0 auto 3rem;
+  }
+
+  .control-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    line-height: 1.2;
+    color: #0a203f;
+      text-align: center;
+    margin: 0 0 4rem 0;
+    font-weight: 400;
+  }
+
+  .control-features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem 2rem;
+  }
+
+  .control-feature {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    perspective: 1000px;
+  }
+
+  .control-feature-card {
+    width: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease;
+  }
+
+  .control-feature-card.flipped {
+    transform: rotateY(180deg);
+  }
+
+  .control-feature-front,
+  .control-feature-back {
+    width: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .control-feature-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: rotateY(180deg);
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 2rem;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .control-feature-image {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    background: #f3f4f6;
+    position: relative;
+  }
+
+  .control-feature-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .control-feature:hover .control-feature-image img {
+    transform: scale(1.05);
+  }
+
+  .control-feature-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #0a203f;
+    margin: 0 0 0.75rem 0;
+    line-height: 1.3;
+  }
+
+  .control-feature-description {
       font-size: 1rem;
       line-height: 1.6;
-      margin-bottom: 2rem;
-      max-width: 100%;
-      text-align: center;
-      padding: 0 1rem;
-    }
+    color: #6b7280;
+    margin: 0 0 1.5rem 0;
+  }
 
-    .cta {
+  .control-feature-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: #8dff2b;
+    border: none;
+    display: flex;
+    align-items: center;
       justify-content: center;
-      flex-wrap: wrap;
-      gap: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #ffffff;
+    flex-shrink: 0;
+  }
+
+  .control-feature-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .control-feature-btn:hover {
+    background: #a5ff4d;
+    transform: scale(1.1);
+  }
+
+  .control-feature-benefits {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+    flex: 1;
+  }
+
+  .control-feature-benefits li {
+    padding: 0.75rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: #6b7280;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .control-feature-benefits li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #8dff2b;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+
+  .control-feature-btn-close {
+    align-self: flex-end;
+    margin-top: auto;
+  }
+
+  /* Tablet */
+  @media (max-width: 1024px) {
+    .control-section {
+      padding: 4rem 2rem;
     }
 
-    .btn {
+    .control-features {
+      gap: 2.5rem 2rem;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .control-section {
+      padding: 3rem 1.5rem;
+    }
+
+    .control-divider {
+      max-width: 150px;
+      margin-bottom: 2rem;
+    }
+
+    .control-title {
+      font-size: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .control-features {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .control-feature-image {
+      aspect-ratio: 16 / 9;
+    }
+
+    .control-feature-title {
+      font-size: 1.25rem;
+    }
+
+    .control-feature-description {
+      font-size: 0.95rem;
+    }
+  }
+
+  /* Sección de Contacto */
+  .contact-section {
+    width: 100%;
+    background: #ffffff;
+    padding: 5rem 2rem;
+  }
+
+  .contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .contact-text {
+    display: flex;
+    align-items: center;
+  }
+
+  .contact-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.2;
+    color: #0a203f;
+    margin: 0;
+    font-weight: 400;
+    text-align: left;
+  }
+
+  .contact-title br {
+    display: block;
+  }
+
+  .contact-form-wrapper {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .contact-form-card {
+    background: #f3f4f6;
+    border-radius: 24px;
+    padding: 3rem;
+    max-width: 600px;
+    width: 100%;
+  }
+
+  .contact-form-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #0a203f;
+    margin: 0 0 2rem 0;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .form-group {
+    position: relative;
+  }
+
+  .contact-form input,
+  .contact-form select {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: none;
+    border-radius: 12px;
+    background: #ffffff;
+    font-size: 0.95rem;
+    color: #0a203f;
+    font-family: inherit;
+    outline: none;
+    transition: all 0.2s ease;
+  }
+
+  .contact-form input::placeholder {
+    color: #9ca3af;
+  }
+
+  .contact-form input:focus,
+  .contact-form select:focus {
+    box-shadow: 0 0 0 3px rgba(33, 63, 140, 0.1);
+  }
+
+  .contact-form select {
+    appearance: none;
+    cursor: pointer;
+    padding-right: 2.5rem;
+  }
+
+  .select-arrow {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    color: #6b7280;
+    pointer-events: none;
+  }
+
+  .contact-legal {
+    font-size: 0.85rem;
+    color: #6b7280;
+    line-height: 1.5;
+    margin: 0.5rem 0 0 0;
+  }
+
+  .contact-legal a {
+    color: #6b7280;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+  }
+
+  .contact-legal a:hover {
+    color: #213F8C;
+  }
+
+  .contact-submit-btn {
+    width: 100%;
+    padding: 1rem 2rem;
+    background: #8dff2b;
+    color: #082436;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 1rem;
+    box-shadow: 0 10px 20px rgba(141, 255, 43, 0.45);
+  }
+
+  .contact-submit-btn:hover {
+    background: #a5ff4d;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(141, 255, 43, 0.5);
+  }
+
+  .contact-submit-btn:active {
+    transform: translateY(0);
+  }
+
+  /* Tablet */
+  @media (max-width: 1024px) {
+    .contact-section {
+      padding: 4rem 2rem;
+    }
+
+    .contact-content {
+      gap: 3rem;
+    }
+
+    .contact-form-card {
+      padding: 2.5rem;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .contact-section {
+      padding: 3rem 1.5rem;
+    }
+
+    .contact-content {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .contact-title {
+      font-size: 2.5rem;
+      text-align: center;
+    }
+
+    .contact-form-wrapper {
+      justify-content: center;
+    }
+
+    .contact-form-card {
+      padding: 2rem;
+    }
+
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-form-title {
+      font-size: 1.5rem;
+      text-align: center;
+    }
+  }
+
+  /* Sección de FAQ */
+  .faq-section {
+    width: 100%;
+    background: #ffffff;
+    padding: 5rem 2rem;
+  }
+
+  .faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .faq-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    line-height: 1.2;
+    color: #0a203f;
+    text-align: center;
+    margin: 0 0 3rem 0;
+    font-weight: 400;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .faq-item:first-child {
+    border-top: 1px solid #e5e7eb;
+  }
+
+  .faq-question {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #0a203f;
+    transition: color 0.2s ease;
+  }
+
+  .faq-question:hover {
+    color: #213F8C;
+  }
+
+  .faq-question span {
+    flex: 1;
+    padding-right: 1rem;
+  }
+
+  .faq-icon {
+    width: 20px;
+    height: 20px;
+    color: #213F8C;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .faq-item.active .faq-icon {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding: 0 0;
+  }
+
+  .faq-item.active .faq-answer {
+    max-height: 500px;
+    padding: 0 0 1.5rem 0;
+  }
+
+  .faq-answer p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #6b7280;
+  }
+
+  /* Tablet */
+  @media (max-width: 1024px) {
+    .faq-section {
+      padding: 4rem 2rem;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .faq-section {
+      padding: 3rem 1.5rem;
+    }
+
+    .faq-title {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .faq-question {
+      font-size: 1rem;
+      padding: 1.25rem 0;
+    }
+
+    .faq-answer p {
       font-size: 0.9rem;
-      padding: 0.75rem 1.5rem;
-      width: fit-content;
     }
   }
 
-  /* Prevent text from colliding with the phone image at desktop zoom levels */
-  @media (max-width: 1600px) {
-    .hero .content {
-      max-width: 52%;
-      padding-right: 3rem;
+  /* Sección CTA Final */
+  .cta-section {
+    width: 100%;
+    background: #f5f7f8;
+    padding: 5rem 2rem;
+  }
+
+  .cta-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .cta-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.2;
+    color: #002a4a;
+    margin: 0 0 2.5rem 0;
+    font-weight: 600;
+  }
+
+  .cta-title br {
+    display: block;
+  }
+
+  .cta-button {
+    padding: 1rem 3rem;
+    background: #b2ff66;
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    text-transform: lowercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(178, 255, 102, 0.3);
+  }
+
+  .cta-button:hover {
+    background: #9eeb5a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(178, 255, 102, 0.4);
+  }
+
+  .cta-button:active {
+    transform: translateY(0);
+  }
+
+  /* Tablet */
+  @media (max-width: 1024px) {
+    .cta-section {
+      padding: 4rem 2rem;
     }
   }
 
-  @media (max-width: 1400px) {
-    .hero .content {
-      max-width: 50%;
-      padding-right: 2rem;
+  /* Mobile */
+  @media (max-width: 768px) {
+    .cta-section {
+      padding: 3rem 1.5rem;
+    }
+
+    .cta-title {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .cta-button {
+      padding: 0.875rem 2.5rem;
+      font-size: 1rem;
+    }
+  }
+
+  /* Footer */
+  .auth-footer {
+    width: 100%;
+    background: #0a203f;
+    padding: 4rem 2rem 2rem;
+    color: #ffffff;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    gap: 3rem;
+  }
+
+  .footer-logo {
+    flex-shrink: 0;
+  }
+
+  .footer-logo img {
+    height: 40px;
+    width: auto;
+    display: block;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .footer-links-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .footer-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .footer-nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+    padding-left: 0.5rem;
+  }
+
+  .footer-nav a:hover {
+    color: #8dff2b;
+  }
+
+  .footer-disclaimer {
+    text-align: center;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0 0 2rem 0;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .footer-copyright {
+    text-align: center;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+  }
+
+  /* Tablet */
+  @media (max-width: 1024px) {
+    .auth-footer {
+      padding: 3rem 2rem 1.5rem;
+    }
+
+    .footer-content {
+      gap: 2.5rem;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .auth-footer {
+      padding: 3rem 1.5rem 1.5rem;
+    }
+
+    .footer-content {
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .footer-links {
+      width: 100%;
+    }
+
+    .footer-disclaimer {
+      font-size: 0.8rem;
+      text-align: left;
+    }
+
+    .footer-copyright {
+      font-size: 0.8rem;
+      text-align: left;
     }
   }
 </style>
+
+<script>
+  let currentStep = 1;
+  const formData = {
+    fullName: '',
+    email: '',
+    emailOTP: '',
+    phone: '',
+    phoneOTP: '',
+    password: '',
+    confirmPassword: ''
+  };
+  
+  const validationErrors = {};
+  let emailOTPStatus = 'idle'; // 'idle' | 'verifying' | 'success' | 'error'
+  let phoneOTPStatus = 'idle';
+
+  // Inicializar OTP inputs
+  function initOTPInputs(containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    const inputs = container.querySelectorAll('.otp-input');
+    
+    inputs.forEach((input, index) => {
+      input.addEventListener('input', (e) => {
+        const value = e.target.value.replace(/[^0-9]/g, '');
+        e.target.value = value;
+        
+        if (value && index < inputs.length - 1) {
+          inputs[index + 1].focus();
+        }
+      });
+
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && !e.target.value && index > 0) {
+          inputs[index - 1].focus();
+        }
+      });
+
+      input.addEventListener('paste', (e) => {
+        e.preventDefault();
+        const pasted = e.clipboardData.getData('text').replace(/[^0-9]/g, '').slice(0, 6);
+        pasted.split('').forEach((char, i) => {
+          if (inputs[i]) {
+            inputs[i].value = char;
+          }
+        });
+        if (pasted.length === 6) {
+          inputs[5].focus();
+        }
+      });
+    });
+  }
+
+  // Actualizar dots de progreso
+  function updateProgressDots(step) {
+    const dots = document.querySelectorAll('.phone-card-dots .dot');
+    dots.forEach((dot, index) => {
+      if (index < step) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
+    });
+  }
+
+  // Mostrar paso
+  function showStep(step) {
+    document.querySelectorAll('.auth-step').forEach((el, index) => {
+      el.style.display = index + 1 === step ? 'block' : 'none';
+    });
+    
+    // Actualizar título y descripción según el paso
+    const titleEl = document.getElementById('step-title');
+    const descEl = document.getElementById('step-description');
+    const loginLink = document.getElementById('login-link');
+    
+    if (step === 1) {
+      titleEl.textContent = 'Crear Cuenta';
+      descEl.innerHTML = 'Ingresa tu nombre y correo electrónico para empezar. Te enviaremos un código de verificación.';
+      loginLink.style.display = 'none';
+    } else if (step === 2) {
+      titleEl.textContent = 'Verifica tu Correo';
+      descEl.innerHTML = 'Hemos enviado un código de 6 dígitos a<br /><strong id="email-display">' + formData.email + '</strong>';
+      loginLink.style.display = 'none';
+    } else if (step === 3) {
+      titleEl.textContent = 'Agrega tu Teléfono';
+      descEl.textContent = 'Te enviaremos un código de verificación por SMS para confirmar tu número de teléfono.';
+      loginLink.style.display = 'none';
+    } else if (step === 4) {
+      titleEl.textContent = 'Verifica tu Teléfono';
+      descEl.innerHTML = 'Hemos enviado un código de 6 dígitos a<br /><strong id="phone-display">' + formData.phone + '</strong>';
+      loginLink.style.display = 'none';
+    } else if (step === 5) {
+      titleEl.textContent = 'Completa tu Perfil';
+      descEl.textContent = 'Completa la información restante para finalizar la configuración de tu cuenta.';
+      loginLink.style.display = 'block';
+    }
+    
+    updateProgressDots(step);
+    currentStep = step;
+  }
+
+  // Funciones de validación
+  function validateFullName(name) {
+    return name.trim().length >= 2;
+  }
+
+  function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function validatePhone(phone) {
+    return phone.trim().length >= 10;
+  }
+
+  function validatePassword(password) {
+    return password.length >= 8;
+  }
+
+  function showFieldError(fieldId, message) {
+    validationErrors[fieldId] = message;
+    const field = document.getElementById(fieldId);
+    if (field) {
+      field.classList.add('field-error');
+      const errorEl = field.parentElement.querySelector('.field-error-message');
+      if (errorEl) {
+        errorEl.textContent = message;
+        errorEl.style.display = 'block';
+      }
+    }
+  }
+
+  function clearFieldError(fieldId) {
+    delete validationErrors[fieldId];
+    const field = document.getElementById(fieldId);
+    if (field) {
+      field.classList.remove('field-error');
+      const errorEl = field.parentElement.querySelector('.field-error-message');
+      if (errorEl) {
+        errorEl.style.display = 'none';
+      }
+    }
+  }
+
+  function clearAllErrors() {
+    Object.keys(validationErrors).forEach(key => clearFieldError(key));
+  }
+
+  // Paso 1: Crear cuenta
+  document.getElementById('form-step-1')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    clearAllErrors();
+    
+    const fullName = document.getElementById('fullName').value.trim();
+    const email = document.getElementById('email').value.trim();
+
+    let hasErrors = false;
+
+    if (!validateFullName(fullName)) {
+      showFieldError('fullName', 'El nombre debe tener al menos 2 caracteres');
+      hasErrors = true;
+    }
+
+    if (!validateEmail(email)) {
+      showFieldError('email', 'Correo electrónico inválido');
+      hasErrors = true;
+    }
+
+    if (hasErrors) {
+      return;
+    }
+
+    formData.fullName = fullName;
+    formData.email = email;
+    
+    showStep(2);
+    initOTPInputs('otp-email');
+  });
+
+  // Limpiar errores al escribir
+  document.getElementById('fullName')?.addEventListener('input', () => {
+    clearFieldError('fullName');
+  });
+
+  document.getElementById('email')?.addEventListener('input', () => {
+    clearFieldError('email');
+  });
+
+  // Paso 2: Verificar email
+  document.getElementById('form-step-2')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const inputs = document.querySelectorAll('#otp-email .otp-input');
+    const otp = Array.from(inputs).map(input => input.value).join('');
+
+    if (otp.length !== 6) {
+      return;
+    }
+
+    emailOTPStatus = 'verifying';
+    updateOTPStatus('otp-email', 'verifying');
+
+    // Código quemado: 202601
+    const isValid = otp === '202601';
+
+    setTimeout(() => {
+      if (isValid) {
+        emailOTPStatus = 'success';
+        updateOTPStatus('otp-email', 'success');
+        formData.emailOTP = otp;
+        
+        setTimeout(() => {
+          emailOTPStatus = 'idle';
+          showStep(3);
+        }, 3000);
+      } else {
+        emailOTPStatus = 'error';
+        updateOTPStatus('otp-email', 'error');
+        
+        setTimeout(() => {
+          emailOTPStatus = 'idle';
+          updateOTPStatus('otp-email', 'idle');
+          inputs.forEach(input => input.value = '');
+          inputs[0].focus();
+        }, 2000);
+      }
+    }, 1000);
+  });
+
+  function updateOTPStatus(containerId, status) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    
+    const inputs = container.querySelectorAll('.otp-input');
+    inputs.forEach(input => {
+      input.classList.remove('otp-verifying', 'otp-success', 'otp-error');
+      if (status !== 'idle') {
+        input.classList.add(`otp-${status}`);
+      }
+    });
+  }
+
+  // Paso 3: Agregar teléfono
+  document.getElementById('form-step-3')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    clearAllErrors();
+    
+    const phone = document.getElementById('phone').value.trim();
+
+    if (!validatePhone(phone)) {
+      showFieldError('phone', 'Número de teléfono inválido');
+      return;
+    }
+
+    formData.phone = phone;
+    showStep(4);
+    initOTPInputs('otp-phone');
+  });
+
+  document.getElementById('phone')?.addEventListener('input', () => {
+    clearFieldError('phone');
+  });
+
+  // Paso 4: Verificar teléfono
+  document.getElementById('form-step-4')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const inputs = document.querySelectorAll('#otp-phone .otp-input');
+    const otp = Array.from(inputs).map(input => input.value).join('');
+
+    if (otp.length !== 6) {
+      return;
+    }
+
+    phoneOTPStatus = 'verifying';
+    updateOTPStatus('otp-phone', 'verifying');
+
+    // Código quemado: 202601
+    const isValid = otp === '202601';
+
+    setTimeout(() => {
+      if (isValid) {
+        phoneOTPStatus = 'success';
+        updateOTPStatus('otp-phone', 'success');
+        formData.phoneOTP = otp;
+        
+        setTimeout(() => {
+          phoneOTPStatus = 'idle';
+          showStep(5);
+        }, 3000);
+      } else {
+        phoneOTPStatus = 'error';
+        updateOTPStatus('otp-phone', 'error');
+        
+        setTimeout(() => {
+          phoneOTPStatus = 'idle';
+          updateOTPStatus('otp-phone', 'idle');
+          inputs.forEach(input => input.value = '');
+          inputs[0].focus();
+        }, 2000);
+      }
+    }, 1000);
+  });
+
+  // Paso 5: Completar perfil
+  document.getElementById('form-step-5')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    clearAllErrors();
+    
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+
+    let hasErrors = false;
+
+    if (!validatePassword(password)) {
+      showFieldError('password', 'La contraseña debe tener al menos 8 caracteres');
+      hasErrors = true;
+    }
+
+    if (password !== confirmPassword) {
+      showFieldError('confirmPassword', 'Las contraseñas no coinciden');
+      hasErrors = true;
+    }
+
+    if (hasErrors) {
+      return;
+    }
+
+    formData.password = password;
+    formData.confirmPassword = confirmPassword;
+
+    // Cuenta creada exitosamente
+    console.log('Registro completado', formData);
+    // Aquí podrías redirigir o hacer una llamada a la API
+  });
+
+  document.getElementById('password')?.addEventListener('input', () => {
+    clearFieldError('password');
+  });
+
+  document.getElementById('confirmPassword')?.addEventListener('input', () => {
+    clearFieldError('confirmPassword');
+  });
+
+  // Reenviar códigos
+  document.getElementById('resend-email')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    // Simular reenvío - en producción harías una llamada a la API
+    console.log('Código reenviado a', formData.email);
+  });
+
+  document.getElementById('resend-phone')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    // Simular reenvío - en producción harías una llamada a la API
+    console.log('Código reenviado a', formData.phone);
+  });
+
+  // Inicializar
+  updateProgressDots(1);
+
+  // Control de flip cards para beneficios
+  document.querySelectorAll('.control-feature-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const card = btn.closest('.control-feature-card');
+      
+      if (card) {
+        card.classList.toggle('flipped');
+      }
+    });
+  });
+
+  // Formulario de contacto
+  document.getElementById('contactForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const formData = {
+      nombres: document.getElementById('nombres').value,
+      apellidos: document.getElementById('apellidos').value,
+      compania: document.getElementById('compania').value,
+      email: document.getElementById('email').value,
+      pais: document.getElementById('pais').value,
+      telefono: document.getElementById('telefono').value
+    };
+
+    console.log('Formulario enviado:', formData);
+    // Aquí podrías hacer una llamada a la API para enviar el formulario
+  });
+
+  // FAQ Accordion
+  document.querySelectorAll('.faq-question').forEach(question => {
+    question.addEventListener('click', () => {
+      const faqItem = question.closest('.faq-item');
+      const isActive = faqItem.classList.contains('active');
+
+      // Cerrar todos los demás items
+      document.querySelectorAll('.faq-item').forEach(item => {
+        item.classList.remove('active');
+      });
+
+      // Abrir el item clickeado si no estaba activo
+      if (!isActive) {
+        faqItem.classList.add('active');
+      }
+    });
+  });
+</script>
