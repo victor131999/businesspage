@@ -1,0 +1,1078 @@
+---
+// TransfersViewApp.astro
+---
+
+<div class="tv-app-container">
+  <!-- Screen 1: Amount (Home) -->
+  <div id="tv-screen-amount" class="tv-screen active">
+    <!-- Top Graphic -->
+    <!-- Top Graphic (Backdrop) -->
+    <div class="tv-graphic-container-fixed">
+      <img
+        src="/gift/ANIMACION%201.gif"
+        alt="Animation"
+        class="tv-graphic-gif"
+      />
+    </div>
+
+    <!-- Glass Content Card -->
+    <div class="tv-main-glass-card">
+      <!-- Title Section -->
+      <h1 class="tv-title">Transfers</h1>
+
+      <div class="tv-instructions">
+        <p class="tv-subtitle">How much do you want to transfer?</p>
+        <p class="tv-caption">
+          Select the currency based on the destination country.
+        </p>
+      </div>
+
+      <!-- Amount Input Card -->
+      <div class="tv-input-section">
+        <label class="tv-input-label">Amount</label>
+        <div class="tv-input-card">
+          <input
+            type="text"
+            class="tv-amount-input"
+            value="0.00"
+            id="tv-amount-field"
+            readonly
+          />
+          <button class="tv-currency-pill" id="tv-btn-currency">
+            <span class="tv-currency-text">MXN</span>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M9 18l6-6-6-6"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spacer -->
+    <div class="flex-grow"></div>
+
+    <!-- Bottom Sheet: Latest Transfers -->
+    <div
+      class="tv-bottom-sheet"
+      id="tv-latest-transfers"
+      onclick="window.tvToggleHistory(true)"
+    >
+      <!-- Compact View Content -->
+      <div class="tv-sheet-header-compact">
+        <div class="tv-sheet-handle-icon">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M18 15l-6-6-6 6"></path>
+          </svg>
+        </div>
+        <span class="tv-sheet-title-text">Latest transfers</span>
+      </div>
+
+      <!-- Expanded View Content -->
+      <div class="tv-sheet-content-expanded">
+        <div
+          class="tv-sheet-header-expanded"
+          onclick="event.stopPropagation(); window.tvToggleHistory(false)"
+        >
+          <div class="tv-sheet-handle-icon down">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M6 9l6 6 6-6"></path>
+            </svg>
+          </div>
+          <span class="tv-sheet-subtitle">History</span>
+          <h2 class="tv-sheet-main-title">Latest transfers</h2>
+        </div>
+
+        <div class="tv-history-list">
+          <!-- Item 1 -->
+          <div class="tv-history-item">
+            <div class="tv-history-left">
+              <span class="tv-history-name">Lucía Gómez</span>
+              <span class="tv-history-date">12-10-2025</span>
+            </div>
+            <div class="tv-history-right">
+              <span class="tv-history-amount">-1,250.00</span>
+              <span class="tv-history-status">Completed</span>
+            </div>
+          </div>
+          <!-- Item 2 -->
+          <div class="tv-history-item">
+            <div class="tv-history-left">
+              <span class="tv-history-name">Lucía Gómez</span>
+              <span class="tv-history-date">12-10-2025</span>
+            </div>
+            <div class="tv-history-right">
+              <span class="tv-history-amount">-1,250.00</span>
+              <span class="tv-history-status">Completed</span>
+            </div>
+          </div>
+          <!-- Item 3 -->
+          <div class="tv-history-item">
+            <div class="tv-history-left">
+              <span class="tv-history-name">Lucía Gómez</span>
+              <span class="tv-history-date">12-10-2025</span>
+            </div>
+            <div class="tv-history-right">
+              <span class="tv-history-amount">-1,250.00</span>
+              <span class="tv-history-status">Completed</span>
+            </div>
+          </div>
+          <!-- Item 4 -->
+          <div class="tv-history-item">
+            <div class="tv-history-left">
+              <span class="tv-history-name">Lucía Gómez</span>
+              <span class="tv-history-date">12-10-2025</span>
+            </div>
+            <div class="tv-history-right">
+              <span class="tv-history-amount">-1,250.00</span>
+              <span class="tv-history-status">Completed</span>
+            </div>
+          </div>
+          <!-- Item 5 -->
+          <div class="tv-history-item">
+            <div class="tv-history-left">
+              <span class="tv-history-name">Lucía Gómez</span>
+              <span class="tv-history-date">12-10-2025</span>
+            </div>
+            <div class="tv-history-right">
+              <span class="tv-history-amount">-1,250.00</span>
+              <span class="tv-history-status">Completed</span>
+            </div>
+          </div>
+          <!-- Item 6 -->
+          <div class="tv-history-item">
+            <div class="tv-history-left">
+              <span class="tv-history-name">Lucía Gómez</span>
+              <span class="tv-history-date">12-10-2025</span>
+            </div>
+            <div class="tv-history-right">
+              <span class="tv-history-amount">-1,250.00</span>
+              <span class="tv-history-status">Completed</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Screen 2: Contacts (Blur Overlay) -->
+  <div id="tv-screen-contacts" class="tv-screen hidden-screen">
+    <!-- Back Button -->
+    <button class="tv-back-btn" onclick="window.tvNavigate('amount')">
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M15 18l-6-6 6-6"></path>
+      </svg>
+      Back
+    </button>
+
+    <div class="tv-blur-content">
+      <div class="tv-section-header">
+        <h2 class="tv-section-title">Recipients</h2>
+        <p class="tv-section-desc">Select who you want to transfer to</p>
+      </div>
+
+      <div class="tv-contacts-list">
+        <!-- Contact 1 -->
+        <div
+          class="tv-contact-item"
+          onclick="window.tvSelectContact('Valentina Duarte', 'VD')"
+        >
+          <div class="tv-avatar">VD</div>
+          <div class="tv-contact-info">
+            <div class="tv-contact-name">Valentina Duarte</div>
+            <div class="tv-contact-bank">@vale - Chase USA</div>
+          </div>
+          <svg
+            class="tv-chevron"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg
+          >
+        </div>
+        <!-- Contact 2 -->
+        <div
+          class="tv-contact-item"
+          onclick="window.tvSelectContact('Carlos Mendoza', 'CM')"
+        >
+          <div class="tv-avatar alt">CM</div>
+          <div class="tv-contact-info">
+            <div class="tv-contact-name">Carlos Mendoza</div>
+            <div class="tv-contact-bank">@CM - BBVA México</div>
+          </div>
+          <svg
+            class="tv-chevron"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg
+          >
+        </div>
+        <!-- Contact 3 -->
+        <div
+          class="tv-contact-item"
+          onclick="window.tvSelectContact('Sofia Rodriguez', 'SR')"
+        >
+          <div class="tv-avatar alt-2">SR</div>
+          <div class="tv-contact-info">
+            <div class="tv-contact-name">Sofia Rodriguez</div>
+            <div class="tv-contact-bank">@SR - Santander España</div>
+          </div>
+          <svg
+            class="tv-chevron"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Screen 3: Summary -->
+  <div id="tv-screen-summary" class="tv-screen hidden-screen">
+    <button class="tv-back-btn" onclick="window.tvNavigate('contacts')">
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg
+      >
+      Back
+    </button>
+
+    <div class="tv-blur-content center-content">
+      <h2 class="tv-summary-title">Confirm payment</h2>
+      <p class="tv-summary-desc">Review the details before continuing.</p>
+
+      <div class="tv-summary-details">
+        <div class="tv-detail-row">
+          <span class="label">Recipient</span>
+          <span class="value" id="tv-summary-recipient">Valentina Duarte</span>
+        </div>
+        <div class="tv-detail-row">
+          <span class="label">Amount</span>
+          <span class="value big">1,250.00 MXN</span>
+        </div>
+
+        <div class="tv-note-input-wrapper">
+          <label>Note</label>
+          <textarea placeholder="Add a note (optional)" rows="2"></textarea>
+        </div>
+      </div>
+
+      <!-- Slide to Confirm -->
+      <div class="tv-slider-container" id="tv-slider">
+        <div class="tv-slider-track">
+          <span class="tv-slider-text">Slide to confirm</span>
+        </div>
+        <div class="tv-slider-thumb" id="tv-slider-thumb">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Screen 4: Processing & Success -->
+  <div id="tv-screen-processing" class="tv-screen hidden-screen processing-bg">
+    <div class="tv-processing-content" id="tv-processing-view">
+      <div class="tv-wave-canvas"></div>
+      <!-- Simulated via CSS -->
+      <h2 class="tv-status-title">Processing...</h2>
+    </div>
+    <div class="tv-success-content hidden" id="tv-success-view">
+      <div class="tv-success-icon">
+        <svg
+          width="40"
+          height="40"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="3"><path d="M20 6L9 17l-5-5"></path></svg
+        >
+      </div>
+      <h2 class="tv-status-title">Successfully sent!</h2>
+      <p class="tv-status-desc">Your transfer has been processed.</p>
+      <button class="tv-finish-btn" onclick="window.tvReset()">Finish</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Global Layout */
+  .tv-app-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+      sans-serif;
+    background: #ffffff;
+  }
+
+  .tv-screen {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 0 24px;
+    padding-top: 10px; /* Safe area top */
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+    background: white;
+  }
+
+  .tv-screen.hidden-screen {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.98);
+    z-index: 0;
+  }
+
+  .tv-screen.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+    z-index: 10;
+  }
+
+  /* Screen Amount Styles */
+  .tv-graphic-container-fixed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 20px;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .tv-graphic-gif {
+    width: 180%;
+    max-width: 400px;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+    transform: translateY(-20px);
+  }
+
+  .tv-main-glass-card {
+    position: relative;
+    z-index: 10;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-top: 220px;
+    margin-left: -24px;
+    margin-right: -24px;
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 24px 24px 0 0;
+    padding: 24px;
+    padding-bottom: 90px;
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.05);
+  }
+
+  .tv-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #004492;
+    margin: 0;
+    text-align: center;
+  }
+
+  .tv-instructions {
+    text-align: center;
+    margin-top: 12px;
+    margin-bottom: 32px;
+  }
+
+  .tv-subtitle {
+    font-size: 15px;
+    color: #1e293b;
+    font-weight: 500;
+    margin: 0 0 4px 0;
+  }
+
+  .tv-caption {
+    font-size: 13px;
+    color: #64748b;
+    margin: 0;
+    line-height: 1.4;
+    padding: 0 20px;
+  }
+
+  /* Input Card */
+  .tv-input-section {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .tv-input-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 8px;
+    display: block;
+    text-align: center;
+  }
+
+  .tv-input-card {
+    background: #ebeff5;
+    border-radius: 16px; /* Rounded corners like image */
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    box-sizing: border-box;
+    transition: box-shadow 0.2s;
+  }
+
+  .tv-input-card:focus-within {
+    box-shadow: 0 0 0 2px #004492;
+  }
+
+  .tv-amount-input {
+    background: transparent;
+    border: none;
+    font-size: 28px;
+    font-weight: 500;
+    color: #0f172a;
+    width: 100%;
+    outline: none;
+  }
+
+  .tv-currency-pill {
+    background: #001530; /* Very dark blue from image */
+    color: white;
+    border: none;
+    border-radius: 99px;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Bottom Sheet (Expandable) */
+  .tv-bottom-sheet {
+    background: #001530; /* Dark blue compact state */
+    width: 100%; /* Match container width */
+    height: 70px; /* Initial compact height */
+    border-radius: 28px 28px 0 0;
+    margin: 0; /* Remove negative margins that were causing offset */
+    position: absolute; /* Fixed at bottom of screen container */
+    bottom: 0px;
+    left: 0; /* Align left */
+    display: flex;
+    flex-direction: column;
+    transition: all 0.5s cubic-bezier(0.32, 0.725, 0.25, 1); /* Smooth spring-like expansion */
+    color: white;
+    overflow: hidden;
+    z-index: 50;
+  }
+
+  /* Active/Expanded State via class */
+  .tv-bottom-sheet.expanded {
+    height: 94%; /* Covers most of screen as requested */
+    background: rgba(235, 239, 245, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #0f172a; /* Dark text */
+    border-radius: 32px 32px 0 0;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Compact Content */
+  .tv-sheet-header-compact {
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding-bottom: 10px;
+    opacity: 1;
+    transition: opacity 0.2s;
+  }
+
+  .tv-bottom-sheet.expanded .tv-sheet-header-compact {
+    opacity: 0;
+    pointer-events: none;
+    height: 0;
+    overflow: hidden;
+  }
+
+  .tv-sheet-handle-icon {
+    margin-bottom: 2px;
+  }
+
+  .tv-sheet-handle-icon.down {
+    color: #64748b;
+    margin-bottom: 8px;
+  }
+
+  .tv-sheet-title-text {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  /* Expanded Content */
+  .tv-sheet-content-expanded {
+    opacity: 0;
+    transition: opacity 0.3s ease 0.1s;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: 100%; /* Ensure content takes full width */
+    box-sizing: border-box; /* Include padding in width */
+  }
+
+  .tv-bottom-sheet.expanded .tv-sheet-content-expanded {
+    opacity: 1;
+  }
+
+  .tv-sheet-header-expanded {
+    padding: 16px 24px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent; /* Top area */
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+
+  .tv-sheet-subtitle {
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 2px;
+  }
+
+  .tv-sheet-main-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #004492;
+    margin: 0;
+  }
+
+  .tv-history-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 16px 24px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .tv-history-item {
+    background: white;
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  }
+
+  .tv-history-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .tv-history-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: #0f172a;
+  }
+
+  .tv-history-date {
+    font-size: 12px;
+    color: #94a3b8;
+  }
+
+  .tv-history-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+  }
+
+  .tv-history-amount {
+    font-size: 15px;
+    font-weight: 600;
+    color: #0f172a;
+  }
+
+  .tv-history-status {
+    font-size: 12px;
+    color: #64748b;
+  }
+
+  /* Contacts & Summary Screens (Shared Blur Look) */
+  .tv-back-btn {
+    align-self: flex-start;
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 20;
+  }
+
+  .tv-blur-content {
+    flex: 1;
+    background: rgba(248, 250, 252, 0.8);
+    backdrop-filter: blur(12px);
+    border-radius: 24px 24px 0 0;
+    margin: 0 -24px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+  }
+
+  .tv-blur-content.center-content {
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Contacts List */
+  .tv-section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #004492;
+    margin: 0 0 4px 0;
+  }
+
+  .tv-section-desc {
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 24px;
+  }
+
+  .tv-contacts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .tv-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    cursor: pointer;
+    transition:
+      transform 0.1s,
+      background 0.1s;
+  }
+
+  .tv-contact-item:active {
+    transform: scale(0.98);
+    background: #f1f5f9;
+  }
+
+  .tv-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #004492;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .tv-avatar.alt {
+    background: #0ea5e9;
+  }
+  .tv-avatar.alt-2 {
+    background: #6366f1;
+  }
+
+  .tv-contact-info {
+    flex: 1;
+  }
+
+  .tv-contact-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0f172a;
+  }
+
+  .tv-contact-bank {
+    font-size: 12px;
+    color: #64748b;
+  }
+
+  .tv-chevron {
+    color: #cbd5e1;
+  }
+
+  /* Summary */
+  .tv-summary-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #004492;
+    margin-bottom: 4px;
+  }
+
+  .tv-summary-desc {
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 32px;
+  }
+
+  .tv-summary-details {
+    width: 100%;
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    margin-bottom: 32px;
+  }
+
+  .tv-detail-row {
+    margin-bottom: 16px;
+  }
+
+  .tv-detail-row .label {
+    display: block;
+    font-size: 12px;
+    color: #64748b;
+    margin-bottom: 2px;
+  }
+
+  .tv-detail-row .value {
+    font-size: 15px;
+    font-weight: 600;
+    color: #0f172a;
+  }
+
+  .tv-detail-row .value.big {
+    font-size: 24px;
+    color: #004492;
+  }
+
+  .tv-note-input-wrapper label {
+    display: block;
+    font-size: 12px;
+    color: #64748b;
+    margin-bottom: 6px;
+  }
+
+  .tv-note-input-wrapper textarea {
+    width: 100%;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 10px;
+    font-size: 13px;
+    outline: none;
+    resize: none;
+    box-sizing: border-box;
+  }
+
+  /* Slider */
+  .tv-slider-container {
+    width: 100%;
+    height: 56px;
+    background: linear-gradient(90deg, #004492 0%, #1e293b 100%);
+    border-radius: 99px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto;
+  }
+
+  .tv-slider-text {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    font-weight: 500;
+    pointer-events: none;
+  }
+
+  .tv-slider-thumb {
+    width: 48px;
+    height: 48px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #004492;
+    cursor: grab;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Processing */
+  .processing-bg {
+    background: #001530;
+    color: white;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tv-processing-content,
+  .tv-success-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .tv-status-title {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .tv-status-desc {
+    opacity: 0.8;
+    font-size: 14px;
+  }
+
+  .tv-success-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #22c55e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-bottom: 8px;
+    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .tv-finish-btn {
+    margin-top: 24px;
+    background: white;
+    color: #001530;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 99px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  @keyframes popIn {
+    from {
+      transform: scale(0);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+
+  .hidden {
+    display: none !important;
+  }
+</style>
+
+<script is:inline>
+  // Bottom Sheet Toggle
+  window.tvToggleHistory = (shouldExpand) => {
+    const sheet = document.getElementById("tv-latest-transfers");
+    if (!sheet) return;
+
+    if (shouldExpand) {
+      sheet.classList.add("expanded");
+    } else {
+      sheet.classList.remove("expanded");
+    }
+  };
+
+  // Simple State Management
+  window.tvNavigate = (screenId) => {
+    document.querySelectorAll(".tv-screen").forEach((el) => {
+      el.classList.remove("active");
+      el.classList.add("hidden-screen");
+    });
+
+    const target = document.getElementById(`tv-screen-${screenId}`);
+    if (target) {
+      target.classList.remove("hidden-screen");
+      target.classList.add("active");
+    }
+  };
+
+  // Interactions
+  // 1. Amount -> Contacts (Click on pill or input)
+  const amountInput = document.getElementById("tv-amount-field");
+  const currencyBtn = document.getElementById("tv-btn-currency");
+
+  const goToContacts = () => window.tvNavigate("contacts");
+
+  if (amountInput) amountInput.addEventListener("click", goToContacts);
+  if (currencyBtn) currencyBtn.addEventListener("click", goToContacts);
+
+  // 2. Contacts -> Summary
+  window.tvSelectContact = (name, initials) => {
+    // Update summary
+    const recEl = document.getElementById("tv-summary-recipient");
+    if (recEl) recEl.textContent = name;
+
+    window.tvNavigate("summary");
+  };
+
+  // 3. Slider Logic
+  const sliderThumb = document.getElementById("tv-slider-thumb");
+  const sliderContainer = document.getElementById("tv-slider");
+
+  if (sliderThumb && sliderContainer) {
+    let isDragging = false;
+    let startX = 0;
+
+    const onDragStart = (e) => {
+      isDragging = true;
+      startX =
+        (e.touches ? e.touches[0].clientX : e.clientX) - sliderThumb.offsetLeft;
+    };
+
+    const onDragMove = (e) => {
+      if (!isDragging) return;
+      const cx = e.touches ? e.touches[0].clientX : e.clientX;
+      let newLeft = cx - startX;
+
+      const maxLeft = sliderContainer.offsetWidth - sliderThumb.offsetWidth - 8;
+
+      if (newLeft < 4) newLeft = 4;
+      if (newLeft > maxLeft) newLeft = maxLeft;
+
+      sliderThumb.style.left = newLeft + "px";
+
+      if (newLeft >= maxLeft - 5) {
+        completeTransaction();
+        isDragging = false;
+      }
+    };
+
+    const onDragEnd = () => {
+      if (!isDragging) return;
+      isDragging = false;
+      // Reset if not complete
+      sliderThumb.style.transition = "left 0.3s";
+      sliderThumb.style.left = "4px";
+      setTimeout(() => {
+        sliderThumb.style.transition = "";
+      }, 300);
+    };
+
+    sliderThumb.addEventListener("mousedown", onDragStart);
+    sliderThumb.addEventListener("touchstart", onDragStart);
+
+    window.addEventListener("mousemove", onDragMove);
+    window.addEventListener("touchmove", onDragMove);
+
+    window.addEventListener("mouseup", onDragEnd);
+    window.addEventListener("touchend", onDragEnd);
+  }
+
+  function completeTransaction() {
+    window.tvNavigate("processing");
+    // Simulate loading
+    setTimeout(() => {
+      const procView = document.getElementById("tv-processing-view");
+      const succView = document.getElementById("tv-success-view");
+      if (procView) procView.classList.add("hidden");
+      if (succView) succView.classList.remove("hidden");
+    }, 2000);
+  }
+
+  window.tvReset = () => {
+    // Reset views
+    const procView = document.getElementById("tv-processing-view");
+    const succView = document.getElementById("tv-success-view");
+    if (procView) procView.classList.remove("hidden");
+    if (succView) succView.classList.add("hidden");
+
+    // Reset Slider
+    if (sliderThumb) sliderThumb.style.left = "4px";
+
+    window.tvNavigate("amount");
+  };
+</script>
