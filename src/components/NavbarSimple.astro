@@ -1,0 +1,226 @@
+---
+type NavItem = {
+  label: string;
+  href: string;
+};
+
+const {
+  logoSrc = "/images/zelify_logo.png",
+  logoAlt = "Zelify logo",
+  navItems = [
+    { label: "Producto", href: "/product" },
+    { label: "Nosotros", href: "/#nosotros" },
+    { label: "Desarrollo", href: "/#desarrollo" },
+    { label: "Otros", href: "/#otros" },
+  ],
+  demoHref = "/demo",
+  initialLang = "ES",
+} = Astro.props as {
+  logoSrc?: string;
+  logoAlt?: string;
+  navItems?: NavItem[];
+  demoHref?: string;
+  initialLang?: string;
+};
+---
+
+<header class="simple-navbar">
+  <nav class="simple-navbar__inner" aria-label="Principal">
+    <a class="simple-navbar__logo" href="/">
+      <img src={logoSrc} alt={logoAlt} />
+    </a>
+
+    <div class="simple-navbar__links">
+      {
+        navItems.map((item) => (
+          <a class="simple-navbar__link" href={item.href}>
+            {item.label}
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="simple-navbar__actions">
+      <a class="simple-navbar__demo" href={demoHref}>demo</a>
+      <button
+        class="simple-navbar__lang"
+        type="button"
+        data-lang={initialLang.toUpperCase() === "EN" ? "EN" : "ES"}
+        aria-label="Cambiar idioma"
+      >
+        <span class="simple-navbar__lang-text"
+          >{initialLang.toUpperCase() === "EN" ? "EN" : "ES"}</span
+        >
+      </button>
+    </div>
+  </nav>
+</header>
+
+<style>
+  .simple-navbar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 1.25rem 0;
+    font-family:
+      "NataSans",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      sans-serif;
+
+    /* Scroll behavior styles */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background: rgba(
+      255,
+      255,
+      255,
+      0.95
+    ); /* Ensure background is visible when sticky */
+    backdrop-filter: blur(8px); /* Optional: nice glass effect */
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .simple-navbar--hidden {
+    transform: translateY(-100%);
+  }
+
+  .simple-navbar__inner {
+    width: 100%; /* Use full available width */
+    max-width: 1600px; /* Increased from 1200px to allow more spread */
+    padding: 0 clamp(24px, 5vw, 60px); /* Slightly increased horizontal padding */
+    display: flex;
+    align-items: center;
+    gap: clamp(1.5rem, 3vw, 3rem);
+  }
+
+  .simple-navbar__logo img {
+    height: 40px;
+    width: auto;
+    display: block;
+  }
+
+  .simple-navbar__links {
+    display: flex;
+    align-items: center;
+    gap: clamp(1.25rem, 2vw, 2.5rem);
+    margin-left: clamp(2rem, 5vw, 5rem); /* Added separation from logo */
+  }
+
+  .simple-navbar__link {
+    text-decoration: none;
+    color: #184090;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+    padding: 0.25rem 0;
+  }
+
+  .simple-navbar__link:hover {
+    opacity: 0.75;
+  }
+
+  .simple-navbar__actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .simple-navbar__demo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #93fb4d;
+    color: #184090;
+    padding: 0.45rem 1.6rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: lowercase;
+    box-shadow: 0 8px 20px rgba(147, 251, 77, 0.35);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .simple-navbar__demo:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 28px rgba(147, 251, 77, 0.4);
+  }
+
+  .simple-navbar__lang {
+    width: 40px;
+    height: 40px;
+    border: 1.5px solid #111111;
+    background: #ffffff;
+    color: #111111;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    text-transform: uppercase;
+  }
+
+  .simple-navbar__lang:focus-visible {
+    outline: 2px solid rgba(24, 64, 144, 0.45);
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 900px) {
+    .simple-navbar__links {
+      display: none;
+    }
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Language toggle logic
+    const button = document.querySelector(".simple-navbar__lang");
+    if (button) {
+      const label = button.querySelector(".simple-navbar__lang-text");
+      const getLang = () => (button.dataset.lang === "EN" ? "EN" : "ES");
+      const setLang = (lang) => {
+        button.dataset.lang = lang;
+        if (label) label.textContent = lang;
+      };
+      setLang(getLang());
+      button.addEventListener("click", () => {
+        setLang(getLang() === "EN" ? "ES" : "EN");
+      });
+    }
+
+    // Scroll hide/show logic
+    const navbar = document.querySelector(".simple-navbar");
+    let lastScrollY = window.scrollY;
+
+    if (navbar) {
+      window.addEventListener(
+        "scroll",
+        () => {
+          const currentScrollY = window.scrollY;
+
+          // Show navbar if scrolling up or at the very top
+          if (currentScrollY < lastScrollY || currentScrollY < 50) {
+            navbar.classList.remove("simple-navbar--hidden");
+          }
+          // Hide navbar if scrolling down and past the threshold
+          else if (currentScrollY > lastScrollY && currentScrollY > 50) {
+            navbar.classList.add("simple-navbar--hidden");
+          }
+
+          lastScrollY = currentScrollY;
+        },
+        { passive: true },
+      );
+    }
+  });
+</script>
