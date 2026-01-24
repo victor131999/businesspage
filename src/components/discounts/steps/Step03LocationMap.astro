@@ -1,0 +1,123 @@
+---
+import DiscountHeader from "../DiscountHeader.astro";
+const customColor = "#004492";
+---
+
+<div
+  class="step-content hidden bg-white h-full relative overflow-hidden font-sans"
+  id="step-03"
+>
+  <DiscountHeader showBack={true} />
+
+  <div class="flex-1 px-4 pt-2 pb-6 flex items-center justify-center min-h-0">
+    <!-- Map Container - Rounded Card -->
+    <div
+      class="relative w-full h-[95%] rounded-[2.5rem] overflow-hidden shadow-2xl flex flex-col items-center bg-[#1a2333] map-interactive-area"
+    >
+      <!-- Map Background with Gradient -->
+      <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 bg-[#1a2333] z-0 overflow-hidden">
+          <!-- Simulated Map Streets -->
+          <div class="absolute inset-0 opacity-10">
+            <svg class="w-full h-full" width="100%" height="100%">
+              <pattern
+                id="street-pattern"
+                x="0"
+                y="0"
+                width="50"
+                height="50"
+                patternUnits="userSpaceOnUse"
+              >
+                <path
+                  d="M50 0 L50 50 M0 50 L50 50"
+                  stroke="white"
+                  stroke-width="1"
+                  fill="none"></path>
+              </pattern>
+              <rect width="100%" height="100%" fill="url(#street-pattern)"
+              ></rect>
+              <path
+                d="M0 100 L400 120 M100 0 L150 800"
+                stroke="white"
+                stroke-width="2"
+                fill="none"></path>
+              <path
+                d="M200 0 L250 800 M0 300 L400 350"
+                stroke="white"
+                stroke-width="3"
+                fill="none"></path>
+            </svg>
+          </div>
+          <!-- Place names (Simulated) -->
+          <div
+            class="absolute top-20 left-10 text-[10px] text-gray-500 rotate-90"
+          >
+            Av. Portugal
+          </div>
+          <div class="absolute bottom-40 right-10 text-[10px] text-gray-500">
+            IÑAQUITO
+          </div>
+        </div>
+        <div
+          class="absolute inset-0"
+          style="background: linear-gradient(to bottom, #000b1e, #044a95); opacity: 0.2;"
+        >
+        </div>
+      </div>
+
+      <!-- Address Input Overlay -->
+      <div class="absolute top-8 left-6 right-6 z-20">
+        <div
+          class="bg-[#1a334d]/60 backdrop-blur-md rounded-xl p-3.5 flex items-center border border-white/5 shadow-lg"
+        >
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="gray"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="mr-3 text-gray-400"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+          </svg>
+          <span class="text-gray-300 text-sm font-light">
+            Search business address...
+          </span>
+        </div>
+      </div>
+
+      <!-- Interactive Pointer -->
+      <div
+        class="absolute transition-all duration-300 ease-out z-30 pointer-marker"
+        style="left: 50%; top: 50%; transform: translate(-50%, -100%);"
+      >
+        <svg
+          width="40"
+          height="40"
+          viewBox="0 0 24 24"
+          fill="white"
+          class="drop-shadow-lg"
+        >
+          <path
+            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+          ></path>
+          <circle cx="12" cy="9" r="2.5" fill="#1a334d"></circle>
+        </svg>
+      </div>
+
+      <!-- Continue Button -->
+      <div class="absolute bottom-6 left-0 right-0 z-20">
+        <button
+          class="w-[70%] mx-auto flex items-center justify-center bg-white text-[#001a33] rounded-2xl py-3.5 font-bold text-sm shadow-lg hover:bg-gray-100 transition-colors relative step-next-btn"
+          data-next="4"
+        >
+          <span class="mr-0">Continue</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

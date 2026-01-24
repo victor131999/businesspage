@@ -1,0 +1,173 @@
+---
+import DiscountHeader from "../DiscountHeader.astro";
+
+// Plans data
+const plans = [
+  {
+    id: "free",
+    title: "Basic",
+    price: "$0",
+    features: [
+      "Basic Access",
+      "Limited Promos",
+      "Standard Support",
+      "Community Access",
+    ],
+  },
+  {
+    id: "premium",
+    title: "Premium",
+    price: "$29",
+    features: [
+      "Unlimited Access",
+      "Unlimited Promos",
+      "Priority Support",
+      "Analytics",
+    ],
+  },
+];
+
+const customColor = "#004492";
+---
+
+<div
+  class="step-content hidden bg-white h-full relative overflow-hidden font-sans"
+  id="step-01"
+>
+  <div
+    class="absolute inset-0 pointer-events-none z-0"
+    style="background: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.35) 100%)"
+  >
+  </div>
+
+  <DiscountHeader showBack={false} />
+
+  <div
+    class="relative flex-1 flex flex-col items-center pt-2 pb-6 min-h-0 z-10 px-4"
+  >
+    <div
+      class="absolute top-[165px] z-50 flex flex-col items-center justify-center w-full pointer-events-none"
+    >
+      <h2 class="text-2xl font-bold" style={`color: ${customColor}`}>
+        Select your plan
+      </h2>
+      <p class="text-gray-500 font-medium tracking-wide text-xs">
+        Choose the best plan for you
+      </p>
+    </div>
+
+    <!-- Animated Graphic Placeholder -->
+    <div
+      class="relative w-40 h-40 flex items-center justify-center mt-8 mb-[-50px] shrink-0 z-0"
+    >
+      <div
+        class="relative w-48 h-48 flex items-center justify-center mb-0 shrink-0 z-10"
+      >
+        <img
+          src="/gift/ANIMACION 1.gif"
+          alt="Map"
+          class="w-full h-full object-contain opacity-80"
+        />
+      </div>
+    </div>
+
+    <div
+      class="relative z-10 flex-1 w-full overflow-hidden rounded-2xl p-5 backdrop-blur-sm flex flex-col"
+      style="background-color: rgba(255, 255, 255, 0.35);"
+    >
+      <div
+        class="w-full flex-1 flex flex-col items-center justify-center -space-y-6 relative z-20"
+        id="plan-container"
+      >
+        <!-- Render Free Plan -->
+        <div
+          class="plan-card rounded-[2rem] transition-all duration-500 ease-in-out relative overflow-hidden flex flex-col items-center shrink-0 cursor-pointer w-[90%] h-[180px] border-[9px] border-white shadow-[0_0_20px_rgba(255,255,255,0.6)] z-10 py-6 active"
+          data-plan="free"
+          style={`background: linear-gradient(to right, ${customColor}, #000b1e);`}
+        >
+          <!-- Expanded Content -->
+          <div
+            class="expanded-content w-full flex flex-col items-center transition-opacity duration-300 px-4 opacity-100 delay-150"
+          >
+            <h3 class="text-xs text-white mb-0">{plans[0].title}</h3>
+            <div class="flex items-center justify-center gap-1 mb-5">
+              <span class="text-xl text-white">{plans[0].price}</span>
+              <span class="text-xs text-white/70">/month</span>
+            </div>
+            <div class="space-y-1.5 text-center w-full">
+              {
+                plans[0].features.map((feature) => (
+                  <p class="text-[9px] text-white/70 leading-tight">
+                    {feature}
+                  </p>
+                ))
+              }
+            </div>
+          </div>
+          <!-- Collapsed Content -->
+          <div
+            class="collapsed-content absolute inset-0 flex items-center justify-center transition-opacity duration-300 opacity-0 pointer-events-none"
+          >
+            <span class="text-white text-base tracking-wide mb-3"
+              >{plans[0].title}</span
+            >
+          </div>
+        </div>
+
+        <!-- Render Premium Plan -->
+        <div
+          class="plan-card rounded-[2rem] transition-all duration-500 ease-in-out relative overflow-hidden flex flex-col items-center shrink-0 cursor-pointer w-[85%] h-[70px] z-0 justify-center translate-y-0 hover:bg-white/40"
+          data-plan="premium"
+          style="background: rgba(189, 185, 185, 0.3);"
+        >
+          <!-- Expanded Content -->
+          <div
+            class="expanded-content w-full flex flex-col items-center transition-opacity duration-300 px-4 opacity-0 absolute pointer-events-none"
+          >
+            <h3 class="text-xs text-white mb-0">{plans[1].title}</h3>
+            <div class="flex items-center justify-center gap-1 mb-5">
+              <span class="text-xl text-white">{plans[1].price}</span>
+              <span class="text-xs text-white/70">/month</span>
+            </div>
+            <div class="space-y-1.5 text-center w-full">
+              {
+                plans[1].features.map((feature) => (
+                  <p class="text-[9px] text-white/70 leading-tight">
+                    {feature}
+                  </p>
+                ))
+              }
+            </div>
+          </div>
+          <!-- Collapsed Content -->
+          <div
+            class="collapsed-content absolute inset-0 flex items-center justify-center transition-opacity duration-300 opacity-100 delay-150"
+          >
+            <span class="text-white text-base tracking-wide mt-6"
+              >{plans[1].title}</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-4 shrink-0">
+        <button
+          class="w-[80%] mx-auto text-white rounded-2xl py-3.5 text-sm flex items-center pl-6 shadow-lg relative overflow-hidden group transition-transform active:scale-[0.98] z-20 step-next-btn"
+          style={`background: linear-gradient(to right, ${customColor}, #000b1e);`}
+          data-next="2"
+        >
+          <span class="mr-0">Continue</span>
+          <span
+            class="absolute right-6 transition-transform group-hover:translate-x-1"
+          >
+            &gt;
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Add any specific styles here if tailwind isn't enough */
+</style>

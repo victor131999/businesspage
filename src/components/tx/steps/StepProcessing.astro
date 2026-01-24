@@ -1,0 +1,159 @@
+---
+const title = "Processing";
+const subtitle = "Your transaction is being processed";
+---
+
+<div class="step-content hidden" id="step-processing">
+  <div class="processing-container">
+    <div class="processing-bg" id="processing-bg"></div>
+
+    <div class="processing-content" id="processing-content">
+      <h2 class="processing-title">
+        {
+          title.split("").map((char, index) => (
+            <span class="char-title" data-index={index}>
+              {char === " " ? "\u00A0" : char}
+            </span>
+          ))
+        }
+      </h2>
+      <p class="processing-subtitle">
+        {
+          subtitle.split("").map((char, index) => (
+            <span class="char-subtitle" data-index={index}>
+              {char === " " ? "\u00A0" : char}
+            </span>
+          ))
+        }
+      </p>
+
+      <div class="progress-wrapper">
+        <div class="progress-track">
+          <div class="progress-fill" id="processing-bar-fill"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .hidden {
+    display: none !important;
+  }
+
+  .step-content {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 !important;
+    position: relative;
+    overflow: hidden;
+    border-radius: 24px;
+  }
+
+  .processing-container {
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    right: 10px;
+    bottom: 80px;
+    background: #f3f4f6;
+    border-radius: 24px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .processing-bg {
+    position: absolute;
+    inset: 0;
+    /* Identical Gradient */
+    background: linear-gradient(
+      to right,
+      #3c50e0 0%,
+      #2a389d 40%,
+      #171f58 70%,
+      #000000 100%
+    );
+    transition: clip-path 0.05s linear;
+    clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%);
+
+    /* Simulate mask for edge fade - handled via JS dynamic maskImage if needed, 
+       but clip-path is primary. React code uses a dynamic maskImage.
+       We'll skip complex maskImage for now unless demanded by 'Indentical' failing visual check.
+       The gradient edge in clip-path is sharp, React's uses a fading lead edge. 
+       Let's try to add the maskImage logic in JS if possible. */
+  }
+
+  .processing-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    width: 100%;
+    padding: 0 40px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .processing-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .processing-subtitle {
+    font-size: 14px;
+    margin: 0 0 24px 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    color: #666;
+  }
+
+  .char-title {
+    color: #0b132b; /* Start dark */
+    transition: color 0.1s linear;
+  }
+
+  .char-subtitle {
+    color: #666; /* Start gray */
+    transition: color 0.1s linear;
+  }
+
+  /* Active state for chars (handled by JS) */
+  .char-title.active {
+    color: white;
+  }
+  .char-subtitle.active {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .progress-wrapper {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .progress-track {
+    width: 100%;
+    background: #d1d5db; /* gray-300 */
+    border-radius: 9999px;
+    height: 8px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: white;
+    border-radius: 9999px;
+    transition: width 0.05s linear;
+  }
+</style>

@@ -1,0 +1,306 @@
+---
+import Step01PlanSelection from "./steps/Step01PlanSelection.astro";
+import Step02BasicInfo from "./steps/Step02BasicInfo.astro";
+import Step03LocationMap from "./steps/Step03LocationMap.astro";
+import Step04AddressDetails from "./steps/Step04AddressDetails.astro";
+import Step05Description from "./steps/Step05Description.astro";
+import Step06Category from "./steps/Step06Category.astro";
+import Step07CreatePromo from "./steps/Step07CreatePromo.astro";
+import Step08PromoStack from "./steps/Step08PromoStack.astro";
+import Step09ConfigurePromo from "./steps/Step09ConfigurePromo.astro";
+import Step10Launching from "./steps/Step10Launching.astro";
+import Step11Success from "./steps/Step11Success.astro";
+
+// Replicate the Frame Design
+---
+
+<!-- App Content Area -->
+<div class="h-full w-full overflow-hidden bg-white relative rounded-[2.5rem]">
+  <Step01PlanSelection />
+  <Step02BasicInfo />
+  <Step03LocationMap />
+  <Step04AddressDetails />
+  <Step05Description />
+  <Step06Category />
+  <Step07CreatePromo />
+  <Step08PromoStack />
+  <Step09ConfigurePromo />
+  <Step10Launching />
+  <Step11Success />
+</div>
+
+<script>
+  // State Management using closure patterns to avoid global pollution if possible,
+  // but Astro scripts are modules by default.
+
+  let currentStep = 8;
+
+  // Map step IDs
+  const steps = [
+    "step-01",
+    "step-02",
+    "step-03",
+    "step-04",
+    "step-05",
+    "step-06",
+    "step-07",
+    "step-08",
+    "step-09",
+    "step-10",
+    "step-11",
+  ];
+
+  function init() {
+    showStep(8);
+    setupEventListeners();
+    setupPlanSelection();
+    setupPromoStack();
+    setupMapPointer();
+  }
+
+  function showStep(stepNum) {
+    currentStep = stepNum;
+
+    // Hide all steps
+    steps.forEach((id, index) => {
+      const el = document.getElementById(id);
+      if (el) {
+        if (index + 1 === stepNum) {
+          el.classList.remove("hidden");
+          el.classList.add("flex", "flex-col"); // Ensure flex layout works
+        } else {
+          el.classList.add("hidden");
+          el.classList.remove("flex", "flex-col");
+        }
+      }
+    });
+
+    // Step Specific Logic
+    if (stepNum === 10) {
+      startLaunchingAnimation();
+    }
+  }
+
+  function setupEventListeners() {
+    // Next Buttons
+    document.querySelectorAll(".step-next-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const nextStep = parseInt(btn.getAttribute("data-next") || "1");
+        showStep(nextStep);
+      });
+    });
+
+    // Reset Button
+    const finishBtn = document.getElementById("finish-btn");
+    if (finishBtn) {
+      finishBtn.addEventListener("click", () => {
+        // Reset Animations if any
+        const progressLayer = document.querySelector(
+          ".progress-layer",
+        ) as HTMLElement;
+        const flushEffect = document.querySelector(
+          ".flush-effect",
+        ) as HTMLElement;
+        if (progressLayer) progressLayer.style.clipPath = "inset(0 100% 0 0)";
+        if (flushEffect) flushEffect.style.left = "0%";
+
+        showStep(1);
+      });
+    }
+
+    // Back Buttons
+    // Note: Each header has a local back button if enabled.
+    // We need to handle this dynamically based on current step.
+    // Or specific event listeners for each step if they have back buttons.
+    // Ideally, we'd add 'data-back' attributes to buttons, but let's wire them up manually or generically.
+    document.querySelectorAll(".back-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        // Determine previous step
+        if (currentStep > 1) {
+          // Logic for specific paths (Category "Try Again" etc) could go here
+          showStep(currentStep - 1);
+        }
+      });
+    });
+  }
+
+  function setupPlanSelection() {
+    const plans = document.querySelectorAll(".plan-card");
+    plans.forEach((plan) => {
+      plan.addEventListener("click", () => {
+        // Remove active from all
+        plans.forEach((p) => {
+          p.classList.remove("active");
+          p.classList.add(
+            "w-[85%]",
+            "h-[70px]",
+            "z-0",
+            "translate-y-0",
+            "hover:bg-white/40",
+          );
+          p.classList.remove(
+            "w-[90%]",
+            "h-[180px]",
+            "border-[9px]",
+            "border-white",
+            "shadow-[0_0_20px_rgba(255,255,255,0.6)]",
+            "z-10",
+            "py-6",
+          );
+          p.style.background = "rgba(189, 185, 185, 0.3)";
+
+          // Toggle contents
+          const expanded = p.querySelector(".expanded-content");
+          const collapsed = p.querySelector(".collapsed-content");
+          if (expanded) {
+            expanded.classList.remove("opacity-100", "delay-150");
+            expanded.classList.add(
+              "opacity-0",
+              "absolute",
+              "pointer-events-none",
+            );
+          }
+          if (collapsed) {
+            collapsed.classList.remove("opacity-0", "pointer-events-none");
+            collapsed.classList.add("opacity-100", "delay-150");
+          }
+        });
+
+        // Add active to current
+        plan.classList.add("active");
+        plan.classList.remove(
+          "w-[85%]",
+          "h-[70px]",
+          "z-0",
+          "translate-y-0",
+          "hover:bg-white/40",
+        );
+        plan.classList.add(
+          "w-[90%]",
+          "h-[180px]",
+          "border-[9px]",
+          "border-white",
+          "shadow-[0_0_20px_rgba(255,255,255,0.6)]",
+          "z-10",
+          "py-6",
+        );
+        plan.style.background = "linear-gradient(to right, #004492, #000b1e)";
+
+        // Toggle contents
+        const expanded = plan.querySelector(".expanded-content");
+        const collapsed = plan.querySelector(".collapsed-content");
+        if (expanded) {
+          expanded.classList.remove(
+            "opacity-0",
+            "absolute",
+            "pointer-events-none",
+          );
+          expanded.classList.add("opacity-100", "delay-150");
+        }
+        if (collapsed) {
+          collapsed.classList.remove("opacity-100", "delay-150");
+          collapsed.classList.add("opacity-0", "pointer-events-none");
+        }
+      });
+    });
+  }
+
+  function setupPromoStack() {
+    // Simple Carousel Logic
+    // We'll just auto-select based on click
+    const cards = document.querySelectorAll(".promo-card");
+    const count = cards.length;
+    if (count === 0) return;
+
+    let activeIndex = 0; // First one default
+
+    const updateStack = (newIndex) => {
+      activeIndex = newIndex;
+      cards.forEach((card, i) => {
+        let diff = i - activeIndex;
+        if (diff > count / 2) diff -= count;
+        if (diff < -count / 2) diff += count;
+
+        const isActive = diff === 0;
+
+        // Styles
+        if (isActive) {
+          card.classList.add("active");
+          card.style.zIndex = "20";
+          card.style.transform = "translateY(-50%) scale(1)";
+          card.style.opacity = "1";
+          card.style.background = "linear-gradient(to right, #004492, #000b1e)";
+        } else {
+          card.classList.remove("active");
+          const translateY = diff * 65;
+          const scale = 0.85;
+          const zIndex = diff < 0 ? 11 : 10;
+
+          card.style.zIndex = zIndex.toString();
+          card.style.transform = `translateY(calc(-50% + ${translateY}px)) scale(${scale})`;
+          card.style.opacity = "0.8";
+          card.style.background = "rgba(189, 185, 185, 0.3)";
+        }
+      });
+    };
+
+    // Init
+    updateStack(0);
+
+    // Click Events
+    cards.forEach((card, i) => {
+      card.addEventListener("click", () => updateStack(i));
+    });
+  }
+
+  function startLaunchingAnimation() {
+    const progressLayer = document.querySelector(
+      ".progress-layer",
+    ) as HTMLElement;
+    const flushEffect = document.querySelector(".flush-effect") as HTMLElement;
+
+    if (progressLayer && flushEffect) {
+      // Reset first
+      progressLayer.style.transition = "none";
+      flushEffect.style.transition = "none";
+      progressLayer.style.clipPath = "inset(0 100% 0 0)";
+      flushEffect.style.left = "0%";
+
+      // Trigger reflow
+      void progressLayer.offsetWidth;
+
+      // Start Animation
+      setTimeout(() => {
+        progressLayer.style.transition = "clip-path 3s linear";
+        flushEffect.style.transition = "left 3s linear";
+
+        progressLayer.style.clipPath = "inset(0 0% 0 0)";
+        flushEffect.style.left = "100%";
+
+        // Auto navigate to Success after 3s
+        setTimeout(() => {
+          showStep(11);
+        }, 3050);
+      }, 100);
+    }
+  }
+
+  function setupMapPointer() {
+    const mapArea = document.querySelector(".map-interactive-area");
+    const pointer = document.querySelector(".pointer-marker") as HTMLElement;
+
+    if (mapArea && pointer) {
+      mapArea.addEventListener("click", (e: any) => {
+        const rect = mapArea.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+        pointer.style.left = `${x}%`;
+        pointer.style.top = `${y}%`;
+      });
+    }
+  }
+
+  // Run
+  init();
+</script>

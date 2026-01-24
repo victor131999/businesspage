@@ -1,0 +1,147 @@
+---
+import DiscountHeader from "../DiscountHeader.astro";
+const customColor = "#004492";
+
+const promos = [1, 2, 3]; // Default count
+---
+
+<div class="step-content hidden bg-white h-full relative overflow-hidden font-sans" id="step-08">
+  <DiscountHeader showBack={true} />
+
+   <!-- Gradient Layer -->
+    <div class="absolute top-[30%] left-0 right-0 bottom-0 pointer-events-none z-0">
+        <div
+            class="relative z-10 w-full h-full overflow-hidden rounded-2xl p-5 backdrop-blur-sm flex flex-col pt-4"
+            style="background: linear-gradient(to bottom, rgba(255, 255, 255, 0.35) 20%, rgba(255,255,255,0.9) 45%, #ffffff 60%);"
+        >
+        </div>
+    </div>
+
+  <div class="flex-1 flex flex-col items-center relative z-10 min-h-0 pt-4">
+     <!-- Animation - Flexible -->
+    <div class="relative w-64 h-64 flex items-center justify-center shrink min-h-[120px] -mb-16 z-0">
+         <div class="relative w-48 h-48 flex items-center justify-center mb-0 shrink-0 z-10">
+            <img
+            src="/gift/ANIMACION 1.gif"
+            alt="Graphic"
+            class="w-full h-full object-contain opacity-80"
+            />
+        </div>
+    </div>
+
+     <div class="absolute top-[30%] left-0 right-0 bottom-0 pointer-events-none z-0">
+        <div
+          class="relative z-10 w-full h-full overflow-hidden rounded-2xl p-5 backdrop-blur-sm flex flex-col pt-4"
+          style="background: linear-gradient(to bottom, rgba(255, 255, 255, 0.35) 20%, rgba(255,255,255,0.9) 45%, #ffffff 60%);"
+        >
+        </div>
+    </div>
+
+     <!-- Text and Carousel -->
+    <div class="flex-1 w-full flex flex-col items-center justify-center z-20 px-6 pb-4">
+        <h2 class="text-2xl mb-0 text-[#003366] text-center mt-4">
+            <span class="font-light">
+            Here We
+            </span>{" "}
+            <span class="font-bold">Go</span>
+        </h2>
+        <p class="text-gray-400 text-xs text-center mb-6">
+            Our custom tailored promos for you
+        </p>
+
+        <!-- Carousel Container -->
+        <div class="relative w-full flex-1 min-h-[220px] flex items-center justify-center perspective-[1000px] stack-container">
+            {promos.map((i, index) => (
+                <div
+                    class="promo-card absolute left-0 right-0 mx-auto transition-all duration-500 ease-out cursor-pointer flex flex-col justify-center"
+                    data-index={index}
+                     style={`background: rgba(189, 185, 185, 0.3); z-index: ${10 - index};`}
+                >
+                  <!-- Active Content (Hidden by default, shown via class) -->
+                  <div class="card-active-content hidden flex items-center px-4 gap-3">
+                     <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center shrink-0">
+                        <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#003366"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M3 3h18v18H3zM21 9H3M21 15H3M12 3v18" />
+                        </svg>
+                     </div>
+                     <div class="flex flex-col text-white">
+                        <span class="text-[9px] font-bold uppercase tracking-widest opacity-70 mb-0.5">
+                            PROMO {index + 1}
+                        </span>
+                         <span class="text-[10px] text-blue-200">
+                            Go Green
+                        </span>
+                        <span class="text-sm font-bold leading-tight">
+                            2x1 on Veggie Bowls
+                        </span>
+                     </div>
+                  </div>
+
+                  <!-- Inactive Content -->
+                   <div class="card-inactive-content flex items-center justify-center h-full transition-transform duration-300">
+                        <span class="text-white/60 font-bold text-xs tracking-widest uppercase">
+                        PROMO {index + 1}
+                        </span>
+                   </div>
+                </div>
+            ))}
+        </div>
+    </div>
+  </div>
+
+  <div class="px-6 pb-8 pt-4 shrink-0 z-30">
+    <button
+        class="w-[80%] mx-auto text-white rounded-2xl py-3.5 text-sm flex items-center pl-6 shadow-lg relative overflow-hidden group transition-transform active:scale-[0.98] z-20 step-next-btn"
+        style={`background: linear-gradient(to right, ${customColor}, #000b1e);`}
+        data-next="9"
+    >
+        <span class="mr-0">Continue</span>
+        <span class="absolute right-6 transition-transform group-hover:translate-x-1">
+        &gt;
+        </span>
+    </button>
+  </div>
+</div>
+
+<style>
+    /* Base styles for cards */
+    .promo-card {
+        top: 50%;
+        border-radius: 2rem;
+    }
+    .promo-card.active {
+        width: 95%;
+        height: 110px;
+        border: 6px solid white;
+        box-shadow: 0 0 25px rgba(255,255,255,0.6);
+        background: linear-gradient(to right, #004492, #000b1e) !important;
+        opacity: 1;
+        transform: translateY(-50%) scale(1);
+    }
+    .promo-card:not(.active) {
+         width: 100%;
+         height: 80px;
+         background: rgba(189, 185, 185, 0.3);
+         opacity: 0.8;
+         transform: translateY(calc(-50% + 65px)) scale(0.85); /* Default offset */
+    }
+    .promo-card:not(.active):hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .promo-card.active .card-active-content {
+        display: flex;
+    }
+    .promo-card.active .card-inactive-content {
+        display: none;
+    }
+</style>

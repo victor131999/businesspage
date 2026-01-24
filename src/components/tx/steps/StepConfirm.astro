@@ -1,0 +1,241 @@
+<div class="step-content hidden" id="step-confirm">
+  <!-- Graphic (smaller) -->
+  <div class="graphic-container-small">
+    <svg width="120" height="70" viewBox="0 0 200 120" fill="none">
+      <path
+        d="M10,120 Q50,20 100,20 Q150,20 190,120"
+        stroke="#004195"
+        stroke-width="1.5"
+        opacity="0.6"
+        fill="none"></path>
+      <path
+        d="M20,120 Q55,30 100,30 Q145,30 180,120"
+        stroke="#004195"
+        stroke-width="1.5"
+        opacity="0.7"
+        fill="none"></path>
+      <path
+        d="M30,120 Q60,40 100,40 Q140,40 170,120"
+        stroke="#004195"
+        stroke-width="1.5"
+        opacity="0.8"
+        fill="none"></path>
+      <path
+        d="M40,120 Q65,50 100,50 Q135,50 160,120"
+        stroke="#004195"
+        stroke-width="1.5"
+        opacity="0.9"
+        fill="none"></path>
+    </svg>
+  </div>
+
+  <h2 class="confirm-title">Confirm <span class="light">the transfer</span></h2>
+  <p class="confirm-subtitle">Review the details before sending</p>
+
+  <div class="transfer-summary">
+    <div class="recipient-preview">
+      <div class="label">Recipient</div>
+      <div class="value large" id="confirm-recipient-name">
+        Valentina Duarte
+      </div>
+    </div>
+
+    <div class="amount-preview">
+      <div class="label">Amount</div>
+      <div class="value large-amount" id="confirm-amount-display">
+        10,000.00 MXN
+      </div>
+    </div>
+
+    <div class="details-grid">
+      <div class="detail-row">
+        <span class="detail-label">You send</span>
+        <span class="detail-value" id="confirm-send-value">$10,000.00 MXN</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Exchange rate</span>
+        <span class="detail-value">1 MXN = 0.0580 USD</span>
+      </div>
+      <div class="detail-row highlight">
+        <span class="detail-label">Total</span>
+        <span class="detail-value" id="confirm-total-value">$580.00 USD</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-to-confirm-container">
+    <div class="slider-track" id="slider-track">
+      <div class="slider-text">Slide to confirm</div>
+      <div class="slider-thumb" id="slider-thumb">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#004195"
+          stroke-width="2"
+        >
+          <path d="M9 18l6-6-6-6"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .hidden {
+    display: none !important;
+  }
+
+  .step-content {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeIn 0.4s ease-out;
+    padding-bottom: 20px;
+  }
+
+  .graphic-container-small {
+    margin-bottom: 10px;
+  }
+
+  .confirm-title {
+    font-size: 22px;
+    color: #004195;
+    font-weight: 700;
+    margin: 0;
+    text-align: center;
+  }
+
+  .confirm-title .light {
+    font-weight: 400;
+    color: #4a8cdb;
+  }
+
+  .confirm-subtitle {
+    font-size: 13px;
+    color: #9aa5b1;
+    margin-top: 4px;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .transfer-summary {
+    width: 100%;
+    margin-bottom: auto;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+
+  .label {
+    font-size: 12px;
+    color: #9aa5b1;
+    margin-bottom: 4px;
+  }
+
+  .value {
+    font-size: 16px;
+    color: #0b132b;
+    font-weight: 600;
+  }
+
+  .large-amount {
+    font-size: 24px;
+    color: #0b132b;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+
+  .recipient-preview {
+    margin-bottom: 20px;
+  }
+
+  .details-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #9aa5b1;
+  }
+
+  .detail-row.highlight {
+    margin-top: 8px;
+  }
+
+  .detail-row.highlight .detail-label,
+  .detail-row.highlight .detail-value {
+    color: #004195;
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  .detail-value {
+    color: #0b132b;
+    font-weight: 500;
+  }
+
+  /* Slider Button */
+  .slide-to-confirm-container {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .slider-track {
+    width: 100%;
+    height: 56px;
+    background: #002b5c;
+    border-radius: 28px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #002b5c;
+    box-sizing: border-box;
+  }
+
+  .slider-text {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 14px;
+    font-weight: 500;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .slider-thumb {
+    position: absolute;
+    left: 4px;
+    width: 44px;
+    height: 44px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    transition: transform 0.1s;
+    z-index: 2;
+  }
+
+  .slider-thumb:active {
+    cursor: grabbing;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

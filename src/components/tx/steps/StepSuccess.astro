@@ -1,0 +1,124 @@
+<div class="step-content hidden" id="step-success">
+  <div class="success-container">
+    <div class="success-content">
+      <svg
+        class="success-icon"
+        width="96"
+        height="96"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="3"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M5 13l4 4L19 7" transform="rotate(-2 12 12)"></path>
+      </svg>
+
+      <h2 class="success-title">Transfer Successful</h2>
+      <p class="success-subtitle">Your money is on its way</p>
+
+      <!-- Optional: Add buttons if needed, though React desing serves as a confirmation state -->
+      <div class="action-area">
+        <button class="done-btn" id="btn-finish">Done</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .hidden {
+    display: none !important;
+  }
+
+  .step-content {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 !important;
+    position: relative;
+    overflow: hidden;
+    border-radius: 24px;
+  }
+
+  .success-container {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to right,
+      #3c50e0 0%,
+      #2a389d 40%,
+      #171f58 70%,
+      #000000 100%
+    );
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 40px 20px;
+    box-sizing: border-box;
+    animation: fadeIn 0.5s ease-out;
+  }
+
+  .success-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .success-icon {
+    color: white;
+    margin-bottom: 24px;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+  }
+
+  .success-title {
+    font-size: 30px;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+    line-height: 1.2;
+  }
+
+  .success-subtitle {
+    font-size: 16px;
+    opacity: 0.9;
+    margin: 0 0 40px 0;
+    line-height: 1.5;
+  }
+
+  .action-area {
+    margin-top: 20px;
+  }
+
+  .done-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 12px 32px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    transition: background 0.2s;
+  }
+
+  .done-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+</style>

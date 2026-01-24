@@ -1,0 +1,359 @@
+<div class="step-content hidden" id="step-contacts">
+  <div class="blur-container">
+    <div class="contacts-header">
+      <!-- Graphic Wave -->
+      <div class="graphic-container">
+        <svg width="240" height="120" viewBox="0 0 240 120" fill="none">
+          <path
+            d="M20,60 C60,20 100,100 140,60 S220,100 240,60"
+            stroke="#004195"
+            stroke-width="1"
+            opacity="0.3"
+            fill="none"></path>
+          <path
+            d="M10,70 C50,30 90,110 130,70 S210,110 230,70"
+            stroke="#004195"
+            stroke-width="1"
+            opacity="0.4"
+            fill="none"></path>
+          <path
+            d="M30,50 C70,10 110,90 150,50 S230,90 250,50"
+            stroke="#004195"
+            stroke-width="1"
+            opacity="0.5"
+            fill="none"></path>
+          <path
+            d="M0,80 C40,40 80,120 120,80 S200,120 220,80"
+            stroke="#004195"
+            stroke-width="1"
+            opacity="0.2"
+            fill="none"></path>
+          <path
+            d="M40,40 C80,0 120,80 160,40 S240,80 260,40"
+            stroke="#004195"
+            stroke-width="1"
+            opacity="0.2"
+            fill="none"></path>
+        </svg>
+      </div>
+
+      <h2 class="section-title">Contacts</h2>
+      <p class="section-subtitle">Select the recipient</p>
+    </div>
+
+    <div class="contacts-list">
+      <!-- Contact Item 1 -->
+      <div
+        class="contact-card"
+        data-contact="Valentina Duarte"
+        data-initials="VD"
+        data-bank="Chase - USA"
+        data-alias="@JP"
+      >
+        <div class="contact-avatar">
+          <span>VD</span>
+        </div>
+        <div class="contact-info">
+          <div class="contact-name">Valentina Duarte</div>
+          <div class="contact-details">@JP - Chase - USA</div>
+        </div>
+        <div class="contact-chevron">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              d="M9 18l6-6-6-6"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Contact Item 2 -->
+      <div
+        class="contact-card"
+        data-contact="Carlos Mendoza"
+        data-initials="CM"
+        data-bank="BBVA - México"
+        data-alias="@CM"
+      >
+        <div class="contact-avatar">
+          <span>CM</span>
+        </div>
+        <div class="contact-info">
+          <div class="contact-name">Carlos Mendoza</div>
+          <div class="contact-details">@CM - BBVA - México</div>
+        </div>
+        <div class="contact-chevron">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              d="M9 18l6-6-6-6"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Contact Item 3 -->
+      <div
+        class="contact-card"
+        data-contact="Sofia Rodriguez"
+        data-initials="SR"
+        data-bank="Santander - España"
+        data-alias="@SR"
+      >
+        <div class="contact-avatar">
+          <span>SR</span>
+        </div>
+        <div class="contact-info">
+          <div class="contact-name">Sofia Rodriguez</div>
+          <div class="contact-details">@SR - Santander - España</div>
+        </div>
+        <div class="contact-chevron">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              d="M9 18l6-6-6-6"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Contact Item 4 (example) -->
+      <div
+        class="contact-card"
+        data-contact="Luis Hernandez"
+        data-initials="LH"
+        data-bank="Bank of America - USA"
+        data-alias="@LH"
+      >
+        <div class="contact-avatar">
+          <span>LH</span>
+        </div>
+        <div class="contact-info">
+          <div class="contact-name">Luis Hernandez</div>
+          <div class="contact-details">@LH - Bank of America - USA</div>
+        </div>
+        <div class="contact-chevron">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              d="M9 18l6-6-6-6"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .hidden {
+    display: none !important;
+  }
+
+  .step-content {
+    flex: 1;
+    width: 100%;
+    /* No padding here, container handles logic */
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 0.4s ease-out;
+    height: 100%;
+  }
+
+  /* Blur Container imitating React's panel */
+  .blur-container {
+    flex: 1;
+    width: 100%;
+    border-radius: 24px;
+    padding: 24px;
+    box-sizing: border-box;
+    /* React: backdrop-filter: blur(4px); bg-white/5 */
+    backdrop-filter: blur(4px);
+    background-color: rgba(
+      255,
+      255,
+      255,
+      0.5
+    ); /* slightly more opaque for visibility in Astro if bg is white */
+    /* React uses variable bg opacity 5, but assumes a dark or specific bg context? 
+       If the main app bg is white, 5% white is invisible.
+       React app seems to have a fancy canvas bg. We don't have the canvas bg here yet.
+       If we want "Identical", we should assume the canvas bg exists or will exist?
+       For now, let's use a safe fallback or just the 5% if we assume bg is not white.
+       But TransferApp.astro has likely white bg.
+       React Card uses bg-white (light mode) or bg-gray-something?
+       Actually the Contact List Container in React is translucent.
+       Let's use rgba(255,255,255, 0.05) to be strictly identical even if it looks odd without the canvas bg. */
+    background-color: rgba(255, 255, 255, 0.05);
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contacts-header {
+    text-align: center;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .graphic-container {
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-size: 24px;
+    color: #3c50e0; /* Theme Color */
+    font-weight: 700;
+    margin: 0 0 4px 0;
+  }
+
+  .section-subtitle {
+    font-size: 14px;
+    color: #64748b; /* slate-600 */
+    margin: 0;
+  }
+
+  .contacts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+    /* Hide scrollbar */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .contacts-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .contact-card {
+    display: flex;
+    align-items: center;
+    background: #e2e8f0; /* bg-slate-200 */
+    padding: 10px 16px;
+    border-radius: 12px; /* rounded-xl */
+    cursor: pointer;
+    transition: all 0.2s ease;
+    gap: 12px;
+  }
+
+  /* Avatar Styles */
+  .contact-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 12px;
+    font-weight: 600;
+
+    /* Default Non-Hover: Gradient BG, White Text */
+    background: linear-gradient(
+      to right,
+      #3c50e0 0%,
+      #2a389d 40%,
+      #171f58 70%,
+      #000000 100%
+    );
+    color: white;
+  }
+
+  .contact-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .contact-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #3c50e0; /* Theme Color */
+    margin-bottom: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .contact-details {
+    font-size: 12px;
+    color: #64748b; /* slate-600 */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .contact-chevron {
+    color: #3c50e0;
+    flex-shrink: 0;
+  }
+
+  /* Hover State (Selected simulation) */
+  .contact-card:hover {
+    background: linear-gradient(
+      to right,
+      #3c50e0 0%,
+      #2a389d 40%,
+      #171f58 70%,
+      #000000 100%
+    );
+  }
+
+  .contact-card:hover .contact-name,
+  .contact-card:hover .contact-details,
+  .contact-card:hover .contact-chevron {
+    color: white;
+  }
+
+  .contact-card:hover .contact-avatar {
+    background: white;
+    color: #0f172a; /* slate-900 */
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

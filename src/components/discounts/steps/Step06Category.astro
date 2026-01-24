@@ -1,0 +1,64 @@
+---
+import DiscountHeader from "../DiscountHeader.astro";
+const customColor = "#004492";
+---
+
+<div
+  class="step-content hidden bg-white h-full relative overflow-hidden font-sans"
+  id="step-06"
+>
+  <DiscountHeader showBack={true} />
+
+  <!-- Animation Layer -->
+  <div class="absolute top-10 left-0 right-0 flex justify-center z-0">
+    <div class="w-64 h-64 flex items-center justify-center">
+      <div
+        class="relative w-48 h-48 flex items-center justify-center mb-0 shrink-0 z-10"
+      >
+        <img
+          src="/gift/ANIMACION 1.gif"
+          alt="Graphic"
+          class="w-full h-full object-contain opacity-80"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Gradient Layer -->
+  <div
+    class="absolute top-[30%] left-0 right-0 bottom-0 pointer-events-none z-0"
+  >
+    <div
+      class="relative z-10 w-full h-full overflow-hidden rounded-2xl p-5 backdrop-blur-sm flex flex-col pt-4"
+      style="background: linear-gradient(to bottom, rgba(255, 255, 255, 0.35) 20%, rgba(255,255,255,0.9) 45%, #ffffff 60%);"
+    >
+    </div>
+  </div>
+
+  <div
+    class="flex-1 flex flex-col items-center justify-center px-6 z-10 pt-[280px]"
+  >
+    <p class="text-gray-400 text-xs text-center mb-2">
+      We detected your business category
+    </p>
+    <h2 class="text-3xl font-bold text-[#003366] mb-10">Restaurant</h2>
+    <div class="w-full space-y-3 mb-6">
+      <button
+        class="w-[60%] mx-auto text-white rounded-2xl py-3.5 font-bold text-sm flex items-center justify-between px-6 shadow-lg step-next-btn"
+        style={`background: linear-gradient(to right, ${customColor}, #000b1e);`}
+        data-next="5"
+      >
+        <span class="flex-1 text-center"> No, Try Again </span>
+        <span class="">&gt;</span>
+      </button>
+      <button
+        class="w-[60%] mx-auto text-white rounded-2xl py-3.5 font-bold text-sm flex items-center justify-between px-6 shadow-lg step-next-btn"
+        style={`background: linear-gradient(to right, ${customColor}, #000b1e);`}
+        data-next="7"
+      >
+        <span class="flex-1 text-center"> Yes, Continue </span>
+        <span class="">&gt;</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,182 @@
+---
+const { class: className } = Astro.props;
+---
+
+<div class={`device-container ${className || ""}`}>
+  <div class="device-frame-wrapper">
+    <div class="device-frame">
+      <div class="device-screen">
+        <!-- Status Bar with Dynamic Island -->
+        <div class="device-status-bar">
+          <div class="status-time">9:41</div>
+          <div class="dynamic-island">
+            <div class="island-shape"></div>
+            <div class="island-speaker"></div>
+          </div>
+          <div class="status-icons">
+            <svg class="signal-icon" fill="none" viewBox="0 0 20 12">
+              <path
+                d="M1 8h2v2H1V8zm3-2h2v4H4V6zm3-2h2v6H7V4zm3-1h2v7h-2V3z"
+                fill="currentColor"></path>
+            </svg>
+            <div class="battery-icon">
+              <div class="battery-level"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- APP CONTENT -->
+        <div class="device-content-area">
+          <slot />
+        </div>
+
+        <!-- Home Indicator -->
+        <div class="device-home-indicator"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Contenedor del dispositivo */
+  .device-container {
+    position: relative;
+    width: 100%;
+    max-width: 360px; /* Adjusted to fit the specific design better, typically iPhone width */
+    margin: 0 auto;
+    z-index: 10;
+  }
+
+  /* Frame del iPhone */
+  .device-frame-wrapper {
+    position: relative;
+    z-index: 10;
+  }
+
+  .device-frame {
+    position: relative;
+    overflow: hidden;
+    border-radius: 3rem;
+    border: none !important;
+    background: transparent !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    padding: 0;
+  }
+
+  /* Pantalla del dispositivo */
+  .device-screen {
+    position: relative;
+    height: 720px; /* Fixed height for consistency */
+    overflow: hidden;
+    border-radius: 2.2rem;
+    background: #ffffff;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    /* box-shadow: 0 0 0 1px rgba(0,0,0,0.05); */
+  }
+
+  /* Status Bar */
+  .device-status-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: transparent;
+    padding: 1rem 1.5rem 0.5rem;
+    flex-shrink: 0;
+    z-index: 20;
+    color: #000;
+  }
+
+  .status-time {
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .dynamic-island {
+    position: absolute;
+    left: 50%;
+    top: 0.75rem;
+    transform: translateX(-50%);
+  }
+
+  .island-shape {
+    width: 96px;
+    height: 24px;
+    border-radius: 999px;
+    background: #000000;
+  }
+
+  .island-speaker {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(31, 41, 55, 0.3);
+  }
+
+  .status-icons {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+  }
+
+  .signal-icon {
+    width: 18px;
+    height: 12px;
+  }
+
+  .battery-icon {
+    width: 22px;
+    height: 10px;
+    border: 1px solid currentColor;
+    border-radius: 3px;
+    padding: 1px;
+    position: relative;
+  }
+
+  .battery-icon::after {
+    content: "";
+    position: absolute;
+    right: -3px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 4px;
+    background: currentColor;
+    border-radius: 0 1px 1px 0;
+  }
+
+  .battery-level {
+    width: 80%;
+    height: 100%;
+    background: currentColor;
+    border-radius: 1px;
+  }
+
+  /* Contenido Content Area */
+  .device-content-area {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* Home Indicator */
+  .device-home-indicator {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 128px;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 100;
+  }
+</style>

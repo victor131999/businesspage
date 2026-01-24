@@ -1,0 +1,748 @@
+---
+import StepAmount from "./steps/StepAmount.astro";
+import StepContacts from "./steps/StepContacts.astro";
+import StepConfirm from "./steps/StepConfirm.astro";
+import StepSuccess from "./steps/StepSuccess.astro";
+import StepProcessing from "./steps/StepProcessing.astro";
+---
+
+<!-- App Header -->
+<div class="app-header">
+  <div class="back-btn" id="app-back-btn">
+    <button class="device-back-btn">&lt; back</button>
+  </div>
+  <div class="device-header">
+    <div class="device-logo">
+      <img src="/images/zelify_logo.png" alt="Zelify" />
+    </div>
+  </div>
+</div>
+
+<!-- Scroll Content -->
+<div class="app-content">
+  <div id="shared-top-section">
+    <!-- Graphic -->
+    <div class="graphic-container">
+      <svg width="240" height="140" viewBox="0 0 200 120" fill="none">
+        <path
+          d="M10,120 Q50,20 100,20 Q150,20 190,120"
+          stroke="#004195"
+          stroke-width="1"
+          opacity="0.5"
+          fill="none"></path>
+        <path
+          d="M20,120 Q55,30 100,30 Q145,30 180,120"
+          stroke="#004195"
+          stroke-width="1"
+          opacity="0.6"
+          fill="none"></path>
+        <path
+          d="M30,120 Q60,40 100,40 Q140,40 170,120"
+          stroke="#004195"
+          stroke-width="1"
+          opacity="0.7"
+          fill="none"></path>
+        <path
+          d="M40,120 Q65,50 100,50 Q135,50 160,120"
+          stroke="#004195"
+          stroke-width="1"
+          opacity="0.8"
+          fill="none"></path>
+        <path
+          d="M50,120 Q70,60 100,60 Q130,60 150,120"
+          stroke="#004195"
+          stroke-width="1"
+          opacity="0.9"
+          fill="none"></path>
+        <path
+          d="M20,120 L30,40"
+          stroke="#004195"
+          stroke-width="0.5"
+          opacity="0.3"></path>
+        <path
+          d="M180,120 L170,40"
+          stroke="#004195"
+          stroke-width="0.5"
+          opacity="0.3"></path>
+        <path
+          d="M50,80 L150,80"
+          stroke="#004195"
+          stroke-width="0.5"
+          opacity="0.3"></path>
+      </svg>
+    </div>
+
+    <!-- Titles -->
+    <h2 class="app-title">
+      International <span class="light">Transfers</span>
+    </h2>
+    <p class="app-subtitle">How much do you want to transfer?</p>
+    <p class="app-caption">Select the currency according to the country</p>
+
+    <!-- Amount Input -->
+    <div class="amount-group">
+      <div class="amount-label">Amount</div>
+      <div class="amount-input-container">
+        <span class="currency-symbol">$</span>
+        <input
+          type="text"
+          class="amount-value-input"
+          id="amount-input-field"
+          value="0,00"
+          placeholder="0,00"
+          inputmode="decimal"
+        />
+        <div class="controls-wrapper">
+          <div class="currency-pill">MXN</div>
+          <button class="nav-arrow-btn" id="amount-next-btn">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              class="nav-icon"
+            >
+              <path
+                d="M9 18L15 12L9 6"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <StepAmount />
+  <StepContacts />
+  <StepConfirm />
+  <StepProcessing />
+  <StepSuccess />
+</div>
+
+<style>
+  .app-header {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px 10px 20px;
+    margin-top: 0;
+  }
+
+  .device-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .device-logo img {
+    height: 32px;
+    width: auto;
+  }
+  .back-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #b0b9c2;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    z-index: 10;
+    visibility: hidden; /* Hidden by default */
+  }
+
+  .device-back-btn {
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .app-content {
+    flex: 1;
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+  }
+
+  .app-content::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+  }
+
+  /* Shared Top Section Styles */
+  #shared-top-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Transition for smooth hiding if needed, or just display none */
+  }
+
+  .graphic-container {
+    height: 140px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
+
+  .app-title {
+    font-size: 24px;
+    color: #004195;
+    font-weight: 700;
+    margin: 0 0 5px 0;
+    text-align: center;
+  }
+
+  .app-title .light {
+    color: #4a8cdb;
+    font-weight: 400;
+  }
+
+  .app-subtitle {
+    font-size: 14px;
+    color: #0b132b;
+    font-weight: 600;
+    margin: 5px 0;
+    text-align: center;
+  }
+
+  .app-caption {
+    font-size: 12px;
+    color: #9aa5b1;
+    margin: 0 0 2rem 0;
+    text-align: center;
+  }
+
+  .amount-group {
+    width: 100%;
+  }
+
+  .amount-label {
+    font-size: 13px;
+    color: #0b132b;
+    font-weight: 600;
+    margin-bottom: 8px;
+    padding-left: 4px;
+  }
+
+  .amount-input-container {
+    width: 100%;
+    background: #ebeff5;
+    border-radius: 16px;
+    padding: 10px 16px 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03);
+    transition: background 0.2s;
+  }
+
+  .amount-input-container:focus-within {
+    background: #e1e7f0;
+    outline: 2px solid #004195;
+    outline-offset: -2px;
+  }
+
+  .currency-symbol {
+    font-size: 24px;
+    color: #9aa5b1;
+    font-weight: 300;
+    margin-right: 4px;
+  }
+
+  .amount-value-input {
+    flex: 1;
+    width: 100%;
+    background: transparent;
+    border: none;
+    font-size: 28px;
+    color: #3e4c59;
+    font-weight: 400;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    font-family: inherit;
+  }
+
+  .amount-value-input::placeholder {
+    color: #3e4c59;
+    opacity: 0.5;
+  }
+
+  .controls-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .currency-pill {
+    background: #99aab5;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .nav-arrow-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9aa5b1;
+    transition:
+      color 0.2s,
+      transform 0.2s;
+  }
+
+  .nav-arrow-btn:hover {
+    color: #004195;
+    transform: translateX(2px);
+  }
+
+  .nav-icon {
+    width: 24px;
+    height: 24px;
+  }
+  /* Utility - Make global to apply to child components */
+  :global(.hidden) {
+    display: none !important;
+  }
+</style>
+
+<script>
+  // State Management
+  let currentStep = 0;
+  // Steps mapping: 0: Amount, 1: Contacts, 2: Confirm, 3: Processing, 4: Success
+  const steps = [
+    "step-amount",
+    "step-contacts",
+    "step-confirm",
+    "step-processing",
+    "step-success",
+  ];
+
+  // Data State
+  let transferData = {
+    amount: "10,000.00 MXN",
+    recipient: "",
+    recipientDetail: "",
+  };
+
+  // DOM Elements
+  const backBtn = document.getElementById("app-back-btn");
+  const stepElements = steps.map((id) => document.getElementById(id));
+
+  // Processing Elements
+  const processingBg = document.getElementById("processing-bg");
+  const processingContent = document.querySelector(".processing-content");
+  const processingBarFill = document.getElementById("processing-bar-fill");
+  const processingTitle = document.getElementById("processing-title");
+
+  // Slider Elements
+  const sliderTrack = document.getElementById("slider-track");
+  const sliderThumb = document.getElementById("slider-thumb");
+
+  // Shared Top Section
+  const sharedTopSection = document.getElementById("shared-top-section");
+
+  // Initialize
+  function init() {
+    updateUI();
+    setupEventListeners();
+  }
+
+  function updateUI() {
+    // Show/Hide Steps
+    stepElements.forEach((el, index) => {
+      // Use index 0 check strictly for StepAmount
+      if (el) {
+        if (index === currentStep) {
+          el.classList.remove("hidden");
+          el.classList.remove("flex");
+
+          // Trigger animation restart
+          if (index !== 3) {
+            el.style.animation = "none";
+            el.offsetHeight; /* trigger reflow */
+            el.style.animation = "fadeIn 0.4s ease-out";
+          }
+        } else {
+          el.classList.add("hidden");
+        }
+      }
+    });
+
+    // Shared Top Section Visibility (Visible ONLY on Step 0 - Amount)
+    if (sharedTopSection) {
+      if (currentStep === 0) {
+        sharedTopSection.style.display = "flex";
+      } else {
+        sharedTopSection.style.display = "none";
+      }
+    }
+
+    // Back Button Visibility Logic
+    if (backBtn) {
+      // Visible on Contacts (1) and Confirm (2)
+      // Hidden on Amount (0), Processing (3), Success (4)
+      if (currentStep === 1 || currentStep === 2) {
+        backBtn.style.visibility = "visible";
+      } else {
+        backBtn.style.visibility = "hidden";
+      }
+    }
+
+    // Logo Visibility: Hide on Step 1+ (Contacts, Confirm, etc) if desired to match clean look
+    const logoEl = document.querySelector(".device-logo");
+    if (logoEl instanceof HTMLElement) {
+      if (currentStep === 0) {
+        logoEl.style.display = "block";
+      } else {
+        logoEl.style.display = "none";
+      }
+    }
+  }
+
+  /** @param {number} stepIndex */
+  function goToStep(stepIndex) {
+    currentStep = stepIndex;
+    updateUI();
+
+    // Specific step logic
+    if (currentStep === 3) {
+      startProcessingAnimation();
+    }
+  }
+
+  function setupEventListeners() {
+    // Back Button Navigation
+    if (backBtn) {
+      backBtn.addEventListener("click", () => {
+        if (currentStep === 1) {
+          goToStep(0); // Contacts -> Amount
+        } else if (currentStep === 2) {
+          resetSlider();
+          goToStep(1); // Confirm -> Contacts
+        }
+      });
+    }
+
+    // Amount -> Contacts
+    // Trigger on clicking the Next button (Arrow)
+    const amountNextBtn = document.getElementById("amount-next-btn");
+    const amountInput = document.getElementById("amount-input-field");
+
+    if (amountNextBtn) {
+      amountNextBtn.addEventListener("click", handleAmountSubmit);
+    }
+
+    if (amountInput) {
+      amountInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          handleAmountSubmit();
+        }
+      });
+    }
+
+    function handleAmountSubmit() {
+      // Safe check for typescript
+      const val =
+        amountInput && "value" in amountInput ? amountInput.value : "";
+      if (val) {
+        transferData.amount = val + " MXN";
+      }
+      goToStep(1);
+    }
+
+    // Contacts -> Confirm
+    const contactCards = document.querySelectorAll(".contact-card");
+    contactCards.forEach((card) => {
+      card.addEventListener("click", () => {
+        const contactName = card.getAttribute("data-contact");
+        if (contactName) {
+          transferData.recipient = contactName;
+
+          // Extract details if possible (assuming simple structure)
+          // For now just name
+          updateConfirmDetails();
+          goToStep(2);
+        }
+      });
+    });
+
+    // Success -> Finish (Reset)
+    const btnFinish = document.getElementById("btn-finish");
+    if (btnFinish) {
+      btnFinish.addEventListener("click", () => {
+        resetSlider();
+        transferData.recipient = "";
+        goToStep(0);
+      });
+    }
+
+    // Slider Logic
+    setupSlider();
+  }
+
+  function updateConfirmDetails() {
+    const recipientEl = document.getElementById("confirm-recipient-name");
+    const amountDisplayEl = document.getElementById("confirm-amount-display");
+    const sendValueEl = document.getElementById("confirm-send-value");
+    const totalValueEl = document.getElementById("confirm-total-value");
+
+    // Update Recipient
+    if (recipientEl) recipientEl.textContent = transferData.recipient;
+
+    // Calculate Amounts
+    // Parse amount string (remove commas, assume dot decimal or handle accordingly)
+    // transferData.amount format expected: "10000" or "10,000.00"
+    // We stored it as string with " MXN" potentially appended if we aren't careful?
+    // Let's re-read how we stored it.
+    // We stored: transferData.amount = amountInput.value + " MXN";
+
+    // Let's parse the raw number from storage
+    const rawString = transferData.amount.replace(/[^0-9.]/g, "");
+    const amountVal = parseFloat(rawString) || 0;
+
+    // Rate
+    const rate = 0.058;
+    const totalUSD = amountVal * rate;
+
+    // Format Back
+    const formatterMXN = new Intl.NumberFormat("es-MX", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+    const formatterUSD = new Intl.NumberFormat("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
+    const amountStr = formatterMXN.format(amountVal);
+    const totalStr = formatterUSD.format(totalUSD);
+
+    if (amountDisplayEl) amountDisplayEl.textContent = amountStr + " MXN";
+    if (sendValueEl) sendValueEl.textContent = "$" + amountStr + " MXN";
+    if (totalValueEl) totalValueEl.textContent = "$" + totalStr + " USD";
+  }
+
+  // --- Slider Logic ---
+  function setupSlider() {
+    if (!sliderTrack || !sliderThumb) return;
+
+    let isDragging = false;
+    let startX = 0;
+    let currentX = 0;
+    // Calculate maxDist dynamically
+    const updateDimensions = () => {
+      // Re-check elements inside closure just in case, though parent check covers init
+      if (!sliderTrack || !sliderThumb) return 0;
+      return sliderTrack.clientWidth - sliderThumb.clientWidth - 8; // 8px buffer
+    };
+    let maxDist = updateDimensions();
+
+    function startDrag(e) {
+      if (currentStep !== 2) return; // Only active in confirm step
+      if (!sliderThumb) return; // Safety check
+      isDragging = true;
+      maxDist = updateDimensions();
+      startX =
+        (e.type === "touchstart" ? e.touches[0].clientX : e.clientX) - currentX;
+      sliderThumb.style.transition = "none";
+    }
+
+    function onDrag(e) {
+      if (!isDragging) return;
+      if (!sliderThumb) return; // Safety check
+      e.preventDefault();
+
+      const clientX = e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
+      let newX = clientX - startX;
+
+      if (newX < 0) newX = 0;
+      if (newX > maxDist) newX = maxDist;
+
+      currentX = newX;
+      sliderThumb.style.transform = `translateX(${currentX}px)`;
+
+      // Check for completion (80% threshold)
+      if (currentX >= maxDist * 0.9) {
+        completeSlide();
+      }
+    }
+
+    function stopDrag() {
+      if (!isDragging) return;
+      if (!sliderThumb) return; // Safety check
+      isDragging = false;
+
+      if (currentX < maxDist * 0.9) {
+        // Reset
+        currentX = 0;
+        sliderThumb.style.transition = "transform 0.3s ease";
+        sliderThumb.style.transform = `translateX(0px)`;
+      }
+    }
+
+    function completeSlide() {
+      if (!sliderThumb) return; // Safety check
+      isDragging = false;
+      // Visual feedback
+      sliderThumb.style.background = "#004195";
+      const svg = sliderThumb.querySelector("svg");
+      if (svg) svg.style.stroke = "white";
+
+      setTimeout(() => {
+        goToStep(3); // Go to Processing
+      }, 300);
+    }
+
+    sliderThumb.addEventListener("mousedown", startDrag);
+    sliderThumb.addEventListener("touchstart", startDrag, { passive: false });
+
+    document.addEventListener("mousemove", onDrag);
+    document.addEventListener("touchmove", onDrag, { passive: false });
+
+    document.addEventListener("mouseup", stopDrag);
+    document.addEventListener("touchend", stopDrag);
+  }
+
+  function resetSlider() {
+    if (!sliderThumb) return;
+    sliderThumb.style.transition = "none";
+    sliderThumb.style.transform = "translateX(0px)";
+    sliderThumb.style.background = "white";
+    const svg = sliderThumb.querySelector("svg");
+    if (svg) svg.style.stroke = "#004195";
+  }
+
+  // --- Processing Animation Logic ---
+  function startProcessingAnimation() {
+    let loadingProgress = 0;
+
+    // Reset state
+    if (processingBarFill) processingBarFill.style.width = "0%";
+    if (processingBg)
+      processingBg.style.clipPath = "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)";
+
+    // Reset Char Colors
+    const titleChars = document.querySelectorAll(".char-title");
+    const subtitleChars = document.querySelectorAll(".char-subtitle");
+    titleChars.forEach((char) => char.classList.remove("active"));
+    subtitleChars.forEach((char) => char.classList.remove("active"));
+
+    const interval = setInterval(() => {
+      loadingProgress += 1.5; // ~3s total
+
+      if (loadingProgress >= 100) loadingProgress = 100;
+
+      // Update ProgressBar
+      if (processingBarFill)
+        processingBarFill.style.width = `${loadingProgress}%`;
+
+      // Update Wave Clip Path (Left to Right)
+      if (processingBg) {
+        const progress = loadingProgress + 20;
+        let points = "0% 0%, ";
+
+        // Loop y from 0 to 100 in steps (vertical slices)
+        for (let i = 0; i <= 50; i++) {
+          const y = (i / 50) * 100;
+          // React Logic:
+          // distanceFromCenter = Math.abs(y - 50) / 50;
+          // delay = distanceFromCenter * 15;
+          // adjustedProgress = Math.max(0, progress - delay);
+          // wave = Math.sin(...) * 10;
+          // x = adjustedProgress + (wave/100)*12;
+
+          const distanceFromCenter = Math.abs(y - 50) / 50;
+          const delay = distanceFromCenter * 15;
+          const adjustedProgress = Math.max(0, progress - delay);
+          const wave =
+            Math.sin(
+              (adjustedProgress / 100) * Math.PI * 5 + (y / 100) * Math.PI * 3,
+            ) * 10;
+
+          let x = adjustedProgress + (wave / 100) * 12;
+          // Clamp x? React doesn't explicitly clamp but let's ensure valid CSS
+
+          points += `${x}% ${y}%, `;
+        }
+
+        // Close polygon: 0% 100%
+        points += "0% 100%";
+        processingBg.style.clipPath = `polygon(${points})`;
+
+        // Mask Image for soft edge
+        const maskGradient = `linear-gradient(to right, 
+          rgba(0,0,0,1) 0%, 
+          rgba(0,0,0,1) ${Math.max(0, loadingProgress - 50)}%, 
+          rgba(0,0,0,0.9) ${Math.max(0, loadingProgress - 40)}%, 
+          rgba(0,0,0,0.6) ${Math.max(0, loadingProgress - 25)}%, 
+          rgba(0,0,0,0.3) ${Math.max(0, loadingProgress - 15)}%, 
+          rgba(0,0,0,0) ${loadingProgress}%, 
+          rgba(0,0,0,0) 100%
+        )`;
+
+        processingBg.style.maskImage = maskGradient;
+        processingBg.style.webkitMaskImage = maskGradient;
+      }
+
+      // Update Text Colors
+      // Progress for text: React uses charProgress = index / length * 100
+      titleChars.forEach((char) => {
+        const index = parseInt(char.getAttribute("data-index") || "0");
+        const total = titleChars.length;
+        const charProgress = (index / total) * 100;
+        if (loadingProgress >= charProgress) {
+          char.classList.add("active");
+        }
+      });
+
+      subtitleChars.forEach((char) => {
+        const index = parseInt(char.getAttribute("data-index") || "0");
+        const total = subtitleChars.length;
+        const charProgress = (index / total) * 100;
+        if (loadingProgress >= charProgress) {
+          char.classList.add("active");
+        }
+      });
+
+      if (loadingProgress >= 100) {
+        clearInterval(interval);
+        setTimeout(() => {
+          goToStep(4); // Success
+        }, 500);
+      }
+    }, 40); // 40ms ~ 25fps
+  }
+
+  // Run
+  init();
+</script>
