@@ -10,6 +10,7 @@ import PaymentsTransfersProd from "../components/product-cards/payments-prod.ast
 import TxProd from "../components/product-cards/tx-prod.astro";
 import DiscountsProd from "../components/product-cards/discounts-prod.astro";
 import AlaizaProd from "../components/product-cards/alaiza-prod.astro";
+import TokensProd from "../components/tokens/tokens-prod.astro";
 
 // Configuración del navbar con tema claro/blanco
 const navbarColors = {
@@ -909,21 +910,7 @@ const modulesList = [
       </div>
       <div class="tokens-right">
         <div class="tokens-content-placeholder">
-          <button
-            class="tokens-play-button"
-            type="button"
-            aria-label="Reproducir"
-          >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M8 5V19L19 12L8 5Z" fill="#213f8c"></path>
-            </svg>
-          </button>
+          <TokensProd />
         </div>
       </div>
     </div>
@@ -935,7 +922,23 @@ const modulesList = [
 
       <div class="action-products-container">
         <div class="action-products-card">
-          <!-- Contenido dinámico según el botón activo -->
+          <div class="action-card-wrapper" data-action-card="auth">
+            <AuthProd />
+          </div>
+          <div
+            class="action-card-wrapper"
+            data-action-card="identity"
+            style="display: none;"
+          >
+            <IdentityProd />
+          </div>
+          <div
+            class="action-card-wrapper"
+            data-action-card="aml"
+            style="display: none;"
+          >
+            <AmlProd />
+          </div>
         </div>
       </div>
 
@@ -945,9 +948,7 @@ const modulesList = [
         <button class="action-nav-button" data-action="identity"
           >Identity</button
         >
-        <button class="action-nav-button" data-action="payments-transfers"
-          >Pago y Transferencias</button
-        >
+        <button class="action-nav-button" data-action="aml">AML</button>
       </div>
     </div>
   </section>
@@ -1974,14 +1975,16 @@ const modulesList = [
 
     .tokens-content-placeholder {
       width: 100%;
-      aspect-ratio: 16 / 9;
+      min-height: 450px;
+      max-height: 600px;
       background-color: #ffffff;
       border-radius: 16px;
       position: relative;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      align-items: stretch;
+      justify-content: stretch;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
     }
 
     .tokens-play-button {
@@ -2056,11 +2059,36 @@ const modulesList = [
       background-color: #ffffff;
       border-radius: 16px;
       width: 280px;
-      height: 500px;
+      height: 600px;
+      display: flex;
+      position: relative;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    .action-card-wrapper {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
+      box-sizing: border-box;
+    }
+
+    /* Asegurar que los componentes hijos se ajusten al contenedor */
+    .action-card-wrapper :global(.auth-card-wrapper),
+    .action-card-wrapper :global(.identity-card-root),
+    .action-card-wrapper :global(.aml-card-root) {
+      width: 100% !important;
+      height: 100% !important;
+      max-width: 100% !important;
+      max-height: 100% !important;
+      overflow: hidden !important;
+      box-sizing: border-box;
     }
 
     .card-header-graphic {
@@ -2455,8 +2483,8 @@ const modulesList = [
       }
 
       .tokens-content-placeholder {
-        aspect-ratio: 16 / 9;
-        min-height: 250px;
+        min-height: 350px;
+        max-height: 500px;
       }
 
       .action-products-section {
@@ -2472,6 +2500,17 @@ const modulesList = [
         width: 240px;
         height: 400px;
         margin-left: 0;
+      }
+
+      .action-card-wrapper :global(.auth-card-wrapper),
+      .action-card-wrapper :global(.identity-card-root),
+      .action-card-wrapper :global(.aml-card-root) {
+        width: 100% !important;
+        height: 100% !important;
+        max-width: 100% !important;
+        max-height: 100% !important;
+        overflow: hidden !important;
+        box-sizing: border-box;
       }
 
       .action-products-nav {
@@ -2669,6 +2708,56 @@ const modulesList = [
           window.dispatchEvent(new CustomEvent(`zelify:play-demo:${moduleId}`));
         }
       });
+    }
+  });
+
+  // Action Products Navigation
+  document.addEventListener("DOMContentLoaded", () => {
+    const actionButtons = document.querySelectorAll(".action-nav-button");
+    const actionCards = document.querySelectorAll(".action-card-wrapper");
+
+    function updateActionCard(actionId) {
+      // Hide all cards
+      actionCards.forEach((card) => {
+        card.style.display = "none";
+      });
+
+      // Show the active card
+      const activeCard = document.querySelector(
+        `[data-action-card="${actionId}"]`,
+      );
+      if (activeCard) {
+        activeCard.style.display = "block";
+      }
+    }
+
+    actionButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const actionId = button.getAttribute("data-action");
+        if (!actionId) return;
+
+        // Remove active class from all buttons
+        actionButtons.forEach((btn) => {
+          btn.classList.remove("active");
+        });
+
+        // Add active class to clicked button
+        button.classList.add("active");
+
+        // Update the displayed card
+        updateActionCard(actionId);
+      });
+    });
+
+    // Initialize with first active button
+    const firstActive = document.querySelector(
+      ".action-nav-button.active",
+    );
+    if (firstActive) {
+      const firstActionId = firstActive.getAttribute("data-action");
+      if (firstActionId) {
+        updateActionCard(firstActionId);
+      }
     }
   });
 </script>
