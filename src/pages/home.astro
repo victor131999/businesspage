@@ -2716,10 +2716,10 @@ const modulesList = [
     const actionButtons = document.querySelectorAll(".action-nav-button");
     const actionCards = document.querySelectorAll(".action-card-wrapper");
 
-    function updateActionCard(actionId) {
+    function updateActionCard(actionId: string) {
       // Hide all cards
       actionCards.forEach((card) => {
-        card.style.display = "none";
+        (card as HTMLElement).style.display = "none";
       });
 
       // Show the active card
@@ -2727,7 +2727,7 @@ const modulesList = [
         `[data-action-card="${actionId}"]`,
       );
       if (activeCard) {
-        activeCard.style.display = "block";
+        (activeCard as HTMLElement).style.display = "block";
       }
     }
 
