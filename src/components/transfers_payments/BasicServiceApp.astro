@@ -1,139 +1,159 @@
 ---
-// Transfers_PaymentsApp.astro
+// src/components/transfers_payments/BasicServiceApp.astro
 // Recreating the Basic Services Payment screen with pixel-perfect attention to detail
+// Using the same layout/structure as CustomKeys.astro
 ---
 
-<div class="tp-app-container">
-  <!-- Background with Dots and potentially GIF -->
-  <div class="tp-background">
-    <div class="tp-dots-pattern"></div>
-    <!-- Placeholder for GIF if needed, or keeping clean as per image -->
-  </div>
+<div class="bs-app-container">
+  <!-- Screen: Dashboard -->
+  <div id="bs-screen-dashboard" class="bs-screen active">
+    <div class="bs-scroll-content">
+      <!-- App Header -->
+      <div class="bs-header">
+        <img src="/images/zelify_logo.png" alt="Zelify" class="bs-logo" />
+      </div>
 
-  <!-- The Blur Panel (Bottom Sheet Container) -->
-  <div class="tp-blur-panel">
-    <!-- Screen 1: Dashboard -->
-    <div id="tp-screen-1" class="tp-screen active">
-      <!-- Top Graphic (Wave) -->
-      <div class="tp-graphic-container">
+      <!-- Hero Animation -->
+      <div class="bs-hero-container">
         <img
           src="/gift/ANIMACION%201.gif"
           alt="Animation"
-          class="tp-graphic-gif"
+          class="bs-hero-gif"
         />
       </div>
 
-      <!-- Header Titles -->
-      <h1 class="tp-title">Services Payments</h1>
-      <p class="tp-subtitle">Which service would you like to pay?</p>
-
-      <!-- Search Bar -->
-      <div class="tp-search-container">
-        <svg
-          class="tp-search-icon"
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-        <input
-          type="text"
-          class="tp-search-input"
-          placeholder="Search banks..."
-        />
-      </div>
-
-      <!-- Providers Grid -->
-      <div class="tp-providers-grid">
-        <!-- CFE -->
-        <div
-          class="tp-provider-item"
-          data-id="cfe"
-          onclick="window.tpNavigate('cfe', 'CFE')"
-        >
-          <div class="tp-provider-icon-wrapper">
-            <img
-              src="/images/business/CFE-PNG-500x500.png"
-              alt="CFE"
-              class="tp-provider-logo"
-            />
-          </div>
-          <span class="tp-provider-name">CFE</span>
+      <!-- Main Glass Card -->
+      <div class="bs-main-card">
+        <div class="bs-title-section">
+          <h1 class="bs-title">Services Payments</h1>
+          <p class="bs-subtitle">Which service would you like to pay?</p>
         </div>
-        <!-- Telmex -->
-        <div
-          class="tp-provider-item"
-          data-id="telmex"
-          onclick="window.tpNavigate('telmex', 'Telmex')"
-        >
-          <div class="tp-provider-icon-wrapper">
-            <img
-              src="/images/business/telmex_1.png"
-              alt="Telmex"
-              class="tp-provider-logo"
-            />
-          </div>
-          <span class="tp-provider-name">Telmex</span>
+
+        <!-- Search Bar -->
+        <div class="bs-search-container">
+          <svg
+            class="bs-search-icon"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input
+            type="text"
+            class="bs-search-input"
+            placeholder="Search banks..."
+          />
         </div>
-      </div>
 
-      <!-- Spacer -->
-      <div class="flex-grow"></div>
+        <!-- Providers Grid -->
+        <div class="bs-providers-grid">
+          <!-- CFE -->
+          <div
+            class="bs-provider-item"
+            data-id="cfe"
+            onclick="window.bsNavigate('cfe', 'CFE')"
+          >
+            <div class="bs-provider-icon-wrapper">
+              <img
+                src="/images/business/CFE-PNG-500x500.png"
+                alt="CFE"
+                class="bs-provider-logo"
+              />
+            </div>
+            <span class="bs-provider-name">CFE</span>
+          </div>
+          <!-- Telmex -->
+          <div
+            class="bs-provider-item"
+            data-id="telmex"
+            onclick="window.bsNavigate('telmex', 'Telmex')"
+          >
+            <div class="bs-provider-icon-wrapper">
+              <img
+                src="/images/business/telmex_1.png"
+                alt="Telmex"
+                class="bs-provider-logo"
+              />
+            </div>
+            <span class="bs-provider-name">Telmex</span>
+          </div>
+        </div>
 
-      <!-- Bottom Sheet Menu (Stacked Cards) -->
-      <div class="tp-bottom-sheet-container">
-        <!-- Most Popular (Active) -->
-        <div class="tp-sheet-item active">Most popular</div>
+        <!-- Spacer -->
+        <div class="flex-grow"></div>
 
-        <!-- Favorites (Behind) -->
-        <div class="tp-sheet-item stacked stacked-1">Favorites</div>
+        <!-- Bottom Sheet Menu (Stacked Cards) -->
+        <div class="bs-bottom-sheet-container">
+          <!-- Most Popular (Active) -->
+          <div class="bs-sheet-item active">Most popular</div>
 
-        <!-- Electricity (Behind) -->
-        <div class="tp-sheet-item stacked stacked-2">Electricity</div>
+          <!-- Favorites (Behind) -->
+          <div class="bs-sheet-item stacked stacked-1">Favorites</div>
+
+          <!-- Electricity (Behind) -->
+          <div class="bs-sheet-item stacked stacked-2">Electricity</div>
+        </div>
       </div>
     </div>
+  </div>
 
-    <!-- Screen 2: Provider Details -->
-    <div id="tp-screen-2" class="tp-screen">
-      <!-- Back Button -->
-      <button class="tp-back-btn" onclick="window.tpBack()">
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="M15 18l-6-6 6-6"></path>
-        </svg>
-        Back
-      </button>
+  <!-- Screen: Provider Details -->
+  <div id="bs-screen-provider" class="bs-screen hidden-screen">
+    <div class="bs-scroll-content">
+      <div class="bs-header">
+        <img src="/images/zelify_logo.png" alt="Zelify" class="bs-logo" />
+      </div>
 
-      <!-- Provider Title -->
-      <h1 class="tp-title" id="tp-provider-title" style="margin-top: 10px;">
-        Provider
-      </h1>
+      <div class="bs-hero-container">
+        <img
+          src="/gift/ANIMACION%201.gif"
+          alt="Animation"
+          class="bs-hero-gif"
+        />
+      </div>
 
-      <div class="tp-options-list">
-        <!-- Option 1 -->
-        <div class="tp-option-card">
-          <div class="tp-option-title">My Phone Number</div>
-          <div class="tp-option-desc">Use your registered phone number</div>
+      <div class="bs-main-card">
+        <!-- Back Button -->
+        <button class="bs-back-btn" onclick="window.bsBack()">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M15 18l-6-6 6-6"></path>
+          </svg>
+          Back
+        </button>
+
+        <!-- Provider Title -->
+        <div class="bs-title-section compact">
+          <h1 class="bs-title-sm" id="bs-provider-title">Provider</h1>
+          <p class="bs-subtitle-sm">Enter payment details</p>
         </div>
 
-        <!-- Option 2 -->
-        <div class="tp-option-card">
-          <div class="tp-option-title">Enter Phone Number</div>
-          <div class="tp-option-desc">
-            Enter the phone number associated with the account
+        <div class="bs-options-list">
+          <!-- Option 1 -->
+          <div class="bs-option-card">
+            <div class="bs-option-title">My Phone Number</div>
+            <div class="bs-option-desc">Use your registered phone number</div>
+          </div>
+
+          <!-- Option 2 -->
+          <div class="bs-option-card">
+            <div class="bs-option-title">Enter Phone Number</div>
+            <div class="bs-option-desc">
+              Enter the phone number associated with the account
+            </div>
           </div>
         </div>
       </div>
@@ -142,135 +162,128 @@
 </div>
 
 <style>
-  /* Container & Reset */
-  .tp-app-container {
+  /* Base Layout - Copied from CustomKeys */
+  .bs-app-container {
     width: 100%;
     height: 100%;
     position: relative;
     overflow: hidden;
+    background: white;
     font-family:
       -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
       sans-serif;
   }
 
-  /* Background Top Half */
-  .tp-background {
+  .bs-screen {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 40%; /* Top part visible behind the blur panel */
-    background: #f8fafc; /* Light gray background */
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+    background: transparent;
+    z-index: 1;
+  }
+
+  .bs-screen.hidden-screen {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.98);
     z-index: 0;
   }
 
-  .tp-dots-pattern {
-    width: 100%;
-    height: 100%;
-    background-image: radial-gradient(#cbd5e1 1.5px, transparent 1.5px);
-    background-size: 24px 24px;
-    opacity: 0.6;
-  }
-
-  /* Blur Panel (The main sheet) */
-  .tp-blur-panel {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 92%; /* Increased height further to minimize top gap as requested */
-    background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 32px 32px 0 0;
+  .bs-screen.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
     z-index: 10;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
-    border-top: 1px solid rgba(255, 255, 255, 0.6);
   }
 
-  .tp-screen {
+  /* Dashboard Styles */
+  .bs-scroll-content {
     flex: 1;
-    display: none;
-    flex-direction: column;
-    padding: 0 24px;
-    height: 100%;
-    position: relative;
-    overflow-y: auto;
-    /* Hide scrollbar */
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-
-  .tp-screen::-webkit-scrollbar {
-    display: none;
-  }
-
-  .tp-screen.active {
     display: flex;
-    animation: tpFadeIn 0.3s ease-out;
+    flex-direction: column;
+    padding: 24px;
+    padding-top: 10px;
+    overflow-y: auto;
+    height: 100%;
+    box-sizing: border-box;
   }
 
-  @keyframes tpFadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* Graphic Styling */
-  .tp-graphic-container {
-    height: 180px; /* Adjusted height for the GIF area */
-    width: 100%;
+  .bs-header {
     display: flex;
     justify-content: center;
-    align-items: center;
-    margin-top: 0;
+    margin-bottom: 12px;
+    z-index: 20;
     position: relative;
-    flex-shrink: 0;
-    overflow: hidden;
   }
 
-  .tp-graphic-gif {
-    width: 140%; /* Scale up slightly if needed to fill width nicely like the reference */
-    height: auto;
+  .bs-logo {
+    height: 32px;
     object-fit: contain;
-    mix-blend-mode: multiply; /* Optional: helps blend if background isn't perfectly white */
-    margin-top: -20px; /* Slight adjustment to center visual weight */
   }
 
-  /* Typography */
-  .tp-title {
-    font-size: 24px;
+  .bs-hero-container {
+    position: relative;
+    margin-bottom: -64px;
+    z-index: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .bs-hero-gif {
+    height: 192px; /* h-48 */
+    width: 192px;
+    object-fit: contain;
+    opacity: 0.9;
+    mix-blend-mode: multiply;
+  }
+
+  .bs-main-card {
+    position: relative;
+    z-index: 10;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 24px;
+    padding: 16px;
+    padding-bottom: 32px;
+    overflow: hidden;
+    min-height: 480px;
+  }
+
+  .bs-title-section {
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .bs-title {
+    font-size: 18px;
     font-weight: 700;
-    color: #004492; /* Blue Title */
-    text-align: center;
-    margin: 0 0 6px 0;
-    flex-shrink: 0;
+    color: #004492;
+    margin: 0;
   }
 
-  .tp-subtitle {
-    font-size: 14px;
+  .bs-subtitle {
+    font-size: 10px;
     color: #64748b;
-    text-align: center;
-    margin: 0 0 24px 0;
-    flex-shrink: 0;
+    margin: 2px 0 0 0;
   }
 
   /* Search */
-  .tp-search-container {
+  .bs-search-container {
     width: 100%;
     position: relative;
     margin-bottom: 24px;
     flex-shrink: 0;
   }
 
-  .tp-search-icon {
+  .bs-search-icon {
     position: absolute;
     left: 16px;
     top: 50%;
@@ -278,30 +291,30 @@
     color: #94a3b8;
   }
 
-  .tp-search-input {
+  .bs-search-input {
     width: 100%;
-    padding: 14px 16px 14px 48px;
+    padding: 12px 16px 12px 48px;
     background: #f1f5f9; /* Gray bg for input */
     border: none;
     border-radius: 12px;
-    font-size: 14px;
+    font-size: 13px;
     color: #334155;
     outline: none;
     box-sizing: border-box;
     transition: background 0.2s;
   }
 
-  .tp-search-input:focus {
+  .bs-search-input:focus {
     background: #ffffff;
     box-shadow: 0 0 0 2px #004492;
   }
 
-  .tp-search-input::placeholder {
+  .bs-search-input::placeholder {
     color: #94a3b8;
   }
 
   /* Providers */
-  .tp-providers-grid {
+  .bs-providers-grid {
     display: flex;
     gap: 20px;
     padding: 0 8px;
@@ -311,27 +324,27 @@
     flex-shrink: 0;
   }
 
-  .tp-providers-grid::-webkit-scrollbar {
+  .bs-providers-grid::-webkit-scrollbar {
     display: none;
   }
 
-  .tp-provider-item {
+  .bs-provider-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 8px;
     cursor: pointer;
     transition: transform 0.2s;
-    min-width: 70px;
+    min-width: 60px;
   }
 
-  .tp-provider-item:hover {
-    transform: translateY(-2px);
+  .bs-provider-item:hover {
+    transform: scale(1.05);
   }
 
-  .tp-provider-icon-wrapper {
-    width: 56px;
-    height: 56px;
+  .bs-provider-icon-wrapper {
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     background: #fff;
     border: 1px solid #e2e8f0;
@@ -339,32 +352,32 @@
     align-items: center;
     justify-content: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    padding: 10px;
+    padding: 8px;
     box-sizing: border-box;
   }
 
-  .tp-provider-logo {
+  .bs-provider-logo {
     width: 100%;
     height: 100%;
     object-fit: contain;
   }
 
-  .tp-provider-name {
-    font-size: 11px;
+  .bs-provider-name {
+    font-size: 10px;
     color: #334155;
-    font-weight: 500;
+    font-weight: 600;
   }
 
   /* Bottom Sheet Stacking */
-  .tp-bottom-sheet-container {
-    height: 140px;
+  .bs-bottom-sheet-container {
+    height: 80px; /* Reduced from original since it is inside a card now */
     position: relative;
     width: 100%;
-    margin-top: auto; /* Push to bottom */
-    margin-bottom: -10px;
+    margin-top: auto;
+    margin-bottom: 0px;
   }
 
-  .tp-sheet-item {
+  .bs-sheet-item {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -379,8 +392,8 @@
     cursor: pointer;
   }
 
-  .tp-sheet-item.active {
-    bottom: 24px;
+  .bs-sheet-item.active {
+    bottom: 0;
     width: 100%;
     height: 64px;
     z-index: 30;
@@ -389,8 +402,8 @@
     font-weight: 600;
   }
 
-  .tp-sheet-item.stacked-1 {
-    bottom: 60px;
+  .bs-sheet-item.stacked-1 {
+    bottom: 12px;
     width: 90%;
     height: 56px;
     z-index: 20;
@@ -398,8 +411,8 @@
     color: #475569;
   }
 
-  .tp-sheet-item.stacked-2 {
-    bottom: 90px;
+  .bs-sheet-item.stacked-2 {
+    bottom: 24px;
     width: 82%;
     height: 56px;
     z-index: 10;
@@ -408,30 +421,44 @@
   }
 
   /* Screen 2 Styles */
-  .tp-back-btn {
+  .bs-back-btn {
+    align-self: flex-start;
     display: flex;
     align-items: center;
-    gap: 6px;
+    color: #9ca3af; /* gray-400 */
+    font-size: 12px;
     background: none;
     border: none;
-    color: #64748b;
-    font-size: 14px;
-    font-weight: 500;
     cursor: pointer;
-    padding: 0;
-    margin-top: 16px;
-    margin-bottom: 8px;
-    align-self: flex-start;
+    margin-bottom: 12px;
+    transition: color 0.2s;
   }
 
-  .tp-options-list {
+  .bs-back-btn:hover {
+    color: #4b5563;
+  }
+
+  .bs-title-section.compact .bs-title-sm {
+    font-size: 16px;
+    font-weight: 700;
+    color: #004492;
+    margin: 0;
+  }
+
+  .bs-title-section.compact .bs-subtitle-sm {
+    font-size: 10px;
+    color: #64748b;
+    margin-top: 2px;
+  }
+
+  .bs-options-list {
     display: flex;
     flex-direction: column;
     gap: 12px;
     margin-top: 24px;
   }
 
-  .tp-option-card {
+  .bs-option-card {
     background: #f8fafc;
     border-radius: 16px;
     padding: 16px;
@@ -439,18 +466,18 @@
     transition: background 0.2s;
   }
 
-  .tp-option-card:hover {
+  .bs-option-card:hover {
     background: #f1f5f9;
   }
 
-  .tp-option-title {
+  .bs-option-title {
     font-size: 14px;
     font-weight: 600;
     color: #0f172a;
     margin-bottom: 4px;
   }
 
-  .tp-option-desc {
+  .bs-option-desc {
     font-size: 12px;
     color: #64748b;
   }
@@ -458,25 +485,31 @@
 
 <script is:inline>
   // Navigation Logic
-  window.tpNavigate = (id, name) => {
-    const screen1 = document.getElementById("tp-screen-1");
-    const screen2 = document.getElementById("tp-screen-2");
-    const titleEl = document.getElementById("tp-provider-title");
+  window.bsNavigate = (id, name) => {
+    const screen1 = document.getElementById("bs-screen-dashboard");
+    const screen2 = document.getElementById("bs-screen-provider");
+    const titleEl = document.getElementById("bs-provider-title");
 
     if (titleEl) titleEl.textContent = name;
 
     if (screen1 && screen2) {
       screen1.classList.remove("active");
+      screen1.classList.add("hidden-screen");
+
+      screen2.classList.remove("hidden-screen");
       screen2.classList.add("active");
     }
   };
 
-  window.tpBack = () => {
-    const screen1 = document.getElementById("tp-screen-1");
-    const screen2 = document.getElementById("tp-screen-2");
+  window.bsBack = () => {
+    const screen1 = document.getElementById("bs-screen-dashboard");
+    const screen2 = document.getElementById("bs-screen-provider");
 
     if (screen1 && screen2) {
       screen2.classList.remove("active");
+      screen2.classList.add("hidden-screen");
+
+      screen1.classList.remove("hidden-screen");
       screen1.classList.add("active");
     }
   };

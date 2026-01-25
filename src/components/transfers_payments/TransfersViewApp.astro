@@ -7,18 +7,24 @@
   <div id="tv-screen-amount" class="tv-screen active">
     <!-- Top Graphic -->
     <!-- Top Graphic (Backdrop) -->
-    <div class="tv-graphic-container-fixed">
+    <!-- GIF Animado (Background Layer) -->
+    <div
+      class="absolute top-12 left-0 right-0 flex justify-center z-0 pointer-events-none"
+    >
       <img
         src="/gift/ANIMACION%201.gif"
-        alt="Animation"
-        class="tv-graphic-gif"
+        alt="Connecting Animation"
+        class="h-48 w-48 object-contain opacity-90 mix-blend-multiply"
       />
     </div>
 
-    <!-- Glass Content Card -->
-    <div class="tv-main-glass-card">
+    <!-- Main Content Area -->
+    <div
+      class="relative z-10 flex-1 flex flex-col overflow-hidden rounded-t-2xl backdrop-blur-sm mt-40 mb-0"
+      style="background-color: rgba(255, 255, 255, 0.35);"
+    >
       <!-- Title Section -->
-      <h1 class="tv-title">Transfers</h1>
+      <h1 class="tv-title mt-6">Transfers</h1>
 
       <div class="tv-instructions">
         <p class="tv-subtitle">How much do you want to transfer?</p>
@@ -55,6 +61,9 @@
           </button>
         </div>
       </div>
+
+      <!-- Spacer -->
+      <div class="flex-grow"></div>
     </div>
 
     <!-- Spacer -->
@@ -197,28 +206,55 @@
       >
         <path d="M15 18l-6-6 6-6"></path>
       </svg>
-      Back
+      Atrás
     </button>
 
-    <div class="tv-blur-content">
-      <div class="tv-section-header">
-        <h2 class="tv-section-title">Recipients</h2>
-        <p class="tv-section-desc">Select who you want to transfer to</p>
+    <!-- GIF Animation Background -->
+    <div class="px-6 pt-2 absolute inset-0 z-0 pointer-events-none">
+      <img
+        src="/gift/ANIMACION%201.gif"
+        alt="Animation"
+        class="w-full h-auto max-w-full object-contain mix-blend-multiply opacity-90"
+      />
+    </div>
+
+    <div class="tv-blur-content flex-1 flex flex-col pt-16 pb-6 relative z-10">
+      <div class="tv-section-header text-center mb-4">
+        <h2 class="tv-section-title text-2xl font-bold text-[#004492] mb-2">
+          Contacts
+        </h2>
+        <p class="tv-section-desc text-sm text-slate-600">
+          Select the recipient
+        </p>
       </div>
 
-      <div class="tv-contacts-list">
+      <div
+        class="tv-contacts-list w-full flex-1 overflow-y-auto px-1 space-y-2"
+      >
         <!-- Contact 1 -->
         <div
-          class="tv-contact-item"
-          onclick="window.tvSelectContact('Valentina Duarte', 'VD')"
+          class="tv-contact-item group"
+          onclick="window.tvSelectContact('Valentina Duarte', 'VD', '@JP - Chase - USA')"
         >
-          <div class="tv-avatar">VD</div>
+          <div
+            class="tv-avatar bg-[#004492] group-hover:bg-white group-hover:text-slate-900 transition-colors"
+          >
+            VD
+          </div>
           <div class="tv-contact-info">
-            <div class="tv-contact-name">Valentina Duarte</div>
-            <div class="tv-contact-bank">@vale - Chase USA</div>
+            <div
+              class="tv-contact-name text-slate-900 group-hover:text-white transition-colors"
+            >
+              Valentina Duarte
+            </div>
+            <div
+              class="tv-contact-bank text-slate-600 group-hover:text-white/90 transition-colors"
+            >
+              @JP - Chase - USA
+            </div>
           </div>
           <svg
-            class="tv-chevron"
+            class="tv-chevron text-[#004492] group-hover:text-white transition-colors"
             width="16"
             height="16"
             viewBox="0 0 24 24"
@@ -229,16 +265,28 @@
         </div>
         <!-- Contact 2 -->
         <div
-          class="tv-contact-item"
-          onclick="window.tvSelectContact('Carlos Mendoza', 'CM')"
+          class="tv-contact-item group"
+          onclick="window.tvSelectContact('Carlos Mendoza', 'CM', '@CM - BBVA - México')"
         >
-          <div class="tv-avatar alt">CM</div>
+          <div
+            class="tv-avatar bg-[#004492] group-hover:bg-white group-hover:text-slate-900 transition-colors"
+          >
+            CM
+          </div>
           <div class="tv-contact-info">
-            <div class="tv-contact-name">Carlos Mendoza</div>
-            <div class="tv-contact-bank">@CM - BBVA México</div>
+            <div
+              class="tv-contact-name text-slate-900 group-hover:text-white transition-colors"
+            >
+              Carlos Mendoza
+            </div>
+            <div
+              class="tv-contact-bank text-slate-600 group-hover:text-white/90 transition-colors"
+            >
+              @CM - BBVA - México
+            </div>
           </div>
           <svg
-            class="tv-chevron"
+            class="tv-chevron text-[#004492] group-hover:text-white transition-colors"
             width="16"
             height="16"
             viewBox="0 0 24 24"
@@ -249,16 +297,124 @@
         </div>
         <!-- Contact 3 -->
         <div
-          class="tv-contact-item"
-          onclick="window.tvSelectContact('Sofia Rodriguez', 'SR')"
+          class="tv-contact-item group"
+          onclick="window.tvSelectContact('Sofia Rodriguez', 'SR', '@SR - Santander - España')"
         >
-          <div class="tv-avatar alt-2">SR</div>
+          <div
+            class="tv-avatar bg-[#004492] group-hover:bg-white group-hover:text-slate-900 transition-colors"
+          >
+            SR
+          </div>
           <div class="tv-contact-info">
-            <div class="tv-contact-name">Sofia Rodriguez</div>
-            <div class="tv-contact-bank">@SR - Santander España</div>
+            <div
+              class="tv-contact-name text-slate-900 group-hover:text-white transition-colors"
+            >
+              Sofia Rodriguez
+            </div>
+            <div
+              class="tv-contact-bank text-slate-600 group-hover:text-white/90 transition-colors"
+            >
+              @SR - Santander - España
+            </div>
           </div>
           <svg
-            class="tv-chevron"
+            class="tv-chevron text-[#004492] group-hover:text-white transition-colors"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg
+          >
+        </div>
+        <!-- Contact 4 -->
+        <div
+          class="tv-contact-item group"
+          onclick="window.tvSelectContact('Luis Hernandez', 'LH', '@LH - Bank of America')"
+        >
+          <div
+            class="tv-avatar bg-[#004492] group-hover:bg-white group-hover:text-slate-900 transition-colors"
+          >
+            LH
+          </div>
+          <div class="tv-contact-info">
+            <div
+              class="tv-contact-name text-slate-900 group-hover:text-white transition-colors"
+            >
+              Luis Hernandez
+            </div>
+            <div
+              class="tv-contact-bank text-slate-600 group-hover:text-white/90 transition-colors"
+            >
+              @LH - Bank of America
+            </div>
+          </div>
+          <svg
+            class="tv-chevron text-[#004492] group-hover:text-white transition-colors"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg
+          >
+        </div>
+        <!-- Contact 5 -->
+        <div
+          class="tv-contact-item group"
+          onclick="window.tvSelectContact('Ana Martinez', 'AM', '@AM - HSBC - UK')"
+        >
+          <div
+            class="tv-avatar bg-[#004492] group-hover:bg-white group-hover:text-slate-900 transition-colors"
+          >
+            AM
+          </div>
+          <div class="tv-contact-info">
+            <div
+              class="tv-contact-name text-slate-900 group-hover:text-white transition-colors"
+            >
+              Ana Martinez
+            </div>
+            <div
+              class="tv-contact-bank text-slate-600 group-hover:text-white/90 transition-colors"
+            >
+              @AM - HSBC - UK
+            </div>
+          </div>
+          <svg
+            class="tv-chevron text-[#004492] group-hover:text-white transition-colors"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg
+          >
+        </div>
+        <!-- Contact 6 -->
+        <div
+          class="tv-contact-item group"
+          onclick="window.tvSelectContact('Diego Fernandez', 'DF', '@DF - Banco de Chile')"
+        >
+          <div
+            class="tv-avatar bg-[#004492] group-hover:bg-white group-hover:text-slate-900 transition-colors"
+          >
+            DF
+          </div>
+          <div class="tv-contact-info">
+            <div
+              class="tv-contact-name text-slate-900 group-hover:text-white transition-colors"
+            >
+              Diego Fernandez
+            </div>
+            <div
+              class="tv-contact-bank text-slate-600 group-hover:text-white/90 transition-colors"
+            >
+              @DF - Banco de Chile
+            </div>
+          </div>
+          <svg
+            class="tv-chevron text-[#004492] group-hover:text-white transition-colors"
             width="16"
             height="16"
             viewBox="0 0 24 24"
@@ -505,7 +661,7 @@
   }
 
   .tv-currency-pill {
-    background: #001530; /* Very dark blue from image */
+    background: linear-gradient(to bottom, #000b1e, #044a95);
     color: white;
     border: none;
     border-radius: 99px;
@@ -521,7 +677,7 @@
 
   /* Bottom Sheet (Expandable) */
   .tv-bottom-sheet {
-    background: #001530; /* Dark blue compact state */
+    background: linear-gradient(to bottom, #000b1e, #044a95);
     width: 100%; /* Match container width */
     height: 70px; /* Initial compact height */
     border-radius: 28px 28px 0 0;
@@ -573,7 +729,7 @@
   }
 
   .tv-sheet-handle-icon.down {
-    color: #64748b;
+    color: white;
     margin-bottom: 8px;
   }
 
@@ -603,21 +759,22 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: transparent; /* Top area */
+    background: linear-gradient(to bottom, #000b1e, #044a95);
     flex-shrink: 0;
     cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 
   .tv-sheet-subtitle {
     font-size: 13px;
-    color: #64748b;
+    color: rgba(255, 255, 255, 0.7);
     margin-bottom: 2px;
   }
 
   .tv-sheet-main-title {
     font-size: 20px;
     font-weight: 700;
-    color: #004492;
+    color: white;
     margin: 0;
   }
 

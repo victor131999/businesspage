@@ -1,221 +1,284 @@
 <div class="step-content" id="step-amount">
-  <!-- Recent Transfers Trigger Button (Visible when sheet is closed) -->
-  <div class="recent-transfers-trigger" id="recent-trigger">
-    <div class="trigger-icon">
-      <svg
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-      >
-        <path
-          d="M18 15L12 9L6 15"
-          stroke-linecap="round"
-          stroke-linejoin="round"></path>
-      </svg>
-    </div>
-    <span>Recent Transfers</span>
-  </div>
-
-  <!-- History Bottom Sheet (Overlay) -->
-  <div class="history-sheet-overlay" id="history-sheet">
-    <div class="sheet-handle-bar" id="sheet-close-handle">
-      <div class="sheet-chevron-down">
+  <!-- Bottom Sheet: Latest Transfers -->
+  <div class="tv-bottom-sheet" id="tv-latest-transfers">
+    <!-- Compact View Content -->
+    <div class="tv-sheet-header-compact" id="tv-sheet-compact">
+      <div class="tv-sheet-handle-icon">
         <svg
           width="24"
           height="24"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          stroke-width="2"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
         >
-          <path
-            d="M6 9L12 15L18 9"
-            stroke-linecap="round"
-            stroke-linejoin="round"></path>
+          <path d="M18 15l-6-6-6 6"></path>
         </svg>
       </div>
-      <div class="sheet-header-text">
-        <div class="sheet-subtitle">History</div>
-        <div class="sheet-title">Recent Transfers</div>
-      </div>
+      <span class="tv-sheet-title-text">Latest transfers</span>
     </div>
 
-    <div class="history-list">
-      {
-        Array.from({ length: 6 }).map((_, i) => (
-          <div class="history-item">
-            <div class="item-left">
-              <div class="item-name">Lucía Gómez</div>
-              <div class="item-date">12-10-2025</div>
+    <!-- Expanded View Content -->
+    <div class="tv-sheet-content-expanded">
+      <div class="tv-sheet-header-expanded" id="tv-sheet-expanded-header">
+        <div class="tv-sheet-handle-icon down">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M6 9l6 6 6-6"></path>
+          </svg>
+        </div>
+        <div class="tv-header-text-block">
+          <span class="tv-sheet-subtitle">History</span>
+          <h2 class="tv-sheet-main-title">Latest transfers</h2>
+        </div>
+      </div>
+
+      <div class="tv-history-list">
+        {
+          Array.from({ length: 6 }).map((_, i) => (
+            <div class="tv-history-item">
+              <div class="tv-history-left">
+                <span class="tv-history-name">Lucía Gómez</span>
+                <span class="tv-history-date">12-10-2025</span>
+              </div>
+              <div class="tv-history-right">
+                <span class="tv-history-amount">-1,250.00</span>
+                <span class="tv-history-status">Completed</span>
+              </div>
             </div>
-            <div class="item-right">
-              <div class="item-amount">-1,250.00</div>
-              <div class="item-status">completed</div>
-            </div>
-          </div>
-        ))
-      }
+          ))
+        }
+      </div>
     </div>
   </div>
 
   <style>
     .step-content {
       flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       width: 100%;
       height: 100%;
-      position: relative;
+      /* Ensure relative positioning for absolute children */
+      /* Note: We don't force position: relative here if we want absolute to reference a higher parent, 
+         but usually maintaining context is safer. */
+      /* However, if app-content has padding, we might want to break out of it? 
+         If app-content is relative, we are bound to it. */
     }
 
-    /* Trigger Button */
-    .recent-transfers-trigger {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #001a40; /* Dark Blue */
-      color: white;
-      padding: 12px 24px;
-      border-radius: 20px 20px 0 0; /* Rounded top only like a tab, or pill? Image shows rounded pill style but attached to bottom or floating? Let's do rounded pill floating near bottom */
-      border-radius: 24px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      z-index: 10;
-      width: 180px;
-      transition: transform 0.2s;
-    }
-
-    .recent-transfers-trigger:active {
-      transform: translateX(-50%) scale(0.98);
-    }
-
-    .recent-transfers-trigger span {
-      font-size: 14px;
-      font-weight: 500;
-    }
-
-    /* Floating Sheet Overlay */
-    .history-sheet-overlay {
-      position: absolute;
-      top: 10%; /* Leaves top 10% visible */
-      left: 0;
+    /* Bottom Sheet (Expandable) */
+    .tv-bottom-sheet {
+      background: #001530; /* Dark blue compact state */
       width: 100%;
-      height: 90%;
-      background: #f8fafc;
-      border-top-left-radius: 32px;
-      border-top-right-radius: 32px;
-      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.15);
-      z-index: 100;
-      transform: translateY(110%); /* Hidden by default */
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      height: 70px; /* Initial compact height */
+      border-radius: 28px 28px 0 0;
+      position: absolute; /* Fixed at bottom of container */
+      bottom: 0;
+      left: 0;
+      right: 0;
       display: flex;
       flex-direction: column;
+      transition: all 0.5s cubic-bezier(0.32, 0.725, 0.25, 1);
+      color: white;
+      overflow: hidden;
+      z-index: 50;
+      /* If parent has padding, this absolute positioning will act relative to padding box */
     }
 
-    .history-sheet-overlay.open {
-      transform: translateY(0);
+    /* Active/Expanded State via class */
+    .tv-bottom-sheet.expanded {
+      height: 94%; /* Covers most of screen */
+      background: rgba(235, 239, 245, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #0f172a; /* Dark text */
+      border-radius: 32px 32px 0 0;
+      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.1);
     }
 
-    .sheet-handle-bar {
-      padding: 16px;
+    /* Compact Content */
+    .tv-sheet-header-compact {
+      height: 70px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       cursor: pointer;
-      background: white;
-      border-top-left-radius: 32px;
-      border-top-right-radius: 32px;
-      border-bottom: 1px solid #edf2f7;
+      padding-bottom: 10px;
+      opacity: 1;
+      transition: opacity 0.2s;
+      width: 100%;
     }
 
-    .sheet-chevron-down {
+    .tv-bottom-sheet.expanded .tv-sheet-header-compact {
+      opacity: 0;
+      pointer-events: none;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .tv-sheet-handle-icon {
+      margin-bottom: 2px;
+    }
+
+    .tv-sheet-handle-icon.down {
       color: #64748b;
       margin-bottom: 8px;
     }
 
-    .sheet-header-text {
+    .tv-sheet-title-text {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    /* Expanded Content */
+    .tv-sheet-content-expanded {
+      opacity: 0;
+      transition: opacity 0.3s ease 0.1s;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .tv-bottom-sheet.expanded .tv-sheet-content-expanded {
+      opacity: 1;
+    }
+
+    .tv-sheet-header-expanded {
+      padding: 16px 24px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: transparent;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .tv-header-text-block {
       text-align: center;
     }
 
-    .sheet-subtitle {
-      font-size: 11px;
-      text-transform: uppercase;
-      color: #94a3b8;
-      letter-spacing: 1px;
+    .tv-sheet-subtitle {
+      font-size: 13px;
+      color: #64748b;
       margin-bottom: 2px;
-    }
-    .sheet-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: #0f172a;
+      display: block;
     }
 
-    .history-list {
+    .tv-sheet-main-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #004492;
+      margin: 0;
+    }
+
+    .tv-history-list {
       flex: 1;
       overflow-y: auto;
-      padding: 20px;
+      padding: 0 16px 24px 16px;
       display: flex;
       flex-direction: column;
       gap: 12px;
-      background: #f8fafc;
     }
 
-    .history-item {
-      background: #e2e8f0; /* Light gray matching image */
-      padding: 16px;
+    .tv-history-item {
+      background: white;
       border-radius: 16px;
+      padding: 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
     }
 
-    .item-name {
-      font-weight: 700;
-      color: #334155;
+    .tv-history-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .tv-history-name {
       font-size: 15px;
-      margin-bottom: 2px;
-    }
-    .item-date {
-      color: #94a3b8;
-      font-size: 13px;
-    }
-    .item-amount {
       font-weight: 600;
-      color: #334155;
-      font-size: 15px;
-      text-align: right;
+      color: #0f172a;
     }
-    .item-status {
-      color: #94a3b8;
+
+    .tv-history-date {
       font-size: 12px;
-      text-align: right;
+      color: #94a3b8;
+    }
+
+    .tv-history-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+    }
+
+    .tv-history-amount {
+      font-size: 15px;
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    .tv-history-status {
+      font-size: 12px;
+      color: #64748b;
     }
   </style>
 
   <script>
-    const trigger = document.getElementById("recent-trigger");
-    const sheet = document.getElementById("history-sheet");
-    const closeHandle = document.getElementById("sheet-close-handle");
+    function setupLatestTransfers() {
+      const sheet = document.getElementById("tv-latest-transfers");
+      const compactHeader = document.getElementById("tv-sheet-compact");
+      const expandedHeader = document.getElementById(
+        "tv-sheet-expanded-header",
+      );
 
-    if (trigger && sheet) {
-      trigger.addEventListener("click", () => {
-        sheet.classList.add("open");
+      if (!sheet || !compactHeader || !expandedHeader) return;
+
+      /** @param {boolean} expand */
+      const toggleSheet = (expand) => {
+        if (expand) {
+          sheet.classList.add("expanded");
+        } else {
+          sheet.classList.remove("expanded");
+        }
+      };
+
+      // Expand on click compact
+      compactHeader.addEventListener("click", () => {
+        toggleSheet(true);
       });
+
+      // Collapse on click expanded header handle
+      expandedHeader.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggleSheet(false);
+      });
+
+      // Optional: Click outside content to close?
+      // Since it covers 100% width, it's mostly full screen.
+      // But if user clicks the top area (translucent part), maybe close?
+      // The sheet takes height 94%, so top 6% is exposed.
+      // But sheet is positioned bottom 0.
     }
 
-    if (closeHandle && sheet) {
-      closeHandle.addEventListener("click", () => {
-        sheet.classList.remove("open");
-      });
-    }
+    // Run setup
+    setupLatestTransfers();
+
+    // Re-run if Astro view transitions are used or on content swap
+    document.addEventListener("astro:page-load", setupLatestTransfers);
   </script>
 </div>

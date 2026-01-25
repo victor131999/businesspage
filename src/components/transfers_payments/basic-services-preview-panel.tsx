@@ -41,24 +41,103 @@ export const PROVIDERS_BY_REGION: Record<
 > = {
   ecuador: "coming_soon",
   mexico: [
-    { id: "mx-1", name: "CFE", logo: "/images/business/CFE-PNG-500x500.png", category: "electricity", paymentOptions: ["reference"] },
-    { id: "mx-2", name: "Telmex", logo: "/images/business/telmex_1.png", category: "telecom", paymentOptions: ["phone"] },
+    {
+      id: "mx-1",
+      name: "CFE",
+      logo: "/images/business/CFE-PNG-500x500.png",
+      category: "electricity",
+      paymentOptions: ["reference"],
+    },
+    {
+      id: "mx-2",
+      name: "Telmex",
+      logo: "/images/business/telmex_1.png",
+      category: "telecom",
+      paymentOptions: ["phone"],
+    },
   ],
   brasil: [
-    { id: "br-1", name: "Vivo", logo: "/images/business/vivo.webp", category: "telecom", paymentOptions: ["phone"], isPopular: true },
-    { id: "br-2", name: "Enel Brasil", logo: "/images/business/enel.png", category: "electricity", paymentOptions: ["reference"], isPopular: true },
-    { id: "br-3", name: "Sabesp", logo: "/images/business/sabesp.png", category: "water", paymentOptions: ["reference"], isPopular: true },
-    { id: "br-4", name: "Claro Brasil", logo: "/images/business/claro.png", category: "telecom", paymentOptions: ["phone"] },
-    { id: "br-5", name: "Oi", logo: "/images/business/oi.png", category: "telecom", paymentOptions: ["phone"] },
-    { id: "br-6", name: "TIM Brasil", logo: "/images/business/tim.webp", category: "telecom", paymentOptions: ["phone"] },
+    {
+      id: "br-1",
+      name: "Vivo",
+      logo: "/images/business/vivo.webp",
+      category: "telecom",
+      paymentOptions: ["phone"],
+      isPopular: true,
+    },
+    {
+      id: "br-2",
+      name: "Enel Brasil",
+      logo: "/images/business/enel.png",
+      category: "electricity",
+      paymentOptions: ["reference"],
+      isPopular: true,
+    },
+    {
+      id: "br-3",
+      name: "Sabesp",
+      logo: "/images/business/sabesp.png",
+      category: "water",
+      paymentOptions: ["reference"],
+      isPopular: true,
+    },
+    {
+      id: "br-4",
+      name: "Claro Brasil",
+      logo: "/images/business/claro.png",
+      category: "telecom",
+      paymentOptions: ["phone"],
+    },
+    {
+      id: "br-5",
+      name: "Oi",
+      logo: "/images/business/oi.png",
+      category: "telecom",
+      paymentOptions: ["phone"],
+    },
+    {
+      id: "br-6",
+      name: "TIM Brasil",
+      logo: "/images/business/tim.webp",
+      category: "telecom",
+      paymentOptions: ["phone"],
+    },
   ],
   colombia: [
-    { id: "co-1", name: "Movistar Colombia", logo: "/images/business/movistar.webp", category: "telecom", paymentOptions: ["phone"], isPopular: true },
-    { id: "co-2", name: "EPM", logo: "/images/business/epm.jpg", category: "electricity", paymentOptions: ["reference"], isPopular: true },
+    {
+      id: "co-1",
+      name: "Movistar Colombia",
+      logo: "/images/business/movistar.webp",
+      category: "telecom",
+      paymentOptions: ["phone"],
+      isPopular: true,
+    },
+    {
+      id: "co-2",
+      name: "EPM",
+      logo: "/images/business/epm.jpg",
+      category: "electricity",
+      paymentOptions: ["reference"],
+      isPopular: true,
+    },
   ],
   estados_unidos: [
-    { id: "us-1", name: "AT&T", logo: "/images/business/at.png", category: "telecom", paymentOptions: ["phone"], isPopular: true },
-    { id: "us-2", name: "Verizon", logo: "/images/business/verizon.jfif", category: "telecom", paymentOptions: ["phone"], isPopular: true },
+    {
+      id: "us-1",
+      name: "AT&T",
+      logo: "/images/business/at.png",
+      category: "telecom",
+      paymentOptions: ["phone"],
+      isPopular: true,
+    },
+    {
+      id: "us-2",
+      name: "Verizon",
+      logo: "/images/business/verizon.jfif",
+      category: "telecom",
+      paymentOptions: ["phone"],
+      isPopular: true,
+    },
   ],
 };
 
@@ -77,7 +156,8 @@ function AnimatedHalftoneBackdrop({ isDarkMode }: { isDarkMode: boolean }) {
     const parent = canvas.parentElement;
     if (!parent) return;
 
-    const dpr = typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1;
+    const dpr =
+      typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1;
 
     const resize = () => {
       const { width, height } = parent.getBoundingClientRect();
@@ -168,20 +248,23 @@ export function BasicServicesPreviewPanel({
   const [currentScreen, setCurrentScreen] = useState<Screen>("screen1");
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<"popular" | "favorites" | ServiceCategory>("popular");
+  const [selectedCategory, setSelectedCategory] = useState<
+    "popular" | "favorites" | ServiceCategory
+  >("popular");
   const [activeCategoryIndex, setActiveCategoryIndex] = useState<number>(0);
   const [favoriteProviderIds, setFavoriteProviderIds] = useState<string[]>([]);
-  const [selectedProvider, setSelectedProvider] = useState<ServiceProvider | null>(null);
+  const [selectedProvider, setSelectedProvider] =
+    useState<ServiceProvider | null>(null);
   const translations = useBasicServicesTranslations();
   const themeColor = config.customColorTheme || "#004492";
 
   // Función para oscurecer el color
   const darkenColor = (hex: string, amount: number) => {
-    const num = parseInt(hex.replace('#', ''), 16);
-    const r = Math.max(0, ((num >> 16) & 0xFF) - amount);
-    const g = Math.max(0, ((num >> 8) & 0xFF) - amount);
-    const b = Math.max(0, (num & 0xFF) - amount);
-    return '#' + (0x1000000 + (r << 16) + (g << 8) + b).toString(16).slice(1);
+    const num = parseInt(hex.replace("#", ""), 16);
+    const r = Math.max(0, ((num >> 16) & 0xff) - amount);
+    const g = Math.max(0, ((num >> 8) & 0xff) - amount);
+    const b = Math.max(0, (num & 0xff) - amount);
+    return "#" + (0x1000000 + (r << 16) + (g << 8) + b).toString(16).slice(1);
   };
 
   const darkThemeColor = darkenColor(themeColor, 30);
@@ -194,7 +277,9 @@ export function BasicServicesPreviewPanel({
   const allProviders = isComingSoon ? [] : (providersData as ServiceProvider[]);
   const providers = useMemo(() => {
     if (visibleProviderIds && visibleProviderIds.length > 0) {
-      return allProviders.filter((provider) => visibleProviderIds.includes(provider.id));
+      return allProviders.filter((provider) =>
+        visibleProviderIds.includes(provider.id),
+      );
     }
     return allProviders;
   }, [allProviders, visibleProviderIds]);
@@ -224,7 +309,10 @@ export function BasicServicesPreviewPanel({
 
   // Obtener categorías disponibles
   const availableCategories = useMemo(() => {
-    const cats: Array<{ type: "popular" | "favorites" | ServiceCategory; label: string }> = [
+    const cats: Array<{
+      type: "popular" | "favorites" | ServiceCategory;
+      label: string;
+    }> = [
       { type: "popular", label: translations.popularLabel },
       { type: "favorites", label: translations.favoritesLabel },
     ];
@@ -260,18 +348,26 @@ export function BasicServicesPreviewPanel({
     }
 
     // Si está en el medio, mostrar el anterior, el actual y el siguiente
-    return availableCategories.slice(Math.max(0, activeIndex - 1), Math.min(total, activeIndex + 2));
+    return availableCategories.slice(
+      Math.max(0, activeIndex - 1),
+      Math.min(total, activeIndex + 2),
+    );
   }, [availableCategories, activeCategoryIndex]);
 
   // Sincronizar selectedCategory con activeCategoryIndex
   useEffect(() => {
-    const index = availableCategories.findIndex((cat) => cat.type === selectedCategory);
+    const index = availableCategories.findIndex(
+      (cat) => cat.type === selectedCategory,
+    );
     if (index !== -1) {
       setActiveCategoryIndex(index);
     }
   }, [selectedCategory, availableCategories]);
 
-  const handleCategoryClick = (categoryType: "popular" | "favorites" | ServiceCategory, index: number) => {
+  const handleCategoryClick = (
+    categoryType: "popular" | "favorites" | ServiceCategory,
+    index: number,
+  ) => {
     setSelectedCategory(categoryType);
     setActiveCategoryIndex(index);
   };
@@ -317,7 +413,10 @@ export function BasicServicesPreviewPanel({
   const CARD_PADDING_BOTTOM = 0; // Padding inferior en píxeles
 
   const renderScreen = () => {
-    const showGifAndBlur = currentScreen === "screen1" || currentScreen === "screen2" || currentScreen === "screen3";
+    const showGifAndBlur =
+      currentScreen === "screen1" ||
+      currentScreen === "screen2" ||
+      currentScreen === "screen3";
 
     return (
       <div className="relative h-full w-full">
@@ -338,7 +437,7 @@ export function BasicServicesPreviewPanel({
             className="absolute bottom-0 left-0 right-0 z-10 flex flex-col"
             style={{
               height: CARD_HEIGHT,
-              borderRadius: '24px 24px 0 0', // Esquinas redondeadas solo arriba
+              borderRadius: "24px 24px 0 0", // Esquinas redondeadas solo arriba
               backdropFilter: `blur(${BLUR_INTENSITY}px)`,
               backgroundColor: isDarkMode
                 ? `rgba(0, 0, 0, ${BACKGROUND_OPACITY})`
@@ -364,8 +463,18 @@ export function BasicServicesPreviewPanel({
                 {/* Barra de búsqueda */}
                 <div className="relative mb-3">
                   <div className="absolute inset-y-0 left-0 flex items-center pl-3">
-                    <svg className="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    <svg
+                      className="h-4 w-4 text-gray-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                      />
                     </svg>
                   </div>
                   <input
@@ -374,9 +483,11 @@ export function BasicServicesPreviewPanel({
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full rounded-lg bg-gray-100 dark:bg-gray-800 pl-10 pr-4 py-2 text-sm text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-0"
-                    style={{
-                      '--tw-ring-color': themeColor,
-                    } as React.CSSProperties & { '--tw-ring-color': string }}
+                    style={
+                      {
+                        "--tw-ring-color": themeColor,
+                      } as React.CSSProperties & { "--tw-ring-color": string }
+                    }
                   />
                 </div>
 
@@ -396,8 +507,8 @@ export function BasicServicesPreviewPanel({
                         <div
                           className="w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center shadow-md border-2"
                           style={{
-                            borderColor: themeColor + '40',
-                            backgroundColor: '#F3F4F6',
+                            borderColor: themeColor + "40",
+                            backgroundColor: "#F3F4F6",
                           }}
                         >
                           {provider.logo ? (
@@ -406,7 +517,9 @@ export function BasicServicesPreviewPanel({
                               alt={provider.name}
                               className={cn(
                                 "rounded-full object-cover",
-                                provider.id === "br-3" ? "h-8 w-8" : "h-10 w-10"
+                                provider.id === "br-3"
+                                  ? "h-8 w-8"
+                                  : "h-10 w-10",
                               )}
                             />
                           ) : (
@@ -427,49 +540,65 @@ export function BasicServicesPreviewPanel({
                 )}
 
                 {/* Tarjetas de categorías con efecto pirámide */}
-                <div className="mt-4 relative flex flex-col items-center flex-shrink-0" style={{ isolation: 'isolate' }}>
+                <div
+                  className="mt-4 relative flex flex-col items-center flex-shrink-0"
+                  style={{ isolation: "isolate" }}
+                >
                   {visibleCategories.map((category) => {
                     // Encontrar el índice global de esta categoría
-                    const globalIndex = availableCategories.findIndex((c) => c.type === category.type);
+                    const globalIndex = availableCategories.findIndex(
+                      (c) => c.type === category.type,
+                    );
                     const isActive = activeCategoryIndex === globalIndex;
-                    const distanceFromActive = Math.abs(activeCategoryIndex - globalIndex);
+                    const distanceFromActive = Math.abs(
+                      activeCategoryIndex - globalIndex,
+                    );
                     const zIndex = 50 - distanceFromActive;
 
                     // Calcular el índice local dentro de visibleCategories
-                    const visibleIndex = visibleCategories.findIndex((c) => c.type === category.type);
+                    const visibleIndex = visibleCategories.findIndex(
+                      (c) => c.type === category.type,
+                    );
 
                     return (
                       <button
                         key={category.type}
-                        onClick={() => handleCategoryClick(category.type, globalIndex)}
+                        onClick={() =>
+                          handleCategoryClick(category.type, globalIndex)
+                        }
                         className="relative w-full cursor-pointer flex items-center justify-center transition-all duration-500"
                         style={{
-                          borderRadius: '20px',
+                          borderRadius: "20px",
                           zIndex: zIndex,
-                          marginTop: visibleIndex === 0 ? '0px' : '-20px',
-                          height: isActive ? '60px' : '55px',
-                          padding: isActive ? '20px 24px' : '16px 24px',
-                          backgroundColor: isActive ? undefined : '#E5E7EB',
-                          color: isActive ? 'white' : '#1F2937',
-                          border: '5px solid #FFFFFF',
+                          marginTop: visibleIndex === 0 ? "0px" : "-20px",
+                          height: isActive ? "60px" : "55px",
+                          padding: isActive ? "20px 24px" : "16px 24px",
+                          backgroundColor: isActive ? undefined : "#E5E7EB",
+                          color: isActive ? "white" : "#1F2937",
+                          border: "5px solid #FFFFFF",
                           boxShadow: isActive
-                            ? '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
-                            : '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                          transform: isActive ? 'scale(1.02)' : 'scale(1)',
-                          transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
-                          ...(isActive ? {
-                            background: `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
-                          } : {}),
+                            ? "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+                            : "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+                          transform: isActive ? "scale(1.02)" : "scale(1)",
+                          transition:
+                            "all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)",
+                          ...(isActive
+                            ? {
+                                background: `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
+                              }
+                            : {}),
                         }}
                       >
                         <span
                           className={cn(
                             "font-medium text-center",
-                            isActive ? 'text-sm font-semibold' : 'text-xs font-medium'
+                            isActive
+                              ? "text-sm font-semibold"
+                              : "text-xs font-medium",
                           )}
                           style={{
-                            whiteSpace: 'nowrap',
-                            color: isActive ? 'white' : '#1F2937',
+                            whiteSpace: "nowrap",
+                            color: isActive ? "white" : "#1F2937",
                           }}
                         >
                           {category.label}
@@ -492,10 +621,22 @@ export function BasicServicesPreviewPanel({
                   }}
                   className="flex items-center gap-2 mb-4 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition"
                 >
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 19l-7-7 7-7"
+                    />
                   </svg>
-                  <span className="text-sm font-medium">{translations.backLabel}</span>
+                  <span className="text-sm font-medium">
+                    {translations.backLabel}
+                  </span>
                 </button>
 
                 {/* Nombre del proveedor centrado */}
@@ -507,26 +648,26 @@ export function BasicServicesPreviewPanel({
                 </h1>
 
                 {/* Tarjeta 1: My Phone Number */}
-                <button
-                  className="w-full rounded-lg bg-gray-100 dark:bg-gray-800 p-4 mb-3 text-left transition hover:bg-gray-200 dark:hover:bg-gray-700"
-                >
+                <button className="w-full rounded-lg bg-gray-100 dark:bg-gray-800 p-4 mb-3 text-left transition hover:bg-gray-200 dark:hover:bg-gray-700">
                   <div className="font-semibold text-gray-900 dark:text-white mb-1">
-                    {translations.paymentMethods?.["phone-my-number"]?.title || "My Phone Number"}
+                    {translations.paymentMethods?.["phone-my-number"]?.title ||
+                      "My Phone Number"}
                   </div>
                   <div className="text-xs text-gray-600 dark:text-gray-400">
-                    {translations.paymentMethods?.["phone-my-number"]?.description || "Use your registered phone number"}
+                    {translations.paymentMethods?.["phone-my-number"]
+                      ?.description || "Use your registered phone number"}
                   </div>
                 </button>
 
                 {/* Tarjeta 2: Enter Phone Number */}
-                <button
-                  className="w-full rounded-lg bg-gray-100 dark:bg-gray-800 p-4 text-left transition hover:bg-gray-200 dark:hover:bg-gray-700"
-                >
+                <button className="w-full rounded-lg bg-gray-100 dark:bg-gray-800 p-4 text-left transition hover:bg-gray-200 dark:hover:bg-gray-700">
                   <div className="font-semibold text-gray-900 dark:text-white mb-1">
-                    {translations.paymentMethods?.phone?.title || "Enter Phone Number"}
+                    {translations.paymentMethods?.phone?.title ||
+                      "Enter Phone Number"}
                   </div>
                   <div className="text-xs text-gray-600 dark:text-gray-400">
-                    {translations.paymentMethods?.phone?.description || "Enter the phone number associated with the account"}
+                    {translations.paymentMethods?.phone?.description ||
+                      "Enter the phone number associated with the account"}
                   </div>
                 </button>
               </div>
