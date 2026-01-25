@@ -713,7 +713,7 @@ export default function ConnectCard() {
                 {/* GIF Animation */}
                 <div className="relative flex-shrink-0 z-0 mb-2 flex justify-center">
                     <img
-                        src="/ANIMACION%201.gif"
+                        src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
                         alt="Wallet Animation"
                         className="h-64 w-64 object-contain opacity-90"
                     />
@@ -871,7 +871,7 @@ export default function ConnectCard() {
             <div className="flex h-full flex-col overflow-y-auto relative">
                 <div className="relative flex-shrink-0 z-0 mb-2 flex justify-center">
                     <img
-                        src="/ANIMACION%201.gif"
+                        src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
                         alt="Deposit Animation"
                         className="h-48 w-48 object-contain opacity-90"
                     />
