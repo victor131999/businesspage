@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { GoogleIcon, FacebookIcon, AppleIcon } from "./oauth-icons";
 import { OTPInput } from "./otp-input";
 import { CountrySelector, type Country } from "./country-selector";
@@ -57,6 +57,179 @@ export function AuthCard() {
         idNumber: "",
         birthDate: "",
     });
+
+    // Demo Automation Logic
+    const [isDemoRunning, setIsDemoRunning] = useState(false);
+    const abortDemo = useRef(false);
+    const isRunningRef = useRef(false);
+
+    useEffect(() => {
+        const handlePlayDemo = async () => {
+            if (isRunningRef.current) return;
+            isRunningRef.current = true;
+            setIsDemoRunning(true);
+            abortDemo.current = false;
+            window.dispatchEvent(new CustomEvent('zelify:demo-start'));
+
+            // Reset to initial state
+            setIsRegistering(false);
+            setRegisterStep(1);
+            setFormData({
+                fullName: "",
+                email: "",
+                emailOTP: "",
+                phoneCountry: "US",
+                phoneNumber: "",
+                phoneOTP: "",
+                password: "",
+                showPassword: false,
+                idNumber: "",
+                birthDate: "",
+            });
+
+            // Helper for delay with abort check
+            const wait = (ms: number) => new Promise<void>((resolve, reject) => {
+                const start = Date.now();
+                const check = () => {
+                    if (abortDemo.current) {
+                        reject(new Error("Demo aborted"));
+                        return;
+                    }
+                    if (Date.now() - start >= ms) {
+                        resolve();
+                    } else {
+                        requestAnimationFrame(check);
+                    }
+                };
+                requestAnimationFrame(check);
+            });
+
+            // Helper for typing effect
+            const typeText = async (val: string, field: keyof typeof formData) => {
+                const currentVal = (formData as any)[field] || "";
+                // If clearing (new val is shorter), just set it
+                if (val === "") {
+                    setFormData(prev => ({ ...prev, [field]: "" }));
+                    return;
+                }
+
+                // Typing
+                for (let i = 0; i <= val.length; i++) {
+                    await wait(50 + Math.random() * 40); // Slightly faster typing
+                    setFormData(prev => ({ ...prev, [field]: val.slice(0, i) }));
+                }
+            };
+
+            try {
+                // 1. Login Flow
+                await wait(1500); // Longer wait to see the screen
+                await typeText("demo@zelify.com", "email");
+                await wait(600);
+                await typeText("password123", "password");
+                await wait(1200); // Let user see filled login
+
+                // Simulate "Create Account" click
+                setIsRegistering(true);
+                setFormData(prev => ({ ...prev, password: "", email: "" }));
+
+                // 2. Register Step 1
+                await wait(1500);
+                await typeText("Usuario Demo", "fullName");
+                await wait(500);
+                await typeText("demo@zelify.com", "email");
+                await wait(1000); // Wait before continuing
+                // Auto-advance is handled by UI button in real life, but here we force state?
+                // Or does the "Continue" button click need simulation?
+                // We'll force state for simplicity in demo as we don't have refs to buttons easy.
+                setRegisterStep(2);
+
+                // 3. Register Step 2 (OTP) - The "Error Then Success" Flow
+                await wait(1500);
+                // A. Wrong OTP
+                await typeText("999999", "emailOTP");
+                await wait(500); // Pause before "clicking" verify
+
+                // Trigger Verify Animation
+                setOtpStatus('verifying');
+                await wait(2000); // Spinning...
+                setOtpStatus('error'); // Wrong!
+
+                await wait(2000); // Show error red shake
+                setOtpStatus('idle'); // Reset to try again
+
+                // B. Clear and Correct OTP
+                setFormData(prev => ({ ...prev, emailOTP: "" })); // Clear
+                await wait(1500);
+                await typeText("202601", "emailOTP"); // Correct
+                await wait(1500);
+
+                // Trigger Verify Animation Again
+                setOtpStatus('verifying');
+                await wait(2000);
+                setOtpStatus('success');
+                await wait(1000);
+
+                // 4. Register Step 3 (Phone)
+                setOtpStatus('idle');
+                setRegisterStep(3);
+
+                await wait(1000);
+                await typeText("999123456", "phoneNumber");
+                await wait(800);
+                setRegisterStep(4);
+
+                // 5. Register Step 4 (Phone OTP)
+                await wait(1500);
+                await typeText("202601", "phoneOTP");
+                await wait(500);
+
+                // Trigger Verify (Phone)
+                setOtpStatus('verifying');
+                await wait(2000);
+                setOtpStatus('success');
+                await wait(1000);
+                setOtpStatus('idle');
+
+                // 6. Register Step 5 (Final)
+                setRegisterStep(5);
+
+                await wait(1000);
+                await typeText("1723456789", "idNumber");
+                await wait(500);
+                setFormData(prev => ({ ...prev, birthDate: "1995-06-15" }));
+                await wait(500);
+                await typeText("securePass123", "password");
+
+                await wait(2000);
+                // No alert
+                setIsDemoRunning(false);
+                isRunningRef.current = false;
+                window.dispatchEvent(new CustomEvent('zelify:demo-end'));
+
+            } catch (e) {
+                console.log("Demo interrupted", e);
+                setIsDemoRunning(false);
+                isRunningRef.current = false;
+                window.dispatchEvent(new CustomEvent('zelify:demo-end'));
+            }
+        };
+
+        const handleStopDemo = () => {
+            if (isRunningRef.current) {
+                console.log("Stopping logic triggered");
+                abortDemo.current = true;
+            }
+        };
+
+        window.addEventListener('zelify:play-demo:auth', handlePlayDemo);
+        window.addEventListener('zelify:stop-demo:auth', handleStopDemo);
+
+        return () => {
+            window.removeEventListener('zelify:play-demo:auth', handlePlayDemo);
+            window.removeEventListener('zelify:stop-demo:auth', handleStopDemo);
+            abortDemo.current = true; // Cleanup safety
+        };
+    }, []);
 
     // Handlers
     const handleStep1Continue = () => {
@@ -216,6 +389,8 @@ export function AuthCard() {
                             type="email"
                             placeholder={t.preview.emailPlaceholder}
                             className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm outline-none focus:border-[#004492] focus:ring-1 focus:ring-[#004492]/20"
+                            value={formData.email}
+                            readOnly
                         />
                     </div>
                     <div>
@@ -226,6 +401,8 @@ export function AuthCard() {
                             type="password"
                             placeholder="••••••••"
                             className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm outline-none focus:border-[#004492] focus:ring-1 focus:ring-[#004492]/20"
+                            value={formData.password}
+                            readOnly
                         />
                     </div>
 
