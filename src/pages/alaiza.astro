@@ -1,5 +1,6 @@
 ---
 import AlaizaApp from "@/components/alaiza/AlaizaApp.astro";
+import AlaizaBehaviorAnalysisApp from "@/components/alaiza/AlaizaBehaviorAnalysisApp.astro";
 import AlaizaChatApp from "@/components/alaiza/AlaizaChatApp.astro";
 import DeviceFrame from "@/components/DeviceFrame.astro";
 import TransferApp from "@/components/tx/TransferApp.astro";
@@ -104,25 +105,7 @@ import TransferApp from "@/components/tx/TransferApp.astro";
 
         <!-- View 2: Behaviour Analysis (Placeholder) -->
         <div id="view-behaviour" class="view-content hidden">
-          <div
-            class="h-full flex flex-col items-center justify-center p-6 bg-white text-center"
-          >
-            <h2 class="text-2xl font-bold text-[#004492] mb-4">
-              Behaviour Analysis
-            </h2>
-            <p class="text-gray-500">
-              Real-time usage patterns & fraud detection
-            </p>
-            <div
-              class="mt-8 w-full max-w-[200px] h-32 bg-gray-50 rounded-lg border border-gray-100 flex items-end justify-center gap-2 p-2"
-            >
-              <div class="w-4 bg-blue-200 h-[40%] rounded-t"></div>
-              <div class="w-4 bg-blue-300 h-[70%] rounded-t"></div>
-              <div class="w-4 bg-[#004492] h-[55%] rounded-t"></div>
-              <div class="w-4 bg-blue-400 h-[90%] rounded-t"></div>
-              <div class="w-4 bg-blue-200 h-[30%] rounded-t"></div>
-            </div>
-          </div>
+          <AlaizaBehaviorAnalysisApp />
         </div>
 
         <!-- View 3: Financial Education (AlaizaApp) -->
