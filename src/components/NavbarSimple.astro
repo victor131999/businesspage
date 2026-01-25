@@ -32,11 +32,25 @@ const {
 
     <div class="simple-navbar__links">
       {
-        navItems.map((item) => (
-          <a class="simple-navbar__link" href={item.href}>
-            {item.label}
-          </a>
-        ))
+        navItems.map((item) => {
+          // Si es "Producto", hacer que abra el panel en lugar de navegar
+          if (item.label.toLowerCase() === "producto" || item.label.toLowerCase() === "productos") {
+            return (
+              <button 
+                class="simple-navbar__link simple-navbar__link--button" 
+                type="button"
+                data-products-trigger
+              >
+                {item.label}
+              </button>
+            );
+          }
+          return (
+            <a class="simple-navbar__link" href={item.href}>
+              {item.label}
+            </a>
+          );
+        })
       }
     </div>
 
@@ -122,6 +136,13 @@ const {
 
   .simple-navbar__link:hover {
     opacity: 0.75;
+  }
+
+  .simple-navbar__link--button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
   }
 
   .simple-navbar__actions {
@@ -221,6 +242,41 @@ const {
         },
         { passive: true },
       );
+    }
+
+    // Products Panel toggle logic
+    const productsTrigger = document.querySelector("[data-products-trigger]");
+    const productsPanel = document.getElementById("products-panel");
+
+    if (productsTrigger && productsPanel) {
+      // Abrir panel
+      productsTrigger.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        productsPanel.classList.remove("hidden");
+      });
+
+      // Cerrar panel al hacer clic fuera
+      document.addEventListener("click", (e) => {
+        const target = e.target;
+        if (
+          productsPanel &&
+          target instanceof Node &&
+          !productsPanel.contains(target) &&
+          productsTrigger instanceof Node &&
+          !productsTrigger.contains(target) &&
+          !productsPanel.classList.contains("hidden")
+        ) {
+          productsPanel.classList.add("hidden");
+        }
+      });
+
+      // Cerrar panel con ESC
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && productsPanel && !productsPanel.classList.contains("hidden")) {
+          productsPanel.classList.add("hidden");
+        }
+      });
     }
   });
 </script>
