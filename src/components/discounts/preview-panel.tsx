@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
 import { AuthConfig } from "../../../auth/authentication/_components/authentication-config";
-import Image from "next/image";
+
 import { useDiscountsTranslations } from "./use-discounts-translations";
 
 function MobileIcon(props: React.SVGProps<SVGSVGElement>) {
@@ -148,13 +148,12 @@ export function DiscountsPreviewPanel({
             className="h-8 w-auto object-contain max-w-[120px]"
           />
         ) : (
-          <Image
-            src="/images/logo/zelifyLogo_ligth.svg"
+          <img
+            src="/images/zelify_logo.png"
             alt="Zelify Logo"
             width={100}
             height={30}
             className="h-8 w-auto object-contain"
-            priority
           />
         )}
       </div>
