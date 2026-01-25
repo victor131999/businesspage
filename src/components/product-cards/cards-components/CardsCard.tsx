@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 /* -- Types -- */
 type ActionId = "number" | "wallet" | "freeze" | "security" | "more" | "lock";
@@ -24,7 +24,7 @@ export default function CardsCard() {
     const cvvIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
     // Actions configuration
-    const actions: Array<{ id: ActionId; label: string; icon: JSX.Element }> = [
+    const actions: Array<{ id: ActionId; label: string; icon: React.ReactElement }> = [
         {
             id: "number",
             label: "Número",
@@ -244,9 +244,9 @@ export default function CardsCard() {
                                 color: isActive ? "white" : "#9CA3AF",
                                 transform: isActive ? `scale(${ACTIVE_SCALE})` : "scale(1)",
                                 transition: "all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)",
-                                boxShadow: isActive
-                                    ? "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
-                                    : "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+                                // boxShadow: isActive
+                                //     ? "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+                                //     : "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
                             }}
                         >
                             <div
@@ -261,7 +261,7 @@ export default function CardsCard() {
                                     {action.icon}
                                 </div>
                                 {isActive && (
-                                    <span className="text-sm font-semibold whitespace-nowrap">
+                                    <span className="text-[10px] font-semibold whitespace-nowrap">
                                         {action.label}
                                     </span>
                                 )}
@@ -438,7 +438,7 @@ export default function CardsCard() {
 
     return (
         <div className="flex h-full flex-col relative overflow-hidden bg-white">
-            <div className="flex-1 flex flex-col overflow-y-auto" style={{ paddingBottom: isExpanded ? "300px" : "80px" }}>
+            <div className="flex-1 flex flex-col overflow-y-auto" style={{ paddingBottom: isExpanded ? "280px" : "80px" }}>
                 {/* Header */}
                 <div className="flex-shrink-0 px-6 pt-4 pb-2">
                     <div className="flex justify-center">
@@ -484,9 +484,10 @@ export default function CardsCard() {
 
             {/* Collapsible Card - Fixed at bottom but within container */}
             <div
-                className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 rounded-t-3xl shadow-lg transition-all duration-300 z-10"
+                className="absolute bottom-0 left-0 right-0 border-t border-gray-200/50 rounded-t-3xl shadow-lg transition-all duration-300 z-10 backdrop-blur-md"
                 style={{
-                    height: isExpanded ? "300px" : "80px",
+                    height: isExpanded ? "280px" : "80px",
+                    backgroundColor: isExpanded ? "rgba(255, 255, 255, 0.7)" : "rgba(255, 255, 255, 1)",
                 }}
             >
                 <div className="h-full flex flex-col">

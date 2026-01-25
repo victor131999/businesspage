@@ -237,7 +237,7 @@ export default function DiscountsCard() {
         <div className="pt-6 px-6 text-center shrink-0 relative flex items-center justify-center z-50">
             {showBack && (
                 <button
-                    onClick={() => setStep((prev) => Math.max(1, (prev - 1) as Step))}
+                    onClick={() => setStep((prev) => (prev > 1 ? (prev - 1) as Step : 1))}
                     className="absolute left-6 text-xs text-gray-500 hover:text-gray-700 flex items-center"
                 >
                     ← Atrás
@@ -261,7 +261,7 @@ export default function DiscountsCard() {
 
         return (
             <button
-                onClick={onClick || (() => setStep((prev) => Math.min(11, (prev + 1) as Step)))}
+                onClick={onClick || (() => setStep((prev) => (prev < 11 ? (prev + 1) as Step : 11)))}
                 className="group relative w-[80%] mx-auto text-white rounded-2xl py-3.5 text-sm flex items-center pl-6 shadow-lg overflow-hidden transition-all active:scale-[0.98] z-20"
                 style={{
                     background: `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
@@ -333,7 +333,7 @@ export default function DiscountsCard() {
 
                 <div className="relative w-40 h-40 flex items-center justify-center mt-8 mb-[-50px] shrink-0 z-0">
                     <img
-                        src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+                        src="/ANIMACION%201.gif"
                         alt="Animación"
                         className="w-full h-full object-contain opacity-80"
                     />
@@ -366,7 +366,7 @@ export default function DiscountsCard() {
             <div className="flex-1 flex flex-col items-center pt-4 px-2 pb-12 z-10 min-h-0">
                 <div className="relative w-32 h-32 flex items-center justify-center min-h-[50px] mb-4 mt-8 shrink z-20">
                     <img
-                        src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+                        src="/ANIMACION%201.gif"
                         alt="Animación"
                         className="w-full h-full object-contain opacity-80"
                     />
@@ -573,7 +573,7 @@ export default function DiscountsCard() {
             <div className="absolute top-10 left-0 right-0 flex justify-center z-0">
                 <div className="w-64 h-64 flex items-center justify-center">
                     <img
-                        src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+                        src="/ANIMACION%201.gif"
                         alt="Animación"
                         className="w-full h-full object-contain opacity-80"
                     />
@@ -613,7 +613,7 @@ export default function DiscountsCard() {
             <div className="absolute top-10 left-0 right-0 flex justify-center z-0">
                 <div className="w-64 h-64 flex items-center justify-center">
                     <img
-                        src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+                        src="/ANIMACION%201.gif"
                         alt="Animación"
                         className="w-full h-full object-contain opacity-80"
                     />
@@ -663,7 +663,7 @@ export default function DiscountsCard() {
             <div className="absolute top-10 left-0 right-0 flex justify-center z-0">
                 <div className="w-64 h-64 flex items-center justify-center">
                     <img
-                        src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+                        src="/ANIMACION%201.gif"
                         alt="Animación"
                         className="w-full h-full object-contain opacity-80"
                     />
@@ -791,7 +791,7 @@ export default function DiscountsCard() {
                 <div className="flex-1 flex flex-col items-center relative z-10 min-h-0 pt-4">
                     <div className="relative w-64 h-64 flex items-center justify-center shrink min-h-[120px] -mb-16 z-0">
                         <img
-                            src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+                            src="/ANIMACION%201.gif"
                             alt="Animación"
                             className="w-full h-full object-contain opacity-80"
                         />

@@ -250,6 +250,27 @@ export default function ConnectCard() {
         window.dispatchEvent(new CustomEvent('zelify:demo-end'));
     };
 
+    // Auto-advance from loading to success when progress completes
+    useEffect(() => {
+        if (currentScreen === "loading" && loadingProgress >= 99.9) {
+            const timer = setTimeout(() => {
+                setCurrentScreen("success");
+            }, 1000); // Delay to show completion state
+            return () => clearTimeout(timer);
+        }
+    }, [currentScreen, loadingProgress]);
+
+    // Auto-advance from success to wallet after showing success message
+    useEffect(() => {
+        if (currentScreen === "success") {
+            const timer = setTimeout(() => {
+                setCurrentScreen("wallet");
+                setWalletBalance(1000.00); // Set initial wallet balance
+            }, 2500); // Show success message for 2.5 seconds
+            return () => clearTimeout(timer);
+        }
+    }, [currentScreen]);
+
     // Event listeners
     useEffect(() => {
         window.addEventListener('zelify:play-demo:connect', handlePlayDemo);
@@ -321,9 +342,8 @@ export default function ConnectCard() {
                         return (
                             <div
                                 key={bank.id}
-                                className={`relative w-full cursor-pointer flex items-center justify-center transition-all duration-500 ${
-                                    isActive ? "shadow-lg" : ""
-                                }`}
+                                className={`relative w-full cursor-pointer flex items-center justify-center transition-all duration-500 ${isActive ? "shadow-lg" : ""
+                                    }`}
                                 onClick={() => {
                                     setActiveBankCard(index);
                                     setSelectedBank(bank);
@@ -419,84 +439,83 @@ export default function ConnectCard() {
     // Render Credentials Screen
     const renderCredentialsScreen = () => {
         return (
-            <div className="flex h-full flex-col px-6 py-6">
-                {/* Header */}
-                <div className="mb-4 text-center">
-                    <h2 className="text-lg font-bold" style={{ color: themeColor }}>
-                        Ingresa tus credenciales
-                    </h2>
-                    <p className="text-sm text-gray-600 mt-1">
-                        Por favor ingrese sus credenciales para conectar su cuenta bancaria
-                    </p>
+            <div className="flex h-full flex-col relative overflow-hidden bg-white">
+                {/* Header/Logo Space (Optional, keeping consistent spacing) */}
+                <div className="pt-6 px-6 text-center shrink-0">
+                    {/* If a logo is needed strictly like AuthCard, uncomment below, otherwise keep simple space */}
+                    {/* <img src="/images/zelify_logo.png" alt="Logo" className="h-10 w-auto mx-auto object-contain" /> */}
                 </div>
 
-                {/* SVG Geometric */}
-                <div className="flex justify-center py-4 mb-6">
-                    <svg
-                        width="128"
-                        height="128"
-                        viewBox="0 0 215.02 215.02"
-                        className="opacity-80"
-                    >
-                        <defs>
-                            <linearGradient id="connect-gradient" x1="4.35" y1="612.77" x2="210.66" y2="612.77" gradientTransform="translate(0 720.29) scale(1 -1)" gradientUnits="userSpaceOnUse">
-                                <stop offset="0" stopColor={themeColor} />
-                                <stop offset="1" stopColor={darkThemeColor} />
-                            </linearGradient>
-                        </defs>
-                        <path
-                            fill="url(#connect-gradient)"
-                            d="M77.1,210.67l-.14-.25L4.35,77.11,137.91,4.37l.14.25,72.61,133.31-133.56,72.74h0ZM5.13,77.33l72.2,132.57,132.57-72.2L137.7,5.13S5.13,77.33,5.13,77.33Z"
-                        />
-                    </svg>
+                {/* Animated GIF - Behind the card */}
+                <div className="relative -mb-10 flex-shrink-0 z-0 flex justify-center mt-2">
+                    <img
+                        src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+                        alt="Security Animation"
+                        className="h-40 w-40 object-contain opacity-90 mix-blend-multiply"
+                    />
                 </div>
 
-                {/* Form */}
-                <div className="flex flex-col space-y-4 flex-1">
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Usuario
-                        </label>
-                        <input
-                            type="text"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            placeholder="Ingrese su usuario"
-                            className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                        />
+                {/* Glass Card Container */}
+                <div
+                    className="relative z-10 flex-1 flex flex-col rounded-2xl p-6 backdrop-blur-sm border border-white/50 mx-4 mb-4 shadow-sm"
+                    style={{ backgroundColor: 'rgba(255, 255, 255, 0.45)' }}
+                >
+                    <div className="text-center mb-6">
+                        <h2 className="text-xl font-bold" style={{ color: themeColor }}>
+                            Ingresa tus credenciales
+                        </h2>
+                        <p className="text-xs text-gray-600 mt-1">
+                            Por favor ingrese sus credenciales para conectar su cuenta bancaria
+                        </p>
                     </div>
 
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Contraseña
-                        </label>
-                        <input
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            placeholder="Ingrese su contraseña"
-                            className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                        />
-                    </div>
+                    <div className="flex flex-col space-y-4 flex-1">
+                        <div>
+                            <label className="block text-xs font-medium text-gray-700 mb-1.5" style={{ color: themeColor }}>
+                                Usuario
+                            </label>
+                            <input
+                                type="text"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                placeholder="Ingrese su usuario"
+                                className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary shadow-sm"
+                            />
+                        </div>
 
-                    <div className="mt-auto pt-4">
-                        <button
-                            onClick={() => {
-                                if (username && password) {
-                                    setCurrentScreen("loading");
-                                    startLoadingProgress();
-                                }
-                            }}
-                            disabled={!username || !password}
-                            className="w-full rounded-lg border px-4 py-3 text-sm font-semibold text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                            style={{
-                                background: (!username || !password)
-                                    ? '#9BA2AF'
-                                    : `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
-                            }}
-                        >
-                            Ingresar
-                        </button>
+                        <div>
+                            <label className="block text-xs font-medium text-gray-700 mb-1.5" style={{ color: themeColor }}>
+                                Contraseña
+                            </label>
+                            <input
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                placeholder="Ingrese su contraseña"
+                                className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary shadow-sm"
+                            />
+                        </div>
+
+                        <div className="mt-auto pt-4">
+                            <button
+                                onClick={() => {
+                                    if (username && password) {
+                                        setCurrentScreen("loading");
+                                        startLoadingProgress();
+                                    }
+                                }}
+                                disabled={!username || !password}
+                                className="group relative w-full overflow-hidden rounded-xl px-4 py-3.5 text-sm font-bold text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98]"
+                                style={{
+                                    background: (!username || !password)
+                                        ? '#9BA2AF'
+                                        : `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
+                                    boxShadow: (!username || !password) ? 'none' : `0 4px 14px 0 ${themeColor}40`,
+                                }}
+                            >
+                                Ingresar
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -709,56 +728,48 @@ export default function ConnectCard() {
         const currencyCode = getCurrencyCode(country);
 
         return (
-            <div className="flex h-full flex-col overflow-y-auto relative">
-                {/* GIF Animation */}
-                <div className="relative flex-shrink-0 z-0 mb-2 flex justify-center">
+            <div className="flex h-full flex-col relative bg-white overflow-hidden">
+                {/* GIF Animation - Top Centered - Reduced size */}
+                <div className="relative flex-shrink-0 z-0 flex justify-center -mb-6 mt-2">
                     <img
                         src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
                         alt="Wallet Animation"
-                        className="h-64 w-64 object-contain opacity-90"
+                        className="h-48 w-48 object-contain opacity-90"
                     />
                 </div>
 
-                {/* Card with blur */}
-                <div
-                    className="relative z-10 flex-1 flex flex-col rounded-2xl backdrop-blur-sm"
-                    style={{
-                        marginLeft: "15px",
-                        marginRight: "15px",
-                        marginBottom: "15px",
-                        padding: "20px",
-                        backgroundColor: "rgba(255, 255, 255, 0.35)",
-                        marginTop: "-120px",
-                    }}
-                >
-                    <div className="flex flex-col flex-1 space-y-4">
-                        <div className="text-center">
-                            <h2 className="text-xl font-bold" style={{ color: almostBlackColor }}>
-                                Billetera
-                            </h2>
-                            <p className="text-xs text-gray-600 mt-1">
-                                Administra tus fondos
-                            </p>
-                        </div>
+                {/* Main Content */}
+                <div className="flex-1 flex flex-col px-6 relative z-10 min-h-0">
+                    {/* Title Section - Reduced margins */}
+                    <div className="text-center mb-4 shrink-0">
+                        <h2 className="text-xl font-bold" style={{ color: almostBlackColor }}>
+                            Billetera
+                        </h2>
+                        <p className="text-xs text-gray-500 mt-0.5">
+                            Administra tus fondos
+                        </p>
+                    </div>
 
-                        <label className="text-sm font-medium" style={{ color: almostBlackColor, textAlign: "left" }}>
+                    {/* Balance Section - Compact */}
+                    <div className="mb-4 shrink-0">
+                        <label className="text-xs font-medium mb-2 block" style={{ color: almostBlackColor }}>
                             Balance total
                         </label>
 
                         <div
-                            className="rounded-xl p-1 flex items-center justify-between"
+                            className="rounded-2xl p-3 flex items-center justify-between"
                             style={{
-                                backgroundColor: "#E5E7EB",
+                                backgroundColor: "#E5E7EB", // Light gray background
                             }}
                         >
-                            <span className="text-2xl font-normal" style={{ color: almostBlackColor }}>
+                            <span className="text-2xl font-normal tracking-tight" style={{ color: almostBlackColor }}>
                                 ${walletBalance.toLocaleString("en-US", {
                                     minimumFractionDigits: 2,
                                     maximumFractionDigits: 2,
                                 })}
                             </span>
                             <span
-                                className="px-3 py-1.5 rounded-full text-xs font-semibold"
+                                className="px-3 py-1 rounded-full text-[10px] font-bold"
                                 style={{
                                     background: `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
                                     color: "white",
@@ -767,62 +778,63 @@ export default function ConnectCard() {
                                 {currencyCode}
                             </span>
                         </div>
+                    </div>
 
-                        <button
-                            onClick={() => setCurrentScreen("deposit")}
-                            className="group relative flex w-full items-center justify-between overflow-hidden rounded-xl border px-4 py-3 text-sm font-semibold text-white transition-all active:scale-[0.98]"
-                            style={{
-                                background: `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
-                                borderColor: themeColor,
-                                boxShadow: `0 4px 14px 0 ${themeColor}40`,
-                            }}
+                    {/* Deposit Button */}
+                    <button
+                        onClick={() => setCurrentScreen("deposit")}
+                        className="group relative flex w-full items-center justify-between overflow-hidden rounded-xl px-5 py-3 text-sm font-bold text-white transition-all active:scale-[0.98] shrink-0"
+                        style={{
+                            background: `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
+                            boxShadow: `0 4px 14px 0 ${themeColor}40`,
+                        }}
+                    >
+                        <span>Depositar fondos</span>
+                        <svg
+                            className="h-4 w-4"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2}
                         >
-                            <span className="relative z-10 flex items-center justify-center gap-2">
-                                Depositar fondos
-                                <svg
-                                    className="h-4 w-4"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    strokeWidth={2}
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M9 5l7 7-7 7"
-                                    />
-                                </svg>
-                            </span>
-                        </button>
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M9 5l7 7-7 7"
+                            />
+                        </svg>
+                    </button>
 
-                        <div
-                            className="rounded-t-xl p-4 mt-auto"
-                            style={{
-                                background: `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
-                            }}
-                        >
-                            <div className="flex flex-col items-center space-y-2">
-                                <svg
-                                    className="h-5 w-5"
-                                    style={{ color: "white" }}
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    strokeWidth={2}
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M5 15l7-7 7 7"
-                                    />
-                                </svg>
-                                <h3 className="text-lg font-bold uppercase" style={{ color: "white" }}>
-                                    {selectedBank?.name || "BBVA"}
-                                </h3>
-                                <p className="text-xs" style={{ color: "white", opacity: 0.9 }}>
-                                    Banco conectado
-                                </p>
-                            </div>
+                    {/* Bank Card (Bottom) - Flex fill to visually anchor bottom */}
+                    <div className="flex-1 min-h-[20px]" />
+
+                    <div
+                        className="rounded-t-3xl pt-6 pb-8 px-8 -mx-6 shrink-0"
+                        style={{
+                            background: `linear-gradient(to bottom, ${themeColor} 0%, ${blackColor} 100%)`,
+                        }}
+                    >
+                        <div className="flex flex-col items-center justify-center space-y-2">
+                            <svg
+                                className="h-5 w-5 mb-0.5"
+                                style={{ color: "white" }}
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth={2.5}
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M5 15l7-7 7 7"
+                                />
+                            </svg>
+                            <h3 className="text-lg font-bold uppercase tracking-wide" style={{ color: "white" }}>
+                                {selectedBank?.name || "BBVA MÉXICO"}
+                            </h3>
+                            <p className="text-xs font-medium" style={{ color: "white", opacity: 0.8 }}>
+                                Banco conectado
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -871,7 +883,7 @@ export default function ConnectCard() {
             <div className="flex h-full flex-col overflow-y-auto relative">
                 <div className="relative flex-shrink-0 z-0 mb-2 flex justify-center">
                     <img
-                        src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+                        src="/ANIMACION%201.gif"
                         alt="Deposit Animation"
                         className="h-48 w-48 object-contain opacity-90"
                     />

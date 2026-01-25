@@ -270,7 +270,7 @@ export default function TxCard() {
                     {/* GIF */}
                     <div className="px-6 pt-2 flex-shrink-0">
                         <img
-                            src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+                            src="/ANIMACION%201.gif"
                             alt="Animación"
                             className="w-full h-auto object-contain"
                         />
@@ -386,7 +386,7 @@ export default function TxCard() {
                 {/* GIF in background */}
                 <div className="absolute inset-0 z-0 pt-2">
                     <img
-                        src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+                        src="/ANIMACION%201.gif"
                         alt="Animación"
                         className="w-full h-auto object-contain"
                     />
@@ -477,7 +477,7 @@ export default function TxCard() {
                 {/* GIF in background */}
                 <div className="absolute inset-0 z-0 px-6 pt-2">
                     <img
-                        src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+                        src="/ANIMACION%201.gif"
                         alt="Animación"
                         className="w-full h-auto object-contain"
                     />

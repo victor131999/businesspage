@@ -471,7 +471,7 @@ export default function AlaizaCard() {
                 {/* GIF Animation */}
                 <div className="relative -mb-16 flex-shrink-0 z-0 flex justify-center">
                     <img
-                        src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+                        src="/ANIMACION%201.gif"
                         alt="Connecting Animation"
                         className="h-48 w-48 object-contain opacity-90"
                     />
