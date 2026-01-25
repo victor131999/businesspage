@@ -32,7 +32,7 @@ const {
 
     <div class="simple-navbar__links">
       {
-        navItems.map((item) => {
+        navItems.map((item, index) => {
           // Si es "Producto", hacer que abra el panel en lugar de navegar
           if (item.label.toLowerCase() === "producto" || item.label.toLowerCase() === "productos") {
             return (
@@ -40,13 +40,30 @@ const {
                 class="simple-navbar__link simple-navbar__link--button" 
                 type="button"
                 data-products-trigger
+                data-i18n="navbar.products"
+                data-nav-index={index}
               >
                 {item.label}
               </button>
             );
           }
+          // Mapear otros items a sus keys de traducción
+          let i18nKey = "";
+          if (item.label.toLowerCase() === "nosotros") {
+            i18nKey = "navbar.about";
+          } else if (item.label.toLowerCase() === "desarrollo") {
+            i18nKey = "navbar.developers";
+          } else if (item.label.toLowerCase() === "otros") {
+            i18nKey = "navbar.others";
+          }
+          
           return (
-            <a class="simple-navbar__link" href={item.href}>
+            <a 
+              class="simple-navbar__link" 
+              href={item.href}
+              data-i18n={i18nKey || undefined}
+              data-nav-index={index}
+            >
               {item.label}
             </a>
           );
@@ -55,12 +72,13 @@ const {
     </div>
 
     <div class="simple-navbar__actions">
-      <a class="simple-navbar__demo" href={demoHref}>demo</a>
+      <a class="simple-navbar__demo" href={demoHref} data-i18n="navbar.demo">demo</a>
       <button
         class="simple-navbar__lang"
         type="button"
         data-lang={initialLang.toUpperCase() === "EN" ? "EN" : "ES"}
         aria-label="Cambiar idioma"
+        data-i18n-aria-label="navbar.changeLanguage"
       >
         <span class="simple-navbar__lang-text"
           >{initialLang.toUpperCase() === "EN" ? "EN" : "ES"}</span
@@ -203,6 +221,48 @@ const {
 </style>
 
 <script is:inline>
+  // Traducciones del navbar
+  const navbarTranslations = {
+    en: {
+      "navbar.products": "Products",
+      "navbar.about": "About us",
+      "navbar.developers": "Developers",
+      "navbar.others": "Others",
+      "navbar.demo": "demo",
+      "navbar.changeLanguage": "Change language",
+    },
+    es: {
+      "navbar.products": "Producto",
+      "navbar.about": "Nosotros",
+      "navbar.developers": "Desarrollo",
+      "navbar.others": "Otros",
+      "navbar.demo": "demo",
+      "navbar.changeLanguage": "Cambiar idioma",
+    }
+  };
+
+  // Función para aplicar traducciones del navbar
+  function applyNavbarTranslations(lang = "es") {
+    const langKey = lang.toLowerCase();
+    const translations = navbarTranslations[langKey] || navbarTranslations.es;
+
+    // Actualizar elementos con data-i18n
+    document.querySelectorAll('.simple-navbar [data-i18n]').forEach(element => {
+      const key = element.getAttribute('data-i18n');
+      if (key && translations[key]) {
+        element.textContent = translations[key];
+      }
+    });
+
+    // Actualizar aria-labels
+    document.querySelectorAll('.simple-navbar [data-i18n-aria-label]').forEach(element => {
+      const key = element.getAttribute('data-i18n-aria-label');
+      if (key && translations[key]) {
+        element.setAttribute('aria-label', translations[key]);
+      }
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     // Language toggle logic
     const button = document.querySelector(".simple-navbar__lang");
@@ -212,12 +272,49 @@ const {
       const setLang = (lang) => {
         button.dataset.lang = lang;
         if (label) label.textContent = lang;
+        
+        // Aplicar traducciones del navbar
+        applyNavbarTranslations(lang);
+        
+        // Disparar evento de cambio de idioma con bubbles para que se propague
+        const event = new CustomEvent("ui:languagechange", {
+          detail: { language: lang },
+          bubbles: true,
+          cancelable: true
+        });
+        window.dispatchEvent(event);
+        document.dispatchEvent(event);
+        
+        // Guardar en localStorage
+        try {
+          localStorage.setItem("ui-language", lang);
+        } catch (error) {
+          console.warn("Unable to persist language preference.", error);
+        }
       };
-      setLang(getLang());
+      
+      // Cargar idioma guardado
+      try {
+        const stored = localStorage.getItem("ui-language");
+        if (stored && (stored === "EN" || stored === "ES")) {
+          setLang(stored);
+        } else {
+          setLang(getLang());
+        }
+      } catch (error) {
+        setLang(getLang());
+      }
+      
       button.addEventListener("click", () => {
         setLang(getLang() === "EN" ? "ES" : "EN");
       });
     }
+
+    // Escuchar cambios de idioma desde otros componentes
+    window.addEventListener("ui:languagechange", (event) => {
+      const lang = event.detail?.language || "ES";
+      applyNavbarTranslations(lang);
+    }, true);
 
     // Scroll hide/show logic
     const navbar = document.querySelector(".simple-navbar");
