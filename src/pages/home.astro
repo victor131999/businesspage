@@ -6,8 +6,7 @@ import IdentityProd from "../components/product-cards/identity-prod.astro";
 import AmlProd from "../components/product-cards/aml-prod.astro";
 import ConnectProd from "../components/product-cards/connect-prod.astro";
 import CardsProd from "../components/product-cards/cards-prod.astro";
-import PaymentsProd from "../components/product-cards/payments-prod.astro";
-import TransfersProd from "../components/product-cards/transfers-prod.astro";
+import PaymentsTransfersProd from "../components/product-cards/payments-prod.astro";
 import TxProd from "../components/product-cards/tx-prod.astro";
 import DiscountsProd from "../components/product-cards/discounts-prod.astro";
 import AlaizaProd from "../components/product-cards/alaiza-prod.astro";
@@ -78,22 +77,13 @@ const modulesList = [
     href: "/cardIssuing",
   },
   {
-    id: "payments",
-    label: "Payments",
-    eyebrow: "Acquiring",
-    title: "Procesamiento de Pagos",
-    copy: "Aceptación y procesamiento de pagos. Múltiples métodos de pago integrados.",
-    cta: "Ver Payments",
+    id: "payments-transfers",
+    label: "Pago y Transferencias",
+    eyebrow: "Payments & Money Movement",
+    title: "Pago y Transferencias",
+    copy: "Aceptación y procesamiento de pagos, y movimiento de dinero entre cuentas. Múltiples métodos de pago integrados y transferencias rápidas y seguras.",
+    cta: "Ver Pago y Transferencias",
     href: "/payments",
-  },
-  {
-    id: "transfers",
-    label: "Transfers",
-    eyebrow: "Money Movement",
-    title: "Transferencias",
-    copy: "Movimiento de dinero entre cuentas. Transferencias rápidas y seguras localmente.",
-    cta: "Ver Transfers",
-    href: "/moneyTransfers",
   },
   {
     id: "tx",
@@ -141,8 +131,7 @@ const modulesList = [
         aml: { name: string; desc: string };
         connect: { name: string; desc: string };
         cards: { name: string; desc: string };
-        payments: { name: string; desc: string };
-        transfers: { name: string; desc: string };
+        "payments-transfers": { name: string; desc: string };
         tx: { name: string; desc: string };
         discounts: { name: string; desc: string };
       };
@@ -220,13 +209,9 @@ const modulesList = [
             desc: "Secure connection to bank accounts.",
           },
           cards: { name: "Cards", desc: "Card issuance and processing." },
-          payments: {
-            name: "Payments",
-            desc: "Payment acceptance and processing.",
-          },
-          transfers: {
-            name: "Transfers",
-            desc: "Money movement between accounts.",
+          "payments-transfers": {
+            name: "Payments & Transfers",
+            desc: "Payment acceptance, processing and money movement between accounts.",
           },
           tx: { name: "Tx", desc: "Transaction management and traceability." },
           discounts: {
@@ -327,13 +312,9 @@ const modulesList = [
             name: "Cards",
             desc: "Emisión y procesamiento de tarjetas.",
           },
-          payments: {
-            name: "Payments",
-            desc: "Aceptación y procesamiento de pagos.",
-          },
-          transfers: {
-            name: "Transfers",
-            desc: "Movimiento de dinero entre cuentas.",
+          "payments-transfers": {
+            name: "Pago y Transferencias",
+            desc: "Aceptación y procesamiento de pagos, y movimiento de dinero entre cuentas.",
           },
           tx: { name: "Tx", desc: "Gestión y trazabilidad de transacciones." },
           discounts: {
@@ -401,7 +382,7 @@ const modulesList = [
         apis: "APIs",
       },
     },
-  };
+  } as const satisfies { en: DemoTranslations; es: DemoTranslations };
 
   function updateContent(rawLang: string) {
     const lang = rawLang.toLowerCase() as "en" | "es";
@@ -429,8 +410,7 @@ const modulesList = [
         "aml",
         "connect",
         "cards",
-        "payments",
-        "transfers",
+        "payments-transfers",
         "tx",
         "discounts",
       ];
@@ -450,8 +430,7 @@ const modulesList = [
         "aml",
         "connect",
         "cards",
-        "payments",
-        "transfers",
+        "payments-transfers",
         "tx",
         "discounts",
       ];
@@ -643,17 +622,10 @@ const modulesList = [
             </div>
             <div
               class="product-card-wrapper"
-              data-card-id="payments"
+              data-card-id="payments-transfers"
               style="display: none;"
             >
-              <PaymentsProd />
-            </div>
-            <div
-              class="product-card-wrapper"
-              data-card-id="transfers"
-              style="display: none;"
-            >
-              <TransfersProd />
+              <PaymentsTransfersProd />
             </div>
             <div
               class="product-card-wrapper"
@@ -973,11 +945,8 @@ const modulesList = [
         <button class="action-nav-button" data-action="identity"
           >Identity</button
         >
-        <button class="action-nav-button" data-action="payments"
-          >Payments</button
-        >
-        <button class="action-nav-button" data-action="transfers"
-          >Transfers</button
+        <button class="action-nav-button" data-action="payments-transfers"
+          >Pago y Transferencias</button
         >
       </div>
     </div>
@@ -2662,7 +2631,7 @@ const modulesList = [
 
     if (playBtn && playIcon && pauseIcon) {
       // Visual toggle logic
-      const setPlaying = (isPlaying) => {
+      const setPlaying = (isPlaying: boolean) => {
         isDemoPlaying = isPlaying;
         if (isPlaying) {
           playIcon.style.display = "none";
