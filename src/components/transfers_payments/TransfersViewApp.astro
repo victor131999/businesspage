@@ -76,7 +76,10 @@
       onclick="window.tvToggleHistory(true)"
     >
       <!-- Compact View Content -->
-      <div class="tv-sheet-header-compact">
+      <div
+        class="tv-sheet-header-compact"
+        onclick="window.tvToggleHistory(true)"
+      >
         <div class="tv-sheet-handle-icon">
           <svg
             width="24"
@@ -91,7 +94,7 @@
             <path d="M18 15l-6-6-6 6"></path>
           </svg>
         </div>
-        <span class="tv-sheet-title-text">Latest transfers</span>
+        <span class="tv-sheet-title-text">Recent transfers</span>
       </div>
 
       <!-- Expanded View Content -->
@@ -114,8 +117,8 @@
               <path d="M6 9l6 6 6-6"></path>
             </svg>
           </div>
-          <span class="tv-sheet-subtitle">History</span>
-          <h2 class="tv-sheet-main-title">Latest transfers</h2>
+          <span class="tv-sheet-subtitle">Historial</span>
+          <h2 class="tv-sheet-main-title">Recent transfers</h2>
         </div>
 
         <div class="tv-history-list">
@@ -443,9 +446,9 @@
           stroke="currentColor"
         >
           <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2.5"
             d="M15 19l-7-7 7-7"></path>
         </svg>
         <span>Atrás</span>
@@ -668,8 +671,8 @@
       <!-- Layer 2: Transaction Details Bottom Sheet (Separate, Overlay) -->
       <div
         id="tv-details-sheet"
-        class="absolute inset-x-0 bottom-0 bg-[#e0e7ff] rounded-t-[2rem] shadow-[0_-5px_30px_rgba(0,0,0,0.15)] z-20 transition-all duration-500 cubic-bezier(0.32, 0.725, 0.25, 1) flex flex-col overflow-hidden"
-        style="height: 70px;"
+        class="absolute inset-x-0 bottom-0 rounded-t-[2rem] shadow-[0_-5px_30px_rgba(0,0,0,0.15)] z-20 transition-all duration-500 cubic-bezier(0.32, 0.725, 0.25, 1) flex flex-col overflow-hidden"
+        style="height: 70px; background-color: rgba(255, 255, 255, 0.5); backdrop-filter: blur(4px);"
       >
         <!-- Handle Area -->
         <div
@@ -934,15 +937,18 @@
   }
 
   /* Bottom Sheet (Expandable) */
+  /* Bottom Sheet (Expandable) */
   .tv-bottom-sheet {
     background: linear-gradient(to bottom, #000b1e, #044a95);
-    width: 100%; /* Match container width */
+    width: 85%; /* Reduced width */
+    max-width: 400px;
     height: 70px; /* Initial compact height */
-    border-radius: 28px 28px 0 0;
-    margin: 0; /* Remove negative margins that were causing offset */
+    border-radius: 40px; /* Pill shape */
+    margin: 0 auto; /* Center horizontally */
     position: absolute; /* Fixed at bottom of screen container */
-    bottom: 0px;
-    left: 0; /* Align left */
+    bottom: 24px; /* Floating from bottom */
+    left: 0;
+    right: 0;
     display: flex;
     flex-direction: column;
     transition: all 0.5s cubic-bezier(0.32, 0.725, 0.25, 1); /* Smooth spring-like expansion */
@@ -954,9 +960,12 @@
   /* Active/Expanded State via class */
   .tv-bottom-sheet.expanded {
     height: 94%; /* Covers most of screen as requested */
-    background: rgba(235, 239, 245, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    width: 100%; /* Full width when expanded */
+    max-width: 100%;
+    bottom: 0; /* Attached to bottom */
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
     color: #0f172a; /* Dark text */
     border-radius: 32px 32px 0 0;
     box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.1);
@@ -987,7 +996,7 @@
   }
 
   .tv-sheet-handle-icon.down {
-    color: white;
+    color: #94a3b8;
     margin-bottom: 8px;
   }
 
@@ -1017,22 +1026,23 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: linear-gradient(to bottom, #000b1e, #044a95);
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(4px);
     flex-shrink: 0;
     cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: none;
   }
 
   .tv-sheet-subtitle {
     font-size: 13px;
-    color: rgba(255, 255, 255, 0.7);
+    color: #64748b;
     margin-bottom: 2px;
   }
 
   .tv-sheet-main-title {
     font-size: 20px;
     font-weight: 700;
-    color: white;
+    color: #2b5bf7;
     margin: 0;
   }
 
@@ -1043,6 +1053,8 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(4px);
   }
 
   .tv-history-item {
@@ -1109,8 +1121,8 @@
 
   .tv-blur-content {
     flex: 1;
-    background: rgba(248, 250, 252, 0.8);
-    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(20px);
     border-radius: 24px 24px 0 0;
     margin: 0 -24px;
     padding: 24px;
@@ -1505,7 +1517,7 @@
 
   // 4. Success Details Toggle
   window.toggleSuccessDetails = () => {
-    const card = document.getElementById("tv-details-card");
+    const card = document.getElementById("tv-details-sheet");
     if (!card) return;
 
     // Check if expanded based on height style or class
@@ -1514,15 +1526,15 @@
 
     if (isExpanded) {
       card.classList.remove("expanded");
-      card.style.height = "280px";
+      card.style.height = "70px";
       // Rotate chevron back
-      const svg = card.querySelector("svg");
+      const svg = document.getElementById("tv-details-chevron");
       if (svg) svg.style.transform = "rotate(0deg)";
     } else {
       card.classList.add("expanded");
       card.style.height = "90%"; // Expand to almost full height
       // Rotate chevron
-      const svg = card.querySelector("svg");
+      const svg = document.getElementById("tv-details-chevron");
       if (svg) svg.style.transform = "rotate(180deg)";
     }
   };
