@@ -283,11 +283,10 @@ export default function DiscountsCard() {
             return (
                 <div
                     onClick={() => !isActive && setSelectedPlan(planKey)}
-                    className={`rounded-[2rem] transition-all duration-500 ease-in-out relative overflow-hidden flex flex-col items-center shrink-0 cursor-pointer ${
-                        isActive
-                            ? "w-[90%] h-[180px] border-[9px] border-white shadow-[0_0_20px_rgba(255,255,255,0.6)] z-10 py-6"
-                            : "w-[85%] h-[70px] z-0 justify-center"
-                    }`}
+                    className={`rounded-[2rem] transition-all duration-500 ease-in-out relative overflow-hidden flex flex-col items-center shrink-0 cursor-pointer ${isActive
+                        ? "w-[90%] h-[180px] border-[9px] border-white shadow-[0_0_20px_rgba(255,255,255,0.6)] z-10 py-6"
+                        : "w-[85%] h-[70px] z-0 justify-center"
+                        }`}
                     style={{
                         background: isActive
                             ? gradientStyle
@@ -331,9 +330,9 @@ export default function DiscountsCard() {
                     </p>
                 </div>
 
-                <div className="relative w-40 h-40 flex items-center justify-center mt-8 mb-[-50px] shrink-0 z-0">
+                <div className="relative w-40 h-40 flex items-center justify-center mt-8 mb-[-50px] shrink-0 z-0 mx-auto">
                     <img
-                        src="/ANIMACION%201.gif"
+                        src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
                         alt="Animación"
                         className="w-full h-full object-contain opacity-80"
                     />
@@ -361,6 +360,10 @@ export default function DiscountsCard() {
     // Step 2: Basic Information
     const renderStep2 = () => (
         <div className="flex flex-col h-full bg-white relative overflow-hidden">
+            <div
+                className="absolute inset-0 pointer-events-none z-0"
+                style={{ background: "linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.35) 100%)" }}
+            />
             {renderHeader(true)}
 
             <div className="flex-1 flex flex-col items-center pt-4 px-2 pb-12 z-10 min-h-0">
@@ -568,6 +571,10 @@ export default function DiscountsCard() {
     // Step 5: Business Description
     const renderStep5 = () => (
         <div className="flex flex-col h-full bg-white relative overflow-hidden">
+            <div
+                className="absolute inset-0 pointer-events-none z-0"
+                style={{ background: "linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.35) 100%)" }}
+            />
             {renderHeader(true)}
 
             <div className="absolute top-10 left-0 right-0 flex justify-center z-0">
@@ -608,6 +615,10 @@ export default function DiscountsCard() {
     // Step 6: Category Detection
     const renderStep6 = () => (
         <div className="flex flex-col h-full bg-white relative overflow-hidden">
+            <div
+                className="absolute inset-0 pointer-events-none z-0"
+                style={{ background: "linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.35) 100%)" }}
+            />
             {renderHeader(true)}
 
             <div className="absolute top-10 left-0 right-0 flex justify-center z-0">
@@ -658,6 +669,10 @@ export default function DiscountsCard() {
     // Step 7: Create Promo Inputs
     const renderStep7 = () => (
         <div className="flex flex-col h-full bg-white relative overflow-hidden">
+            <div
+                className="absolute inset-0 pointer-events-none z-0"
+                style={{ background: "linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.35) 100%)" }}
+            />
             {renderHeader(true)}
 
             <div className="absolute top-10 left-0 right-0 flex justify-center z-0">
@@ -728,11 +743,10 @@ export default function DiscountsCard() {
                     <div
                         key={i}
                         onClick={() => setActivePromoIndex(i)}
-                        className={`absolute left-0 right-0 mx-auto transition-all duration-500 ease-out cursor-pointer flex flex-col justify-center ${
-                            isActive
-                                ? "w-[95%] h-[110px] rounded-[2rem] border-[6px] border-white shadow-[0_0_25px_rgba(255,255,255,0.6)]"
-                                : "w-[100%] h-[80px] rounded-[2rem]"
-                        }`}
+                        className={`absolute left-0 right-0 mx-auto transition-all duration-500 ease-out cursor-pointer flex flex-col justify-center ${isActive
+                            ? "w-[95%] h-[110px] rounded-[2rem] border-[6px] border-white shadow-[0_0_25px_rgba(255,255,255,0.6)]"
+                            : "w-[100%] h-[80px] rounded-[2rem]"
+                            }`}
                         style={{
                             top: "50%",
                             transform: `translateY(calc(-50% + ${translateY}px)) scale(${scale})`,
@@ -788,10 +802,18 @@ export default function DiscountsCard() {
             <div className="flex flex-col h-full bg-white relative overflow-hidden">
                 {renderHeader(true)}
 
+                {/* Gradient Layer */}
+                <div className="absolute top-[30%] left-0 right-0 bottom-0 pointer-events-none z-0">
+                    <div
+                        className="relative z-10 w-full h-full overflow-hidden rounded-2xl p-5 backdrop-blur-sm flex flex-col pt-4"
+                        style={{ background: "linear-gradient(to bottom, rgba(255, 255, 255, 0.35) 20%, rgba(255,255,255,0.9) 45%, #ffffff 60%)" }}
+                    />
+                </div>
+
                 <div className="flex-1 flex flex-col items-center relative z-10 min-h-0 pt-4">
                     <div className="relative w-64 h-64 flex items-center justify-center shrink min-h-[120px] -mb-16 z-0">
                         <img
-                            src="/ANIMACION%201.gif"
+                            src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
                             alt="Animación"
                             className="w-full h-full object-contain opacity-80"
                         />
@@ -822,6 +844,10 @@ export default function DiscountsCard() {
     // Step 9: Configure Promo
     const renderStep9 = () => (
         <div className="flex flex-col h-full bg-white relative overflow-hidden">
+            <div
+                className="absolute inset-0 pointer-events-none z-0"
+                style={{ background: "linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.35) 100%)" }}
+            />
             {renderHeader(true)}
             <div className="flex-1 flex flex-col items-center justify-center px-6 pt-2 pb-6 z-10 min-h-0">
                 <div
