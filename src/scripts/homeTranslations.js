@@ -2,9 +2,9 @@
 export const homeTranslations = {
   en: {
     // Welcome Section
-    "home.welcome.title.line1": "Build the bank of the future, in one integration.",
+    "home.welcome.title.line1": "Build the bank of <br/> the future, in one integration.",
     "home.welcome.title.line2": "Powered by AI.",
-    "home.welcome.subtitle": "We digitize services for financial institutions, building neobank stacks with a single line of code",
+    "home.welcome.subtitle": "We digitize services for financial institutions,<br />building neobank stacks with a single line of code",
     "home.welcome.email.placeholder": "Enter your email",
     "home.welcome.email.aria": "Enter your email",
     "home.welcome.quote": "quote",
@@ -40,9 +40,9 @@ export const homeTranslations = {
   },
   es: {
     // Welcome Section
-    "home.welcome.title.line1": "Construye la banca del futuro, en una integración.",
+    "home.welcome.title.line1": "Construye la banca del <br/> futuro, en una integración.",
     "home.welcome.title.line2": "Potenciada por IA.",
-    "home.welcome.subtitle": "Digitalizamos servicios a instituciones financieras, construyendo stacks neobancarios con una sola línea de código",
+    "home.welcome.subtitle": "Digitalizamos servicios a instituciones financieras,<br />construyendo stacks neobancarios con una sola línea de código",
     "home.welcome.email.placeholder": "ingresa tu correo",
     "home.welcome.email.aria": "Ingresa tu correo",
     "home.welcome.quote": "cotizar",
@@ -76,16 +76,16 @@ export const homeTranslations = {
 export function applyHomeTranslations(lang = "es") {
   const langKey = lang.toLowerCase();
   const translations = homeTranslations[langKey] || homeTranslations.es;
-  
+
   // Actualizar elementos con data-i18n
   const elements = document.querySelectorAll('[data-i18n]');
-  
+
   elements.forEach(element => {
     const key = element.getAttribute('data-i18n');
     if (!key || !translations[key]) {
       return;
     }
-    
+
     // Para títulos con múltiples líneas (welcome-title)
     if (element.classList.contains('welcome-title')) {
       const line1Key = 'home.welcome.title.line1';
@@ -110,7 +110,7 @@ export function applyHomeTranslations(lang = "es") {
     }
     // Para contenido normal
     else {
-      element.textContent = translations[key];
+      element.innerHTML = translations[key];
     }
   });
 

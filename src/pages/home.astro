@@ -36,80 +36,81 @@ const modulesList = [
   {
     id: "auth",
     label: "Auth",
-    eyebrow: "Security",
-    title: "Autenticación y Control",
+    titleStrong: "Autenticación",
+    titleAccent: "y Control",
     copy: "Autenticación y control de acceso de usuarios. Protege el acceso y gestiona identidades de forma segura.",
-    cta: "Ver Auth",
+    cta: "Explorar Auth",
     href: "/auth",
   },
   {
     id: "identity",
     label: "Identity",
-    eyebrow: "Verification",
-    title: "Identidad Digital",
+    titleStrong: "Identidad Digital",
+    titleAccent: "",
     copy: "Gestión y validación de identidad digital. Verifica usuarios con biometría y análisis de documentos.",
-    cta: "Ver Identity",
+    cta: "Explorar Identity",
     href: "/identity",
   },
   {
     id: "aml",
     label: "AML",
-    eyebrow: "Compliance",
-    title: "Prevención de Lavado",
+    titleStrong: "Prevención de Lavado",
+    titleAccent: "",
     copy: "Evaluación de riesgo y cumplimiento regulatorio. Monitoreo continuo y listas de control.",
-    cta: "Ver AML",
+    cta: "Explorar AML",
     href: "/amlCompliance",
   },
   {
     id: "connect",
     label: "Connect",
-    eyebrow: "Open Banking",
-    title: "Conexión Bancaria",
+    titleStrong: "Conexión Bancaria",
+    titleAccent: "",
     copy: "Conexión segura a cuentas bancarias. Accede a información financiera y facilita pagos.",
-    cta: "Ver Connect",
+    cta: "Explorar Connect",
     href: "/openBankingConnect",
   },
   {
     id: "cards",
     label: "Cards",
-    eyebrow: "Issuing",
-    title: "Emisión de Tarjetas",
+    titleStrong: "Emisión de Tarjetas",
+    titleAccent: "",
     copy: "Emisión y procesamiento de tarjetas. Crea programas de tarjetas físicas y virtuales.",
-    cta: "Ver Cards",
+    cta: "Explorar Cards",
     href: "/cardIssuing",
   },
   {
     id: "payments-transfers",
     label: "Pago y Transferencias",
-    eyebrow: "Payments & Money Movement",
-    title: "Pago y Transferencias",
+    titleStrong:
+      'Pagos <span class="title-light">de servicios</span> <br /> y transferencias',
+    titleAccent: "",
     copy: "Aceptación y procesamiento de pagos, y movimiento de dinero entre cuentas. Múltiples métodos de pago integrados y transferencias rápidas y seguras.",
-    cta: "Ver Pago y Transferencias",
+    cta: "Explorar Pago y Transferencias",
     href: "/payments",
   },
   {
     id: "tx",
     label: "TX",
-    eyebrow: "Global",
-    title: "Transacciones Internacionales",
+    titleStrong: "Transacciones Internacionales",
+    titleAccent: "",
     copy: "Gestión y trazabilidad de transacciones transfronterizas y conversión de divisas.",
-    cta: "Ver TX",
+    cta: "Explorar TX",
     href: "/transactions",
   },
   {
     id: "discounts",
     label: "Discounts",
-    eyebrow: "Loyalty",
-    title: "Descuentos y Beneficios",
+    titleStrong: "Descuentos y Beneficios",
+    titleAccent: "",
     copy: "Reglas de beneficios y promociones. Gestiona campañas de lealtad y cupones.",
-    cta: "Ver Discounts",
+    cta: "Explorar Discounts",
     href: "/discountsCoupons",
   },
   {
     id: "alaiza",
     label: "Alaiza Fintech AI Core",
-    eyebrow: "Intelligence",
-    title: "IA Financiera",
+    titleStrong: "IA Financiera",
+    titleAccent: "",
     copy: "Inteligencia artificial para decisiones rápidas, prevención de fraudes y análisis de datos.",
     cta: "Explora Alaiza",
     href: "/matildaAI",
@@ -554,11 +555,13 @@ const modulesList = [
     <section class="welcome-section">
       <div class="welcome-content">
         <h1 class="welcome-title" data-i18n="home.welcome.title.line1">
-          Construye la banca del futuro, en una integración.
-          <span class="welcome-title-line" data-i18n="home.welcome.title.line2">Potenciada por IA.</span>
+          Construye la banca del <br />futuro, en una integración.
+          <span class="welcome-title-line" data-i18n="home.welcome.title.line2"
+            >Potenciada por IA.</span
+          >
         </h1>
         <p class="welcome-subtitle" data-i18n="home.welcome.subtitle">
-          Digitalizamos servicios a instituciones financieras, construyendo
+          Digitalizamos servicios a instituciones financieras,<br />construyendo
           stacks neobancarios con una sola línea de código
         </p>
         <div class="welcome-cta">
@@ -577,9 +580,17 @@ const modulesList = [
               data-i18n-placeholder="home.welcome.email.placeholder"
               data-i18n-aria="home.welcome.email.aria"
             />
-            <button class="welcome-quote-button" type="submit" data-i18n="home.welcome.quote">cotizar</button>
+            <button
+              class="welcome-quote-button"
+              type="submit"
+              data-i18n="home.welcome.quote">cotizar</button
+            >
           </form>
-          <a class="welcome-demo-button" href="/demo" data-i18n="home.welcome.demo">demo</a>
+          <a
+            class="welcome-demo-button"
+            href="/demo"
+            data-i18n="home.welcome.demo">demo</a
+          >
         </div>
       </div>
     </section>
@@ -703,11 +714,17 @@ const modulesList = [
                   <div class="product-showcase__panel" data-ps-panel>
                     <div class="product-showcase__panel-inner">
                       <div class="product-showcase__panel-left">
-                        <span class="product-showcase__eyebrow" data-ps-eyebrow>
-                          {module.eyebrow}
-                        </span>
                         <h2 class="product-showcase__title" data-ps-title>
-                          {module.title}
+                          <span
+                            class="title-strong"
+                            data-ps-title-strong
+                            set:html={module.titleStrong}
+                          />
+                          <span
+                            class="title-accent"
+                            data-ps-title-accent
+                            set:html={module.titleAccent}
+                          />
                         </h2>
                         <a
                           class="product-showcase__cta"
@@ -729,278 +746,365 @@ const modulesList = [
         </aside>
       </div>
     </section>
-  </body>
 
-  <section class="how-it-works-section">
-    <div class="how-it-works-content">
-      <div class="how-it-works-left">
-        <h2 class="how-it-works-title" data-i18n="home.how.title">¿Cómo Funciona Zelify?</h2>
-        <div class="how-it-works-separator"></div>
-        <p class="how-it-works-description" data-i18n="home.how.description">
-          Zelify integra en una sola plataforma digital: autenticación y
-          validación de identidad, cumplimiento AML, digitalización de cuentas,
-          emisión y procesamiento de tarjetas, transferencias locales e
-          internacionales, pagos múltiples, programas de descuentos y cupones.
-        </p>
-        <a href="/demo" class="how-it-works-demo-button" data-i18n="home.how.demo">demo</a>
-      </div>
-      <div class="how-it-works-right">
-        <div class="login-card">
-          <h3 class="login-card-title" data-i18n="home.how.login.title">Ingreso</h3>
-          <p class="login-card-subtitle" data-i18n="home.how.login.subtitle">Bienvenido de regreso</p>
-          <form class="login-form">
-            <div class="login-field">
-              <label for="email" data-i18n="home.how.login.email.label">Correo</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="email@example.com"
-                data-i18n-placeholder="home.how.login.email.placeholder"
-              />
+    <section class="how-it-works-section">
+      <div class="how-it-works-divider"></div>
+      <div class="how-it-works-content">
+        <div class="how-it-works-left">
+          <h2 class="how-it-works-title" data-i18n="home.how.title">
+            ¿Cómo <br /> Funciona <br /> Zelify?
+          </h2>
+          <p class="how-it-works-description" data-i18n="home.how.description">
+            Zelify integra en una sola plataforma digital: autenticación y
+            validación de identidad, cumplimiento AML, digitalización de
+            cuentas, emisión y procesamiento de tarjetas, transferencias locales
+            e internacionales, pagos múltiples, programas de descuentos y
+            cupones.
+          </p>
+          <a
+            href="/demo"
+            class="how-it-works-demo-button"
+            data-i18n="home.how.demo">demo</a
+          >
+        </div>
+        <div class="how-it-works-right">
+          <div class="right-bg-panel">
+            <div class="login-card">
+              <h3 class="login-card-title" data-i18n="home.how.login.title">
+                Ingreso
+              </h3>
+              <p
+                class="login-card-subtitle"
+                data-i18n="home.how.login.subtitle"
+              >
+                Bienvenido de regreso
+              </p>
+              <form class="login-form">
+                <div class="login-field">
+                  <label for="email" data-i18n="home.how.login.email.label"
+                    >Correo</label
+                  >
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="email@example.com"
+                    data-i18n-placeholder="home.how.login.email.placeholder"
+                  />
+                </div>
+                <div class="login-field">
+                  <label
+                    for="password"
+                    data-i18n="home.how.login.password.label">Contraseña</label
+                  >
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="••••••••"
+                    data-i18n-placeholder="home.how.login.password.placeholder"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  class="login-button"
+                  data-i18n="home.how.login.button"
+                >
+                  Ingresa
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M6 12L10 8L6 4"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"></path>
+                  </svg>
+                </button>
+              </form>
+              <p class="login-create-account" data-i18n="home.how.login.create">
+                O crea una nueva cuenta
+              </p>
             </div>
-            <div class="login-field">
-              <label for="password" data-i18n="home.how.login.password.label">Contraseña</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                placeholder="••••••••"
-                data-i18n-placeholder="home.how.login.password.placeholder"
-              />
-            </div>
-            <button type="submit" class="login-button" data-i18n="home.how.login.button">
-              Ingresa
+            <button
+              class="how-it-works-play-button"
+              type="button"
+              aria-label="Reproducir"
+            >
               <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path
-                  d="M6 12L10 8L6 4"
-                  stroke="white"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"></path>
+                <path d="M8 5V19L19 12L8 5Z" fill="#213f8c"></path>
               </svg>
             </button>
-          </form>
-          <p class="login-create-account" data-i18n="home.how.login.create">O crea una nueva cuenta</p>
-        </div>
-        <button
-          class="how-it-works-play-button"
-          type="button"
-          aria-label="Reproducir"
-        >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M8 5V19L19 12L8 5Z" fill="#213f8c"></path>
-          </svg>
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <section class="why-zelify-section">
-    <div class="why-zelify-content">
-      <div class="why-zelify-left">
-        <div class="ai-illustration-card">
-          <div class="ai-chip-container">
-            <div class="ai-chip">
-              <span class="ai-chip-text">AI</span>
-            </div>
-            <div class="ai-network-elements">
-              <div class="network-node"></div>
-              <div class="network-node"></div>
-              <div class="network-node"></div>
-              <div class="network-node"></div>
-            </div>
           </div>
-          <button
-            class="ai-illustration-play-button"
-            type="button"
-            aria-label="Reproducir"
-          >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+        </div>
+      </div>
+    </section>
+
+    <section class="why-zelify-section">
+      <div class="why-zelify-content">
+        <div class="why-zelify-left">
+          <div class="ai-illustration-card">
+            <div class="ai-chip-container">
+              <div class="ai-chip">
+                <span class="ai-chip-text">AI</span>
+              </div>
+              <div class="ai-network-elements">
+                <div class="network-node"></div>
+                <div class="network-node"></div>
+                <div class="network-node"></div>
+                <div class="network-node"></div>
+              </div>
+            </div>
+            <button
+              class="ai-illustration-play-button"
+              type="button"
+              aria-label="Reproducir"
             >
-              <path d="M8 5V19L19 12L8 5Z" fill="#213f8c"></path>
-            </svg>
-          </button>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M8 5V19L19 12L8 5Z" fill="#213f8c"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="why-zelify-right">
+          <h2 class="why-zelify-title" data-i18n="home.why.title">
+            Cada producto, potenciado por IA.
+          </h2>
+          <div class="why-zelify-separator"></div>
+          <p class="why-zelify-description" data-i18n="home.why.description">
+            Zelify integra en una sola plataforma digital: autenticación y
+            validación de identidad, cumplimiento AML, digitalización de
+            cuentas, emisión y procesamiento de tarjetas, transferencias locales
+            e internacionales, pagos múltiples, programas de descuentos y
+            cupones.
+          </p>
+          <a
+            href="/demo"
+            class="why-zelify-demo-button"
+            data-i18n="home.why.demo">demo</a
+          >
         </div>
       </div>
-      <div class="why-zelify-right">
-        <h2 class="why-zelify-title" data-i18n="home.why.title">Cada producto, potenciado por IA.</h2>
-        <div class="why-zelify-separator"></div>
-        <p class="why-zelify-description" data-i18n="home.why.description">
-          Zelify integra en una sola plataforma digital: autenticación y
-          validación de identidad, cumplimiento AML, digitalización de cuentas,
-          emisión y procesamiento de tarjetas, transferencias locales e
-          internacionales, pagos múltiples, programas de descuentos y cupones.
-        </p>
-        <a href="/demo" class="why-zelify-demo-button" data-i18n="home.why.demo">demo</a>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="bench-section">
-    <div class="bench-section-2-content">
-      <div class="bench-tabs">
-        <button class="bench-tab active" data-bench="1">Bench 1</button>
-        <button class="bench-tab" data-bench="2">Bench 2</button>
-        <button class="bench-tab" data-bench="3">Bench 3</button>
-        <button class="bench-tab" data-bench="4">Bench 4</button>
-      </div>
-
-      <div class="bench-content-area">
-        <div class="bench-content-placeholder" data-bench-content="1">
-          <!-- Contenido para Bench 1 -->
+    <section class="bench-section">
+      <div class="bench-section-2-content">
+        <div class="bench-tabs">
+          <button class="bench-tab active" data-bench="1">Bench 1</button>
+          <button class="bench-tab" data-bench="2">Bench 2</button>
+          <button class="bench-tab" data-bench="3">Bench 3</button>
+          <button class="bench-tab" data-bench="4">Bench 4</button>
         </div>
-        <div
-          class="bench-content-placeholder"
-          data-bench-content="2"
-          style="display: none;"
-        >
-          <!-- Contenido para Bench 2 -->
-        </div>
-        <div
-          class="bench-content-placeholder"
-          data-bench-content="3"
-          style="display: none;"
-        >
-          <!-- Contenido para Bench 3 -->
-        </div>
-        <div
-          class="bench-content-placeholder"
-          data-bench-content="4"
-          style="display: none;"
-        >
-          <!-- Contenido para Bench 4 -->
-        </div>
-      </div>
 
-      <div class="bench-text-content">
-        <h2 class="bench-title" data-i18n="home.bench.title">Paga solo lo que usas</h2>
-        <p class="bench-subtitle" data-i18n="home.bench.subtitle">
-          y escala sin fricción con los precios más bajos del mercado.
-        </p>
-      </div>
-
-      <div class="bench-cta">
-        <button class="bench-cta-button" data-i18n="home.bench.button">bench 1</button>
-      </div>
-    </div>
-  </section>
-
-  <section class="tokens-section">
-    <div class="tokens-container">
-      <div class="tokens-left">
-        <h2 class="tokens-title" data-i18n="home.tokens.title">Tokens</h2>
-        <p class="tokens-description" data-i18n="home.tokens.description">
-          Zelify integra en una sola plataforma digital: autenticación y
-          validación de identidad, cumplimiento AML, digitalización de cuentas,
-          emisión y procesamiento de tarjetas, transferencias locales e
-          internacionales, pagos múltiples, programas de descuentos y cupones.
-        </p>
-        <a href="/demo" class="tokens-demo-button" data-i18n="home.tokens.demo">demo</a>
-      </div>
-      <div class="tokens-right">
-        <div class="tokens-content-placeholder">
-          <TokensProd />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="action-products-section">
-    <div class="action-products-content">
-      <h2 class="action-products-title" data-i18n="home.action.products.title">Nuestros productos en acción</h2>
-
-      <div class="action-products-container">
-        <div class="action-products-card">
-          <div class="action-card-wrapper" data-action-card="auth">
-            <AuthProd />
+        <div class="bench-content-area">
+          <div class="bench-content-placeholder" data-bench-content="1">
+            <!-- Contenido para Bench 1 -->
+            <video
+              class="bench-video"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+            >
+              <source
+                src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/cards_bench_clip.mp4"
+                type="video/mp4"
+              />
+            </video>
           </div>
           <div
-            class="action-card-wrapper"
-            data-action-card="identity"
+            class="bench-content-placeholder"
+            data-bench-content="2"
             style="display: none;"
           >
-            <IdentityProd />
+            <!-- Contenido para Bench 2 -->
           </div>
           <div
-            class="action-card-wrapper"
-            data-action-card="aml"
+            class="bench-content-placeholder"
+            data-bench-content="3"
             style="display: none;"
           >
-            <AmlProd />
+            <!-- Contenido para Bench 3 -->
+          </div>
+          <div
+            class="bench-content-placeholder"
+            data-bench-content="4"
+            style="display: none;"
+          >
+            <!-- Contenido para Bench 4 -->
+          </div>
+        </div>
+
+        <div class="bench-text-content">
+          <h2 class="bench-title" data-i18n="home.bench.title">
+            Paga solo lo que usas
+          </h2>
+          <p class="bench-subtitle" data-i18n="home.bench.subtitle">
+            y escala sin fricción con los precios más bajos del mercado.
+          </p>
+        </div>
+
+        <div class="bench-cta">
+          <button class="bench-cta-button" data-i18n="home.bench.button"
+            >bench 1</button
+          >
+        </div>
+      </div>
+    </section>
+
+    <section class="tokens-section">
+      <div class="tokens-container">
+        <div class="tokens-left">
+          <h2 class="tokens-title" data-i18n="home.tokens.title">Tokens</h2>
+          <p class="tokens-description" data-i18n="home.tokens.description">
+            Zelify integra en una sola plataforma digital: autenticación y
+            validación de identidad, cumplimiento AML, digitalización de
+            cuentas, emisión y procesamiento de tarjetas, transferencias locales
+            e internacionales, pagos múltiples, programas de descuentos y
+            cupones.
+          </p>
+          <a
+            href="/demo"
+            class="tokens-demo-button"
+            data-i18n="home.tokens.demo">demo</a
+          >
+        </div>
+        <div class="tokens-right">
+          <div class="tokens-content-placeholder">
+            <TokensProd />
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="action-products-nav">
-        <button class="action-nav-button active" data-action="auth" data-i18n="home.action.products.auth">Auth</button
+    <section class="action-products-section">
+      <div class="action-products-content">
+        <h2
+          class="action-products-title"
+          data-i18n="home.action.products.title"
         >
-        <button class="action-nav-button" data-action="identity" data-i18n="home.action.products.identity"
-          >Identity</button
+          Nuestros productos en acción
+        </h2>
+
+        <div class="action-products-container">
+          <div class="action-products-card">
+            <div class="action-card-wrapper" data-action-card="auth">
+              <AuthProd />
+            </div>
+            <div
+              class="action-card-wrapper"
+              data-action-card="identity"
+              style="display: none;"
+            >
+              <IdentityProd />
+            </div>
+            <div
+              class="action-card-wrapper"
+              data-action-card="aml"
+              style="display: none;"
+            >
+              <AmlProd />
+            </div>
+          </div>
+        </div>
+
+        <div class="action-products-nav">
+          <button
+            class="action-nav-button active"
+            data-action="auth"
+            data-i18n="home.action.products.auth">Auth</button
+          >
+          <button
+            class="action-nav-button"
+            data-action="identity"
+            data-i18n="home.action.products.identity">Identity</button
+          >
+          <button
+            class="action-nav-button"
+            data-action="aml"
+            data-i18n="home.action.products.aml">AML</button
+          >
+        </div>
+      </div>
+    </section>
+
+    <section class="ai-section">
+      <div class="ai-section-content">
+        <h2 class="ai-section-title" data-i18n="home.ai.title.line1">
+          Construye la banca del futuro,<br />
+          potenciada por IA.
+        </h2>
+        <a href="/hablemos" class="ai-section-button" data-i18n="home.ai.quote"
+          >cotizar</a
         >
-        <button class="action-nav-button" data-action="aml" data-i18n="home.action.products.aml">AML</button>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="ai-section">
-    <div class="ai-section-content">
-      <h2 class="ai-section-title" data-i18n="home.ai.title.line1">
-        Construye la banca del futuro,<br />
-        potenciada por IA.
-      </h2>
-      <a href="/hablemos" class="ai-section-button" data-i18n="home.ai.quote">cotizar</a>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="demo-footer">
-    <div class="footer-container">
-      <div class="footer-top">
-        <div class="footer-logo">
-          <span class="logo-z">Z</span>
-          <span class="logo-text">Zelify</span>
+    <!-- Footer -->
+    <footer class="demo-footer">
+      <div class="footer-container">
+        <div class="footer-top">
+          <div class="footer-logo">
+            <span class="logo-z">Z</span>
+            <span class="logo-text">Zelify</span>
+          </div>
+          <div class="footer-quick-links">
+            <h4 class="quick-links-title" data-i18n="footer.quicklinks">
+              Quick links
+            </h4>
+            <ul class="quick-links-list">
+              <li><a href="/" data-i18n="footer.products">Products</a></li>
+              <li><a href="/" data-i18n="footer.about">About us</a></li>
+              <li>
+                <a href="https://docs.zelify.com" data-i18n="footer.developers"
+                  >Developers</a
+                >
+              </li>
+              <li><a href="/" data-i18n="footer.others">Others</a></li>
+            </ul>
+          </div>
         </div>
-        <div class="footer-quick-links">
-          <h4 class="quick-links-title" data-i18n="footer.quicklinks">Quick links</h4>
-          <ul class="quick-links-list">
-            <li><a href="/" data-i18n="footer.products">Products</a></li>
-            <li><a href="/" data-i18n="footer.about">About us</a></li>
-            <li><a href="https://docs.zelify.com" data-i18n="footer.developers">Developers</a></li>
-            <li><a href="/" data-i18n="footer.others">Others</a></li>
-          </ul>
+        <div class="footer-bottom">
+          <p class="footer-legal" data-i18n="footer.legal">
+            Zelify is a technology platform currently in a development phase,
+            not yet deployed or operational, and does not provide or process
+            financial services directly; all financial operations are conducted
+            exclusively through regulated third-party partners.
+          </p>
+          <p class="footer-copyright" data-i18n="footer.copyright">
+            © 2025 Zelify. All rights reserved.
+          </p>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p class="footer-legal" data-i18n="footer.legal">
-          Zelify is a technology platform currently in a development phase, not
-          yet deployed or operational, and does not provide or process financial
-          services directly; all financial operations are conducted exclusively
-          through regulated third-party partners.
-        </p>
-        <p class="footer-copyright" data-i18n="footer.copyright">© 2025 Zelify. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
+    </footer>
+  </body>
 
   <style>
+    @font-face {
+      font-family: "NataSans";
+      src: url("/fonts/Nata_Sans/NataSans-Light.ttf") format("truetype");
+      font-weight: 300;
+      font-display: swap;
+    }
+
     @font-face {
       font-family: "NataSans";
       src: url("/fonts/NataSans-VariableFont_wght.ttf") format("truetype");
@@ -1051,6 +1155,7 @@ const modulesList = [
       height: 100%;
       object-fit: cover;
       z-index: 0;
+      opacity: 0.15;
     }
 
     .product-showcase__overlay {
@@ -1073,7 +1178,7 @@ const modulesList = [
 
     /* Content wrapper sits above video */
     .product-showcase__grid {
-      width: min(1500px, 100%);
+      width: min(1300px, 100%);
       display: grid;
       grid-template-columns: 1fr;
       gap: 0;
@@ -1085,16 +1190,16 @@ const modulesList = [
     .product-showcase__overlay-card {
       position: absolute;
       left: 50%;
-      top: 40%;
-      height: 70%;
+      top: 35%;
+      height: 75%;
       transform: translate(-50%, -50%);
-      width: clamp(280px, 25vw, 380px);
+      width: clamp(320px, 40vw, 550px);
       background-color: #f3f4f6;
       border-radius: 24px;
       border: 1px solid rgba(0, 0, 0, 0.05);
       z-index: 10;
       pointer-events: auto;
-      padding: 1rem;
+      padding: 4rem 5rem 1rem; /* 3rem arriba, 2rem lados, 1rem abajo */
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -1166,9 +1271,15 @@ const modulesList = [
     }
 
     .product-showcase__item {
+      /* Default divider line for each item */
       border-bottom: 1px solid rgba(33, 63, 140, 0.25);
       position: relative;
       z-index: 1;
+    }
+
+    .product-showcase__item.is-active {
+      /* Active item underline (thicker + black) */
+      border-bottom: 3px solid #000;
     }
 
     .product-showcase__nav-item {
@@ -1177,7 +1288,7 @@ const modulesList = [
       background: transparent;
       border: none;
       font-size: 1.1rem;
-      padding: 1.2rem 0;
+      padding: 1rem 0;
       color: #213f8c;
       cursor: pointer;
       transition: color 0.2s ease;
@@ -1208,7 +1319,9 @@ const modulesList = [
     .product-showcase__item.is-active .product-showcase__panel {
       max-height: 500px;
       opacity: 1;
-      padding: 1.5rem 0 2rem;
+      padding: 1rem 0 2rem;
+      /* Allow CTA shadow/rounding to render without being clipped */
+      overflow: visible;
     }
 
     .product-showcase__panel-inner {
@@ -1230,14 +1343,6 @@ const modulesList = [
       z-index: 1;
     }
 
-    .product-showcase__eyebrow {
-      font-size: 0.85rem;
-      color: #213f8c;
-      display: block;
-      margin-bottom: 0.4rem;
-      font-weight: 500;
-    }
-
     .product-showcase__title {
       font-size: clamp(1.4rem, 2.5vw, 2rem);
       line-height: 1.25;
@@ -1248,14 +1353,46 @@ const modulesList = [
       word-wrap: break-word;
     }
 
+    .product-showcase__title .title-strong {
+      /* Title strong: set weight/size/color here */
+      font-weight: 700;
+      font-family: "NataSans";
+      font-size: 2rem;
+      color: #000000;
+    }
+
+    .product-showcase__title .title-strong :global(.title-light) {
+      /* Lighter weight for specific words inside title-strong */
+      font-family: "NataSans";
+      font-variation-settings: "wght" 300;
+      font-weight: 300 !important;
+    }
+
+    .product-showcase__title .title-accent {
+      /* Accent color/weight for the second part */
+      color: #004195;
+      font-weight: 500;
+    }
+
+    .product-showcase__title .title-accent:empty {
+      display: none;
+    }
+
+    .product-showcase__title .title-accent:empty {
+      display: none;
+    }
+
     .product-showcase__cta {
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      /* CTA size controls: tweak padding for overall size; add width/min-width if you want a fixed width */
       background: #93fb4d;
       color: #00223e;
       padding: 0.6rem 1.6rem;
-      border-radius: 999px;
+      /* Rounded corners (more squared than pill) */
+      border-radius: 12px;
+      min-height: 44px;
       text-decoration: none;
       font-weight: 600;
       font-size: 0.95rem;
@@ -1277,7 +1414,9 @@ const modulesList = [
       color: #00223e;
       text-align: right;
       justify-self: end;
-      max-width: 420px;
+      /* Push the copy closer to the bottom of the panel column */
+      align-self: end;
+      max-width: 300px;
       font-weight: 400;
       word-wrap: break-word;
       position: relative;
@@ -1285,6 +1424,7 @@ const modulesList = [
     }
 
     .welcome-section {
+      margin-top: 110px;
       padding: 6rem 1.5rem 4rem;
       display: flex;
       justify-content: center;
@@ -1300,7 +1440,7 @@ const modulesList = [
     .welcome-title {
       font-size: clamp(2.4rem, 4.6vw, 4.2rem);
       font-weight: 500;
-      line-height: 1.18;
+      line-height: 1.12;
       margin: 0 0 1.4rem;
       color: #00223e;
       letter-spacing: 0.01em;
@@ -1316,6 +1456,8 @@ const modulesList = [
       color: #213f8c;
       margin: 0 auto 2.6rem;
       max-width: 760px;
+      font-family: "NataSans";
+      font-weight: 300;
     }
 
     .welcome-cta {
@@ -1323,6 +1465,18 @@ const modulesList = [
       align-items: center;
       justify-content: center;
       gap: 1.25rem;
+    }
+
+    @media (max-width: 640px) {
+      .welcome-title {
+        line-height: 1.18;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .welcome-title {
+        line-height: 1.1;
+      }
     }
 
     .welcome-input-group {
@@ -1394,49 +1548,64 @@ const modulesList = [
 
     /* How It Works Section */
     .how-it-works-section {
-      padding: 6rem clamp(1rem, 5vw, 4rem);
-      background-color: #ffffff00;
+      padding: 3rem 2rem;
+      background-color: #ffffff;
       display: flex;
       justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .how-it-works-divider {
+      position: absolute;
+      top: 45%;
+      left: 0;
+      right: 0;
+      height: 1.5px;
+      background-color: #154091;
+      z-index: 1;
+      transform: translateY(-50%);
+      margin-left: 140px;
+      margin-right: 140px;
     }
 
     .how-it-works-content {
-      max-width: 1400px;
+      max-width: 1300px;
       width: 100%;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
+      grid-template-columns: 55% 45%;
+      gap: 2rem;
+      align-items: center;
       position: relative;
+      z-index: 2;
     }
 
     .how-it-works-left {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 2rem;
+      z-index: 2;
     }
 
     .how-it-works-title {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 600;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 400;
       color: #00223e;
       margin: 0;
-      line-height: 1.2;
-    }
-
-    .how-it-works-separator {
-      width: 60px;
-      height: 2px;
-      background-color: rgba(33, 63, 140, 0.3);
-      margin: 0.5rem 0;
+      line-height: 1.1;
+      text-transform: none;
+      width: 50%;
     }
 
     .how-it-works-description {
-      font-size: clamp(1rem, 1.5vw, 1.2rem);
-      line-height: 1.7;
+      font-size: clamp(1rem, 1.4vw, 1.25rem);
+      line-height: 1.6;
       color: #213f8c;
       margin: 0;
-      max-width: 600px;
+      max-width: 540px;
+      font-weight: 300;
+      opacity: 0.9;
+      margin-top: 4rem;
     }
 
     .how-it-works-demo-button {
@@ -1445,149 +1614,169 @@ const modulesList = [
       justify-content: center;
       background: #93fb4d;
       color: #00223e;
-      padding: 0.75rem 2.6rem;
-      border-radius: 10px;
+      padding: 0.8rem 2.8rem;
+      border-radius: 12px;
       text-decoration: none;
       font-weight: 600;
-      font-size: 1.05rem;
-      box-shadow: 0 10px 22px rgba(147, 251, 77, 0.35);
-      transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
+      font-size: 1.1rem;
+      box-shadow: 0 10px 25px rgba(147, 251, 77, 0.4);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       width: fit-content;
-      margin-top: 1rem;
     }
 
     .how-it-works-demo-button:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 14px 26px rgba(147, 251, 77, 0.4);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 15px 30px rgba(147, 251, 77, 0.5);
     }
 
     .how-it-works-right {
+      display: flex;
+      justify-content: flex-end;
+      position: relative;
+      z-index: 3;
+      width: 88%;
+    }
+
+    .right-bg-panel {
+      background-color: #f3f4f6;
+      padding: 3.5rem;
+      border-radius: 32px;
+      width: 100%;
+      max-width: 520px;
       position: relative;
       display: flex;
-      align-items: flex-end;
-      justify-content: flex-end;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.03);
     }
 
     .login-card {
       background-color: #ffffff;
-      border-radius: 16px;
+      border-radius: 20px;
       padding: 2.5rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
       width: 100%;
-      max-width: 420px;
+      position: relative;
+      z-index: 4;
     }
 
     .login-card-title {
-      font-size: 1.8rem;
-      font-weight: 600;
+      font-size: 2rem;
+      font-weight: 700;
       color: #00223e;
       margin: 0 0 0.5rem 0;
+      letter-spacing: -0.02em;
     }
 
     .login-card-subtitle {
-      font-size: 1rem;
+      font-size: 1.05rem;
       color: #213f8c;
-      margin: 0 0 2rem 0;
+      margin: 0 0 2.5rem 0;
+      opacity: 0.8;
     }
 
     .login-form {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 1.8rem;
     }
 
     .login-field {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0.6rem;
     }
 
     .login-field label {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: #00223e;
-      font-weight: 500;
+      font-weight: 600;
+      margin-left: 0.2rem;
     }
 
     .login-field input {
-      padding: 0.75rem 1rem;
-      border: 1px solid rgba(33, 63, 140, 0.2);
-      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      border-radius: 12px;
       font-size: 1rem;
       color: #00223e;
-      background-color: #f3f4f6;
+      background-color: #f8f9fa;
       outline: none;
-      transition: border-color 0.2s ease;
+      transition: all 0.2s ease;
+      width: 100%;
     }
 
     .login-field input:focus {
       border-color: #213f8c;
-    }
-
-    .login-field input::placeholder {
-      color: rgba(33, 63, 140, 0.5);
+      background-color: #ffffff;
+      box-shadow: 0 0 0 4px rgba(33, 63, 140, 0.08);
     }
 
     .login-button {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
-      background-color: #213f8c;
+      gap: 0.7rem;
+      background: linear-gradient(135deg, #213f8c 0%, #152a5e 100%);
       color: #ffffff;
       border: none;
-      padding: 0.875rem 1.5rem;
-      border-radius: 8px;
-      font-size: 1rem;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      font-size: 1.1rem;
       font-weight: 600;
       cursor: pointer;
-      transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
+      transition: all 0.3s ease;
       margin-top: 0.5rem;
+      box-shadow: 0 8px 20px rgba(33, 63, 140, 0.25);
     }
 
     .login-button:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(33, 63, 140, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(33, 63, 140, 0.35);
+      background: linear-gradient(135deg, #2a4fa8 0%, #1a3475 100%);
     }
 
     .login-create-account {
       text-align: center;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: #213f8c;
-      margin: 1.5rem 0 0 0;
+      margin: 2rem 0 0 0;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .login-create-account:hover {
+      color: #00223e;
+      text-decoration: underline;
     }
 
     .how-it-works-play-button {
       position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 48px;
-      height: 48px;
+      bottom: -24px;
+      right: 40px;
+      width: 64px;
+      height: 64px;
       border-radius: 50%;
-      border: 2px solid #213f8c;
-      background-color: transparent;
+      background-color: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.05);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      pointer-events: auto;
-      transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-      z-index: 11;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 10;
     }
 
     .how-it-works-play-button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 12px rgba(33, 63, 140, 0.3);
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
     }
 
     .how-it-works-play-button svg {
-      width: 20px;
-      height: 20px;
+      width: 24px;
+      height: 24px;
       margin-left: 2px;
     }
 
@@ -1848,7 +2037,8 @@ const modulesList = [
 
     .bench-content-area {
       width: 100%;
-      min-height: 400px;
+      min-height: 200px;
+      height: 500px;
       background-color: #f3f4f6;
       border-radius: 16px;
       position: relative;
@@ -1862,6 +2052,13 @@ const modulesList = [
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+
+    .bench-video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
     }
 
     .bench-text-content {
@@ -2440,6 +2637,10 @@ const modulesList = [
         padding: 4rem 1.5rem;
       }
 
+      .how-it-works-divider {
+        display: none;
+      }
+
       .how-it-works-content {
         grid-template-columns: 1fr;
         gap: 3rem;
@@ -2449,8 +2650,19 @@ const modulesList = [
         justify-content: center;
       }
 
+      .right-bg-panel {
+        padding: 2rem 1.5rem;
+        border-radius: 24px;
+      }
+
+      .login-card {
+        padding: 1.5rem;
+      }
+
       .how-it-works-play-button {
         position: relative;
+        bottom: auto;
+        right: auto;
         margin-top: 2rem;
       }
 
@@ -2661,349 +2873,391 @@ const modulesList = [
           }
         });
       });
-  });
-</script>
+    });
+  </script>
 
-<script is:inline>
-  // Sistema de traducciones para home.astro
-  (function() {
-    // Traducciones inline para evitar problemas de carga
-    const homeTranslations = {
-      en: {
-        "home.welcome.title.line1": "Build the bank of the future, in one integration.",
-        "home.welcome.title.line2": "Powered by AI.",
-        "home.welcome.subtitle": "We digitize services for financial institutions, building neobank stacks with a single line of code",
-        "home.welcome.email.placeholder": "Enter your email",
-        "home.welcome.email.aria": "Enter your email",
-        "home.welcome.quote": "quote",
-        "home.welcome.demo": "demo",
-        "home.welcome.quote.aria": "Request quote",
-        "home.bench.title": "Pay only what you use",
-        "home.bench.subtitle": "and scale without friction with the lowest prices in the market.",
-        "home.bench.button": "bench 1",
-        "home.tokens.title": "Tokens",
-        "home.tokens.description": "Zelify integrates into a single digital platform: authentication and identity validation, AML compliance, account digitization, card issuance and processing, local and international transfers, multiple payments, discount and coupon programs.",
-        "home.tokens.demo": "demo",
-        "home.action.products.title": "Our products in action",
-        "home.action.products.auth": "Auth",
-        "home.action.products.identity": "Identity",
-        "home.action.products.aml": "AML",
-        "home.ai.title.line1": "Build the bank of the future,",
-        "home.ai.title.line2": "powered by AI.",
-        "home.ai.quote": "quote",
+  <script is:inline>
+    // Sistema de traducciones para home.astro
+    (function () {
+      // Traducciones inline para evitar problemas de carga
+      const homeTranslations = {
+        en: {
+          "home.welcome.title.line1":
+            "Build the bank of<br />the future, in one integration.",
+          "home.welcome.title.line2": "Powered by AI.",
+          "home.welcome.subtitle":
+            "We digitize services for financial institutions,<br />building neobank stacks with a single line of code",
+          "home.welcome.email.placeholder": "Enter your email",
+          "home.welcome.email.aria": "Enter your email",
+          "home.welcome.quote": "quote",
+          "home.welcome.demo": "demo",
+          "home.welcome.quote.aria": "Request quote",
+          "home.bench.title": "Pay only what you use",
+          "home.bench.subtitle":
+            "and scale without friction with the lowest prices in the market.",
+          "home.bench.button": "bench 1",
+          "home.tokens.title": "Tokens",
+          "home.tokens.description":
+            "Zelify integrates into a single digital platform: authentication and identity validation, AML compliance, account digitization, card issuance and processing, local and international transfers, multiple payments, discount and coupon programs.",
+          "home.tokens.demo": "demo",
+          "home.action.products.title": "Our products in action",
+          "home.action.products.auth": "Auth",
+          "home.action.products.identity": "Identity",
+          "home.action.products.aml": "AML",
+          "home.ai.title.line1": "Build the bank of the future,",
+          "home.ai.title.line2": "powered by AI.",
+          "home.ai.quote": "quote",
 
-        // How it works section
-        "home.how.title": "How Does Zelify Work?",
-        "home.how.description": "Zelify integrates into a single digital platform: authentication and identity validation, AML compliance, account digitization, card issuance and processing, local and international transfers, multiple payments, discount and coupon programs.",
-        "home.how.demo": "demo",
-        "home.how.login.title": "Login",
-        "home.how.login.subtitle": "Welcome back",
-        "home.how.login.email.label": "Email",
-        "home.how.login.email.placeholder": "email@example.com",
-        "home.how.login.password.label": "Password",
-        "home.how.login.password.placeholder": "••••••••",
-        "home.how.login.button": "Sign in",
-        "home.how.login.create": "Or create a new account",
+          // How it works section
+          "home.how.title": "How Does Zelify Work?",
+          "home.how.description":
+            "Zelify integrates into a single digital platform: authentication and identity validation, AML compliance, account digitization, card issuance and processing, local and international transfers, multiple payments, discount and coupon programs.",
+          "home.how.demo": "demo",
+          "home.how.login.title": "Login",
+          "home.how.login.subtitle": "Welcome back",
+          "home.how.login.email.label": "Email",
+          "home.how.login.email.placeholder": "email@example.com",
+          "home.how.login.password.label": "Password",
+          "home.how.login.password.placeholder": "••••••••",
+          "home.how.login.button": "Sign in",
+          "home.how.login.create": "Or create a new account",
 
-        // Why zelify section
-        "home.why.title": "Every product, powered by AI.",
-        "home.why.description": "Zelify integrates into a single digital platform: authentication and identity validation, AML compliance, account digitization, card issuance and processing, local and international transfers, multiple payments, discount and coupon programs.",
-        "home.why.demo": "demo",
+          // Why zelify section
+          "home.why.title": "Every product, powered by AI.",
+          "home.why.description":
+            "Zelify integrates into a single digital platform: authentication and identity validation, AML compliance, account digitization, card issuance and processing, local and international transfers, multiple payments, discount and coupon programs.",
+          "home.why.demo": "demo",
 
-        // Footer
-        "footer.quicklinks": "Quick links",
-        "footer.products": "Products",
-        "footer.about": "About us",
-        "footer.developers": "Developers",
-        "footer.others": "Others",
-        "footer.legal": "Zelify is a technology platform currently in a development phase, not yet deployed or operational, and does not provide or process financial services directly; all financial operations are conducted exclusively through regulated third-party partners.",
-        "footer.copyright": "© 2025 Zelify. All rights reserved.",
+          // Footer
+          "footer.quicklinks": "Quick links",
+          "footer.products": "Products",
+          "footer.about": "About us",
+          "footer.developers": "Developers",
+          "footer.others": "Others",
+          "footer.legal":
+            "Zelify is a technology platform currently in a development phase, not yet deployed or operational, and does not provide or process financial services directly; all financial operations are conducted exclusively through regulated third-party partners.",
+          "footer.copyright": "© 2025 Zelify. All rights reserved.",
 
-        // Product Showcase Modules
-        "modules.auth.label": "Auth",
-        "modules.auth.eyebrow": "Security",
-        "modules.auth.title": "Authentication and Control",
-        "modules.auth.copy": "User authentication and access control. Protect access and manage identities securely.",
-        "modules.auth.cta": "View Auth",
-        "modules.identity.label": "Identity",
-        "modules.identity.eyebrow": "Verification",
-        "modules.identity.title": "Digital Identity",
-        "modules.identity.copy": "Digital identity management and validation. Verify users with biometrics and document analysis.",
-        "modules.identity.cta": "View Identity",
-        "modules.aml.label": "AML",
-        "modules.aml.eyebrow": "Compliance",
-        "modules.aml.title": "Money Laundering Prevention",
-        "modules.aml.copy": "Risk assessment and regulatory compliance. Continuous monitoring and watchlists.",
-        "modules.aml.cta": "View AML",
-        "modules.connect.label": "Connect",
-        "modules.connect.eyebrow": "Open Banking",
-        "modules.connect.title": "Bank Connection",
-        "modules.connect.copy": "Secure connection to bank accounts. Access financial information and facilitate payments.",
-        "modules.connect.cta": "View Connect",
-        "modules.cards.label": "Cards",
-        "modules.cards.eyebrow": "Issuing",
-        "modules.cards.title": "Card Issuance",
-        "modules.cards.copy": "Card issuance and processing. Create physical and virtual card programs.",
-        "modules.cards.cta": "View Cards",
-        "modules.payments-transfers.label": "Payments & Transfers",
-        "modules.payments-transfers.eyebrow": "Payments & Money Movement",
-        "modules.payments-transfers.title": "Payments & Transfers",
-        "modules.payments-transfers.copy": "Payment acceptance and processing, and money movement between accounts. Multiple integrated payment methods and fast, secure transfers.",
-        "modules.payments-transfers.cta": "View Payments & Transfers",
-        "modules.tx.label": "TX",
-        "modules.tx.eyebrow": "Global",
-        "modules.tx.title": "International Transactions",
-        "modules.tx.copy": "Cross-border transaction management and traceability, and currency conversion.",
-        "modules.tx.cta": "View TX",
-        "modules.discounts.label": "Discounts",
-        "modules.discounts.eyebrow": "Loyalty",
-        "modules.discounts.title": "Discounts & Benefits",
-        "modules.discounts.copy": "Benefit rules and promotions. Manage loyalty campaigns and coupons.",
-        "modules.discounts.cta": "View Discounts",
-        "modules.alaiza.label": "Alaiza Fintech AI Core",
-        "modules.alaiza.eyebrow": "Intelligence",
-        "modules.alaiza.title": "Financial AI",
-        "modules.alaiza.copy": "Artificial intelligence for quick decisions, fraud prevention and data analysis.",
-        "modules.alaiza.cta": "Explore Alaiza",
-      },
-      es: {
-        "home.welcome.title.line1": "Construye la banca del futuro, en una integración.",
-        "home.welcome.title.line2": "Potenciada por IA.",
-        "home.welcome.subtitle": "Digitalizamos servicios a instituciones financieras, construyendo stacks neobancarios con una sola línea de código",
-        "home.welcome.email.placeholder": "ingresa tu correo",
-        "home.welcome.email.aria": "Ingresa tu correo",
-        "home.welcome.quote": "cotizar",
-        "home.welcome.demo": "demo",
-        "home.welcome.quote.aria": "Solicitar cotización",
-        "home.bench.title": "Paga solo lo que usas",
-        "home.bench.subtitle": "y escala sin fricción con los precios más bajos del mercado.",
-        "home.bench.button": "bench 1",
-        "home.tokens.title": "Tokens",
-        "home.tokens.description": "Zelify integra en una sola plataforma digital: autenticación y validación de identidad, cumplimiento AML, digitalización de cuentas, emisión y procesamiento de tarjetas, transferencias locales e internacionales, pagos múltiples, programas de descuentos y cupones.",
-        "home.tokens.demo": "demo",
-        "home.action.products.title": "Nuestros productos en acción",
-        "home.action.products.auth": "Auth",
-        "home.action.products.identity": "Identity",
-        "home.action.products.aml": "AML",
-        "home.ai.title.line1": "Construye la banca del futuro,",
-        "home.ai.title.line2": "potenciada por IA.",
-        "home.ai.quote": "cotizar",
+          // Product Showcase Modules
+          "modules.auth.label": "Auth",
+          "modules.auth.titleStrong": "Authentication",
+          "modules.auth.titleAccent": "and Control",
+          "modules.auth.copy":
+            "User authentication and access control. Protect access and manage identities securely.",
+          "modules.auth.cta": "View Auth",
+          "modules.identity.label": "Identity",
+          "modules.identity.titleStrong": "Digital Identity",
+          "modules.identity.titleAccent": "",
+          "modules.identity.copy":
+            "Digital identity management and validation. Verify users with biometrics and document analysis.",
+          "modules.identity.cta": "View Identity",
+          "modules.aml.label": "AML",
+          "modules.aml.titleStrong": "Money Laundering Prevention",
+          "modules.aml.titleAccent": "",
+          "modules.aml.copy":
+            "Risk assessment and regulatory compliance. Continuous monitoring and watchlists.",
+          "modules.aml.cta": "View AML",
+          "modules.connect.label": "Connect",
+          "modules.connect.titleStrong": "Bank Connection",
+          "modules.connect.titleAccent": "",
+          "modules.connect.copy":
+            "Secure connection to bank accounts. Access financial information and facilitate payments.",
+          "modules.connect.cta": "View Connect",
+          "modules.cards.label": "Cards",
+          "modules.cards.titleStrong": "Card Issuance",
+          "modules.cards.titleAccent": "",
+          "modules.cards.copy":
+            "Card issuance and processing. Create physical and virtual card programs.",
+          "modules.cards.cta": "View Cards",
+          "modules.payments-transfers.label": "Payments & Transfers",
+          "modules.payments-transfers.titleStrong": "Payments & Transfers",
+          "modules.payments-transfers.titleAccent": "",
+          "modules.payments-transfers.copy":
+            "Payment acceptance and processing, and money movement between accounts. Multiple integrated payment methods and fast, secure transfers.",
+          "modules.payments-transfers.cta": "View Payments & Transfers",
+          "modules.tx.label": "TX",
+          "modules.tx.titleStrong": "International Transactions",
+          "modules.tx.titleAccent": "",
+          "modules.tx.copy":
+            "Cross-border transaction management and traceability, and currency conversion.",
+          "modules.tx.cta": "View TX",
+          "modules.discounts.label": "Discounts",
+          "modules.discounts.titleStrong": "Discounts & Benefits",
+          "modules.discounts.titleAccent": "",
+          "modules.discounts.copy":
+            "Benefit rules and promotions. Manage loyalty campaigns and coupons.",
+          "modules.discounts.cta": "View Discounts",
+          "modules.alaiza.label": "Alaiza Fintech AI Core",
+          "modules.alaiza.titleStrong": "Financial AI",
+          "modules.alaiza.titleAccent": "",
+          "modules.alaiza.copy":
+            "Artificial intelligence for quick decisions, fraud prevention and data analysis.",
+          "modules.alaiza.cta": "Explore Alaiza",
+        },
+        es: {
+          "home.welcome.title.line1":
+            "Construye la banca del<br />futuro, en una integración.",
+          "home.welcome.title.line2": "Potenciada por IA.",
+          "home.welcome.subtitle":
+            "Digitalizamos servicios a instituciones financieras,<br />construyendo stacks neobancarios con una sola línea de código",
+          "home.welcome.email.placeholder": "ingresa tu correo",
+          "home.welcome.email.aria": "Ingresa tu correo",
+          "home.welcome.quote": "cotizar",
+          "home.welcome.demo": "demo",
+          "home.welcome.quote.aria": "Solicitar cotización",
+          "home.bench.title": "Paga solo lo que usas",
+          "home.bench.subtitle":
+            "y escala sin fricción con los precios más bajos del mercado.",
+          "home.bench.button": "bench 1",
+          "home.tokens.title": "Tokens",
+          "home.tokens.description":
+            "Zelify integra en una sola plataforma digital: autenticación y validación de identidad, cumplimiento AML, digitalización de cuentas, emisión y procesamiento de tarjetas, transferencias locales e internacionales, pagos múltiples, programas de descuentos y cupones.",
+          "home.tokens.demo": "demo",
+          "home.action.products.title": "Nuestros productos en acción",
+          "home.action.products.auth": "Auth",
+          "home.action.products.identity": "Identity",
+          "home.action.products.aml": "AML",
+          "home.ai.title.line1": "Construye la banca del futuro,",
+          "home.ai.title.line2": "potenciada por IA.",
+          "home.ai.quote": "cotizar",
 
-        // How it works section
-        "home.how.title": "¿Cómo Funciona Zelify?",
-        "home.how.description": "Zelify integra en una sola plataforma digital: autenticación y validación de identidad, cumplimiento AML, digitalización de cuentas, emisión y procesamiento de tarjetas, transferencias locales e internacionales, pagos múltiples, programas de descuentos y cupones.",
-        "home.how.demo": "demo",
-        "home.how.login.title": "Ingreso",
-        "home.how.login.subtitle": "Bienvenido de regreso",
-        "home.how.login.email.label": "Correo",
-        "home.how.login.email.placeholder": "email@example.com",
-        "home.how.login.password.label": "Contraseña",
-        "home.how.login.password.placeholder": "••••••••",
-        "home.how.login.button": "Ingresa",
-        "home.how.login.create": "O crea una nueva cuenta",
+          // How it works section
+          "home.how.title": "¿Cómo Funciona Zelify?",
+          "home.how.description":
+            "Zelify integra en una sola plataforma digital: autenticación y validación de identidad, cumplimiento AML, digitalización de cuentas, emisión y procesamiento de tarjetas, transferencias locales e internacionales, pagos múltiples, programas de descuentos y cupones.",
+          "home.how.demo": "demo",
+          "home.how.login.title": "Ingreso",
+          "home.how.login.subtitle": "Bienvenido de regreso",
+          "home.how.login.email.label": "Correo",
+          "home.how.login.email.placeholder": "email@example.com",
+          "home.how.login.password.label": "Contraseña",
+          "home.how.login.password.placeholder": "••••••••",
+          "home.how.login.button": "Ingresa",
+          "home.how.login.create": "O crea una nueva cuenta",
 
-        // Why zelify section
-        "home.why.title": "Cada producto, potenciado por IA.",
-        "home.why.description": "Zelify integra en una sola plataforma digital: autenticación y validación de identidad, cumplimiento AML, digitalización de cuentas, emisión y procesamiento de tarjetas, transferencias locales e internacionales, pagos múltiples, programas de descuentos y cupones.",
-        "home.why.demo": "demo",
+          // Why zelify section
+          "home.why.title": "Cada producto, potenciado por IA.",
+          "home.why.description":
+            "Zelify integra en una sola plataforma digital: autenticación y validación de identidad, cumplimiento AML, digitalización de cuentas, emisión y procesamiento de tarjetas, transferencias locales e internacionales, pagos múltiples, programas de descuentos y cupones.",
+          "home.why.demo": "demo",
 
-        // Footer
-        "footer.quicklinks": "Enlaces rápidos",
-        "footer.products": "Productos",
-        "footer.about": "Nosotros",
-        "footer.developers": "Desarrolladores",
-        "footer.others": "Otros",
-        "footer.legal": "Zelify es una plataforma tecnológica actualmente en fase de desarrollo, aún no desplegada u operativa, y no proporciona ni procesa servicios financieros directamente; todas las operaciones financieras se realizan exclusivamente a través de socios terceros regulados.",
-        "footer.copyright": "© 2025 Zelify. Todos los derechos reservados.",
+          // Footer
+          "footer.quicklinks": "Enlaces rápidos",
+          "footer.products": "Productos",
+          "footer.about": "Nosotros",
+          "footer.developers": "Desarrolladores",
+          "footer.others": "Otros",
+          "footer.legal":
+            "Zelify es una plataforma tecnológica actualmente en fase de desarrollo, aún no desplegada u operativa, y no proporciona ni procesa servicios financieros directamente; todas las operaciones financieras se realizan exclusivamente a través de socios terceros regulados.",
+          "footer.copyright": "© 2025 Zelify. Todos los derechos reservados.",
 
-        // Product Showcase Modules
-        "modules.auth.label": "Auth",
-        "modules.auth.eyebrow": "Security",
-        "modules.auth.title": "Autenticación y Control",
-        "modules.auth.copy": "Autenticación y control de acceso de usuarios. Protege el acceso y gestiona identidades de forma segura.",
-        "modules.auth.cta": "Ver Auth",
-        "modules.identity.label": "Identity",
-        "modules.identity.eyebrow": "Verification",
-        "modules.identity.title": "Identidad Digital",
-        "modules.identity.copy": "Gestión y validación de identidad digital. Verifica usuarios con biometría y análisis de documentos.",
-        "modules.identity.cta": "Ver Identity",
-        "modules.aml.label": "AML",
-        "modules.aml.eyebrow": "Compliance",
-        "modules.aml.title": "Prevención de Lavado",
-        "modules.aml.copy": "Evaluación de riesgo y cumplimiento regulatorio. Monitoreo continuo y listas de control.",
-        "modules.aml.cta": "Ver AML",
-        "modules.connect.label": "Connect",
-        "modules.connect.eyebrow": "Open Banking",
-        "modules.connect.title": "Conexión Bancaria",
-        "modules.connect.copy": "Conexión segura a cuentas bancarias. Accede a información financiera y facilita pagos.",
-        "modules.connect.cta": "Ver Connect",
-        "modules.cards.label": "Cards",
-        "modules.cards.eyebrow": "Issuing",
-        "modules.cards.title": "Emisión de Tarjetas",
-        "modules.cards.copy": "Emisión y procesamiento de tarjetas. Crea programas de tarjetas físicas y virtuales.",
-        "modules.cards.cta": "Ver Cards",
-        "modules.payments-transfers.label": "Pago y Transferencias",
-        "modules.payments-transfers.eyebrow": "Payments & Money Movement",
-        "modules.payments-transfers.title": "Pago y Transferencias",
-        "modules.payments-transfers.copy": "Aceptación y procesamiento de pagos, y movimiento de dinero entre cuentas. Múltiples métodos de pago integrados y transferencias rápidas y seguras.",
-        "modules.payments-transfers.cta": "Ver Pago y Transferencias",
-        "modules.tx.label": "TX",
-        "modules.tx.eyebrow": "Global",
-        "modules.tx.title": "Transacciones Internacionales",
-        "modules.tx.copy": "Gestión y trazabilidad de transacciones transfronterizas y conversión de divisas.",
-        "modules.tx.cta": "Ver TX",
-        "modules.discounts.label": "Discounts",
-        "modules.discounts.eyebrow": "Loyalty",
-        "modules.discounts.title": "Descuentos y Beneficios",
-        "modules.discounts.copy": "Reglas de beneficios y promociones. Gestiona campañas de lealtad y cupones.",
-        "modules.discounts.cta": "Ver Discounts",
-        "modules.alaiza.label": "Alaiza Fintech AI Core",
-        "modules.alaiza.eyebrow": "Intelligence",
-        "modules.alaiza.title": "IA Financiera",
-        "modules.alaiza.copy": "Inteligencia artificial para decisiones rápidas, prevención de fraudes y análisis de datos.",
-        "modules.alaiza.cta": "Explora Alaiza",
+          // Product Showcase Modules
+          "modules.auth.label": "Auth",
+          "modules.auth.titleStrong": "Autenticación",
+          "modules.auth.titleAccent": "<br />y Control",
+          "modules.auth.copy":
+            "Autenticación y control de acceso de usuarios. Protege el acceso y gestiona identidades de forma segura.",
+          "modules.auth.cta": "Explorar Auth",
+          "modules.identity.label": "Identity",
+          "modules.identity.titleStrong": "Identidad",
+          "modules.identity.titleAccent": "Digital",
+          "modules.identity.copy":
+            "Gestión y validación de identidad digital. Verifica usuarios con biometría y análisis de documentos.",
+          "modules.identity.cta": "Explorar Identity",
+          "modules.aml.label": "AML",
+          "modules.aml.titleStrong": "Prevención de Lavado",
+          "modules.aml.titleAccent": "<br /> de dinero",
+          "modules.aml.copy":
+            "Evaluación de riesgo y cumplimiento regulatorio. Monitoreo continuo y listas de control.",
+          "modules.aml.cta": "Explorar AML",
+          "modules.connect.label": "Connect",
+          "modules.connect.titleStrong": "Conexión",
+          "modules.connect.titleAccent": "Bancaria",
+          "modules.connect.copy":
+            "Conexión segura a cuentas bancarias. Accede a información financiera y facilita pagos.",
+          "modules.connect.cta": "Explorar Connect",
+          "modules.cards.label": "Cards",
+          "modules.cards.titleStrong": "Emisión",
+          "modules.cards.titleAccent": "<br />de Tarjetas",
+          "modules.cards.copy":
+            "Emisión y procesamiento de tarjetas. Crea programas de tarjetas físicas y virtuales.",
+          "modules.cards.cta": "Explorar Cards",
+          "modules.payments-transfers.label": "Pagos y Transferencias",
+          "modules.payments-transfers.titleStrong":
+            'Pagos <span class="title-light">de servicios</span> <br /> y transferencias',
+          "modules.payments-transfers.titleAccent": "<br />locales",
+          "modules.payments-transfers.copy":
+            "Aceptación y procesamiento de pagos, y movimiento de dinero entre cuentas. Múltiples métodos de pago integrados y transferencias rápidas y seguras.",
+          "modules.payments-transfers.cta": "Explorar Pago y Transferencias",
+          "modules.tx.label": "TX",
+          "modules.tx.titleStrong": "Transacciones",
+          "modules.tx.titleAccent": "Internacionales",
+          "modules.tx.copy":
+            "Gestión y trazabilidad de transacciones transfronterizas y conversión de divisas.",
+          "modules.tx.cta": "Explorar TX",
+          "modules.discounts.label": "Discounts",
+          "modules.discounts.titleStrong": "Descuentos y",
+          "modules.discounts.titleAccent": "<br />Beneficios",
+          "modules.discounts.copy":
+            "Reglas de beneficios y promociones. Gestiona campañas de lealtad y cupones.",
+          "modules.discounts.cta": "Explorar Discounts",
+          "modules.alaiza.label": "Alaiza Fintech AI Core",
+          "modules.alaiza.titleStrong": "IA Financiera",
+          "modules.alaiza.titleAccent": "",
+          "modules.alaiza.copy":
+            "Inteligencia artificial para decisiones rápidas, prevención de fraudes y análisis de datos.",
+          "modules.alaiza.cta": "Explora Alaiza",
+        },
+      };
+
+      function applyHomeTranslations(lang = "es") {
+        const langKey = lang.toLowerCase();
+        const translations = homeTranslations[langKey] || homeTranslations.es;
+
+        // Actualizar elementos con data-i18n
+        const elements = document.querySelectorAll("[data-i18n]");
+        elements.forEach((element) => {
+          const key = element.getAttribute("data-i18n");
+          if (!key || !translations[key]) return;
+
+          // Para títulos con múltiples líneas (welcome-title)
+          if (element.classList.contains("welcome-title")) {
+            const line1Key = "home.welcome.title.line1";
+            const line2Key = "home.welcome.title.line2";
+            if (translations[line1Key] && translations[line2Key]) {
+              element.innerHTML = `${translations[line1Key]} <span class="welcome-title-line" data-i18n="${line2Key}">${translations[line2Key]}</span>`;
+            }
+          }
+          // Para títulos con múltiples líneas (ai-section-title)
+          else if (element.classList.contains("ai-section-title")) {
+            const line1Key = "home.ai.title.line1";
+            const line2Key = "home.ai.title.line2";
+            if (translations[line1Key] && translations[line2Key]) {
+              element.innerHTML = `${translations[line1Key]}<br />${translations[line2Key]}`;
+            }
+          }
+          // Para contenido normal
+          else {
+            element.innerHTML = translations[key];
+          }
+        });
+
+        // Actualizar placeholders
+        document
+          .querySelectorAll("[data-i18n-placeholder]")
+          .forEach((element) => {
+            const key = element.getAttribute("data-i18n-placeholder");
+            if (translations[key]) {
+              element.setAttribute("placeholder", translations[key]);
+            }
+          });
+
+        // Actualizar aria-labels
+        document
+          .querySelectorAll("[data-i18n-aria], [data-i18n-aria-label]")
+          .forEach((element) => {
+            const key =
+              element.getAttribute("data-i18n-aria") ||
+              element.getAttribute("data-i18n-aria-label");
+            if (translations[key]) {
+              element.setAttribute("aria-label", translations[key]);
+            }
+          });
+
+        // Actualizar módulos del product-showcase (elementos dinámicos)
+        const moduleItems = document.querySelectorAll("[data-ps-item]");
+        moduleItems.forEach((item) => {
+          const moduleId = item.getAttribute("data-ps-item");
+          if (!moduleId) return;
+
+          // Actualizar label del botón
+          const navButton = item.querySelector(".product-showcase__nav-item");
+          if (navButton) {
+            const labelKey = `modules.${moduleId}.label`;
+            if (translations[labelKey]) {
+              navButton.textContent = translations[labelKey];
+            }
+          }
+
+          // Actualizar título
+          const titleStrong = item.querySelector("[data-ps-title-strong]");
+          if (titleStrong) {
+            const strongKey = `modules.${moduleId}.titleStrong`;
+            if (translations[strongKey]) {
+              titleStrong.innerHTML = translations[strongKey];
+            }
+          }
+
+          const titleAccent = item.querySelector("[data-ps-title-accent]");
+          if (titleAccent) {
+            const accentKey = `modules.${moduleId}.titleAccent`;
+            if (translations[accentKey] !== undefined) {
+              titleAccent.innerHTML = translations[accentKey];
+            }
+          }
+
+          // Actualizar copy
+          const copy = item.querySelector("[data-ps-copy]");
+          if (copy) {
+            const copyKey = `modules.${moduleId}.copy`;
+            if (translations[copyKey]) {
+              copy.textContent = translations[copyKey];
+            }
+          }
+
+          // Actualizar CTA
+          const cta = item.querySelector("[data-ps-cta]");
+          if (cta) {
+            const ctaKey = `modules.${moduleId}.cta`;
+            if (translations[ctaKey]) {
+              cta.textContent = translations[ctaKey];
+            }
+          }
+        });
       }
-    };
 
-    function applyHomeTranslations(lang = "es") {
-      const langKey = lang.toLowerCase();
-      const translations = homeTranslations[langKey] || homeTranslations.es;
-      
-      // Actualizar elementos con data-i18n
-      const elements = document.querySelectorAll('[data-i18n]');
-      elements.forEach(element => {
-        const key = element.getAttribute('data-i18n');
-        if (!key || !translations[key]) return;
-        
-        // Para títulos con múltiples líneas (welcome-title)
-        if (element.classList.contains('welcome-title')) {
-          const line1Key = 'home.welcome.title.line1';
-          const line2Key = 'home.welcome.title.line2';
-          if (translations[line1Key] && translations[line2Key]) {
-            element.innerHTML = `${translations[line1Key]} <span class="welcome-title-line" data-i18n="${line2Key}">${translations[line2Key]}</span>`;
-          }
-        }
-        // Para títulos con múltiples líneas (ai-section-title)
-        else if (element.classList.contains('ai-section-title')) {
-          const line1Key = 'home.ai.title.line1';
-          const line2Key = 'home.ai.title.line2';
-          if (translations[line1Key] && translations[line2Key]) {
-            element.innerHTML = `${translations[line1Key]}<br />${translations[line2Key]}`;
-          }
-        }
-        // Para contenido normal
-        else {
-          element.textContent = translations[key];
-        }
-      });
-
-      // Actualizar placeholders
-      document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
-        const key = element.getAttribute('data-i18n-placeholder');
-        if (translations[key]) {
-          element.setAttribute('placeholder', translations[key]);
-        }
-      });
-
-      // Actualizar aria-labels
-      document.querySelectorAll('[data-i18n-aria], [data-i18n-aria-label]').forEach(element => {
-        const key = element.getAttribute('data-i18n-aria') || element.getAttribute('data-i18n-aria-label');
-        if (translations[key]) {
-          element.setAttribute('aria-label', translations[key]);
-        }
-      });
-
-      // Actualizar módulos del product-showcase (elementos dinámicos)
-      const moduleItems = document.querySelectorAll('[data-ps-item]');
-      moduleItems.forEach(item => {
-        const moduleId = item.getAttribute('data-ps-item');
-        if (!moduleId) return;
-
-        // Actualizar label del botón
-        const navButton = item.querySelector('.product-showcase__nav-item');
-        if (navButton) {
-          const labelKey = `modules.${moduleId}.label`;
-          if (translations[labelKey]) {
-            navButton.textContent = translations[labelKey];
-          }
-        }
-
-        // Actualizar eyebrow
-        const eyebrow = item.querySelector('[data-ps-eyebrow]');
-        if (eyebrow) {
-          const eyebrowKey = `modules.${moduleId}.eyebrow`;
-          if (translations[eyebrowKey]) {
-            eyebrow.textContent = translations[eyebrowKey];
-          }
-        }
-
-        // Actualizar título
-        const title = item.querySelector('[data-ps-title]');
-        if (title) {
-          const titleKey = `modules.${moduleId}.title`;
-          if (translations[titleKey]) {
-            title.textContent = translations[titleKey];
-          }
-        }
-
-        // Actualizar copy
-        const copy = item.querySelector('[data-ps-copy]');
-        if (copy) {
-          const copyKey = `modules.${moduleId}.copy`;
-          if (translations[copyKey]) {
-            copy.textContent = translations[copyKey];
-          }
-        }
-
-        // Actualizar CTA
-        const cta = item.querySelector('[data-ps-cta]');
-        if (cta) {
-          const ctaKey = `modules.${moduleId}.cta`;
-          if (translations[ctaKey]) {
-            cta.textContent = translations[ctaKey];
-          }
-        }
-      });
-    }
-
-    // Función para aplicar traducciones
-    function applyTranslations(lang) {
-      const langKey = lang === "EN" ? "en" : "es";
-      // Usar requestAnimationFrame para asegurar que el DOM esté listo
-      requestAnimationFrame(() => {
-        applyHomeTranslations(langKey);
-      });
-    }
-
-    // Registrar listener inmediatamente (antes de DOMContentLoaded)
-    window.addEventListener("ui:languagechange", (event) => {
-      const lang = event.detail?.language || "ES";
-      applyTranslations(lang);
-    }, true);
-
-    // Aplicar traducciones al cargar la página
-    function initTranslations() {
-      let currentLang = "ES";
-      try {
-        const stored = localStorage.getItem("ui-language");
-        if (stored && (stored === "EN" || stored === "ES")) {
-          currentLang = stored;
-        }
-      } catch (error) {
-        console.warn("Unable to access localStorage.", error);
+      // Función para aplicar traducciones
+      function applyTranslations(lang) {
+        const langKey = lang === "EN" ? "en" : "es";
+        // Usar requestAnimationFrame para asegurar que el DOM esté listo
+        requestAnimationFrame(() => {
+          applyHomeTranslations(langKey);
+        });
       }
-      applyTranslations(currentLang);
-    }
 
-    if (document.readyState === 'loading') {
-      document.addEventListener("DOMContentLoaded", () => {
+      // Registrar listener inmediatamente (antes de DOMContentLoaded)
+      window.addEventListener(
+        "ui:languagechange",
+        (event) => {
+          const lang = event.detail?.language || "ES";
+          applyTranslations(lang);
+        },
+        true,
+      );
+
+      // Aplicar traducciones al cargar la página
+      function initTranslations() {
+        let currentLang = "ES";
+        try {
+          const stored = localStorage.getItem("ui-language");
+          if (stored && (stored === "EN" || stored === "ES")) {
+            currentLang = stored;
+          }
+        } catch (error) {
+          console.warn("Unable to access localStorage.", error);
+        }
+        applyTranslations(currentLang);
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", () => {
+          setTimeout(initTranslations, 100);
+        });
+      } else {
         setTimeout(initTranslations, 100);
-      });
-    } else {
-      setTimeout(initTranslations, 100);
-    }
-  })();
-</script>
+      }
+    })();
+  </script>
 </html>
 
 <script>
@@ -3098,9 +3352,7 @@ const modulesList = [
     });
 
     // Initialize with first active button
-    const firstActive = document.querySelector(
-      ".action-nav-button.active",
-    );
+    const firstActive = document.querySelector(".action-nav-button.active");
     if (firstActive) {
       const firstActionId = firstActive.getAttribute("data-action");
       if (firstActionId) {

@@ -32,14 +32,14 @@ export function initializeLanguageSystem() {
                 detail: { language: lang },
             })
         );
-        
+
         // Aplicar traducciones
         const elements = document.querySelectorAll('[data-i18n]');
         elements.forEach(element => {
             const key = element.getAttribute('data-i18n');
             const translationLang = lang.toLowerCase();
             if (translations[translationLang] && translations[translationLang][key]) {
-                element.textContent = translations[translationLang][key];
+                element.innerHTML = translations[translationLang][key];
             }
         });
     };
