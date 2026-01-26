@@ -82,8 +82,6 @@ export default function AlaizaCard() {
         // Behavior Analysis is a full-screen immersive view (lock screen style).
         // Let's keep it visible on Chat and Education.
 
-        if (currentModule === "behavior-analysis") return null;
-
         return (
             <div className="absolute top-20 left-0 right-0 z-30 px-4 pointer-events-none flex justify-center">
                 <div className="flex justify-center gap-1 bg-white/90 backdrop-blur-md rounded-full p-1 shadow-lg pointer-events-auto border border-gray-100">
