@@ -1483,7 +1483,7 @@ const modulesList = [
       display: flex;
       align-items: center;
       border: 2px solid #00223e;
-      border-radius: 16px;
+      border-radius: 10px;
       padding: 0.25rem;
       background: #ffffff;
       min-width: min(560px, 100%);
@@ -1510,7 +1510,7 @@ const modulesList = [
       background: #213f8c;
       color: #ffffff;
       padding: 0.7rem 2.2rem;
-      border-radius: 12px;
+      border-radius: 9px;
       font-size: 1.05rem;
       font-weight: 600;
       cursor: pointer;
@@ -1531,7 +1531,8 @@ const modulesList = [
       background: #93fb4d;
       color: #00223e;
       padding: 0.75rem 2.6rem;
-      border-radius: 10px;
+      border-radius: 9px;
+      width: 20%;
       text-decoration: none;
       font-weight: 600;
       font-size: 1.05rem;
@@ -2785,8 +2786,17 @@ const modulesList = [
 
       const items = showcase.querySelectorAll(".product-showcase__item");
       const cardWrappers = document.querySelectorAll(".product-card-wrapper");
+      const playBtn = document.getElementById("demo-play-button");
+      let currentActiveModule = "auth";
 
       function updateProductCard(moduleId) {
+        // Stop the previous module's demo
+        if (currentActiveModule && currentActiveModule !== moduleId) {
+          window.dispatchEvent(
+            new CustomEvent(`zelify:stop-demo:${currentActiveModule}`),
+          );
+        }
+
         // Hide all cards
         cardWrappers.forEach((wrapper) => {
           wrapper.style.display = "none";
@@ -2799,6 +2809,12 @@ const modulesList = [
         if (activeCard) {
           activeCard.style.display = "block";
         }
+
+        // Auto-play the new module's demo
+        currentActiveModule = moduleId;
+        setTimeout(() => {
+          window.dispatchEvent(new CustomEvent(`zelify:play-demo:${moduleId}`));
+        }, 300); // Small delay for visual transition
       }
 
       items.forEach((item) => {
@@ -2806,18 +2822,14 @@ const modulesList = [
         const moduleId = item.getAttribute("data-ps-item");
 
         button?.addEventListener("click", () => {
-          // If already active, do nothing (prevent full collapse)
           if (item.classList.contains("is-active")) return;
 
-          // Close all others
           items.forEach((other) => {
             other.classList.remove("is-active");
           });
 
-          // Activate current
           item.classList.add("is-active");
 
-          // Update product card
           if (moduleId) {
             updateProductCard(moduleId);
           }
@@ -2831,7 +2843,10 @@ const modulesList = [
       if (firstActive) {
         const firstModuleId = firstActive.getAttribute("data-ps-item");
         if (firstModuleId) {
-          updateProductCard(firstModuleId);
+          // Trigger initial play
+          setTimeout(() => {
+            updateProductCard(firstModuleId);
+          }, 1000); // Wait a bit after load
         }
       }
     });

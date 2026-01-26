@@ -71,22 +71,6 @@ export function AuthCard() {
             abortDemo.current = false;
             window.dispatchEvent(new CustomEvent('zelify:demo-start'));
 
-            // Reset to initial state
-            setIsRegistering(false);
-            setRegisterStep(1);
-            setFormData({
-                fullName: "",
-                email: "",
-                emailOTP: "",
-                phoneCountry: "US",
-                phoneNumber: "",
-                phoneOTP: "",
-                password: "",
-                showPassword: false,
-                idNumber: "",
-                birthDate: "",
-            });
-
             // Helper for delay with abort check
             const wait = (ms: number) => new Promise<void>((resolve, reject) => {
                 const start = Date.now();
@@ -107,107 +91,105 @@ export function AuthCard() {
             // Helper for typing effect
             const typeText = async (val: string, field: keyof typeof formData) => {
                 const currentVal = (formData as any)[field] || "";
-                // If clearing (new val is shorter), just set it
                 if (val === "") {
                     setFormData(prev => ({ ...prev, [field]: "" }));
                     return;
                 }
 
-                // Typing
                 for (let i = 0; i <= val.length; i++) {
-                    await wait(50 + Math.random() * 40); // Slightly faster typing
+                    await wait(50 + Math.random() * 40);
                     setFormData(prev => ({ ...prev, [field]: val.slice(0, i) }));
                 }
             };
 
             try {
-                // 1. Login Flow
-                await wait(1500); // Longer wait to see the screen
-                await typeText("demo@zelify.com", "email");
-                await wait(600);
-                await typeText("password123", "password");
-                await wait(1200); // Let user see filled login
+                // LOOP CONTINUO
+                while (!abortDemo.current) {
+                    // Reset to initial state
+                    setIsRegistering(false);
+                    setRegisterStep(1);
+                    setFormData({
+                        fullName: "",
+                        email: "",
+                        emailOTP: "",
+                        phoneCountry: "US",
+                        phoneNumber: "",
+                        phoneOTP: "",
+                        password: "",
+                        showPassword: false,
+                        idNumber: "",
+                        birthDate: "",
+                    });
 
-                // Simulate "Create Account" click
-                setIsRegistering(true);
-                setFormData(prev => ({ ...prev, password: "", email: "" }));
+                    // 1. Login Flow
+                    await wait(1500);
+                    await typeText("demo@zelify.com", "email");
+                    await wait(600);
+                    await typeText("password123", "password");
+                    await wait(1200);
 
-                // 2. Register Step 1
-                await wait(1500);
-                await typeText("Usuario Demo", "fullName");
-                await wait(500);
-                await typeText("demo@zelify.com", "email");
-                await wait(1000); // Wait before continuing
-                // Auto-advance is handled by UI button in real life, but here we force state?
-                // Or does the "Continue" button click need simulation?
-                // We'll force state for simplicity in demo as we don't have refs to buttons easy.
-                setRegisterStep(2);
+                    setIsRegistering(true);
+                    setFormData(prev => ({ ...prev, password: "", email: "" }));
 
-                // 3. Register Step 2 (OTP) - The "Error Then Success" Flow
-                await wait(1500);
-                // A. Wrong OTP
-                await typeText("999999", "emailOTP");
-                await wait(500); // Pause before "clicking" verify
+                    // 2. Register Step 1
+                    await wait(1500);
+                    await typeText("Usuario Demo", "fullName");
+                    await wait(500);
+                    await typeText("demo@zelify.com", "email");
+                    await wait(1000);
+                    setRegisterStep(2);
 
-                // Trigger Verify Animation
-                setOtpStatus('verifying');
-                await wait(2000); // Spinning...
-                setOtpStatus('error'); // Wrong!
+                    // 3. Register Step 2 (OTP)
+                    await wait(1500);
+                    await typeText("999999", "emailOTP");
+                    await wait(500);
+                    setOtpStatus('verifying');
+                    await wait(2000);
+                    setOtpStatus('error');
+                    await wait(2000);
+                    setOtpStatus('idle');
+                    setFormData(prev => ({ ...prev, emailOTP: "" }));
+                    await wait(1500);
+                    await typeText("202601", "emailOTP");
+                    await wait(1500);
+                    setOtpStatus('verifying');
+                    await wait(2000);
+                    setOtpStatus('success');
+                    await wait(1000);
 
-                await wait(2000); // Show error red shake
-                setOtpStatus('idle'); // Reset to try again
+                    // 4. Register Step 3 (Phone)
+                    setOtpStatus('idle');
+                    setRegisterStep(3);
+                    await wait(1000);
+                    await typeText("999123456", "phoneNumber");
+                    await wait(800);
+                    setRegisterStep(4);
 
-                // B. Clear and Correct OTP
-                setFormData(prev => ({ ...prev, emailOTP: "" })); // Clear
-                await wait(1500);
-                await typeText("202601", "emailOTP"); // Correct
-                await wait(1500);
+                    // 5. Register Step 4 (Phone OTP)
+                    await wait(1500);
+                    await typeText("202601", "phoneOTP");
+                    await wait(500);
+                    setOtpStatus('verifying');
+                    await wait(2000);
+                    setOtpStatus('success');
+                    await wait(1000);
+                    setOtpStatus('idle');
 
-                // Trigger Verify Animation Again
-                setOtpStatus('verifying');
-                await wait(2000);
-                setOtpStatus('success');
-                await wait(1000);
+                    // 6. Register Step 5 (Final)
+                    setRegisterStep(5);
+                    await wait(1000);
+                    await typeText("1723456789", "idNumber");
+                    await wait(500);
+                    setFormData(prev => ({ ...prev, birthDate: "1995-06-15" }));
+                    await wait(500);
+                    await typeText("securePass123", "password");
 
-                // 4. Register Step 3 (Phone)
-                setOtpStatus('idle');
-                setRegisterStep(3);
-
-                await wait(1000);
-                await typeText("999123456", "phoneNumber");
-                await wait(800);
-                setRegisterStep(4);
-
-                // 5. Register Step 4 (Phone OTP)
-                await wait(1500);
-                await typeText("202601", "phoneOTP");
-                await wait(500);
-
-                // Trigger Verify (Phone)
-                setOtpStatus('verifying');
-                await wait(2000);
-                setOtpStatus('success');
-                await wait(1000);
-                setOtpStatus('idle');
-
-                // 6. Register Step 5 (Final)
-                setRegisterStep(5);
-
-                await wait(1000);
-                await typeText("1723456789", "idNumber");
-                await wait(500);
-                setFormData(prev => ({ ...prev, birthDate: "1995-06-15" }));
-                await wait(500);
-                await typeText("securePass123", "password");
-
-                await wait(2000);
-                // No alert
-                setIsDemoRunning(false);
-                isRunningRef.current = false;
-                window.dispatchEvent(new CustomEvent('zelify:demo-end'));
+                    await wait(3000); // Wait at the end of loop
+                }
 
             } catch (e) {
                 console.log("Demo interrupted", e);
+            } finally {
                 setIsDemoRunning(false);
                 isRunningRef.current = false;
                 window.dispatchEvent(new CustomEvent('zelify:demo-end'));
@@ -435,9 +417,6 @@ export function AuthCard() {
                             </button>
                             <button className="flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 bg-white transition hover:bg-gray-50 active:scale-95">
                                 <div className="scale-75"><FacebookIcon /></div>
-                            </button>
-                            <button className="flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 bg-white transition hover:bg-gray-50 active:scale-95">
-                                <div className="scale-75"><AppleIcon /></div>
                             </button>
                         </div>
                     </div>

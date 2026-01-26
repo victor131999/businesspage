@@ -2,9 +2,17 @@
 import PaymentsCard from "./payments-components/PaymentsCard";
 ---
 
-<PaymentsCard client:visible />
+<div class="no-interaction">
+  <PaymentsCard client:visible />
+</div>
 
 <style>
+  .no-interaction {
+    width: 100%;
+    height: 100%;
+    pointer-events: none !important;
+    user-select: none !important;
+  }
   :global(.payments-card-root) {
     width: 100%;
     height: 100%;

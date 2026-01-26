@@ -2,9 +2,17 @@
 import TxCard from "./tx-components/TxCard";
 ---
 
-<TxCard client:visible />
+<div class="no-interaction">
+  <TxCard client:visible />
+</div>
 
 <style>
+  .no-interaction {
+    width: 100%;
+    height: 100%;
+    pointer-events: none !important;
+    user-select: none !important;
+  }
   :global(.tx-card-root) {
     width: 100%;
     height: 100%;

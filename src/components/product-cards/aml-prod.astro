@@ -2,9 +2,17 @@
 import AmlCard from "./aml-components/AmlCard";
 ---
 
-<AmlCard client:visible />
+<div class="no-interaction">
+  <AmlCard client:visible />
+</div>
 
 <style>
+  .no-interaction {
+    width: 100%;
+    height: 100%;
+    pointer-events: none !important;
+    user-select: none !important;
+  }
   :global(.aml-card-root) {
     width: 100%;
     height: 100%;

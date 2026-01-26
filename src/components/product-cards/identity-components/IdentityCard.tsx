@@ -115,107 +115,98 @@ export default function IdentityCard() {
             abortDemo.current = false;
             window.dispatchEvent(new CustomEvent('zelify:demo-start'));
 
-            // 1. Reset State
-            setCurrentScreen("welcome");
-            setActiveWelcomeCard(0);
-            setActiveDocumentCard(0);
-            setSelectedDocumentType("id_card");
-            setCaptureStep("front");
-            setFrontCaptured(false);
-            setBackCaptured(false);
-            setIsFaceIdScanning(false);
-            setFaceIdProgress(0);
-            setSelectedLivenessType(null);
-            setActiveLivenessCard(null);
-            setVerificationResult("approved");
-
             try {
-                // 2. Welcome Screen Interactions
-                await wait(1000);
-                setActiveWelcomeCard(1); // Click second card
-                await wait(800);
-                setActiveWelcomeCard(2); // Click third card
-                await wait(800);
+                while (!abortDemo.current) {
+                    // 1. Reset State
+                    setCurrentScreen("welcome");
+                    setActiveWelcomeCard(0);
+                    setActiveDocumentCard(0);
+                    setSelectedDocumentType("id_card");
+                    setCaptureStep("front");
+                    setFrontCaptured(false);
+                    setBackCaptured(false);
+                    setIsFaceIdScanning(false);
+                    setFaceIdProgress(0);
+                    setSelectedLivenessType(null);
+                    setActiveLivenessCard(null);
+                    setVerificationResult("approved");
 
-                // Click Start
-                await wait(500);
-                setCurrentScreen("document_selection");
+                    // 2. Welcome Screen Interactions
+                    await wait(1000);
+                    setActiveWelcomeCard(1);
+                    await wait(800);
+                    setActiveWelcomeCard(2);
+                    await wait(800);
 
-                // 3. Document Selection
-                await wait(1000);
-                // Pasar por cada documento
-                setActiveDocumentCard(0);
-                setSelectedDocumentType("drivers_license");
-                await wait(800);
-                setActiveDocumentCard(1);
-                setSelectedDocumentType("id_card");
-                await wait(800);
-                setActiveDocumentCard(2);
-                setSelectedDocumentType("passport");
-                await wait(800);
-                // Volver a seleccionar cédula de identidad (la que queremos)
-                setActiveDocumentCard(1);
-                setSelectedDocumentType("id_card");
-                await wait(500);
-                // Click Next
-                setCurrentScreen("document_capture");
+                    // Click Start
+                    await wait(500);
+                    setCurrentScreen("document_selection");
 
-                // 4. Document Capture (Front)
-                await wait(1500); // Simulate positioning
-                setIsCapturing(true);
-                await wait(300); // Flash duration
-                setIsCapturing(false);
-                setFrontCaptured(true);
-                await wait(500);
-                setCaptureStep("back");
+                    // 3. Document Selection
+                    await wait(1000);
+                    setActiveDocumentCard(0);
+                    setSelectedDocumentType("drivers_license");
+                    await wait(800);
+                    setActiveDocumentCard(1);
+                    setSelectedDocumentType("id_card");
+                    await wait(800);
+                    setActiveDocumentCard(2);
+                    setSelectedDocumentType("passport");
+                    await wait(800);
+                    setActiveDocumentCard(1);
+                    setSelectedDocumentType("id_card");
+                    await wait(500);
+                    setCurrentScreen("document_capture");
 
-                // 5. Document Capture (Back)
-                await wait(1500);
-                setIsCapturing(true);
-                await wait(300);
-                setIsCapturing(false);
-                setBackCaptured(true);
-                await wait(1000);
-                setCurrentScreen("liveness_check");
+                    // 4. Document Capture (Front)
+                    await wait(1500);
+                    setIsCapturing(true);
+                    await wait(300);
+                    setIsCapturing(false);
+                    setFrontCaptured(true);
+                    await wait(500);
+                    setCaptureStep("back");
 
-                // 6. Liveness Check
-                await wait(1000);
-                // Pasar por cada opción de liveness
-                setActiveLivenessCard(0);
-                setSelectedLivenessType("selfie_photo");
-                await wait(800);
-                setActiveLivenessCard(1);
-                setSelectedLivenessType("selfie_video");
-                await wait(800);
-                // Volver a seleccionar selfie_photo (la que queremos)
-                setActiveLivenessCard(0);
-                setSelectedLivenessType("selfie_photo");
-                await wait(500);
-                // Iniciar escaneo
-                setIsFaceIdScanning(true);
+                    // 5. Document Capture (Back)
+                    await wait(1500);
+                    setIsCapturing(true);
+                    await wait(300);
+                    setIsCapturing(false);
+                    setBackCaptured(true);
+                    await wait(1000);
+                    setCurrentScreen("liveness_check");
 
-                // Animate Scan Progress
-                const scanDuration = 4000;
-                const steps = 40;
-                for (let i = 0; i <= steps; i++) {
-                    await wait(scanDuration / steps);
-                    setFaceIdProgress((i / steps) * 100);
+                    // 6. Liveness Check
+                    await wait(1000);
+                    setActiveLivenessCard(0);
+                    setSelectedLivenessType("selfie_photo");
+                    await wait(800);
+                    setActiveLivenessCard(1);
+                    setSelectedLivenessType("selfie_video");
+                    await wait(800);
+                    setActiveLivenessCard(0);
+                    setSelectedLivenessType("selfie_photo");
+                    await wait(500);
+                    setIsFaceIdScanning(true);
+
+                    // Animate Scan Progress
+                    const scanDuration = 4000;
+                    const steps = 40;
+                    for (let i = 0; i <= steps; i++) {
+                        await wait(scanDuration / steps);
+                        setFaceIdProgress((i / steps) * 100);
+                    }
+
+                    await wait(500);
+                    setVerificationResult(Math.random() > 0.3 ? "approved" : "rejected");
+                    setCurrentScreen("result");
+
+                    await wait(3000); // Wait at the end of loop
                 }
-
-                await wait(500); // Hold completion
-                setVerificationResult(Math.random() > 0.3 ? "approved" : "rejected");
-                setCurrentScreen("result");
-
-
-                // 7. Result
-                await wait(2000);
-
-                // Finish
-                isRunningRef.current = false;
-                window.dispatchEvent(new CustomEvent('zelify:demo-end'));
 
             } catch (e) {
                 console.log("Identity Demo Stopped/Aborted");
+            } finally {
                 isRunningRef.current = false;
                 window.dispatchEvent(new CustomEvent('zelify:demo-end'));
             }
@@ -402,7 +393,7 @@ export default function IdentityCard() {
 
             {/* Glassmorphism Container - From title to button */}
             <div className="relative z-10 flex-1 flex flex-col items-center overflow-hidden w-full">
-                <div 
+                <div
                     className="w-full flex flex-col flex-1 mt-auto rounded-t-[35px] pt-8 pb-6 backdrop-blur-sm border-t border-x border-white/50"
                     style={{
                         backgroundColor: 'rgba(255, 255, 255, 0.45)',
@@ -427,11 +418,11 @@ export default function IdentityCard() {
                                 const activeIndex = (["drivers_license", "id_card", "passport"] as DocumentType[]).indexOf(selectedDocumentType);
                                 const isAbove = idx < activeIndex;
                                 const isBelow = idx > activeIndex;
-                                
+
                                 // Card heights: active is taller, inactive are shorter
                                 const activeHeight = 75;
                                 const inactiveHeight = 58;
-                                
+
                                 // Calculate position for pyramid effect - tighter spacing
                                 let topPosition = 0;
                                 if (isActive) {
@@ -457,7 +448,7 @@ export default function IdentityCard() {
                                 }
 
                                 return (
-                                    <div 
+                                    <div
                                         key={type}
                                         onClick={() => {
                                             setSelectedDocumentType(type);
@@ -586,7 +577,7 @@ export default function IdentityCard() {
                                 Captura {documentName}
                             </h2>
                             <p className="text-sm text-gray-600 leading-tight">
-                                {isFront 
+                                {isFront
                                     ? "Alinea el documento dentro del marco y asegúrate de que sea legible"
                                     : "Gira el documento y alinea la parte posterior dentro del marco"
                                 }
@@ -603,7 +594,7 @@ export default function IdentityCard() {
                                 {isCapturing && (
                                     <div className="absolute inset-0 z-20 bg-white rounded-2xl animate-pulse" />
                                 )}
-                                
+
                                 {/* Captured Document Simulation */}
                                 {(isBack && frontCaptured) && (
                                     <div className="absolute inset-4 rounded-lg bg-white shadow-lg flex flex-col p-2">
@@ -657,9 +648,8 @@ export default function IdentityCard() {
                             }, 300);
                         }}
                         disabled={isCapturing}
-                        className={`h-16 w-16 rounded-full shadow-xl transition-all duration-200 flex items-center justify-center ${
-                            isCapturing ? 'scale-95 opacity-80' : 'hover:scale-110 active:scale-95 hover:shadow-2xl'
-                        }`}
+                        className={`h-16 w-16 rounded-full shadow-xl transition-all duration-200 flex items-center justify-center ${isCapturing ? 'scale-95 opacity-80' : 'hover:scale-110 active:scale-95 hover:shadow-2xl'
+                            }`}
                         style={{
                             background: themeColor,
                         }}
@@ -692,15 +682,15 @@ export default function IdentityCard() {
 
         // Liveness options
         const livenessOptions: Array<{ type: LivenessType; title: string; description: string; icon: React.ReactNode }> = [
-            { 
-                type: "selfie_photo", 
-                title: "Selfie con foto", 
+            {
+                type: "selfie_photo",
+                title: "Selfie con foto",
                 description: "Toma una foto de tu rostro",
                 icon: <FaImage className="w-6 h-6 text-white" />
             },
-            { 
-                type: "selfie_video", 
-                title: "Selfie con video", 
+            {
+                type: "selfie_video",
+                title: "Selfie con video",
                 description: "Graba un video corto de tu rostro",
                 icon: <FaVideo className="w-6 h-6 text-white" />
             },
@@ -744,7 +734,7 @@ export default function IdentityCard() {
                     </div>
 
                     {/* Tarjeta Principal */}
-                    <div 
+                    <div
                         className="relative z-10 flex-1 flex flex-col rounded-2xl p-5 backdrop-blur-sm overflow-hidden"
                         style={{ backgroundColor: 'rgba(255, 255, 255, 0.35)' }}
                     >
@@ -761,79 +751,79 @@ export default function IdentityCard() {
                         {/* Tarjetas Verticales - Pyramid Effect (centradas verticalmente) */}
                         <div className="flex-1 flex items-center justify-center">
                             <div className="relative w-full flex-shrink-0" style={{ minHeight: '200px', paddingTop: '5px' }}>
-                            {livenessOptions.map((option, idx) => {
-                                const isActive = activeLivenessCard === idx;
-                                const activeIndex = activeLivenessCard ?? 0;
-                                const isAbove = idx < activeIndex;
-                                const isBelow = idx > activeIndex;
-                                
-                                // Card heights: active is taller, inactive are shorter
-                                const activeHeight = 75;
-                                const inactiveHeight = 58;
-                                
-                                // Calculate position for pyramid effect - tighter spacing
-                                let topPosition = 0;
-                                if (isActive) {
-                                    // Active card position based on its index
-                                    topPosition = idx === 0 ? 0 : (idx === 1 ? 35 : 70);
-                                } else if (isAbove) {
-                                    // Cards above: start from top, very close together
-                                    topPosition = idx * 38;
-                                } else {
-                                    // Cards below: positioned after active card, overlapping
-                                    const activePos = activeIndex === 0 ? 0 : (activeIndex === 1 ? 35 : 70);
-                                    topPosition = activePos + activeHeight - 15 + (idx - activeIndex - 1) * 38;
-                                }
+                                {livenessOptions.map((option, idx) => {
+                                    const isActive = activeLivenessCard === idx;
+                                    const activeIndex = activeLivenessCard ?? 0;
+                                    const isAbove = idx < activeIndex;
+                                    const isBelow = idx > activeIndex;
 
-                                // Z-index: active is highest, then based on distance from active
-                                let zIndex = 10;
-                                if (isActive) {
-                                    zIndex = 30;
-                                } else if (isAbove) {
-                                    zIndex = 20 - (activeIndex - idx);
-                                } else {
-                                    zIndex = 20 - (idx - activeIndex);
-                                }
+                                    // Card heights: active is taller, inactive are shorter
+                                    const activeHeight = 75;
+                                    const inactiveHeight = 58;
 
-                                return (
-                                    <div 
-                                        key={option.type}
-                                        onClick={() => {
-                                            setActiveLivenessCard(idx);
-                                            setSelectedLivenessType(option.type);
-                                        }}
-                                        className={`absolute left-0 right-0 transition-all duration-300 cursor-pointer flex items-center gap-3 rounded-2xl border-[3px] overflow-visible
+                                    // Calculate position for pyramid effect - tighter spacing
+                                    let topPosition = 0;
+                                    if (isActive) {
+                                        // Active card position based on its index
+                                        topPosition = idx === 0 ? 0 : (idx === 1 ? 35 : 70);
+                                    } else if (isAbove) {
+                                        // Cards above: start from top, very close together
+                                        topPosition = idx * 38;
+                                    } else {
+                                        // Cards below: positioned after active card, overlapping
+                                        const activePos = activeIndex === 0 ? 0 : (activeIndex === 1 ? 35 : 70);
+                                        topPosition = activePos + activeHeight - 15 + (idx - activeIndex - 1) * 38;
+                                    }
+
+                                    // Z-index: active is highest, then based on distance from active
+                                    let zIndex = 10;
+                                    if (isActive) {
+                                        zIndex = 30;
+                                    } else if (isAbove) {
+                                        zIndex = 20 - (activeIndex - idx);
+                                    } else {
+                                        zIndex = 20 - (idx - activeIndex);
+                                    }
+
+                                    return (
+                                        <div
+                                            key={option.type}
+                                            onClick={() => {
+                                                setActiveLivenessCard(idx);
+                                                setSelectedLivenessType(option.type);
+                                            }}
+                                            className={`absolute left-0 right-0 transition-all duration-300 cursor-pointer flex items-center gap-3 rounded-2xl border-[3px] overflow-visible
                                             ${isActive
-                                                ? 'border-white shadow-xl'
-                                                : 'border-white bg-[#d1d5db] hover:bg-[#c4c8ce]'
-                                            }`}
-                                        style={{
-                                            background: isActive
-                                                ? `linear-gradient(to right, ${themeColor} 0%, ${blackColor} 100%)`
-                                                : undefined,
-                                            top: `${topPosition}px`,
-                                            height: isActive ? `${activeHeight}px` : `${inactiveHeight}px`,
-                                            padding: isActive ? '0.875rem 1rem' : '0.75rem 1rem',
-                                            width: isActive ? 'calc(100% + 16px)' : 'calc(100% - 16px)',
-                                            left: isActive ? '-8px' : '8px',
-                                            transform: isActive ? 'scale(1.06)' : 'scale(1)',
-                                            zIndex: zIndex,
-                                        }}
-                                    >
-                                        <div className={`p-1.5 rounded-lg flex-shrink-0`}>
-                                            {option.icon}
+                                                    ? 'border-white shadow-xl'
+                                                    : 'border-white bg-[#d1d5db] hover:bg-[#c4c8ce]'
+                                                }`}
+                                            style={{
+                                                background: isActive
+                                                    ? `linear-gradient(to right, ${themeColor} 0%, ${blackColor} 100%)`
+                                                    : undefined,
+                                                top: `${topPosition}px`,
+                                                height: isActive ? `${activeHeight}px` : `${inactiveHeight}px`,
+                                                padding: isActive ? '0.875rem 1rem' : '0.75rem 1rem',
+                                                width: isActive ? 'calc(100% + 16px)' : 'calc(100% - 16px)',
+                                                left: isActive ? '-8px' : '8px',
+                                                transform: isActive ? 'scale(1.06)' : 'scale(1)',
+                                                zIndex: zIndex,
+                                            }}
+                                        >
+                                            <div className={`p-1.5 rounded-lg flex-shrink-0`}>
+                                                {option.icon}
+                                            </div>
+                                            <div className="flex-1 min-w-0">
+                                                <h3 className={`text-xs font-bold leading-tight ${isActive ? 'text-white' : 'text-white'}`}>
+                                                    {option.title}
+                                                </h3>
+                                                <p className={`text-[10px] leading-tight mt-0.5 ${isActive ? 'text-white/80' : 'hidden'}`}>
+                                                    {option.description}
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div className="flex-1 min-w-0">
-                                            <h3 className={`text-xs font-bold leading-tight ${isActive ? 'text-white' : 'text-white'}`}>
-                                                {option.title}
-                                            </h3>
-                                            <p className={`text-[10px] leading-tight mt-0.5 ${isActive ? 'text-white/80' : 'hidden'}`}>
-                                                {option.description}
-                                            </p>
-                                        </div>
-                                    </div>
-                                )
-                            })}
+                                    )
+                                })}
                             </div>
                         </div>
 
@@ -1048,28 +1038,28 @@ export default function IdentityCard() {
                     <div className="flex flex-col items-center justify-center text-center space-y-6">
                         {/* Icono (Checkmark o X) */}
                         {isApproved ? (
-                            <svg 
-                                className="h-24 w-24" 
-                                style={{ color: 'white' }} 
-                                fill="none" 
-                                viewBox="0 0 24 24" 
-                                stroke="currentColor" 
+                            <svg
+                                className="h-24 w-24"
+                                style={{ color: 'white' }}
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
                                 strokeWidth={3}
                             >
-                                <path 
-                                    strokeLinecap="round" 
-                                    strokeLinejoin="round" 
-                                    d="M5 13l4 4L19 7" 
-                                    style={{ transform: 'rotate(-2deg)' }} 
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M5 13l4 4L19 7"
+                                    style={{ transform: 'rotate(-2deg)' }}
                                 />
                             </svg>
                         ) : (
-                            <svg 
-                                className="h-24 w-24" 
-                                style={{ color: 'white' }} 
-                                fill="none" 
-                                viewBox="0 0 24 24" 
-                                stroke="currentColor" 
+                            <svg
+                                className="h-24 w-24"
+                                style={{ color: 'white' }}
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
                                 strokeWidth={3}
                             >
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />

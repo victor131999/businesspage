@@ -123,79 +123,91 @@ export default function DiscountsCard() {
         abortDemo.current = false;
         window.dispatchEvent(new CustomEvent('zelify:demo-start'));
 
-        // Reset to initial state
-        setStep(1);
-        setSelectedPlan("free");
-        setLoadingProgress(0);
-        setActivePromoIndex(0);
-        setMapPointer({ x: 50, y: 50 });
-        setBusinessName("");
-        setBusinessId("");
-
         try {
-            // Step 1: Plan Selection
-            await wait(1500);
-            setSelectedPlan("premium");
-            await wait(1000);
-            setStep(2);
+            while (isRunningRef.current && !abortDemo.current) {
+                // Reset to initial state
+                setStep(1);
+                setSelectedPlan("free");
+                setLoadingProgress(0);
+                setActivePromoIndex(0);
+                setMapPointer({ x: 50, y: 50 });
+                setBusinessName("");
+                setBusinessId("");
 
-            // Step 2: Basic Information
-            await wait(1500);
-            for (let i = 0; i <= "Mi Negocio".length; i++) {
-                await wait(50);
-                setBusinessName("Mi Negocio".slice(0, i));
+                // Step 1: Plan Selection
+                await wait(1500);
+                setSelectedPlan("premium");
+                await wait(1000);
+                if (abortDemo.current) break;
+                setStep(2);
+
+                // Step 2: Basic Information
+                await wait(1500);
+                for (let i = 0; i <= "Mi Negocio".length; i++) {
+                    if (abortDemo.current) break;
+                    await wait(50);
+                    setBusinessName("Mi Negocio".slice(0, i));
+                }
+                await wait(500);
+                for (let i = 0; i <= "1234567890".length; i++) {
+                    if (abortDemo.current) break;
+                    await wait(50);
+                    setBusinessId("1234567890".slice(0, i));
+                }
+                await wait(1000);
+                if (abortDemo.current) break;
+                setStep(3);
+
+                // Step 3: Location Map
+                await wait(2000);
+                if (abortDemo.current) break;
+                setStep(4);
+
+                // Step 4: Address Details
+                await wait(2000);
+                if (abortDemo.current) break;
+                setStep(5);
+
+                // Step 5: Business Description
+                await wait(2000);
+                if (abortDemo.current) break;
+                setStep(6);
+
+                // Step 6: Category Detection
+                await wait(2000);
+                if (abortDemo.current) break;
+                setStep(7);
+
+                // Step 7: Create Promo Inputs
+                await wait(2000);
+                if (abortDemo.current) break;
+                setStep(8);
+
+                // Step 8: Promo Selection
+                await wait(1500);
+                setActivePromoIndex(1);
+                await wait(1000);
+                setActivePromoIndex(0);
+                await wait(1000);
+                if (abortDemo.current) break;
+                setStep(9);
+
+                // Step 9: Configure Promo
+                await wait(2000);
+                if (abortDemo.current) break;
+                setStep(10);
+
+                // Step 10: Launching (auto-advances to 11)
+                await wait(3500);
+
+                // Step 11: Success
+                await wait(3000); // Wait at end of loop
             }
-            await wait(500);
-            for (let i = 0; i <= "1234567890".length; i++) {
-                await wait(50);
-                setBusinessId("1234567890".slice(0, i));
-            }
-            await wait(1000);
-            setStep(3);
-
-            // Step 3: Location Map
-            await wait(2000);
-            setStep(4);
-
-            // Step 4: Address Details
-            await wait(2000);
-            setStep(5);
-
-            // Step 5: Business Description
-            await wait(2000);
-            setStep(6);
-
-            // Step 6: Category Detection
-            await wait(2000);
-            setStep(7);
-
-            // Step 7: Create Promo Inputs
-            await wait(2000);
-            setStep(8);
-
-            // Step 8: Promo Selection
-            await wait(1500);
-            setActivePromoIndex(1);
-            await wait(1000);
-            setActivePromoIndex(0);
-            await wait(1000);
-            setStep(9);
-
-            // Step 9: Configure Promo
-            await wait(2000);
-            setStep(10);
-
-            // Step 10: Launching (auto-advances to 11)
-            await wait(3500);
-
-            // Step 11: Success
-            await wait(2000);
-
-            window.dispatchEvent(new CustomEvent('zelify:demo-end'));
         } catch (error) {
             // Demo was aborted
         } finally {
             isRunningRef.current = false;
+            window.dispatchEvent(new CustomEvent('zelify:demo-end'));
         }
     };
 

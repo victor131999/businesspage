@@ -150,93 +150,103 @@ export default function ConnectCard() {
         abortDemo.current = false;
         window.dispatchEvent(new CustomEvent('zelify:demo-start'));
 
-        // Reset to initial state
-        setCurrentScreen("banks");
-        setSelectedBank(null);
-        setActiveBankCard(0);
-        setSearchQuery("");
-        setUsername("");
-        setPassword("");
-        setLoadingProgress(0);
-        setWalletBalance(0);
-        setSelectedAccountForDeposit(null);
-        setActiveDepositAccountCard(0);
-        setDepositAmount("");
-        setSlideProgress(0);
-        setIsSliding(false);
-        setIsTransferring(false);
-
         try {
-            // 1. Banks screen - simulate selection
-            await wait(1000);
-            setActiveBankCard(1);
-            setSelectedBank(banks[1]);
-            await wait(800);
-            setActiveBankCard(0);
-            setSelectedBank(banks[0]);
-            await wait(1000);
+            while (isRunningRef.current && !abortDemo.current) {
+                // Reset to initial state
+                setCurrentScreen("banks");
+                setSelectedBank(null);
+                setActiveBankCard(0);
+                setSearchQuery("");
+                setUsername("");
+                setPassword("");
+                setLoadingProgress(0);
+                setWalletBalance(0);
+                setSelectedAccountForDeposit(null);
+                setActiveDepositAccountCard(0);
+                setDepositAmount("");
+                setSlideProgress(0);
+                setIsSliding(false);
+                setIsTransferring(false);
 
-            // 2. Navigate to credentials
-            setCurrentScreen("credentials");
-            await wait(1500);
+                // 1. Banks screen - simulate selection
+                await wait(1000);
+                setActiveBankCard(1);
+                setSelectedBank(banks[1]);
+                await wait(800);
+                setActiveBankCard(0);
+                setSelectedBank(banks[0]);
+                await wait(1000);
 
-            // 3. Fill credentials
-            for (let i = 0; i <= "demo@zelify.com".length; i++) {
-                await wait(50);
-                setUsername("demo@zelify.com".slice(0, i));
+                // 2. Navigate to credentials
+                if (abortDemo.current) break;
+                setCurrentScreen("credentials");
+                await wait(1500);
+
+                // 3. Fill credentials
+                for (let i = 0; i <= "demo@zelify.com".length; i++) {
+                    if (abortDemo.current) break;
+                    await wait(50);
+                    setUsername("demo@zelify.com".slice(0, i));
+                }
+                await wait(500);
+                for (let i = 0; i <= "password123".length; i++) {
+                    if (abortDemo.current) break;
+                    await wait(50);
+                    setPassword("password123".slice(0, i));
+                }
+                await wait(1000);
+
+                // 4. Navigate to loading
+                if (abortDemo.current) break;
+                setCurrentScreen("loading");
+                startLoadingProgress();
+                await wait(3200);
+
+                // 5. Navigate to success
+                if (abortDemo.current) break;
+                setCurrentScreen("success");
+                await wait(2000);
+
+                // 6. Navigate to wallet
+                if (abortDemo.current) break;
+                setCurrentScreen("wallet");
+                setWalletBalance(1000.00);
+                await wait(2000);
+
+                // 7. Navigate to deposit
+                if (abortDemo.current) break;
+                setCurrentScreen("deposit");
+                await wait(1000);
+                setActiveDepositAccountCard(0);
+                setSelectedAccountForDeposit(depositAccounts[0]);
+                await wait(500);
+                setDepositAmount("500");
+                await wait(1000);
+
+                // 8. Simulate slide
+                for (let i = 0; i <= 100; i += 5) {
+                    if (abortDemo.current) break;
+                    await wait(30);
+                    setSlideProgress(i);
+                }
+                await wait(500);
+                setIsTransferring(true);
+                setCurrentScreen("loading");
+                setLoadingProgress(0);
+                startLoadingProgress();
+                await wait(3200);
+
+                // 9. Back to wallet
+                if (abortDemo.current) break;
+                setCurrentScreen("wallet");
+                setWalletBalance(1500.00);
+                await wait(3000); // Wait at end of loop
             }
-            await wait(500);
-            for (let i = 0; i <= "password123".length; i++) {
-                await wait(50);
-                setPassword("password123".slice(0, i));
-            }
-            await wait(1000);
-
-            // 4. Navigate to loading
-            setCurrentScreen("loading");
-            startLoadingProgress();
-            await wait(3200);
-
-            // 5. Navigate to success
-            setCurrentScreen("success");
-            await wait(2000);
-
-            // 6. Navigate to wallet
-            setCurrentScreen("wallet");
-            setWalletBalance(1000.00);
-            await wait(2000);
-
-            // 7. Navigate to deposit
-            setCurrentScreen("deposit");
-            await wait(1000);
-            setActiveDepositAccountCard(0);
-            setSelectedAccountForDeposit(depositAccounts[0]);
-            await wait(500);
-            setDepositAmount("500");
-            await wait(1000);
-
-            // 8. Simulate slide
-            for (let i = 0; i <= 100; i += 5) {
-                await wait(30);
-                setSlideProgress(i);
-            }
-            await wait(500);
-            setIsTransferring(true);
-            setCurrentScreen("loading");
-            setLoadingProgress(0);
-            startLoadingProgress();
-            await wait(3200);
-
-            // 9. Back to wallet
-            setCurrentScreen("wallet");
-            setWalletBalance(1500.00);
-            await wait(2000);
-
-            window.dispatchEvent(new CustomEvent('zelify:demo-end'));
         } catch (error) {
             // Demo was aborted
         } finally {
             isRunningRef.current = false;
+            window.dispatchEvent(new CustomEvent('zelify:demo-end'));
         }
     };
 

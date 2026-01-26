@@ -47,32 +47,25 @@ export default function AmlCard() {
     }, [progress]);
 
     // Start progress simulation
-    const startProgress = () => {
-        // Clear any existing interval
-        if (progressIntervalRef.current) {
-            clearInterval(progressIntervalRef.current);
-        }
+    const startProgress = async () => {
+        while (isRunningRef.current) {
+            setProgress(0);
+            setCurrentVerificationText("Verificando en listas internas");
 
-        const duration = 5000;
-        const interval = 50;
-        const increment = 100 / (duration / interval);
-        
-        progressIntervalRef.current = setInterval(() => {
-            setProgress((prev) => {
-                const newProgress = prev + increment;
-                if (newProgress >= 100) {
-                    if (progressIntervalRef.current) {
-                        clearInterval(progressIntervalRef.current);
-                        progressIntervalRef.current = null;
-                    }
-                    setIsRunning(false);
-                    isRunningRef.current = false;
-                    window.dispatchEvent(new CustomEvent('zelify:demo-end'));
-                    return 100;
-                }
-                return newProgress;
-            });
-        }, interval);
+            const duration = 5000;
+            const interval = 50;
+            const steps = duration / interval;
+            const increment = 100 / steps;
+
+            for (let i = 0; i < steps; i++) {
+                if (!isRunningRef.current) return;
+                await new Promise(resolve => setTimeout(resolve, interval));
+                setProgress(prev => Math.min(prev + increment, 100));
+            }
+
+            setProgress(100);
+            await new Promise(resolve => setTimeout(resolve, 3000)); // Wait before restart loop
+        }
     };
 
     // Stop progress simulation
@@ -89,13 +82,13 @@ export default function AmlCard() {
     const handlePlayDemo = () => {
         // Si ya está corriendo, no hacer nada (el botón externo maneja el toggle)
         if (isRunningRef.current) return;
-        
+
         // Detener cualquier animación anterior
         stopProgress();
-        
+
         // Reiniciar desde el principio
         setProgress(0);
-        
+
         // Pequeño delay para asegurar que el estado se actualice
         setTimeout(() => {
             isRunningRef.current = true;

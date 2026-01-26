@@ -137,49 +137,56 @@ export default function CardsCard() {
         abortDemo.current = false;
         window.dispatchEvent(new CustomEvent('zelify:demo-start'));
 
-        // Reset to initial state
-        setActiveAction("number");
-        setIsExpanded(false);
-        setCurrentCard(1);
-
         try {
-            // 1. Show number action
-            await wait(1500);
-            setIsExpanded(true);
-            await wait(2000);
+            while (isRunningRef.current && !abortDemo.current) {
+                // Reset to initial state
+                setActiveAction("number");
+                setIsExpanded(false);
+                setCurrentCard(1);
 
-            // 2. Switch to wallet
-            setActiveAction("wallet");
-            await wait(2000);
+                // 1. Show number action
+                await wait(1500);
+                setIsExpanded(true);
+                await wait(2000);
 
-            // 3. Switch to freeze
-            setActiveAction("freeze");
-            await wait(2000);
+                // 2. Switch to wallet
+                if (abortDemo.current) break;
+                setActiveAction("wallet");
+                await wait(2000);
 
-            // 4. Switch to security
-            setActiveAction("security");
-            await wait(2000);
+                // 3. Switch to freeze
+                if (abortDemo.current) break;
+                setActiveAction("freeze");
+                await wait(2000);
 
-            // 5. Switch to more
-            setActiveAction("more");
-            await wait(2000);
+                // 4. Switch to security
+                if (abortDemo.current) break;
+                setActiveAction("security");
+                await wait(2000);
 
-            // 6. Switch to lock
-            setActiveAction("lock");
-            await wait(2000);
+                // 5. Switch to more
+                if (abortDemo.current) break;
+                setActiveAction("more");
+                await wait(2000);
 
-            // 7. Change card
-            setCurrentCard(2);
-            await wait(1500);
-            setActiveAction("number");
-            setIsExpanded(true);
-            await wait(2000);
+                // 6. Switch to lock
+                if (abortDemo.current) break;
+                setActiveAction("lock");
+                await wait(2000);
 
-            window.dispatchEvent(new CustomEvent('zelify:demo-end'));
+                // 7. Change card
+                if (abortDemo.current) break;
+                setCurrentCard(2);
+                await wait(1500);
+                setActiveAction("number");
+                setIsExpanded(true);
+                await wait(3000); // Wait at end of loop
+            }
         } catch (error) {
             // Demo was aborted
         } finally {
             isRunningRef.current = false;
+            window.dispatchEvent(new CustomEvent('zelify:demo-end'));
         }
     };
 

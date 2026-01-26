@@ -165,57 +165,60 @@ export default function PaymentsCard() {
         abortDemo.current = false;
         window.dispatchEvent(new CustomEvent('zelify:demo-start'));
 
-        // Reset all states
-        setCurrentModule("qr");
-        setQrScreen("home");
-        setQrLoadingProgress(0);
-        setCkScreen("dashboard");
-        setSelectedContact(null);
-        setCkLoadingProgress(0);
-        setSbScreen("screen1");
-        setSelectedProvider(null);
-        setSearchQuery("");
-
         try {
-            // QR Module Demo
-            await wait(2000);
-            setQrScreen("scan-qr");
-            await wait(2000);
-            setQrScreen("confirm");
-            await wait(2000);
-            setQrScreen("processing");
-            startQrLoadingProgress();
-            await wait(3500);
-            setQrScreen("success");
-            await wait(2000);
+            while (isRunningRef.current && !abortDemo.current) {
+                // Reset all states
+                setCurrentModule("qr");
+                setQrScreen("home");
+                setQrLoadingProgress(0);
+                setCkScreen("dashboard");
+                setSelectedContact(null);
+                setCkLoadingProgress(0);
+                setSbScreen("screen1");
+                setSelectedProvider(null);
+                setSearchQuery("");
 
-            // Custom Keys Module Demo
-            setCurrentModule("custom-keys");
-            await wait(2000);
-            setSelectedContact("cs");
-            setCkScreen("selection");
-            await wait(2000);
-            setCkScreen("confirm");
-            await wait(2000);
-            setCkScreen("processing");
-            startCkLoadingProgress();
-            await wait(3500);
-            setCkScreen("success");
-            await wait(2000);
+                // QR Module Demo
+                await wait(2000);
+                setQrScreen("scan-qr");
+                await wait(2000);
+                setQrScreen("confirm");
+                await wait(2000);
+                setQrScreen("processing");
+                startQrLoadingProgress();
+                await wait(3500);
+                setQrScreen("success");
+                await wait(2000);
 
-            // Servicios Básicos Module Demo
-            setCurrentModule("servicios-basicos");
-            await wait(2000);
-            setSbScreen("screen2");
-            await wait(2000);
-            setSbScreen("screen1");
-            await wait(2000);
+                // Custom Keys Module Demo
+                if (abortDemo.current) break;
+                setCurrentModule("custom-keys");
+                await wait(2000);
+                setSelectedContact("cs");
+                setCkScreen("selection");
+                await wait(2000);
+                setCkScreen("confirm");
+                await wait(2000);
+                setCkScreen("processing");
+                startCkLoadingProgress();
+                await wait(3500);
+                setCkScreen("success");
+                await wait(2000);
 
-            window.dispatchEvent(new CustomEvent('zelify:demo-end'));
+                // Servicios Básicos Module Demo
+                if (abortDemo.current) break;
+                setCurrentModule("servicios-basicos");
+                await wait(2000);
+                setSbScreen("screen2");
+                await wait(2000);
+                setSbScreen("screen1");
+                await wait(3000); // Wait at the end of loop
+            }
         } catch (error) {
             // Demo was aborted
         } finally {
             isRunningRef.current = false;
+            window.dispatchEvent(new CustomEvent('zelify:demo-end'));
         }
     };
 
@@ -343,8 +346,8 @@ export default function PaymentsCard() {
             return (
                 <div className="relative flex h-full flex-col px-5 py-3">
                     <div className="flex items-center justify-between mb-2">
-                        <button 
-                            onClick={() => setQrScreen("home")} 
+                        <button
+                            onClick={() => setQrScreen("home")}
                             className="flex h-8 w-8 items-center justify-center rounded-full hover:bg-gray-100 transition"
                         >
                             <svg className="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -395,8 +398,8 @@ export default function PaymentsCard() {
             return (
                 <div className="relative flex h-full flex-col px-5 py-3">
                     <div className="flex items-center justify-between mb-2">
-                        <button 
-                            onClick={() => setQrScreen("home")} 
+                        <button
+                            onClick={() => setQrScreen("home")}
                             className="flex h-8 w-8 items-center justify-center rounded-full hover:bg-gray-100 transition"
                         >
                             <svg className="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -439,7 +442,7 @@ export default function PaymentsCard() {
                         </div>
                         <button
                             onClick={() => setQrScreen("confirm")}
-                            className="mt-3 w-full rounded-xl py-2.5 text-xs font-semibold text-white" 
+                            className="mt-3 w-full rounded-xl py-2.5 text-xs font-semibold text-white"
                             style={{ background: gradientStyle }}
                         >
                             Simular escaneo
@@ -633,11 +636,11 @@ export default function PaymentsCard() {
             return (
                 <div className="relative flex h-full flex-col px-5 py-3">
                     <div className="flex items-center justify-between mb-2">
-                        <button 
+                        <button
                             onClick={() => {
                                 setCurrentModule("qr");
                                 setQrScreen("home");
-                            }} 
+                            }}
                             className="flex h-8 w-8 items-center justify-center rounded-full hover:bg-gray-100 transition"
                         >
                             <svg className="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -886,11 +889,11 @@ export default function PaymentsCard() {
                     <div className="absolute bottom-0 left-0 right-0 z-10 flex flex-col" style={{ height: '65%', borderRadius: '24px 24px 0 0', backdropFilter: 'blur(8px)', backgroundColor: 'rgba(255, 255, 255, 0.4)' }}>
                         <div className="flex-1 flex flex-col px-4 pt-4 pb-4 overflow-y-auto">
                             <div className="flex items-center justify-between mb-2">
-                                <button 
+                                <button
                                     onClick={() => {
                                         setCurrentModule("qr");
                                         setQrScreen("home");
-                                    }} 
+                                    }}
                                     className="flex h-8 w-8 items-center justify-center rounded-full hover:bg-gray-100 transition"
                                 >
                                     <svg className="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

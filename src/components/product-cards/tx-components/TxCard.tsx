@@ -166,64 +166,70 @@ export default function TxCard() {
         abortDemo.current = false;
         window.dispatchEvent(new CustomEvent('zelify:demo-start'));
 
-        // Reset to initial state
-        setCurrentScreen("amount");
-        setAmount("0.00");
-        setSelectedContact(null);
-        setSelectedContactData(null);
-        setLoadingProgress(0);
-        setIsSliderComplete(false);
-        setSlidePosition(0);
-        setIsDragging(false);
-        setIsTransactionDetailsExpanded(false);
-        setIsRecentTransfersExpanded(false);
-
         try {
-            // 1. Amount screen
-            await wait(1000);
-            setAmount("500");
-            await wait(1000);
-            setAmount("500.00");
-            await wait(1000);
+            while (isRunningRef.current && !abortDemo.current) {
+                // Reset to initial state
+                setCurrentScreen("amount");
+                setAmount("0.00");
+                setSelectedContact(null);
+                setSelectedContactData(null);
+                setLoadingProgress(0);
+                setIsSliderComplete(false);
+                setSlidePosition(0);
+                setIsDragging(false);
+                setIsTransactionDetailsExpanded(false);
+                setIsRecentTransfersExpanded(false);
 
-            // 2. Navigate to contacts
-            setCurrentScreen("currency-selector");
-            await wait(1500);
+                // 1. Amount screen
+                await wait(1000);
+                setAmount("500");
+                await wait(1000);
+                setAmount("500.00");
+                await wait(1000);
 
-            // 3. Select contact
-            setSelectedContact("1");
-            setSelectedContactData(contacts[0]);
-            await wait(1000);
+                // 2. Navigate to contacts
+                if (abortDemo.current) break;
+                setCurrentScreen("currency-selector");
+                await wait(1500);
 
-            // 4. Navigate to summary
-            setCurrentScreen("summary");
-            await wait(1500);
+                // 3. Select contact
+                if (abortDemo.current) break;
+                setSelectedContact("1");
+                setSelectedContactData(contacts[0]);
+                await wait(1000);
 
-            // 5. Simulate slide
-            for (let i = 0; i <= 100; i += 5) {
-                await wait(30);
-                if (trackRef.current && sliderRef.current) {
-                    const rect = trackRef.current.getBoundingClientRect();
-                    const sliderWidth = sliderRef.current.offsetWidth;
-                    const maxPosition = rect.width - sliderWidth;
-                    setSlidePosition((maxPosition * i) / 100);
+                // 4. Navigate to summary
+                if (abortDemo.current) break;
+                setCurrentScreen("summary");
+                await wait(1500);
+
+                // 5. Simulate slide
+                for (let i = 0; i <= 100; i += 5) {
+                    if (abortDemo.current) break;
+                    await wait(30);
+                    if (trackRef.current && sliderRef.current) {
+                        const rect = trackRef.current.getBoundingClientRect();
+                        const sliderWidth = sliderRef.current.offsetWidth;
+                        const maxPosition = rect.width - sliderWidth;
+                        setSlidePosition((maxPosition * i) / 100);
+                    }
                 }
+                await wait(500);
+                setIsSliderComplete(true);
+                setCurrentScreen("processing");
+                startLoadingProgress();
+                await wait(3200);
+
+                // 6. Navigate to success
+                if (abortDemo.current) break;
+                setCurrentScreen("success");
+                await wait(3000); // Wait at end of loop
             }
-            await wait(500);
-            setIsSliderComplete(true);
-            setCurrentScreen("processing");
-            startLoadingProgress();
-            await wait(3200);
-
-            // 6. Navigate to success
-            setCurrentScreen("success");
-            await wait(2000);
-
-            window.dispatchEvent(new CustomEvent('zelify:demo-end'));
         } catch (error) {
             // Demo was aborted
         } finally {
             isRunningRef.current = false;
+            window.dispatchEvent(new CustomEvent('zelify:demo-end'));
         }
     };
 
@@ -426,15 +432,13 @@ export default function TxCard() {
                                         }}
                                         onMouseEnter={() => setHoveredContact(contact.id)}
                                         onMouseLeave={() => setHoveredContact(null)}
-                                        className={`flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all cursor-pointer ${
-                                            shouldShowGradient ? "text-white" : "bg-gray-200"
-                                        }`}
+                                        className={`flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all cursor-pointer ${shouldShowGradient ? "text-white" : "bg-gray-200"
+                                            }`}
                                         style={shouldShowGradient ? { background: gradientStyle } : {}}
                                     >
                                         <div
-                                            className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold text-xs flex-shrink-0 ${
-                                                shouldShowGradient ? "bg-white" : ""
-                                            }`}
+                                            className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold text-xs flex-shrink-0 ${shouldShowGradient ? "bg-white" : ""
+                                                }`}
                                             style={shouldShowGradient ? {} : { background: gradientStyle }}
                                         >
                                             <span className={shouldShowGradient ? "text-gray-900" : "text-white"}>

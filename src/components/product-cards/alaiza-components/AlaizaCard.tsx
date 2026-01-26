@@ -35,34 +35,28 @@ export default function AlaizaCard() {
         isRunningRef.current = true;
         window.dispatchEvent(new CustomEvent('zelify:demo-start'));
 
-        // Reset to initial state
-        setCurrentModule("chat");
-
         try {
-            // Chat demo - The module handles its own typing simulation on mount or user interaction?
-            // The Astro demo script simulated user interaction.
-            // Our modules are self-contained. We can just switch views to show them off for now.
-            // Or we could pass a ref to trigger actions.
+            while (isRunningRef.current) {
+                // Reset to initial state
+                setCurrentModule("chat");
+                await wait(4000); // Stay on Chat
 
-            // For this refactor, we focus on Visuals. The demo flow simply switches screens.
+                if (!isRunningRef.current) break;
+                setCurrentModule("financial-education");
+                await wait(5000); // Show Summary
 
-            await wait(4000); // Stay on Chat
+                if (!isRunningRef.current) break;
+                setCurrentModule("behavior-analysis");
+                await wait(5000); // Show behavior
 
-            setCurrentModule("financial-education");
-            await wait(5000); // Show Summary
-
-            // Ideally we'd trigger screen types inside Education, but let's just cycle top level modules first.
-
-            setCurrentModule("behavior-analysis");
-            await wait(5000); // Show behavior
-
-            // Loop or End?
-            setCurrentModule("chat");
-            window.dispatchEvent(new CustomEvent('zelify:demo-end'));
+                if (!isRunningRef.current) break;
+                await wait(2000); // Small pause before loop reset
+            }
         } catch (error) {
             // Demo aborted
         } finally {
             isRunningRef.current = false;
+            window.dispatchEvent(new CustomEvent('zelify:demo-end'));
         }
     };
 

@@ -1,11 +1,20 @@
 ---
+
 ---
 
-<div class="product-card-content">
-  <p>Transfers</p>
+<div class="no-interaction">
+  <div class="product-card-content">
+    <p>Transfers</p>
+  </div>
 </div>
 
 <style>
+  .no-interaction {
+    width: 100%;
+    height: 100%;
+    pointer-events: none !important;
+    user-select: none !important;
+  }
   .product-card-content {
     width: 100%;
     height: 100%;
@@ -14,7 +23,7 @@
     justify-content: center;
     padding: 2rem;
   }
-  
+
   .product-card-content p {
     font-size: 1.5rem;
     color: #00223e;
