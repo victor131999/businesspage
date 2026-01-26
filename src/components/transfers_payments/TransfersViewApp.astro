@@ -429,80 +429,338 @@
 
   <!-- Screen 3: Summary -->
   <div id="tv-screen-summary" class="tv-screen hidden-screen">
-    <button class="tv-back-btn" onclick="window.tvNavigate('contacts')">
-      <svg
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg
+    <div class="h-full w-full relative flex flex-col">
+      <!-- Back Button (Re-positioned relative) -->
+      <button
+        onclick="window.tvNavigate('contacts')"
+        class="absolute top-4 left-0 flex items-center text-sm font-medium text-[#000b1e] hover:text-[#004492] transition-colors z-50 ml-0 pl-0"
+        style="font-weight: 600;"
       >
-      Back
-    </button>
+        <svg
+          class="h-5 w-5 mr-1"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2.5"
+            d="M15 19l-7-7 7-7"></path>
+        </svg>
+        <span>Atrás</span>
+      </button>
 
-    <div class="tv-blur-content center-content">
-      <h2 class="tv-summary-title">Confirm payment</h2>
-      <p class="tv-summary-desc">Review the details before continuing.</p>
-
-      <div class="tv-summary-details">
-        <div class="tv-detail-row">
-          <span class="label">Recipient</span>
-          <span class="value" id="tv-summary-recipient">Valentina Duarte</span>
-        </div>
-        <div class="tv-detail-row">
-          <span class="label">Amount</span>
-          <span class="value big">1,250.00 MXN</span>
-        </div>
-
-        <div class="tv-note-input-wrapper">
-          <label>Note</label>
-          <textarea placeholder="Add a note (optional)" rows="2"></textarea>
-        </div>
+      <!-- GIF Background (Absolute) -->
+      <div
+        class="absolute top-12 left-0 right-0 flex justify-center z-0 pointer-events-none"
+      >
+        <img
+          src="/gift/ANIMACION%201.gif"
+          alt="Connecting Animation"
+          class="h-48 w-48 object-contain opacity-90 mix-blend-multiply"
+        />
       </div>
 
-      <!-- Slide to Confirm -->
-      <div class="tv-slider-container" id="tv-slider">
-        <div class="tv-slider-track">
-          <span class="tv-slider-text">Slide to confirm</span>
+      <!-- Glassmorphic Card -->
+      <div
+        class="relative z-10 flex-1 flex flex-col overflow-hidden rounded-t-[32px] backdrop-blur-sm mt-40 mb-0 px-6 pt-6 pb-8 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] border-t border-white/40"
+        style="background-color: rgba(255, 255, 255, 0.35);"
+      >
+        <!-- Title Section (Centered) -->
+        <div class="text-center mb-6">
+          <h2 class="text-[22px] font-bold text-[#2b5bf7] mb-1 leading-tight">
+            Confirm the transfer
+          </h2>
+          <p class="text-[13px] text-[#64748b] font-normal">
+            Review the details before sending.
+          </p>
         </div>
-        <div class="tv-slider-thumb" id="tv-slider-thumb">
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg
+
+        <!-- Recipient -->
+        <div class="mb-5">
+          <p class="text-[13px] font-medium text-[#94a3b8] mb-1">Recipient</p>
+          <p
+            class="text-[17px] font-bold text-[#0f172a]"
+            id="tv-summary-recipient"
           >
+            Carlos Mendoza
+          </p>
+        </div>
+
+        <!-- Amount -->
+        <div class="mb-6">
+          <p class="text-[13px] font-medium text-[#94a3b8] mb-1">Amount</p>
+          <p class="text-[28px] font-bold text-[#0f172a] tracking-tight">
+            1,250.00 MXN
+          </p>
+        </div>
+
+        <!-- Divider -->
+        <div class="h-px bg-slate-200 w-full mb-4"></div>
+
+        <!-- Summary Details -->
+        <div class="space-y-3 mb-4">
+          <div class="flex justify-between items-center text-[14px]">
+            <span class="text-[#64748b]">You send</span>
+            <span class="font-medium text-[#0f172a]">1,250.00 MXN</span>
+          </div>
+          <div class="flex justify-between items-center text-[14px]">
+            <span class="text-[#64748b]">Exchange rate</span>
+            <span class="font-medium text-[#0f172a]">1 MXN = 0.0580 USD</span>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="h-px bg-slate-200 w-full mb-4"></div>
+
+        <!-- Total -->
+        <div class="flex justify-between items-center text-[16px] mb-auto">
+          <span class="font-bold text-[#0f172a] text-lg">Total</span>
+          <span class="font-bold text-[#0f172a] text-lg">$72.50 USD</span>
+        </div>
+
+        <!-- Slider Button -->
+        <div class="w-full mt-6 mb-4" id="tv-slider">
+          <div
+            class="relative w-full h-[56px] rounded-[28px] flex items-center justify-center overflow-hidden cursor-pointer shadow-lg active:scale-[0.99] transition-transform tv-slider-track"
+            style="background: linear-gradient(90deg, #1e3a8a 0%, #000080 100%);"
+          >
+            <span
+              class="text-white font-semibold text-[15px] pointer-events-none z-0 tracking-wide"
+            >
+              Slide to confirm
+            </span>
+
+            <div
+              class="absolute left-1 w-[48px] h-[48px] bg-white rounded-full flex items-center justify-center cursor-grab active:cursor-grabbing z-10 shadow-md transition-transform tv-slider-thumb"
+              id="tv-slider-thumb"
+            >
+              <!-- Blue Arrow Icon -->
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                class="text-[#1e3a8a]"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M9 18l6-6-6-6"></path>
+              </svg>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Screen 4: Processing & Success -->
-  <div id="tv-screen-processing" class="tv-screen hidden-screen processing-bg">
-    <div class="tv-processing-content" id="tv-processing-view">
-      <div class="tv-wave-canvas"></div>
-      <!-- Simulated via CSS -->
-      <h2 class="tv-status-title">Processing...</h2>
-    </div>
-    <div class="tv-success-content hidden" id="tv-success-view">
-      <div class="tv-success-icon">
-        <svg
-          width="40"
-          height="40"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="3"><path d="M20 6L9 17l-5-5"></path></svg
+  <div
+    id="tv-screen-processing"
+    class="tv-screen hidden-screen bg-white h-full relative overflow-hidden font-sans"
+  >
+    <!-- Processing View (Card Animation) -->
+    <div
+      class="flex-1 px-6 pb-6 pt-2 flex flex-col items-center justify-center min-h-0 h-full"
+      id="tv-processing-view"
+    >
+      <!-- Card Container -->
+      <div
+        class="relative w-full h-full rounded-[2.5rem] overflow-hidden shadow-xl bg-[#001a33]"
+      >
+        <!-- Base Layer -->
+        <div
+          class="absolute inset-0 z-10 flex flex-col items-center justify-center h-full px-6 text-center w-full"
         >
+          <h2 class="text-2xl font-bold mb-2 text-[#003366]">
+            Processing your transaction
+          </h2>
+          <p class="text-[13px] text-gray-400">This may take a few seconds</p>
+          <!-- Empty Bar -->
+          <div
+            class="w-64 h-2 rounded-full mt-8 overflow-hidden bg-gray-200/10"
+          >
+          </div>
+        </div>
+
+        <!-- Overlay Layer (Clipped) -->
+        <div
+          id="tv-processing-overlay"
+          class="absolute inset-0 z-20 overflow-hidden"
+          style="clip-path: inset(0 100% 0 0); transition: clip-path 3s cubic-bezier(0.22, 1, 0.36, 1);"
+        >
+          <div
+            class="w-full h-full flex flex-col items-center justify-center px-6 text-center"
+            style="background: linear-gradient(to right, #004492 0%, #000b1e 100%);"
+          >
+            <!-- Content on top of gradient -->
+            <div class="relative z-10 flex flex-col items-center">
+              <h2 class="text-2xl font-bold mb-2 text-white">
+                Processing your transaction
+              </h2>
+              <p class="text-[13px] text-white/80">
+                This may take a few seconds
+              </p>
+              <!-- Filled Bar -->
+              <div
+                class="w-64 h-2 rounded-full mt-8 overflow-hidden bg-white/20"
+              >
+                <div
+                  class="h-full w-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.8)]"
+                >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Flush Edge Effect -->
+        <div
+          id="tv-processing-glint"
+          class="absolute top-0 bottom-0 w-20 z-30 pointer-events-none flush-effect"
+          style="left: 0%; background: linear-gradient(to right, transparent, rgba(255,255,255,0.5), transparent); transform: translateX(-50%); transition: left 3s linear;"
+        >
+        </div>
       </div>
-      <h2 class="tv-status-title">Successfully sent!</h2>
-      <p class="tv-status-desc">Your transfer has been processed.</p>
-      <button class="tv-finish-btn" onclick="window.tvReset()">Finish</button>
+    </div>
+
+    <!-- Success View -->
+    <div
+      class="tv-success-content hidden h-full w-full relative"
+      id="tv-success-view"
+    >
+      <!-- Layer 1: Blue "Transfer Sent" Card (Separate) -->
+      <div
+        class="absolute top-6 bottom-24 left-6 right-6 rounded-[2.5rem] overflow-hidden shadow-2xl z-10 bg-[#004492]"
+      >
+        <div
+          class="absolute inset-0 w-full h-full"
+          style="background: linear-gradient(to right, #004492 0%, #000b1e 100%);"
+        >
+        </div>
+
+        <div
+          class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-6"
+        >
+          <svg
+            width="64"
+            height="64"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="mb-4"
+          >
+            <path d="M20 6L9 17l-5-5"></path>
+          </svg>
+          <h2 class="text-3xl font-bold mb-2">Transfer sent</h2>
+          <p class="text-sm opacity-90 font-medium">
+            Zelify notified the recipient
+          </p>
+        </div>
+      </div>
+
+      <!-- Layer 2: Transaction Details Bottom Sheet (Separate, Overlay) -->
+      <div
+        id="tv-details-sheet"
+        class="absolute inset-x-0 bottom-0 bg-[#e0e7ff] rounded-t-[2rem] shadow-[0_-5px_30px_rgba(0,0,0,0.15)] z-20 transition-all duration-500 cubic-bezier(0.32, 0.725, 0.25, 1) flex flex-col overflow-hidden"
+        style="height: 70px;"
+      >
+        <!-- Handle Area -->
+        <div
+          class="w-full flex items-center justify-center h-[70px] shrink-0 cursor-pointer hover:bg-white/50 transition-colors"
+          onclick="toggleSuccessDetails()"
+        >
+          <svg
+            id="tv-details-chevron"
+            class="w-6 h-6 text-slate-500 transition-transform duration-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 15l7-7 7 7"></path>
+          </svg>
+        </div>
+
+        <!-- Expanded Content -->
+        <div class="flex-1 px-8 pb-8 overflow-y-auto no-scrollbar pt-2">
+          <h2 class="text-center text-[17px] font-bold text-[#1e293b] mb-6">
+            Transaction Details
+          </h2>
+
+          <div class="space-y-5 relative">
+            <!-- Date/Hour -->
+            <div>
+              <p class="text-[13px] text-slate-500 mb-0.5">Date/Hour</p>
+              <p class="text-[15px] font-semibold text-[#1e293b]">
+                10/10/2025 / 12:26:04 PM
+              </p>
+            </div>
+
+            <!-- Recipient -->
+            <div>
+              <p class="text-[13px] text-slate-500 mb-0.5">Recipient</p>
+              <p class="text-[15px] font-bold text-[#1e293b]">Carlos Mendoza</p>
+            </div>
+
+            <!-- Transaction number -->
+            <div>
+              <p class="text-[13px] text-slate-500 mb-0.5">
+                Transaction number
+              </p>
+              <p class="text-[15px] font-bold text-[#1e293b]">871607050</p>
+            </div>
+
+            <!-- Payment method -->
+            <div>
+              <p class="text-[13px] text-slate-500 mb-0.5">Payment method</p>
+              <p class="text-[15px] font-bold text-[#1e293b]">TRANSFER</p>
+            </div>
+
+            <!-- Amount -->
+            <div>
+              <p class="text-[13px] text-slate-500 mb-0.5">Amount</p>
+              <p class="text-[15px] font-bold text-[#1e293b]">$100.00 USD</p>
+            </div>
+
+            <!-- Fee -->
+            <div>
+              <p class="text-[13px] text-slate-500 mb-0.5">Fee</p>
+              <p class="text-[15px] font-bold text-[#1e293b]">$10.00 USD</p>
+            </div>
+
+            <!-- Total -->
+            <div class="pt-2">
+              <p class="text-[13px] text-slate-500 mb-0.5">Total</p>
+              <p class="text-[20px] font-bold text-[#0f172a]">$110.00 USD</p>
+            </div>
+          </div>
+
+          <!-- Buttons -->
+          <div class="flex gap-4 mt-8 pb-6">
+            <button
+              class="flex-1 bg-[#1e3a8a] text-white py-3 rounded-xl font-semibold shadow-lg active:scale-95 transition-transform text-sm"
+            >
+              Share
+            </button>
+            <button
+              class="flex-1 bg-[#1e3a8a] text-white py-3 rounded-xl font-semibold shadow-lg active:scale-95 transition-transform text-sm"
+              onclick="window.tvReset()"
+            >
+              Download
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -1211,14 +1469,63 @@
 
   function completeTransaction() {
     window.tvNavigate("processing");
-    // Simulate loading
+
+    // Get Elements
+    const overlay = document.getElementById("tv-processing-overlay");
+    const glint = document.getElementById("tv-processing-glint");
+
+    // Reset first
+    if (overlay) overlay.style.clipPath = "inset(0 100% 0 0)";
+    if (glint) {
+      glint.style.transition = "none";
+      glint.style.left = "0%";
+      glint.style.transform = "skewX(-20deg) translateX(-150%)";
+    }
+
+    // Force Reflow
+    if (overlay) void overlay.offsetWidth;
+
+    // Trigger Animation
+    setTimeout(() => {
+      if (overlay) overlay.style.clipPath = "inset(0 0 0 0)";
+      if (glint) {
+        glint.style.transition = "left 3s ease-out";
+        glint.style.left = "200%";
+      }
+    }, 100);
+
+    // After animation finishes (3s), show success
     setTimeout(() => {
       const procView = document.getElementById("tv-processing-view");
       const succView = document.getElementById("tv-success-view");
       if (procView) procView.classList.add("hidden");
       if (succView) succView.classList.remove("hidden");
-    }, 2000);
+    }, 3200);
   }
+
+  // 4. Success Details Toggle
+  window.toggleSuccessDetails = () => {
+    const card = document.getElementById("tv-details-card");
+    if (!card) return;
+
+    // Check if expanded based on height style or class
+    // We'll use a data-attribute or simple class toggle
+    const isExpanded = card.classList.contains("expanded");
+
+    if (isExpanded) {
+      card.classList.remove("expanded");
+      card.style.height = "280px";
+      // Rotate chevron back
+      const svg = card.querySelector("svg");
+      if (svg) svg.style.transform = "rotate(0deg)";
+    } else {
+      card.classList.add("expanded");
+      card.style.height = "90%"; // Expand to almost full height
+      // Rotate chevron
+      const svg = card.querySelector("svg");
+      if (svg) svg.style.transform = "rotate(180deg)";
+    }
+  };
 
   window.tvReset = () => {
     // Reset views
@@ -1227,7 +1534,21 @@
     if (procView) procView.classList.remove("hidden");
     if (succView) succView.classList.add("hidden");
 
+    // Reset Animation State
+    const overlay = document.getElementById("tv-processing-overlay");
+    if (overlay) overlay.style.clipPath = "inset(0 100% 0 0)";
+
+    // Reset Details Card
+    const detailsCard = document.getElementById("tv-details-card");
+    if (detailsCard) {
+      detailsCard.classList.remove("expanded");
+      detailsCard.style.height = "280px";
+      const svg = detailsCard.querySelector("svg");
+      if (svg) svg.style.transform = "rotate(0deg)";
+    }
+
     // Reset Slider
+    const sliderThumb = document.getElementById("tv-slider-thumb");
     if (sliderThumb) sliderThumb.style.left = "4px";
 
     window.tvNavigate("amount");

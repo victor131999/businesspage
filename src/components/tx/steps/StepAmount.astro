@@ -77,13 +77,14 @@
     /* Bottom Sheet (Expandable) */
     .tv-bottom-sheet {
       background: #001530; /* Dark blue compact state */
-      width: 100%;
+      width: 50%;
       height: 70px; /* Initial compact height */
-      border-radius: 28px 28px 0 0;
+      border-radius: 20px 20px 0 0;
       position: absolute; /* Fixed at bottom of container */
       bottom: 0;
       left: 0;
       right: 0;
+      margin: 0 auto;
       display: flex;
       flex-direction: column;
       transition: all 0.5s cubic-bezier(0.32, 0.725, 0.25, 1);
@@ -96,7 +97,8 @@
     /* Active/Expanded State via class */
     .tv-bottom-sheet.expanded {
       height: 94%; /* Covers most of screen */
-      background: rgba(235, 239, 245, 0.85);
+      width: 50%;
+      background: transparent;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       color: #0f172a; /* Dark text */
