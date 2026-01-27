@@ -128,16 +128,16 @@ const useAnimatedNumber = (target: number, duration: number = 2000, delay: numbe
     useEffect(() => {
         const timer = setTimeout(() => {
             const startTime = Date.now();
-            const startValue = 0;
+            const startValue = current;
 
             const animate = () => {
                 const elapsed = Date.now() - startTime;
                 const progress = Math.min(elapsed / duration, 1);
-                
+
                 // Easing function (ease-out)
                 const easeOut = 1 - Math.pow(1 - progress, 3);
                 const value = Math.floor(startValue + (target - startValue) * easeOut);
-                
+
                 setCurrent(value);
 
                 if (progress < 1) {
@@ -161,10 +161,141 @@ export default function TokensDashboard() {
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
 
-    // Números animados con delays escalonados
-    const animatedTotal = useAnimatedNumber(mockTokenData.total, 2000, 200);
-    const animatedUsed = useAnimatedNumber(mockTokenData.used, 2000, 400);
-    const animatedRemaining = useAnimatedNumber(mockTokenData.remaining, 2000, 600);
+    // Config for cycle
+    const CYCLE_DURATION = 12000; // 12 seconds full cycle
+
+    // State for dynamic data
+    const [tokenData, setTokenData] = useState(mockTokenData);
+    const [liveLogs, setLiveLogs] = useState(mockLogs.slice(0, 7));
+    const [cyclePhase, setCyclePhase] = useState(0); // 0 to 1 (progress of filling)
+    const [isDraining, setIsDraining] = useState(false); // Mode
+
+    // Cycle Engine
+    useEffect(() => {
+        let startTime = Date.now();
+        let frameId: number;
+
+        const animate = () => {
+            const now = Date.now();
+            const elapsed = now - startTime;
+
+            // Calculate phase based on time
+            // We want: 0 -> 1 (Filling) over X seconds, then Fast Drain 1 -> 0
+
+            if (!isDraining) {
+                // Filling Phase
+                let progress = elapsed / (CYCLE_DURATION * 0.82); // 82% of time is filling
+                if (progress >= 1) {
+                    progress = 1;
+                    setIsDraining(true);
+                    startTime = Date.now(); // Reset time for drain phase
+                }
+                setCyclePhase(progress);
+            } else {
+                // Draining Phase (Faster)
+                let progress = 1 - (elapsed / (CYCLE_DURATION * 0.18)); // 18% of time is draining
+                if (progress <= 0) {
+                    progress = 0;
+                    setIsDraining(false);
+                    startTime = Date.now(); // Reset for fill phase
+                }
+                setCyclePhase(progress);
+            }
+
+            frameId = requestAnimationFrame(animate);
+        };
+
+        frameId = requestAnimationFrame(animate);
+        return () => cancelAnimationFrame(frameId);
+    }, [isDraining]);
+
+    // Apply phase to data
+    useEffect(() => {
+        // Base values (max capacity)
+        const MAX_TOTAL = 10000000; // 10M capacity
+
+        // Varying growth curves for realism
+        // We use the cyclePhase (0-1) to determine how "full" things are.
+        // Add some noise so they don't move perfectly in sync
+
+        const time = Date.now();
+        const smoothNoise = Math.floor(20000 * (0.5 + 0.5 * Math.sin(time / 1200))); // Subtle, smooth noise
+        const currentTotalUsed = Math.floor(MAX_TOTAL * 0.9 * cyclePhase) + smoothNoise; // Up to 90% full + subtle noise
+
+        // Update users
+        const newByUser = mockTokenData.byUser.map((u, i) => {
+            // Each user has a slightly different curve
+            const curve = Math.pow(cyclePhase, 1 + (i * 0.1)); // Different exponential growth
+            const wobble = 0.96 + 0.04 * Math.sin(time / 1400 + i);
+            return {
+                ...u,
+                tokens: Math.max(0, Math.floor((u.tokens * 2.3) * curve * wobble)) // Scale up existing mock as base
+            };
+        }).sort((a, b) => b.tokens - a.tokens);
+
+        // Update services
+        const newByService = mockTokenData.byService.map((s, i) => {
+            const curve = Math.pow(cyclePhase, 1 + (i * 0.05));
+            const wobble = 0.96 + 0.04 * Math.sin(time / 1500 + i);
+            return {
+                ...s,
+                tokens: Math.max(0, Math.floor((s.tokens * 2.3) * curve * wobble))
+            };
+        }).sort((a, b) => b.tokens - a.tokens);
+
+        setTokenData(prev => ({
+            ...prev,
+            total: MAX_TOTAL,
+            used: currentTotalUsed,
+            remaining: MAX_TOTAL - currentTotalUsed,
+            byUser: newByUser,
+            byService: newByService
+        }));
+
+    }, [cyclePhase]);
+
+
+    // Logs Ticker (Separate interval)
+    useEffect(() => {
+        const interval = setInterval(() => {
+            // Only add logs when there is activity (filling phase or high cyclePhase)
+            if (cyclePhase > 0.1) {
+                const now = new Date();
+                const timeString = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+                const randomUser = mockTokenData.byUser[Math.floor(Math.random() * mockTokenData.byUser.length)].user;
+                const randomService = mockTokenData.byService[Math.floor(Math.random() * mockTokenData.byService.length)].service;
+                const isSuccess = Math.random() > 0.05; // Mostly success
+
+                const newLog = {
+                    id: Date.now(),
+                    time: timeString,
+                    user: randomUser,
+                    service: randomService,
+                    tokens: Math.floor(Math.random() * 800 * cyclePhase) + 10, // More tokens when busier
+                    status: isSuccess ? "success" : "error"
+                };
+
+                setLiveLogs(prev => [newLog, ...prev].slice(0, 8));
+            }
+        }, 600);
+        return () => clearInterval(interval);
+    }, [cyclePhase]);
+
+
+    // Animated numbers hooks
+    // Use a very short duration because the state updates are frequent (animation frame driven)
+    const animatedTotal = useAnimatedNumber(tokenData.total, 580);
+    const animatedUsed = useAnimatedNumber(tokenData.used, 580);
+    const animatedRemaining = useAnimatedNumber(tokenData.remaining, 580);
+
+    const usagePercentage = (tokenData.used / tokenData.total) * 100;
+
+    const getFillClass = (percent: number) => {
+        if (percent >= 85) return "bg-red-500";
+        if (percent >= 60) return "bg-amber-400";
+        return "bg-emerald-500";
+    };
 
     useEffect(() => {
         const checkDarkMode = () => {
@@ -180,132 +311,172 @@ export default function TokensDashboard() {
     }, []);
 
     useEffect(() => {
-        // Trigger visibility animation
         setIsVisible(true);
     }, []);
 
-    const usagePercentage = (mockTokenData.used / mockTokenData.total) * 100;
-
     return (
-        <div className="tokens-dashboard space-y-4 p-4 h-full w-full">
-            {/* Token Consumption Overview - 3 Tarjetas Superiores */}
+        <div className="tokens-dashboard space-y-4 p-4 h-full w-full flex flex-col">
+
+            {/* Top Cards Grid */}
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-                {/* Tarjeta 1: Total Tokens */}
-                <div 
-                    className="card-animate rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800"
-                    style={{ animationDelay: '0.1s' }}
+                {/* Available / Total */}
+                <div
+                    className="card-animate rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 relative overflow-hidden"
                 >
-                    <div className="mb-2 text-xs font-medium text-gray-600 dark:text-gray-400">
+                    <div className="absolute top-0 right-0 p-2 opacity-10">
+                        <svg className="w-8 h-8 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div className="mb-2 text-xs font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wider">
                         {t.totalTokens}
                     </div>
-                    <div className="text-xl font-bold text-gray-900 dark:text-white tabular-nums">
+                    <div className="text-xl font-bold text-gray-900 dark:text-white tabular-nums tracking-tight">
                         {animatedTotal.toLocaleString()}
                     </div>
-                </div>
-                {/* Tarjeta 2: Tokens Usados */}
-                <div 
-                    className="card-animate rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800"
-                    style={{ animationDelay: '0.2s' }}
-                >
-                    <div className="mb-2 text-xs font-medium text-gray-600 dark:text-gray-400">
-                        {t.tokensUsed}
+                    {/* Progress Line for visual flair */}
+                    <div className="absolute bottom-0 left-0 h-1 bg-slate-100 dark:bg-slate-700/60 w-full">
+                        <div className="h-full bg-slate-200 dark:bg-slate-600 transition-all duration-200" style={{ width: '100%' }}></div>
                     </div>
-                    <div className="text-xl font-bold text-gray-900 dark:text-white tabular-nums">
+                </div>
+
+                {/* Used (Live Pulse) */}
+                <div
+                    className={`card-animate rounded-lg border bg-white p-4 shadow-sm relative overflow-hidden transition-colors duration-500 ${isDraining ? 'border-amber-400/30 bg-amber-50/50 dark:border-amber-500/20 dark:bg-amber-900/10' : 'border-slate-200/70 bg-slate-50/60 dark:border-slate-700 dark:bg-slate-800/60'}`}
+                >
+                    <div className="absolute top-0 right-0 p-2 opacity-20">
+                        <div className={`${isDraining ? 'animate-pulse' : 'animate-spin-slow'}`}>
+                            <svg className={`w-8 h-8 ${isDraining ? 'text-amber-500' : 'text-slate-400'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div className={`mb-2 text-xs font-medium uppercase tracking-wider flex items-center justify-between ${isDraining ? 'text-amber-600 dark:text-amber-300' : 'text-slate-600 dark:text-slate-300'}`}>
+                        {t.tokensUsed}
+                        <span className="flex h-2 w-2 relative">
+                            <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-60 ${isDraining ? 'bg-amber-400' : 'bg-slate-400'}`}></span>
+                            <span className={`relative inline-flex rounded-full h-2 w-2 ${isDraining ? 'bg-amber-500' : 'bg-slate-500'}`}></span>
+                        </span>
+                    </div>
+                    <div className="text-2xl font-black text-slate-900 dark:text-slate-100 tabular-nums tracking-tight">
                         {animatedUsed.toLocaleString()}
                     </div>
-                    <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-                        {usagePercentage.toFixed(1)}% {t.tokensUsed.toLowerCase()}
+                    {/* Capacity bar */}
+                    <div className="mt-2 w-full h-1.5 bg-slate-200 dark:bg-slate-700/60 rounded-full overflow-hidden">
+                        <div
+                            className={`h-full rounded-full transition-[width] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${isDraining ? 'bg-amber-500/90' : 'bg-slate-600'}`}
+                            style={{ width: `${Math.min(usagePercentage, 100)}%` }}
+                        ></div>
                     </div>
                 </div>
-                {/* Tarjeta 3: Tokens Restantes */}
-                <div 
+
+                {/* Remaining */}
+                <div
                     className="card-animate rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800"
-                    style={{ animationDelay: '0.3s' }}
                 >
-                    <div className="mb-2 text-xs font-medium text-gray-600 dark:text-gray-400">
+                    <div className="mb-2 text-xs font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wider">
                         {t.tokensRemaining}
                     </div>
-                    <div className="text-xl font-bold text-gray-900 dark:text-white tabular-nums">
+                    <div className="text-xl font-bold text-gray-900 dark:text-white tabular-nums tracking-tight">
                         {animatedRemaining.toLocaleString()}
                     </div>
                 </div>
             </div>
 
-            {/* Sección de Barras de Progreso - 2 Columnas */}
+            {/* Middle Section: Live Bars */}
             <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-                {/* Consumo por Usuario - Barras AZULES */}
-                <div 
-                    className="card-animate rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800"
-                    style={{ animationDelay: '0.4s' }}
-                >
-                    <h3 className="mb-3 text-base font-semibold text-gray-900 dark:text-white">
-                        {t.tokenConsumption} - {t.byUser}
+                {/* Users Bar Chart */}
+                <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+                    <h3 className="mb-3 text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-2">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        {t.byUser}
                     </h3>
-                    <div className="space-y-3">
-                        {mockTokenData.byUser.map((item, index) => (
-                            <div 
-                                key={index}
-                                className="bar-item"
-                                style={{ animationDelay: `${0.5 + index * 0.1}s` }}
-                            >
-                                <div className="mb-2 flex items-center justify-between">
-                                    <span className="text-sm font-medium text-gray-900 dark:text-white truncate pr-2">
-                                        {item.user}
-                                    </span>
-                                    <span className="text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap">
-                                        {item.tokens.toLocaleString()} ({item.percentage}%)
-                                    </span>
+                    <div className="space-y-2">
+                        {tokenData.byUser.slice(0, 5).map((item, index) => (
+                            <div key={item.user} className="w-full">
+                                <div className="flex justify-between text-xs mb-1">
+                                    <span className="font-medium truncate text-gray-700 dark:text-gray-300 w-24">{item.user.split('@')[0]}</span>
+                                    <span className="font-mono text-gray-500">{item.tokens.toLocaleString()}</span>
                                 </div>
-                                <div className="h-2 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
-                                    <div
-                                        className="bar-progress h-full rounded-full"
-                                        style={{
-                                            width: isVisible ? `${item.percentage}%` : '0%',
-                                            backgroundColor: "#004492", // 🔵 AZUL
-                                            transition: `width 1.8s cubic-bezier(0.4, 0, 0.2, 1) ${0.6 + index * 0.1}s`,
-                                        }}
-                                    />
+                                <div className="h-1.5 w-full bg-slate-100 dark:bg-slate-700/60 rounded-full overflow-hidden">
+                                    {(() => {
+                                        const percent = Math.min((item.tokens / (tokenData.byUser[0].tokens || 1)) * 100, 100);
+                                        return (
+                                            <div
+                                                className={`h-full rounded-full transition-[width] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${getFillClass(percent)}`}
+                                                style={{ width: `${percent}%` }}
+                                            />
+                                        );
+                                    })()}
                                 </div>
                             </div>
                         ))}
                     </div>
                 </div>
-                {/* Consumo por Servicio - Barras VERDES */}
-                <div 
-                    className="card-animate rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800"
-                    style={{ animationDelay: '0.5s' }}
-                >
-                    <h3 className="mb-3 text-base font-semibold text-gray-900 dark:text-white">
-                        {t.tokenConsumption} - {t.byService}
+
+                {/* Services Bar Chart */}
+                <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+                    <h3 className="mb-3 text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-2">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                        {t.byService}
                     </h3>
-                    <div className="space-y-3">
-                        {mockTokenData.byService.map((item, index) => (
-                            <div 
-                                key={index}
-                                className="bar-item"
-                                style={{ animationDelay: `${0.6 + index * 0.1}s` }}
-                            >
-                                <div className="mb-2 flex items-center justify-between">
-                                    <span className="text-sm font-medium text-gray-900 dark:text-white">
-                                        {item.service}
-                                    </span>
-                                    <span className="text-sm text-gray-600 dark:text-gray-400">
-                                        {item.tokens.toLocaleString()} ({item.percentage}%)
-                                    </span>
+                    <div className="space-y-2">
+                        {tokenData.byService.slice(0, 5).map((item, index) => (
+                            <div key={item.service} className="w-full">
+                                <div className="flex justify-between text-xs mb-1">
+                                    <span className="font-medium text-gray-700 dark:text-gray-300">{item.service}</span>
+                                    <span className="font-mono text-gray-500">{item.tokens.toLocaleString()}</span>
                                 </div>
-                                <div className="h-2 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
-                                    <div
-                                        className="bar-progress h-full rounded-full"
-                                        style={{
-                                            width: isVisible ? `${item.percentage}%` : '0%',
-                                            backgroundColor: "#10B981", // 🟢 VERDE
-                                            transition: `width 1.8s cubic-bezier(0.4, 0, 0.2, 1) ${0.7 + index * 0.1}s`,
-                                        }}
-                                    />
+                                <div className="h-1.5 w-full bg-slate-100 dark:bg-slate-700/60 rounded-full overflow-hidden">
+                                    {(() => {
+                                        const percent = Math.min((item.tokens / (tokenData.byService[0].tokens || 1)) * 100, 100);
+                                        return (
+                                            <div
+                                                className={`h-full rounded-full transition-[width] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${getFillClass(percent)}`}
+                                                style={{ width: `${percent}%` }}
+                                            />
+                                        );
+                                    })()}
                                 </div>
                             </div>
                         ))}
                     </div>
+                </div>
+            </div>
+
+            {/* Live Logs Section (New Ticker) */}
+            <div className="flex-1 min-h-0 rounded-lg border border-gray-200 bg-gray-50 p-4 shadow-inner dark:border-gray-700 dark:bg-gray-900/50 flex flex-col">
+                <h3 className="mb-2 text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center justify-between">
+                    <span className="flex items-center gap-2">
+                        <svg className={`w-4 h-4 animate-pulse ${isDraining ? 'text-red-500' : 'text-green-500'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Live Traffic
+                    </span>
+                    <span className="font-mono text-[10px] bg-gray-200 dark:bg-gray-700 px-1 rounded text-gray-600">
+                        {isDraining ? 'DRAINING BUFFER' : 'PROCESSING REQUESTS'}
+                    </span>
+                </h3>
+
+                <div className="overflow-hidden relative flex-1">
+                    <div className="absolute inset-0 space-y-2">
+                        {liveLogs.map((log) => (
+                            <div
+                                key={log.id}
+                                className="flex items-center justify-between text-xs p-2 bg-white dark:bg-gray-800 rounded border border-gray-100 dark:border-gray-700 shadow-sm animate-in slide-in-from-top-2 fade-in duration-300"
+                            >
+                                <div className="flex items-center gap-3">
+                                    <span className="font-mono text-gray-400 text-[10px]">{log.time}</span>
+                                    <span className={`w-1.5 h-1.5 rounded-full ${log.status === 'success' ? 'bg-green-500' : 'bg-red-500'}`}></span>
+                                    <span className="font-medium text-gray-700 dark:text-gray-300">{log.service}</span>
+                                </div>
+                                <div className="flex items-center gap-4">
+                                    <span className="text-gray-500 max-w-[120px] truncate hidden sm:block">{log.user}</span>
+                                    <span className="font-mono font-semibold text-gray-900 dark:text-white">+{log.tokens} tkns</span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    {/* Gradient Fade at bottom */}
+                    <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-gray-50 dark:from-gray-900 to-transparent pointer-events-none"></div>
                 </div>
             </div>
         </div>

@@ -9,12 +9,12 @@ const {
   logoAlt = "Zelify logo",
   navItems = [
     { label: "Producto", href: "/product" },
-    { label: "Nosotros", href: "/#nosotros" },
+    { label: "Nosotros", href: "/blog" },
     {
       label: "Desarrollo",
       href: "https://docs.zelify.com/documentation/getting-started",
     },
-    { label: "Otros", href: "/#otros" },
+    { label: "Otros", href: "/blog" },
   ],
   demoHref = "http://www.zelify.com/clips",
   initialLang = "ES",
@@ -148,7 +148,7 @@ const {
     display: flex;
     align-items: center;
     gap: clamp(1.25rem, 2vw, 2.5rem);
-    margin-left: clamp(2rem, 5vw, 5rem); /* Added separation from logo */
+    margin-left: 15%; /* Added separation from logo */
   }
 
   .simple-navbar__link {
