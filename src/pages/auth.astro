@@ -1,4 +1,5 @@
 ---
+import Navbar3 from "../components/NavbarSimple.astro";
 ---
 
 <html lang="es">
@@ -11,19 +12,7 @@
 
   <body>
     <header class="auth-header">
-      <a class="auth-logo" href="/">
-        <img src="/images/zelify_logo.png" alt="Zelify" />
-      </a>
-      <nav class="auth-nav" aria-label="Main navigation">
-        <a href="/products">Productos</a>
-        <a href="/nosotros">Nosotros</a>
-        <a href="/desarrollo">Desarrollo</a>
-        <a href="/otros">Otros</a>
-      </nav>
-      <div class="auth-actions">
-        <a href="https://www.zelify.com/clips" class="btn-demo" target="_blank" rel="noopener noreferrer">demo</a>
-        <button class="lang-pill" aria-label="Idioma actual español">ES</button>
-      </div>
+     <Navbar3 />
     </header>
 
     <main class="auth-main">
@@ -2391,7 +2380,7 @@
   let phoneOTPStatus = 'idle';
 
   // Inicializar OTP inputs
-  function initOTPInputs(containerId) {
+  function initOTPInputs(containerId: string) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
@@ -2416,7 +2405,7 @@
       input.addEventListener('paste', (e) => {
         e.preventDefault();
         const pasted = e.clipboardData.getData('text').replace(/[^0-9]/g, '').slice(0, 6);
-        pasted.split('').forEach((char, i) => {
+        pasted.split('').forEach((char: any, i: string | number) => {
           if (inputs[i]) {
             inputs[i].value = char;
           }
@@ -2429,7 +2418,7 @@
   }
 
   // Actualizar dots de progreso
-  function updateProgressDots(step) {
+  function updateProgressDots(step: number) {
     const dots = document.querySelectorAll('.phone-card-dots .dot');
     dots.forEach((dot, index) => {
       if (index < step) {
@@ -2441,7 +2430,7 @@
   }
 
   // Mostrar paso
-  function showStep(step) {
+  function showStep(step: number) {
     document.querySelectorAll('.auth-step').forEach((el, index) => {
       el.style.display = index + 1 === step ? 'block' : 'none';
     });
@@ -2478,23 +2467,23 @@
   }
 
   // Funciones de validación
-  function validateFullName(name) {
+  function validateFullName(name: { trim: () => { (): any; new(): any; length: number; }; }) {
     return name.trim().length >= 2;
   }
 
-  function validateEmail(email) {
+  function validateEmail(email: string) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
-  function validatePhone(phone) {
+  function validatePhone(phone: { trim: () => { (): any; new(): any; length: number; }; }) {
     return phone.trim().length >= 10;
   }
 
-  function validatePassword(password) {
+  function validatePassword(password: string | any[]) {
     return password.length >= 8;
   }
 
-  function showFieldError(fieldId, message) {
+  function showFieldError(fieldId: string, message: string | null) {
     validationErrors[fieldId] = message;
     const field = document.getElementById(fieldId);
     if (field) {
@@ -2507,7 +2496,7 @@
     }
   }
 
-  function clearFieldError(fieldId) {
+  function clearFieldError(fieldId: string) {
     delete validationErrors[fieldId];
     const field = document.getElementById(fieldId);
     if (field) {
@@ -2603,7 +2592,7 @@
     }, 1000);
   });
 
-  function updateOTPStatus(containerId, status) {
+  function updateOTPStatus(containerId: string, status: string) {
     const container = document.getElementById(containerId);
     if (!container) return;
     

@@ -1,6 +1,4 @@
 ---
-import TransfersViewApp from "@/components/transfers_payments/TransfersViewApp.astro";
-import DeviceFrame from "../components/DeviceFrame.astro";
 import Navbar3 from "../components/NavbarSimple.astro";
 ---
 
@@ -13,28 +11,25 @@ import Navbar3 from "../components/NavbarSimple.astro";
       type="image/png"
       href="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/ISO-ZELIFY-2025.png"
     />
-    <title>Zelify — Tx</title>
+    <title>Zelify — Connect</title>
   </head>
 
   <body>
     <header class="auth-header">
-    <Navbar3 />
+      <Navbar3 />
     </header>
 
     <main class="auth-main">
       <section class="auth-hero">
         <h1 class="auth-title">
-          Cotización y conversión<br />
-          de divisas
+          Cumplimiento AML<br />
+          claro, ágil y efectivo.
         </h1>
         <p class="auth-description">
-          Mecanismo integral que permite generar y obtener cotizaciones precisas
-          en tiempo real,<br />
-          facilitando el acceso a tasas de cambio dinámicas para una amplia variedad
-          de monedas admitidas.<br />
-          Este proceso asegura transparencia en la conversión, aplicando márgenes<br
-          />
-          y comisiones configurables antes de iniciar cualquier operación.
+          Evalúa riesgo automáticamente con listas globales, PEP y medios
+          adversos,<br />
+          monitorea transacciones en tiempo real y aplica reglas dinámicas<br />
+          para prevenir actividades ilícitas sin fricción operativa.
         </p>
         <div class="auth-cta">
           <input
@@ -64,125 +59,322 @@ import Navbar3 from "../components/NavbarSimple.astro";
       </div>
 
       <!-- Contenedor del dispositivo móvil -->
-      <DeviceFrame class="device-container">
-        <TransfersViewApp />
-      </DeviceFrame>
+      <div class="device-container">
+        <!-- Frame del iPhone -->
+        <div class="device-frame-wrapper">
+          <div class="device-frame">
+            <!-- Pantalla del dispositivo -->
+            <div class="device-screen">
+              <!-- Status Bar con Dynamic Island -->
+              <div class="device-status-bar">
+                <div class="status-time">9:41</div>
+                <div class="dynamic-island">
+                  <div class="island-shape"></div>
+                  <div class="island-speaker"></div>
+                </div>
+                <div class="status-icons">
+                  <svg class="signal-icon" fill="none" viewBox="0 0 20 12">
+                    <path
+                      d="M1 8h2v2H1V8zm3-2h2v4H4V6zm3-2h2v6H7V4zm3-1h2v7h-2V3z"
+                      fill="currentColor"></path>
+                  </svg>
+                  <div class="battery-icon">
+                    <div class="battery-level"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Contenido del dispositivo -->
+              <div class="device-content">
+                <!-- Header con back y logo -->
+                <div class="device-header">
+                  <button class="device-back-btn">&lt; back</button>
+                  <div class="device-logo">
+                    <img src="/images/zelify_logo.png" alt="Zelify" />
+                  </div>
+                  <div class="device-header-spacer"></div>
+                </div>
+
+                <!-- Animación GIF -->
+                <div class="device-animation">
+                  <img src="/ANIMACION 1.gif" alt="Aml animation" />
+                </div>
+
+                <!-- Tarjeta con fondo translúcido -->
+                <div class="device-card">
+                  <div class="auth-phone-card">
+                    <!-- Indicador de progreso -->
+                    <div class="phone-card-dots">
+                      <span class="dot active"></span>
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                    </div>
+
+                    <h2 class="phone-card-title" id="step-title">
+                      Crear Cuenta
+                    </h2>
+                    <p class="phone-card-description" id="step-description">
+                      Ingresa tu nombre y correo electrónico para empezar. Te
+                      enviaremos un código de verificación.
+                    </p>
+
+                    <button class="btn-google">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M19.6 10.2273C19.6 9.51818 19.5364 8.83636 19.4182 8.18182H10V12.05H15.3818C15.15 13.3 14.4455 14.3591 13.3864 15.0682V17.5773H16.6182C18.5091 15.8364 19.6 13.2727 19.6 10.2273Z"
+                          fill="#4285F4"></path>
+                        <path
+                          d="M10 20C12.7 20 14.9636 19.1045 16.6182 17.5773L13.3864 15.0682C12.4909 15.6682 11.3455 16.0227 10 16.0227C7.39545 16.0227 5.19091 14.2636 4.40455 11.9H1.06364V14.4909C2.70909 17.7591 6.09091 20 10 20Z"
+                          fill="#34A853"></path>
+                        <path
+                          d="M4.40455 11.9C4.20455 11.3 4.09091 10.6591 4.09091 10C4.09091 9.34091 4.20455 8.7 4.40455 8.1V5.50909H1.06364C0.386364 6.85909 0 8.38636 0 10C0 11.6136 0.386364 13.1409 1.06364 14.4909L4.40455 11.9Z"
+                          fill="#FBBC05"></path>
+                        <path
+                          d="M10 3.97727C11.4682 3.97727 12.7864 4.46818 13.8227 5.42273L16.6909 2.55455C14.9591 0.940909 12.6955 0 10 0C6.09091 0 2.70909 2.24091 1.06364 5.50909L4.40455 8.1C5.19091 5.73636 7.39545 3.97727 10 3.97727Z"
+                          fill="#EA4335"></path>
+                      </svg>
+                      Crear cuenta con Google
+                    </button>
+
+                    <div class="phone-card-divider">
+                      <span class="divider-line"></span>
+                      <span class="divider-text">O crea cuenta con correo</span>
+                      <span class="divider-line"></span>
+                    </div>
+
+                    <!-- Paso 1: Crear Cuenta -->
+                    <div id="step-1" class="auth-step">
+                      <form class="phone-card-form" id="form-step-1">
+                        <div class="form-field">
+                          <label
+                            >Nombre Completo<span class="required">*</span
+                            ></label
+                          >
+                          <input
+                            type="text"
+                            id="fullName"
+                            placeholder="John Doe"
+                            required
+                          />
+                          <span class="field-error-message"></span>
+                        </div>
+                        <div class="form-field">
+                          <label>Correo<span class="required">*</span></label>
+                          <input
+                            type="email"
+                            id="email"
+                            placeholder="email@example.com"
+                            required
+                          />
+                          <span class="field-error-message"></span>
+                        </div>
+                        <button type="submit" class="btn-continuar">
+                          Continuar →
+                        </button>
+                      </form>
+                    </div>
+
+                    <!-- Paso 2: Verificar Email -->
+                    <div id="step-2" class="auth-step" style="display: none;">
+                      <form class="phone-card-form" id="form-step-2">
+                        <div class="otp-container">
+                          <div class="otp-inputs" id="otp-email">
+                            <input
+                              type="text"
+                              class="otp-input"
+                              maxlength="1"
+                              inputmode="numeric"
+                            />
+                            <input
+                              type="text"
+                              class="otp-input"
+                              maxlength="1"
+                              inputmode="numeric"
+                            />
+                            <input
+                              type="text"
+                              class="otp-input"
+                              maxlength="1"
+                              inputmode="numeric"
+                            />
+                            <input
+                              type="text"
+                              class="otp-input"
+                              maxlength="1"
+                              inputmode="numeric"
+                            />
+                            <input
+                              type="text"
+                              class="otp-input"
+                              maxlength="1"
+                              inputmode="numeric"
+                            />
+                            <input
+                              type="text"
+                              class="otp-input"
+                              maxlength="1"
+                              inputmode="numeric"
+                            />
+                          </div>
+                        </div>
+                        <button type="submit" class="btn-continuar">
+                          Verificar →
+                        </button>
+                        <p class="resend-code">
+                          ¿No recibiste el código? <a href="#" id="resend-email"
+                            >Reenviar</a
+                          >
+                        </p>
+                      </form>
+                    </div>
+
+                    <!-- Paso 3: Agregar Teléfono -->
+                    <div id="step-3" class="auth-step" style="display: none;">
+                      <form class="phone-card-form" id="form-step-3">
+                        <div class="form-field">
+                          <label
+                            >Número de Teléfono<span class="required">*</span
+                            ></label
+                          >
+                          <input
+                            type="tel"
+                            id="phone"
+                            placeholder="+1 234 567 8900"
+                            required
+                          />
+                          <span class="field-error-message"></span>
+                        </div>
+                        <button type="submit" class="btn-continuar">
+                          Continuar →
+                        </button>
+                      </form>
+                    </div>
+
+                    <!-- Paso 4: Verificar Teléfono -->
+                    <div id="step-4" class="auth-step" style="display: none;">
+                      <form class="phone-card-form" id="form-step-4">
+                        <div class="otp-container">
+                          <div class="otp-inputs" id="otp-phone">
+                            <input
+                              type="text"
+                              class="otp-input"
+                              maxlength="1"
+                              inputmode="numeric"
+                            />
+                            <input
+                              type="text"
+                              class="otp-input"
+                              maxlength="1"
+                              inputmode="numeric"
+                            />
+                            <input
+                              type="text"
+                              class="otp-input"
+                              maxlength="1"
+                              inputmode="numeric"
+                            />
+                            <input
+                              type="text"
+                              class="otp-input"
+                              maxlength="1"
+                              inputmode="numeric"
+                            />
+                            <input
+                              type="text"
+                              class="otp-input"
+                              maxlength="1"
+                              inputmode="numeric"
+                            />
+                            <input
+                              type="text"
+                              class="otp-input"
+                              maxlength="1"
+                              inputmode="numeric"
+                            />
+                          </div>
+                        </div>
+                        <button type="submit" class="btn-continuar">
+                          Verificar →
+                        </button>
+                        <p class="resend-code">
+                          ¿No recibiste el código? <a href="#" id="resend-phone"
+                            >Reenviar</a
+                          >
+                        </p>
+                      </form>
+                    </div>
+
+                    <!-- Paso 5: Completar Perfil -->
+                    <div id="step-5" class="auth-step" style="display: none;">
+                      <form class="phone-card-form" id="form-step-5">
+                        <div class="form-field">
+                          <label
+                            >Contraseña<span class="required">*</span></label
+                          >
+                          <input
+                            type="password"
+                            id="password"
+                            placeholder="Mínimo 8 caracteres"
+                            required
+                          />
+                          <span class="field-error-message"></span>
+                        </div>
+                        <div class="form-field">
+                          <label
+                            >Confirmar Contraseña<span class="required">*</span
+                            ></label
+                          >
+                          <input
+                            type="password"
+                            id="confirmPassword"
+                            placeholder="Confirma tu contraseña"
+                            required
+                          />
+                          <span class="field-error-message"></span>
+                        </div>
+                        <button type="submit" class="btn-continuar">
+                          Crear Cuenta →
+                        </button>
+                      </form>
+                    </div>
+
+                    <p
+                      class="phone-card-login"
+                      id="login-link"
+                      style="display: none;"
+                    >
+                      ¿Ya tienes una cuenta? <a href="#">Ingresa</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Home Indicator -->
+              <div class="device-home-indicator"></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Sección de Seguridad Inteligente -->
     <section class="security-section">
       <div class="security-container">
         <h2 class="security-title">
-          Ciclo de vida<br />
-          de la transacción
+          Zelify AML<br />
+          detección temprana de riesgo.
         </h2>
 
         <div class="security-features">
-          <div class="security-feature">
-            <div class="feature-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"
-                ></path>
-              </svg>
-            </div>
-            <h3 class="feature-title">Cotización FX</h3>
-            <p class="feature-description">
-              Acceso a tasas de cambio dinámicas con márgenes y comisiones
-              configurables en tiempo real.
-            </p>
-          </div>
-
-          <div class="security-feature">
-            <div class="feature-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                <path d="M9 12l2 2 4-4"></path>
-              </svg>
-            </div>
-            <h3 class="feature-title">Valida cuentas</h3>
-            <p class="feature-description">
-              Verificación de formatos estandarizados IBAN, CLABE o SWIFT para
-              reducir rechazos.
-            </p>
-          </div>
-
-          <div class="security-feature">
-            <div class="feature-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <line x1="22" y1="2" x2="11" y2="13"></line>
-                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-              </svg>
-            </div>
-            <h3 class="feature-title">Inicio de transferencia</h3>
-            <p class="feature-description">
-              Procesamiento ágil capturando datos de remitente, beneficiario y
-              propósito del pago.
-            </p>
-          </div>
-
-          <div class="security-feature">
-            <div class="feature-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                <circle cx="12" cy="12" r="3"></circle>
-              </svg>
-            </div>
-            <h3 class="feature-title">Seguimiento Real-time</h3>
-            <p class="feature-description">
-              Visibilidad total del ciclo de vida y obtención de estados a
-              medida que avanza la red.
-            </p>
-          </div>
-
-          <div class="security-feature">
-            <div class="feature-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-            </div>
-            <h3 class="feature-title">Liquidación y Lotes</h3>
-            <p class="feature-description">
-              Procesos con proveedores de liquidez y consulta de estados por
-              lotes de operaciones.
-            </p>
-          </div>
-
+          <!-- Feature 1: Evaluación de listas globales -->
           <div class="security-feature">
             <div class="feature-icon">
               <svg
@@ -196,43 +388,177 @@ import Navbar3 from "../components/NavbarSimple.astro";
                 <path
                   d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
                 ></path>
-                <polyline points="14 2 14 8 20 8"></polyline>
-                <line x1="16" y1="13" x2="8" y2="13"></line>
-                <line x1="16" y1="17" x2="8" y2="17"></line>
-                <polyline points="10 9 9 9 8 9"></polyline>
+                <path d="M14 2v6h6"></path>
+                <path d="M16 13H8"></path>
+                <path d="M16 17H8"></path>
+                <path d="M10 9H8"></path>
+                <circle cx="19" cy="5" r="1.5" fill="currentColor"></circle>
+                <path d="M19 4v2M19 6h-1M19 6h1" stroke-width="1"></path>
               </svg>
             </div>
-            <h3 class="feature-title">Conciliación Perfecta</h3>
+            <h3 class="feature-title">Evaluación de listas globales</h3>
             <p class="feature-description">
-              Informes detallados por montos, divisas convertidas y cargos
-              aplicados.
+              Verificaciones automáticas contra sanciones, PEP y listas de
+              observación internacionales.
+            </p>
+          </div>
+
+          <!-- Feature 2: Verificación de listas globales -->
+          <div class="security-feature">
+            <div class="feature-icon">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M12 1v4M12 19v4M1 12h4M19 12h4"></path>
+              </svg>
+            </div>
+            <h3 class="feature-title">Verificación de listas globales</h3>
+            <p class="feature-description">
+              Cruce continuo con OFAC, ONU, UE, Interpol y FinCEN para detección
+              temprana.
+            </p>
+          </div>
+
+          <!-- Feature 3: Verificación de listas nacionales PEP -->
+          <div class="security-feature">
+            <div class="feature-icon">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.3"
+                ></circle>
+                <path d="M9 12l2 2 4-4" stroke-width="2"></path>
+              </svg>
+            </div>
+            <h3 class="feature-title">Verificación de listas nacionales PEP</h3>
+            <p class="feature-description">
+              Identifica personas políticamente expuestas según normativas
+              locales.
+            </p>
+          </div>
+
+          <!-- Feature 4: Monitoreo y operaciones -->
+          <div class="security-feature">
+            <div class="feature-icon">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <circle cx="12" cy="12" r="6"></circle>
+                <circle cx="12" cy="12" r="2" fill="currentColor"></circle>
+                <path d="M12 2v4M12 18v4M2 12h4M18 12h4"></path>
+                <path
+                  d="M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="feature-title">Monitoreo y operaciones</h3>
+            <p class="feature-description">
+              Supervisa transacciones sospechosas con reglas dinámicas y
+              perfiles de riesgo.
+            </p>
+          </div>
+
+          <!-- Feature 5: Medios adversos e inteligencia de riesgo -->
+          <div class="security-feature">
+            <div class="feature-icon">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+                <path d="M12 11v6M9 14h6"></path>
+                <path
+                  d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                  opacity="0.3"></path>
+                <path d="M9 12l2 2 4-4" stroke-width="2"></path>
+              </svg>
+            </div>
+            <h3 class="feature-title">
+              Medios adversos e inteligencia de riesgo
+            </h3>
+            <p class="feature-description">
+              Analiza noticias y reportes públicos para riesgos reputacionales o
+              legales.
+            </p>
+          </div>
+
+          <!-- Feature 6: Evaluación de listas internas -->
+          <div class="security-feature">
+            <div class="feature-icon">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <circle cx="12" cy="12" r="6"></circle>
+                <path d="M12 2v4M12 18v4M2 12h4M18 12h4"></path>
+                <circle cx="12" cy="12" r="2" fill="currentColor"></circle>
+                <path d="M8 8l8 8M16 8l-8 8" stroke-width="2"></path>
+              </svg>
+            </div>
+            <h3 class="feature-title">Evaluación de listas internas</h3>
+            <p class="feature-description">
+              Integra tus listas de control y políticas internas dentro del
+              flujo AML.
             </p>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- Sección de Control Total -->
     <section class="control-section">
       <div class="control-container">
         <div class="control-divider"></div>
-        <h2 class="control-title">Control total de transferencias</h2>
+        <h2 class="control-title">Control total de cumplimiento AML</h2>
 
         <div class="control-features">
+          <!-- Feature 1: Evaluación de listas globales -->
           <div class="control-feature">
             <div class="control-feature-card">
               <div class="control-feature-front">
                 <div class="control-feature-image">
                   <img
                     src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=500&fit=crop&q=80"
-                    alt="Validación de cuentas"
+                    alt="Evaluación de listas globales"
                   />
                 </div>
-                <h3 class="control-feature-title">Validación Internacional</h3>
+                <h3 class="control-feature-title">
+                  Evaluación de listas globales
+                </h3>
                 <p class="control-feature-description">
-                  Herramienta de seguridad para validar la cuenta del
-                  beneficiario antes de procesar el pago.
+                  Cruce automático contra listas internacionales para detectar
+                  alertas relevantes.
                 </p>
-                <button class="control-feature-btn" data-feature="validation">
+                <button class="control-feature-btn" data-feature="global-lists">
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
@@ -247,17 +573,19 @@ import Navbar3 from "../components/NavbarSimple.astro";
                 </button>
               </div>
               <div class="control-feature-back">
-                <h3 class="control-feature-title">Seguridad Operativa</h3>
+                <h3 class="control-feature-title">
+                  Beneficios de listas globales
+                </h3>
                 <ul class="control-feature-benefits">
-                  <li>Verifica cumplimiento de formato IBAN</li>
-                  <li>Soporte para cuentas CLABE y SWIFT</li>
-                  <li>Reduce drásticamente errores operativos</li>
-                  <li>Validación previa al movimiento de fondos</li>
-                  <li>Minimiza el riesgo de rechazos bancarios</li>
+                  <li>Detección temprana de coincidencias</li>
+                  <li>Alertas por riesgo regulatorio</li>
+                  <li>Historial de evaluaciones</li>
+                  <li>Filtros y reglas por país</li>
+                  <li>Reducción de falsos positivos</li>
                 </ul>
                 <button
                   class="control-feature-btn control-feature-btn-close"
-                  data-feature="validation"
+                  data-feature="global-lists"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -275,21 +603,22 @@ import Navbar3 from "../components/NavbarSimple.astro";
             </div>
           </div>
 
+          <!-- Feature 2: Monitoreo y operaciones -->
           <div class="control-feature">
             <div class="control-feature-card">
               <div class="control-feature-front">
                 <div class="control-feature-image">
                   <img
-                    src="https://plus.unsplash.com/premium_photo-1739995619648-e463f3ecdbc4?q=80&w=1332&auto=format&fit=crop"
-                    alt="Cotización FX"
+                    src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=500&fit=crop&q=80"
+                    alt="Monitoreo y operaciones"
                   />
                 </div>
-                <h3 class="control-feature-title">Conversión de Divisas</h3>
+                <h3 class="control-feature-title">Monitoreo y operaciones</h3>
                 <p class="control-feature-description">
-                  Mecanismo integral para generar cotizaciones precisas con
-                  tasas de cambio dinámicas.
+                  Supervisión continua de alertas y casos con trazabilidad
+                  operativa.
                 </p>
-                <button class="control-feature-btn" data-feature="fx">
+                <button class="control-feature-btn" data-feature="monitoring">
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
@@ -304,17 +633,17 @@ import Navbar3 from "../components/NavbarSimple.astro";
                 </button>
               </div>
               <div class="control-feature-back">
-                <h3 class="control-feature-title">Transparencia en FX</h3>
+                <h3 class="control-feature-title">Beneficios de monitoreo</h3>
                 <ul class="control-feature-benefits">
-                  <li>Acceso a múltiples monedas admitidas</li>
-                  <li>Márgenes y comisiones configurables</li>
-                  <li>Generación de cotizaciones en tiempo real</li>
-                  <li>Asegura transparencia en la conversión</li>
-                  <li>Cotización previa al inicio de operación</li>
+                  <li>Alertas en tiempo real</li>
+                  <li>Gestión de casos centralizada</li>
+                  <li>Flujos de aprobación</li>
+                  <li>Historial de decisiones</li>
+                  <li>Panel operativo unificado</li>
                 </ul>
                 <button
                   class="control-feature-btn control-feature-btn-close"
-                  data-feature="fx"
+                  data-feature="monitoring"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -332,21 +661,27 @@ import Navbar3 from "../components/NavbarSimple.astro";
             </div>
           </div>
 
+          <!-- Feature 3: Medios adversos e inteligencia de riesgo -->
           <div class="control-feature">
             <div class="control-feature-card">
               <div class="control-feature-front">
                 <div class="control-feature-image">
                   <img
-                    src="https://plus.unsplash.com/premium_photo-1679243793236-55b25dcf091b?q=80&w=784&auto=format&fit=crop"
-                    alt="Seguimiento y confirmación"
+                    src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&h=500&fit=crop&q=80"
+                    alt="Medios adversos e inteligencia de riesgo"
                   />
                 </div>
-                <h3 class="control-feature-title">Seguimiento y Recibos</h3>
+                <h3 class="control-feature-title">
+                  Medios adversos e inteligencia de riesgo
+                </h3>
                 <p class="control-feature-description">
-                  Obtén estados de la transferencia en tiempo real y genera
-                  comprobantes oficiales automáticos.
+                  Análisis de señales públicas para identificar riesgo
+                  reputacional.
                 </p>
-                <button class="control-feature-btn" data-feature="tracking">
+                <button
+                  class="control-feature-btn"
+                  data-feature="adverse-media"
+                >
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
@@ -361,17 +696,19 @@ import Navbar3 from "../components/NavbarSimple.astro";
                 </button>
               </div>
               <div class="control-feature-back">
-                <h3 class="control-feature-title">Trazabilidad Total</h3>
+                <h3 class="control-feature-title">
+                  Beneficios de inteligencia
+                </h3>
                 <ul class="control-feature-benefits">
-                  <li>Estados de transferencia en tiempo real</li>
-                  <li>Generación de recibo digital automático</li>
-                  <li>Comprobante oficial para usuario final</li>
-                  <li>Visibilidad del ciclo de vida operativo</li>
-                  <li>Monitoreo por la red de pagos</li>
+                  <li>Detección de noticias de riesgo</li>
+                  <li>Clasificación por severidad</li>
+                  <li>Contexto y trazabilidad</li>
+                  <li>Alertas configurables</li>
+                  <li>Reducción de exposición reputacional</li>
                 </ul>
                 <button
                   class="control-feature-btn control-feature-btn-close"
-                  data-feature="tracking"
+                  data-feature="adverse-media"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -389,21 +726,27 @@ import Navbar3 from "../components/NavbarSimple.astro";
             </div>
           </div>
 
+          <!-- Feature 4: Evaluación de listas internas -->
           <div class="control-feature">
             <div class="control-feature-card">
               <div class="control-feature-front">
                 <div class="control-feature-image">
                   <img
                     src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=500&fit=crop&q=80"
-                    alt="Liquidación y conciliación"
+                    alt="Evaluación de listas internas"
                   />
                 </div>
-                <h3 class="control-feature-title">Control Pos-operativo</h3>
+                <h3 class="control-feature-title">
+                  Evaluación de listas internas
+                </h3>
                 <p class="control-feature-description">
-                  Módulo avanzado para conciliación contable e informes de
-                  liquidación detallados.
+                  Comparación contra listas propias para mayor control y
+                  cumplimiento.
                 </p>
-                <button class="control-feature-btn" data-feature="settlement">
+                <button
+                  class="control-feature-btn"
+                  data-feature="internal-lists"
+                >
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
@@ -418,17 +761,19 @@ import Navbar3 from "../components/NavbarSimple.astro";
                 </button>
               </div>
               <div class="control-feature-back">
-                <h3 class="control-feature-title">Conciliación Financiera</h3>
+                <h3 class="control-feature-title">
+                  Beneficios de listas internas
+                </h3>
                 <ul class="control-feature-benefits">
-                  <li>Informes por montos y divisas</li>
-                  <li>Reporte de cargos y comisiones aplicados</li>
-                  <li>Liquidación manual o automática</li>
-                  <li>Conciliación contable garantizada</li>
-                  <li>Consulta de estados de lotes (batches)</li>
+                  <li>Bloqueos y whitelists</li>
+                  <li>Reglas por segmento</li>
+                  <li>Actualización inmediata</li>
+                  <li>Auditoría interna</li>
+                  <li>Control total del riesgo</li>
                 </ul>
                 <button
                   class="control-feature-btn control-feature-btn-close"
-                  data-feature="settlement"
+                  data-feature="internal-lists"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -553,17 +898,16 @@ import Navbar3 from "../components/NavbarSimple.astro";
       </div>
     </section>
 
+    <!-- Sección de FAQ -->
     <section class="faq-section">
       <div class="faq-container">
         <h2 class="faq-title">Preguntas frecuentes</h2>
 
         <div class="faq-list">
+          <!-- FAQ 1 -->
           <div class="faq-item">
             <button class="faq-question" data-faq="1">
-              <span
-                >¿Qué funcionalidades incluye el módulo de International
-                Transfers?</span
-              >
+              <span>¿Qué funcionalidades incluye el producto?</span>
               <svg
                 class="faq-icon"
                 viewBox="0 0 24 24"
@@ -578,20 +922,20 @@ import Navbar3 from "../components/NavbarSimple.astro";
             </button>
             <div class="faq-answer">
               <p>
-                Nuestro módulo permite cotizar FX con márgenes configurables,
-                validar cuentas internacionales (SWIFT, IBAN, CLABE), procesar
-                transferencias de forma segura y realizar un seguimiento en
-                tiempo real con comprobantes digitales. Además, incluye
-                herramientas avanzadas de liquidación y conciliación contable.
+                Nuestro producto incluye autenticación avanzada con biometría,
+                registro personalizable de usuarios, validación de email y
+                teléfono, información detallada del dispositivo, geolocalización
+                estratégica, detección temprana de fraudes, y un SDK de
+                integración sencillo para incorporar todas estas funcionalidades
+                en una sola línea de código.
               </p>
             </div>
           </div>
 
+          <!-- FAQ 2 -->
           <div class="faq-item">
             <button class="faq-question" data-faq="2">
-              <span
-                >¿Cómo se gestionan las tasas de cambio y las comisiones?</span
-              >
+              <span>¿Es seguro usar biometría y doble factor?</span>
               <svg
                 class="faq-icon"
                 viewBox="0 0 24 24"
@@ -606,19 +950,21 @@ import Navbar3 from "../components/NavbarSimple.astro";
             </button>
             <div class="faq-answer">
               <p>
-                El sistema ofrece un mecanismo de cotización en tiempo real con
-                acceso a tasas de cambio dinámicas para múltiples divisas.
-                Permite aplicar márgenes y comisiones personalizables antes de
-                confirmar la operación, garantizando total transparencia en la
-                conversión de fondos.
+                Sí, es completamente seguro. La biometría y la autenticación de
+                doble factor (2FA) son estándares de la industria que
+                proporcionan capas adicionales de seguridad. Nuestro sistema
+                utiliza encriptación de extremo a extremo y cumple con los más
+                altos estándares de seguridad para proteger los datos
+                biométricos y las credenciales de tus usuarios.
               </p>
             </div>
           </div>
 
+          <!-- FAQ 3 -->
           <div class="faq-item">
             <button class="faq-question" data-faq="3">
               <span
-                >¿Qué tipos de cuentas internacionales se pueden validar?</span
+                >¿Puedo personalizar los campos de registro para mis usuarios?</span
               >
               <svg
                 class="faq-icon"
@@ -634,19 +980,19 @@ import Navbar3 from "../components/NavbarSimple.astro";
             </button>
             <div class="faq-answer">
               <p>
-                Para reducir errores operativos y rechazos, nuestra herramienta
-                valida automáticamente formatos estandarizados como SWIFT, IBAN
-                y CLABE. Esto asegura que la información del beneficiario sea
-                correcta antes de orquestar el movimiento de fondos.
+                Absolutamente. Nuestro sistema de registro es completamente
+                personalizable. Puedes agregar, eliminar o modificar campos
+                según las necesidades de tu negocio. Los campos se adaptan
+                dinámicamente a tus usuarios, permitiéndote crear experiencias
+                de registro únicas y relevantes para tu plataforma.
               </p>
             </div>
           </div>
 
+          <!-- FAQ 4 -->
           <div class="faq-item">
             <button class="faq-question" data-faq="4">
-              <span
-                >¿Cómo pueden los usuarios rastrear el estado de su envío?</span
-              >
+              <span>¿Cómo detecta fraudes y accesos sospechosos?</span>
               <svg
                 class="faq-icon"
                 viewBox="0 0 24 24"
@@ -661,20 +1007,21 @@ import Navbar3 from "../components/NavbarSimple.astro";
             </button>
             <div class="faq-answer">
               <p>
-                Ofrecemos visibilidad total sobre el ciclo de vida de la
-                transacción. Los usuarios pueden consultar los estados en tiempo
-                real mientras la transferencia avanza por la red de pagos y
-                obtener un recibo digital automático que sirve como comprobante
-                oficial de la operación.
+                Nuestro sistema utiliza inteligencia artificial y machine
+                learning para analizar patrones de comportamiento, detectar
+                tráfico inusual, identificar el uso de VPNs, analizar la
+                geolocalización de accesos, y monitorear información del
+                dispositivo en tiempo real. Todo esto permite identificar y
+                prevenir accesos sospechosos antes de que representen una
+                amenaza.
               </p>
             </div>
           </div>
 
+          <!-- FAQ 5 -->
           <div class="faq-item">
             <button class="faq-question" data-faq="5">
-              <span
-                >¿Cómo se maneja la liquidación con proveedores de liquidez?</span
-              >
+              <span>¿Funciona en cualquier dispositivo?</span>
               <svg
                 class="faq-icon"
                 viewBox="0 0 24 24"
@@ -689,20 +1036,48 @@ import Navbar3 from "../components/NavbarSimple.astro";
             </button>
             <div class="faq-answer">
               <p>
-                Contamos con un módulo de control financiero pos-operativo que
-                permite generar informes detallados y realizar procesos de
-                liquidación manuales o automáticos. Esto facilita la consulta
-                del estado de cada lote de operaciones para asegurar una
-                conciliación contable perfecta.
+                Sí, nuestro producto es multiplataforma y funciona en cualquier
+                dispositivo: smartphones (iOS y Android), tablets, computadoras
+                de escritorio y laptops. La interfaz se adapta automáticamente a
+                cada dispositivo, proporcionando una experiencia óptima sin
+                importar desde dónde accedan tus usuarios.
               </p>
             </div>
           </div>
 
+          <!-- FAQ 6 -->
           <div class="faq-item">
             <button class="faq-question" data-faq="6">
+              <span>¿Es fácil de integrar a mi sistema actual?</span>
+              <svg
+                class="faq-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>
+                Muy fácil. Nuestro SDK de integración está diseñado para ser
+                implementado con una sola línea de código. Proporcionamos
+                documentación completa, ejemplos de código, y soporte técnico
+                especializado para ayudarte en el proceso de integración. La
+                mayoría de nuestros clientes completan la integración en menos
+                de una hora.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ 7 -->
+          <div class="faq-item">
+            <button class="faq-question" data-faq="7">
               <span
-                >¿Es difícil integrar las transferencias internacionales en mi
-                App?</span
+                >¿Puedo escalar la seguridad a medida que crece mi plataforma?</span
               >
               <svg
                 class="faq-icon"
@@ -718,15 +1093,32 @@ import Navbar3 from "../components/NavbarSimple.astro";
             </button>
             <div class="faq-answer">
               <p>
-                No, gracias al SDK de Zelify TX, la integración es ágil y
-                sencilla. El SDK está diseñado para reducir la complejidad
-                técnica y el cumplimiento normativo, permitiendo a las
-                instituciones financieras acelerar su tiempo de salida al
-                mercado con una solución robusta.
+                Definitivamente. Nuestra arquitectura está construida para
+                escalar automáticamente. A medida que tu plataforma crece,
+                nuestro sistema se adapta sin necesidad de cambios adicionales.
+                Puedes manejar desde cientos hasta millones de usuarios sin
+                preocuparte por la capacidad o el rendimiento del sistema de
+                seguridad.
               </p>
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Sección CTA Final -->
+    <section class="cta-section">
+      <div class="cta-container">
+        <h2 class="cta-title">
+          Comienza hoy y<br />
+          asegura cada acceso.
+        </h2>
+        <a
+          href="https://alaiza.zelify.com"
+          class="cta-button"
+          target="_blank"
+          rel="noopener noreferrer">cotizar</a
+        >
       </div>
     </section>
 
@@ -802,7 +1194,7 @@ import Navbar3 from "../components/NavbarSimple.astro";
     background: #ffffff;
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 10;
     max-width: 1400px;
     margin: 0 auto;
     box-sizing: border-box;
@@ -2485,45 +2877,69 @@ import Navbar3 from "../components/NavbarSimple.astro";
     confirmPassword: "",
   };
 
-  const validationErrors = {};
+  const validationErrors: Record<string, string> = {};
   let emailOTPStatus = "idle"; // 'idle' | 'verifying' | 'success' | 'error'
   let phoneOTPStatus = "idle";
 
+  function getInputValue(id: string) {
+    const el = document.getElementById(id);
+    if (el instanceof HTMLInputElement || el instanceof HTMLSelectElement) {
+      return el.value;
+    }
+    return "";
+  }
+
   // Inicializar OTP inputs
-  function initOTPInputs(containerId) {
+  function initOTPInputs(containerId: string) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
     const inputs = container.querySelectorAll(".otp-input");
 
     inputs.forEach((input, index) => {
+      if (!(input instanceof HTMLInputElement)) return;
       input.addEventListener("input", (e) => {
+        if (!(e.target instanceof HTMLInputElement)) return;
         const value = e.target.value.replace(/[^0-9]/g, "");
         e.target.value = value;
 
         if (value && index < inputs.length - 1) {
-          inputs[index + 1].focus();
+          const nextInput = inputs[index + 1];
+          if (nextInput instanceof HTMLInputElement) {
+            nextInput.focus();
+          }
         }
       });
 
       input.addEventListener("keydown", (e) => {
-        if (e.key === "Backspace" && !e.target.value && index > 0) {
-          inputs[index - 1].focus();
+        if (
+          e.key === "Backspace" &&
+          e.target instanceof HTMLInputElement &&
+          !e.target.value &&
+          index > 0
+        ) {
+          const prevInput = inputs[index - 1];
+          if (prevInput instanceof HTMLInputElement) {
+            prevInput.focus();
+          }
         }
       });
 
       input.addEventListener("paste", (e) => {
         e.preventDefault();
-        const pasted = e.clipboardData
+        const clipboard = e.clipboardData;
+        if (!clipboard) return;
+        const pasted = clipboard
           .getData("text")
           .replace(/[^0-9]/g, "")
           .slice(0, 6);
         pasted.split("").forEach((char, i) => {
-          if (inputs[i]) {
-            inputs[i].value = char;
+          const targetInput = inputs[i];
+          if (targetInput instanceof HTMLInputElement) {
+            targetInput.value = char;
           }
         });
-        if (pasted.length === 6) {
+        if (pasted.length === 6 && inputs[5] instanceof HTMLInputElement) {
           inputs[5].focus();
         }
       });
@@ -2531,7 +2947,7 @@ import Navbar3 from "../components/NavbarSimple.astro";
   }
 
   // Actualizar dots de progreso
-  function updateProgressDots(step) {
+  function updateProgressDots(step: number) {
     const dots = document.querySelectorAll(".phone-card-dots .dot");
     dots.forEach((dot, index) => {
       if (index < step) {
@@ -2543,8 +2959,9 @@ import Navbar3 from "../components/NavbarSimple.astro";
   }
 
   // Mostrar paso
-  function showStep(step) {
+  function showStep(step: number) {
     document.querySelectorAll(".auth-step").forEach((el, index) => {
+      if (!(el instanceof HTMLElement)) return;
       el.style.display = index + 1 === step ? "block" : "none";
     });
 
@@ -2552,6 +2969,7 @@ import Navbar3 from "../components/NavbarSimple.astro";
     const titleEl = document.getElementById("step-title");
     const descEl = document.getElementById("step-description");
     const loginLink = document.getElementById("login-link");
+    if (!titleEl || !descEl || !loginLink) return;
 
     if (step === 1) {
       titleEl.textContent = "Crear Cuenta";
@@ -2589,42 +3007,47 @@ import Navbar3 from "../components/NavbarSimple.astro";
   }
 
   // Funciones de validación
-  function validateFullName(name) {
+  function validateFullName(name: string) {
     return name.trim().length >= 2;
   }
 
-  function validateEmail(email) {
+  function validateEmail(email: string) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
-  function validatePhone(phone) {
+  function validatePhone(phone: string) {
     return phone.trim().length >= 10;
   }
 
-  function validatePassword(password) {
+  function validatePassword(password: string | any[]) {
     return password.length >= 8;
   }
 
-  function showFieldError(fieldId, message) {
+  function showFieldError(fieldId: string, message: string | null) {
+    if (!message) return;
     validationErrors[fieldId] = message;
     const field = document.getElementById(fieldId);
     if (field) {
       field.classList.add("field-error");
-      const errorEl = field.parentElement.querySelector(".field-error-message");
-      if (errorEl) {
+      const parent = field.parentElement;
+      if (!parent) return;
+      const errorEl = parent.querySelector(".field-error-message");
+      if (errorEl instanceof HTMLElement) {
         errorEl.textContent = message;
         errorEl.style.display = "block";
       }
     }
   }
 
-  function clearFieldError(fieldId) {
+  function clearFieldError(fieldId: string) {
     delete validationErrors[fieldId];
     const field = document.getElementById(fieldId);
     if (field) {
       field.classList.remove("field-error");
-      const errorEl = field.parentElement.querySelector(".field-error-message");
-      if (errorEl) {
+      const parent = field.parentElement;
+      if (!parent) return;
+      const errorEl = parent.querySelector(".field-error-message");
+      if (errorEl instanceof HTMLElement) {
         errorEl.style.display = "none";
       }
     }
@@ -2639,8 +3062,17 @@ import Navbar3 from "../components/NavbarSimple.astro";
     e.preventDefault();
     clearAllErrors();
 
-    const fullName = document.getElementById("fullName").value.trim();
-    const email = document.getElementById("email").value.trim();
+    const fullNameEl = document.getElementById("fullName");
+    const emailEl = document.getElementById("email");
+    if (
+      !(fullNameEl instanceof HTMLInputElement) ||
+      !(emailEl instanceof HTMLInputElement)
+    ) {
+      return;
+    }
+
+    const fullName = fullNameEl.value.trim();
+    const email = emailEl.value.trim();
 
     let hasErrors = false;
 
@@ -2677,7 +3109,9 @@ import Navbar3 from "../components/NavbarSimple.astro";
   // Paso 2: Verificar email
   document.getElementById("form-step-2")?.addEventListener("submit", (e) => {
     e.preventDefault();
-    const inputs = document.querySelectorAll("#otp-email .otp-input");
+    const inputs = Array.from(
+      document.querySelectorAll("#otp-email .otp-input"),
+    ).filter((input) => input instanceof HTMLInputElement);
     const otp = Array.from(inputs)
       .map((input) => input.value)
       .join("");
@@ -2710,13 +3144,13 @@ import Navbar3 from "../components/NavbarSimple.astro";
           emailOTPStatus = "idle";
           updateOTPStatus("otp-email", "idle");
           inputs.forEach((input) => (input.value = ""));
-          inputs[0].focus();
+          inputs[0]?.focus();
         }, 2000);
       }
     }, 1000);
   });
 
-  function updateOTPStatus(containerId, status) {
+  function updateOTPStatus(containerId: string, status: string) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
@@ -2734,7 +3168,9 @@ import Navbar3 from "../components/NavbarSimple.astro";
     e.preventDefault();
     clearAllErrors();
 
-    const phone = document.getElementById("phone").value.trim();
+    const phoneEl = document.getElementById("phone");
+    if (!(phoneEl instanceof HTMLInputElement)) return;
+    const phone = phoneEl.value.trim();
 
     if (!validatePhone(phone)) {
       showFieldError("phone", "Número de teléfono inválido");
@@ -2753,7 +3189,9 @@ import Navbar3 from "../components/NavbarSimple.astro";
   // Paso 4: Verificar teléfono
   document.getElementById("form-step-4")?.addEventListener("submit", (e) => {
     e.preventDefault();
-    const inputs = document.querySelectorAll("#otp-phone .otp-input");
+    const inputs = Array.from(
+      document.querySelectorAll("#otp-phone .otp-input"),
+    ).filter((input) => input instanceof HTMLInputElement);
     const otp = Array.from(inputs)
       .map((input) => input.value)
       .join("");
@@ -2786,7 +3224,7 @@ import Navbar3 from "../components/NavbarSimple.astro";
           phoneOTPStatus = "idle";
           updateOTPStatus("otp-phone", "idle");
           inputs.forEach((input) => (input.value = ""));
-          inputs[0].focus();
+          inputs[0]?.focus();
         }, 2000);
       }
     }, 1000);
@@ -2797,8 +3235,17 @@ import Navbar3 from "../components/NavbarSimple.astro";
     e.preventDefault();
     clearAllErrors();
 
-    const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("confirmPassword").value;
+    const passwordEl = document.getElementById("password");
+    const confirmPasswordEl = document.getElementById("confirmPassword");
+    if (
+      !(passwordEl instanceof HTMLInputElement) ||
+      !(confirmPasswordEl instanceof HTMLInputElement)
+    ) {
+      return;
+    }
+
+    const password = passwordEl.value;
+    const confirmPassword = confirmPasswordEl.value;
 
     let hasErrors = false;
 
@@ -2868,12 +3315,12 @@ import Navbar3 from "../components/NavbarSimple.astro";
     e.preventDefault();
 
     const formData = {
-      nombres: document.getElementById("nombres").value,
-      apellidos: document.getElementById("apellidos").value,
-      compania: document.getElementById("compania").value,
-      email: document.getElementById("email").value,
-      pais: document.getElementById("pais").value,
-      telefono: document.getElementById("telefono").value,
+      nombres: getInputValue("nombres"),
+      apellidos: getInputValue("apellidos"),
+      compania: getInputValue("compania"),
+      email: getInputValue("email"),
+      pais: getInputValue("pais"),
+      telefono: getInputValue("telefono"),
     };
 
     console.log("Formulario enviado:", formData);
@@ -2885,15 +3332,14 @@ import Navbar3 from "../components/NavbarSimple.astro";
     question.addEventListener("click", () => {
       const faqItem = question.closest(".faq-item");
       if (!faqItem) return;
-
       const isActive = faqItem.classList.contains("active");
 
       // Cerrar todos los demás items
       document.querySelectorAll(".faq-item").forEach((item) => {
         item.classList.remove("active");
       });
-
       // Abrir el item clickeado si no estaba activo
+
       if (!isActive) {
         faqItem.classList.add("active");
       }

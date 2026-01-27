@@ -11,9 +11,10 @@ import "../styles/navbar.css";
     <button role="tab" class="pp-item" data-key="aml">AML</button>
     <button role="tab" class="pp-item" data-key="linking">Connect</button>
     <button role="tab" class="pp-item" data-key="cards">Cards</button>
-    <button role="tab" class="pp-item" data-key="transfers">Transfers</button>
     <button role="tab" class="pp-item" data-key="international">TX</button>
-    <button role="tab" class="pp-item" data-key="payments">Payments</button>
+    <button role="tab" class="pp-item" data-key="paymentsTransfers"
+      >Payments and Transfers</button
+    >
     <button role="tab" class="pp-item" data-key="biz"
       >Discounts & Coupons</button
     >
@@ -92,14 +93,13 @@ import "../styles/navbar.css";
   const KEY_TO_ROUTE = {
     register: "/auth",
     identity: "/identity",
-    aml: "/amlCompliance",
-    linking: "/openBankingConnect",
-    cards: "/cardIssuing",
-    transfers: "/moneyTransfers",
+    aml: "/aml",
+    linking: "/connect",
+    cards: "/cards",
     international: "/tx",
-    payments: "/payments",
-    biz: "/discountsCoupons",
-    matilda: "/matildaAI",
+    paymentsTransfers: "/transfers",
+    biz: "/discounts",
+    matilda: "/alaiza",
   };
 
   // Catálogo de contenidos por pestaña - Versión en Español
@@ -230,9 +230,9 @@ import "../styles/navbar.css";
         },
       ],
     },
-    transfers: {
+    paymentsTransfers: {
       title: "Descripción General",
-      sub: "Módulo para movimientos instantáneos de dinero entre cuentas digitales del ecosistema Zelify.",
+      sub: "Pagos y transferencias en un solo módulo para mover dinero, cobrar y conciliar con visibilidad total.",
       features: [
         {
           icon: "transferQuoteValidation",
@@ -251,6 +251,24 @@ import "../styles/navbar.css";
           t: "Transferencias interbancarias",
           d: "Permite transferencias entre diferentes bancos.",
           href: "https://docs.zelify.com/financial-services/transfers?lang=es#interbank-local-transfers"
+        },
+        {
+          icon: "multiPlatform",
+          t: "Procesamiento Multiplataforma",
+          d: "Tarjeta, billetera, transferencia.",
+          href: "https://docs.zelify.com/financial-services/payments?lang=es#multi-platform-processing"
+        },
+        {
+          icon: "qrSdk",
+          t: "SDK con QR",
+          d: "Pagos con códigos QR.",
+          href: "https://docs.zelify.com/financial-services/payments?lang=es#sdk-with-qr"
+        },
+        {
+          icon: "recurringPayments",
+          t: "Pagos recurrentes",
+          d: "Sistema inteligente para suscripciones.",
+          href: "https://docs.zelify.com/financial-services/payments?lang=es#recurring-payments"
         },
         {
           icon: "payIn",
@@ -295,16 +313,22 @@ import "../styles/navbar.css";
           href: "https://docs.zelify.com/financial-services/transfers?lang=es#transactional-limits"
         },
         {
-          icon: "accountStatements",
-          t: "Estados de cuenta y reportes PDF",
-          d: "Provee estados de cuenta en formato PDF.",
-          href: "https://docs.zelify.com/financial-services/transfers?lang=es#account-statements-pdf-reports"
+          icon: "customKeys",
+          t: "Llaves personalizadas",
+          d: "Identificación única de usuario para pagos rápidos.",
+          href: "https://docs.zelify.com/financial-services/payments?lang=es#custom-keys"
         },
         {
           icon: "sdkTransfers",
           t: "SDK Transferencias",
           d: "Librerías para integración de transferencias.",
           href: "https://docs.zelify.com/financial-services/transfers?lang=es#sdk-transfers"
+        },
+        {
+          icon: "sdkPayments",
+          t: "SDK Pagos",
+          d: "Librerías pre-construidas para integración.",
+          href: "https://docs.zelify.com/financial-services/payments?lang=es#payments-sdk"
         },
       ],
     },
@@ -347,42 +371,6 @@ import "../styles/navbar.css";
           t: "SDK Tx",
           d: "Librerías para integración de transferencias internacionales.",
           href: "https://docs.zelify.com/financial-services/tx?lang=es#sdk-tx"
-        },
-      ],
-    },
-    payments: {
-      title: "Descripción General",
-      sub: "Procesador de pagos unificado que soporta múltiples métodos: tarjetas, llaves personalizadas o métodos de contacto.",
-      features: [
-        {
-          icon: "multiPlatform",
-          t: "Procesamiento Multiplataforma",
-          d: "Tarjeta, billetera, transferencia.",
-          href: "https://docs.zelify.com/financial-services/payments?lang=es#multi-platform-processing"
-        },
-        {
-          icon: "qrSdk",
-          t: "SDK con QR",
-          d: "Pagos con códigos QR.",
-          href: "https://docs.zelify.com/financial-services/payments?lang=es#sdk-with-qr"
-        },
-        {
-          icon: "recurringPayments",
-          t: "Pagos recurrentes",
-          d: "Sistema inteligente para suscripciones.",
-          href: "https://docs.zelify.com/financial-services/payments?lang=es#recurring-payments"
-        },
-        {
-          icon: "customKeys",
-          t: "Llaves personalizadas",
-          d: "Identificación única de usuario para pagos rápidos.",
-          href: "https://docs.zelify.com/financial-services/payments?lang=es#custom-keys"
-        },
-        {
-          icon: "sdkPayments",
-          t: "SDK",
-          d: "Librerías pre-construidas para integración.",
-          href: "https://docs.zelify.com/financial-services/payments?lang=es#payments-sdk"
         },
       ],
     },
@@ -642,9 +630,9 @@ import "../styles/navbar.css";
         },
       ],
     },
-    transfers: {
+    paymentsTransfers: {
       title: "Overview",
-      sub: "Module for instant money movements between digital accounts within the Zelify ecosystem.",
+      sub: "Payments and transfers in one module to move money, collect, and reconcile with full visibility.",
       features: [
         {
           icon: "transferQuoteValidation",
@@ -663,6 +651,24 @@ import "../styles/navbar.css";
           t: "Interbank & Local Transfers",
           d: "Allows transfers between different banks.",
           href: "https://docs.zelify.com/financial-services/transfers?lang=en#interbank-local-transfers"
+        },
+        {
+          icon: "multiPlatform",
+          t: "Multi-platform Processing",
+          d: "Card, wallet, transfer.",
+          href: "https://docs.zelify.com/financial-services/payments?lang=en#multi-platform-processing"
+        },
+        {
+          icon: "qrSdk",
+          t: "SDK with QR",
+          d: "Payments with QR codes.",
+          href: "https://docs.zelify.com/financial-services/payments?lang=en#sdk-with-qr"
+        },
+        {
+          icon: "recurringPayments",
+          t: "Recurring Payments",
+          d: "Intelligent system for subscriptions.",
+          href: "https://docs.zelify.com/financial-services/payments?lang=en#recurring-payments"
         },
         {
           icon: "payIn",
@@ -707,16 +713,22 @@ import "../styles/navbar.css";
           href: "https://docs.zelify.com/financial-services/transfers?lang=en#transactional-limits"
         },
         {
-          icon: "accountStatements",
-          t: "Account Statements & PDF Reports",
-          d: "Provides account statements in PDF.",
-          href: "https://docs.zelify.com/financial-services/transfers?lang=en#account-statements-pdf-reports"
+          icon: "customKeys",
+          t: "Custom Keys",
+          d: "Unique user identification for fast payments.",
+          href: "https://docs.zelify.com/financial-services/payments?lang=en#custom-keys"
         },
         {
           icon: "sdkTransfers",
           t: "SDK Transfers",
           d: "Libraries for transfer integration.",
           href: "https://docs.zelify.com/financial-services/transfers?lang=en#sdk-transfers"
+        },
+        {
+          icon: "sdkPayments",
+          t: "Payments SDK",
+          d: "Pre-built libraries for integration.",
+          href: "https://docs.zelify.com/financial-services/payments?lang=en#sdk"
         },
       ],
     },
@@ -759,42 +771,6 @@ import "../styles/navbar.css";
           t: "SDK Tx",
           d: "Libraries for international transfer integration.",
           href: "https://docs.zelify.com/financial-services/tx?lang=en#sdk-tx"
-        },
-      ],
-    },
-    payments: {
-      title: "Overview",
-      sub: "Unified payment processor supporting multiple methods: cards, custom keys, or contact methods.",
-      features: [
-        {
-          icon: "multiPlatform",
-          t: "Multi-platform Processing",
-          d: "Card, wallet, transfer.",
-          href: "https://docs.zelify.com/financial-services/payments?lang=en#multi-platform-processing"
-        },
-        {
-          icon: "qrSdk",
-          t: "SDK with QR",
-          d: "Payments with QR codes.",
-          href: "https://docs.zelify.com/financial-services/payments?lang=en#sdk-with-qr"
-        },
-        {
-          icon: "recurringPayments",
-          t: "Recurring Payments",
-          d: "Intelligent system for subscriptions.",
-          href: "https://docs.zelify.com/financial-services/payments?lang=en#recurring-payments"
-        },
-        {
-          icon: "customKeys",
-          t: "Custom Keys",
-          d: "Unique user identification for fast payments.",
-          href: "https://docs.zelify.com/financial-services/payments?lang=en#custom-keys"
-        },
-        {
-          icon: "sdkPayments",
-          t: "SDK",
-          d: "Pre-built libraries for integration.",
-          href: "https://docs.zelify.com/financial-services/payments?lang=en#sdk"
         },
       ],
     },
