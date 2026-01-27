@@ -588,7 +588,7 @@ const modulesList = [
           </form>
           <a
             class="welcome-demo-button"
-            href="/demo"
+            href="https://www.zelify.com/clips/"
             data-i18n="home.welcome.demo">demo</a
           >
         </div>
@@ -607,63 +607,66 @@ const modulesList = [
         <div class="product-showcase__overlay-card">
           <div class="product-showcase__inner-card" data-product-card>
             <div class="product-card-wrapper" data-card-id="auth">
-              <AuthProd />
+              <AuthProd noInteraction={true} isDemoEnabled={true} />
             </div>
             <div
               class="product-card-wrapper"
               data-card-id="identity"
               style="display: none;"
             >
-              <IdentityProd />
+              <IdentityProd noInteraction={true} isDemoEnabled={true} />
             </div>
             <div
               class="product-card-wrapper"
               data-card-id="aml"
               style="display: none;"
             >
-              <AmlProd />
+              <AmlProd noInteraction={true} isDemoEnabled={true} />
             </div>
             <div
               class="product-card-wrapper"
               data-card-id="connect"
               style="display: none;"
             >
-              <ConnectProd />
+              <ConnectProd noInteraction={true} isDemoEnabled={true} />
             </div>
             <div
               class="product-card-wrapper"
               data-card-id="cards"
               style="display: none;"
             >
-              <CardsProd />
+              <CardsProd noInteraction={true} isDemoEnabled={true} />
             </div>
             <div
               class="product-card-wrapper"
               data-card-id="payments-transfers"
               style="display: none;"
             >
-              <PaymentsTransfersProd />
+              <PaymentsTransfersProd
+                noInteraction={true}
+                isDemoEnabled={true}
+              />
             </div>
             <div
               class="product-card-wrapper"
               data-card-id="tx"
               style="display: none;"
             >
-              <TxProd />
+              <TxProd noInteraction={true} isDemoEnabled={true} />
             </div>
             <div
               class="product-card-wrapper"
               data-card-id="discounts"
               style="display: none;"
             >
-              <DiscountsProd />
+              <DiscountsProd noInteraction={true} isDemoEnabled={true} />
             </div>
             <div
               class="product-card-wrapper"
               data-card-id="alaiza"
               style="display: none;"
             >
-              <AlaizaProd />
+              <AlaizaProd noInteraction={true} isDemoEnabled={true} />
             </div>
           </div>
 
@@ -762,7 +765,7 @@ const modulesList = [
             cupones.
           </p>
           <a
-            href="/demo"
+            href="https://www.zelify.com/clips/"
             class="how-it-works-demo-button"
             data-i18n="home.how.demo">demo</a
           >
@@ -896,7 +899,7 @@ const modulesList = [
             cupones.
           </p>
           <a
-            href="/demo"
+            href="https://www.zelify.com/clips/"
             class="why-zelify-demo-button"
             data-i18n="home.why.demo">demo</a
           >
@@ -982,7 +985,7 @@ const modulesList = [
             cupones.
           </p>
           <a
-            href="/demo"
+            href="https://www.zelify.com/clips/"
             class="tokens-demo-button"
             data-i18n="home.tokens.demo">demo</a
           >
@@ -1007,21 +1010,21 @@ const modulesList = [
         <div class="action-products-container">
           <div class="action-products-card">
             <div class="action-card-wrapper" data-action-card="auth">
-              <AuthProd />
+              <AuthProd noInteraction={false} isDemoEnabled={false} />
             </div>
             <div
               class="action-card-wrapper"
               data-action-card="identity"
               style="display: none;"
             >
-              <IdentityProd />
+              <IdentityProd noInteraction={false} isDemoEnabled={false} />
             </div>
             <div
               class="action-card-wrapper"
               data-action-card="aml"
               style="display: none;"
             >
-              <AmlProd />
+              <AmlProd noInteraction={false} isDemoEnabled={false} />
             </div>
           </div>
         </div>
@@ -2263,7 +2266,7 @@ const modulesList = [
     .action-products-card {
       background-color: #ffffff;
       border-radius: 16px;
-      width: 280px;
+      width: 340px;
       height: 600px;
       display: flex;
       position: relative;
@@ -2712,14 +2715,20 @@ const modulesList = [
       }
 
       .action-products-container {
-        padding: 2rem;
+        padding: 1rem;
         min-height: 400px;
       }
 
       .action-products-card {
-        width: 240px;
-        height: 400px;
+        width: 340px;
+        height: 500px;
         margin-left: 0;
+      }
+
+      .action-card-wrapper {
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
       }
 
       .action-card-wrapper :global(.auth-card-wrapper),

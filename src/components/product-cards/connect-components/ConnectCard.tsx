@@ -18,7 +18,7 @@ interface BankAccount {
 }
 
 /* -- Main Component -- */
-export default function ConnectCard() {
+export default function ConnectCard({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) {
     // State
     const [currentScreen, setCurrentScreen] = useState<Screen>("banks");
     const [selectedBank, setSelectedBank] = useState<Bank | null>(null);
@@ -145,7 +145,7 @@ export default function ConnectCard() {
 
     // Demo flow
     const handlePlayDemo = async () => {
-        if (isRunningRef.current) return;
+        if (!isDemoEnabled || isRunningRef.current) return;
         isRunningRef.current = true;
         abortDemo.current = false;
         window.dispatchEvent(new CustomEvent('zelify:demo-start'));
@@ -293,7 +293,7 @@ export default function ConnectCard() {
                 clearInterval(progressIntervalRef.current);
             }
         };
-    }, []);
+    }, [isDemoEnabled]);
 
     // Render Banks Screen
     const renderBanksScreen = () => {

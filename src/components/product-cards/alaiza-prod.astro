@@ -1,9 +1,15 @@
 ---
 import AlaizaCard from "./alaiza-components/AlaizaCard";
+interface Props {
+  noInteraction?: boolean;
+  isDemoEnabled?: boolean;
+}
+
+const { noInteraction = true, isDemoEnabled = true } = Astro.props;
 ---
 
-<div class="no-interaction">
-  <AlaizaCard client:visible />
+<div class={noInteraction ? "no-interaction" : ""}>
+  <AlaizaCard client:visible isDemoEnabled={isDemoEnabled} />
 </div>
 
 <style>

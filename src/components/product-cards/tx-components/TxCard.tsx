@@ -12,7 +12,7 @@ interface Contact {
 }
 
 /* -- Main Component -- */
-export default function TxCard() {
+export default function TxCard({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) {
     // State
     const [currentScreen, setCurrentScreen] = useState<Screen>("amount");
     const [amount, setAmount] = useState("0.00");
@@ -161,7 +161,7 @@ export default function TxCard() {
 
     // Demo flow
     const handlePlayDemo = async () => {
-        if (isRunningRef.current) return;
+        if (!isDemoEnabled || isRunningRef.current) return;
         isRunningRef.current = true;
         abortDemo.current = false;
         window.dispatchEvent(new CustomEvent('zelify:demo-start'));
@@ -255,7 +255,7 @@ export default function TxCard() {
                 clearInterval(progressIntervalRef.current);
             }
         };
-    }, []);
+    }, [isDemoEnabled]);
 
     // Render Amount Screen
     const renderAmountScreen = () => {

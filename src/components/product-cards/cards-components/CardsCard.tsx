@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 type ActionId = "number" | "wallet" | "freeze" | "security" | "more" | "lock";
 
 /* -- Main Component -- */
-export default function CardsCard() {
+export default function CardsCard({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) {
     // State
     const [activeAction, setActiveAction] = useState<ActionId>("number");
     const [isExpanded, setIsExpanded] = useState(false);
@@ -132,7 +132,7 @@ export default function CardsCard() {
 
     // Demo flow
     const handlePlayDemo = async () => {
-        if (isRunningRef.current) return;
+        if (!isDemoEnabled || isRunningRef.current) return;
         isRunningRef.current = true;
         abortDemo.current = false;
         window.dispatchEvent(new CustomEvent('zelify:demo-start'));

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 
 /* -- Main Component -- */
-export default function AmlCard() {
+export default function AmlCard({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) {
     // State
     const [progress, setProgress] = useState(0);
     const [currentVerificationText, setCurrentVerificationText] = useState("Verificando en listas internas");
@@ -80,8 +80,8 @@ export default function AmlCard() {
 
     // Reset and start animation
     const handlePlayDemo = () => {
-        // Si ya está corriendo, no hacer nada (el botón externo maneja el toggle)
-        if (isRunningRef.current) return;
+        // Si ya está corriendo o la demo está desactivada, no hacer nada
+        if (!isDemoEnabled || isRunningRef.current) return;
 
         // Detener cualquier animación anterior
         stopProgress();
@@ -116,7 +116,7 @@ export default function AmlCard() {
                 clearInterval(progressIntervalRef.current);
             }
         };
-    }, []);
+    }, [isDemoEnabled]);
 
     return (
         <div className="flex h-full flex-col relative overflow-hidden bg-white" style={{ paddingBottom: '100px', paddingLeft: '10px', paddingRight: '10px' }}>

@@ -5,7 +5,7 @@ type Step = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
 type PlanType = "free" | "premium";
 
 /* -- Main Component -- */
-export default function DiscountsCard() {
+export default function DiscountsCard({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) {
     // State
     const [step, setStep] = useState<Step>(1);
     const [selectedPlan, setSelectedPlan] = useState<PlanType>("free");
@@ -118,7 +118,7 @@ export default function DiscountsCard() {
 
     // Demo flow
     const handlePlayDemo = async () => {
-        if (isRunningRef.current) return;
+        if (!isDemoEnabled || isRunningRef.current) return;
         isRunningRef.current = true;
         abortDemo.current = false;
         window.dispatchEvent(new CustomEvent('zelify:demo-start'));
@@ -233,7 +233,7 @@ export default function DiscountsCard() {
                 clearInterval(progressIntervalRef.current);
             }
         };
-    }, []);
+    }, [isDemoEnabled]);
 
     // Helper: Darken color
     const darkenColor = (hex: string, amount: number) => {

@@ -1,9 +1,16 @@
 ---
 import AmlCard from "./aml-components/AmlCard";
+
+interface Props {
+  noInteraction?: boolean;
+  isDemoEnabled?: boolean;
+}
+
+const { noInteraction = true, isDemoEnabled = true } = Astro.props;
 ---
 
-<div class="no-interaction">
-  <AmlCard client:visible />
+<div class={noInteraction ? "no-interaction" : ""}>
+  <AmlCard client:visible isDemoEnabled={isDemoEnabled} />
 </div>
 
 <style>

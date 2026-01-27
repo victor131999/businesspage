@@ -29,7 +29,7 @@ function cn(...classes: (string | undefined | null | false)[]) {
     return classes.filter(Boolean).join(" ");
 }
 
-export function AuthCard() {
+export function AuthCard({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) {
     const [isRegistering, setIsRegistering] = useState(false);
     const [registerStep, setRegisterStep] = useState(1);
     const [otpStatus, setOtpStatus] = useState<'idle' | 'verifying' | 'success' | 'error'>('idle');
@@ -65,7 +65,7 @@ export function AuthCard() {
 
     useEffect(() => {
         const handlePlayDemo = async () => {
-            if (isRunningRef.current) return;
+            if (!isDemoEnabled || isRunningRef.current) return;
             isRunningRef.current = true;
             setIsDemoRunning(true);
             abortDemo.current = false;
@@ -211,7 +211,7 @@ export function AuthCard() {
             window.removeEventListener('zelify:stop-demo:auth', handleStopDemo);
             abortDemo.current = true; // Cleanup safety
         };
-    }, []);
+    }, [isDemoEnabled]);
 
     // Handlers
     const handleStep1Continue = () => {

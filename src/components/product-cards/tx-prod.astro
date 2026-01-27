@@ -1,9 +1,15 @@
 ---
 import TxCard from "./tx-components/TxCard";
+interface Props {
+  noInteraction?: boolean;
+  isDemoEnabled?: boolean;
+}
+
+const { noInteraction = true, isDemoEnabled = true } = Astro.props;
 ---
 
-<div class="no-interaction">
-  <TxCard client:visible />
+<div class={noInteraction ? "no-interaction" : ""}>
+  <TxCard client:visible isDemoEnabled={isDemoEnabled} />
 </div>
 
 <style>

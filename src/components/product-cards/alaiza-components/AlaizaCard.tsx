@@ -7,7 +7,7 @@ import AlaizaBehavior from "./modules/AlaizaBehavior";
 type ModuleType = "chat" | "financial-education" | "behavior-analysis";
 
 /* -- Main Component -- */
-export default function AlaizaCard() {
+export default function AlaizaCard({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) {
     // Module Navigation
     const [currentModule, setCurrentModule] = useState<ModuleType>("chat");
     const isRunningRef = useRef(false);
@@ -31,7 +31,7 @@ export default function AlaizaCard() {
     });
 
     const handlePlayDemo = async () => {
-        if (isRunningRef.current) return;
+        if (!isDemoEnabled || isRunningRef.current) return;
         isRunningRef.current = true;
         window.dispatchEvent(new CustomEvent('zelify:demo-start'));
 
@@ -74,7 +74,7 @@ export default function AlaizaCard() {
             window.removeEventListener('zelify:play-demo:alaiza', handlePlayDemo);
             window.removeEventListener('zelify:stop-demo:alaiza', handleStopDemo);
         };
-    }, []);
+    }, [isDemoEnabled]);
 
     // Render Module Selector (Internal Navigation)
     const renderModuleSelector = () => {

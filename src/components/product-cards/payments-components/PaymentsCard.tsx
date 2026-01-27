@@ -14,7 +14,7 @@ interface Contact {
 }
 
 /* -- Main Component -- */
-export default function PaymentsCard() {
+export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) {
     // Module Navigation
     const [currentModule, setCurrentModule] = useState<ModuleType>("qr");
 
@@ -160,7 +160,7 @@ export default function PaymentsCard() {
 
     // Demo flow
     const handlePlayDemo = async () => {
-        if (isRunningRef.current) return;
+        if (!isDemoEnabled || isRunningRef.current) return;
         isRunningRef.current = true;
         abortDemo.current = false;
         window.dispatchEvent(new CustomEvent('zelify:demo-start'));
@@ -251,7 +251,7 @@ export default function PaymentsCard() {
                 clearInterval(ckProgressIntervalRef.current);
             }
         };
-    }, []);
+    }, [isDemoEnabled]);
 
     // ========== RENDER FUNCTIONS ==========
 

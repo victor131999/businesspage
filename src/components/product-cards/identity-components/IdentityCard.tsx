@@ -66,7 +66,7 @@ const DOCUMENT_NAMES: Record<Country, Record<DocumentType, string>> = {
 };
 
 /* -- Main Component -- */
-export default function IdentityCard() {
+export default function IdentityCard({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) {
     // State
     const [currentScreen, setCurrentScreen] = useState<ScreenStep>("welcome");
     const [activeWelcomeCard, setActiveWelcomeCard] = useState(0);
@@ -110,7 +110,7 @@ export default function IdentityCard() {
     // -- Event Listeners for Demo --
     useEffect(() => {
         const handlePlayDemo = async () => {
-            if (isRunningRef.current) return;
+            if (!isDemoEnabled || isRunningRef.current) return;
             isRunningRef.current = true;
             abortDemo.current = false;
             window.dispatchEvent(new CustomEvent('zelify:demo-start'));
@@ -226,7 +226,7 @@ export default function IdentityCard() {
             window.removeEventListener('zelify:stop-demo:identity', handleStopDemo);
             abortDemo.current = true;
         };
-    }, []);
+    }, [isDemoEnabled]);
 
     // -- Render Helpers --
     const renderWelcome = () => (

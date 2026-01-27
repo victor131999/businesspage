@@ -1,9 +1,15 @@
 ---
 import PaymentsCard from "./payments-components/PaymentsCard";
+interface Props {
+  noInteraction?: boolean;
+  isDemoEnabled?: boolean;
+}
+
+const { noInteraction = true, isDemoEnabled = true } = Astro.props;
 ---
 
-<div class="no-interaction">
-  <PaymentsCard client:visible />
+<div class={noInteraction ? "no-interaction" : ""}>
+  <PaymentsCard client:visible isDemoEnabled={isDemoEnabled} />
 </div>
 
 <style>

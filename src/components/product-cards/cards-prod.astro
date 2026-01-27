@@ -1,9 +1,15 @@
 ---
 import CardsCard from "./cards-components/CardsCard";
+interface Props {
+  noInteraction?: boolean;
+  isDemoEnabled?: boolean;
+}
+
+const { noInteraction = true, isDemoEnabled = true } = Astro.props;
 ---
 
-<div class="no-interaction">
-  <CardsCard client:visible />
+<div class={noInteraction ? "no-interaction" : ""}>
+  <CardsCard client:visible isDemoEnabled={isDemoEnabled} />
 </div>
 
 <style>

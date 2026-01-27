@@ -1,9 +1,16 @@
 ---
 import { AuthCard } from "./auth-components/AuthCard";
+
+interface Props {
+  noInteraction?: boolean;
+  isDemoEnabled?: boolean;
+}
+
+const { noInteraction = true, isDemoEnabled = true } = Astro.props;
 ---
 
-<div class="no-interaction">
-  <AuthCard client:visible />
+<div class={noInteraction ? "no-interaction" : ""}>
+  <AuthCard client:visible isDemoEnabled={isDemoEnabled} />
 </div>
 
 <style>

@@ -1,9 +1,15 @@
 ---
 import DiscountsCard from "./discounts-components/DiscountsCard";
+interface Props {
+  noInteraction?: boolean;
+  isDemoEnabled?: boolean;
+}
+
+const { noInteraction = true, isDemoEnabled = true } = Astro.props;
 ---
 
-<div class="no-interaction">
-  <DiscountsCard client:visible />
+<div class={noInteraction ? "no-interaction" : ""}>
+  <DiscountsCard client:visible isDemoEnabled={isDemoEnabled} />
 </div>
 
 <style>

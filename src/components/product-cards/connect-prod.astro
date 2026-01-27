@@ -1,9 +1,15 @@
 ---
 import ConnectCard from "./connect-components/ConnectCard";
+interface Props {
+  noInteraction?: boolean;
+  isDemoEnabled?: boolean;
+}
+
+const { noInteraction = true, isDemoEnabled = true } = Astro.props;
 ---
 
-<div class="no-interaction">
-  <ConnectCard client:visible />
+<div class={noInteraction ? "no-interaction" : ""}>
+  <ConnectCard client:visible isDemoEnabled={isDemoEnabled} />
 </div>
 
 <style>
