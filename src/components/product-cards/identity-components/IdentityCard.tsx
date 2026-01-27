@@ -232,7 +232,7 @@ export default function IdentityCard() {
     const renderWelcome = () => (
         <div className="relative flex h-full flex-col overflow-hidden">
             {/* Header Elements (Absolute) */}
-            <div className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between p-3 pointer-events-none">
+            {/* <div className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between p-3 pointer-events-none">
                 <div className="w-12"></div>
                 <div className="absolute left-1/2 top-4 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center p-1">
                     <img
@@ -242,12 +242,12 @@ export default function IdentityCard() {
                     />
                 </div>
                 <div className="w-12"></div>
-            </div>
+            </div> */}
 
             {/* Animation */}
             <div className="relative -mb-4 flex-shrink-0 z-0 flex justify-center mt-8">
                 <img
-                    src="/ANIMACION%201.gif"
+                    src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
                     alt="Identity Animation"
                     className="h-44 w-44 object-contain opacity-90 mix-blend-multiply"
                 />
@@ -372,20 +372,20 @@ export default function IdentityCard() {
                     <span>back</span>
                 </button>
 
-                <div className="absolute left-1/2 top-4 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center p-1">
+                {/* <div className="absolute left-1/2 top-4 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center p-1">
                     <img
                         src="/images/zelify_logo.png"
                         alt="Logo"
                         className="h-14 w-14 object-contain drop-shadow-sm"
                     />
-                </div>
+                </div> */}
                 <div className="w-12"></div>
             </div>
 
             {/* Animation */}
             <div className="relative -mb-12 flex-shrink-0 z-0 flex justify-center mt-8">
                 <img
-                    src="/ANIMACION%201.gif"
+                    src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
                     alt="Identity Animation"
                     className="h-44 w-44 object-contain opacity-90 mix-blend-multiply"
                 />
@@ -533,11 +533,11 @@ export default function IdentityCard() {
                     >
                         <span>&lt; back</span>
                     </button>
-                    <img
+                    {/* <img
                         src="/images/zelify_logo.png"
                         alt="Logo"
                         className="h-8 absolute left-1/2 -translate-x-1/2 object-contain drop-shadow-sm"
-                    />
+                    /> */}
                     <div className="w-12"></div>
                 </div>
 
@@ -716,18 +716,18 @@ export default function IdentityCard() {
                         >
                             <span>&lt; back</span>
                         </button>
-                        <img
+                        {/* <img
                             src="/images/zelify_logo.png"
                             alt="Logo"
                             className="h-8 absolute left-1/2 -translate-x-1/2 object-contain drop-shadow-sm"
-                        />
+                        /> */}
                         <div className="w-12"></div>
                     </div>
 
                     {/* GIF Fondo */}
                     <div className="relative -mb-16 z-0 flex justify-center">
                         <img
-                            src="/ANIMACION%201.gif"
+                            src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
                             alt="Animation"
                             className="h-48 w-48 object-contain opacity-90 mix-blend-multiply"
                         />
@@ -873,7 +873,7 @@ export default function IdentityCard() {
         return (
             <div className="flex h-full flex-col relative overflow-hidden bg-white" style={{ paddingBottom: '100px', paddingLeft: '10px', paddingRight: '10px' }}>
                 {/* Header - Solo logo */}
-                <div className="relative mb-3 flex items-center justify-between px-6 pt-6 z-20">
+                {/* <div className="relative mb-3 flex items-center justify-between px-6 pt-6 z-20">
                     <div className="w-full"></div>
                     <img
                         src="/images/zelify_logo.png"
@@ -881,7 +881,7 @@ export default function IdentityCard() {
                         className="h-8 absolute left-1/2 -translate-x-1/2 object-contain drop-shadow-sm"
                     />
                     <div className="w-full"></div>
-                </div>
+                </div> */}
 
                 {/* Contenedor con Gradiente */}
                 <div
@@ -1008,7 +1008,7 @@ export default function IdentityCard() {
 
         return (
             <div className="flex h-full flex-col relative overflow-hidden bg-white">
-                {/* Header - Solo logo */}
+                {/* Header - Solo logo
                 <div className="relative mb-3 flex items-center justify-between px-6 pt-6 z-20">
                     <div className="w-full"></div>
                     <img
@@ -1017,7 +1017,7 @@ export default function IdentityCard() {
                         className="h-8 absolute left-1/2 -translate-x-1/2 object-contain drop-shadow-sm"
                     />
                     <div className="w-full"></div>
-                </div>
+                </div> */}
 
                 {/* Contenedor con Gradiente Horizontal */}
                 <div

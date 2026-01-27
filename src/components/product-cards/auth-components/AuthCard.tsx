@@ -334,14 +334,14 @@ export function AuthCard() {
     // Render Functions
     const renderLogin = () => (
         <div className="relative flex h-full flex-col overflow-hidden">
-            {/* Logo */}
+            {/* Logo
             <div className="flex items-center justify-center p-1">
                 <img
                     src="/images/zelify_logo.png"
                     alt="Logo"
                     className="h-14 w-14 object-contain drop-shadow-sm"
                 />
-            </div>
+            </div> */}
             {/* Animated GIF */}
             <div className="relative -mb-12 flex-shrink-0 z-0 flex justify-center">
                 <img
@@ -673,14 +673,14 @@ export function AuthCard() {
                     Back
                 </button>
 
-                {/* Logo */}
+                {/* Logo
                 <div className="absolute left-1/2 top-4 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center p-1">
                     <img
                         src="/images/zelify_logo.png"
                         alt="Logo"
                         className="h-14 w-14 object-contain drop-shadow-sm"
                     />
-                </div>
+                </div> */}
 
                 {/* Spacer for symmetry if needed, or just empty */}
                 <div className="w-8"></div>

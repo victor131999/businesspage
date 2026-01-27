@@ -449,11 +449,11 @@ export default function CardsCard() {
                 {/* Header */}
                 <div className="flex-shrink-0 px-6 pt-4 pb-2">
                     <div className="flex justify-center">
-                        <img
+                        {/* <img
                             src="/images/zelify_logo.png"
                             alt="Logo"
                             className="h-8 w-auto object-contain"
-                        />
+                        /> */}
                     </div>
                 </div>
 

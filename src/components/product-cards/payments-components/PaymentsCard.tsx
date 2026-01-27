@@ -292,12 +292,12 @@ export default function PaymentsCard() {
             return (
                 <div className="relative flex h-full flex-col px-5 py-3">
                     <div className="flex-shrink-0 mb-3 flex justify-center">
-                        <img src="/images/zelify_logo.png" alt="Logo" className="h-8 w-auto object-contain" />
+                        {/* <img src="/images/zelify_logo.png" alt="Logo" className="h-8 w-auto object-contain" /> */}
                     </div>
 
                     <div className="relative -mb-16 z-0 flex justify-center">
                         <img
-                            src="/ANIMACION%201.gif"
+                            src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
                             alt="Animation"
                             className="h-48 w-48 object-contain opacity-90"
                         />
@@ -354,13 +354,13 @@ export default function PaymentsCard() {
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
                             </svg>
                         </button>
-                        <img src="/images/zelify_logo.png" alt="Logo" className="h-8 w-auto object-contain" />
+                        {/* <img src="/images/zelify_logo.png" alt="Logo" className="h-8 w-auto object-contain" /> */}
                         <div className="w-8"></div>
                     </div>
 
                     <div className="relative -mb-16 z-0 flex justify-center">
                         <img
-                            src="/ANIMACION%201.gif"
+                            src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
                             alt="Animation"
                             className="h-48 w-48 object-contain opacity-90"
                         />
@@ -406,13 +406,13 @@ export default function PaymentsCard() {
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
                             </svg>
                         </button>
-                        <img src="/images/zelify_logo.png" alt="Logo" className="h-8 w-auto object-contain" />
+                        {/* <img src="/images/zelify_logo.png" alt="Logo" className="h-8 w-auto object-contain" /> */}
                         <div className="w-8"></div>
                     </div>
 
                     <div className="relative -mb-16 z-0 flex justify-center">
                         <img
-                            src="/ANIMACION%201.gif"
+                            src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
                             alt="Animation"
                             className="h-48 w-48 object-contain opacity-90"
                         />
@@ -462,7 +462,7 @@ export default function PaymentsCard() {
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
                             </svg>
                         </button>
-                        <img src="/images/zelify_logo.png" alt="Logo" className="h-8 w-auto object-contain" />
+                        {/* <img src="/images/zelify_logo.png" alt="Logo" className="h-8 w-auto object-contain" /> */}
                         <button onClick={() => setQrScreen("home")} className="flex h-8 w-8 items-center justify-center rounded-full hover:bg-gray-100 transition">
                             <svg className="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -471,7 +471,7 @@ export default function PaymentsCard() {
                     </div>
 
                     <div className="relative -mb-16 z-0 flex justify-center">
-                        <img src="/ANIMACION%201.gif" alt="Animation" className="h-48 w-48 object-contain opacity-90" />
+                        <img src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif" alt="Animation" className="h-48 w-48 object-contain opacity-90" />
                     </div>
 
                     <div className="relative z-10 flex-1 overflow-hidden rounded-2xl p-4 backdrop-blur-sm flex flex-col -mx-5" style={{ backgroundColor: 'rgba(255, 255, 255, 0.35)' }}>
@@ -647,12 +647,12 @@ export default function PaymentsCard() {
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
                             </svg>
                         </button>
-                        <img src="/images/zelify_logo.png" alt="Logo" className="h-8 w-auto object-contain" />
+                        {/* <img src="/images/zelify_logo.png" alt="Logo" className="h-8 w-auto object-contain" /> */}
                         <div className="w-8"></div>
                     </div>
 
                     <div className="relative -mb-16 z-0 flex justify-center">
-                        <img src="/ANIMACION%201.gif" alt="Animation" className="h-48 w-48 object-contain opacity-90" />
+                        <img src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif" alt="Animation" className="h-48 w-48 object-contain opacity-90" />
                     </div>
 
                     <div className="relative z-10 flex-1 overflow-hidden rounded-2xl p-4 backdrop-blur-sm flex flex-col" style={{ backgroundColor: 'rgba(255, 255, 255, 0.35)' }}>
@@ -700,11 +700,11 @@ export default function PaymentsCard() {
             return (
                 <div className="flex flex-col h-full px-5 py-3">
                     <div className="flex-shrink-0 mb-3 flex justify-center">
-                        <img src="/images/zelify_logo.png" alt="Logo" className="h-8 w-auto object-contain" />
+                        {/* <img src="/images/zelify_logo.png" alt="Logo" className="h-8 w-auto object-contain" /> */}
                     </div>
 
                     <div className="relative -mb-16 z-0 flex justify-center">
-                        <img src="/ANIMACION%201.gif" alt="Animation" className="h-48 w-48 object-contain opacity-90" />
+                        <img src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif" alt="Animation" className="h-48 w-48 object-contain opacity-90" />
                     </div>
 
                     <div className="relative z-10 flex-1 overflow-hidden rounded-2xl p-4 backdrop-blur-sm flex flex-col" style={{ backgroundColor: 'rgba(255, 255, 255, 0.35)' }}>
@@ -747,11 +747,11 @@ export default function PaymentsCard() {
             return (
                 <div className="flex flex-col h-full px-5 py-3">
                     <div className="flex-shrink-0 mb-3 flex justify-center">
-                        <img src="/images/zelify_logo.png" alt="Logo" className="h-8 w-auto object-contain" />
+                        {/* <img src="/images/zelify_logo.png" alt="Logo" className="h-8 w-auto object-contain" /> */}
                     </div>
 
                     <div className="relative -mb-16 z-0 flex justify-center">
-                        <img src="/ANIMACION%201.gif" alt="Animation" className="h-48 w-48 object-contain opacity-90" />
+                        <img src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif" alt="Animation" className="h-48 w-48 object-contain opacity-90" />
                     </div>
 
                     <div className="relative z-10 flex-1 overflow-hidden rounded-2xl p-4 backdrop-blur-sm flex flex-col" style={{ backgroundColor: 'rgba(255, 255, 255, 0.35)' }}>
@@ -883,7 +883,7 @@ export default function PaymentsCard() {
             return (
                 <div className="relative h-full w-full">
                     <div className="absolute top-0 left-0 right-0 h-1/2 z-0 px-4 overflow-hidden flex items-center justify-center pt-4">
-                        <img src="/ANIMACION%201.gif" alt="Animation" className="w-[140%] h-auto object-contain" />
+                        <img src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif" alt="Animation" className="w-[140%] h-auto object-contain" />
                     </div>
 
                     <div className="absolute bottom-0 left-0 right-0 z-10 flex flex-col" style={{ height: '65%', borderRadius: '24px 24px 0 0', backdropFilter: 'blur(8px)', backgroundColor: 'rgba(255, 255, 255, 0.4)' }}>
@@ -976,7 +976,7 @@ export default function PaymentsCard() {
             return (
                 <div className="relative h-full w-full">
                     <div className="absolute top-0 left-0 right-0 h-1/2 z-0 px-4 overflow-hidden flex items-center justify-center pt-4">
-                        <img src="/ANIMACION%201.gif" alt="Animation" className="w-[140%] h-auto object-contain" />
+                        <img src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif" alt="Animation" className="w-[140%] h-auto object-contain" />
                     </div>
 
                     <div className="absolute bottom-0 left-0 right-0 z-10 flex flex-col" style={{ height: '65%', borderRadius: '24px 24px 0 0', backdropFilter: 'blur(8px)', backgroundColor: 'rgba(255, 255, 255, 0.4)' }}>

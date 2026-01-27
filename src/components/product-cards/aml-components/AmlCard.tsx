@@ -123,11 +123,11 @@ export default function AmlCard() {
             {/* Header - Solo logo */}
             <div className="relative mb-3 flex items-center justify-between px-6 pt-6 z-20">
                 <div className="w-full"></div>
-                <img
+                {/* <img
                     src="/images/zelify_logo.png"
                     alt="Logo"
                     className="h-8 absolute left-1/2 -translate-x-1/2 object-contain drop-shadow-sm"
-                />
+                /> */}
                 <div className="w-full"></div>
             </div>
 
@@ -143,7 +143,7 @@ export default function AmlCard() {
                         rgba(${themeRgb}, 0.4) 40%, 
                         transparent 50%, 
                         transparent 100%)`,
-                    minHeight: '500px',
+                    minHeight: '100%',
                 }}
             >
                 {/* Título */}

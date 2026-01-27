@@ -256,11 +256,11 @@ export default function DiscountsCard() {
                 </button>
             )}
             <div className="flex items-center justify-center">
-                <img
+                {/* <img
                     src="/images/zelify_logo.png"
                     alt="Logo"
                     className="h-8 w-auto object-contain"
-                />
+                /> */}
             </div>
         </div>
     );
@@ -381,7 +381,7 @@ export default function DiscountsCard() {
             <div className="flex-1 flex flex-col items-center pt-4 px-2 pb-12 z-10 min-h-0">
                 <div className="relative w-32 h-32 flex items-center justify-center min-h-[50px] mb-4 mt-8 shrink z-20">
                     <img
-                        src="/ANIMACION%201.gif"
+                        src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
                         alt="Animación"
                         className="w-full h-full object-contain opacity-80"
                     />
@@ -592,7 +592,7 @@ export default function DiscountsCard() {
             <div className="absolute top-10 left-0 right-0 flex justify-center z-0">
                 <div className="w-64 h-64 flex items-center justify-center">
                     <img
-                        src="/ANIMACION%201.gif"
+                        src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
                         alt="Animación"
                         className="w-full h-full object-contain opacity-80"
                     />
@@ -636,7 +636,7 @@ export default function DiscountsCard() {
             <div className="absolute top-10 left-0 right-0 flex justify-center z-0">
                 <div className="w-64 h-64 flex items-center justify-center">
                     <img
-                        src="/ANIMACION%201.gif"
+                        src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
                         alt="Animación"
                         className="w-full h-full object-contain opacity-80"
                     />
@@ -690,7 +690,7 @@ export default function DiscountsCard() {
             <div className="absolute top-10 left-0 right-0 flex justify-center z-0">
                 <div className="w-64 h-64 flex items-center justify-center">
                     <img
-                        src="/ANIMACION%201.gif"
+                        src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
                         alt="Animación"
                         className="w-full h-full object-contain opacity-80"
                     />
