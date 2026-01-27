@@ -570,7 +570,16 @@ const modulesList = [
             action="#"
             aria-label="Solicitar cotización"
             data-i18n-aria-label="home.welcome.quote.aria"
+            novalidate
           >
+            <input
+              class="welcome-honeypot"
+              type="text"
+              name="company"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+            />
             <input
               class="welcome-input"
               type="email"
@@ -586,6 +595,40 @@ const modulesList = [
               data-i18n="home.welcome.quote">cotizar</button
             >
           </form>
+          <div id="captcha-modal" class="captcha-modal">
+            <div class="captcha-modal-overlay"></div>
+            <div class="captcha-modal-content">
+              <button
+                id="close-captcha"
+                class="captcha-modal-close"
+                aria-label="Cerrar modal"
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><line x1="18" y1="6" x2="6" y2="18"></line><line
+                    x1="6"
+                    y1="6"
+                    x2="18"
+                    y2="18"></line></svg
+                >
+              </button>
+              <h3 class="captcha-modal-title">Solo un paso más</h3>
+              <p class="captcha-modal-subtitle">
+                Por favor, completa la verificación para continuar.
+              </p>
+              <div class="welcome-captcha">
+                <div id="turnstile-widget"></div>
+              </div>
+            </div>
+          </div>
+          <p class="welcome-form-message" aria-live="polite"></p>
           <a
             class="welcome-demo-button"
             href="https://www.zelify.com/clips/"
@@ -1468,6 +1511,115 @@ const modulesList = [
       align-items: center;
       justify-content: center;
       gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .welcome-honeypot {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .welcome-captcha {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 70px;
+    }
+
+    /* Modal Styles */
+    .captcha-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .captcha-modal.is-active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .captcha-modal-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 34, 62, 0.4);
+      backdrop-filter: blur(8px);
+    }
+
+    .captcha-modal-content {
+      position: relative;
+      background: #ffffff;
+      padding: 2.5rem 2rem;
+      border-radius: 24px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow:
+        0 20px 25px -5px rgba(0, 0, 0, 0.1),
+        0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      text-align: center;
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+
+    .captcha-modal.is-active .captcha-modal-content {
+      transform: translateY(0);
+    }
+
+    .captcha-modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 50%;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .captcha-modal-close:hover {
+      background: #f1f5f9;
+      color: #00223e;
+    }
+
+    .captcha-modal-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #00223e;
+      margin-bottom: 0.5rem;
+    }
+
+    .captcha-modal-subtitle {
+      font-size: 0.95rem;
+      color: #64748b;
+      margin-bottom: 1.5rem;
+    }
+
+    .welcome-form-message {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #00223e;
+      min-height: 1.4rem;
+      text-align: center;
+      width: 100%;
+    }
+
+    .welcome-input.is-error {
+      border-color: #d92d20;
+      box-shadow: 0 0 0 3px rgba(217, 45, 32, 0.12);
     }
 
     @media (max-width: 640px) {
@@ -3283,6 +3435,185 @@ const modulesList = [
     })();
   </script>
 </html>
+
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer
+></script>
+
+<script is:inline>
+  (() => {
+    const form = document.querySelector(".welcome-input-group");
+    const emailInput = document.querySelector(".welcome-input");
+    const honeypot = document.querySelector(".welcome-honeypot");
+    const message = document.querySelector(".welcome-form-message");
+    const modal = document.querySelector("#captcha-modal");
+    const closeModal = document.querySelector("#close-captcha");
+    let captchaToken = "";
+    let isModalOpen = false;
+    let widgetId = null;
+
+    const setMessage = (text, isError = false) => {
+      if (!message) return;
+      message.textContent = text;
+      message.style.color = isError ? "#b42318" : "#00223e";
+      if (emailInput) {
+        emailInput.classList.toggle("is-error", isError);
+      }
+    };
+
+    const toggleModal = (show) => {
+      if (!modal) return;
+      isModalOpen = show;
+      modal.classList.toggle("is-active", show);
+      if (show) {
+        document.body.style.overflow = "hidden";
+
+        // Renderizado manual del captcha cuando el modal es visible
+        if (typeof turnstile !== "undefined") {
+          if (widgetId === null) {
+            widgetId = turnstile.render("#turnstile-widget", {
+              sitekey: "0x4AAAAAACTr8BCSls7WtvbZ",
+              callback: (token) => {
+                captchaToken = token;
+                const email = emailInput?.value.trim();
+                // Si el modal está abierto y tenemos email válido
+                if (isModalOpen && email && isValidEmail(email)) {
+                  setTimeout(() => {
+                    toggleModal(false);
+                    submitForm(email);
+                  }, 800);
+                }
+              },
+              "expired-callback": () => {
+                captchaToken = "";
+                if (isModalOpen) {
+                  setMessage("El captcha expiró. Inténtalo de nuevo.", true);
+                }
+              },
+            });
+          } else {
+            turnstile.reset(widgetId);
+            captchaToken = "";
+          }
+        }
+      } else {
+        document.body.style.overflow = "";
+      }
+    };
+
+    const isValidEmail = (value) =>
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+
+    const submitForm = async (email) => {
+      setMessage("Enviando...", false);
+      const toAddress = "vicente.narvaez@zwippe.com";
+      const payload = {
+        to: toAddress,
+        subject: "Nueva solicitud de cotización",
+        html: `
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f3f4f6;padding:24px 0;font-family:Arial,Helvetica,sans-serif;">
+            <tr>
+              <td align="center">
+                <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="background:#ffffff;border-radius:14px;overflow:hidden;">
+                  <tr>
+                    <td align="center" bgcolor="#001c40" style="padding:20px;">
+                      <img src="https://rlerklikpjwhzloyqpnk.supabase.co/storage/v1/object/sign/a/header_logo.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9hMGY0YTQzMC00MDRhLTQyM2EtYWM1OS1lNjlhOTA3ZWIyYzEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJhL2hlYWRlcl9sb2dvLnBuZyIsImlhdCI6MTc1Nzk1NDcyNSwiZXhwIjoxNzg5NDkwNzI1fQ.F3IDj7sZ9eB2p9ne9MM-PG6FJFWDCR8-8e6lw2yManc"
+                        alt="Zelify Logo" width="123" height="35"
+                        style="max-width:100%;height:auto;display:block;">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:28px 32px 10px;color:#0b1d3a;">
+                      <h2 style="margin:0 0 12px;font-size:20px;line-height:1.3;">Nueva solicitud desde la página principal</h2>
+                      <p style="margin:0 0 16px;font-size:14px;line-height:1.6;color:#334155;">
+                        Un usuario ha interactuado con el botón <strong>“Cotizar”</strong> y confirmó su interés en recibir más información
+                        y posiblemente agendar una reunión.
+                      </p>
+                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f8fafc;border-radius:10px;">
+                        <tr>
+                          <td style="padding:14px 16px;font-size:14px;color:#0b1d3a;">
+                            <strong>Email del interesado:</strong> ${email}
+                          </td>
+                        </tr>
+                      </table>
+                      <p style="margin:18px 0 0;font-size:12px;line-height:1.5;color:#64748b;">
+                        Origen: Formulario “Cotizar” en www.zelify.com
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:16px 32px 28px;color:#64748b;font-size:12px;">
+                      Este mensaje fue generado automáticamente por Zelify.
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        `,
+        text: `Nueva solicitud desde la página principal. Email: ${email}. Interés en más información y posible reunión.`,
+        cc: "",
+        bcc: "",
+      };
+
+      try {
+        const response = await fetch(
+          "https://mailing-production.up.railway.app/email/send",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          },
+        );
+
+        if (!response.ok) throw new Error("Request failed");
+
+        setMessage("¡Listo! Te contactaremos pronto.");
+        if (form) form.reset();
+        captchaToken = "";
+        if (typeof turnstile !== "undefined" && widgetId !== null) {
+          turnstile.reset(widgetId);
+        }
+      } catch (error) {
+        setMessage("No pudimos enviar tu solicitud. Intenta más tarde.", true);
+      }
+    };
+
+    if (closeModal) {
+      closeModal.addEventListener("click", () => toggleModal(false));
+    }
+
+    if (!form || !emailInput) return;
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (honeypot && honeypot.value) return;
+
+      const email = emailInput.value.trim();
+      if (!isValidEmail(email)) {
+        setMessage("Ingresa un correo válido.", true);
+        emailInput.focus();
+        return;
+      }
+
+      setMessage("", false);
+
+      if (!captchaToken || !isModalOpen) {
+        toggleModal(true);
+        return;
+      }
+
+      await submitForm(email);
+    });
+
+    emailInput.addEventListener("input", () => {
+      if (emailInput.classList.contains("is-error")) {
+        setMessage("", false);
+      }
+    });
+  })();
+</script>
 
 <script>
   /* Ensure this script runs after DOM load */
