@@ -1,18 +1,24 @@
 ---
 import Navbar3 from "../components/NavbarSimple.astro";
+import ProductsPanel from "../components/productsPanel.astro";
 ---
 
 <html lang="es">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/png" href="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/ISO-ZELIFY-2025.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/ISO-ZELIFY-2025.png"
+    />
     <title>Zelify — Auth</title>
   </head>
 
   <body>
     <header class="auth-header">
-     <Navbar3 />
+      <Navbar3 />
+      <ProductsPanel />
     </header>
 
     <main class="auth-main">
@@ -28,18 +34,38 @@ import Navbar3 from "../components/NavbarSimple.astro";
           y garantizar usuarios confiables.
         </p>
         <div class="auth-cta">
-          <input type="email" placeholder="ingresa tu correo" aria-label="Correo electrónico" />
-          <a href="https://alaiza.zelify.com" class="btn-cotizar" target="_blank" rel="noopener noreferrer">cotizar</a>
-          <a href="https://www.zelify.com/clips" class="btn-demo-hero" target="_blank" rel="noopener noreferrer">demo</a>
+          <input
+            type="email"
+            placeholder="ingresa tu correo"
+            aria-label="Correo electrónico"
+          />
+          <a
+            href="https://alaiza.zelify.com"
+            class="btn-cotizar"
+            target="_blank"
+            rel="noopener noreferrer">cotizar</a
+          >
+          <a
+            href="https://www.zelify.com/clips"
+            class="btn-demo-hero"
+            target="_blank"
+            rel="noopener noreferrer">demo</a
+          >
         </div>
       </section>
     </main>
 
     <div class="auth-background-section">
+      <div class="auth-background-overlay"></div>
       <div class="auth-background-image">
-        <img src="/background.jpeg" alt="Background pattern" />
+        <video class="auth-video" autoplay loop muted playsinline>
+          <source
+            src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/circlesmov.mp4"
+            type="video/mp4"
+          />
+        </video>
       </div>
-      
+
       <!-- Contenedor del dispositivo móvil -->
       <div class="device-container">
         <!-- Frame del iPhone -->
@@ -56,7 +82,9 @@ import Navbar3 from "../components/NavbarSimple.astro";
                 </div>
                 <div class="status-icons">
                   <svg class="signal-icon" fill="none" viewBox="0 0 20 12">
-                    <path d="M1 8h2v2H1V8zm3-2h2v4H4V6zm3-2h2v6H7V4zm3-1h2v7h-2V3z" fill="currentColor"/>
+                    <path
+                      d="M1 8h2v2H1V8zm3-2h2v4H4V6zm3-2h2v6H7V4zm3-1h2v7h-2V3z"
+                      fill="currentColor"></path>
                   </svg>
                   <div class="battery-icon">
                     <div class="battery-level"></div>
@@ -91,127 +119,248 @@ import Navbar3 from "../components/NavbarSimple.astro";
                       <span class="dot"></span>
                       <span class="dot"></span>
                     </div>
-                    
-                    <h2 class="phone-card-title" id="step-title">Crear Cuenta</h2>
+
+                    <h2 class="phone-card-title" id="step-title">
+                      Crear Cuenta
+                    </h2>
                     <p class="phone-card-description" id="step-description">
-                      Ingresa tu nombre y correo electrónico para empezar. Te enviaremos un código de verificación.
+                      Ingresa tu nombre y correo electrónico para empezar. Te
+                      enviaremos un código de verificación.
                     </p>
-                    
+
                     <button class="btn-google">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M19.6 10.2273C19.6 9.51818 19.5364 8.83636 19.4182 8.18182H10V12.05H15.3818C15.15 13.3 14.4455 14.3591 13.3864 15.0682V17.5773H16.6182C18.5091 15.8364 19.6 13.2727 19.6 10.2273Z" fill="#4285F4"/>
-            <path d="M10 20C12.7 20 14.9636 19.1045 16.6182 17.5773L13.3864 15.0682C12.4909 15.6682 11.3455 16.0227 10 16.0227C7.39545 16.0227 5.19091 14.2636 4.40455 11.9H1.06364V14.4909C2.70909 17.7591 6.09091 20 10 20Z" fill="#34A853"/>
-            <path d="M4.40455 11.9C4.20455 11.3 4.09091 10.6591 4.09091 10C4.09091 9.34091 4.20455 8.7 4.40455 8.1V5.50909H1.06364C0.386364 6.85909 0 8.38636 0 10C0 11.6136 0.386364 13.1409 1.06364 14.4909L4.40455 11.9Z" fill="#FBBC05"/>
-            <path d="M10 3.97727C11.4682 3.97727 12.7864 4.46818 13.8227 5.42273L16.6909 2.55455C14.9591 0.940909 12.6955 0 10 0C6.09091 0 2.70909 2.24091 1.06364 5.50909L4.40455 8.1C5.19091 5.73636 7.39545 3.97727 10 3.97727Z" fill="#EA4335"/>
-          </svg>
-          Crear cuenta con Google
-        </button>
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M19.6 10.2273C19.6 9.51818 19.5364 8.83636 19.4182 8.18182H10V12.05H15.3818C15.15 13.3 14.4455 14.3591 13.3864 15.0682V17.5773H16.6182C18.5091 15.8364 19.6 13.2727 19.6 10.2273Z"
+                          fill="#4285F4"></path>
+                        <path
+                          d="M10 20C12.7 20 14.9636 19.1045 16.6182 17.5773L13.3864 15.0682C12.4909 15.6682 11.3455 16.0227 10 16.0227C7.39545 16.0227 5.19091 14.2636 4.40455 11.9H1.06364V14.4909C2.70909 17.7591 6.09091 20 10 20Z"
+                          fill="#34A853"></path>
+                        <path
+                          d="M4.40455 11.9C4.20455 11.3 4.09091 10.6591 4.09091 10C4.09091 9.34091 4.20455 8.7 4.40455 8.1V5.50909H1.06364C0.386364 6.85909 0 8.38636 0 10C0 11.6136 0.386364 13.1409 1.06364 14.4909L4.40455 11.9Z"
+                          fill="#FBBC05"></path>
+                        <path
+                          d="M10 3.97727C11.4682 3.97727 12.7864 4.46818 13.8227 5.42273L16.6909 2.55455C14.9591 0.940909 12.6955 0 10 0C6.09091 0 2.70909 2.24091 1.06364 5.50909L4.40455 8.1C5.19091 5.73636 7.39545 3.97727 10 3.97727Z"
+                          fill="#EA4335"></path>
+                      </svg>
+                      Crear cuenta con Google
+                    </button>
 
-        <div class="phone-card-divider">
-          <span class="divider-line"></span>
-          <span class="divider-text">O crea cuenta con correo</span>
-          <span class="divider-line"></span>
-        </div>
+                    <div class="phone-card-divider">
+                      <span class="divider-line"></span>
+                      <span class="divider-text">O crea cuenta con correo</span>
+                      <span class="divider-line"></span>
+                    </div>
 
-        <!-- Paso 1: Crear Cuenta -->
-        <div id="step-1" class="auth-step">
-          <form class="phone-card-form" id="form-step-1">
-            <div class="form-field">
-              <label>Nombre Completo<span class="required">*</span></label>
-              <input type="text" id="fullName" placeholder="John Doe" required />
-              <span class="field-error-message"></span>
-      </div>
-            <div class="form-field">
-              <label>Correo<span class="required">*</span></label>
-              <input type="email" id="email" placeholder="email@example.com" required />
-              <span class="field-error-message"></span>
-            </div>
-            <button type="submit" class="btn-continuar">
-              Continuar →
-            </button>
-          </form>
-        </div>
+                    <!-- Paso 1: Crear Cuenta -->
+                    <div id="step-1" class="auth-step">
+                      <form class="phone-card-form" id="form-step-1">
+                        <div class="form-field">
+                          <label
+                            >Nombre Completo<span class="required">*</span
+                            ></label
+                          >
+                          <input
+                            type="text"
+                            id="fullName"
+                            placeholder="John Doe"
+                            required
+                          />
+                          <span class="field-error-message"></span>
+                        </div>
+                        <div class="form-field">
+                          <label>Correo<span class="required">*</span></label>
+                          <input
+                            type="email"
+                            id="email"
+                            placeholder="email@example.com"
+                            required
+                          />
+                          <span class="field-error-message"></span>
+                        </div>
+                        <button type="submit" class="btn-continuar">
+                          Continuar →
+                        </button>
+                      </form>
+                    </div>
 
-        <!-- Paso 2: Verificar Email -->
-        <div id="step-2" class="auth-step" style="display: none;">
-          <form class="phone-card-form" id="form-step-2">
-            <div class="otp-container">
-              <div class="otp-inputs" id="otp-email">
-                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" />
-                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" />
-                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" />
-                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" />
-                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" />
-                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" />
-              </div>
-            </div>
-            <button type="submit" class="btn-continuar">
-              Verificar →
-            </button>
-            <p class="resend-code">
-              ¿No recibiste el código? <a href="#" id="resend-email">Reenviar</a>
-            </p>
-          </form>
-        </div>
+                    <!-- Paso 2: Verificar Email -->
+                    <div id="step-2" class="auth-step" style="display: none;">
+                      <form class="phone-card-form" id="form-step-2">
+                        <div class="otp-container">
+                          <div class="otp-inputs" id="otp-email">
+                            <input
+                              type="text"
+                              class="otp-input"
+                              maxlength="1"
+                              inputmode="numeric"
+                            />
+                            <input
+                              type="text"
+                              class="otp-input"
+                              maxlength="1"
+                              inputmode="numeric"
+                            />
+                            <input
+                              type="text"
+                              class="otp-input"
+                              maxlength="1"
+                              inputmode="numeric"
+                            />
+                            <input
+                              type="text"
+                              class="otp-input"
+                              maxlength="1"
+                              inputmode="numeric"
+                            />
+                            <input
+                              type="text"
+                              class="otp-input"
+                              maxlength="1"
+                              inputmode="numeric"
+                            />
+                            <input
+                              type="text"
+                              class="otp-input"
+                              maxlength="1"
+                              inputmode="numeric"
+                            />
+                          </div>
+                        </div>
+                        <button type="submit" class="btn-continuar">
+                          Verificar →
+                        </button>
+                        <p class="resend-code">
+                          ¿No recibiste el código? <a href="#" id="resend-email"
+                            >Reenviar</a
+                          >
+                        </p>
+                      </form>
+                    </div>
 
-        <!-- Paso 3: Agregar Teléfono -->
-        <div id="step-3" class="auth-step" style="display: none;">
-          <form class="phone-card-form" id="form-step-3">
-            <div class="form-field">
-              <label>Número de Teléfono<span class="required">*</span></label>
-              <input type="tel" id="phone" placeholder="+1 234 567 8900" required />
-              <span class="field-error-message"></span>
-            </div>
-            <button type="submit" class="btn-continuar">
-              Continuar →
-            </button>
-          </form>
-        </div>
+                    <!-- Paso 3: Agregar Teléfono -->
+                    <div id="step-3" class="auth-step" style="display: none;">
+                      <form class="phone-card-form" id="form-step-3">
+                        <div class="form-field">
+                          <label
+                            >Número de Teléfono<span class="required">*</span
+                            ></label
+                          >
+                          <input
+                            type="tel"
+                            id="phone"
+                            placeholder="+1 234 567 8900"
+                            required
+                          />
+                          <span class="field-error-message"></span>
+                        </div>
+                        <button type="submit" class="btn-continuar">
+                          Continuar →
+                        </button>
+                      </form>
+                    </div>
 
-        <!-- Paso 4: Verificar Teléfono -->
-        <div id="step-4" class="auth-step" style="display: none;">
-          <form class="phone-card-form" id="form-step-4">
-            <div class="otp-container">
-              <div class="otp-inputs" id="otp-phone">
-                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" />
-                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" />
-                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" />
-                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" />
-                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" />
-                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" />
-              </div>
-            </div>
-            <button type="submit" class="btn-continuar">
-              Verificar →
-            </button>
-            <p class="resend-code">
-              ¿No recibiste el código? <a href="#" id="resend-phone">Reenviar</a>
-            </p>
-          </form>
-        </div>
+                    <!-- Paso 4: Verificar Teléfono -->
+                    <div id="step-4" class="auth-step" style="display: none;">
+                      <form class="phone-card-form" id="form-step-4">
+                        <div class="otp-container">
+                          <div class="otp-inputs" id="otp-phone">
+                            <input
+                              type="text"
+                              class="otp-input"
+                              maxlength="1"
+                              inputmode="numeric"
+                            />
+                            <input
+                              type="text"
+                              class="otp-input"
+                              maxlength="1"
+                              inputmode="numeric"
+                            />
+                            <input
+                              type="text"
+                              class="otp-input"
+                              maxlength="1"
+                              inputmode="numeric"
+                            />
+                            <input
+                              type="text"
+                              class="otp-input"
+                              maxlength="1"
+                              inputmode="numeric"
+                            />
+                            <input
+                              type="text"
+                              class="otp-input"
+                              maxlength="1"
+                              inputmode="numeric"
+                            />
+                            <input
+                              type="text"
+                              class="otp-input"
+                              maxlength="1"
+                              inputmode="numeric"
+                            />
+                          </div>
+                        </div>
+                        <button type="submit" class="btn-continuar">
+                          Verificar →
+                        </button>
+                        <p class="resend-code">
+                          ¿No recibiste el código? <a href="#" id="resend-phone"
+                            >Reenviar</a
+                          >
+                        </p>
+                      </form>
+                    </div>
 
-        <!-- Paso 5: Completar Perfil -->
-        <div id="step-5" class="auth-step" style="display: none;">
-          <form class="phone-card-form" id="form-step-5">
-            <div class="form-field">
-              <label>Contraseña<span class="required">*</span></label>
-              <input type="password" id="password" placeholder="Mínimo 8 caracteres" required />
-              <span class="field-error-message"></span>
-            </div>
-            <div class="form-field">
-              <label>Confirmar Contraseña<span class="required">*</span></label>
-              <input type="password" id="confirmPassword" placeholder="Confirma tu contraseña" required />
-              <span class="field-error-message"></span>
-            </div>
-            <button type="submit" class="btn-continuar">
-              Crear Cuenta →
-            </button>
-          </form>
-        </div>
-        
-        <p class="phone-card-login" id="login-link" style="display: none;">
-          ¿Ya tienes una cuenta? <a href="#">Ingresa</a>
-        </p>
+                    <!-- Paso 5: Completar Perfil -->
+                    <div id="step-5" class="auth-step" style="display: none;">
+                      <form class="phone-card-form" id="form-step-5">
+                        <div class="form-field">
+                          <label
+                            >Contraseña<span class="required">*</span></label
+                          >
+                          <input
+                            type="password"
+                            id="password"
+                            placeholder="Mínimo 8 caracteres"
+                            required
+                          />
+                          <span class="field-error-message"></span>
+                        </div>
+                        <div class="form-field">
+                          <label
+                            >Confirmar Contraseña<span class="required">*</span
+                            ></label
+                          >
+                          <input
+                            type="password"
+                            id="confirmPassword"
+                            placeholder="Confirma tu contraseña"
+                            required
+                          />
+                          <span class="field-error-message"></span>
+                        </div>
+                        <button type="submit" class="btn-continuar">
+                          Crear Cuenta →
+                        </button>
+                      </form>
+                    </div>
+
+                    <p
+                      class="phone-card-login"
+                      id="login-link"
+                      style="display: none;"
+                    >
+                      ¿Ya tienes una cuenta? <a href="#">Ingresa</a>
+                    </p>
                   </div>
                 </div>
               </div>
@@ -219,7 +368,6 @@ import Navbar3 from "../components/NavbarSimple.astro";
               <!-- Home Indicator -->
               <div class="device-home-indicator"></div>
             </div>
-
           </div>
         </div>
       </div>
@@ -232,94 +380,158 @@ import Navbar3 from "../components/NavbarSimple.astro";
           Seguridad inteligente<br />
           desde el primer acceso.
         </h2>
-        
+
         <div class="security-features">
           <!-- Feature 1: Registro a tu medida -->
           <div class="security-feature">
             <div class="feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                <path d="M14 2v6h6"/>
-                <path d="M16 13H8"/>
-                <path d="M16 17H8"/>
-                <path d="M10 9H8"/>
-                <circle cx="19" cy="5" r="1.5" fill="currentColor"/>
-                <path d="M19 4v2M19 6h-1M19 6h1" stroke-width="1"/>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                ></path>
+                <path d="M14 2v6h6"></path>
+                <path d="M16 13H8"></path>
+                <path d="M16 17H8"></path>
+                <path d="M10 9H8"></path>
+                <circle cx="19" cy="5" r="1.5" fill="currentColor"></circle>
+                <path d="M19 4v2M19 6h-1M19 6h1" stroke-width="1"></path>
               </svg>
             </div>
             <h3 class="feature-title">Registro a tu medida</h3>
-            <p class="feature-description">Campos personalizados que se adaptan a tu negocio y a tus usuarios.</p>
+            <p class="feature-description">
+              Campos personalizados que se adaptan a tu negocio y a tus
+              usuarios.
+            </p>
           </div>
 
           <!-- Feature 2: Acceso rápido y seguro -->
           <div class="security-feature">
             <div class="feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                <circle cx="12" cy="12" r="3"/>
-                <path d="M12 1v4M12 19v4M1 12h4M19 12h4"/>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M12 1v4M12 19v4M1 12h4M19 12h4"></path>
               </svg>
             </div>
             <h3 class="feature-title">Acceso rápido y seguro</h3>
-            <p class="feature-description">Biometría y autenticación multifactor sin fricciones.</p>
+            <p class="feature-description">
+              Biometría y autenticación multifactor sin fricciones.
+            </p>
           </div>
 
           <!-- Feature 3: Seguridad desde el primer clic -->
           <div class="security-feature">
             <div class="feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.3"/>
-                <path d="M9 12l2 2 4-4" stroke-width="2"/>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.3"
+                ></circle>
+                <path d="M9 12l2 2 4-4" stroke-width="2"></path>
               </svg>
             </div>
             <h3 class="feature-title">Seguridad desde el primer clic</h3>
-            <p class="feature-description">Protección avanzada en cada inicio de sesión.</p>
+            <p class="feature-description">
+              Protección avanzada en cada inicio de sesión.
+            </p>
           </div>
 
           <!-- Feature 4: Inteligencia del dispositivo -->
           <div class="security-feature">
             <div class="feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <circle cx="12" cy="12" r="6"/>
-                <circle cx="12" cy="12" r="2" fill="currentColor"/>
-                <path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>
-                <path d="M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <circle cx="12" cy="12" r="6"></circle>
+                <circle cx="12" cy="12" r="2" fill="currentColor"></circle>
+                <path d="M12 2v4M12 18v4M2 12h4M18 12h4"></path>
+                <path
+                  d="M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"
+                ></path>
               </svg>
             </div>
             <h3 class="feature-title">Inteligencia del dispositivo</h3>
-            <p class="feature-description">Validación automática del entorno desde donde se conecta el usuario.</p>
+            <p class="feature-description">
+              Validación automática del entorno desde donde se conecta el
+              usuario.
+            </p>
           </div>
 
           <!-- Feature 5: Usuarios verificados -->
           <div class="security-feature">
             <div class="feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                <circle cx="12" cy="7" r="4"/>
-                <path d="M12 11v6M9 14h6"/>
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" opacity="0.3"/>
-                <path d="M9 12l2 2 4-4" stroke-width="2"/>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+                <path d="M12 11v6M9 14h6"></path>
+                <path
+                  d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                  opacity="0.3"></path>
+                <path d="M9 12l2 2 4-4" stroke-width="2"></path>
               </svg>
             </div>
             <h3 class="feature-title">Usuarios verificados</h3>
-            <p class="feature-description">Cada usuario vinculado a un entorno confiable y trazable.</p>
+            <p class="feature-description">
+              Cada usuario vinculado a un entorno confiable y trazable.
+            </p>
           </div>
 
           <!-- Feature 6: Detección temprana de fraude -->
           <div class="security-feature">
             <div class="feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <circle cx="12" cy="12" r="6"/>
-                <path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>
-                <circle cx="12" cy="12" r="2" fill="currentColor"/>
-                <path d="M8 8l8 8M16 8l-8 8" stroke-width="2"/>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <circle cx="12" cy="12" r="6"></circle>
+                <path d="M12 2v4M12 18v4M2 12h4M18 12h4"></path>
+                <circle cx="12" cy="12" r="2" fill="currentColor"></circle>
+                <path d="M8 8l8 8M16 8l-8 8" stroke-width="2"></path>
               </svg>
             </div>
             <h3 class="feature-title">Detección temprana de fraude</h3>
-            <p class="feature-description">Identifica tráfico inusual, VPNs y accesos sospechosos en tiempo real.</p>
+            <p class="feature-description">
+              Identifica tráfico inusual, VPNs y accesos sospechosos en tiempo
+              real.
+            </p>
           </div>
         </div>
       </div>
@@ -330,26 +542,41 @@ import Navbar3 from "../components/NavbarSimple.astro";
       <div class="control-container">
         <div class="control-divider"></div>
         <h2 class="control-title">Control total del acceso a tu plataforma</h2>
-        
+
         <div class="control-features">
           <!-- Feature 1: Autenticación -->
           <div class="control-feature">
             <div class="control-feature-card">
               <div class="control-feature-front">
                 <div class="control-feature-image">
-                  <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=500&fit=crop&q=80" alt="Autenticación" />
+                  <img
+                    src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=500&fit=crop&q=80"
+                    alt="Autenticación"
+                  />
                 </div>
                 <h3 class="control-feature-title">Autenticación</h3>
-                <p class="control-feature-description">Registro de usuarios, inicios de sesión seguros y validación de correo y número de teléfono.</p>
+                <p class="control-feature-description">
+                  Registro de usuarios, inicios de sesión seguros y validación
+                  de correo y número de teléfono.
+                </p>
                 <button class="control-feature-btn" data-feature="auth">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
                     <line x1="12" y1="5" x2="12" y2="19"></line>
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                   </svg>
                 </button>
               </div>
               <div class="control-feature-back">
-                <h3 class="control-feature-title">Beneficios de Autenticación</h3>
+                <h3 class="control-feature-title">
+                  Beneficios de Autenticación
+                </h3>
                 <ul class="control-feature-benefits">
                   <li>Registro personalizado con campos adaptables</li>
                   <li>Verificación de email y teléfono en tiempo real</li>
@@ -357,8 +584,18 @@ import Navbar3 from "../components/NavbarSimple.astro";
                   <li>Biometría integrada para acceso rápido</li>
                   <li>Gestión segura de sesiones</li>
                 </ul>
-                <button class="control-feature-btn control-feature-btn-close" data-feature="auth">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <button
+                  class="control-feature-btn control-feature-btn-close"
+                  data-feature="auth"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                   </svg>
@@ -372,19 +609,36 @@ import Navbar3 from "../components/NavbarSimple.astro";
             <div class="control-feature-card">
               <div class="control-feature-front">
                 <div class="control-feature-image">
-                  <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=500&fit=crop&q=80" alt="Información de dispositivo" />
+                  <img
+                    src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=500&fit=crop&q=80"
+                    alt="Información de dispositivo"
+                  />
                 </div>
-                <h3 class="control-feature-title">Información de dispositivo</h3>
-                <p class="control-feature-description">Servicio de inteligencia para identificar información del dispositivo desde básica hasta avanzada.</p>
+                <h3 class="control-feature-title">
+                  Información de dispositivo
+                </h3>
+                <p class="control-feature-description">
+                  Servicio de inteligencia para identificar información del
+                  dispositivo desde básica hasta avanzada.
+                </p>
                 <button class="control-feature-btn" data-feature="device">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
                     <line x1="12" y1="5" x2="12" y2="19"></line>
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                   </svg>
                 </button>
               </div>
               <div class="control-feature-back">
-                <h3 class="control-feature-title">Beneficios de Información de Dispositivo</h3>
+                <h3 class="control-feature-title">
+                  Beneficios de Información de Dispositivo
+                </h3>
                 <ul class="control-feature-benefits">
                   <li>Identificación automática del dispositivo</li>
                   <li>Detección de características avanzadas</li>
@@ -392,8 +646,18 @@ import Navbar3 from "../components/NavbarSimple.astro";
                   <li>Validación de seguridad del dispositivo</li>
                   <li>Información detallada en tiempo real</li>
                 </ul>
-                <button class="control-feature-btn control-feature-btn-close" data-feature="device">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <button
+                  class="control-feature-btn control-feature-btn-close"
+                  data-feature="device"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                   </svg>
@@ -407,19 +671,33 @@ import Navbar3 from "../components/NavbarSimple.astro";
             <div class="control-feature-card">
               <div class="control-feature-front">
                 <div class="control-feature-image">
-                  <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&h=500&fit=crop&q=80" alt="Geolocalización" />
+                  <img
+                    src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&h=500&fit=crop&q=80"
+                    alt="Geolocalización"
+                  />
                 </div>
                 <h3 class="control-feature-title">Geolocalización</h3>
-                <p class="control-feature-description">Convierte coordenadas en información estratégica y de valor.</p>
+                <p class="control-feature-description">
+                  Convierte coordenadas en información estratégica y de valor.
+                </p>
                 <button class="control-feature-btn" data-feature="geo">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
                     <line x1="12" y1="5" x2="12" y2="19"></line>
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                   </svg>
                 </button>
               </div>
               <div class="control-feature-back">
-                <h3 class="control-feature-title">Beneficios de Geolocalización</h3>
+                <h3 class="control-feature-title">
+                  Beneficios de Geolocalización
+                </h3>
                 <ul class="control-feature-benefits">
                   <li>Análisis de ubicación en tiempo real</li>
                   <li>Detección de accesos sospechosos</li>
@@ -427,8 +705,18 @@ import Navbar3 from "../components/NavbarSimple.astro";
                   <li>Validación de entorno geográfico</li>
                   <li>Prevención de fraudes por ubicación</li>
                 </ul>
-                <button class="control-feature-btn control-feature-btn-close" data-feature="geo">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <button
+                  class="control-feature-btn control-feature-btn-close"
+                  data-feature="geo"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                   </svg>
@@ -442,12 +730,25 @@ import Navbar3 from "../components/NavbarSimple.astro";
             <div class="control-feature-card">
               <div class="control-feature-front">
                 <div class="control-feature-image">
-                  <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=500&fit=crop&q=80" alt="SDK de integración" />
+                  <img
+                    src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=500&fit=crop&q=80"
+                    alt="SDK de integración"
+                  />
                 </div>
                 <h3 class="control-feature-title">SDK de integración</h3>
-                <p class="control-feature-description">Incorpora estas interfaces mediante una única integración ágil y sencilla.</p>
+                <p class="control-feature-description">
+                  Incorpora estas interfaces mediante una única integración ágil
+                  y sencilla.
+                </p>
                 <button class="control-feature-btn" data-feature="sdk">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
                     <line x1="12" y1="5" x2="12" y2="19"></line>
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                   </svg>
@@ -462,8 +763,18 @@ import Navbar3 from "../components/NavbarSimple.astro";
                   <li>Soporte técnico especializado</li>
                   <li>Actualizaciones automáticas</li>
                 </ul>
-                <button class="control-feature-btn control-feature-btn-close" data-feature="sdk">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <button
+                  class="control-feature-btn control-feature-btn-close"
+                  data-feature="sdk"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                   </svg>
@@ -492,23 +803,43 @@ import Navbar3 from "../components/NavbarSimple.astro";
           <div class="contact-form-wrapper">
             <div class="contact-form-card">
               <h3 class="contact-form-title">Habla con nuestro equipo</h3>
-              
+
               <form class="contact-form" id="contactForm">
                 <div class="form-row">
                   <div class="form-group">
-                    <input type="text" id="nombres" placeholder="Nombres" required />
+                    <input
+                      type="text"
+                      id="nombres"
+                      placeholder="Nombres"
+                      required
+                    />
                   </div>
                   <div class="form-group">
-                    <input type="text" id="apellidos" placeholder="Apellidos" required />
+                    <input
+                      type="text"
+                      id="apellidos"
+                      placeholder="Apellidos"
+                      required
+                    />
                   </div>
                 </div>
 
                 <div class="form-row">
                   <div class="form-group">
-                    <input type="text" id="compania" placeholder="Nombre de la compañía" required />
+                    <input
+                      type="text"
+                      id="compania"
+                      placeholder="Nombre de la compañía"
+                      required
+                    />
                   </div>
                   <div class="form-group">
-                    <input type="email" id="email" placeholder="Email de la compañía" required />
+                    <input
+                      type="email"
+                      id="email"
+                      placeholder="Email de la compañía"
+                      required
+                    />
                   </div>
                 </div>
 
@@ -524,17 +855,29 @@ import Navbar3 from "../components/NavbarSimple.astro";
                       <option value="es">España</option>
                       <option value="us">Estados Unidos</option>
                     </select>
-                    <svg class="select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg
+                      class="select-arrow"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
                       <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                   </div>
                   <div class="form-group">
-                    <input type="tel" id="telefono" placeholder="Teléfono (opcional)" />
+                    <input
+                      type="tel"
+                      id="telefono"
+                      placeholder="Teléfono (opcional)"
+                    />
                   </div>
                 </div>
 
                 <p class="contact-legal">
-                  Al enviar este formulario, aceptas nuestros <a href="#">Términos de Servicio</a> y <a href="#">Política de Privacidad</a>.
+                  Al enviar este formulario, aceptas nuestros <a href="#"
+                    >Términos de Servicio</a
+                  > y <a href="#">Política de Privacidad</a>.
                 </p>
 
                 <button type="submit" class="contact-submit-btn">
@@ -551,18 +894,33 @@ import Navbar3 from "../components/NavbarSimple.astro";
     <section class="faq-section">
       <div class="faq-container">
         <h2 class="faq-title">Preguntas frecuentes</h2>
-        
+
         <div class="faq-list">
           <!-- FAQ 1 -->
           <div class="faq-item">
             <button class="faq-question" data-faq="1">
               <span>¿Qué funcionalidades incluye el producto?</span>
-              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg
+                class="faq-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
             </button>
             <div class="faq-answer">
-              <p>Nuestro producto incluye autenticación avanzada con biometría, registro personalizable de usuarios, validación de email y teléfono, información detallada del dispositivo, geolocalización estratégica, detección temprana de fraudes, y un SDK de integración sencillo para incorporar todas estas funcionalidades en una sola línea de código.</p>
+              <p>
+                Nuestro producto incluye autenticación avanzada con biometría,
+                registro personalizable de usuarios, validación de email y
+                teléfono, información detallada del dispositivo, geolocalización
+                estratégica, detección temprana de fraudes, y un SDK de
+                integración sencillo para incorporar todas estas funcionalidades
+                en una sola línea de código.
+              </p>
             </div>
           </div>
 
@@ -570,25 +928,56 @@ import Navbar3 from "../components/NavbarSimple.astro";
           <div class="faq-item">
             <button class="faq-question" data-faq="2">
               <span>¿Es seguro usar biometría y doble factor?</span>
-              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg
+                class="faq-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
             </button>
             <div class="faq-answer">
-              <p>Sí, es completamente seguro. La biometría y la autenticación de doble factor (2FA) son estándares de la industria que proporcionan capas adicionales de seguridad. Nuestro sistema utiliza encriptación de extremo a extremo y cumple con los más altos estándares de seguridad para proteger los datos biométricos y las credenciales de tus usuarios.</p>
+              <p>
+                Sí, es completamente seguro. La biometría y la autenticación de
+                doble factor (2FA) son estándares de la industria que
+                proporcionan capas adicionales de seguridad. Nuestro sistema
+                utiliza encriptación de extremo a extremo y cumple con los más
+                altos estándares de seguridad para proteger los datos
+                biométricos y las credenciales de tus usuarios.
+              </p>
             </div>
           </div>
 
           <!-- FAQ 3 -->
           <div class="faq-item">
             <button class="faq-question" data-faq="3">
-              <span>¿Puedo personalizar los campos de registro para mis usuarios?</span>
-              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <span
+                >¿Puedo personalizar los campos de registro para mis usuarios?</span
+              >
+              <svg
+                class="faq-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
             </button>
             <div class="faq-answer">
-              <p>Absolutamente. Nuestro sistema de registro es completamente personalizable. Puedes agregar, eliminar o modificar campos según las necesidades de tu negocio. Los campos se adaptan dinámicamente a tus usuarios, permitiéndote crear experiencias de registro únicas y relevantes para tu plataforma.</p>
+              <p>
+                Absolutamente. Nuestro sistema de registro es completamente
+                personalizable. Puedes agregar, eliminar o modificar campos
+                según las necesidades de tu negocio. Los campos se adaptan
+                dinámicamente a tus usuarios, permitiéndote crear experiencias
+                de registro únicas y relevantes para tu plataforma.
+              </p>
             </div>
           </div>
 
@@ -596,12 +985,28 @@ import Navbar3 from "../components/NavbarSimple.astro";
           <div class="faq-item">
             <button class="faq-question" data-faq="4">
               <span>¿Cómo detecta fraudes y accesos sospechosos?</span>
-              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg
+                class="faq-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
             </button>
             <div class="faq-answer">
-              <p>Nuestro sistema utiliza inteligencia artificial y machine learning para analizar patrones de comportamiento, detectar tráfico inusual, identificar el uso de VPNs, analizar la geolocalización de accesos, y monitorear información del dispositivo en tiempo real. Todo esto permite identificar y prevenir accesos sospechosos antes de que representen una amenaza.</p>
+              <p>
+                Nuestro sistema utiliza inteligencia artificial y machine
+                learning para analizar patrones de comportamiento, detectar
+                tráfico inusual, identificar el uso de VPNs, analizar la
+                geolocalización de accesos, y monitorear información del
+                dispositivo en tiempo real. Todo esto permite identificar y
+                prevenir accesos sospechosos antes de que representen una
+                amenaza.
+              </p>
             </div>
           </div>
 
@@ -609,12 +1014,26 @@ import Navbar3 from "../components/NavbarSimple.astro";
           <div class="faq-item">
             <button class="faq-question" data-faq="5">
               <span>¿Funciona en cualquier dispositivo?</span>
-              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg
+                class="faq-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
             </button>
             <div class="faq-answer">
-              <p>Sí, nuestro producto es multiplataforma y funciona en cualquier dispositivo: smartphones (iOS y Android), tablets, computadoras de escritorio y laptops. La interfaz se adapta automáticamente a cada dispositivo, proporcionando una experiencia óptima sin importar desde dónde accedan tus usuarios.</p>
+              <p>
+                Sí, nuestro producto es multiplataforma y funciona en cualquier
+                dispositivo: smartphones (iOS y Android), tablets, computadoras
+                de escritorio y laptops. La interfaz se adapta automáticamente a
+                cada dispositivo, proporcionando una experiencia óptima sin
+                importar desde dónde accedan tus usuarios.
+              </p>
             </div>
           </div>
 
@@ -622,25 +1041,57 @@ import Navbar3 from "../components/NavbarSimple.astro";
           <div class="faq-item">
             <button class="faq-question" data-faq="6">
               <span>¿Es fácil de integrar a mi sistema actual?</span>
-              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg
+                class="faq-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
             </button>
             <div class="faq-answer">
-              <p>Muy fácil. Nuestro SDK de integración está diseñado para ser implementado con una sola línea de código. Proporcionamos documentación completa, ejemplos de código, y soporte técnico especializado para ayudarte en el proceso de integración. La mayoría de nuestros clientes completan la integración en menos de una hora.</p>
+              <p>
+                Muy fácil. Nuestro SDK de integración está diseñado para ser
+                implementado con una sola línea de código. Proporcionamos
+                documentación completa, ejemplos de código, y soporte técnico
+                especializado para ayudarte en el proceso de integración. La
+                mayoría de nuestros clientes completan la integración en menos
+                de una hora.
+              </p>
             </div>
           </div>
 
           <!-- FAQ 7 -->
           <div class="faq-item">
             <button class="faq-question" data-faq="7">
-              <span>¿Puedo escalar la seguridad a medida que crece mi plataforma?</span>
-              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <span
+                >¿Puedo escalar la seguridad a medida que crece mi plataforma?</span
+              >
+              <svg
+                class="faq-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
             </button>
             <div class="faq-answer">
-              <p>Definitivamente. Nuestra arquitectura está construida para escalar automáticamente. A medida que tu plataforma crece, nuestro sistema se adapta sin necesidad de cambios adicionales. Puedes manejar desde cientos hasta millones de usuarios sin preocuparte por la capacidad o el rendimiento del sistema de seguridad.</p>
+              <p>
+                Definitivamente. Nuestra arquitectura está construida para
+                escalar automáticamente. A medida que tu plataforma crece,
+                nuestro sistema se adapta sin necesidad de cambios adicionales.
+                Puedes manejar desde cientos hasta millones de usuarios sin
+                preocuparte por la capacidad o el rendimiento del sistema de
+                seguridad.
+              </p>
             </div>
           </div>
         </div>
@@ -654,7 +1105,12 @@ import Navbar3 from "../components/NavbarSimple.astro";
           Comienza hoy y<br />
           asegura cada acceso.
         </h2>
-        <a href="https://alaiza.zelify.com" class="cta-button" target="_blank" rel="noopener noreferrer">cotizar</a>
+        <a
+          href="https://alaiza.zelify.com"
+          class="cta-button"
+          target="_blank"
+          rel="noopener noreferrer">cotizar</a
+        >
       </div>
     </section>
 
@@ -681,14 +1137,14 @@ import Navbar3 from "../components/NavbarSimple.astro";
 
         <!-- Disclaimer -->
         <p class="footer-disclaimer">
-          Zelify is a technology platform currently in a development phase, not yet deployed or operational, and does not provide or process financial services directly;
-          all financial operations are conducted exclusively through regulated third-party partners.
+          Zelify is a technology platform currently in a development phase, not
+          yet deployed or operational, and does not provide or process financial
+          services directly; all financial operations are conducted exclusively
+          through regulated third-party partners.
         </p>
 
         <!-- Copyright -->
-        <p class="footer-copyright">
-          © 2025 Zelify. All rights reserved.
-        </p>
+        <p class="footer-copyright">© 2025 Zelify. All rights reserved.</p>
       </div>
     </footer>
   </body>
@@ -711,7 +1167,13 @@ import Navbar3 from "../components/NavbarSimple.astro";
   }
 
   body {
-    font-family: "NataSans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family:
+      "NataSans",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      sans-serif;
     background-color: #ffffff;
     color: #0a203f;
   }
@@ -837,7 +1299,7 @@ import Navbar3 from "../components/NavbarSimple.astro";
   .auth-description {
     font-size: clamp(1rem, 2vw, 1.1rem);
     line-height: 1.6;
-    color: #213F8C;
+    color: #213f8c;
     margin: 0 0 3rem 0;
   }
 
@@ -914,12 +1376,30 @@ import Navbar3 from "../components/NavbarSimple.astro";
   .auth-background-section {
     position: relative;
     width: 100%;
-    background: #ffffff;
+    /* background: #ffffff; */
     padding: 4rem 0;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+  }
+
+  .auth-background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: linear-gradient(
+      to bottom,
+      #ffffff 0%,
+      transparent 15%,
+      transparent 85%,
+      #ffffff 100%
+    );
+    pointer-events: none;
   }
 
   .auth-background-image {
@@ -928,11 +1408,10 @@ import Navbar3 from "../components/NavbarSimple.astro";
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
     z-index: 0;
   }
 
-  .auth-background-image img {
+  .auth-video {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -947,7 +1426,6 @@ import Navbar3 from "../components/NavbarSimple.astro";
     z-index: 10;
     padding: 1rem 0 2rem;
   }
-
 
   /* Frame del iPhone */
   .device-frame-wrapper {
@@ -974,7 +1452,9 @@ import Navbar3 from "../components/NavbarSimple.astro";
     margin: 0;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.05), 0 20px 60px rgba(0,0,0,0.15);
+    box-shadow:
+      0 0 0 1px rgba(0, 0, 0, 0.05),
+      0 20px 60px rgba(0, 0, 0, 0.15);
   }
 
   /* Status Bar */
@@ -1150,10 +1630,9 @@ import Navbar3 from "../components/NavbarSimple.astro";
     flex-shrink: 0;
   }
 
-
   .phone-card-dots {
     display: flex;
-      justify-content: center;
+    justify-content: center;
     gap: 0.5rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -1168,7 +1647,7 @@ import Navbar3 from "../components/NavbarSimple.astro";
   }
 
   .phone-card-dots .dot.active {
-    background: #213F8C;
+    background: #213f8c;
   }
 
   .phone-card-title {
@@ -1176,7 +1655,7 @@ import Navbar3 from "../components/NavbarSimple.astro";
     font-weight: 700;
     color: #0a203f;
     margin: 0 0 0.5rem 0;
-      text-align: center;
+    text-align: center;
   }
 
   .phone-card-description {
@@ -1231,8 +1710,8 @@ import Navbar3 from "../components/NavbarSimple.astro";
   }
 
   .phone-card-form {
-      display: flex;
-      flex-direction: column;
+    display: flex;
+    flex-direction: column;
     gap: 1rem;
     margin-bottom: 1rem;
   }
@@ -1267,7 +1746,7 @@ import Navbar3 from "../components/NavbarSimple.astro";
   }
 
   .form-field input:focus {
-    border-color: #213F8C;
+    border-color: #213f8c;
     background: #ffffff;
   }
 
@@ -1293,7 +1772,7 @@ import Navbar3 from "../components/NavbarSimple.astro";
   }
 
   .otp-input.otp-verifying {
-    border-color: #213F8C;
+    border-color: #213f8c;
     animation: otp-pulse 1s ease-in-out infinite;
   }
 
@@ -1309,20 +1788,38 @@ import Navbar3 from "../components/NavbarSimple.astro";
   }
 
   @keyframes otp-pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.6; }
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.6;
+    }
   }
 
   @keyframes otp-shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-4px); }
-    75% { transform: translateX(4px); }
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-4px);
+    }
+    75% {
+      transform: translateX(4px);
+    }
   }
 
   .btn-continuar {
     position: relative;
     border: none;
-    background: linear-gradient(to right, #213F8C 0%, #1a2f6b 40%, #0f1f4d 70%, #0a203f 100%);
+    background: linear-gradient(
+      to right,
+      #213f8c 0%,
+      #1a2f6b 40%,
+      #0f1f4d 70%,
+      #0a203f 100%
+    );
     color: #ffffff;
     border-radius: 12px;
     padding: 0.85rem 1.5rem;
@@ -1330,33 +1827,40 @@ import Navbar3 from "../components/NavbarSimple.astro";
     font-size: 0.875rem;
     cursor: pointer;
     display: flex;
-      align-items: center;
+    align-items: center;
     justify-content: center;
     gap: 0.5rem;
     transition: all 0.2s ease;
     margin-top: 0.5rem;
     overflow: hidden;
     box-shadow: 0 4px 14px 0 rgba(33, 63, 140, 0.4);
-    animation: cta-pulse-glow 2s ease-in-out infinite, cta-button-pulse 2.5s ease-in-out infinite;
+    animation:
+      cta-pulse-glow 2s ease-in-out infinite,
+      cta-button-pulse 2.5s ease-in-out infinite;
   }
 
   .btn-continuar::before {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
     border-radius: 12px;
     opacity: 0.6;
-    background: #213F8C;
+    background: #213f8c;
     filter: blur(8px);
     z-index: -1;
     animation: cta-pulse-ring 2s ease-in-out infinite;
   }
 
   .btn-continuar::after {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
     transform: translateX(-100%);
     animation: cta-shine-sweep 2.5s linear infinite;
     z-index: 1;
@@ -1371,16 +1875,20 @@ import Navbar3 from "../components/NavbarSimple.astro";
   }
 
   @keyframes cta-pulse-glow {
-    0%, 100% {
+    0%,
+    100% {
       box-shadow: 0 4px 14px 0 rgba(33, 63, 140, 0.4);
     }
     50% {
-      box-shadow: 0 4px 20px 0 rgba(33, 63, 140, 0.8), 0 0 30px 0 rgba(33, 63, 140, 0.4);
+      box-shadow:
+        0 4px 20px 0 rgba(33, 63, 140, 0.8),
+        0 0 30px 0 rgba(33, 63, 140, 0.4);
     }
   }
 
   @keyframes cta-button-pulse {
-    0%, 100% {
+    0%,
+    100% {
       transform: scale(1);
     }
     50% {
@@ -1389,7 +1897,8 @@ import Navbar3 from "../components/NavbarSimple.astro";
   }
 
   @keyframes cta-pulse-ring {
-    0%, 100% {
+    0%,
+    100% {
       opacity: 0.4;
       transform: scale(1);
     }
@@ -1409,14 +1918,14 @@ import Navbar3 from "../components/NavbarSimple.astro";
   }
 
   .phone-card-login {
-      text-align: center;
+    text-align: center;
     font-size: 0.75rem;
     color: #6b7280;
     margin: 0.5rem 0 0 0;
   }
 
   .phone-card-login a {
-    color: #213F8C;
+    color: #213f8c;
     text-decoration: none;
     font-weight: 500;
   }
@@ -1513,7 +2022,7 @@ import Navbar3 from "../components/NavbarSimple.astro";
 
   /* Sección de Seguridad Inteligente */
   .security-section {
-      width: 100%;
+    width: 100%;
     background: #ffffff;
     padding: 5rem 2rem;
   }
@@ -1527,7 +2036,7 @@ import Navbar3 from "../components/NavbarSimple.astro";
     font-size: clamp(2.5rem, 5vw, 3.5rem);
     line-height: 1.2;
     color: #0a203f;
-      text-align: center;
+    text-align: center;
     margin: 0 0 4rem 0;
     font-weight: 400;
   }
@@ -1544,11 +2053,11 @@ import Navbar3 from "../components/NavbarSimple.astro";
   }
 
   .security-feature {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
 
   .feature-icon {
     width: 72px;
@@ -1559,7 +2068,7 @@ import Navbar3 from "../components/NavbarSimple.astro";
     background: transparent;
     border-radius: 18px;
     margin-bottom: 1.5rem;
-    color: #213F8C;
+    color: #213f8c;
     flex-shrink: 0;
     transition: all 0.3s ease;
   }
@@ -1583,7 +2092,7 @@ import Navbar3 from "../components/NavbarSimple.astro";
 
   .feature-description {
     font-size: 0.95rem;
-      line-height: 1.6;
+    line-height: 1.6;
     color: #6b7280;
     margin: 0;
   }
@@ -1660,7 +2169,7 @@ import Navbar3 from "../components/NavbarSimple.astro";
     font-size: clamp(2.5rem, 5vw, 3.5rem);
     line-height: 1.2;
     color: #0a203f;
-      text-align: center;
+    text-align: center;
     margin: 0 0 4rem 0;
     font-weight: 400;
   }
@@ -1740,8 +2249,8 @@ import Navbar3 from "../components/NavbarSimple.astro";
   }
 
   .control-feature-description {
-      font-size: 1rem;
-      line-height: 1.6;
+    font-size: 1rem;
+    line-height: 1.6;
     color: #6b7280;
     margin: 0 0 1.5rem 0;
   }
@@ -1754,7 +2263,7 @@ import Navbar3 from "../components/NavbarSimple.astro";
     border: none;
     display: flex;
     align-items: center;
-      justify-content: center;
+    justify-content: center;
     cursor: pointer;
     transition: all 0.2s ease;
     color: #ffffff;
@@ -1973,7 +2482,7 @@ import Navbar3 from "../components/NavbarSimple.astro";
   }
 
   .contact-legal a:hover {
-    color: #213F8C;
+    color: #213f8c;
   }
 
   .contact-submit-btn {
@@ -2102,7 +2611,7 @@ import Navbar3 from "../components/NavbarSimple.astro";
   }
 
   .faq-question:hover {
-    color: #213F8C;
+    color: #213f8c;
   }
 
   .faq-question span {
@@ -2113,7 +2622,7 @@ import Navbar3 from "../components/NavbarSimple.astro";
   .faq-icon {
     width: 20px;
     height: 20px;
-    color: #213F8C;
+    color: #213f8c;
     transition: transform 0.3s ease;
     flex-shrink: 0;
   }
@@ -2125,7 +2634,9 @@ import Navbar3 from "../components/NavbarSimple.astro";
   .faq-answer {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease, padding 0.3s ease;
+    transition:
+      max-height 0.3s ease,
+      padding 0.3s ease;
     padding: 0 0;
   }
 
@@ -2366,46 +2877,49 @@ import Navbar3 from "../components/NavbarSimple.astro";
 <script>
   let currentStep = 1;
   const formData = {
-    fullName: '',
-    email: '',
-    emailOTP: '',
-    phone: '',
-    phoneOTP: '',
-    password: '',
-    confirmPassword: ''
+    fullName: "",
+    email: "",
+    emailOTP: "",
+    phone: "",
+    phoneOTP: "",
+    password: "",
+    confirmPassword: "",
   };
-  
+
   const validationErrors = {};
-  let emailOTPStatus = 'idle'; // 'idle' | 'verifying' | 'success' | 'error'
-  let phoneOTPStatus = 'idle';
+  let emailOTPStatus = "idle"; // 'idle' | 'verifying' | 'success' | 'error'
+  let phoneOTPStatus = "idle";
 
   // Inicializar OTP inputs
   function initOTPInputs(containerId: string) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
-    const inputs = container.querySelectorAll('.otp-input');
-    
+    const inputs = container.querySelectorAll(".otp-input");
+
     inputs.forEach((input, index) => {
-      input.addEventListener('input', (e) => {
-        const value = e.target.value.replace(/[^0-9]/g, '');
+      input.addEventListener("input", (e) => {
+        const value = e.target.value.replace(/[^0-9]/g, "");
         e.target.value = value;
-        
+
         if (value && index < inputs.length - 1) {
           inputs[index + 1].focus();
         }
       });
 
-      input.addEventListener('keydown', (e) => {
-        if (e.key === 'Backspace' && !e.target.value && index > 0) {
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Backspace" && !e.target.value && index > 0) {
           inputs[index - 1].focus();
         }
       });
 
-      input.addEventListener('paste', (e) => {
+      input.addEventListener("paste", (e) => {
         e.preventDefault();
-        const pasted = e.clipboardData.getData('text').replace(/[^0-9]/g, '').slice(0, 6);
-        pasted.split('').forEach((char: any, i: string | number) => {
+        const pasted = e.clipboardData
+          .getData("text")
+          .replace(/[^0-9]/g, "")
+          .slice(0, 6);
+        pasted.split("").forEach((char: any, i: string | number) => {
           if (inputs[i]) {
             inputs[i].value = char;
           }
@@ -2419,55 +2933,66 @@ import Navbar3 from "../components/NavbarSimple.astro";
 
   // Actualizar dots de progreso
   function updateProgressDots(step: number) {
-    const dots = document.querySelectorAll('.phone-card-dots .dot');
+    const dots = document.querySelectorAll(".phone-card-dots .dot");
     dots.forEach((dot, index) => {
       if (index < step) {
-        dot.classList.add('active');
+        dot.classList.add("active");
       } else {
-        dot.classList.remove('active');
+        dot.classList.remove("active");
       }
     });
   }
 
   // Mostrar paso
   function showStep(step: number) {
-    document.querySelectorAll('.auth-step').forEach((el, index) => {
-      el.style.display = index + 1 === step ? 'block' : 'none';
+    document.querySelectorAll(".auth-step").forEach((el, index) => {
+      el.style.display = index + 1 === step ? "block" : "none";
     });
-    
+
     // Actualizar título y descripción según el paso
-    const titleEl = document.getElementById('step-title');
-    const descEl = document.getElementById('step-description');
-    const loginLink = document.getElementById('login-link');
-    
+    const titleEl = document.getElementById("step-title");
+    const descEl = document.getElementById("step-description");
+    const loginLink = document.getElementById("login-link");
+
     if (step === 1) {
-      titleEl.textContent = 'Crear Cuenta';
-      descEl.innerHTML = 'Ingresa tu nombre y correo electrónico para empezar. Te enviaremos un código de verificación.';
-      loginLink.style.display = 'none';
+      titleEl.textContent = "Crear Cuenta";
+      descEl.innerHTML =
+        "Ingresa tu nombre y correo electrónico para empezar. Te enviaremos un código de verificación.";
+      loginLink.style.display = "none";
     } else if (step === 2) {
-      titleEl.textContent = 'Verifica tu Correo';
-      descEl.innerHTML = 'Hemos enviado un código de 6 dígitos a<br /><strong id="email-display">' + formData.email + '</strong>';
-      loginLink.style.display = 'none';
+      titleEl.textContent = "Verifica tu Correo";
+      descEl.innerHTML =
+        'Hemos enviado un código de 6 dígitos a<br /><strong id="email-display">' +
+        formData.email +
+        "</strong>";
+      loginLink.style.display = "none";
     } else if (step === 3) {
-      titleEl.textContent = 'Agrega tu Teléfono';
-      descEl.textContent = 'Te enviaremos un código de verificación por SMS para confirmar tu número de teléfono.';
-      loginLink.style.display = 'none';
+      titleEl.textContent = "Agrega tu Teléfono";
+      descEl.textContent =
+        "Te enviaremos un código de verificación por SMS para confirmar tu número de teléfono.";
+      loginLink.style.display = "none";
     } else if (step === 4) {
-      titleEl.textContent = 'Verifica tu Teléfono';
-      descEl.innerHTML = 'Hemos enviado un código de 6 dígitos a<br /><strong id="phone-display">' + formData.phone + '</strong>';
-      loginLink.style.display = 'none';
+      titleEl.textContent = "Verifica tu Teléfono";
+      descEl.innerHTML =
+        'Hemos enviado un código de 6 dígitos a<br /><strong id="phone-display">' +
+        formData.phone +
+        "</strong>";
+      loginLink.style.display = "none";
     } else if (step === 5) {
-      titleEl.textContent = 'Completa tu Perfil';
-      descEl.textContent = 'Completa la información restante para finalizar la configuración de tu cuenta.';
-      loginLink.style.display = 'block';
+      titleEl.textContent = "Completa tu Perfil";
+      descEl.textContent =
+        "Completa la información restante para finalizar la configuración de tu cuenta.";
+      loginLink.style.display = "block";
     }
-    
+
     updateProgressDots(step);
     currentStep = step;
   }
 
   // Funciones de validación
-  function validateFullName(name: { trim: () => { (): any; new(): any; length: number; }; }) {
+  function validateFullName(name: {
+    trim: () => { (): any; new (): any; length: number };
+  }) {
     return name.trim().length >= 2;
   }
 
@@ -2475,7 +3000,9 @@ import Navbar3 from "../components/NavbarSimple.astro";
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
-  function validatePhone(phone: { trim: () => { (): any; new(): any; length: number; }; }) {
+  function validatePhone(phone: {
+    trim: () => { (): any; new (): any; length: number };
+  }) {
     return phone.trim().length >= 10;
   }
 
@@ -2487,11 +3014,11 @@ import Navbar3 from "../components/NavbarSimple.astro";
     validationErrors[fieldId] = message;
     const field = document.getElementById(fieldId);
     if (field) {
-      field.classList.add('field-error');
-      const errorEl = field.parentElement.querySelector('.field-error-message');
+      field.classList.add("field-error");
+      const errorEl = field.parentElement.querySelector(".field-error-message");
       if (errorEl) {
         errorEl.textContent = message;
-        errorEl.style.display = 'block';
+        errorEl.style.display = "block";
       }
     }
   }
@@ -2500,35 +3027,35 @@ import Navbar3 from "../components/NavbarSimple.astro";
     delete validationErrors[fieldId];
     const field = document.getElementById(fieldId);
     if (field) {
-      field.classList.remove('field-error');
-      const errorEl = field.parentElement.querySelector('.field-error-message');
+      field.classList.remove("field-error");
+      const errorEl = field.parentElement.querySelector(".field-error-message");
       if (errorEl) {
-        errorEl.style.display = 'none';
+        errorEl.style.display = "none";
       }
     }
   }
 
   function clearAllErrors() {
-    Object.keys(validationErrors).forEach(key => clearFieldError(key));
+    Object.keys(validationErrors).forEach((key) => clearFieldError(key));
   }
 
   // Paso 1: Crear cuenta
-  document.getElementById('form-step-1')?.addEventListener('submit', (e) => {
+  document.getElementById("form-step-1")?.addEventListener("submit", (e) => {
     e.preventDefault();
     clearAllErrors();
-    
-    const fullName = document.getElementById('fullName').value.trim();
-    const email = document.getElementById('email').value.trim();
+
+    const fullName = document.getElementById("fullName").value.trim();
+    const email = document.getElementById("email").value.trim();
 
     let hasErrors = false;
 
     if (!validateFullName(fullName)) {
-      showFieldError('fullName', 'El nombre debe tener al menos 2 caracteres');
+      showFieldError("fullName", "El nombre debe tener al menos 2 caracteres");
       hasErrors = true;
     }
 
     if (!validateEmail(email)) {
-      showFieldError('email', 'Correo electrónico inválido');
+      showFieldError("email", "Correo electrónico inválido");
       hasErrors = true;
     }
 
@@ -2538,54 +3065,56 @@ import Navbar3 from "../components/NavbarSimple.astro";
 
     formData.fullName = fullName;
     formData.email = email;
-    
+
     showStep(2);
-    initOTPInputs('otp-email');
+    initOTPInputs("otp-email");
   });
 
   // Limpiar errores al escribir
-  document.getElementById('fullName')?.addEventListener('input', () => {
-    clearFieldError('fullName');
+  document.getElementById("fullName")?.addEventListener("input", () => {
+    clearFieldError("fullName");
   });
 
-  document.getElementById('email')?.addEventListener('input', () => {
-    clearFieldError('email');
+  document.getElementById("email")?.addEventListener("input", () => {
+    clearFieldError("email");
   });
 
   // Paso 2: Verificar email
-  document.getElementById('form-step-2')?.addEventListener('submit', (e) => {
+  document.getElementById("form-step-2")?.addEventListener("submit", (e) => {
     e.preventDefault();
-    const inputs = document.querySelectorAll('#otp-email .otp-input');
-    const otp = Array.from(inputs).map(input => input.value).join('');
+    const inputs = document.querySelectorAll("#otp-email .otp-input");
+    const otp = Array.from(inputs)
+      .map((input) => input.value)
+      .join("");
 
     if (otp.length !== 6) {
       return;
     }
 
-    emailOTPStatus = 'verifying';
-    updateOTPStatus('otp-email', 'verifying');
+    emailOTPStatus = "verifying";
+    updateOTPStatus("otp-email", "verifying");
 
     // Código quemado: 202601
-    const isValid = otp === '202601';
+    const isValid = otp === "202601";
 
     setTimeout(() => {
       if (isValid) {
-        emailOTPStatus = 'success';
-        updateOTPStatus('otp-email', 'success');
+        emailOTPStatus = "success";
+        updateOTPStatus("otp-email", "success");
         formData.emailOTP = otp;
-        
+
         setTimeout(() => {
-          emailOTPStatus = 'idle';
+          emailOTPStatus = "idle";
           showStep(3);
         }, 3000);
       } else {
-        emailOTPStatus = 'error';
-        updateOTPStatus('otp-email', 'error');
-        
+        emailOTPStatus = "error";
+        updateOTPStatus("otp-email", "error");
+
         setTimeout(() => {
-          emailOTPStatus = 'idle';
-          updateOTPStatus('otp-email', 'idle');
-          inputs.forEach(input => input.value = '');
+          emailOTPStatus = "idle";
+          updateOTPStatus("otp-email", "idle");
+          inputs.forEach((input) => (input.value = ""));
           inputs[0].focus();
         }, 2000);
       }
@@ -2595,71 +3124,73 @@ import Navbar3 from "../components/NavbarSimple.astro";
   function updateOTPStatus(containerId: string, status: string) {
     const container = document.getElementById(containerId);
     if (!container) return;
-    
-    const inputs = container.querySelectorAll('.otp-input');
-    inputs.forEach(input => {
-      input.classList.remove('otp-verifying', 'otp-success', 'otp-error');
-      if (status !== 'idle') {
+
+    const inputs = container.querySelectorAll(".otp-input");
+    inputs.forEach((input) => {
+      input.classList.remove("otp-verifying", "otp-success", "otp-error");
+      if (status !== "idle") {
         input.classList.add(`otp-${status}`);
       }
     });
   }
 
   // Paso 3: Agregar teléfono
-  document.getElementById('form-step-3')?.addEventListener('submit', (e) => {
+  document.getElementById("form-step-3")?.addEventListener("submit", (e) => {
     e.preventDefault();
     clearAllErrors();
-    
-    const phone = document.getElementById('phone').value.trim();
+
+    const phone = document.getElementById("phone").value.trim();
 
     if (!validatePhone(phone)) {
-      showFieldError('phone', 'Número de teléfono inválido');
+      showFieldError("phone", "Número de teléfono inválido");
       return;
     }
 
     formData.phone = phone;
     showStep(4);
-    initOTPInputs('otp-phone');
+    initOTPInputs("otp-phone");
   });
 
-  document.getElementById('phone')?.addEventListener('input', () => {
-    clearFieldError('phone');
+  document.getElementById("phone")?.addEventListener("input", () => {
+    clearFieldError("phone");
   });
 
   // Paso 4: Verificar teléfono
-  document.getElementById('form-step-4')?.addEventListener('submit', (e) => {
+  document.getElementById("form-step-4")?.addEventListener("submit", (e) => {
     e.preventDefault();
-    const inputs = document.querySelectorAll('#otp-phone .otp-input');
-    const otp = Array.from(inputs).map(input => input.value).join('');
+    const inputs = document.querySelectorAll("#otp-phone .otp-input");
+    const otp = Array.from(inputs)
+      .map((input) => input.value)
+      .join("");
 
     if (otp.length !== 6) {
       return;
     }
 
-    phoneOTPStatus = 'verifying';
-    updateOTPStatus('otp-phone', 'verifying');
+    phoneOTPStatus = "verifying";
+    updateOTPStatus("otp-phone", "verifying");
 
     // Código quemado: 202601
-    const isValid = otp === '202601';
+    const isValid = otp === "202601";
 
     setTimeout(() => {
       if (isValid) {
-        phoneOTPStatus = 'success';
-        updateOTPStatus('otp-phone', 'success');
+        phoneOTPStatus = "success";
+        updateOTPStatus("otp-phone", "success");
         formData.phoneOTP = otp;
-        
+
         setTimeout(() => {
-          phoneOTPStatus = 'idle';
+          phoneOTPStatus = "idle";
           showStep(5);
         }, 3000);
       } else {
-        phoneOTPStatus = 'error';
-        updateOTPStatus('otp-phone', 'error');
-        
+        phoneOTPStatus = "error";
+        updateOTPStatus("otp-phone", "error");
+
         setTimeout(() => {
-          phoneOTPStatus = 'idle';
-          updateOTPStatus('otp-phone', 'idle');
-          inputs.forEach(input => input.value = '');
+          phoneOTPStatus = "idle";
+          updateOTPStatus("otp-phone", "idle");
+          inputs.forEach((input) => (input.value = ""));
           inputs[0].focus();
         }, 2000);
       }
@@ -2667,22 +3198,25 @@ import Navbar3 from "../components/NavbarSimple.astro";
   });
 
   // Paso 5: Completar perfil
-  document.getElementById('form-step-5')?.addEventListener('submit', (e) => {
+  document.getElementById("form-step-5")?.addEventListener("submit", (e) => {
     e.preventDefault();
     clearAllErrors();
-    
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('confirmPassword').value;
+
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
 
     let hasErrors = false;
 
     if (!validatePassword(password)) {
-      showFieldError('password', 'La contraseña debe tener al menos 8 caracteres');
+      showFieldError(
+        "password",
+        "La contraseña debe tener al menos 8 caracteres",
+      );
       hasErrors = true;
     }
 
     if (password !== confirmPassword) {
-      showFieldError('confirmPassword', 'Las contraseñas no coinciden');
+      showFieldError("confirmPassword", "Las contraseñas no coinciden");
       hasErrors = true;
     }
 
@@ -2694,77 +3228,77 @@ import Navbar3 from "../components/NavbarSimple.astro";
     formData.confirmPassword = confirmPassword;
 
     // Cuenta creada exitosamente
-    console.log('Registro completado', formData);
+    console.log("Registro completado", formData);
     // Aquí podrías redirigir o hacer una llamada a la API
   });
 
-  document.getElementById('password')?.addEventListener('input', () => {
-    clearFieldError('password');
+  document.getElementById("password")?.addEventListener("input", () => {
+    clearFieldError("password");
   });
 
-  document.getElementById('confirmPassword')?.addEventListener('input', () => {
-    clearFieldError('confirmPassword');
+  document.getElementById("confirmPassword")?.addEventListener("input", () => {
+    clearFieldError("confirmPassword");
   });
 
   // Reenviar códigos
-  document.getElementById('resend-email')?.addEventListener('click', (e) => {
+  document.getElementById("resend-email")?.addEventListener("click", (e) => {
     e.preventDefault();
     // Simular reenvío - en producción harías una llamada a la API
-    console.log('Código reenviado a', formData.email);
+    console.log("Código reenviado a", formData.email);
   });
 
-  document.getElementById('resend-phone')?.addEventListener('click', (e) => {
+  document.getElementById("resend-phone")?.addEventListener("click", (e) => {
     e.preventDefault();
     // Simular reenvío - en producción harías una llamada a la API
-    console.log('Código reenviado a', formData.phone);
+    console.log("Código reenviado a", formData.phone);
   });
 
   // Inicializar
   updateProgressDots(1);
 
   // Control de flip cards para beneficios
-  document.querySelectorAll('.control-feature-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
+  document.querySelectorAll(".control-feature-btn").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
       e.stopPropagation();
-      const card = btn.closest('.control-feature-card');
-      
+      const card = btn.closest(".control-feature-card");
+
       if (card) {
-        card.classList.toggle('flipped');
+        card.classList.toggle("flipped");
       }
     });
   });
 
   // Formulario de contacto
-  document.getElementById('contactForm')?.addEventListener('submit', (e) => {
+  document.getElementById("contactForm")?.addEventListener("submit", (e) => {
     e.preventDefault();
-    
+
     const formData = {
-      nombres: document.getElementById('nombres').value,
-      apellidos: document.getElementById('apellidos').value,
-      compania: document.getElementById('compania').value,
-      email: document.getElementById('email').value,
-      pais: document.getElementById('pais').value,
-      telefono: document.getElementById('telefono').value
+      nombres: document.getElementById("nombres").value,
+      apellidos: document.getElementById("apellidos").value,
+      compania: document.getElementById("compania").value,
+      email: document.getElementById("email").value,
+      pais: document.getElementById("pais").value,
+      telefono: document.getElementById("telefono").value,
     };
 
-    console.log('Formulario enviado:', formData);
+    console.log("Formulario enviado:", formData);
     // Aquí podrías hacer una llamada a la API para enviar el formulario
   });
 
   // FAQ Accordion
-  document.querySelectorAll('.faq-question').forEach(question => {
-    question.addEventListener('click', () => {
-      const faqItem = question.closest('.faq-item');
-      const isActive = faqItem.classList.contains('active');
+  document.querySelectorAll(".faq-question").forEach((question) => {
+    question.addEventListener("click", () => {
+      const faqItem = question.closest(".faq-item");
+      const isActive = faqItem.classList.contains("active");
 
       // Cerrar todos los demás items
-      document.querySelectorAll('.faq-item').forEach(item => {
-        item.classList.remove('active');
+      document.querySelectorAll(".faq-item").forEach((item) => {
+        item.classList.remove("active");
       });
 
       // Abrir el item clickeado si no estaba activo
       if (!isActive) {
-        faqItem.classList.add('active');
+        faqItem.classList.add("active");
       }
     });
   });

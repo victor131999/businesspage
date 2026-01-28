@@ -1,0 +1,351 @@
+---
+import Navbar from "../components/navbar.astro";
+import ProductsPanel from "../components/productsPanel.astro";
+import AnimatedHalftone from "../components/AnimatedHalftone.astro";
+import "../styles/navbar.css";
+---
+
+<script>
+  const homeTranslations = {
+    en: {
+        subtitle: "The New Standard in",
+        title: "Business\nFinances",
+        description: "Zelify simplifies business finance:\nconnecting payments, credit,\nand cash flow in one smart platform.",
+        ctaButton: "Let's start"
+    },
+    es: {
+        subtitle: "El Nuevo Estándar en",
+        title: "Finanzas\nEmpresariales",
+        description: "Zelify simplifica las finanzas empresariales:\nconectando pagos, crédito\ny flujo de caja en una plataforma inteligente.",
+        ctaButton: "Hablemos"
+    }
+  };
+
+  function updateContent(rawLang: string) {
+    const lang = rawLang.toLowerCase() as 'en' | 'es';
+    const content = homeTranslations[lang] || homeTranslations.en;
+    
+    // Actualizar elementos
+    const elements = {
+      subtitle: document.querySelector('.subtitle'),
+      title: document.querySelector('.title'),
+      description: document.querySelector('.description'),
+      ctaButton: document.querySelector('.btn-primary')
+    };
+
+    if (elements.subtitle) elements.subtitle.textContent = content.subtitle;
+    if (elements.title) elements.title.innerHTML = content.title.replace(/\n/g, '<br>');
+    if (elements.description) elements.description.innerHTML = content.description.replace(/\n/g, '<br>');
+    if (elements.ctaButton) elements.ctaButton.textContent = content.ctaButton;
+  }
+
+  // Escuchar cambios de idioma desde el navbar
+  window.addEventListener('ui:languagechange', ((event: Event) => {
+    const customEvent = event as CustomEvent<{language: string}>;
+    if (customEvent.detail?.language) {
+      updateContent(customEvent.detail.language);
+    }
+  }) as EventListener);
+
+  // Aplicar traducciones iniciales
+  document.addEventListener('DOMContentLoaded', () => {
+    const storedLang = localStorage.getItem('ui-language') || 'EN';
+    updateContent(storedLang);
+  });
+</script>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/png" href="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/ISO-ZELIFY-2025.png" />
+    <title>Zelify — Business Finances</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css" />
+  </head>
+
+  <body>
+    <Navbar />
+    <ProductsPanel />
+    <div
+      class="latam-modal-overlay"
+      aria-hidden="true"
+    >
+      <AnimatedHalftone isDark={true} fullScreen={true} intensity={0.25} />
+    </div>
+    <!-- ← antes estaba <productsPanel /> y NO renderiza -->
+
+    <section class="hero">
+      <div class="hero-content">
+        <h2 class="subtitle">The New Standard in</h2>
+        <h1 class="title">Business<br />Finances</h1>
+        <p class="description">
+          Zelify simplifies business finance: <br />connecting payments, credit,<br />
+          and cash flow in one smart platform.
+        </p>
+        <a href="https://docs.zelify.com" class="btn-primary hvr-grow">Let's start</a>
+      </div>
+    </section>
+  </body>
+</html>
+
+<style>
+  @font-face {
+    font-family: "NataSans";
+    src: url("/fonts/NataSans-VariableFont_wght.ttf") format("truetype");
+    font-weight: 100 900;
+    font-display: swap;
+  }
+
+  body {
+    font-family:
+      "NataSans",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      sans-serif;
+    color: #fff;
+    background-color: #020b18;
+    background-image: url('/images/FONDO%201.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .hero {
+    display: flex;
+    align-items: flex-start; /* puedes cambiar a center o flex-end */
+    justify-content: flex-start; /* puedes cambiar a center o flex-end */
+    height: 100vh; /* ocupa toda la ventana */
+    width: 100vw;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  /* Aquí controlas la posición manual del contenido */
+  .hero-content {
+    position: absolute;
+    top: 15%; /* mueve hacia abajo */
+    left: 20%; /* mueve hacia la derecha */
+    transform: translate(0, 0); /* puedes ajustar manualmente con translate */
+    max-width: 600px;
+  }
+
+  .subtitle {
+    font-size: 2.5rem;
+    font-weight: normal;
+    color: #95FF0B;
+    margin-bottom: -0.2rem;
+  }
+
+  .title {
+    font-size: 6.5rem;
+    font-weight: 800;
+    line-height: 0.85;
+    color: #f8f9fa;
+    margin-bottom: 1.5rem;
+  }
+
+  .description {
+    font-size: 1.25rem;
+    line-height: 1.4;
+    color: #ced4da;
+    margin-bottom: 2rem;
+    max-width: 520px;
+    text-align: left;
+    text-wrap: balance;
+  }
+
+  .btn-primary {
+    background-color: #95FF0B;
+    color: #0d1117;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.25rem;
+    padding: 0.3rem 1.5rem;
+    border-radius: 8px;
+    display: inline-block;
+    cursor: pointer;
+    box-shadow:
+      0 6px 16px rgba(80, 220, 0, 0.35),
+      0 0 20px rgba(149, 255, 11, 0.35);
+    transition: all 0.25s ease-in-out;
+  }
+
+  .btn-primary:hover {
+    background: linear-gradient(145deg, rgba(128, 255, 0, 0.95), rgba(88, 220, 0, 0.88));
+    color: #10220a;
+    transform: translateY(-1px);
+    box-shadow: 0 16px 32px rgba(80, 220, 0, 0.38);
+    transition: all 0.25s ease-in-out;
+  }
+
+  .latam-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* Tablet/iPad */
+  @media (max-width: 1024px) {
+    .hero-content {
+      top: 18%;
+      left: 10%;
+      max-width: 500px;
+    }
+
+    .subtitle {
+      font-size: 2rem;
+    }
+
+    .title {
+      font-size: 4.5rem;
+      line-height: 0.85;
+      margin-bottom: 1rem;
+    }
+
+    .description {
+      font-size: 1.1rem;
+      max-width: 450px;
+    }
+
+    .btn-primary {
+      font-size: 1.1rem;
+      padding: 0.4rem 1.3rem;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    body {
+      overflow: auto;
+      min-height: 100vh;
+      background-size: cover;
+      background-position: 60% bottom;
+      background-attachment: scroll;
+    }
+
+    .hero {
+      overflow: auto;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 0;
+      padding-top: 1rem;
+    }
+
+    .hero-content {
+      position: relative;
+      top: auto;
+      left: auto;
+      padding: 1rem 1.5rem 2rem;
+      margin: 0 auto;
+      max-width: 100%;
+      width: 100%;
+      transform: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .latam-modal-card {
+      padding: 2rem 1.5rem;
+    }
+
+    .latam-modal-title {
+      font-size: 1.35rem;
+    }
+
+    .subtitle {
+      font-size: 1.5rem;
+      margin-bottom: -0.2rem;
+      text-align: center;
+      width: 100%;
+    }
+
+    .title {
+      font-size: 3rem;
+      line-height: 0.85;
+      margin-bottom: 1rem;
+      text-align: center;
+      width: 100%;
+    }
+
+    .description {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+      max-width: 100%;
+      width: 100%;
+      text-align: center;
+      padding: 0 1rem;
+    }
+
+    .btn-primary {
+      font-size: 1rem;
+      padding: 0.75rem 2rem;
+      display: block;
+      text-align: center;
+      width: fit-content;
+      margin: 0 auto;
+    }
+
+  }
+
+  /* Small mobile */
+  @media (max-width: 480px) {
+    body {
+      background-size: cover;
+      background-position: 60% bottom;
+    }
+
+    .hero {
+      padding: 0;
+      padding-top: 0.5rem;
+    }
+
+    .hero-content {
+      padding: 0.5rem 1rem 1.5rem;
+      width: 100%;
+    }
+
+    .latam-modal-card {
+      padding: 1.85rem 1.2rem;
+    }
+
+    .latam-modal-description {
+      font-size: 0.95rem;
+    }
+
+    .subtitle {
+      font-size: 1.25rem;
+      width: 100%;
+    }
+
+    .title {
+      font-size: 2.5rem;
+      width: 100%;
+    }
+
+    .description {
+      font-size: 0.95rem;
+      width: 100%;
+      padding: 0 0.5rem;
+    }
+
+    .btn-primary {
+      font-size: 0.95rem;
+      padding: 0.65rem 1.8rem;
+      width: fit-content;
+    }
+  }
+</style>
