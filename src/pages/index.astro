@@ -628,7 +628,7 @@ const modulesList = [
               </div>
             </div>
           </div>
-          <p class="welcome-form-message" aria-live="polite"></p>
+
           <a
             class="welcome-demo-button"
             href="https://www.zelify.com/clips/"
@@ -1172,7 +1172,7 @@ const modulesList = [
       display: flex;
       justify-content: center;
       position: relative;
-      height: 140vh;
+      height: 100vh;
       overflow: hidden; /* Ensure video doesn't spill out */
     }
 
@@ -1219,8 +1219,8 @@ const modulesList = [
     .product-showcase__overlay-card {
       position: absolute;
       left: 50%;
-      top: 35%;
-      height: 75%;
+      top: 50%;
+      height: 130%;
       transform: translate(-50%, -50%);
       width: clamp(320px, 40vw, 550px);
       background-color: #f3f4f6;
@@ -1228,7 +1228,7 @@ const modulesList = [
       border: 1px solid rgba(0, 0, 0, 0.05);
       z-index: 10;
       pointer-events: auto;
-      padding: 4rem 5rem 1rem; /* 3rem arriba, 2rem lados, 1rem abajo */
+      padding: 6.5rem 4rem 1rem; /* 3rem arriba, 2rem lados, 1rem abajo */
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -1331,13 +1331,13 @@ const modulesList = [
     .product-showcase__item.is-active .product-showcase__nav-item {
       color: #00223e;
       font-weight: 700;
+      padding-bottom: 0.25rem;
     }
 
     .product-showcase__panel {
       max-height: 0;
       opacity: 0;
       overflow: hidden;
-      padding: 0;
       transition:
         max-height 0.4s ease,
         opacity 0.4s ease,
@@ -1348,18 +1348,22 @@ const modulesList = [
     .product-showcase__item.is-active .product-showcase__panel {
       max-height: 500px;
       opacity: 1;
-      padding: 1rem 0 2rem;
+      padding: 0 0 2rem;
       /* Allow CTA shadow/rounding to render without being clipped */
       overflow: visible;
     }
 
     .product-showcase__panel-inner {
-      display: grid;
-      grid-template-columns: minmax(280px, 1fr) minmax(280px, 1fr);
-      gap: clamp(2rem, 8vw, 6rem);
-      align-items: start;
-      position: relative;
-      z-index: 1;
+      display: grid; /* Usa CSS Grid como sistema de layout */
+      grid-template-columns: minmax(280px, 1fr) minmax(280px, 1fr); /* 2 columnas, mínimo 280px, máximo 1fr cada una */
+      gap: clamp(
+        1rem,
+        8vw,
+        6rem
+      ); /* Espacio entre columnas/filas: min 2rem, fluido 8vw, max 6rem */
+      align-items: start; /* Alinea los elementos del grid en la parte superior */
+      position: relative; /* Permite posicionar hijos con position:absolute */
+      z-index: 1; /* Controla la capa (profundidad) del contenedor */
     }
 
     .product-showcase__panel-left {
@@ -1375,7 +1379,7 @@ const modulesList = [
     .product-showcase__title {
       font-size: clamp(1.4rem, 2.5vw, 2rem);
       line-height: 1.25;
-      margin: 0 0 1rem;
+
       color: #00223e;
       font-weight: 700;
       max-width: 380px;
@@ -1420,8 +1424,10 @@ const modulesList = [
       color: #00223e;
       padding: 0.6rem 1.6rem;
       /* Rounded corners (more squared than pill) */
+      margin-top: 0.5rem;
       border-radius: 12px;
       min-height: 44px;
+      min-width: 220px;
       text-decoration: none;
       font-weight: 600;
       font-size: 0.95rem;
@@ -1467,11 +1473,11 @@ const modulesList = [
     }
 
     .welcome-title {
-      font-size: clamp(2.4rem, 4.6vw, 4.2rem);
+      font-size: 4.4rem;
       font-weight: 500;
+      color: #09213c;
       line-height: 1.12;
       margin: 0 0 1.4rem;
-      color: #00223e;
       letter-spacing: 0.01em;
     }
 
@@ -1493,7 +1499,7 @@ const modulesList = [
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 1.25rem;
+      width: 100%;
       flex-wrap: wrap;
     }
 
@@ -1622,7 +1628,10 @@ const modulesList = [
       align-items: center;
       border: 2px solid #00223e;
       border-radius: 10px;
-      padding: 0.25rem;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      padding-left: 1px;
+      padding-right: 3px;
       background: #ffffff;
       min-width: min(560px, 100%);
       max-width: 620px;
@@ -1647,19 +1656,15 @@ const modulesList = [
       border: none;
       background: #213f8c;
       color: #ffffff;
-      padding: 0.7rem 2.2rem;
+      padding: 0.7rem 2.9rem;
       border-radius: 9px;
-      font-size: 1.05rem;
-      font-weight: 600;
+      font-size: 1.1rem;
+      font-weight: 400;
       cursor: pointer;
+      width: 170px;
       transition:
         transform 0.2s ease,
         box-shadow 0.2s ease;
-    }
-
-    .welcome-quote-button:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 10px 20px rgba(33, 63, 140, 0.25);
     }
 
     .welcome-demo-button {
@@ -1668,13 +1673,15 @@ const modulesList = [
       justify-content: center;
       background: #93fb4d;
       color: #00223e;
-      padding: 0.75rem 2.6rem;
+      padding-top: 10px;
+      padding-bottom: 10px;
       border-radius: 9px;
       width: 20%;
       text-decoration: none;
-      font-weight: 600;
-      font-size: 1.05rem;
+      font-weight: 400;
+      font-size: 1.1rem;
       box-shadow: 0 10px 22px rgba(147, 251, 77, 0.35);
+      margin-left: 1rem;
       transition:
         transform 0.2s ease,
         box-shadow 0.2s ease;
@@ -1693,14 +1700,15 @@ const modulesList = [
       justify-content: center;
       position: relative;
       overflow: hidden;
+      margin-bottom: 2rem;
     }
 
     .how-it-works-divider {
       position: absolute;
-      top: 45%;
+      top: 52.5%;
       left: 0;
       right: 0;
-      height: 1.5px;
+      height: 1px;
       background-color: #154091;
       z-index: 1;
       transform: translateY(-50%);
@@ -1712,7 +1720,7 @@ const modulesList = [
       max-width: 1300px;
       width: 100%;
       display: grid;
-      grid-template-columns: 55% 45%;
+      grid-template-columns: 45% 55%;
       gap: 2rem;
       align-items: center;
       position: relative;
@@ -1722,14 +1730,14 @@ const modulesList = [
     .how-it-works-left {
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      gap: 0.5rem;
       z-index: 2;
     }
 
     .how-it-works-title {
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 400;
-      color: #00223e;
+      font-size: 4.4rem;
+      font-weight: 500;
+      color: #09213c;
       margin: 0;
       line-height: 1.1;
       text-transform: none;
@@ -1741,7 +1749,7 @@ const modulesList = [
       line-height: 1.6;
       color: #213f8c;
       margin: 0;
-      max-width: 540px;
+      max-width: 440px;
       font-weight: 300;
       opacity: 0.9;
       margin-top: 4rem;
@@ -1753,19 +1761,20 @@ const modulesList = [
       justify-content: center;
       background: #93fb4d;
       color: #00223e;
-      padding: 0.8rem 2.8rem;
+      padding-top: 0.4rem;
+      padding-bottom: 0.4rem;
+      padding-left: 2.8rem;
+      padding-right: 2.8rem;
       border-radius: 12px;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 400;
       font-size: 1.1rem;
-      box-shadow: 0 10px 25px rgba(147, 251, 77, 0.4);
       transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       width: fit-content;
     }
 
     .how-it-works-demo-button:hover {
       transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 15px 30px rgba(147, 251, 77, 0.5);
     }
 
     .how-it-works-right {
@@ -1778,15 +1787,21 @@ const modulesList = [
 
     .right-bg-panel {
       background-color: #f3f4f6;
-      padding: 3.5rem;
+
+      padding-right: 5.5rem;
+      padding-left: 5.5rem;
+
+      padding-top: 4.5rem;
+      padding-bottom: 4.5rem;
+
       border-radius: 32px;
       width: 100%;
-      max-width: 520px;
+      max-width: 920px;
       position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+
       border: 1px solid rgba(0, 0, 0, 0.03);
     }
 
@@ -1892,8 +1907,8 @@ const modulesList = [
 
     .how-it-works-play-button {
       position: absolute;
-      bottom: -24px;
-      right: 40px;
+      bottom: 20px;
+      right: 20px;
       width: 64px;
       height: 64px;
       border-radius: 50%;
@@ -1903,7 +1918,6 @@ const modulesList = [
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
       transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       z-index: 10;
     }
@@ -1927,11 +1941,12 @@ const modulesList = [
       justify-content: center;
       position: relative;
       overflow: hidden;
+      margin-top: 2rem;
     }
 
     .why-zelify-divider {
       position: absolute;
-      top: 35%;
+      top: 45%;
       left: 0;
       right: 0;
       height: 1.5px;
@@ -1946,7 +1961,7 @@ const modulesList = [
       max-width: 1300px;
       width: 100%;
       display: grid;
-      grid-template-columns: 45% 55%;
+      grid-template-columns: 55% 45%;
       gap: 2rem;
       align-items: center;
       position: relative;
@@ -1964,17 +1979,22 @@ const modulesList = [
 
     .ai-illustration-card {
       background-color: #f3f4f6;
-      padding: 3.5rem;
+
+      padding-right: 5.5rem;
+      padding-left: 5.5rem;
+
+      padding-top: 4.5rem;
+      padding-bottom: 4.5rem;
+
       border-radius: 32px;
       width: 100%;
-      height: 500px;
-      max-width: 520px;
+      height: 600px;
+      max-width: 920px;
       position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
       border: 1px solid rgba(0, 0, 0, 0.03);
     }
 
@@ -1987,8 +2007,8 @@ const modulesList = [
 
     .ai-illustration-play-button {
       position: absolute;
-      bottom: -24px;
-      right: 40px;
+      bottom: 20px;
+      right: 20px;
       width: 64px;
       height: 64px;
       border-radius: 50%;
@@ -1998,7 +2018,6 @@ const modulesList = [
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
       transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       z-index: 11;
     }
@@ -2024,14 +2043,14 @@ const modulesList = [
     }
 
     .why-zelify-title {
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 400;
-      color: #00223e;
+      font-size: 4.4rem;
+      font-weight: 500;
+      color: #09213c;
       margin: 0;
       line-height: 1.1;
       text-transform: none;
       text-align: right;
-      width: 100%;
+      width: 90%;
       max-width: 600px;
     }
 
@@ -2040,7 +2059,7 @@ const modulesList = [
       line-height: 1.6;
       color: #213f8c;
       margin: 0;
-      max-width: 540px;
+      max-width: 440px;
       font-weight: 300;
       opacity: 0.9;
       margin-top: 4rem;
@@ -2053,10 +2072,13 @@ const modulesList = [
       justify-content: center;
       background: #93fb4d;
       color: #00223e;
-      padding: 0.8rem 2.8rem;
+      padding-top: 0.4rem;
+      padding-bottom: 0.4rem;
+      padding-left: 2.8rem;
+      padding-right: 2.8rem;
       border-radius: 12px;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 400;
       font-size: 1.1rem;
       box-shadow: 0 10px 25px rgba(147, 251, 77, 0.4);
       transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -2101,9 +2123,8 @@ const modulesList = [
       background: transparent;
       border: none;
       font-size: 1.1rem;
-      color: rgba(33, 63, 140, 0.5);
+      color: #283e87;
       cursor: pointer;
-
       position: relative;
       transition: color 0.2s ease;
       font-weight: 400;
@@ -2114,8 +2135,8 @@ const modulesList = [
     }
 
     .bench-tab.active {
-      color: #00223e;
-      font-weight: 600;
+      color: #283e87;
+      font-weight: 400;
     }
 
     .bench-tab.active::after {
@@ -2185,10 +2206,14 @@ const modulesList = [
       background: #93fb4d;
       color: #1a22ad;
       border: none;
-      padding: 0.875rem 2.5rem;
+      padding-top: 0.4rem;
+      padding-bottom: 0.4rem;
+      padding-left: 2.8rem;
+      padding-right: 2.8rem;
       border-radius: 12px;
-      font-size: 1rem;
-      font-weight: 600;
+      text-decoration: none;
+      font-weight: 400;
+      font-size: 1.1rem;
       cursor: pointer;
       text-transform: lowercase;
       transition:
@@ -2242,20 +2267,24 @@ const modulesList = [
       color: #213f8c;
       margin: 0;
       opacity: 0.8;
+      width: 65%;
+      text-align: left;
     }
 
     .tokens-demo-button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: #92f33d;
-      color: #ffffff;
-      padding: 0.875rem 2rem;
-      border-radius: 10px;
+      background: #93fb4d;
+      color: #00223e;
+      padding-top: 0.4rem;
+      padding-bottom: 0.4rem;
+      padding-left: 2.8rem;
+      padding-right: 2.8rem;
+      border-radius: 12px;
       text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      box-shadow: 0 4px 12px rgba(146, 243, 61, 0.3);
+      font-weight: 400;
+      font-size: 1.1rem;
       transition:
         transform 0.2s ease,
         box-shadow 0.2s ease;
@@ -2328,10 +2357,12 @@ const modulesList = [
     .action-products-content {
       max-width: 1200px;
       width: 100%;
+      margin-left: 40px;
+      margin-right: 40px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 3rem;
+      gap: 6rem;
     }
 
     .action-products-title {
@@ -2513,9 +2544,12 @@ const modulesList = [
     }
 
     .action-nav-button {
-      padding: 0.75rem 2rem;
-      border-radius: 8px;
-      font-size: 1rem;
+      padding-top: 0.4rem;
+      padding-bottom: 0.4rem;
+      padding-left: 2.8rem;
+      padding-right: 2.8rem;
+      border-radius: 12px;
+      text-decoration: none;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.2s ease;
@@ -2529,6 +2563,12 @@ const modulesList = [
     }
 
     .action-nav-button.active {
+      padding-top: 0.4rem;
+      padding-bottom: 0.4rem;
+      padding-left: 2.8rem;
+      padding-right: 2.8rem;
+      border-radius: 12px;
+      text-decoration: none;
       background-color: #000000;
       color: #ffffff;
       border-color: #000000;
@@ -3160,7 +3200,7 @@ const modulesList = [
           "home.how.login.create": "O crea una nueva cuenta",
 
           // Why zelify section
-          "home.why.title": "Cada producto, potenciado por IA.",
+          "home.why.title": "Cada producto, potenciado <br />por IA.",
           "home.why.description":
             "Cada producto de Zelify está potenciado por IA con Alaiza AI Core: analizamos el comportamiento financiero (gasto, ahorro y deuda) para detectar hábitos, anticipar necesidades y generar alertas. Sumamos educación financiera y recomendaciones personalizadas —presupuestos, recordatorios de pago y metas— y un chat de soporte inteligente.",
           "home.why.demo": "demo",
