@@ -14,24 +14,8 @@ import ProductsPanel from "../components/productsPanel.astro";
 
   <body>
     <header class="auth-header">
-      <a class="auth-logo" href="/">
-        <img src="/images/zelify_logo.png" alt="Zelify" />
-      </a>
-      <nav class="auth-nav" aria-label="Main navigation">
-        <a href="/products">Productos</a>
-        <a href="/nosotros">Nosotros</a>
-        <a href="/desarrollo">Desarrollo</a>
-        <a href="/otros">Otros</a>
-      </nav>
-      <div class="auth-actions">
-        <a
-          href="https://www.zelify.com/clips"
-          class="btn-demo"
-          target="_blank"
-          rel="noopener noreferrer">demo</a
-        >
-        <button class="lang-pill" aria-label="Idioma actual español">ES</button>
-      </div>
+      <Navbar3 />
+      <ProductsPanel />
     </header>
 
     <main class="auth-main">
@@ -849,92 +833,12 @@ import ProductsPanel from "../components/productsPanel.astro";
     align-items: center;
     justify-content: space-between;
     padding: 0.75rem 3rem;
-    background: #ffffff;
     position: sticky;
     top: 0;
     z-index: 10;
     max-width: 1400px;
     margin: 0 auto;
     box-sizing: border-box;
-  }
-
-  .auth-logo {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    flex-shrink: 0;
-  }
-
-  .auth-logo img {
-    height: 36px;
-    width: auto;
-    display: block;
-  }
-
-  .auth-nav {
-    display: flex;
-    align-items: center;
-    gap: clamp(2rem, 3vw, 3rem);
-    font-size: 1rem;
-    font-weight: 500;
-    margin: 0 auto;
-    flex: 1;
-    justify-content: center;
-  }
-
-  .auth-nav a {
-    color: #0a203f;
-    text-decoration: none;
-    transition: color 0.2s ease;
-    white-space: nowrap;
-  }
-
-  .auth-nav a:hover {
-    color: #1488fe;
-  }
-
-  .auth-actions {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex-shrink: 0;
-  }
-
-  .btn-demo {
-    border: none;
-    background: #8dff2b;
-    color: #082436;
-    text-transform: lowercase;
-    padding: 0.55rem 1.75rem;
-    border-radius: 999px;
-    font-weight: 600;
-    font-size: 0.95rem;
-    cursor: pointer;
-    box-shadow: 0 10px 20px rgba(141, 255, 43, 0.45);
-    transition: all 0.2s ease;
-  }
-
-  .btn-demo:hover {
-    background: #a5ff4d;
-    transform: translateY(-1px);
-    box-shadow: 0 12px 24px rgba(141, 255, 43, 0.5);
-  }
-
-  .lang-pill {
-    border: 1px solid #0a203f;
-    background: #ffffff;
-    color: #0a203f;
-    border-radius: 999px;
-    padding: 0.55rem 1rem;
-    font-weight: 600;
-    font-size: 0.95rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-
-  .lang-pill:hover {
-    background: #f5f5f5;
-    border-color: #1488fe;
   }
 
   .auth-main {
@@ -1605,11 +1509,6 @@ import ProductsPanel from "../components/productsPanel.astro";
     .auth-header {
       padding: 1.25rem 2rem;
     }
-
-    .auth-nav {
-      gap: clamp(1.5rem, 2vw, 2.5rem);
-      font-size: 0.95rem;
-    }
   }
 
   /* Mobile */
@@ -1618,18 +1517,6 @@ import ProductsPanel from "../components/productsPanel.astro";
       flex-direction: column;
       gap: 1rem;
       padding: 1.25rem 1.5rem;
-    }
-
-    .auth-nav {
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-      font-size: 0.9rem;
-    }
-
-    .auth-actions {
-      width: 100%;
-      justify-content: center;
     }
 
     .auth-main {
