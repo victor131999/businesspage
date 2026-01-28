@@ -24,14 +24,14 @@ import ProductsPanel from "../components/productsPanel.astro";
     <main class="auth-main">
       <section class="auth-hero">
         <h1 class="auth-title">
-          Cumplimiento AML<br />
-          claro, ágil y efectivo.
+          Zelify Connect<br />
+          Banner
         </h1>
         <p class="auth-description">
-          Evalúa riesgo automáticamente con listas globales, PEP y medios
-          adversos,<br />
-          monitorea transacciones en tiempo real y aplica reglas dinámicas<br />
-          para prevenir actividades ilícitas sin fricción operativa.
+          Permite conectar cuentas digitales a un módulo de Billetera digital
+          para concentrar su saldo.<br />
+          Además en países como México, Colombia y Estados Unidos permite conectar
+          diferentes cuentas de un usuario de diferentes bancos en una sola Billetera.
         </p>
         <div class="auth-cta">
           <input
@@ -92,283 +92,393 @@ import ProductsPanel from "../components/productsPanel.astro";
                 </div>
               </div>
 
-              <!-- Contenido del dispositivo -->
-              <div class="device-content">
-                <!-- Header con back y logo -->
-                <div class="device-header">
-                  <button class="device-back-btn">&lt; back</button>
-                  <div class="device-logo">
-                    <img src="/images/zelify_logo.png" alt="Zelify" />
+              <div class="device-content bank-link-mode">
+                <!-- Header -->
+                <div class="device-header-nav">
+                  <button class="device-back-btn">
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                    atrás
+                  </button>
+                </div>
+
+                <div class="bank-link-container screen-1" id="screen-banks">
+                  <div class="bank-link-header">
+                    <h2 class="bank-link-title">
+                      Vinculación de cuenta bancaria
+                    </h2>
+                    <p class="bank-link-subtitle">Vamos a vincular tu cuenta</p>
                   </div>
-                  <div class="device-header-spacer"></div>
+
+                  <!-- Search -->
+                  <div class="bank-search-container">
+                    <svg
+                      class="search-icon"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="11" cy="11" r="8"></circle>
+                      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input
+                      type="text"
+                      class="bank-search-input"
+                      placeholder="Buscar bancos..."
+                    />
+                  </div>
+
+                  <!-- Bank List -->
+                  <div class="bank-list">
+                    <div class="bank-item" data-bank="bbva">
+                      <div class="bank-logo-placeholder">BBVA</div>
+                      <span class="bank-name">BBVA México</span>
+                    </div>
+                    <div class="bank-item active" data-bank="santander">
+                      <div class="bank-logo-placeholder">
+                        <img
+                          src="https://upload.wikimedia.org/wikipedia/commons/b/b8/Banco_Santander_Logotipo.svg"
+                          alt="Santander"
+                          style="width: 100%; height: auto;"
+                        />
+                      </div>
+                      <span class="bank-name">Banco Santander</span>
+                    </div>
+                    <div class="bank-item" data-bank="banamex">
+                      <div class="bank-logo-placeholder">Banamex</div>
+                      <span class="bank-name">Banamex</span>
+                    </div>
+                    <div class="bank-item" data-bank="hsbc">
+                      <div class="bank-logo-placeholder">HSBC</div>
+                      <span class="bank-name">HSBC México</span>
+                    </div>
+                    <div class="bank-item" data-bank="azteca">
+                      <div class="bank-logo-placeholder">Azteca</div>
+                      <span class="bank-name">Banco Azteca</span>
+                    </div>
+                    <div class="bank-item" data-bank="scotiabank">
+                      <div class="bank-logo-placeholder">Scotia</div>
+                      <span class="bank-name">Scotiabank México</span>
+                    </div>
+                  </div>
+                  <button
+                    type="submit"
+                    class="btn-continuar"
+                    id="btn-continue-banks"
+                  >
+                    Continuar →
+                  </button>
                 </div>
 
-                <!-- Animación GIF -->
-                <div class="device-animation">
-                  <img src="/ANIMACION 1.gif" alt="Aml animation" />
-                </div>
-
-                <!-- Tarjeta con fondo translúcido -->
-                <div class="device-card">
-                  <div class="auth-phone-card">
-                    <!-- Indicador de progreso -->
-                    <div class="phone-card-dots">
-                      <span class="dot active"></span>
-                      <span class="dot"></span>
-                      <span class="dot"></span>
-                      <span class="dot"></span>
-                      <span class="dot"></span>
+                <div
+                  class="bank-link-container screen-2"
+                  id="screen-credentials"
+                  style="display: none;"
+                >
+                  <div class="credentials-content">
+                    <!-- Animated Logo -->
+                    <div class="bank-auth-logo">
+                      <img
+                        src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+                        alt="Bank Animation"
+                      />
                     </div>
 
-                    <h2 class="phone-card-title" id="step-title">
-                      Crear Cuenta
+                    <h2 class="bank-auth-title" id="auth-bank-name">
+                      BBVA México
                     </h2>
-                    <p class="phone-card-description" id="step-description">
-                      Ingresa tu nombre y correo electrónico para empezar. Te
-                      enviaremos un código de verificación.
+                    <p class="bank-auth-subtitle">
+                      Por favor ingrese sus credenciales para conectar su cuenta
+                      bancaria
                     </p>
 
-                    <button class="btn-google">
+                    <div class="auth-form">
+                      <div class="input-group">
+                        <label>Usuario</label>
+                        <input
+                          type="text"
+                          id="cred-username"
+                          placeholder="demo@hotmail.com"
+                          value=""
+                        />
+                      </div>
+
+                      <div class="input-group">
+                        <label>Contraseña</label>
+                        <input
+                          type="password"
+                          id="cred-password"
+                          placeholder="••••••••"
+                        />
+                      </div>
+                    </div>
+
+                    <button
+                      class="btn-primary btn-ingresar"
+                      id="btn-submit-credentials"
+                    >
+                      Ingresar
                       <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
                         fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
+                        stroke="currentColor"
+                        stroke-width="3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <div
+                  class="bank-link-container screen-3"
+                  id="screen-connecting"
+                  style="display: none;"
+                >
+                  <!-- Background Gradient Layer (Masked/Clipped) -->
+                  <div id="loading-fill-layer" class="loading-fill-layer"></div>
+
+                  <!-- Content: Loading -->
+                  <div id="content-loading" class="screen-3-content active">
+                    <h2 class="loading-text-title" id="loading-text-container">
+                      Conectando tu cuenta
+                    </h2>
+                    <p
+                      class="loading-text-subtitle"
+                      id="loading-subtext-container"
+                    >
+                      Espera por favor
+                    </p>
+
+                    <div class="loading-bar-container">
+                      <div class="loading-bar-fill" id="loading-bar-fill"></div>
+                    </div>
+                  </div>
+
+                  <!-- Content: Success -->
+                  <div id="content-success" class="screen-3-content">
+                    <div class="success-icon-wrapper">
+                      <svg
+                        class="success-icon"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="3"
                       >
                         <path
-                          d="M19.6 10.2273C19.6 9.51818 19.5364 8.83636 19.4182 8.18182H10V12.05H15.3818C15.15 13.3 14.4455 14.3591 13.3864 15.0682V17.5773H16.6182C18.5091 15.8364 19.6 13.2727 19.6 10.2273Z"
-                          fill="#4285F4"></path>
-                        <path
-                          d="M10 20C12.7 20 14.9636 19.1045 16.6182 17.5773L13.3864 15.0682C12.4909 15.6682 11.3455 16.0227 10 16.0227C7.39545 16.0227 5.19091 14.2636 4.40455 11.9H1.06364V14.4909C2.70909 17.7591 6.09091 20 10 20Z"
-                          fill="#34A853"></path>
-                        <path
-                          d="M4.40455 11.9C4.20455 11.3 4.09091 10.6591 4.09091 10C4.09091 9.34091 4.20455 8.7 4.40455 8.1V5.50909H1.06364C0.386364 6.85909 0 8.38636 0 10C0 11.6136 0.386364 13.1409 1.06364 14.4909L4.40455 11.9Z"
-                          fill="#FBBC05"></path>
-                        <path
-                          d="M10 3.97727C11.4682 3.97727 12.7864 4.46818 13.8227 5.42273L16.6909 2.55455C14.9591 0.940909 12.6955 0 10 0C6.09091 0 2.70909 2.24091 1.06364 5.50909L4.40455 8.1C5.19091 5.73636 7.39545 3.97727 10 3.97727Z"
-                          fill="#EA4335"></path>
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M5 13l4 4L19 7"
+                          transform="rotate(-2 12 12)"></path>
                       </svg>
-                      Crear cuenta con Google
-                    </button>
-
-                    <div class="phone-card-divider">
-                      <span class="divider-line"></span>
-                      <span class="divider-text">O crea cuenta con correo</span>
-                      <span class="divider-line"></span>
                     </div>
-
-                    <!-- Paso 1: Crear Cuenta -->
-                    <div id="step-1" class="auth-step">
-                      <form class="phone-card-form" id="form-step-1">
-                        <div class="form-field">
-                          <label
-                            >Nombre Completo<span class="required">*</span
-                            ></label
-                          >
-                          <input
-                            type="text"
-                            id="fullName"
-                            placeholder="John Doe"
-                            required
-                          />
-                          <span class="field-error-message"></span>
-                        </div>
-                        <div class="form-field">
-                          <label>Correo<span class="required">*</span></label>
-                          <input
-                            type="email"
-                            id="email"
-                            placeholder="email@example.com"
-                            required
-                          />
-                          <span class="field-error-message"></span>
-                        </div>
-                        <button type="submit" class="btn-continuar">
-                          Continuar →
-                        </button>
-                      </form>
-                    </div>
-
-                    <!-- Paso 2: Verificar Email -->
-                    <div id="step-2" class="auth-step" style="display: none;">
-                      <form class="phone-card-form" id="form-step-2">
-                        <div class="otp-container">
-                          <div class="otp-inputs" id="otp-email">
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                          </div>
-                        </div>
-                        <button type="submit" class="btn-continuar">
-                          Verificar →
-                        </button>
-                        <p class="resend-code">
-                          ¿No recibiste el código? <a href="#" id="resend-email"
-                            >Reenviar</a
-                          >
-                        </p>
-                      </form>
-                    </div>
-
-                    <!-- Paso 3: Agregar Teléfono -->
-                    <div id="step-3" class="auth-step" style="display: none;">
-                      <form class="phone-card-form" id="form-step-3">
-                        <div class="form-field">
-                          <label
-                            >Número de Teléfono<span class="required">*</span
-                            ></label
-                          >
-                          <input
-                            type="tel"
-                            id="phone"
-                            placeholder="+1 234 567 8900"
-                            required
-                          />
-                          <span class="field-error-message"></span>
-                        </div>
-                        <button type="submit" class="btn-continuar">
-                          Continuar →
-                        </button>
-                      </form>
-                    </div>
-
-                    <!-- Paso 4: Verificar Teléfono -->
-                    <div id="step-4" class="auth-step" style="display: none;">
-                      <form class="phone-card-form" id="form-step-4">
-                        <div class="otp-container">
-                          <div class="otp-inputs" id="otp-phone">
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                          </div>
-                        </div>
-                        <button type="submit" class="btn-continuar">
-                          Verificar →
-                        </button>
-                        <p class="resend-code">
-                          ¿No recibiste el código? <a href="#" id="resend-phone"
-                            >Reenviar</a
-                          >
-                        </p>
-                      </form>
-                    </div>
-
-                    <!-- Paso 5: Completar Perfil -->
-                    <div id="step-5" class="auth-step" style="display: none;">
-                      <form class="phone-card-form" id="form-step-5">
-                        <div class="form-field">
-                          <label
-                            >Contraseña<span class="required">*</span></label
-                          >
-                          <input
-                            type="password"
-                            id="password"
-                            placeholder="Mínimo 8 caracteres"
-                            required
-                          />
-                          <span class="field-error-message"></span>
-                        </div>
-                        <div class="form-field">
-                          <label
-                            >Confirmar Contraseña<span class="required">*</span
-                            ></label
-                          >
-                          <input
-                            type="password"
-                            id="confirmPassword"
-                            placeholder="Confirma tu contraseña"
-                            required
-                          />
-                          <span class="field-error-message"></span>
-                        </div>
-                        <button type="submit" class="btn-continuar">
-                          Crear Cuenta →
-                        </button>
-                      </form>
-                    </div>
-
-                    <p
-                      class="phone-card-login"
-                      id="login-link"
-                      style="display: none;"
-                    >
-                      ¿Ya tienes una cuenta? <a href="#">Ingresa</a>
+                    <h2 class="success-title">
+                      Vinculación Exitosa
+                    </h2>
+                    <p class="success-subtitle">
+                      Tu cuenta bancaria ha sido vinculada exitosamente
                     </p>
                   </div>
                 </div>
-              </div>
 
-              <!-- Home Indicator -->
-              <div class="device-home-indicator"></div>
+                <div
+                  class="bank-link-container screen-4"
+                  id="screen-wallet"
+                  style="display: none;"
+                >
+                  <div class="wallet-screen">
+                    <div class="wallet-animation">
+                      <img
+                        src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+                        alt="Wallet Animation"
+                        class="wallet-animation-img"
+                      />
+                    </div>
+
+                    <div class="wallet-main">
+                      <div class="wallet-header">
+                        <h2 class="wallet-title">Billetera</h2>
+                        <p class="wallet-subtitle">Administra tus fondos</p>
+                      </div>
+
+                      <div class="wallet-balance">
+                        <label class="wallet-balance-label">Saldo total</label>
+                        <div class="wallet-balance-card">
+                          <span class="wallet-balance-amount" id="wallet-balance"
+                            >$0.00</span
+                          >
+                          <span class="wallet-currency-badge" id="wallet-currency"
+                            >MXN</span
+                          >
+                        </div>
+                      </div>
+
+                      <button class="wallet-deposit-btn" id="btn-go-deposit">
+                        <span>Depositar fondos</span>
+                        <svg
+                          class="wallet-deposit-icon"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          stroke-width="2"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </button>
+
+                      <div class="wallet-spacer"></div>
+
+                      <div class="wallet-bank-card">
+                        <svg
+                          class="wallet-bank-chevron"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          stroke-width="2.5"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M5 15l7-7 7 7"
+                          />
+                        </svg>
+                        <h3 class="wallet-bank-name" id="wallet-bank-name">
+                          SCOTIABANK MÉXICO
+                        </h3>
+                        <p class="wallet-bank-subtitle">Banco conectado</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="bank-link-container screen-5"
+                  id="screen-deposit"
+                  style="display: none;"
+                >
+                  <div class="deposit-screen">
+                    <div class="deposit-animation">
+                      <img
+                        src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+                        alt="Deposit Animation"
+                        class="deposit-animation-img"
+                      />
+                    </div>
+
+                    <div class="deposit-card">
+                      <div class="deposit-header">
+                        <h2 class="deposit-title">Depositar fondos</h2>
+                        <p class="deposit-subtitle">
+                          Seleccione una cuenta e ingrese el monto
+                        </p>
+                      </div>
+
+                      <label class="deposit-section-label">
+                        Seleccionar cuenta
+                      </label>
+
+                      <div class="deposit-account-list">
+                        <button
+                          class="deposit-account-card active"
+                          type="button"
+                          data-account="clabe"
+                        >
+                          <div class="deposit-account-info">
+                            <span class="deposit-account-name"
+                              >Cuenta CLABE</span
+                            >
+                            <span class="deposit-account-number"
+                              >012345678901234567</span
+                            >
+                          </div>
+                          <div class="deposit-account-balance">
+                            <span class="deposit-account-amount"
+                              >$12,345.67</span
+                            >
+                            <span class="deposit-account-currency">MXN</span>
+                          </div>
+                        </button>
+
+                        <button
+                          class="deposit-account-card"
+                          type="button"
+                          data-account="checking"
+                        >
+                          <div class="deposit-account-info">
+                            <span class="deposit-account-name">Chequera</span>
+                            <span class="deposit-account-number"
+                              >**** 4821</span
+                            >
+                          </div>
+                          <div class="deposit-account-balance">
+                            <span class="deposit-account-amount">$145.67</span>
+                            <span class="deposit-account-currency">MXN</span>
+                          </div>
+                        </button>
+                      </div>
+
+                      <div class="deposit-amount">
+                        <label class="deposit-section-label">Monto</label>
+                        <input
+                          type="text"
+                          class="deposit-amount-input"
+                          placeholder="0.00"
+                          inputmode="decimal"
+                        />
+                      </div>
+
+                      <div class="slide-track-container" id="slide-track">
+                        <div class="slide-fill" id="slide-fill"></div>
+                        <div class="slide-thumb" id="slide-thumb">
+                          <svg
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                          </svg>
+                        </div>
+                        <div class="slide-text" id="slide-text">
+                          Desliza para confirmar
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
             </div>
           </div>
+
+          <!-- Home Indicator -->
+          <div class="device-home-indicator"></div>
         </div>
       </div>
     </div>
@@ -377,12 +487,12 @@ import ProductsPanel from "../components/productsPanel.astro";
     <section class="security-section">
       <div class="security-container">
         <h2 class="security-title">
-          Zelify AML<br />
-          detección temprana de riesgo.
+          Zelify Connect<br />
+          integración bancaria y cuentas digitales.
         </h2>
 
         <div class="security-features">
-          <!-- Feature 1: Evaluación de listas globales -->
+          <!-- Feature 1: Vinculación de cuentas bancarias -->
           <div class="security-feature">
             <div class="feature-icon">
               <svg
@@ -404,14 +514,16 @@ import ProductsPanel from "../components/productsPanel.astro";
                 <path d="M19 4v2M19 6h-1M19 6h1" stroke-width="1"></path>
               </svg>
             </div>
-            <h3 class="feature-title">Evaluación de listas globales</h3>
+            <h3 class="feature-title">Vinculación de cuentas bancarias</h3>
             <p class="feature-description">
-              Verificaciones automáticas contra sanciones, PEP y listas de
-              observación internacionales.
+              Para Colombia y México permite ingreso y salida de fondos con
+              transferencias electrónicas seguras entre bancos, comercios y
+              cuentas digitales. En Estados Unidos conecta cuentas bajo un
+              esquema informativo sin ejecutar transferencias.
             </p>
           </div>
 
-          <!-- Feature 2: Verificación de listas globales -->
+          <!-- Feature 2: Verificación de cuenta y titularidad -->
           <div class="security-feature">
             <div class="feature-icon">
               <svg
@@ -427,14 +539,14 @@ import ProductsPanel from "../components/productsPanel.astro";
                 <path d="M12 1v4M12 19v4M1 12h4M19 12h4"></path>
               </svg>
             </div>
-            <h3 class="feature-title">Verificación de listas globales</h3>
+            <h3 class="feature-title">Verificación de cuenta y titularidad</h3>
             <p class="feature-description">
-              Cruce continuo con OFAC, ONU, UE, Interpol y FinCEN para detección
-              temprana.
+              Comprueba número de cuenta, banco emisor y coincidencia del
+              titular con la identidad registrada.
             </p>
           </div>
 
-          <!-- Feature 3: Verificación de listas nacionales PEP -->
+          <!-- Feature 3: Cuentas digitales -->
           <div class="security-feature">
             <div class="feature-icon">
               <svg
@@ -451,14 +563,15 @@ import ProductsPanel from "../components/productsPanel.astro";
                 <path d="M9 12l2 2 4-4" stroke-width="2"></path>
               </svg>
             </div>
-            <h3 class="feature-title">Verificación de listas nacionales PEP</h3>
+            <h3 class="feature-title">Cuentas digitales</h3>
             <p class="feature-description">
-              Identifica personas políticamente expuestas según normativas
-              locales.
+              Habilita cuentas operativas con número propio tras completar el
+              onboarding (AML + Auth + KYC) para recibir, enviar y administrar
+              fondos en tu billetera o aplicativo.
             </p>
           </div>
 
-          <!-- Feature 4: Monitoreo y operaciones -->
+          <!-- Feature 4: Creación de cuentas CLABE -->
           <div class="security-feature">
             <div class="feature-icon">
               <svg
@@ -478,64 +591,11 @@ import ProductsPanel from "../components/productsPanel.astro";
                 ></path>
               </svg>
             </div>
-            <h3 class="feature-title">Monitoreo y operaciones</h3>
+            <h3 class="feature-title">Creación de cuentas CLABE</h3>
             <p class="feature-description">
-              Supervisa transacciones sospechosas con reglas dinámicas y
-              perfiles de riesgo.
-            </p>
-          </div>
-
-          <!-- Feature 5: Medios adversos e inteligencia de riesgo -->
-          <div class="security-feature">
-            <div class="feature-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-                <path d="M12 11v6M9 14h6"></path>
-                <path
-                  d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
-                  opacity="0.3"></path>
-                <path d="M9 12l2 2 4-4" stroke-width="2"></path>
-              </svg>
-            </div>
-            <h3 class="feature-title">
-              Medios adversos e inteligencia de riesgo
-            </h3>
-            <p class="feature-description">
-              Analiza noticias y reportes públicos para riesgos reputacionales o
-              legales.
-            </p>
-          </div>
-
-          <!-- Feature 6: Evaluación de listas internas -->
-          <div class="security-feature">
-            <div class="feature-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <circle cx="12" cy="12" r="10"></circle>
-                <circle cx="12" cy="12" r="6"></circle>
-                <path d="M12 2v4M12 18v4M2 12h4M18 12h4"></path>
-                <circle cx="12" cy="12" r="2" fill="currentColor"></circle>
-                <path d="M8 8l8 8M16 8l-8 8" stroke-width="2"></path>
-              </svg>
-            </div>
-            <h3 class="feature-title">Evaluación de listas internas</h3>
-            <p class="feature-description">
-              Integra tus listas de control y políticas internas dentro del
-              flujo AML.
+              Genera cuentas CLABE en México para habilitar cuentas operativas
+              y facilitar la recepción y envío de fondos dentro del sistema
+              financiero local.
             </p>
           </div>
         </div>
@@ -546,27 +606,27 @@ import ProductsPanel from "../components/productsPanel.astro";
     <section class="control-section">
       <div class="control-container">
         <div class="control-divider"></div>
-        <h2 class="control-title">Control total de cumplimiento AML</h2>
+        <h2 class="control-title">Control total de Zelify Connect</h2>
 
         <div class="control-features">
-          <!-- Feature 1: Evaluación de listas globales -->
+          <!-- Feature 1: Vinculación de cuentas bancarias -->
           <div class="control-feature">
             <div class="control-feature-card">
               <div class="control-feature-front">
                 <div class="control-feature-image">
                   <img
                     src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=500&fit=crop&q=80"
-                    alt="Evaluación de listas globales"
+                    alt="Vinculación de cuentas bancarias"
                   />
                 </div>
                 <h3 class="control-feature-title">
-                  Evaluación de listas globales
+                  Vinculación de cuentas bancarias
                 </h3>
                 <p class="control-feature-description">
-                  Cruce automático contra listas internacionales para detectar
-                  alertas relevantes.
+                  Conecta cuentas bancarias para el ingreso y salida de fondos o
+                  verificación informativa según el país.
                 </p>
-                <button class="control-feature-btn" data-feature="global-lists">
+                <button class="control-feature-btn" data-feature="bank-linking">
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
@@ -582,18 +642,18 @@ import ProductsPanel from "../components/productsPanel.astro";
               </div>
               <div class="control-feature-back">
                 <h3 class="control-feature-title">
-                  Beneficios de listas globales
+                  Flujos de vinculación bancaria
                 </h3>
                 <ul class="control-feature-benefits">
-                  <li>Detección temprana de coincidencias</li>
-                  <li>Alertas por riesgo regulatorio</li>
-                  <li>Historial de evaluaciones</li>
-                  <li>Filtros y reglas por país</li>
-                  <li>Reducción de falsos positivos</li>
+                  <li>Vincular cuenta bancaria</li>
+                  <li>Obtener cuentas vinculadas</li>
+                  <li>Desvincular cuenta bancaria</li>
+                  <li>Obtener bancos soportados</li>
+                  <li>Diagrama 1</li>
                 </ul>
                 <button
                   class="control-feature-btn control-feature-btn-close"
-                  data-feature="global-lists"
+                  data-feature="bank-linking"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -611,22 +671,24 @@ import ProductsPanel from "../components/productsPanel.astro";
             </div>
           </div>
 
-          <!-- Feature 2: Monitoreo y operaciones -->
+          <!-- Feature 2: Verificación de cuenta y titularidad -->
           <div class="control-feature">
             <div class="control-feature-card">
               <div class="control-feature-front">
                 <div class="control-feature-image">
                   <img
                     src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=500&fit=crop&q=80"
-                    alt="Monitoreo y operaciones"
+                    alt="Verificación de cuenta y titularidad"
                   />
                 </div>
-                <h3 class="control-feature-title">Monitoreo y operaciones</h3>
+                <h3 class="control-feature-title">
+                  Verificación de cuenta y titularidad
+                </h3>
                 <p class="control-feature-description">
-                  Supervisión continua de alertas y casos con trazabilidad
-                  operativa.
+                  Valida datos de cuenta y coincidencia de titularidad con la
+                  identidad registrada.
                 </p>
-                <button class="control-feature-btn" data-feature="monitoring">
+                <button class="control-feature-btn" data-feature="account-proof">
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
@@ -641,17 +703,17 @@ import ProductsPanel from "../components/productsPanel.astro";
                 </button>
               </div>
               <div class="control-feature-back">
-                <h3 class="control-feature-title">Beneficios de monitoreo</h3>
+                <h3 class="control-feature-title">Flujos de verificación</h3>
                 <ul class="control-feature-benefits">
-                  <li>Alertas en tiempo real</li>
-                  <li>Gestión de casos centralizada</li>
-                  <li>Flujos de aprobación</li>
-                  <li>Historial de decisiones</li>
-                  <li>Panel operativo unificado</li>
+                  <li>Verificación de titularidad de cuenta</li>
+                  <li>Confirmación mediante microdepósitos</li>
+                  <li>Estado de verificación</li>
+                  <li>Historial de verificación</li>
+                  <li>Diagrama 2</li>
                 </ul>
                 <button
                   class="control-feature-btn control-feature-btn-close"
-                  data-feature="monitoring"
+                  data-feature="account-proof"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -669,26 +731,26 @@ import ProductsPanel from "../components/productsPanel.astro";
             </div>
           </div>
 
-          <!-- Feature 3: Medios adversos e inteligencia de riesgo -->
+          <!-- Feature 3: Cuentas digitales -->
           <div class="control-feature">
             <div class="control-feature-card">
               <div class="control-feature-front">
                 <div class="control-feature-image">
                   <img
                     src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&h=500&fit=crop&q=80"
-                    alt="Medios adversos e inteligencia de riesgo"
+                    alt="Cuentas digitales"
                   />
                 </div>
                 <h3 class="control-feature-title">
-                  Medios adversos e inteligencia de riesgo
+                  Cuentas digitales
                 </h3>
                 <p class="control-feature-description">
-                  Análisis de señales públicas para identificar riesgo
-                  reputacional.
+                  Crea cuentas operativas luego del onboarding para gestionar
+                  fondos dentro de tu billetera.
                 </p>
                 <button
                   class="control-feature-btn"
-                  data-feature="adverse-media"
+                  data-feature="digital-accounts"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -705,18 +767,20 @@ import ProductsPanel from "../components/productsPanel.astro";
               </div>
               <div class="control-feature-back">
                 <h3 class="control-feature-title">
-                  Beneficios de inteligencia
+                  Flujos de cuentas digitales
                 </h3>
                 <ul class="control-feature-benefits">
-                  <li>Detección de noticias de riesgo</li>
-                  <li>Clasificación por severidad</li>
-                  <li>Contexto y trazabilidad</li>
-                  <li>Alertas configurables</li>
-                  <li>Reducción de exposición reputacional</li>
+                  <li>Crear cuenta digital</li>
+                  <li>Actualizar cuenta digital</li>
+                  <li>Eliminar cuenta digital</li>
+                  <li>Obtener cuenta digital</li>
+                  <li>Activar cuenta digital</li>
+                  <li>Desactivar cuenta digital</li>
+                  <li>Diagrama 4</li>
                 </ul>
                 <button
                   class="control-feature-btn control-feature-btn-close"
-                  data-feature="adverse-media"
+                  data-feature="digital-accounts"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -734,26 +798,26 @@ import ProductsPanel from "../components/productsPanel.astro";
             </div>
           </div>
 
-          <!-- Feature 4: Evaluación de listas internas -->
+          <!-- Feature 4: Creación de cuentas CLABE -->
           <div class="control-feature">
             <div class="control-feature-card">
               <div class="control-feature-front">
                 <div class="control-feature-image">
                   <img
                     src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=500&fit=crop&q=80"
-                    alt="Evaluación de listas internas"
+                    alt="Creación de cuentas CLABE"
                   />
                 </div>
                 <h3 class="control-feature-title">
-                  Evaluación de listas internas
+                  Creación de cuentas CLABE
                 </h3>
                 <p class="control-feature-description">
-                  Comparación contra listas propias para mayor control y
-                  cumplimiento.
+                  Genera cuentas CLABE en México para habilitar cuentas
+                  operativas y recepción de fondos.
                 </p>
                 <button
                   class="control-feature-btn"
-                  data-feature="internal-lists"
+                  data-feature="clabe"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -770,18 +834,17 @@ import ProductsPanel from "../components/productsPanel.astro";
               </div>
               <div class="control-feature-back">
                 <h3 class="control-feature-title">
-                  Beneficios de listas internas
+                  Flujos de cuentas CLABE
                 </h3>
                 <ul class="control-feature-benefits">
-                  <li>Bloqueos y whitelists</li>
-                  <li>Reglas por segmento</li>
-                  <li>Actualización inmediata</li>
-                  <li>Auditoría interna</li>
-                  <li>Control total del riesgo</li>
+                  <li>Crear lote de cuentas CLABE</li>
+                  <li>Crear cuenta CLABE</li>
+                  <li>Obtener cuentas CLABE</li>
+                  <li>Obtener detalle de cuenta CLABE</li>
                 </ul>
                 <button
                   class="control-feature-btn control-feature-btn-close"
-                  data-feature="internal-lists"
+                  data-feature="clabe"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -1163,2114 +1226,3267 @@ import ProductsPanel from "../components/productsPanel.astro";
         <p class="footer-copyright">© 2025 Zelify. All rights reserved.</p>
       </div>
     </footer>
-  </body>
-</html>
-
-<style>
-  @font-face {
-    font-family: "NataSans";
-    src: url("/fonts/NataSans-VariableFont_wght.ttf") format("truetype");
-    font-weight: 100 900;
-    font-display: swap;
-  }
-
-  html,
-  body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-  }
-
-  body {
-    font-family:
-      "NataSans",
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      Roboto,
-      sans-serif;
-    background-color: #ffffff;
-    color: #0a203f;
-  }
-
-  .auth-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.75rem 3rem;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    max-width: 1400px;
-    margin: 0 auto;
-    box-sizing: border-box;
-  }
-
-  .auth-main {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 3rem 2rem 2rem;
-  }
-
-  .auth-hero {
-    max-width: 800px;
-    width: 100%;
-    text-align: center;
-  }
-
-  .auth-title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    line-height: 1.2;
-    color: #0a203f;
-    margin: 0 0 2rem 0;
-    font-weight: 400;
-  }
-
-  .auth-title br {
-    display: block;
-  }
-
-  .auth-description {
-    font-size: clamp(1rem, 2vw, 1.1rem);
-    line-height: 1.6;
-    color: #213f8c;
-    margin: 0 0 3rem 0;
-  }
-
-  .auth-description br {
-    display: block;
-  }
-
-  .auth-cta {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-  }
-
-  .auth-cta input {
-    border: 1px solid rgba(10, 32, 63, 0.2);
-    border-radius: 999px;
-    padding: 0.65rem 1.5rem;
-    min-width: 260px;
-    font-size: 1rem;
-    outline: none;
-    background: #fff;
-    color: #0a203f;
-    font-family: inherit;
-  }
-
-  .auth-cta input::placeholder {
-    color: rgba(10, 32, 63, 0.5);
-  }
-
-  .btn-cotizar {
-    border: none;
-    background: #0a203f;
-    color: #ffffff;
-    border-radius: 999px;
-    padding: 0.65rem 1.75rem;
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    text-transform: lowercase;
-    transition: all 0.2s ease;
-    text-decoration: none;
-    display: inline-block;
-  }
-
-  .btn-cotizar:hover {
-    background: #0d2a4f;
-    transform: translateY(-1px);
-  }
-
-  .btn-demo-hero {
-    border: none;
-    background: #8dff2b;
-    color: #082436;
-    text-transform: lowercase;
-    padding: 0.65rem 1.75rem;
-    border-radius: 999px;
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    box-shadow: 0 10px 20px rgba(141, 255, 43, 0.45);
-    transition: all 0.2s ease;
-  }
-
-  .btn-demo-hero:hover {
-    background: #a5ff4d;
-    transform: translateY(-1px);
-    box-shadow: 0 12px 24px rgba(141, 255, 43, 0.5);
-  }
-
-  .auth-background-section {
-    position: relative;
-    width: 100%;
-    /* background: #ffffff; */
-    padding: 4rem 0;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-
-  .auth-background-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    background: linear-gradient(
-      to bottom,
-      #ffffff 0%,
-      transparent 15%,
-      transparent 85%,
-      #ffffff 100%
-    );
-    pointer-events: none;
-  }
-
-  .auth-background-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-  }
-
-  .auth-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  /* Contenedor del dispositivo */
-  .device-container {
-    position: relative;
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-    z-index: 10;
-    padding: 1rem 0 2rem;
-  }
-
-  /* Frame del iPhone */
-  .device-frame-wrapper {
-    position: relative;
-    z-index: 10;
-  }
-
-  .device-frame {
-    position: relative;
-    overflow: hidden;
-    border-radius: 3rem;
-    border: none;
-    background: transparent;
-    box-shadow: none;
-  }
-
-  /* Pantalla del dispositivo */
-  .device-screen {
-    position: relative;
-    height: 750px;
-    overflow: hidden;
-    border-radius: 2.5rem;
-    background: #ffffff;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    box-shadow:
-      0 0 0 1px rgba(0, 0, 0, 0.05),
-      0 20px 60px rgba(0, 0, 0, 0.15);
-  }
-
-  /* Status Bar */
-  .device-status-bar {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #ffffff;
-    padding: 2.5rem 1.5rem 0.5rem;
-    flex-shrink: 0;
-  }
-
-  .status-time {
-    position: absolute;
-    left: 1.5rem;
-    top: 1rem;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #000000;
-  }
-
-  .dynamic-island {
-    position: absolute;
-    left: 50%;
-    top: 0.75rem;
-    transform: translateX(-50%);
-  }
-
-  .island-shape {
-    width: 96px;
-    height: 20px;
-    border-radius: 999px;
-    background: #000000;
-  }
-
-  .island-speaker {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 48px;
-    height: 2px;
-    border-radius: 999px;
-    background: rgba(31, 41, 55, 0.3);
-  }
-
-  .status-icons {
-    position: absolute;
-    right: 1.5rem;
-    top: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.375rem;
-  }
-
-  .signal-icon {
-    width: 20px;
-    height: 12px;
-    color: #000000;
-  }
-
-  .battery-icon {
-    width: 24px;
-    height: 10px;
-    border: 1px solid #000000;
-    border-radius: 2px;
-    padding: 1px;
-  }
-
-  .battery-level {
-    width: 80%;
-    height: 100%;
-    background: #000000;
-    border-radius: 1px;
-  }
-
-  /* Contenido del dispositivo */
-  .device-content {
-    flex: 1;
-    min-height: 0;
-    background: #ffffff;
-    padding: 1rem 1.25rem;
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
-
-  /* Header del dispositivo */
-  .device-header {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 0.5rem;
-    flex-shrink: 0;
-  }
-
-  .device-back-btn {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: #6b7280;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-  }
-
-  .device-logo {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .device-logo img {
-    height: 32px;
-    width: auto;
-  }
-
-  .device-header-spacer {
-    width: 48px;
-  }
-
-  /* Animación GIF */
-  .device-animation {
-    position: relative;
-    margin-bottom: -3.5rem;
-    z-index: 0;
-    display: flex;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .device-animation img {
-    width: 180px;
-    height: 180px;
-    object-fit: contain;
-    opacity: 0.9;
-  }
-
-  /* Tarjeta translúcida */
-  .device-card {
-    position: relative;
-    z-index: 10;
-    flex: 1;
-    overflow-y: auto;
-    overflow-x: hidden;
-    border-radius: 1rem;
-    padding: 1rem 1.25rem;
-    backdrop-filter: blur(4px);
-    background: rgba(255, 255, 255, 0.35);
-    min-height: 0;
-  }
-
-  .auth-phone-card {
-    width: 100%;
-    background: transparent;
-    border-radius: 0;
-    padding: 0;
-    box-shadow: none;
-    position: relative;
-  }
-
-  /* Home Indicator */
-  .device-home-indicator {
-    position: absolute;
-    bottom: 0.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 128px;
-    height: 4px;
-    border-radius: 999px;
-    background: rgba(0, 0, 0, 0.3);
-    flex-shrink: 0;
-  }
-
-  .phone-card-dots {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  .phone-card-dots .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #d0d0d0;
-    transition: background 0.3s ease;
-  }
-
-  .phone-card-dots .dot.active {
-    background: #213f8c;
-  }
-
-  .phone-card-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #0a203f;
-    margin: 0 0 0.5rem 0;
-    text-align: center;
-  }
-
-  .phone-card-description {
-    font-size: 0.75rem;
-    color: #6b7280;
-    margin: 0 0 1rem 0;
-    text-align: center;
-    line-height: 1.4;
-  }
-
-  .btn-google {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    border: 1px solid #e5e7eb;
-    background: #f9fafb;
-    border-radius: 12px;
-    padding: 0.75rem 1.25rem;
-    font-weight: 500;
-    font-size: 0.875rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    margin-bottom: 1rem;
-    color: #0a203f;
-  }
-
-  .btn-google:hover {
-    background: #f3f4f6;
-    border-color: #d1d5db;
-  }
-
-  .phone-card-divider {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .divider-line {
-    flex: 1;
-    height: 1px;
-    background: #e5e7eb;
-  }
-
-  .divider-text {
-    font-size: 0.75rem;
-    color: #6b7280;
-    font-weight: 500;
-    white-space: nowrap;
-  }
-
-  .phone-card-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  .form-field {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .form-field label {
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: #374151;
-  }
-
-  .form-field .required {
-    color: #ef4444;
-    margin-left: 2px;
-  }
-
-  .form-field input {
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    padding: 0.625rem 0.875rem;
-    font-size: 0.875rem;
-    outline: none;
-    background: #f9fafb;
-    color: #0a203f;
-    font-family: inherit;
-    transition: border-color 0.2s ease;
-  }
-
-  .form-field input:focus {
-    border-color: #213f8c;
-    background: #ffffff;
-  }
-
-  .form-field input.field-error {
-    border-color: #ef4444;
-    background: #fef2f2;
-  }
-
-  .form-field input.field-error:focus {
-    border-color: #ef4444;
-    background: #fef2f2;
-  }
-
-  .field-error-message {
-    display: none;
-    margin-top: 0.25rem;
-    font-size: 0.7rem;
-    color: #ef4444;
-  }
-
-  .form-field input::placeholder {
-    color: #9ca3af;
-  }
-
-  .otp-input.otp-verifying {
-    border-color: #213f8c;
-    animation: otp-pulse 1s ease-in-out infinite;
-  }
-
-  .otp-input.otp-success {
-    border-color: #10b981;
-    background: #f0fdf4;
-  }
-
-  .otp-input.otp-error {
-    border-color: #ef4444;
-    background: #fef2f2;
-    animation: otp-shake 0.5s ease-in-out;
-  }
-
-  @keyframes otp-pulse {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.6;
-    }
-  }
-
-  @keyframes otp-shake {
-    0%,
-    100% {
-      transform: translateX(0);
-    }
-    25% {
-      transform: translateX(-4px);
-    }
-    75% {
-      transform: translateX(4px);
-    }
-  }
-
-  .btn-continuar {
-    position: relative;
-    border: none;
-    background: linear-gradient(
-      to right,
-      #213f8c 0%,
-      #1a2f6b 40%,
-      #0f1f4d 70%,
-      #0a203f 100%
-    );
-    color: #ffffff;
-    border-radius: 12px;
-    padding: 0.85rem 1.5rem;
-    font-weight: 600;
-    font-size: 0.875rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    transition: all 0.2s ease;
-    margin-top: 0.5rem;
-    overflow: hidden;
-    box-shadow: 0 4px 14px 0 rgba(33, 63, 140, 0.4);
-    animation:
-      cta-pulse-glow 2s ease-in-out infinite,
-      cta-button-pulse 2.5s ease-in-out infinite;
-  }
-
-  .btn-continuar::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 12px;
-    opacity: 0.6;
-    background: #213f8c;
-    filter: blur(8px);
-    z-index: -1;
-    animation: cta-pulse-ring 2s ease-in-out infinite;
-  }
-
-  .btn-continuar::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to right,
-      transparent,
-      rgba(255, 255, 255, 0.4),
-      transparent
-    );
-    transform: translateX(-100%);
-    animation: cta-shine-sweep 2.5s linear infinite;
-    z-index: 1;
-  }
-
-  .btn-continuar:hover {
-    transform: translateY(-1px);
-  }
-
-  .btn-continuar:active {
-    transform: scale(0.98);
-  }
-
-  @keyframes cta-pulse-glow {
-    0%,
-    100% {
-      box-shadow: 0 4px 14px 0 rgba(33, 63, 140, 0.4);
-    }
-    50% {
-      box-shadow:
-        0 4px 20px 0 rgba(33, 63, 140, 0.8),
-        0 0 30px 0 rgba(33, 63, 140, 0.4);
-    }
-  }
-
-  @keyframes cta-button-pulse {
-    0%,
-    100% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.02);
-    }
-  }
-
-  @keyframes cta-pulse-ring {
-    0%,
-    100% {
-      opacity: 0.4;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 0.7;
-      transform: scale(1.05);
-    }
-  }
-
-  @keyframes cta-shine-sweep {
-    0% {
-      transform: translateX(-100%) skewX(-15deg);
-    }
-    100% {
-      transform: translateX(200%) skewX(-15deg);
-    }
-  }
-
-  .phone-card-login {
-    text-align: center;
-    font-size: 0.75rem;
-    color: #6b7280;
-    margin: 0.5rem 0 0 0;
-  }
-
-  .phone-card-login a {
-    color: #213f8c;
-    text-decoration: none;
-    font-weight: 500;
-  }
-
-  .phone-card-login a:hover {
-    text-decoration: underline;
-  }
-
-  /* Tablet */
-  @media (max-width: 1024px) {
-    .auth-header {
-      padding: 1.25rem 2rem;
-    }
-  }
-
-  /* Mobile */
-  @media (max-width: 768px) {
-    .auth-header {
-      flex-direction: column;
-      gap: 1rem;
-      padding: 1.25rem 1.5rem;
-    }
-
-    .auth-main {
-      padding: 2rem 1.5rem;
-    }
-
-    .auth-title {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .auth-description {
-      font-size: 0.95rem;
-      margin-bottom: 2rem;
-    }
-
-    .auth-cta {
-      flex-direction: column;
-      align-items: stretch;
-    }
-
-    .auth-cta input {
-      width: 100%;
-      min-width: auto;
-    }
-
-    .btn-cotizar,
-    .btn-demo-hero {
-      width: 100%;
-    }
-
-    .auth-phone-card {
-      position: relative;
-      top: auto;
-      left: auto;
-      transform: none;
-      margin: 2rem auto;
-      max-width: 100%;
-      width: calc(100% - 2rem);
-    }
-
-    .auth-background-section {
-      padding: 2rem 0;
-    }
-
-    .otp-inputs {
-      gap: 0.5rem;
-    }
-
-    .otp-input {
-      width: 42px;
-      height: 42px;
-      font-size: 1.1rem;
-    }
-  }
-
-  /* Sección de Seguridad Inteligente */
-  .security-section {
-    width: 100%;
-    background: #ffffff;
-    padding: 5rem 2rem;
-  }
-
-  .security-container {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .security-title {
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
-    line-height: 1.2;
-    color: #0a203f;
-    text-align: center;
-    margin: 0 0 4rem 0;
-    font-weight: 400;
-  }
-
-  .security-title br {
-    display: block;
-  }
-
-  .security-features {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 3rem 2rem;
-    margin-top: 3rem;
-  }
-
-  .security-feature {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .feature-icon {
-    width: 72px;
-    height: 72px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: transparent;
-    border-radius: 18px;
-    margin-bottom: 1.5rem;
-    color: #213f8c;
-    flex-shrink: 0;
-    transition: all 0.3s ease;
-  }
-
-  .security-feature:hover .feature-icon {
-    transform: translateY(-2px);
-  }
-
-  .feature-icon svg {
-    width: 36px;
-    height: 36px;
-  }
-
-  .feature-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #0a203f;
-    margin: 0 0 0.75rem 0;
-    line-height: 1.3;
-  }
-
-  .feature-description {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: #6b7280;
-    margin: 0;
-  }
-
-  /* Tablet */
-  @media (max-width: 1024px) {
-    .security-section {
-      padding: 4rem 2rem;
-    }
-
-    .security-features {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2.5rem 2rem;
-    }
-  }
-
-  /* Mobile */
-  @media (max-width: 768px) {
-    .security-section {
-      padding: 3rem 1.5rem;
-    }
-
-    .security-title {
-      font-size: 2rem;
-      margin-bottom: 3rem;
-    }
-
-    .security-features {
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-    }
-
-    .feature-icon {
-      width: 56px;
-      height: 56px;
-      margin-bottom: 1.25rem;
-    }
-
-    .feature-icon svg {
-      width: 28px;
-      height: 28px;
-    }
-
-    .feature-title {
-      font-size: 1.1rem;
-    }
-
-    .feature-description {
-      font-size: 0.9rem;
-    }
-  }
-
-  /* Sección de Control Total */
-  .control-section {
-    width: 100%;
-    background: #ffffff;
-    padding: 5rem 2rem;
-  }
-
-  .control-container {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .control-divider {
-    width: 100%;
-    max-width: 200px;
-    height: 2px;
-    background: #1488fe;
-    margin: 0 auto 3rem;
-  }
-
-  .control-title {
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
-    line-height: 1.2;
-    color: #0a203f;
-    text-align: center;
-    margin: 0 0 4rem 0;
-    font-weight: 400;
-  }
-
-  .control-features {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 3rem 2rem;
-  }
-
-  .control-feature {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    perspective: 1000px;
-  }
-
-  .control-feature-card {
-    width: 100%;
-    position: relative;
-    transform-style: preserve-3d;
-    transition: transform 0.6s ease;
-  }
-
-  .control-feature-card.flipped {
-    transform: rotateY(180deg);
-  }
-
-  .control-feature-front,
-  .control-feature-back {
-    width: 100%;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-  }
-
-  .control-feature-back {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: rotateY(180deg);
-    background: #ffffff;
-    border-radius: 16px;
-    padding: 2rem;
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  }
-
-  .control-feature-image {
-    width: 100%;
-    aspect-ratio: 16 / 10;
-    border-radius: 16px;
-    overflow: hidden;
-    margin-bottom: 1.5rem;
-    background: #f3f4f6;
-    position: relative;
-  }
-
-  .control-feature-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-  }
-
-  .control-feature:hover .control-feature-image img {
-    transform: scale(1.05);
-  }
-
-  .control-feature-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #0a203f;
-    margin: 0 0 0.75rem 0;
-    line-height: 1.3;
-  }
-
-  .control-feature-description {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #6b7280;
-    margin: 0 0 1.5rem 0;
-  }
-
-  .control-feature-btn {
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
-    background: #8dff2b;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    color: #ffffff;
-    flex-shrink: 0;
-  }
-
-  .control-feature-btn svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  .control-feature-btn:hover {
-    background: #a5ff4d;
-    transform: scale(1.1);
-  }
-
-  .control-feature-benefits {
-    list-style: none;
-    padding: 0;
-    margin: 1.5rem 0;
-    flex: 1;
-  }
-
-  .control-feature-benefits li {
-    padding: 0.75rem 0;
-    padding-left: 1.5rem;
-    position: relative;
-    color: #6b7280;
-    font-size: 0.95rem;
-    line-height: 1.6;
-  }
-
-  .control-feature-benefits li::before {
-    content: "✓";
-    position: absolute;
-    left: 0;
-    color: #8dff2b;
-    font-weight: bold;
-    font-size: 1.1rem;
-  }
-
-  .control-feature-btn-close {
-    align-self: flex-end;
-    margin-top: auto;
-  }
-
-  /* Tablet */
-  @media (max-width: 1024px) {
-    .control-section {
-      padding: 4rem 2rem;
-    }
-
-    .control-features {
-      gap: 2.5rem 2rem;
-    }
-  }
-
-  /* Mobile */
-  @media (max-width: 768px) {
-    .control-section {
-      padding: 3rem 1.5rem;
-    }
-
-    .control-divider {
-      max-width: 150px;
-      margin-bottom: 2rem;
-    }
-
-    .control-title {
-      font-size: 2rem;
-      margin-bottom: 3rem;
-    }
-
-    .control-features {
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-    }
-
-    .control-feature-image {
-      aspect-ratio: 16 / 9;
-    }
-
-    .control-feature-title {
-      font-size: 1.25rem;
-    }
-
-    .control-feature-description {
-      font-size: 0.95rem;
-    }
-  }
-
-  /* Sección de Contacto */
-  .contact-section {
-    width: 100%;
-    background: #ffffff;
-    padding: 5rem 2rem;
-  }
-
-  .contact-container {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .contact-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-  }
-
-  .contact-text {
-    display: flex;
-    align-items: center;
-  }
-
-  .contact-title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    line-height: 1.2;
-    color: #0a203f;
-    margin: 0;
-    font-weight: 400;
-    text-align: left;
-  }
-
-  .contact-title br {
-    display: block;
-  }
-
-  .contact-form-wrapper {
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  .contact-form-card {
-    background: #f3f4f6;
-    border-radius: 24px;
-    padding: 3rem;
-    max-width: 600px;
-    width: 100%;
-  }
-
-  .contact-form-title {
-    font-size: 1.75rem;
-    font-weight: 600;
-    color: #0a203f;
-    margin: 0 0 2rem 0;
-  }
-
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-
-  .form-group {
-    position: relative;
-  }
-
-  .contact-form input,
-  .contact-form select {
-    width: 100%;
-    padding: 0.875rem 1rem;
-    border: none;
-    border-radius: 12px;
-    background: #ffffff;
-    font-size: 0.95rem;
-    color: #0a203f;
-    font-family: inherit;
-    outline: none;
-    transition: all 0.2s ease;
-  }
-
-  .contact-form input::placeholder {
-    color: #9ca3af;
-  }
-
-  .contact-form input:focus,
-  .contact-form select:focus {
-    box-shadow: 0 0 0 3px rgba(33, 63, 140, 0.1);
-  }
-
-  .contact-form select {
-    appearance: none;
-    cursor: pointer;
-    padding-right: 2.5rem;
-  }
-
-  .select-arrow {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 16px;
-    height: 16px;
-    color: #6b7280;
-    pointer-events: none;
-  }
-
-  .contact-legal {
-    font-size: 0.85rem;
-    color: #6b7280;
-    line-height: 1.5;
-    margin: 0.5rem 0 0 0;
-  }
-
-  .contact-legal a {
-    color: #6b7280;
-    text-decoration: underline;
-    transition: color 0.2s ease;
-  }
-
-  .contact-legal a:hover {
-    color: #213f8c;
-  }
-
-  .contact-submit-btn {
-    width: 100%;
-    padding: 1rem 2rem;
-    background: #8dff2b;
-    color: #082436;
-    border: none;
-    border-radius: 12px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    margin-top: 1rem;
-    box-shadow: 0 10px 20px rgba(141, 255, 43, 0.45);
-  }
-
-  .contact-submit-btn:hover {
-    background: #a5ff4d;
-    transform: translateY(-2px);
-    box-shadow: 0 12px 24px rgba(141, 255, 43, 0.5);
-  }
-
-  .contact-submit-btn:active {
-    transform: translateY(0);
-  }
-
-  /* Tablet */
-  @media (max-width: 1024px) {
-    .contact-section {
-      padding: 4rem 2rem;
-    }
-
-    .contact-content {
-      gap: 3rem;
-    }
-
-    .contact-form-card {
-      padding: 2.5rem;
-    }
-  }
-
-  /* Mobile */
-  @media (max-width: 768px) {
-    .contact-section {
-      padding: 3rem 1.5rem;
-    }
-
-    .contact-content {
-      grid-template-columns: 1fr;
-      gap: 3rem;
-    }
-
-    .contact-title {
-      font-size: 2.5rem;
-      text-align: center;
-    }
-
-    .contact-form-wrapper {
-      justify-content: center;
-    }
-
-    .contact-form-card {
-      padding: 2rem;
-    }
-
-    .form-row {
-      grid-template-columns: 1fr;
-    }
-
-    .contact-form-title {
-      font-size: 1.5rem;
-      text-align: center;
-    }
-  }
-
-  /* Sección de FAQ */
-  .faq-section {
-    width: 100%;
-    background: #ffffff;
-    padding: 5rem 2rem;
-  }
-
-  .faq-container {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .faq-title {
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
-    line-height: 1.2;
-    color: #0a203f;
-    text-align: center;
-    margin: 0 0 3rem 0;
-    font-weight: 400;
-  }
-
-  .faq-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .faq-item {
-    border-bottom: 1px solid #e5e7eb;
-  }
-
-  .faq-item:first-child {
-    border-top: 1px solid #e5e7eb;
-  }
-
-  .faq-question {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.5rem 0;
-    background: none;
-    border: none;
-    cursor: pointer;
-    text-align: left;
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: #0a203f;
-    transition: color 0.2s ease;
-  }
-
-  .faq-question:hover {
-    color: #213f8c;
-  }
-
-  .faq-question span {
-    flex: 1;
-    padding-right: 1rem;
-  }
-
-  .faq-icon {
-    width: 20px;
-    height: 20px;
-    color: #213f8c;
-    transition: transform 0.3s ease;
-    flex-shrink: 0;
-  }
-
-  .faq-item.active .faq-icon {
-    transform: rotate(180deg);
-  }
-
-  .faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    transition:
-      max-height 0.3s ease,
-      padding 0.3s ease;
-    padding: 0 0;
-  }
-
-  .faq-item.active .faq-answer {
-    max-height: 500px;
-    padding: 0 0 1.5rem 0;
-  }
-
-  .faq-answer p {
-    margin: 0;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: #6b7280;
-  }
-
-  /* Tablet */
-  @media (max-width: 1024px) {
-    .faq-section {
-      padding: 4rem 2rem;
-    }
-  }
-
-  /* Mobile */
-  @media (max-width: 768px) {
-    .faq-section {
-      padding: 3rem 1.5rem;
-    }
-
-    .faq-title {
-      font-size: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    .faq-question {
-      font-size: 1rem;
-      padding: 1.25rem 0;
-    }
-
-    .faq-answer p {
-      font-size: 0.9rem;
-    }
-  }
-
-  /* Sección CTA Final */
-  .cta-section {
-    width: 100%;
-    background: #f5f7f8;
-    padding: 5rem 2rem;
-  }
-
-  .cta-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  .cta-title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    line-height: 1.2;
-    color: #002a4a;
-    margin: 0 0 2.5rem 0;
-    font-weight: 600;
-  }
-
-  .cta-title br {
-    display: block;
-  }
-
-  .cta-button {
-    padding: 1rem 3rem;
-    background: #b2ff66;
-    color: #ffffff;
-    border: none;
-    border-radius: 12px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    text-decoration: none;
-    display: inline-block;
-    text-transform: lowercase;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 4px 12px rgba(178, 255, 102, 0.3);
-  }
-
-  .cta-button:hover {
-    background: #9eeb5a;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(178, 255, 102, 0.4);
-  }
-
-  .cta-button:active {
-    transform: translateY(0);
-  }
-
-  /* Tablet */
-  @media (max-width: 1024px) {
-    .cta-section {
-      padding: 4rem 2rem;
-    }
-  }
-
-  /* Mobile */
-  @media (max-width: 768px) {
-    .cta-section {
-      padding: 3rem 1.5rem;
-    }
-
-    .cta-title {
-      font-size: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    .cta-button {
-      padding: 0.875rem 2.5rem;
-      font-size: 1rem;
-    }
-  }
-
-  /* Footer */
-  .auth-footer {
-    width: 100%;
-    background: #0a203f;
-    padding: 4rem 2rem 2rem;
-    color: #ffffff;
-  }
-
-  .footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .footer-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 3rem;
-    flex-wrap: wrap;
-    gap: 3rem;
-  }
-
-  .footer-logo {
-    flex-shrink: 0;
-  }
-
-  .footer-logo img {
-    height: 40px;
-    width: auto;
-    display: block;
-  }
-
-  .footer-links {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .footer-links-title {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #ffffff;
-    margin: 0 0 0.5rem 0;
-  }
-
-  .footer-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .footer-nav a {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 0.95rem;
-    transition: color 0.2s ease;
-    padding-left: 0.5rem;
-  }
-
-  .footer-nav a:hover {
-    color: #8dff2b;
-  }
-
-  .footer-disclaimer {
-    text-align: center;
-    font-size: 0.85rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.9);
-    margin: 0 0 2rem 0;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .footer-copyright {
-    text-align: center;
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.7);
-    margin: 0;
-  }
-
-  /* Tablet */
-  @media (max-width: 1024px) {
-    .auth-footer {
-      padding: 3rem 2rem 1.5rem;
-    }
-
-    .footer-content {
-      gap: 2.5rem;
-    }
-  }
-
-  /* Mobile */
-  @media (max-width: 768px) {
-    .auth-footer {
-      padding: 3rem 1.5rem 1.5rem;
-    }
-
-    .footer-content {
-      flex-direction: column;
-      gap: 2rem;
-    }
-
-    .footer-links {
-      width: 100%;
-    }
-
-    .footer-disclaimer {
-      font-size: 0.8rem;
-      text-align: left;
-    }
-
-    .footer-copyright {
-      font-size: 0.8rem;
-      text-align: left;
-    }
-  }
-</style>
-
-<script>
-  let currentStep = 1;
-  const formData = {
-    fullName: "",
-    email: "",
-    emailOTP: "",
-    phone: "",
-    phoneOTP: "",
-    password: "",
-    confirmPassword: "",
-  };
-
-  const validationErrors: Record<string, string> = {};
-  let emailOTPStatus = "idle"; // 'idle' | 'verifying' | 'success' | 'error'
-  let phoneOTPStatus = "idle";
-
-  function getInputValue(id: string) {
-    const el = document.getElementById(id);
-    if (el instanceof HTMLInputElement || el instanceof HTMLSelectElement) {
-      return el.value;
-    }
-    return "";
-  }
-
-  // Inicializar OTP inputs
-  function initOTPInputs(containerId: string) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-
-    const inputs = container.querySelectorAll(".otp-input");
-
-    inputs.forEach((input, index) => {
-      if (!(input instanceof HTMLInputElement)) return;
-      input.addEventListener("input", (e) => {
-        if (!(e.target instanceof HTMLInputElement)) return;
-        const value = e.target.value.replace(/[^0-9]/g, "");
-        e.target.value = value;
-
-        if (value && index < inputs.length - 1) {
-          const nextInput = inputs[index + 1];
-          if (nextInput instanceof HTMLInputElement) {
-            nextInput.focus();
-          }
+
+    <style>
+      @font-face {
+        font-family: "NataSans";
+        src: url("/fonts/NataSans-VariableFont_wght.ttf") format("truetype");
+        font-weight: 100 900;
+        font-display: swap;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+      }
+
+      body {
+        font-family:
+          "NataSans",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+        background-color: #ffffff;
+        color: #0a203f;
+      }
+
+      .auth-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75rem 3rem;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        max-width: 1400px;
+        margin: 0 auto;
+        box-sizing: border-box;
+      }
+
+      .auth-main {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 3rem 2rem 2rem;
+      }
+
+      .auth-hero {
+        max-width: 800px;
+        width: 100%;
+        text-align: center;
+      }
+
+      .auth-title {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        line-height: 1.2;
+        color: #0a203f;
+        margin: 0 0 2rem 0;
+        font-weight: 400;
+      }
+
+      .auth-title br {
+        display: block;
+      }
+
+      .auth-description {
+        font-size: clamp(1rem, 2vw, 1.1rem);
+        line-height: 1.6;
+        color: #213f8c;
+        margin: 0 0 3rem 0;
+      }
+
+      .auth-description br {
+        display: block;
+      }
+
+      .auth-cta {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+      }
+
+      .auth-cta input {
+        border: 1px solid rgba(10, 32, 63, 0.2);
+        border-radius: 999px;
+        padding: 0.65rem 1.5rem;
+        min-width: 260px;
+        font-size: 1rem;
+        outline: none;
+        background: #fff;
+        color: #0a203f;
+        font-family: inherit;
+      }
+
+      .auth-cta input::placeholder {
+        color: rgba(10, 32, 63, 0.5);
+      }
+
+      .btn-cotizar {
+        border: none;
+        background: #0a203f;
+        color: #ffffff;
+        border-radius: 999px;
+        padding: 0.65rem 1.75rem;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        text-transform: lowercase;
+        transition: all 0.2s ease;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .btn-cotizar:hover {
+        background: #0d2a4f;
+        transform: translateY(-1px);
+      }
+
+      .btn-demo-hero {
+        border: none;
+        background: #8dff2b;
+        color: #082436;
+        text-transform: lowercase;
+        padding: 0.65rem 1.75rem;
+        border-radius: 999px;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        box-shadow: 0 10px 20px rgba(141, 255, 43, 0.45);
+        transition: all 0.2s ease;
+      }
+
+      .btn-demo-hero:hover {
+        background: #a5ff4d;
+        transform: translateY(-1px);
+        box-shadow: 0 12px 24px rgba(141, 255, 43, 0.5);
+      }
+
+      .auth-background-section {
+        position: relative;
+        width: 100%;
+        /* background: #ffffff; */
+        padding: 4rem 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .auth-background-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        background: linear-gradient(
+          to bottom,
+          #ffffff 0%,
+          transparent 15%,
+          transparent 85%,
+          #ffffff 100%
+        );
+        pointer-events: none;
+      }
+
+      .auth-background-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+      }
+
+      .auth-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* Contenedor del dispositivo */
+      .device-container {
+        position: relative;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        z-index: 10;
+        padding: 1rem 0 2rem;
+      }
+
+      /* Frame del iPhone */
+      .device-frame-wrapper {
+        position: relative;
+        z-index: 10;
+      }
+
+      .device-frame {
+        position: relative;
+        overflow: hidden;
+        border-radius: 3rem;
+        border: none;
+        background: transparent;
+        box-shadow: none;
+      }
+
+      /* Pantalla del dispositivo */
+      .device-screen {
+        position: relative;
+        height: 750px;
+        overflow: hidden;
+        border-radius: 2.5rem;
+        background: #ffffff;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        box-shadow:
+          0 0 0 1px rgba(0, 0, 0, 0.05),
+          0 20px 60px rgba(0, 0, 0, 0.15);
+      }
+
+      /* Status Bar */
+      .device-status-bar {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #ffffff;
+        padding: 2.5rem 1.5rem 0.5rem;
+        flex-shrink: 0;
+      }
+
+      .status-time {
+        position: absolute;
+        left: 1.5rem;
+        top: 1rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #000000;
+      }
+
+      .dynamic-island {
+        position: absolute;
+        left: 50%;
+        top: 0.75rem;
+        transform: translateX(-50%);
+      }
+
+      .island-shape {
+        width: 96px;
+        height: 20px;
+        border-radius: 999px;
+        background: #000000;
+      }
+
+      .island-speaker {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 48px;
+        height: 2px;
+        border-radius: 999px;
+        background: rgba(31, 41, 55, 0.3);
+      }
+
+      .status-icons {
+        position: absolute;
+        right: 1.5rem;
+        top: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+      }
+
+      .signal-icon {
+        width: 20px;
+        height: 12px;
+        color: #000000;
+      }
+
+      .battery-icon {
+        width: 24px;
+        height: 10px;
+        border: 1px solid #000000;
+        border-radius: 2px;
+        padding: 1px;
+      }
+
+      .battery-level {
+        width: 80%;
+        height: 100%;
+        background: #000000;
+        border-radius: 1px;
+      }
+
+      /* Contenido del dispositivo */
+      .device-content {
+        flex: 1;
+        min-height: 0;
+        background: #ffffff;
+        padding: 1rem 1.25rem;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+
+      /* Header del dispositivo */
+      .device-header {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+        flex-shrink: 0;
+      }
+
+      .device-back-btn {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #6b7280;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+      }
+
+      .device-logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .device-logo img {
+        height: 32px;
+        width: auto;
+      }
+
+      .device-header-spacer {
+        width: 48px;
+      }
+
+      /* Animación GIF */
+      .device-animation {
+        position: relative;
+        margin-bottom: -3.5rem;
+        z-index: 0;
+        display: flex;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .device-animation img {
+        width: 180px;
+        height: 180px;
+        object-fit: contain;
+        opacity: 0.9;
+      }
+
+      /* Tarjeta translúcida */
+      .device-card {
+        position: relative;
+        z-index: 10;
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+        border-radius: 1rem;
+        padding: 1rem 1.25rem;
+        backdrop-filter: blur(4px);
+        background: rgba(255, 255, 255, 0.35);
+        min-height: 0;
+      }
+
+      .auth-phone-card {
+        width: 100%;
+        background: transparent;
+        border-radius: 0;
+        padding: 0;
+        box-shadow: none;
+        position: relative;
+      }
+
+      /* Home Indicator */
+      .device-home-indicator {
+        position: absolute;
+        bottom: 0.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 128px;
+        height: 4px;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.3);
+        flex-shrink: 0;
+      }
+
+      .phone-card-dots {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .phone-card-dots .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #d0d0d0;
+        transition: background 0.3s ease;
+      }
+
+      .phone-card-dots .dot.active {
+        background: #213f8c;
+      }
+
+      .phone-card-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #0a203f;
+        margin: 0 0 0.5rem 0;
+        text-align: center;
+      }
+
+      .phone-card-description {
+        font-size: 0.75rem;
+        color: #6b7280;
+        margin: 0 0 1rem 0;
+        text-align: center;
+        line-height: 1.4;
+      }
+
+      .btn-google {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        border: 1px solid #e5e7eb;
+        background: #f9fafb;
+        border-radius: 12px;
+        padding: 0.75rem 1.25rem;
+        font-weight: 500;
+        font-size: 0.875rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        margin-bottom: 1rem;
+        color: #0a203f;
+      }
+
+      .btn-google:hover {
+        background: #f3f4f6;
+        border-color: #d1d5db;
+      }
+
+      .phone-card-divider {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .divider-line {
+        flex: 1;
+        height: 1px;
+        background: #e5e7eb;
+      }
+
+      .divider-text {
+        font-size: 0.75rem;
+        color: #6b7280;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+
+      .phone-card-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .form-field {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .form-field label {
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: #374151;
+      }
+
+      .form-field .required {
+        color: #ef4444;
+        margin-left: 2px;
+      }
+
+      .form-field input {
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 0.625rem 0.875rem;
+        font-size: 0.875rem;
+        outline: none;
+        background: #f9fafb;
+        color: #0a203f;
+        font-family: inherit;
+        transition: border-color 0.2s ease;
+      }
+
+      .form-field input:focus {
+        border-color: #213f8c;
+        background: #ffffff;
+      }
+
+      .form-field input.field-error {
+        border-color: #ef4444;
+        background: #fef2f2;
+      }
+
+      .form-field input.field-error:focus {
+        border-color: #ef4444;
+        background: #fef2f2;
+      }
+
+      .field-error-message {
+        display: none;
+        margin-top: 0.25rem;
+        font-size: 0.7rem;
+        color: #ef4444;
+      }
+
+      .form-field input::placeholder {
+        color: #9ca3af;
+      }
+
+      .otp-input.otp-verifying {
+        border-color: #213f8c;
+        animation: otp-pulse 1s ease-in-out infinite;
+      }
+
+      .otp-input.otp-success {
+        border-color: #10b981;
+        background: #f0fdf4;
+      }
+
+      .otp-input.otp-error {
+        border-color: #ef4444;
+        background: #fef2f2;
+        animation: otp-shake 0.5s ease-in-out;
+      }
+
+      @keyframes otp-pulse {
+        0%,
+        100% {
+          opacity: 1;
         }
-      });
+        50% {
+          opacity: 0.6;
+        }
+      }
 
-      input.addEventListener("keydown", (e) => {
+      @keyframes otp-shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-4px);
+        }
+        75% {
+          transform: translateX(4px);
+        }
+      }
+
+      .btn-continuar {
+        position: relative;
+        border: none;
+        background: linear-gradient(
+          to right,
+          #213f8c 0%,
+          #1a2f6b 40%,
+          #0f1f4d 70%,
+          #0a203f 100%
+        );
+        color: #ffffff;
+        border-radius: 12px;
+        padding: 0.85rem 1.5rem;
+        font-weight: 600;
+        font-size: 0.875rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        transition: all 0.2s ease;
+        margin-top: 0.5rem;
+        overflow: hidden;
+        box-shadow: 0 4px 14px 0 rgba(33, 63, 140, 0.4);
+        animation:
+          cta-pulse-glow 2s ease-in-out infinite,
+          cta-button-pulse 2.5s ease-in-out infinite;
+      }
+
+      .btn-continuar::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 12px;
+        opacity: 0.6;
+        background: #213f8c;
+        filter: blur(8px);
+        z-index: -1;
+        animation: cta-pulse-ring 2s ease-in-out infinite;
+      }
+
+      .btn-continuar::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to right,
+          transparent,
+          rgba(255, 255, 255, 0.4),
+          transparent
+        );
+        transform: translateX(-100%);
+        animation: cta-shine-sweep 2.5s linear infinite;
+        z-index: 1;
+      }
+
+      .btn-continuar:hover {
+        transform: translateY(-1px);
+      }
+
+      .btn-continuar:active {
+        transform: scale(0.98);
+      }
+
+      @keyframes cta-pulse-glow {
+        0%,
+        100% {
+          box-shadow: 0 4px 14px 0 rgba(33, 63, 140, 0.4);
+        }
+        50% {
+          box-shadow:
+            0 4px 20px 0 rgba(33, 63, 140, 0.8),
+            0 0 30px 0 rgba(33, 63, 140, 0.4);
+        }
+      }
+
+      @keyframes cta-button-pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.02);
+        }
+      }
+
+      @keyframes cta-pulse-ring {
+        0%,
+        100% {
+          opacity: 0.4;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.7;
+          transform: scale(1.05);
+        }
+      }
+
+      @keyframes cta-shine-sweep {
+        0% {
+          transform: translateX(-100%) skewX(-15deg);
+        }
+        100% {
+          transform: translateX(200%) skewX(-15deg);
+        }
+      }
+
+      .phone-card-login {
+        text-align: center;
+        font-size: 0.75rem;
+        color: #6b7280;
+        margin: 0.5rem 0 0 0;
+      }
+
+      .phone-card-login a {
+        color: #213f8c;
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .phone-card-login a:hover {
+        text-decoration: underline;
+      }
+
+      /* Tablet */
+      @media (max-width: 1024px) {
+        .auth-header {
+          padding: 1.25rem 2rem;
+        }
+      }
+
+      /* Mobile */
+      @media (max-width: 768px) {
+        .auth-header {
+          flex-direction: column;
+          gap: 1rem;
+          padding: 1.25rem 1.5rem;
+        }
+
+        .auth-main {
+          padding: 2rem 1.5rem;
+        }
+
+        .auth-title {
+          font-size: 2rem;
+          margin-bottom: 1.5rem;
+        }
+
+        .auth-description {
+          font-size: 0.95rem;
+          margin-bottom: 2rem;
+        }
+
+        .auth-cta {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .auth-cta input {
+          width: 100%;
+          min-width: auto;
+        }
+
+        .btn-cotizar,
+        .btn-demo-hero {
+          width: 100%;
+        }
+
+        .auth-phone-card {
+          position: relative;
+          top: auto;
+          left: auto;
+          transform: none;
+          margin: 2rem auto;
+          max-width: 100%;
+          width: calc(100% - 2rem);
+        }
+
+        .auth-background-section {
+          padding: 2rem 0;
+        }
+
+        .otp-inputs {
+          gap: 0.5rem;
+        }
+
+        .otp-input {
+          width: 42px;
+          height: 42px;
+          font-size: 1.1rem;
+        }
+      }
+
+      /* Sección de Seguridad Inteligente */
+      .security-section {
+        width: 100%;
+        background: #ffffff;
+        padding: 5rem 2rem;
+      }
+
+      .security-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .security-title {
+        font-size: clamp(2.5rem, 5vw, 3.5rem);
+        line-height: 1.2;
+        color: #0a203f;
+        text-align: center;
+        margin: 0 0 4rem 0;
+        font-weight: 400;
+      }
+
+      .security-title br {
+        display: block;
+      }
+
+      .security-features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 3rem 2rem;
+        margin-top: 3rem;
+      }
+
+      .security-feature {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .feature-icon {
+        width: 72px;
+        height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border-radius: 18px;
+        margin-bottom: 1.5rem;
+        color: #213f8c;
+        flex-shrink: 0;
+        transition: all 0.3s ease;
+      }
+
+      .security-feature:hover .feature-icon {
+        transform: translateY(-2px);
+      }
+
+      .feature-icon svg {
+        width: 36px;
+        height: 36px;
+      }
+
+      .feature-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #0a203f;
+        margin: 0 0 0.75rem 0;
+        line-height: 1.3;
+      }
+
+      .feature-description {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: #6b7280;
+        margin: 0;
+      }
+
+      /* Tablet */
+      @media (max-width: 1024px) {
+        .security-section {
+          padding: 4rem 2rem;
+        }
+
+        .security-features {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 2.5rem 2rem;
+        }
+      }
+
+      /* Mobile */
+      @media (max-width: 768px) {
+        .security-section {
+          padding: 3rem 1.5rem;
+        }
+
+        .security-title {
+          font-size: 2rem;
+          margin-bottom: 3rem;
+        }
+
+        .security-features {
+          grid-template-columns: 1fr;
+          gap: 2.5rem;
+        }
+
+        .feature-icon {
+          width: 56px;
+          height: 56px;
+          margin-bottom: 1.25rem;
+        }
+
+        .feature-icon svg {
+          width: 28px;
+          height: 28px;
+        }
+
+        .feature-title {
+          font-size: 1.1rem;
+        }
+
+        .feature-description {
+          font-size: 0.9rem;
+        }
+      }
+
+      /* Sección de Control Total */
+      .control-section {
+        width: 100%;
+        background: #ffffff;
+        padding: 5rem 2rem;
+      }
+
+      .control-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .control-divider {
+        width: 100%;
+        max-width: 200px;
+        height: 2px;
+        background: #1488fe;
+        margin: 0 auto 3rem;
+      }
+
+      .control-title {
+        font-size: clamp(2.5rem, 5vw, 3.5rem);
+        line-height: 1.2;
+        color: #0a203f;
+        text-align: center;
+        margin: 0 0 4rem 0;
+        font-weight: 400;
+      }
+
+      .control-features {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem 2rem;
+      }
+
+      .control-feature {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        perspective: 1000px;
+      }
+
+      .control-feature-card {
+        width: 100%;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 0.6s ease;
+      }
+
+      .control-feature-card.flipped {
+        transform: rotateY(180deg);
+      }
+
+      .control-feature-front,
+      .control-feature-back {
+        width: 100%;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+      }
+
+      .control-feature-back {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: rotateY(180deg);
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 2rem;
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .control-feature-image {
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        border-radius: 16px;
+        overflow: hidden;
+        margin-bottom: 1.5rem;
+        background: #f3f4f6;
+        position: relative;
+      }
+
+      .control-feature-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .control-feature:hover .control-feature-image img {
+        transform: scale(1.05);
+      }
+
+      .control-feature-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #0a203f;
+        margin: 0 0 0.75rem 0;
+        line-height: 1.3;
+      }
+
+      .control-feature-description {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #6b7280;
+        margin: 0 0 1.5rem 0;
+      }
+
+      .control-feature-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        background: #8dff2b;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        color: #ffffff;
+        flex-shrink: 0;
+      }
+
+      .control-feature-btn svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .control-feature-btn:hover {
+        background: #a5ff4d;
+        transform: scale(1.1);
+      }
+
+      .control-feature-benefits {
+        list-style: none;
+        padding: 0;
+        margin: 1.5rem 0;
+        flex: 1;
+      }
+
+      .control-feature-benefits li {
+        padding: 0.75rem 0;
+        padding-left: 1.5rem;
+        position: relative;
+        color: #6b7280;
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+
+      .control-feature-benefits li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #8dff2b;
+        font-weight: bold;
+        font-size: 1.1rem;
+      }
+
+      .control-feature-btn-close {
+        align-self: flex-end;
+        margin-top: auto;
+      }
+
+      /* Tablet */
+      @media (max-width: 1024px) {
+        .control-section {
+          padding: 4rem 2rem;
+        }
+
+        .control-features {
+          gap: 2.5rem 2rem;
+        }
+      }
+
+      /* Mobile */
+      @media (max-width: 768px) {
+        .control-section {
+          padding: 3rem 1.5rem;
+        }
+
+        .control-divider {
+          max-width: 150px;
+          margin-bottom: 2rem;
+        }
+
+        .control-title {
+          font-size: 2rem;
+          margin-bottom: 3rem;
+        }
+
+        .control-features {
+          grid-template-columns: 1fr;
+          gap: 2.5rem;
+        }
+
+        .control-feature-image {
+          aspect-ratio: 16 / 9;
+        }
+
+        .control-feature-title {
+          font-size: 1.25rem;
+        }
+
+        .control-feature-description {
+          font-size: 0.95rem;
+        }
+      }
+
+      /* Sección de Contacto */
+      .contact-section {
+        width: 100%;
+        background: #ffffff;
+        padding: 5rem 2rem;
+      }
+
+      .contact-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .contact-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+
+      .contact-text {
+        display: flex;
+        align-items: center;
+      }
+
+      .contact-title {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        line-height: 1.2;
+        color: #0a203f;
+        margin: 0;
+        font-weight: 400;
+        text-align: left;
+      }
+
+      .contact-title br {
+        display: block;
+      }
+
+      .contact-form-wrapper {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .contact-form-card {
+        background: #f3f4f6;
+        border-radius: 24px;
+        padding: 3rem;
+        max-width: 600px;
+        width: 100%;
+      }
+
+      .contact-form-title {
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: #0a203f;
+        margin: 0 0 2rem 0;
+      }
+
+      .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+
+      .form-group {
+        position: relative;
+      }
+
+      .contact-form input,
+      .contact-form select {
+        width: 100%;
+        padding: 0.875rem 1rem;
+        border: none;
+        border-radius: 12px;
+        background: #ffffff;
+        font-size: 0.95rem;
+        color: #0a203f;
+        font-family: inherit;
+        outline: none;
+        transition: all 0.2s ease;
+      }
+
+      .contact-form input::placeholder {
+        color: #9ca3af;
+      }
+
+      .contact-form input:focus,
+      .contact-form select:focus {
+        box-shadow: 0 0 0 3px rgba(33, 63, 140, 0.1);
+      }
+
+      .contact-form select {
+        appearance: none;
+        cursor: pointer;
+        padding-right: 2.5rem;
+      }
+
+      .select-arrow {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 16px;
+        height: 16px;
+        color: #6b7280;
+        pointer-events: none;
+      }
+
+      .contact-legal {
+        font-size: 0.85rem;
+        color: #6b7280;
+        line-height: 1.5;
+        margin: 0.5rem 0 0 0;
+      }
+
+      .contact-legal a {
+        color: #6b7280;
+        text-decoration: underline;
+        transition: color 0.2s ease;
+      }
+
+      .contact-legal a:hover {
+        color: #213f8c;
+      }
+
+      .contact-submit-btn {
+        width: 100%;
+        padding: 1rem 2rem;
+        background: #8dff2b;
+        color: #082436;
+        border: none;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        margin-top: 1rem;
+        box-shadow: 0 10px 20px rgba(141, 255, 43, 0.45);
+      }
+
+      .contact-submit-btn:hover {
+        background: #a5ff4d;
+        transform: translateY(-2px);
+        box-shadow: 0 12px 24px rgba(141, 255, 43, 0.5);
+      }
+
+      .contact-submit-btn:active {
+        transform: translateY(0);
+      }
+
+      /* Tablet */
+      @media (max-width: 1024px) {
+        .contact-section {
+          padding: 4rem 2rem;
+        }
+
+        .contact-content {
+          gap: 3rem;
+        }
+
+        .contact-form-card {
+          padding: 2.5rem;
+        }
+      }
+
+      /* Mobile */
+      @media (max-width: 768px) {
+        .contact-section {
+          padding: 3rem 1.5rem;
+        }
+
+        .contact-content {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+        }
+
+        .contact-title {
+          font-size: 2.5rem;
+          text-align: center;
+        }
+
+        .contact-form-wrapper {
+          justify-content: center;
+        }
+
+        .contact-form-card {
+          padding: 2rem;
+        }
+
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+
+        .contact-form-title {
+          font-size: 1.5rem;
+          text-align: center;
+        }
+      }
+
+      /* Sección de FAQ */
+      .faq-section {
+        width: 100%;
+        background: #ffffff;
+        padding: 5rem 2rem;
+      }
+
+      .faq-container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .faq-title {
+        font-size: clamp(2.5rem, 5vw, 3.5rem);
+        line-height: 1.2;
+        color: #0a203f;
+        text-align: center;
+        margin: 0 0 3rem 0;
+        font-weight: 400;
+      }
+
+      .faq-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .faq-item {
+        border-bottom: 1px solid #e5e7eb;
+      }
+
+      .faq-item:first-child {
+        border-top: 1px solid #e5e7eb;
+      }
+
+      .faq-question {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.5rem 0;
+        background: none;
+        border: none;
+        cursor: pointer;
+        text-align: left;
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #0a203f;
+        transition: color 0.2s ease;
+      }
+
+      .faq-question:hover {
+        color: #213f8c;
+      }
+
+      .faq-question span {
+        flex: 1;
+        padding-right: 1rem;
+      }
+
+      .faq-icon {
+        width: 20px;
+        height: 20px;
+        color: #213f8c;
+        transition: transform 0.3s ease;
+        flex-shrink: 0;
+      }
+
+      .faq-item.active .faq-icon {
+        transform: rotate(180deg);
+      }
+
+      .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition:
+          max-height 0.3s ease,
+          padding 0.3s ease;
+        padding: 0 0;
+      }
+
+      .faq-item.active .faq-answer {
+        max-height: 500px;
+        padding: 0 0 1.5rem 0;
+      }
+
+      .faq-answer p {
+        margin: 0;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: #6b7280;
+      }
+
+      /* Tablet */
+      @media (max-width: 1024px) {
+        .faq-section {
+          padding: 4rem 2rem;
+        }
+      }
+
+      /* Mobile */
+      @media (max-width: 768px) {
+        .faq-section {
+          padding: 3rem 1.5rem;
+        }
+
+        .faq-title {
+          font-size: 2rem;
+          margin-bottom: 2rem;
+        }
+
+        .faq-question {
+          font-size: 1rem;
+          padding: 1.25rem 0;
+        }
+
+        .faq-answer p {
+          font-size: 0.9rem;
+        }
+      }
+
+      /* Sección CTA Final */
+      .cta-section {
+        width: 100%;
+        background: #f5f7f8;
+        padding: 5rem 2rem;
+      }
+
+      .cta-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .cta-title {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        line-height: 1.2;
+        color: #002a4a;
+        margin: 0 0 2.5rem 0;
+        font-weight: 600;
+      }
+
+      .cta-title br {
+        display: block;
+      }
+
+      .cta-button {
+        padding: 1rem 3rem;
+        background: #b2ff66;
+        color: #ffffff;
+        border: none;
+        border-radius: 12px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-block;
+        text-transform: lowercase;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 12px rgba(178, 255, 102, 0.3);
+      }
+
+      .cta-button:hover {
+        background: #9eeb5a;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(178, 255, 102, 0.4);
+      }
+
+      .cta-button:active {
+        transform: translateY(0);
+      }
+
+      /* Tablet */
+      @media (max-width: 1024px) {
+        .cta-section {
+          padding: 4rem 2rem;
+        }
+      }
+
+      /* Mobile */
+      @media (max-width: 768px) {
+        .cta-section {
+          padding: 3rem 1.5rem;
+        }
+
+        .cta-title {
+          font-size: 2rem;
+          margin-bottom: 2rem;
+        }
+
+        .cta-button {
+          padding: 0.875rem 2.5rem;
+          font-size: 1rem;
+        }
+      }
+
+      /* Footer */
+      .auth-footer {
+        width: 100%;
+        background: #0a203f;
+        padding: 4rem 2rem 2rem;
+        color: #ffffff;
+      }
+
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 3rem;
+        flex-wrap: wrap;
+        gap: 3rem;
+      }
+
+      .footer-logo {
+        flex-shrink: 0;
+      }
+
+      .footer-logo img {
+        height: 40px;
+        width: auto;
+        display: block;
+      }
+
+      .footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .footer-links-title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #ffffff;
+        margin: 0 0 0.5rem 0;
+      }
+
+      .footer-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .footer-nav a {
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 0.95rem;
+        transition: color 0.2s ease;
+        padding-left: 0.5rem;
+      }
+
+      .footer-nav a:hover {
+        color: #8dff2b;
+      }
+
+      .footer-disclaimer {
+        text-align: center;
+        font-size: 0.85rem;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.9);
+        margin: 0 0 2rem 0;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .footer-copyright {
+        text-align: center;
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.7);
+        margin: 0;
+      }
+
+      /* Tablet */
+      @media (max-width: 1024px) {
+        .auth-footer {
+          padding: 3rem 2rem 1.5rem;
+        }
+
+        .footer-content {
+          gap: 2.5rem;
+        }
+      }
+
+      /* Mobile */
+      @media (max-width: 768px) {
+        .auth-footer {
+          padding: 3rem 1.5rem 1.5rem;
+        }
+
+        .footer-content {
+          flex-direction: column;
+          gap: 2rem;
+        }
+
+        .footer-links {
+          width: 100%;
+        }
+
+        .footer-disclaimer {
+          font-size: 0.8rem;
+          text-align: left;
+        }
+
+        .footer-copyright {
+          font-size: 0.8rem;
+          text-align: left;
+        }
+      }
+      /* Bank Linking UI Styles */
+      .bank-link-mode {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        background: #ffffff;
+        padding: 1rem 1.5rem;
+      }
+
+      .bank-link-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Header Nav */
+      .device-header-nav {
+        display: flex;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+
+      .device-back-btn {
+        background: none;
+        border: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #6b7280;
+        font-size: 1rem;
+        cursor: pointer;
+        font-weight: 500;
+      }
+
+      /* Text Content */
+      .bank-link-header {
+        text-align: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .bank-link-title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #003366; /* Deep blue text */
+        margin: 0 0 0.5rem 0;
+      }
+
+      .bank-link-subtitle {
+        font-size: 0.95rem;
+        color: #6b7280;
+        margin: 0;
+      }
+
+      /* Search */
+      .bank-search-container {
+        position: relative;
+        margin-bottom: 1.5rem;
+      }
+
+      .search-icon {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #9ca3af;
+      }
+
+      .bank-search-input {
+        width: 100%;
+        padding: 0.85rem 1rem 0.85rem 2.8rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.75rem;
+        font-size: 0.95rem;
+        color: #374151;
+        outline: none;
+        transition: all 0.2s;
+      }
+
+      .bank-search-input:focus {
+        border-color: #003366;
+        box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.1);
+      }
+
+      /* --- Bank List Pyramid Styles --- */
+      .bank-list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 10px;
+        isolation: isolate; /* Create stacking context */
+      }
+
+      .bank-item {
+        position: relative;
+        width: 100%;
+        height: 65px;
+        background-color: #e5e7eb; /* Default Grey */
+        border-radius: 20px;
+        border: 5px solid #ffffff; /* White border for 'cut' effect */
+        margin-top: -20px; /* Overlap */
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        display: flex;
+        align-items: center;
+        justify-content: center; /* Center text when inactive */
+        padding: 0 24px;
+        color: #1f2937;
+      }
+
+      .bank-item:first-child {
+        margin-top: 0;
+      }
+
+      /* Active State (Pop out) */
+      .bank-item.active {
+        background: linear-gradient(
+          90deg,
+          #004492 0%,
+          #002a5c 40%,
+          #001126 70%,
+          #000000 100%
+        );
+        color: white;
+        transform: scale(1.02);
+        box-shadow:
+          0 20px 25px -5px rgba(0, 0, 0, 0.15),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        height: 80px; /* Slightly taller */
+        z-index: 50; /* Always on top */
+        justify-content: flex-start; /* Align start when logo is visible */
+      }
+
+      /* Logo & Text in Item */
+      .bank-logo-placeholder {
+        width: 40px;
+        height: 40px;
+        background: white;
+        border-radius: 12px;
+        display: none; /* Hidden by default */
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7rem;
+        font-weight: 800;
+        color: #003366;
+        margin-right: 1rem;
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+
+      .bank-item.active .bank-logo-placeholder {
+        display: flex; /* Show when active */
+        /* Ensure logo looks good against dark bg */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .bank-name {
+        font-size: 0.9rem;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+
+      .bank-item.active .bank-name {
+        font-weight: 700;
+        font-size: 1rem;
+      }
+      /* Floating Footer Button (Legacy, can be removed if unused, but keeping for safety) */
+      .bank-footer-floating {
+        position: absolute;
+        bottom: 2rem;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        pointer-events: none;
+      }
+
+      /* Continuar Button */
+      .btn-continuar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        background: linear-gradient(
+          135deg,
+          #003366 0%,
+          #001a4d 100%
+        ); /* proper dark blue gradient */
+        color: white;
+        border: none;
+        padding: 0.85rem 3rem; /* Wide button */
+        border-radius: 12px; /* Pill shape */
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 10px 20px -5px rgba(0, 51, 102, 0.4);
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+
+        /* Centering & Positioning */
+        margin: 3rem auto 1rem auto; /* Top margin to push down, centered horizontally */
+      }
+
+      .btn-continuar:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 25px -5px rgba(0, 51, 102, 0.5);
+      }
+      /* --- Connect Screens Common --- */
+      .connect-screen {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        animation: fadeIn 0.3s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(5px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .screen-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #003366;
+        margin: 0;
+        text-align: center;
+      }
+
+      .screen-subtitle {
+        font-size: 0.85rem;
+        color: #6b7280;
+        text-align: center;
+        margin-top: 0.5rem;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #003366 0%, #001a4d 100%);
+        color: white;
+        border: none;
+        padding: 0.85rem;
+        border-radius: 0.75rem;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        transition: transform 0.1s;
+        width: 100%;
+      }
+
+      /* --- Screen 2: Credentials --- */
+      .screen-2 {
+        display: none; /* Hidden by default */
+        flex-direction: column;
+        align-items: center;
+        padding-top: 1rem;
+        animation: fadeIn 0.4s ease-out;
+      }
+
+      .credentials-content {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .bank-auth-logo {
+        width: 120px;
+        height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0.5rem;
+      }
+
+      .bank-auth-logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .bank-auth-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #003366;
+        margin: 0.5rem 0;
+        text-align: center;
+      }
+
+      .bank-auth-subtitle {
+        font-size: 0.8rem;
+        color: #6b7280;
+        text-align: center;
+        line-height: 1.4;
+        max-width: 280px;
+        margin-bottom: 1.5rem;
+      }
+
+      .auth-form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        margin-bottom: 2rem;
+      }
+
+      .input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .input-group label {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: #001a4d; /* Dark Blue Text */
+      }
+
+      .input-group input {
+        background: #d1d5db; /* Grey Input Background */
+        border: none;
+        border-radius: 12px;
+        padding: 1rem 1.25rem;
+        font-size: 0.95rem;
+        color: #1f2937;
+        outline: none;
+        width: 100%;
+      }
+
+      .input-group input::placeholder {
+        color: #6b7280;
+      }
+
+      .btn-ingresar {
+        position: relative;
+        border: none;
+        background: linear-gradient(
+          to right,
+          #213f8c 0%,
+          #1a2f6b 40%,
+          #0f1f4d 70%,
+          #0a203f 100%
+        );
+        color: #ffffff;
+        border-radius: 12px;
+        padding: 0.85rem 1.5rem;
+        font-weight: 600;
+        font-size: 0.875rem; /* Matches user provided pixel size, or keep rem */
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        transition: all 0.2s ease;
+        margin-top: 1rem;
+        overflow: hidden;
+        width: 100%; /* Keep full width for this screen */
+        box-shadow: 0 4px 14px 0 rgba(33, 63, 140, 0.4);
+        animation:
+          cta-pulse-glow 2s ease-in-out infinite,
+          cta-button-pulse 2.5s ease-in-out infinite;
+      }
+
+      .btn-ingresar::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 12px;
+        opacity: 0.6;
+        background: #213f8c;
+        filter: blur(8px);
+        z-index: -1;
+        animation: cta-pulse-ring 2s ease-in-out infinite;
+      }
+
+      .btn-ingresar::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to right,
+          transparent,
+          rgba(255, 255, 255, 0.4),
+          transparent
+        );
+        transform: translateX(-100%);
+        animation: cta-shine-sweep 2.5s linear infinite;
+        z-index: 1;
+      }
+
+      .btn-ingresar:hover {
+        transform: translateY(-1px);
+      }
+
+      .btn-ingresar:active {
+        transform: scale(0.98);
+      }
+
+      @keyframes cta-pulse-glow {
+        0%,
+        100% {
+          box-shadow: 0 4px 14px 0 rgba(33, 63, 140, 0.4);
+        }
+        50% {
+          box-shadow:
+            0 4px 20px 0 rgba(33, 63, 140, 0.8),
+            0 0 30px 0 rgba(33, 63, 140, 0.4);
+        }
+      }
+
+      @keyframes cta-button-pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.02);
+        }
+      }
+
+      @keyframes cta-pulse-ring {
+        0%,
+        100% {
+          opacity: 0.4;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.7;
+          transform: scale(1.05);
+        }
+      }
+
+      @keyframes cta-shine-sweep {
+        0% {
+          transform: translateX(-100%) skewX(-15deg);
+        }
+        100% {
+          transform: translateX(200%) skewX(-15deg);
+        }
+      }
+
+      /* --- Credentials Screen --- */
+      .credentials-card {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        justify-content: center;
+      }
+
+      .input-group {
+        margin-bottom: 1rem;
+      }
+
+      .input-group label {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #003366;
+        margin-bottom: 0.5rem;
+      }
+
+      .input-group input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.75rem;
+        font-size: 0.9rem;
+        outline: none;
+      }
+
+      .input-group input:focus {
+        border-color: #003366;
+        box-shadow: 0 0 0 2px rgba(0, 51, 102, 0.1);
+      }
+
+      /* --- Screen 3: Connecting (Loading/Success) --- */
+      .screen-3 {
+        position: relative;
+        overflow: hidden;
+        background-color: #f3f4f6;
+        border-radius: 28px;
+        margin: 20px 10px 80px;
+        width: calc(100% - 20px);
+        height: calc(100% - 100px);
+        box-sizing: border-box;
+        padding: 40px 20px;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* The filling gradient layer */
+      .loading-fill-layer {
+        position: absolute;
+        inset: 0;
+        /* Theme gradient */
+        background: linear-gradient(
+          to right,
+          #004492 0%,
+          #002a5c 40%,
+          #001126 70%,
+          #000000 100%
+        );
+        border-radius: inherit;
+        mask-repeat: no-repeat;
+        mask-size: 100% 100%;
+        -webkit-mask-repeat: no-repeat;
+        -webkit-mask-size: 100% 100%;
+        /* Clip path will be updated via JS */
+        clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+        transition: clip-path 0.05s linear;
+        z-index: 1;
+      }
+
+      .screen-3-content {
+        position: relative;
+        z-index: 2; /* Above the fill */
+        display: none; /* Toggled */
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+      }
+
+      .screen-3-content.active {
+        display: flex;
+      }
+
+      /* Dynamic Text Coloring logic will be inline or simplified */
+      .loading-text-title {
+        font-size: 1.35rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: #0a203f; /* Dark by default */
+        transition: color 0.2s ease-out;
+        width: 100%;
+        display: block;
+        text-align: center;
+      }
+
+      .loading-text-subtitle {
+        font-size: 0.95rem;
+        color: #666;
+        margin-bottom: 2rem;
+        transition: color 0.2s ease-out;
+        width: 100%;
+        display: block;
+        text-align: center;
+      }
+
+      .loading-char {
+        transition: color 0.2s ease;
+        display: inline-block;
+      }
+
+      .loading-bar-container {
+        width: 100%;
+        max-width: 240px;
+        height: 8px;
+        background-color: #d1d5db; /* Gray-300 */
+        border-radius: 99px;
+        overflow: hidden;
+        margin-top: 1rem;
+      }
+
+      .loading-bar-fill {
+        height: 100%;
+        background-color: white; /* White fill as per React snippet when bg is dark? Or blue? React says white bg on bar */
+        width: 0%;
+        transition: width 0.1s linear;
+      }
+
+      /* Success State */
+      .success-icon-wrapper {
+        margin-bottom: 1.5rem;
+        animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .success-icon {
+        width: 96px;
+        height: 96px;
+        color: #ffffff;
+      }
+
+      .success-title {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin: 0 0 0.5rem 0;
+      }
+
+      .success-subtitle {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.9);
+        margin: 0;
+      }
+
+      @keyframes popIn {
+        from {
+          transform: scale(0);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .loading-container.filled .loading-bar-fill {
+        background: white;
+      }
+
+      /* --- Success Screen --- */
+      .success-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #003366 0%, #001a4d 100%);
+        color: white;
+        border-radius: 1.5rem;
+        margin: 1rem 0;
+        padding: 2rem;
+        text-align: center;
+      }
+
+      .success-icon {
+        margin-bottom: 1.5rem;
+        animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      @keyframes scaleIn {
+        from {
+          transform: scale(0);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .success-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+
+      .success-subtitle {
+        font-size: 0.95rem;
+        opacity: 0.9;
+      }
+
+      /* --- Wallet Screen --- */
+      .screen-4 {
+        display: none;
+        flex-direction: column;
+        height: 100%;
+        background: #ffffff;
+        overflow: hidden;
+      }
+
+      .wallet-screen {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        background: #ffffff;
+      }
+
+      .wallet-animation {
+        display: flex;
+        justify-content: center;
+        margin-top: 0.5rem;
+        margin-bottom: -1.5rem;
+      }
+
+      .wallet-animation-img {
+        width: 190px;
+        height: 190px;
+        object-fit: contain;
+        opacity: 0.9;
+      }
+
+      .wallet-main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 0 1.5rem 0;
+        min-height: 0;
+        position: relative;
+        z-index: 1;
+      }
+
+      .wallet-main::before {
+        content: "";
+        position: absolute;
+        left: -1.5rem;
+        right: -1.5rem;
+        top: -1.5rem;
+        height: 220px;
+        background: radial-gradient(
+          circle at center top,
+          rgba(255, 255, 255, 0.95) 0%,
+          rgba(255, 255, 255, 0.9) 45%,
+          rgba(255, 255, 255, 0.75) 60%,
+          rgba(255, 255, 255, 0) 100%
+        );
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      .wallet-header {
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+
+      .wallet-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #0a203f;
+        margin: 0;
+      }
+
+      .wallet-subtitle {
+        font-size: 0.85rem;
+        color: #6b7280;
+        margin: 0.25rem 0 0;
+      }
+
+      .wallet-balance {
+        margin-bottom: 1rem;
+      }
+
+      .wallet-balance-label {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #0a203f;
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+
+      .wallet-balance-card {
+        background: #e5e7eb;
+        border-radius: 1.25rem;
+        padding: 0.85rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .wallet-balance-amount {
+        font-size: 1.9rem;
+        font-weight: 600;
+        color: #0a203f;
+        letter-spacing: -0.02em;
+      }
+
+      .wallet-currency-badge {
+        background: linear-gradient(
+          to right,
+          #0a4ea3 0%,
+          #003070 45%,
+          #001126 100%
+        );
+        color: #ffffff;
+        font-size: 0.7rem;
+        font-weight: 700;
+        padding: 0.35rem 0.9rem;
+        border-radius: 999px;
+      }
+
+      .wallet-deposit-btn {
+        margin-top: 0.5rem;
+        border: none;
+        border-radius: 1rem;
+        padding: 0.95rem 1.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #ffffff;
+        cursor: pointer;
+        background: linear-gradient(
+          to right,
+          #0a4ea3 0%,
+          #003070 45%,
+          #001126 100%
+        );
+        box-shadow: 0 6px 18px rgba(10, 78, 163, 0.35);
+        transition: transform 0.15s ease;
+      }
+
+      .wallet-deposit-btn:active {
+        transform: scale(0.98);
+      }
+
+      .wallet-deposit-icon {
+        width: 18px;
+        height: 18px;
+      }
+
+      .wallet-spacer {
+        flex: 1;
+        min-height: 16px;
+      }
+
+      .wallet-bank-card {
+        margin: 0 -1.5rem;
+        padding: 1.75rem 1.5rem 2.5rem;
+        border-radius: 2rem 2rem 0 0;
+        background: linear-gradient(
+          to right,
+          #0a4ea3 0%,
+          #002a5c 45%,
+          #001126 100%
+        );
+        color: #ffffff;
+        text-align: center;
+      }
+
+      .wallet-bank-chevron {
+        width: 20px;
+        height: 20px;
+        margin: 0 auto 0.5rem;
+        color: #ffffff;
+      }
+
+      .wallet-bank-name {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 800;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+      }
+
+      .wallet-bank-subtitle {
+        margin: 0.35rem 0 0;
+        font-size: 0.75rem;
+        font-weight: 600;
+        opacity: 0.85;
+      }
+
+      /* --- Deposit Screen --- */
+      .screen-5 {
+        display: none;
+        flex-direction: column;
+        height: 100%;
+        background: #ffffff;
+        overflow: hidden;
+      }
+
+      .deposit-screen {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        background: #ffffff;
+      }
+
+      .deposit-animation {
+        display: flex;
+        justify-content: center;
+        margin: 0.5rem 0 0.5rem;
+      }
+
+      .deposit-animation-img {
+        width: 190px;
+        height: 190px;
+        object-fit: contain;
+        opacity: 0.9;
+      }
+
+      .deposit-card {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        height: 300px;
+        margin: -110px 15px 15px;
+        padding: 1rem;
+        border-radius: 1.5rem;
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(10px);
+      }
+
+      .deposit-header {
+        text-align: center;
+        margin-bottom: 0.75rem;
+      }
+
+      .deposit-title {
+        font-size: 1.05rem;
+        font-weight: 800;
+        color: #0a203f;
+        margin: 0;
+      }
+
+      .deposit-subtitle {
+        font-size: 0.8rem;
+        color: #6b7280;
+        margin: 0.35rem 0 0;
+      }
+
+      .deposit-section-label {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: #0a203f;
+        margin: 0.35rem 0 0.75rem;
+      }
+
+      .deposit-account-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        padding-top: 0.5rem;
+        isolation: isolate;
+      }
+
+      .deposit-account-card {
+        position: relative;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        border-radius: 1.75rem;
+        padding: 0.9rem 1.25rem;
+        background: #e5e7eb;
+        border: 5px solid #ffffff;
+        margin-top: -18px;
+        cursor: pointer;
+        transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+
+      .deposit-account-card.active {
+        background: linear-gradient(
+          to right,
+          #0a4ea3 0%,
+          #003070 45%,
+          #001126 100%
+        );
+        color: #ffffff;
+      
+        transform: scale(1.02);
+      }
+
+      .deposit-account-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+
+      .deposit-account-name {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #1f2937;
+      }
+
+      .deposit-account-number {
+        font-size: 0.75rem;
+        color: #6b7280;
+        display: none;
+      }
+
+      .deposit-account-balance {
+        display: none;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.2rem;
+      }
+
+      .deposit-account-amount {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #ffffff;
+      }
+
+      .deposit-account-currency {
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.85);
+      }
+
+      .deposit-account-card.active .deposit-account-name {
+        color: #ffffff;
+      }
+
+      .deposit-account-card.active .deposit-account-number,
+      .deposit-account-card.active .deposit-account-balance {
+        display: flex;
+      }
+
+      .deposit-amount {
+        margin-top: 0.75rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .deposit-amount-input {
+        width: 100%;
+        background: #e5e7eb;
+        border: 2px solid transparent;
+        border-radius: 1.1rem;
+        padding: 0.9rem 1rem;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #0a203f;
+        text-align: center;
+        outline: none;
+        transition: border 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .deposit-amount-input:focus {
+        border-color: #7aa6f8;
+        box-shadow: 0 0 0 3px rgba(122, 166, 248, 0.35);
+      }
+
+      /* Slide Track */
+      .slide-track-container {
+        position: relative;
+        height: 56px;
+        background: #e5e7eb;
+        border-radius: 99px;
+        margin-top: auto;
+        margin-bottom: 0.5rem;
+        overflow: hidden;
+        user-select: none;
+        touch-action: none;
+      }
+
+      .slide-text {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #0a203f;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .slide-thumb {
+        position: absolute;
+        left: 4px;
+        top: 4px;
+        width: 48px;
+        height: 48px;
+        background: white;
+        border-radius: 50%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #0a4ea3;
+        z-index: 10;
+        cursor: grab;
+        transition: box-shadow 0.2s;
+      }
+
+      .slide-thumb:active {
+        cursor: grabbing;
+        transform: scale(0.95);
+      }
+
+      .slide-fill {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 0;
+        background: linear-gradient(
+          to right,
+          #0a4ea3 0%,
+          #003070 45%,
+          #001126 100%
+        );
+        z-index: 5;
+        transition: background 0.3s;
+      }
+
+      .slide-track-container.success .slide-fill {
+        background: linear-gradient(
+          to right,
+          #0a3f7f 0%,
+          #002b5e 45%,
+          #001126 100%
+        );
+      }
+    </style>
+
+    <script>
+      // @ts-nocheck
+      // State
+      let currentScreen = "banks"; // banks | credentials | loading | success | wallet | deposit
+      let walletBalance = 0;
+      let selectedBank = null;
+      let selectedBankName = "Banco";
+
+      // DOM Elements
+      const screens = {
+        banks: document.getElementById("screen-banks"),
+        credentials: document.getElementById("screen-credentials"),
+        connecting:
+          document.getElementById("screen-connecting") /* The new screen */,
+        wallet: document.getElementById("screen-wallet"),
+        deposit: document.getElementById("screen-deposit"),
+      };
+
+      // Helper: Show Screen
+      function showScreen(screenId) {
+        // Hide all
+        Object.values(screens).forEach((el) => {
+          if (el) el.style.display = "none";
+        });
+        // Show target
+        if (screens[screenId]) {
+          screens[screenId].style.display = "flex"; // or block depending on layout, flex is better for centering
+        }
+        currentScreen = screenId;
+      }
+
+      // --- 1. Banks Screen Logic ---
+      const bankItems = document.querySelectorAll(".bank-item");
+      const searchInput = document.querySelector(".bank-search-input");
+
+      if (bankItems.length > 0) {
+        // Helper to update visual stack
+        const updateStack = (activeIndex) => {
+          bankItems.forEach((item, index) => {
+            if (!(item instanceof HTMLElement)) return;
+
+            // Calculate distance from active
+            const distanceFromActive = Math.abs(activeIndex - index);
+            // Base z-index logic: closer to active = higher z-index
+            const zIndex = 50 - distanceFromActive;
+
+            item.style.zIndex = zIndex.toString();
+
+            if (index === activeIndex) {
+              item.classList.add("active");
+            } else {
+              item.classList.remove("active");
+            }
+          });
+        };
+
+        // Initialize stack (Santander active by default matches design)
+        updateStack(1);
+
+        bankItems.forEach((item, index) => {
+          item.addEventListener("click", () => {
+            updateStack(index);
+            selectedBank = item.getAttribute("data-bank");
+          });
+        });
+
+        if (searchInput instanceof HTMLInputElement) {
+          searchInput.addEventListener("input", (e) => {
+            if (!(e.target instanceof HTMLInputElement)) return;
+            const term = e.target.value.toLowerCase();
+            bankItems.forEach((item) => {
+              if (!(item instanceof HTMLElement)) return;
+              const name =
+                item.querySelector(".bank-name")?.textContent?.toLowerCase() ||
+                "";
+              if (name.includes(term)) item.style.display = "flex";
+              else item.style.display = "none";
+            });
+          });
+        }
+
+        document
+          .getElementById("btn-continue-banks")
+          ?.addEventListener("click", () => {
+            // Get active item
+            const active = document.querySelector(".bank-item.active");
+            if (active) {
+              // Get name
+              const bankName =
+                active.querySelector(".bank-name")?.textContent || "Banco";
+              selectedBankName = bankName;
+              // Set title on next screen
+              const titleEl = document.getElementById("auth-bank-name");
+              if (titleEl) titleEl.textContent = bankName;
+
+              showScreen("credentials");
+            } else {
+              // Fallback
+              showScreen("credentials");
+            }
+          });
+      }
+
+      // --- 2. Credentials Screen Logic ---
+      const userInput = document.getElementById("cred-username");
+      const passInput = document.getElementById("cred-password");
+      const submitCredBtn = document.getElementById("btn-submit-credentials");
+
+      function checkCreds() {
         if (
-          e.key === "Backspace" &&
-          e.target instanceof HTMLInputElement &&
-          !e.target.value &&
-          index > 0
+          userInput instanceof HTMLInputElement &&
+          passInput instanceof HTMLInputElement &&
+          submitCredBtn instanceof HTMLButtonElement
         ) {
-          const prevInput = inputs[index - 1];
-          if (prevInput instanceof HTMLInputElement) {
-            prevInput.focus();
+          if (userInput.value.length > 0 && passInput.value.length > 0) {
+            submitCredBtn.disabled = false;
+          } else {
+            submitCredBtn.disabled = true;
           }
         }
-      });
+      }
 
-      input.addEventListener("paste", (e) => {
-        e.preventDefault();
-        const clipboard = e.clipboardData;
-        if (!clipboard) return;
-        const pasted = clipboard
-          .getData("text")
-          .replace(/[^0-9]/g, "")
-          .slice(0, 6);
-        pasted.split("").forEach((char, i) => {
-          const targetInput = inputs[i];
-          if (targetInput instanceof HTMLInputElement) {
-            targetInput.value = char;
+      userInput?.addEventListener("input", checkCreds);
+      passInput?.addEventListener("input", checkCreds);
+
+      // --- 3. Loading Animation Logic (Ported from React) ---
+      let animationFrameId;
+      let loadingStartTime = null;
+      const DURATION = 3000; // 3 seconds total
+
+      function startLoadingFlow({
+        titleText,
+        subtitleText,
+        successTitle,
+        successSubtitle,
+        onComplete,
+      }) {
+        showScreen("connecting"); // Shared loading screen
+        const fillLayer = document.getElementById("loading-fill-layer");
+        const barFill = document.getElementById("loading-bar-fill");
+        const contentLoading = document.getElementById("content-loading");
+        const contentSuccess = document.getElementById("content-success");
+
+        // Reset states
+        if (contentLoading) contentLoading.classList.add("active");
+        if (contentSuccess) contentSuccess.classList.remove("active");
+        if (fillLayer) {
+          fillLayer.style.clipPath = "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)"; // Empty
+          const mask = buildMaskGradient(0);
+          fillLayer.style.maskImage = mask;
+          fillLayer.style.webkitMaskImage = mask;
+        }
+
+        wrapChars("loading-text-container", titleText);
+        wrapChars("loading-subtext-container", subtitleText);
+
+        loadingStartTime = performance.now();
+
+        function frame(currentTime) {
+          const elapsed = currentTime - loadingStartTime;
+          let progress = Math.min((elapsed / DURATION) * 100, 100);
+
+          // Update Bar
+          if (barFill) barFill.style.width = `${progress}%`;
+
+          // Update Wave / Clip Path
+          if (fillLayer) {
+            const clipPoly = calculateWavePolygon(progress);
+            fillLayer.style.clipPath = clipPoly;
+            const mask = buildMaskGradient(progress);
+            fillLayer.style.maskImage = mask;
+            fillLayer.style.webkitMaskImage = mask;
+          }
+
+          // Update Text Colors
+          updateTextColors("loading-text-container", progress);
+          updateTextColors("loading-subtext-container", progress);
+
+          if (progress < 100) {
+            animationFrameId = requestAnimationFrame(frame);
+          } else {
+            // Complete
+            if (fillLayer) {
+              fillLayer.style.clipPath =
+                "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)";
+              fillLayer.style.maskImage = "none";
+              fillLayer.style.webkitMaskImage = "none";
+            }
+            setTimeout(() => {
+              if (contentLoading) contentLoading.classList.remove("active");
+              if (contentSuccess) contentSuccess.classList.add("active");
+              const successTitleEl = document.querySelector(".success-title");
+              const successSubtitleEl =
+                document.querySelector(".success-subtitle");
+              if (successTitleEl) successTitleEl.textContent = successTitle;
+              if (successSubtitleEl)
+                successSubtitleEl.textContent = successSubtitle;
+
+              setTimeout(() => {
+                if (onComplete) onComplete();
+              }, 2000);
+            }, 500);
+          }
+        }
+
+        animationFrameId = requestAnimationFrame(frame);
+      }
+
+      function startConnectFlow() {
+        startLoadingFlow({
+          titleText: "Conectando tu cuenta",
+          subtitleText: "Espera por favor",
+          successTitle: "Vinculación Exitosa",
+          successSubtitle: "Tu cuenta bancaria ha sido vinculada exitosamente",
+          onComplete: () => {
+            const walletBankName = document.getElementById("wallet-bank-name");
+            if (walletBankName) walletBankName.textContent = selectedBankName;
+            showScreen("wallet");
+            updateBalance(2500.5); // Example update
+          },
+        });
+      }
+
+      function wrapChars(elementId, text) {
+        const oldEl = document.getElementById(elementId);
+        if (!oldEl) return;
+        oldEl.innerHTML = "";
+        text.split("").forEach((char) => {
+          const span = document.createElement("span");
+          span.textContent = char === " " ? "\u00A0" : char;
+          span.className = "loading-char";
+          oldEl.appendChild(span);
+        });
+      }
+
+      function updateTextColors(elementId, progress) {
+        const el = document.getElementById(elementId);
+        if (!el) return;
+        const spans = el.querySelectorAll("span");
+        spans.forEach((span, index) => {
+          const charProgress = (index / spans.length) * 100;
+          // Logic: if overall progress > this char's position % roughly, it becomes white
+          // Adjusting logic to match visual feeling of wave passing
+          const isWhite = progress >= charProgress;
+          span.style.color = isWhite ? "white" : "#0a203f";
+          if (elementId.includes("subtext")) {
+            span.style.color = isWhite ? "rgba(255,255,255,0.9)" : "#666";
           }
         });
-        if (pasted.length === 6 && inputs[5] instanceof HTMLInputElement) {
-          inputs[5].focus();
+      }
+
+      function calculateWavePolygon(loadingProgress) {
+        // Ported logic
+        const progress = loadingProgress + 20; // Lookahead
+        let points = `0% 0%, `; // Top Left start? usage in clip-path is tricky.
+        // Wait, React clip-path was: polygon(points)
+        // Points logic:
+        // x changes with progress.
+        // React logic:
+        // for i 0 to 50:
+        // y = (i/50)*100
+        // wave = sin(...)
+        // x = progress + wave
+
+        // CSS clip-path coords are X% Y%
+        // We want to fill from Left to Right?
+        // React gradient was "to right".
+        // The polygon seems to define the RIGHT edge of the fill.
+        // So it should start at Top-Left (0 0), go down to Bottom-Left (0 100), then trace the wave on the right side?
+        // Actually let's look at the React points generation:
+        // It generates points x% y%.
+        // If x is roughly 'progress', then it creates a vertical-ish line moving right.
+        // So the polygon should enclose the FILLED area (Left side).
+
+        // Start point: Top Left
+        let poly = `0% 0%, `;
+
+        // Wave line (Right edge of the fill)
+        for (let i = 0; i <= 50; i++) {
+          const y = (i / 50) * 100;
+          const distanceFromCenter = Math.abs(y - 50) / 50;
+          const delay = distanceFromCenter * 15;
+          const adjustedProgress = Math.max(0, progress - delay);
+
+          const wave =
+            Math.sin(
+              (adjustedProgress / 100) * Math.PI * 5 + (y / 100) * Math.PI * 3,
+            ) * 10;
+
+          // Ensure we don't go below 0 or above 100 visual bound if needed,
+          // but clip-path handles overflow fine usually.
+          // Logic: x increases as progress increases.
+          const x = Math.min(
+            100,
+            Math.max(0, adjustedProgress + (wave / 100) * 12),
+          );
+
+          poly += `${x}% ${y}%, `;
         }
+
+        // End point: Bottom Left
+        poly += `0% 100%`;
+
+        return `polygon(${poly})`;
+      }
+
+      function buildMaskGradient(loadingProgress) {
+        const stopA = Math.max(0, loadingProgress - 50);
+        const stopB = Math.max(0, loadingProgress - 40);
+        const stopC = Math.max(0, loadingProgress - 25);
+        const stopD = Math.max(0, loadingProgress - 15);
+        return `linear-gradient(to right,
+          rgba(0,0,0,1) 0%,
+          rgba(0,0,0,1) ${stopA}%,
+          rgba(0,0,0,0.9) ${stopB}%,
+          rgba(0,0,0,0.6) ${stopC}%,
+          rgba(0,0,0,0.3) ${stopD}%,
+          rgba(0,0,0,0) ${loadingProgress}%,
+          rgba(0,0,0,0) 100%
+        )`;
+      }
+
+      // Hook up Ingredients Button
+
+      submitCredBtn?.addEventListener("click", () => {
+        // showScreen("loading"); // Old flow
+        startConnectFlow(); // New flow
       });
-    });
-  }
 
-  // Actualizar dots de progreso
-  function updateProgressDots(step: number) {
-    const dots = document.querySelectorAll(".phone-card-dots .dot");
-    dots.forEach((dot, index) => {
-      if (index < step) {
-        dot.classList.add("active");
-      } else {
-        dot.classList.remove("active");
+      // --- 4. Wallet Logic ---
+      function updateBalance(amount) {
+        walletBalance = amount;
+        const el = document.getElementById("wallet-balance");
+        if (el)
+          el.textContent = `$${amount.toLocaleString("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}`;
       }
-    });
-  }
 
-  // Mostrar paso
-  function showStep(step: number) {
-    document.querySelectorAll(".auth-step").forEach((el, index) => {
-      if (!(el instanceof HTMLElement)) return;
-      el.style.display = index + 1 === step ? "block" : "none";
-    });
+      document
+        .getElementById("btn-go-deposit")
+        ?.addEventListener("click", () => {
+          showScreen("deposit");
+        });
 
-    // Actualizar título y descripción según el paso
-    const titleEl = document.getElementById("step-title");
-    const descEl = document.getElementById("step-description");
-    const loginLink = document.getElementById("login-link");
-    if (!titleEl || !descEl || !loginLink) return;
+      // Deposit account selection
+      const depositCards = document.querySelectorAll(".deposit-account-card");
+      if (depositCards.length > 0) {
+        const setActiveDeposit = (activeIndex) => {
+          depositCards.forEach((card, index) => {
+            if (!(card instanceof HTMLElement)) return;
+            const distance = Math.abs(activeIndex - index);
+            card.style.zIndex = (20 - distance).toString();
+            if (index === activeIndex) card.classList.add("active");
+            else card.classList.remove("active");
+          });
+        };
 
-    if (step === 1) {
-      titleEl.textContent = "Crear Cuenta";
-      descEl.innerHTML =
-        "Ingresa tu nombre y correo electrónico para empezar. Te enviaremos un código de verificación.";
-      loginLink.style.display = "none";
-    } else if (step === 2) {
-      titleEl.textContent = "Verifica tu Correo";
-      descEl.innerHTML =
-        'Hemos enviado un código de 6 dígitos a<br /><strong id="email-display">' +
-        formData.email +
-        "</strong>";
-      loginLink.style.display = "none";
-    } else if (step === 3) {
-      titleEl.textContent = "Agrega tu Teléfono";
-      descEl.textContent =
-        "Te enviaremos un código de verificación por SMS para confirmar tu número de teléfono.";
-      loginLink.style.display = "none";
-    } else if (step === 4) {
-      titleEl.textContent = "Verifica tu Teléfono";
-      descEl.innerHTML =
-        'Hemos enviado un código de 6 dígitos a<br /><strong id="phone-display">' +
-        formData.phone +
-        "</strong>";
-      loginLink.style.display = "none";
-    } else if (step === 5) {
-      titleEl.textContent = "Completa tu Perfil";
-      descEl.textContent =
-        "Completa la información restante para finalizar la configuración de tu cuenta.";
-      loginLink.style.display = "block";
-    }
-
-    updateProgressDots(step);
-    currentStep = step;
-  }
-
-  // Funciones de validación
-  function validateFullName(name: string) {
-    return name.trim().length >= 2;
-  }
-
-  function validateEmail(email: string) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  }
-
-  function validatePhone(phone: string) {
-    return phone.trim().length >= 10;
-  }
-
-  function validatePassword(password: string | any[]) {
-    return password.length >= 8;
-  }
-
-  function showFieldError(fieldId: string, message: string | null) {
-    if (!message) return;
-    validationErrors[fieldId] = message;
-    const field = document.getElementById(fieldId);
-    if (field) {
-      field.classList.add("field-error");
-      const parent = field.parentElement;
-      if (!parent) return;
-      const errorEl = parent.querySelector(".field-error-message");
-      if (errorEl instanceof HTMLElement) {
-        errorEl.textContent = message;
-        errorEl.style.display = "block";
+        setActiveDeposit(0);
+        depositCards.forEach((card, index) => {
+          card.addEventListener("click", () => setActiveDeposit(index));
+        });
       }
-    }
-  }
 
-  function clearFieldError(fieldId: string) {
-    delete validationErrors[fieldId];
-    const field = document.getElementById(fieldId);
-    if (field) {
-      field.classList.remove("field-error");
-      const parent = field.parentElement;
-      if (!parent) return;
-      const errorEl = parent.querySelector(".field-error-message");
-      if (errorEl instanceof HTMLElement) {
-        errorEl.style.display = "none";
+      // --- 5. Deposit & Slider Logic ---
+      const slideTrack = document.getElementById("slide-track");
+      const slideThumb = document.getElementById("slide-thumb");
+      const slideFill = document.getElementById("slide-fill");
+      const slideText = document.getElementById("slide-text");
+      let isDragging = false;
+      let startX = 0;
+      let currentX = 0;
+      let maxSlide = 0;
+
+      if (slideTrack && slideThumb && slideFill) {
+        const getSlideMetrics = () => {
+          const trackRect = slideTrack.getBoundingClientRect();
+          const thumbWidth = slideThumb.getBoundingClientRect().width;
+          maxSlide = Math.max(0, trackRect.width - thumbWidth - 8);
+          return { trackRect, thumbWidth };
+        };
+
+        const resetSlider = () => {
+          slideTrack.classList.remove("success");
+          slideThumb.style.transition = "transform 0.3s ease";
+          slideFill.style.transition = "width 0.3s ease";
+          slideThumb.style.transform = `translateX(0px)`;
+          slideFill.style.width = `0px`;
+          currentX = 0;
+          if (slideText) slideText.textContent = "Desliza para confirmar";
+        };
+
+        const startDrag = (e) => {
+          isDragging = true;
+          const { trackRect } = getSlideMetrics();
+          startX =
+            (e.type === "touchstart" ? e.touches[0].clientX : e.clientX) -
+            currentX -
+            trackRect.left;
+          slideThumb.style.transition = "none";
+          slideFill.style.transition = "none";
+        };
+
+        const moveDrag = (e) => {
+          if (!isDragging) return;
+          e.preventDefault(); // Prevent scroll on mobile
+
+          const clientX =
+            e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
+          const { trackRect, thumbWidth } = getSlideMetrics();
+          let x = clientX - trackRect.left - startX;
+
+          if (x < 0) x = 0;
+          if (x > maxSlide) x = maxSlide;
+
+          currentX = x;
+          slideThumb.style.transform = `translateX(${x}px)`;
+          slideFill.style.width = `${x + thumbWidth / 2}px`;
+
+          // Check completion (90% threshold)
+          if (x > maxSlide * 0.9) {
+            completeSlide();
+          }
+        };
+
+        const endDrag = () => {
+          if (!isDragging) return;
+          isDragging = false;
+
+          // If not completed, snap back
+          if (currentX <= maxSlide * 0.9) {
+            resetSlider();
+          }
+        };
+
+        const completeSlide = () => {
+          isDragging = false;
+          slideTrack.classList.add("success");
+          if (slideText) slideText.textContent = "Confirmando...";
+          // Simulate processing
+          setTimeout(() => {
+            startLoadingFlow({
+              titleText: "Transfiriendo fondos",
+              subtitleText: "Espera por favor",
+              successTitle: "Transferencia Exitosa",
+              successSubtitle: "Los fondos han sido acreditados",
+              onComplete: () => {
+                showScreen("wallet");
+                updateBalance(walletBalance + 500); // Simulate adding amount
+
+                // Reset slider for next time
+                resetSlider();
+              },
+            });
+          }, 500);
+        };
+
+        slideTrack.addEventListener("mousedown", startDrag);
+        slideTrack.addEventListener("touchstart", startDrag, {
+          passive: false,
+        });
+
+        document.addEventListener("mousemove", moveDrag);
+        document.addEventListener("touchmove", moveDrag, { passive: false });
+
+        document.addEventListener("mouseup", endDrag);
+        document.addEventListener("touchend", endDrag);
+
+        window.addEventListener("resize", () => {
+          getSlideMetrics();
+          resetSlider();
+        });
+
+        // Ensure slider starts clean when entering deposit screen
+        document
+          .getElementById("btn-go-deposit")
+          ?.addEventListener("click", () => {
+            resetSlider();
+          });
       }
-    }
-  }
 
-  function clearAllErrors() {
-    Object.keys(validationErrors).forEach((key) => clearFieldError(key));
-  }
-
-  // Paso 1: Crear cuenta
-  document.getElementById("form-step-1")?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    clearAllErrors();
-
-    const fullNameEl = document.getElementById("fullName");
-    const emailEl = document.getElementById("email");
-    if (
-      !(fullNameEl instanceof HTMLInputElement) ||
-      !(emailEl instanceof HTMLInputElement)
-    ) {
-      return;
-    }
-
-    const fullName = fullNameEl.value.trim();
-    const email = emailEl.value.trim();
-
-    let hasErrors = false;
-
-    if (!validateFullName(fullName)) {
-      showFieldError("fullName", "El nombre debe tener al menos 2 caracteres");
-      hasErrors = true;
-    }
-
-    if (!validateEmail(email)) {
-      showFieldError("email", "Correo electrónico inválido");
-      hasErrors = true;
-    }
-
-    if (hasErrors) {
-      return;
-    }
-
-    formData.fullName = fullName;
-    formData.email = email;
-
-    showStep(2);
-    initOTPInputs("otp-email");
-  });
-
-  // Limpiar errores al escribir
-  document.getElementById("fullName")?.addEventListener("input", () => {
-    clearFieldError("fullName");
-  });
-
-  document.getElementById("email")?.addEventListener("input", () => {
-    clearFieldError("email");
-  });
-
-  // Paso 2: Verificar email
-  document.getElementById("form-step-2")?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const inputs = Array.from(
-      document.querySelectorAll("#otp-email .otp-input"),
-    ).filter((input) => input instanceof HTMLInputElement);
-    const otp = Array.from(inputs)
-      .map((input) => input.value)
-      .join("");
-
-    if (otp.length !== 6) {
-      return;
-    }
-
-    emailOTPStatus = "verifying";
-    updateOTPStatus("otp-email", "verifying");
-
-    // Código quemado: 202601
-    const isValid = otp === "202601";
-
-    setTimeout(() => {
-      if (isValid) {
-        emailOTPStatus = "success";
-        updateOTPStatus("otp-email", "success");
-        formData.emailOTP = otp;
-
-        setTimeout(() => {
-          emailOTPStatus = "idle";
-          showStep(3);
-        }, 3000);
-      } else {
-        emailOTPStatus = "error";
-        updateOTPStatus("otp-email", "error");
-
-        setTimeout(() => {
-          emailOTPStatus = "idle";
-          updateOTPStatus("otp-email", "idle");
-          inputs.forEach((input) => (input.value = ""));
-          inputs[0]?.focus();
-        }, 2000);
+      // --- Extras ---
+      function getInputValue(id) {
+        const el = document.getElementById(id);
+        if (el instanceof HTMLInputElement || el instanceof HTMLSelectElement) {
+          return el.value;
+        }
+        return "";
       }
-    }, 1000);
-  });
 
-  function updateOTPStatus(containerId: string, status: string) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
+      // Formulario de contacto (Keep existing logic)
+      document
+        .getElementById("contactForm")
+        ?.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const formData = {
+            nombres: getInputValue("nombres"),
+            apellidos: getInputValue("apellidos"),
+            compania: getInputValue("compania"),
+            email: getInputValue("email"),
+            pais: getInputValue("pais"),
+            telefono: getInputValue("telefono"),
+          };
+          console.log("Formulario enviado:", formData);
+        });
 
-    const inputs = container.querySelectorAll(".otp-input");
-    inputs.forEach((input) => {
-      input.classList.remove("otp-verifying", "otp-success", "otp-error");
-      if (status !== "idle") {
-        input.classList.add(`otp-${status}`);
-      }
-    });
-  }
-
-  // Paso 3: Agregar teléfono
-  document.getElementById("form-step-3")?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    clearAllErrors();
-
-    const phoneEl = document.getElementById("phone");
-    if (!(phoneEl instanceof HTMLInputElement)) return;
-    const phone = phoneEl.value.trim();
-
-    if (!validatePhone(phone)) {
-      showFieldError("phone", "Número de teléfono inválido");
-      return;
-    }
-
-    formData.phone = phone;
-    showStep(4);
-    initOTPInputs("otp-phone");
-  });
-
-  document.getElementById("phone")?.addEventListener("input", () => {
-    clearFieldError("phone");
-  });
-
-  // Paso 4: Verificar teléfono
-  document.getElementById("form-step-4")?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const inputs = Array.from(
-      document.querySelectorAll("#otp-phone .otp-input"),
-    ).filter((input) => input instanceof HTMLInputElement);
-    const otp = Array.from(inputs)
-      .map((input) => input.value)
-      .join("");
-
-    if (otp.length !== 6) {
-      return;
-    }
-
-    phoneOTPStatus = "verifying";
-    updateOTPStatus("otp-phone", "verifying");
-
-    // Código quemado: 202601
-    const isValid = otp === "202601";
-
-    setTimeout(() => {
-      if (isValid) {
-        phoneOTPStatus = "success";
-        updateOTPStatus("otp-phone", "success");
-        formData.phoneOTP = otp;
-
-        setTimeout(() => {
-          phoneOTPStatus = "idle";
-          showStep(5);
-        }, 3000);
-      } else {
-        phoneOTPStatus = "error";
-        updateOTPStatus("otp-phone", "error");
-
-        setTimeout(() => {
-          phoneOTPStatus = "idle";
-          updateOTPStatus("otp-phone", "idle");
-          inputs.forEach((input) => (input.value = ""));
-          inputs[0]?.focus();
-        }, 2000);
-      }
-    }, 1000);
-  });
-
-  // Paso 5: Completar perfil
-  document.getElementById("form-step-5")?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    clearAllErrors();
-
-    const passwordEl = document.getElementById("password");
-    const confirmPasswordEl = document.getElementById("confirmPassword");
-    if (
-      !(passwordEl instanceof HTMLInputElement) ||
-      !(confirmPasswordEl instanceof HTMLInputElement)
-    ) {
-      return;
-    }
-
-    const password = passwordEl.value;
-    const confirmPassword = confirmPasswordEl.value;
-
-    let hasErrors = false;
-
-    if (!validatePassword(password)) {
-      showFieldError(
-        "password",
-        "La contraseña debe tener al menos 8 caracteres",
-      );
-      hasErrors = true;
-    }
-
-    if (password !== confirmPassword) {
-      showFieldError("confirmPassword", "Las contraseñas no coinciden");
-      hasErrors = true;
-    }
-
-    if (hasErrors) {
-      return;
-    }
-
-    formData.password = password;
-    formData.confirmPassword = confirmPassword;
-
-    // Cuenta creada exitosamente
-    console.log("Registro completado", formData);
-    // Aquí podrías redirigir o hacer una llamada a la API
-  });
-
-  document.getElementById("password")?.addEventListener("input", () => {
-    clearFieldError("password");
-  });
-
-  document.getElementById("confirmPassword")?.addEventListener("input", () => {
-    clearFieldError("confirmPassword");
-  });
-
-  // Reenviar códigos
-  document.getElementById("resend-email")?.addEventListener("click", (e) => {
-    e.preventDefault();
-    // Simular reenvío - en producción harías una llamada a la API
-    console.log("Código reenviado a", formData.email);
-  });
-
-  document.getElementById("resend-phone")?.addEventListener("click", (e) => {
-    e.preventDefault();
-    // Simular reenvío - en producción harías una llamada a la API
-    console.log("Código reenviado a", formData.phone);
-  });
-
-  // Inicializar
-  updateProgressDots(1);
-
-  // Control de flip cards para beneficios
-  document.querySelectorAll(".control-feature-btn").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const card = btn.closest(".control-feature-card");
-
-      if (card) {
-        card.classList.toggle("flipped");
-      }
-    });
-  });
-
-  // Formulario de contacto
-  document.getElementById("contactForm")?.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const formData = {
-      nombres: getInputValue("nombres"),
-      apellidos: getInputValue("apellidos"),
-      compania: getInputValue("compania"),
-      email: getInputValue("email"),
-      pais: getInputValue("pais"),
-      telefono: getInputValue("telefono"),
-    };
-
-    console.log("Formulario enviado:", formData);
-    // Aquí podrías hacer una llamada a la API para enviar el formulario
-  });
-
-  // FAQ Accordion
-  document.querySelectorAll(".faq-question").forEach((question) => {
-    question.addEventListener("click", () => {
-      const faqItem = question.closest(".faq-item");
-      if (!faqItem) return;
-      const isActive = faqItem.classList.contains("active");
-
-      // Cerrar todos los demás items
-      document.querySelectorAll(".faq-item").forEach((item) => {
-        item.classList.remove("active");
+      // FAQ Accordion (Keep existing logic)
+      document.querySelectorAll(".faq-question").forEach((question) => {
+        question.addEventListener("click", () => {
+          const faqItem = question.closest(".faq-item");
+          if (!faqItem) return;
+          const isActive = faqItem.classList.contains("active");
+          document.querySelectorAll(".faq-item").forEach((item) => {
+            item.classList.remove("active");
+          });
+          if (!isActive) {
+            faqItem.classList.add("active");
+          }
+        });
       });
-      // Abrir el item clickeado si no estaba activo
-
-      if (!isActive) {
-        faqItem.classList.add("active");
+      // Back Button Logic
+      const backBtn = document.querySelector(".device-back-btn");
+      if (backBtn) {
+        backBtn.addEventListener("click", () => {
+          // Check current screen and navigate back accordingly
+          if (currentScreen === "credentials") {
+            showScreen("banks");
+          } else if (currentScreen === "wallet") {
+            showScreen("banks");
+          } else if (currentScreen === "deposit") {
+            showScreen("wallet");
+          }
+        });
       }
-    });
-  });
-</script>
+    </script>
+  </body>
+</html>
