@@ -1,0 +1,162 @@
+---
+
+---
+
+<div
+  id="graph-screen-content"
+  class="w-full h-full flex flex-col hidden bg-white"
+>
+  <!-- Top Section (Header & Graph) -->
+  <div class="px-6 pt-4 pb-2">
+    <!-- Back Button -->
+    <button
+      id="back-to-home-from-graph-btn"
+      class="mb-4 text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors flex items-center gap-1"
+    >
+      <span>&lt;</span>
+      <span>back</span>
+    </button>
+
+    <!-- Logo -->
+    <div class="mb-4 flex justify-center">
+      <div class="relative h-6 w-24">
+        <img
+          src="/images/zelify_logo.png"
+          alt="Zelify"
+          class="h-full w-full object-contain filter"
+        />
+      </div>
+    </div>
+
+    <!-- Date Pill -->
+    <div class="mb-4 flex items-center justify-center gap-2">
+      <button
+        class="rounded-full bg-[#004492] px-4 py-1.5 text-xs font-medium text-white shadow-sm"
+      >
+        Today 01-09-26
+      </button>
+    </div>
+
+    <!-- Circles (Legends?) -->
+    <div class="mb-4 flex justify-center gap-4">
+      <div
+        class="flex h-10 w-10 items-center justify-center rounded-full border-2 border-green-500 shadow-sm bg-white"
+      >
+      </div>
+      <div
+        class="flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#004492] shadow-sm bg-white"
+      >
+      </div>
+      <div
+        class="flex h-10 w-10 items-center justify-center rounded-full border-2 border-yellow-500 shadow-sm bg-white"
+      >
+      </div>
+    </div>
+
+    <!-- Filter Pills -->
+    <div class="mb-4 flex gap-2 overflow-x-auto scrollbar-hide">
+      <button
+        class="rounded-full px-3 py-1 text-xs font-medium bg-[#004492] text-white shadow-sm"
+      >
+        All
+      </button>
+      <button
+        class="rounded-full px-3 py-1 text-xs font-medium bg-gray-100 text-gray-600 border border-gray-200"
+      >
+        Increasing
+      </button>
+      <button
+        class="rounded-full px-3 py-1 text-xs font-medium bg-gray-100 text-gray-600 border border-gray-200"
+      >
+        Spending
+      </button>
+      <button
+        class="rounded-full px-3 py-1 text-xs font-medium bg-gray-100 text-gray-600 border border-gray-200"
+      >
+        Savings
+      </button>
+    </div>
+  </div>
+
+  <!-- Graph Area (Scrollable if needed, but fitting in view) -->
+  <div class="flex-1 px-6 overflow-hidden flex flex-col">
+    <!-- Graph Container -->
+    <div
+      class="h-64 rounded-xl bg-gray-50 border border-gray-100 relative mb-4 shadow-inner"
+    >
+      <!-- Bars -->
+      <div class="flex h-full items-end justify-between gap-1 p-4 pb-0">
+        <!-- Hardcoded bars to match the React component's visual -->
+        <!-- 12 bars -->
+        <div class="flex-1 rounded-t-sm bg-[#10B981] h-[65%]"></div>
+        <div class="flex-1 rounded-t-sm bg-[#004492] h-[45%]"></div>
+        <div class="flex-1 rounded-t-sm bg-[#F59E0B] h-[80%]"></div>
+
+        <div class="flex-1 rounded-t-sm bg-[#10B981] h-[55%]"></div>
+        <div class="flex-1 rounded-t-sm bg-[#004492] h-[70%]"></div>
+        <div class="flex-1 rounded-t-sm bg-[#F59E0B] h-[60%]"></div>
+
+        <div class="flex-1 rounded-t-sm bg-[#10B981] h-[75%]"></div>
+        <div class="flex-1 rounded-t-sm bg-[#004492] h-[50%]"></div>
+        <div class="flex-1 rounded-t-sm bg-[#F59E0B] h-[85%]"></div>
+
+        <div class="flex-1 rounded-t-sm bg-[#10B981] h-[65%]"></div>
+        <div class="flex-1 rounded-t-sm bg-[#004492] h-[70%]"></div>
+        <div class="flex-1 rounded-t-sm bg-[#F59E0B] h-[60%]"></div>
+      </div>
+    </div>
+
+    <!-- Timeframe Selector -->
+    <div class="flex justify-between gap-1 px-1">
+      <button
+        class="rounded-lg px-2 py-1.5 text-[10px] font-medium bg-gray-100 text-gray-600"
+        >24H</button
+      >
+      <button
+        class="rounded-lg px-2 py-1.5 text-[10px] font-medium bg-[#004492] text-white shadow-sm"
+        >1W</button
+      >
+      <button
+        class="rounded-lg px-2 py-1.5 text-[10px] font-medium bg-gray-100 text-gray-600"
+        >1M</button
+      >
+      <button
+        class="rounded-lg px-2 py-1.5 text-[10px] font-medium bg-gray-100 text-gray-600"
+        >3M</button
+      >
+      <button
+        class="rounded-lg px-2 py-1.5 text-[10px] font-medium bg-gray-100 text-gray-600"
+        >6M</button
+      >
+      <button
+        class="rounded-lg px-2 py-1.5 text-[10px] font-medium bg-gray-100 text-gray-600"
+        >1Y</button
+      >
+      <button
+        class="rounded-lg px-2 py-1.5 text-[10px] font-medium bg-gray-100 text-gray-600"
+        >All</button
+      >
+    </div>
+  </div>
+
+  <!-- Bottom CTA -->
+  <div
+    class="flex-shrink-0 border-t border-gray-200 bg-white px-6 py-5 mt-auto"
+  >
+    <button
+      class="w-full rounded-2xl bg-[#004492] py-4 text-sm font-bold text-white shadow-lg shadow-blue-900/20 active:scale-[0.98] transition-transform"
+    >
+      Discover More
+    </button>
+  </div>
+</div>
+
+<style>
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>

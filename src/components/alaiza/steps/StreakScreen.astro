@@ -1,0 +1,248 @@
+---
+// Hardcoded configuration to match the React component's visual state
+const config = {
+  streakDays: 14,
+  streakStartDate: "Jan 02, 2026",
+  maxStreak: 15,
+  weeklyProgress: [true, true, true, true, true, false, false], // Mon-Fri completed
+  goalProgress: {
+    current: 14,
+    target: 23,
+  },
+  activeRewards: [
+    "Only & Sons 20% off",
+    "Juan Valdez 2 in coffee",
+    "Multicines Free Combo",
+    "BK",
+  ],
+};
+
+const translations = {
+  back: "back",
+  dayStreak: "day streak",
+  streakStarted: "Streak Started",
+  maxStreak: "Max Streak",
+  thisWeek: "This Week",
+  moreDays: "more days",
+  toUnlock: "To unlock your next reward",
+  activeRewards: "Your active rewards",
+  viewAll: "View all",
+  futureRewards: "Your future rewards",
+  days: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+};
+
+const dayColors = ["#004492", "#10B981", "#34D399", "#6EE7B7", "#10B981"];
+const progressPercent =
+  (config.goalProgress.current / config.goalProgress.target) * 100;
+const remainingDays = config.goalProgress.target - config.goalProgress.current;
+
+const parseReward = (reward) => {
+  const parts = reward.split(" ");
+  if (parts.length >= 2) {
+    if (parts[0] === "Juan") {
+      return { brand: "Juan Valdez", description: parts.slice(2).join(" ") };
+    } else if (parts[0] === "Only") {
+      return { brand: "Only & Sons", description: parts.slice(3).join(" ") }; // Adjusted slice for "Only & Sons"
+    } else {
+      return { brand: parts[0], description: parts.slice(1).join(" ") };
+    }
+  }
+  return { brand: reward, description: "" };
+};
+---
+
+<div
+  id="streak-screen-content"
+  class="h-full flex flex-col bg-white overflow-hidden hidden"
+>
+  <!-- Back Button -->
+  <div class="flex-shrink-0 pt-2 pb-0">
+    <button
+      id="back-to-home-btn"
+      class="text-sm font-medium text-gray-400 hover:text-gray-600 transition-colors flex items-center gap-1"
+    >
+      <span>&lt;</span>
+      {translations.back}
+    </button>
+  </div>
+
+  <div class="flex-1 space-y-6 overflow-y-auto pb-6 scrollbar-hide">
+    <!-- Streak Display - Semicircle with Gradient -->
+    <div class="relative flex justify-center pt-4 shrink-0">
+      <div class="relative h-40 w-72">
+        <!-- Semicircle with brand colors gradient -->
+        <div
+          class="absolute bottom-0 left-1/2 h-40 w-72 -translate-x-1/2 rounded-t-full bg-blue-500"
+          style="background: linear-gradient(135deg, #004492 0%, #3B82F6 20%, #10B981 50%, #059669 75%, #047857 100%); box-shadow: 0 4px 12px rgba(0, 68, 146, 0.3);"
+        >
+          <!-- Additional color overlay -->
+          <div
+            class="absolute inset-0 rounded-t-full opacity-70"
+            style="background: linear-gradient(90deg, rgba(0, 68, 146, 0.9) 0%, rgba(59, 130, 246, 0.8) 25%, rgba(16, 185, 129, 0.9) 60%, rgba(5, 150, 105, 1) 100%);"
+          >
+          </div>
+
+          <!-- Glassmorphism overlay -->
+          <div
+            class="absolute inset-0 rounded-t-full bg-white/10 backdrop-blur-sm"
+          >
+          </div>
+
+          <!-- Content -->
+          <div
+            class="relative flex h-full flex-col items-center justify-center pt-6"
+          >
+            <div class="text-6xl font-bold text-white drop-shadow-sm">
+              {config.streakDays}
+            </div>
+            <div class="mt-1 text-sm font-medium text-white/95 drop-shadow-sm">
+              {translations.dayStreak}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Streak Details Card -->
+    <div
+      class="mx-auto -mt-6 w-full max-w-[300px] rounded-2xl bg-gray-50 p-4 shadow-sm"
+      style="border: 1px solid rgba(229, 231, 235, 0.5);"
+    >
+      <div class="flex items-center justify-between">
+        <div class="flex flex-col gap-2">
+          <span class="text-xs font-medium text-gray-600">
+            {translations.streakStarted}
+          </span>
+          <span class="text-xs font-medium text-gray-600">
+            {translations.maxStreak}
+          </span>
+        </div>
+        <div class="flex flex-col items-end gap-2">
+          <span class="text-xs font-semibold text-gray-900">
+            {config.streakStartDate}
+          </span>
+          <span class="text-xs font-semibold text-gray-900">
+            {config.maxStreak}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- This Week Progress -->
+    <div class="text-center shrink-0">
+      <h3 class="mb-4 text-sm font-semibold text-[#004492]">
+        {translations.thisWeek}
+      </h3>
+      <div class="flex justify-center gap-2">
+        {
+          translations.days.map((day, index) => {
+            const isCompleted = config.weeklyProgress[index];
+            const color = isCompleted
+              ? dayColors[index] || "#10B981"
+              : undefined;
+            // Astro inline styles for conditional rendering
+            const style = isCompleted
+              ? `background: linear-gradient(135deg, ${color} 0%, ${color}dd 100%); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); border: none;`
+              : `background-color: transparent; border: 2px solid #E5E7EB;`;
+
+            return (
+              <div class="flex flex-col items-center gap-1.5">
+                <div
+                  class="flex h-8 w-8 items-center justify-center rounded-full transition-all"
+                  style={style}
+                />
+                <span class="text-[10px] font-medium text-gray-600">{day}</span>
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+
+    <!-- Reward Progress Bar -->
+    <div
+      class="mx-auto w-full max-w-[300px] rounded-2xl bg-gray-50 p-5 shadow-sm"
+      style="border: 1px solid rgba(229, 231, 235, 0.5);"
+    >
+      <div class="flex items-center gap-3">
+        <!-- Left circle -->
+        <div
+          class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white shadow-md"
+          style="background: linear-gradient(135deg, #10B981 0%, #059669 100%);"
+        >
+          {config.goalProgress.current}
+        </div>
+
+        <!-- Progress section -->
+        <div class="flex-1">
+          <div class="mb-2 text-center text-xs font-semibold text-gray-900">
+            {remainingDays}
+            {translations.moreDays}
+          </div>
+          <div class="h-2.5 w-full overflow-hidden rounded-full bg-gray-200">
+            <div
+              class="h-full rounded-full transition-all duration-500"
+              style={`width: ${progressPercent}%; background: linear-gradient(90deg, #10B981 0%, #34D399 100%);`}
+            >
+            </div>
+          </div>
+          <div class="mt-2 text-center text-[10px] font-medium text-gray-600">
+            {translations.toUnlock}
+          </div>
+        </div>
+
+        <!-- Right circle -->
+        <div
+          class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white shadow-md"
+          style="background: linear-gradient(135deg, #10B981 0%, #059669 100%);"
+        >
+          {config.goalProgress.target}
+        </div>
+      </div>
+    </div>
+
+    <!-- Active Rewards -->
+    <div class="text-center pb-4">
+      <h3 class="mb-4 text-sm font-semibold text-[#004492]">
+        {translations.activeRewards}
+      </h3>
+      <div class="flex justify-center gap-2.5 px-2">
+        {
+          config.activeRewards.map((reward) => {
+            const parsed = parseReward(reward);
+            return (
+              <div
+                class="flex-1 max-w-[75px] rounded-xl bg-gray-100 p-2.5 text-center shadow-sm flex flex-col items-center justify-center min-h-[80px]"
+                style="border: 1px solid rgba(229, 231, 235, 0.5);"
+              >
+                <div class="mb-1 text-[10px] font-semibold leading-tight text-[#004492]">
+                  {parsed.brand}
+                </div>
+                {parsed.description && (
+                  <div class="text-[9px] font-medium leading-tight text-[#004492]">
+                    {parsed.description}
+                  </div>
+                )}
+              </div>
+            );
+          })
+        }
+      </div>
+      <button
+        class="mt-3 text-xs font-semibold transition-opacity hover:opacity-80 text-[#004492]"
+      >
+        {translations.viewAll}
+      </button>
+    </div>
+
+    <!-- Future Rewards -->
+    <div
+      class="mx-auto w-full max-w-[300px] rounded-2xl bg-gray-50 p-5 text-center shadow-sm mb-4"
+      style="border: 1px solid rgba(229, 231, 235, 0.5);"
+    >
+      <span class="text-xs font-semibold text-gray-900">
+        {translations.futureRewards}
+      </span>
+    </div>
+  </div>
+</div>
