@@ -1,6 +1,7 @@
----
+﻿---
 import Navbar3 from "../components/NavbarSimple.astro";
 import ProductsPanel from "../components/productsPanel.astro";
+import IdentityApp from "../components/identity/IdentityApp.astro";
 ---
 
 <html lang="es">
@@ -67,1103 +68,790 @@ import ProductsPanel from "../components/productsPanel.astro";
       </div>
 
       <!-- Contenedor del dispositivo móvil -->
-      <div class="device-container">
-        <!-- Frame del iPhone -->
-        <div class="device-frame-wrapper">
-          <div class="device-frame">
-            <!-- Pantalla del dispositivo -->
-            <div class="device-screen">
-              <!-- Status Bar con Dynamic Island -->
-              <div class="device-status-bar">
-                <div class="status-time">9:41</div>
-                <div class="dynamic-island">
-                  <div class="island-shape"></div>
-                  <div class="island-speaker"></div>
-                </div>
-                <div class="status-icons">
-                  <svg class="signal-icon" fill="none" viewBox="0 0 20 12">
-                    <path
-                      d="M1 8h2v2H1V8zm3-2h2v4H4V6zm3-2h2v6H7V4zm3-1h2v7h-2V3z"
-                      fill="currentColor"></path>
-                  </svg>
-                  <div class="battery-icon">
-                    <div class="battery-level"></div>
-                  </div>
-                </div>
+      <IdentityApp />
+    </div>
+  </body>
+
+  <!-- Sección de Seguridad Inteligente -->
+  <section class="security-section">
+    <div class="security-container">
+      <h2 class="security-title">
+        Zelify AML<br />
+        detección temprana de riesgo.
+      </h2>
+
+      <div class="security-features">
+        <!-- Feature 1: Evaluación de listas globales -->
+        <div class="security-feature">
+          <div class="feature-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+              ></path>
+              <path d="M14 2v6h6"></path>
+              <path d="M16 13H8"></path>
+              <path d="M16 17H8"></path>
+              <path d="M10 9H8"></path>
+              <circle cx="19" cy="5" r="1.5" fill="currentColor"></circle>
+              <path d="M19 4v2M19 6h-1M19 6h1" stroke-width="1"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title">Evaluación de listas globales</h3>
+          <p class="feature-description">
+            Verificaciones automáticas contra sanciones, PEP y listas de
+            observación internacionales.
+          </p>
+        </div>
+
+        <!-- Feature 2: Verificación de listas globales -->
+        <div class="security-feature">
+          <div class="feature-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M12 1v4M12 19v4M1 12h4M19 12h4"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title">Verificación de listas globales</h3>
+          <p class="feature-description">
+            Cruce continuo con OFAC, ONU, UE, Interpol y FinCEN para detección
+            temprana.
+          </p>
+        </div>
+
+        <!-- Feature 3: Verificación de listas nacionales PEP -->
+        <div class="security-feature">
+          <div class="feature-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.3"
+              ></circle>
+              <path d="M9 12l2 2 4-4" stroke-width="2"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title">Verificación de listas nacionales PEP</h3>
+          <p class="feature-description">
+            Identifica personas políticamente expuestas según normativas
+            locales.
+          </p>
+        </div>
+
+        <!-- Feature 4: Monitoreo y operaciones -->
+        <div class="security-feature">
+          <div class="feature-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <circle cx="12" cy="12" r="6"></circle>
+              <circle cx="12" cy="12" r="2" fill="currentColor"></circle>
+              <path d="M12 2v4M12 18v4M2 12h4M18 12h4"></path>
+              <path
+                d="M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"
+              ></path>
+            </svg>
+          </div>
+          <h3 class="feature-title">Monitoreo y operaciones</h3>
+          <p class="feature-description">
+            Supervisa transacciones sospechosas con reglas dinámicas y perfiles
+            de riesgo.
+          </p>
+        </div>
+
+        <!-- Feature 5: Medios adversos e inteligencia de riesgo -->
+        <div class="security-feature">
+          <div class="feature-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+              <path d="M12 11v6M9 14h6"></path>
+              <path
+                d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                opacity="0.3"></path>
+              <path d="M9 12l2 2 4-4" stroke-width="2"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title">
+            Medios adversos e inteligencia de riesgo
+          </h3>
+          <p class="feature-description">
+            Analiza noticias y reportes públicos para riesgos reputacionales o
+            legales.
+          </p>
+        </div>
+
+        <!-- Feature 6: Evaluación de listas internas -->
+        <div class="security-feature">
+          <div class="feature-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <circle cx="12" cy="12" r="6"></circle>
+              <path d="M12 2v4M12 18v4M2 12h4M18 12h4"></path>
+              <circle cx="12" cy="12" r="2" fill="currentColor"></circle>
+              <path d="M8 8l8 8M16 8l-8 8" stroke-width="2"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title">Evaluación de listas internas</h3>
+          <p class="feature-description">
+            Integra tus listas de control y políticas internas dentro del flujo
+            AML.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de Control Total -->
+  <section class="control-section">
+    <div class="control-container">
+      <div class="control-divider"></div>
+      <h2 class="control-title">Control total de cumplimiento AML</h2>
+
+      <div class="control-features">
+        <!-- Feature 1: Evaluación de listas globales -->
+        <div class="control-feature">
+          <div class="control-feature-card">
+            <div class="control-feature-front">
+              <div class="control-feature-image">
+                <img
+                  src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=500&fit=crop&q=80"
+                  alt="Evaluación de listas globales"
+                />
               </div>
+              <h3 class="control-feature-title">
+                Evaluación de listas globales
+              </h3>
+              <p class="control-feature-description">
+                Cruce automático contra listas internacionales para detectar
+                alertas relevantes.
+              </p>
+              <button class="control-feature-btn" data-feature="global-lists">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </button>
+            </div>
+            <div class="control-feature-back">
+              <h3 class="control-feature-title">
+                Beneficios de listas globales
+              </h3>
+              <ul class="control-feature-benefits">
+                <li>Detección temprana de coincidencias</li>
+                <li>Alertas por riesgo regulatorio</li>
+                <li>Historial de evaluaciones</li>
+                <li>Filtros y reglas por país</li>
+                <li>Reducción de falsos positivos</li>
+              </ul>
+              <button
+                class="control-feature-btn control-feature-btn-close"
+                data-feature="global-lists"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
 
-              <!-- Contenido del dispositivo -->
-              <div class="device-content">
-                <!-- Header con back y logo -->
-                <div class="device-header">
-                  <button class="device-back-btn">&lt; back</button>
-                  <div class="device-logo">
-                    <img src="/images/zelify_logo.png" alt="Zelify" />
-                  </div>
-                  <div class="device-header-spacer"></div>
-                </div>
-
-                <!-- Animación GIF -->
-                <div class="device-animation">
-                  <img src="/ANIMACION 1.gif" alt="Aml animation" />
-                </div>
-
-                <!-- Tarjeta con fondo translúcido -->
-                <div class="device-card">
-                  <div class="auth-phone-card">
-                    <!-- Indicador de progreso -->
-                    <div class="phone-card-dots">
-                      <span class="dot active"></span>
-                      <span class="dot"></span>
-                      <span class="dot"></span>
-                      <span class="dot"></span>
-                      <span class="dot"></span>
-                    </div>
-
-                    <h2 class="phone-card-title" id="step-title">
-                      Crear Cuenta
-                    </h2>
-                    <p class="phone-card-description" id="step-description">
-                      Ingresa tu nombre y correo electrónico para empezar. Te
-                      enviaremos un código de verificación.
-                    </p>
-
-                    <button class="btn-google">
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M19.6 10.2273C19.6 9.51818 19.5364 8.83636 19.4182 8.18182H10V12.05H15.3818C15.15 13.3 14.4455 14.3591 13.3864 15.0682V17.5773H16.6182C18.5091 15.8364 19.6 13.2727 19.6 10.2273Z"
-                          fill="#4285F4"></path>
-                        <path
-                          d="M10 20C12.7 20 14.9636 19.1045 16.6182 17.5773L13.3864 15.0682C12.4909 15.6682 11.3455 16.0227 10 16.0227C7.39545 16.0227 5.19091 14.2636 4.40455 11.9H1.06364V14.4909C2.70909 17.7591 6.09091 20 10 20Z"
-                          fill="#34A853"></path>
-                        <path
-                          d="M4.40455 11.9C4.20455 11.3 4.09091 10.6591 4.09091 10C4.09091 9.34091 4.20455 8.7 4.40455 8.1V5.50909H1.06364C0.386364 6.85909 0 8.38636 0 10C0 11.6136 0.386364 13.1409 1.06364 14.4909L4.40455 11.9Z"
-                          fill="#FBBC05"></path>
-                        <path
-                          d="M10 3.97727C11.4682 3.97727 12.7864 4.46818 13.8227 5.42273L16.6909 2.55455C14.9591 0.940909 12.6955 0 10 0C6.09091 0 2.70909 2.24091 1.06364 5.50909L4.40455 8.1C5.19091 5.73636 7.39545 3.97727 10 3.97727Z"
-                          fill="#EA4335"></path>
-                      </svg>
-                      Crear cuenta con Google
-                    </button>
-
-                    <div class="phone-card-divider">
-                      <span class="divider-line"></span>
-                      <span class="divider-text">O crea cuenta con correo</span>
-                      <span class="divider-line"></span>
-                    </div>
-
-                    <!-- Paso 1: Crear Cuenta -->
-                    <div id="step-1" class="auth-step">
-                      <form class="phone-card-form" id="form-step-1">
-                        <div class="form-field">
-                          <label
-                            >Nombre Completo<span class="required">*</span
-                            ></label
-                          >
-                          <input
-                            type="text"
-                            id="fullName"
-                            placeholder="John Doe"
-                            required
-                          />
-                          <span class="field-error-message"></span>
-                        </div>
-                        <div class="form-field">
-                          <label>Correo<span class="required">*</span></label>
-                          <input
-                            type="email"
-                            id="email"
-                            placeholder="email@example.com"
-                            required
-                          />
-                          <span class="field-error-message"></span>
-                        </div>
-                        <button type="submit" class="btn-continuar">
-                          Continuar →
-                        </button>
-                      </form>
-                    </div>
-
-                    <!-- Paso 2: Verificar Email -->
-                    <div id="step-2" class="auth-step" style="display: none;">
-                      <form class="phone-card-form" id="form-step-2">
-                        <div class="otp-container">
-                          <div class="otp-inputs" id="otp-email">
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                          </div>
-                        </div>
-                        <button type="submit" class="btn-continuar">
-                          Verificar →
-                        </button>
-                        <p class="resend-code">
-                          ¿No recibiste el código? <a href="#" id="resend-email"
-                            >Reenviar</a
-                          >
-                        </p>
-                      </form>
-                    </div>
-
-                    <!-- Paso 3: Agregar Teléfono -->
-                    <div id="step-3" class="auth-step" style="display: none;">
-                      <form class="phone-card-form" id="form-step-3">
-                        <div class="form-field">
-                          <label
-                            >Número de Teléfono<span class="required">*</span
-                            ></label
-                          >
-                          <input
-                            type="tel"
-                            id="phone"
-                            placeholder="+1 234 567 8900"
-                            required
-                          />
-                          <span class="field-error-message"></span>
-                        </div>
-                        <button type="submit" class="btn-continuar">
-                          Continuar →
-                        </button>
-                      </form>
-                    </div>
-
-                    <!-- Paso 4: Verificar Teléfono -->
-                    <div id="step-4" class="auth-step" style="display: none;">
-                      <form class="phone-card-form" id="form-step-4">
-                        <div class="otp-container">
-                          <div class="otp-inputs" id="otp-phone">
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                          </div>
-                        </div>
-                        <button type="submit" class="btn-continuar">
-                          Verificar →
-                        </button>
-                        <p class="resend-code">
-                          ¿No recibiste el código? <a href="#" id="resend-phone"
-                            >Reenviar</a
-                          >
-                        </p>
-                      </form>
-                    </div>
-
-                    <!-- Paso 5: Completar Perfil -->
-                    <div id="step-5" class="auth-step" style="display: none;">
-                      <form class="phone-card-form" id="form-step-5">
-                        <div class="form-field">
-                          <label
-                            >Contraseña<span class="required">*</span></label
-                          >
-                          <input
-                            type="password"
-                            id="password"
-                            placeholder="Mínimo 8 caracteres"
-                            required
-                          />
-                          <span class="field-error-message"></span>
-                        </div>
-                        <div class="form-field">
-                          <label
-                            >Confirmar Contraseña<span class="required">*</span
-                            ></label
-                          >
-                          <input
-                            type="password"
-                            id="confirmPassword"
-                            placeholder="Confirma tu contraseña"
-                            required
-                          />
-                          <span class="field-error-message"></span>
-                        </div>
-                        <button type="submit" class="btn-continuar">
-                          Crear Cuenta →
-                        </button>
-                      </form>
-                    </div>
-
-                    <p
-                      class="phone-card-login"
-                      id="login-link"
-                      style="display: none;"
-                    >
-                      ¿Ya tienes una cuenta? <a href="#">Ingresa</a>
-                    </p>
-                  </div>
-                </div>
+        <!-- Feature 2: Monitoreo y operaciones -->
+        <div class="control-feature">
+          <div class="control-feature-card">
+            <div class="control-feature-front">
+              <div class="control-feature-image">
+                <img
+                  src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=500&fit=crop&q=80"
+                  alt="Monitoreo y operaciones"
+                />
               </div>
+              <h3 class="control-feature-title">Monitoreo y operaciones</h3>
+              <p class="control-feature-description">
+                Supervisión continua de alertas y casos con trazabilidad
+                operativa.
+              </p>
+              <button class="control-feature-btn" data-feature="monitoring">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </button>
+            </div>
+            <div class="control-feature-back">
+              <h3 class="control-feature-title">Beneficios de monitoreo</h3>
+              <ul class="control-feature-benefits">
+                <li>Alertas en tiempo real</li>
+                <li>Gestión de casos centralizada</li>
+                <li>Flujos de aprobación</li>
+                <li>Historial de decisiones</li>
+                <li>Panel operativo unificado</li>
+              </ul>
+              <button
+                class="control-feature-btn control-feature-btn-close"
+                data-feature="monitoring"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
 
-              <!-- Home Indicator -->
-              <div class="device-home-indicator"></div>
+        <!-- Feature 3: Medios adversos e inteligencia de riesgo -->
+        <div class="control-feature">
+          <div class="control-feature-card">
+            <div class="control-feature-front">
+              <div class="control-feature-image">
+                <img
+                  src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&h=500&fit=crop&q=80"
+                  alt="Medios adversos e inteligencia de riesgo"
+                />
+              </div>
+              <h3 class="control-feature-title">
+                Medios adversos e inteligencia de riesgo
+              </h3>
+              <p class="control-feature-description">
+                Análisis de señales públicas para identificar riesgo
+                reputacional.
+              </p>
+              <button class="control-feature-btn" data-feature="adverse-media">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </button>
+            </div>
+            <div class="control-feature-back">
+              <h3 class="control-feature-title">Beneficios de inteligencia</h3>
+              <ul class="control-feature-benefits">
+                <li>Detección de noticias de riesgo</li>
+                <li>Clasificación por severidad</li>
+                <li>Contexto y trazabilidad</li>
+                <li>Alertas configurables</li>
+                <li>Reducción de exposición reputacional</li>
+              </ul>
+              <button
+                class="control-feature-btn control-feature-btn-close"
+                data-feature="adverse-media"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 4: Evaluación de listas internas -->
+        <div class="control-feature">
+          <div class="control-feature-card">
+            <div class="control-feature-front">
+              <div class="control-feature-image">
+                <img
+                  src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=500&fit=crop&q=80"
+                  alt="Evaluación de listas internas"
+                />
+              </div>
+              <h3 class="control-feature-title">
+                Evaluación de listas internas
+              </h3>
+              <p class="control-feature-description">
+                Comparación contra listas propias para mayor control y
+                cumplimiento.
+              </p>
+              <button class="control-feature-btn" data-feature="internal-lists">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </button>
+            </div>
+            <div class="control-feature-back">
+              <h3 class="control-feature-title">
+                Beneficios de listas internas
+              </h3>
+              <ul class="control-feature-benefits">
+                <li>Bloqueos y whitelists</li>
+                <li>Reglas por segmento</li>
+                <li>Actualización inmediata</li>
+                <li>Auditoría interna</li>
+                <li>Control total del riesgo</li>
+              </ul>
+              <button
+                class="control-feature-btn control-feature-btn-close"
+                data-feature="internal-lists"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- Sección de Seguridad Inteligente -->
-    <section class="security-section">
-      <div class="security-container">
-        <h2 class="security-title">
-          Zelify AML<br />
-          detección temprana de riesgo.
-        </h2>
-
-        <div class="security-features">
-          <!-- Feature 1: Evaluación de listas globales -->
-          <div class="security-feature">
-            <div class="feature-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-                ></path>
-                <path d="M14 2v6h6"></path>
-                <path d="M16 13H8"></path>
-                <path d="M16 17H8"></path>
-                <path d="M10 9H8"></path>
-                <circle cx="19" cy="5" r="1.5" fill="currentColor"></circle>
-                <path d="M19 4v2M19 6h-1M19 6h1" stroke-width="1"></path>
-              </svg>
-            </div>
-            <h3 class="feature-title">Evaluación de listas globales</h3>
-            <p class="feature-description">
-              Verificaciones automáticas contra sanciones, PEP y listas de
-              observación internacionales.
-            </p>
-          </div>
-
-          <!-- Feature 2: Verificación de listas globales -->
-          <div class="security-feature">
-            <div class="feature-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                <circle cx="12" cy="12" r="3"></circle>
-                <path d="M12 1v4M12 19v4M1 12h4M19 12h4"></path>
-              </svg>
-            </div>
-            <h3 class="feature-title">Verificación de listas globales</h3>
-            <p class="feature-description">
-              Cruce continuo con OFAC, ONU, UE, Interpol y FinCEN para detección
-              temprana.
-            </p>
-          </div>
-
-          <!-- Feature 3: Verificación de listas nacionales PEP -->
-          <div class="security-feature">
-            <div class="feature-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.3"
-                ></circle>
-                <path d="M9 12l2 2 4-4" stroke-width="2"></path>
-              </svg>
-            </div>
-            <h3 class="feature-title">Verificación de listas nacionales PEP</h3>
-            <p class="feature-description">
-              Identifica personas políticamente expuestas según normativas
-              locales.
-            </p>
-          </div>
-
-          <!-- Feature 4: Monitoreo y operaciones -->
-          <div class="security-feature">
-            <div class="feature-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <circle cx="12" cy="12" r="10"></circle>
-                <circle cx="12" cy="12" r="6"></circle>
-                <circle cx="12" cy="12" r="2" fill="currentColor"></circle>
-                <path d="M12 2v4M12 18v4M2 12h4M18 12h4"></path>
-                <path
-                  d="M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"
-                ></path>
-              </svg>
-            </div>
-            <h3 class="feature-title">Monitoreo y operaciones</h3>
-            <p class="feature-description">
-              Supervisa transacciones sospechosas con reglas dinámicas y
-              perfiles de riesgo.
-            </p>
-          </div>
-
-          <!-- Feature 5: Medios adversos e inteligencia de riesgo -->
-          <div class="security-feature">
-            <div class="feature-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-                <path d="M12 11v6M9 14h6"></path>
-                <path
-                  d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
-                  opacity="0.3"></path>
-                <path d="M9 12l2 2 4-4" stroke-width="2"></path>
-              </svg>
-            </div>
-            <h3 class="feature-title">
-              Medios adversos e inteligencia de riesgo
-            </h3>
-            <p class="feature-description">
-              Analiza noticias y reportes públicos para riesgos reputacionales o
-              legales.
-            </p>
-          </div>
-
-          <!-- Feature 6: Evaluación de listas internas -->
-          <div class="security-feature">
-            <div class="feature-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <circle cx="12" cy="12" r="10"></circle>
-                <circle cx="12" cy="12" r="6"></circle>
-                <path d="M12 2v4M12 18v4M2 12h4M18 12h4"></path>
-                <circle cx="12" cy="12" r="2" fill="currentColor"></circle>
-                <path d="M8 8l8 8M16 8l-8 8" stroke-width="2"></path>
-              </svg>
-            </div>
-            <h3 class="feature-title">Evaluación de listas internas</h3>
-            <p class="feature-description">
-              Integra tus listas de control y políticas internas dentro del
-              flujo AML.
-            </p>
-          </div>
+  <!-- Sección de Contacto -->
+  <section class="contact-section">
+    <div class="contact-container">
+      <div class="contact-content">
+        <!-- Texto izquierdo -->
+        <div class="contact-text">
+          <h2 class="contact-title">
+            Empieza hoy<br />
+            y protege tu<br />
+            plataforma.
+          </h2>
         </div>
-      </div>
-    </section>
 
-    <!-- Sección de Control Total -->
-    <section class="control-section">
-      <div class="control-container">
-        <div class="control-divider"></div>
-        <h2 class="control-title">Control total de cumplimiento AML</h2>
+        <!-- Formulario derecho -->
+        <div class="contact-form-wrapper">
+          <div class="contact-form-card">
+            <h3 class="contact-form-title">Habla con nuestro equipo</h3>
 
-        <div class="control-features">
-          <!-- Feature 1: Evaluación de listas globales -->
-          <div class="control-feature">
-            <div class="control-feature-card">
-              <div class="control-feature-front">
-                <div class="control-feature-image">
-                  <img
-                    src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=500&fit=crop&q=80"
-                    alt="Evaluación de listas globales"
+            <form class="contact-form" id="contactForm">
+              <div class="form-row">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    id="nombres"
+                    placeholder="Nombres"
+                    required
                   />
                 </div>
-                <h3 class="control-feature-title">
-                  Evaluación de listas globales
-                </h3>
-                <p class="control-feature-description">
-                  Cruce automático contra listas internacionales para detectar
-                  alertas relevantes.
-                </p>
-                <button class="control-feature-btn" data-feature="global-lists">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                  </svg>
-                </button>
-              </div>
-              <div class="control-feature-back">
-                <h3 class="control-feature-title">
-                  Beneficios de listas globales
-                </h3>
-                <ul class="control-feature-benefits">
-                  <li>Detección temprana de coincidencias</li>
-                  <li>Alertas por riesgo regulatorio</li>
-                  <li>Historial de evaluaciones</li>
-                  <li>Filtros y reglas por país</li>
-                  <li>Reducción de falsos positivos</li>
-                </ul>
-                <button
-                  class="control-feature-btn control-feature-btn-close"
-                  data-feature="global-lists"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Feature 2: Monitoreo y operaciones -->
-          <div class="control-feature">
-            <div class="control-feature-card">
-              <div class="control-feature-front">
-                <div class="control-feature-image">
-                  <img
-                    src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=500&fit=crop&q=80"
-                    alt="Monitoreo y operaciones"
+                <div class="form-group">
+                  <input
+                    type="text"
+                    id="apellidos"
+                    placeholder="Apellidos"
+                    required
                   />
                 </div>
-                <h3 class="control-feature-title">Monitoreo y operaciones</h3>
-                <p class="control-feature-description">
-                  Supervisión continua de alertas y casos con trazabilidad
-                  operativa.
-                </p>
-                <button class="control-feature-btn" data-feature="monitoring">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                  </svg>
-                </button>
               </div>
-              <div class="control-feature-back">
-                <h3 class="control-feature-title">Beneficios de monitoreo</h3>
-                <ul class="control-feature-benefits">
-                  <li>Alertas en tiempo real</li>
-                  <li>Gestión de casos centralizada</li>
-                  <li>Flujos de aprobación</li>
-                  <li>Historial de decisiones</li>
-                  <li>Panel operativo unificado</li>
-                </ul>
-                <button
-                  class="control-feature-btn control-feature-btn-close"
-                  data-feature="monitoring"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
 
-          <!-- Feature 3: Medios adversos e inteligencia de riesgo -->
-          <div class="control-feature">
-            <div class="control-feature-card">
-              <div class="control-feature-front">
-                <div class="control-feature-image">
-                  <img
-                    src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&h=500&fit=crop&q=80"
-                    alt="Medios adversos e inteligencia de riesgo"
+              <div class="form-row">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    id="compania"
+                    placeholder="Nombre de la compañía"
+                    required
                   />
                 </div>
-                <h3 class="control-feature-title">
-                  Medios adversos e inteligencia de riesgo
-                </h3>
-                <p class="control-feature-description">
-                  Análisis de señales públicas para identificar riesgo
-                  reputacional.
-                </p>
-                <button
-                  class="control-feature-btn"
-                  data-feature="adverse-media"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                  </svg>
-                </button>
-              </div>
-              <div class="control-feature-back">
-                <h3 class="control-feature-title">
-                  Beneficios de inteligencia
-                </h3>
-                <ul class="control-feature-benefits">
-                  <li>Detección de noticias de riesgo</li>
-                  <li>Clasificación por severidad</li>
-                  <li>Contexto y trazabilidad</li>
-                  <li>Alertas configurables</li>
-                  <li>Reducción de exposición reputacional</li>
-                </ul>
-                <button
-                  class="control-feature-btn control-feature-btn-close"
-                  data-feature="adverse-media"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Feature 4: Evaluación de listas internas -->
-          <div class="control-feature">
-            <div class="control-feature-card">
-              <div class="control-feature-front">
-                <div class="control-feature-image">
-                  <img
-                    src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=500&fit=crop&q=80"
-                    alt="Evaluación de listas internas"
+                <div class="form-group">
+                  <input
+                    type="email"
+                    id="email"
+                    placeholder="Email de la compañía"
+                    required
                   />
                 </div>
-                <h3 class="control-feature-title">
-                  Evaluación de listas internas
-                </h3>
-                <p class="control-feature-description">
-                  Comparación contra listas propias para mayor control y
-                  cumplimiento.
-                </p>
-                <button
-                  class="control-feature-btn"
-                  data-feature="internal-lists"
-                >
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <select id="pais" required>
+                    <option value="">País</option>
+                    <option value="mx">México</option>
+                    <option value="co">Colombia</option>
+                    <option value="ar">Argentina</option>
+                    <option value="cl">Chile</option>
+                    <option value="pe">Perú</option>
+                    <option value="es">España</option>
+                    <option value="us">Estados Unidos</option>
+                  </select>
                   <svg
+                    class="select-arrow"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    stroke-width="2"
                   >
-                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="6 9 12 15 18 9"></polyline>
                   </svg>
-                </button>
+                </div>
+                <div class="form-group">
+                  <input
+                    type="tel"
+                    id="telefono"
+                    placeholder="Teléfono (opcional)"
+                  />
+                </div>
               </div>
-              <div class="control-feature-back">
-                <h3 class="control-feature-title">
-                  Beneficios de listas internas
-                </h3>
-                <ul class="control-feature-benefits">
-                  <li>Bloqueos y whitelists</li>
-                  <li>Reglas por segmento</li>
-                  <li>Actualización inmediata</li>
-                  <li>Auditoría interna</li>
-                  <li>Control total del riesgo</li>
-                </ul>
-                <button
-                  class="control-feature-btn control-feature-btn-close"
-                  data-feature="internal-lists"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                  </svg>
-                </button>
-              </div>
-            </div>
+
+              <p class="contact-legal">
+                Al enviar este formulario, aceptas nuestros <a href="#"
+                  >Términos de Servicio</a
+                > y <a href="#">Política de Privacidad</a>.
+              </p>
+
+              <button type="submit" class="contact-submit-btn">
+                Hablemos
+              </button>
+            </form>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Sección de Contacto -->
-    <section class="contact-section">
-      <div class="contact-container">
-        <div class="contact-content">
-          <!-- Texto izquierdo -->
-          <div class="contact-text">
-            <h2 class="contact-title">
-              Empieza hoy<br />
-              y protege tu<br />
-              plataforma.
-            </h2>
-          </div>
+  <!-- Sección de FAQ -->
+  <section class="faq-section">
+    <div class="faq-container">
+      <h2 class="faq-title">Preguntas frecuentes</h2>
 
-          <!-- Formulario derecho -->
-          <div class="contact-form-wrapper">
-            <div class="contact-form-card">
-              <h3 class="contact-form-title">Habla con nuestro equipo</h3>
-
-              <form class="contact-form" id="contactForm">
-                <div class="form-row">
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      id="nombres"
-                      placeholder="Nombres"
-                      required
-                    />
-                  </div>
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      id="apellidos"
-                      placeholder="Apellidos"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div class="form-row">
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      id="compania"
-                      placeholder="Nombre de la compañía"
-                      required
-                    />
-                  </div>
-                  <div class="form-group">
-                    <input
-                      type="email"
-                      id="email"
-                      placeholder="Email de la compañía"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div class="form-row">
-                  <div class="form-group">
-                    <select id="pais" required>
-                      <option value="">País</option>
-                      <option value="mx">México</option>
-                      <option value="co">Colombia</option>
-                      <option value="ar">Argentina</option>
-                      <option value="cl">Chile</option>
-                      <option value="pe">Perú</option>
-                      <option value="es">España</option>
-                      <option value="us">Estados Unidos</option>
-                    </select>
-                    <svg
-                      class="select-arrow"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                  </div>
-                  <div class="form-group">
-                    <input
-                      type="tel"
-                      id="telefono"
-                      placeholder="Teléfono (opcional)"
-                    />
-                  </div>
-                </div>
-
-                <p class="contact-legal">
-                  Al enviar este formulario, aceptas nuestros <a href="#"
-                    >Términos de Servicio</a
-                  > y <a href="#">Política de Privacidad</a>.
-                </p>
-
-                <button type="submit" class="contact-submit-btn">
-                  Hablemos
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Sección de FAQ -->
-    <section class="faq-section">
-      <div class="faq-container">
-        <h2 class="faq-title">Preguntas frecuentes</h2>
-
-        <div class="faq-list">
-          <!-- FAQ 1 -->
-          <div class="faq-item">
-            <button class="faq-question" data-faq="1">
-              <span>¿Qué funcionalidades incluye el producto?</span>
-              <svg
-                class="faq-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </button>
-            <div class="faq-answer">
-              <p>
-                Nuestro producto incluye autenticación avanzada con biometría,
-                registro personalizable de usuarios, validación de email y
-                teléfono, información detallada del dispositivo, geolocalización
-                estratégica, detección temprana de fraudes, y un SDK de
-                integración sencillo para incorporar todas estas funcionalidades
-                en una sola línea de código.
-              </p>
-            </div>
-          </div>
-
-          <!-- FAQ 2 -->
-          <div class="faq-item">
-            <button class="faq-question" data-faq="2">
-              <span>¿Es seguro usar biometría y doble factor?</span>
-              <svg
-                class="faq-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </button>
-            <div class="faq-answer">
-              <p>
-                Sí, es completamente seguro. La biometría y la autenticación de
-                doble factor (2FA) son estándares de la industria que
-                proporcionan capas adicionales de seguridad. Nuestro sistema
-                utiliza encriptación de extremo a extremo y cumple con los más
-                altos estándares de seguridad para proteger los datos
-                biométricos y las credenciales de tus usuarios.
-              </p>
-            </div>
-          </div>
-
-          <!-- FAQ 3 -->
-          <div class="faq-item">
-            <button class="faq-question" data-faq="3">
-              <span
-                >¿Puedo personalizar los campos de registro para mis usuarios?</span
-              >
-              <svg
-                class="faq-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </button>
-            <div class="faq-answer">
-              <p>
-                Absolutamente. Nuestro sistema de registro es completamente
-                personalizable. Puedes agregar, eliminar o modificar campos
-                según las necesidades de tu negocio. Los campos se adaptan
-                dinámicamente a tus usuarios, permitiéndote crear experiencias
-                de registro únicas y relevantes para tu plataforma.
-              </p>
-            </div>
-          </div>
-
-          <!-- FAQ 4 -->
-          <div class="faq-item">
-            <button class="faq-question" data-faq="4">
-              <span>¿Cómo detecta fraudes y accesos sospechosos?</span>
-              <svg
-                class="faq-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </button>
-            <div class="faq-answer">
-              <p>
-                Nuestro sistema utiliza inteligencia artificial y machine
-                learning para analizar patrones de comportamiento, detectar
-                tráfico inusual, identificar el uso de VPNs, analizar la
-                geolocalización de accesos, y monitorear información del
-                dispositivo en tiempo real. Todo esto permite identificar y
-                prevenir accesos sospechosos antes de que representen una
-                amenaza.
-              </p>
-            </div>
-          </div>
-
-          <!-- FAQ 5 -->
-          <div class="faq-item">
-            <button class="faq-question" data-faq="5">
-              <span>¿Funciona en cualquier dispositivo?</span>
-              <svg
-                class="faq-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </button>
-            <div class="faq-answer">
-              <p>
-                Sí, nuestro producto es multiplataforma y funciona en cualquier
-                dispositivo: smartphones (iOS y Android), tablets, computadoras
-                de escritorio y laptops. La interfaz se adapta automáticamente a
-                cada dispositivo, proporcionando una experiencia óptima sin
-                importar desde dónde accedan tus usuarios.
-              </p>
-            </div>
-          </div>
-
-          <!-- FAQ 6 -->
-          <div class="faq-item">
-            <button class="faq-question" data-faq="6">
-              <span>¿Es fácil de integrar a mi sistema actual?</span>
-              <svg
-                class="faq-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </button>
-            <div class="faq-answer">
-              <p>
-                Muy fácil. Nuestro SDK de integración está diseñado para ser
-                implementado con una sola línea de código. Proporcionamos
-                documentación completa, ejemplos de código, y soporte técnico
-                especializado para ayudarte en el proceso de integración. La
-                mayoría de nuestros clientes completan la integración en menos
-                de una hora.
-              </p>
-            </div>
-          </div>
-
-          <!-- FAQ 7 -->
-          <div class="faq-item">
-            <button class="faq-question" data-faq="7">
-              <span
-                >¿Puedo escalar la seguridad a medida que crece mi plataforma?</span
-              >
-              <svg
-                class="faq-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </button>
-            <div class="faq-answer">
-              <p>
-                Definitivamente. Nuestra arquitectura está construida para
-                escalar automáticamente. A medida que tu plataforma crece,
-                nuestro sistema se adapta sin necesidad de cambios adicionales.
-                Puedes manejar desde cientos hasta millones de usuarios sin
-                preocuparte por la capacidad o el rendimiento del sistema de
-                seguridad.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Sección CTA Final -->
-    <section class="cta-section">
-      <div class="cta-container">
-        <h2 class="cta-title">
-          Comienza hoy y<br />
-          asegura cada acceso.
-        </h2>
-        <a
-          href="https://alaiza.zelify.com"
-          class="cta-button"
-          target="_blank"
-          rel="noopener noreferrer">cotizar</a
-        >
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="auth-footer">
-      <div class="footer-container">
-        <div class="footer-content">
-          <!-- Logo -->
-          <div class="footer-logo">
-            <img src="/images/zelify_logo2.png" alt="Zelify" />
-          </div>
-
-          <!-- Quick Links -->
-          <div class="footer-links">
-            <h3 class="footer-links-title">Quick links</h3>
-            <nav class="footer-nav">
-              <a href="/products">Products</a>
-              <a href="/nosotros">About us</a>
-              <a href="/desarrollo">Developers</a>
-              <a href="/otros">Others</a>
-            </nav>
+      <div class="faq-list">
+        <!-- FAQ 1 -->
+        <div class="faq-item">
+          <button class="faq-question" data-faq="1">
+            <span>¿Qué funcionalidades incluye el producto?</span>
+            <svg
+              class="faq-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Nuestro producto incluye autenticación avanzada con biometría,
+              registro personalizable de usuarios, validación de email y
+              teléfono, información detallada del dispositivo, geolocalización
+              estratégica, detección temprana de fraudes, y un SDK de
+              integración sencillo para incorporar todas estas funcionalidades
+              en una sola línea de código.
+            </p>
           </div>
         </div>
 
-        <!-- Disclaimer -->
-        <p class="footer-disclaimer">
-          Zelify is a technology platform currently in a development phase, not
-          yet deployed or operational, and does not provide or process financial
-          services directly; all financial operations are conducted exclusively
-          through regulated third-party partners.
-        </p>
+        <!-- FAQ 2 -->
+        <div class="faq-item">
+          <button class="faq-question" data-faq="2">
+            <span>¿Es seguro usar biometría y doble factor?</span>
+            <svg
+              class="faq-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Sí, es completamente seguro. La biometría y la autenticación de
+              doble factor (2FA) son estándares de la industria que proporcionan
+              capas adicionales de seguridad. Nuestro sistema utiliza
+              encriptación de extremo a extremo y cumple con los más altos
+              estándares de seguridad para proteger los datos biométricos y las
+              credenciales de tus usuarios.
+            </p>
+          </div>
+        </div>
 
-        <!-- Copyright -->
-        <p class="footer-copyright">© 2025 Zelify. All rights reserved.</p>
+        <!-- FAQ 3 -->
+        <div class="faq-item">
+          <button class="faq-question" data-faq="3">
+            <span
+              >¿Puedo personalizar los campos de registro para mis usuarios?</span
+            >
+            <svg
+              class="faq-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Absolutamente. Nuestro sistema de registro es completamente
+              personalizable. Puedes agregar, eliminar o modificar campos según
+              las necesidades de tu negocio. Los campos se adaptan dinámicamente
+              a tus usuarios, permitiéndote crear experiencias de registro
+              únicas y relevantes para tu plataforma.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="faq-item">
+          <button class="faq-question" data-faq="4">
+            <span>¿Cómo detecta fraudes y accesos sospechosos?</span>
+            <svg
+              class="faq-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Nuestro sistema utiliza inteligencia artificial y machine learning
+              para analizar patrones de comportamiento, detectar tráfico
+              inusual, identificar el uso de VPNs, analizar la geolocalización
+              de accesos, y monitorear información del dispositivo en tiempo
+              real. Todo esto permite identificar y prevenir accesos sospechosos
+              antes de que representen una amenaza.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div class="faq-item">
+          <button class="faq-question" data-faq="5">
+            <span>¿Funciona en cualquier dispositivo?</span>
+            <svg
+              class="faq-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Sí, nuestro producto es multiplataforma y funciona en cualquier
+              dispositivo: smartphones (iOS y Android), tablets, computadoras de
+              escritorio y laptops. La interfaz se adapta automáticamente a cada
+              dispositivo, proporcionando una experiencia óptima sin importar
+              desde dónde accedan tus usuarios.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 6 -->
+        <div class="faq-item">
+          <button class="faq-question" data-faq="6">
+            <span>¿Es fácil de integrar a mi sistema actual?</span>
+            <svg
+              class="faq-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Muy fácil. Nuestro SDK de integración está diseñado para ser
+              implementado con una sola línea de código. Proporcionamos
+              documentación completa, ejemplos de código, y soporte técnico
+              especializado para ayudarte en el proceso de integración. La
+              mayoría de nuestros clientes completan la integración en menos de
+              una hora.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 7 -->
+        <div class="faq-item">
+          <button class="faq-question" data-faq="7">
+            <span
+              >¿Puedo escalar la seguridad a medida que crece mi plataforma?</span
+            >
+            <svg
+              class="faq-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Definitivamente. Nuestra arquitectura está construida para escalar
+              automáticamente. A medida que tu plataforma crece, nuestro sistema
+              se adapta sin necesidad de cambios adicionales. Puedes manejar
+              desde cientos hasta millones de usuarios sin preocuparte por la
+              capacidad o el rendimiento del sistema de seguridad.
+            </p>
+          </div>
+        </div>
       </div>
-    </footer>
-  </body>
+    </div>
+  </section>
+
+  <!-- Sección CTA Final -->
+  <section class="cta-section">
+    <div class="cta-container">
+      <h2 class="cta-title">
+        Comienza hoy y<br />
+        asegura cada acceso.
+      </h2>
+      <a
+        href="https://alaiza.zelify.com"
+        class="cta-button"
+        target="_blank"
+        rel="noopener noreferrer">cotizar</a
+      >
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="auth-footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <!-- Logo -->
+        <div class="footer-logo">
+          <img src="/images/zelify_logo2.png" alt="Zelify" />
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-links">
+          <h3 class="footer-links-title">Quick links</h3>
+          <nav class="footer-nav">
+            <a href="/products">Products</a>
+            <a href="/nosotros">About us</a>
+            <a href="/desarrollo">Developers</a>
+            <a href="/otros">Others</a>
+          </nav>
+        </div>
+      </div>
+
+      <!-- Disclaimer -->
+      <p class="footer-disclaimer">
+        Zelify is a technology platform currently in a development phase, not
+        yet deployed or operational, and does not provide or process financial
+        services directly; all financial operations are conducted exclusively
+        through regulated third-party partners.
+      </p>
+
+      <!-- Copyright -->
+      <p class="footer-copyright">© 2025 Zelify. All rights reserved.</p>
+    </div>
+  </footer>
 </html>
 
 <style>
