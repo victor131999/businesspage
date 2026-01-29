@@ -47,7 +47,7 @@
               stroke-linecap="round"
               stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg
             >
-            back
+            atrás
           </button>
           <!-- Logo centered absolutely -->
           <div
@@ -80,16 +80,16 @@
 
           <div class="px-6 text-center mb-6 relative z-10">
             <h2 class="text-2xl leading-tight text-[#004492]">
-              <span class="font-bold">Identity</span>
-              <span class="font-light">Verification</span>
+              <span class="font-bold">Verificación</span>
+              <span class="font-light">de Identidad</span>
             </h2>
             <p class="text-[11px] text-gray-500 mt-2">
-              We will verify your identity securely and quickly
+              Verificaremos tu identidad de forma segura y rápida
             </p>
           </div>
 
           <div
-            class="mx-4 mb-6 mt-auto rounded-[32px] bg-[#F3F4F6] p-6 flex flex-col gap-8 relative z-20 overflow-hidden shadow-sm"
+            class="w-full mt-auto rounded-t-[40px] bg-[#F3F4F6] px-6 pt-8 pb-10 flex flex-col gap-8 relative z-20 overflow-hidden shadow-sm"
           >
             <div
               class="relative w-full h-[60px] flex justify-center items-center"
@@ -121,10 +121,10 @@
                   class="text-content ml-2 text-white overflow-hidden whitespace-nowrap opacity-0 max-w-0 transition-opacity duration-300"
                 >
                   <p class="text-[11px] font-bold leading-tight">
-                    Fast and secure process
+                    Proceso rápido y seguro
                   </p>
                   <p class="text-[9px] leading-tight opacity-90">
-                    Completed in less than 2 minute
+                    Finaliza en menos de 2 minutos
                   </p>
                 </div>
               </div>
@@ -154,10 +154,10 @@
                   class="text-content ml-2 text-white overflow-hidden whitespace-nowrap opacity-0 max-w-0 transition-opacity duration-300"
                 >
                   <p class="text-[11px] font-bold leading-tight">
-                    Protected data
+                    Datos protegidos
                   </p>
                   <p class="text-[9px] leading-tight opacity-90">
-                    End-to-end encryption
+                    Encriptación de extremo a extremo
                   </p>
                 </div>
               </div>
@@ -187,16 +187,16 @@
                   class="text-content ml-2 text-white overflow-hidden whitespace-nowrap opacity-0 max-w-0 transition-opacity duration-300"
                 >
                   <p class="text-[11px] font-bold leading-tight">
-                    Real-time check
+                    Verificación en tiempo real
                   </p>
                   <p class="text-[9px] leading-tight opacity-90">
-                    Global database verification
+                    Verificación en bases de datos globales
                   </p>
                 </div>
               </div>
             </div>
 
-            <div class="flex justify-center mt-auto">
+            <div class="relative flex justify-center mt-auto">
               <button
                 id="start-btn"
                 class="group relative flex items-center justify-between overflow-hidden rounded-xl border border-[#004492] px-6 py-3 text-xs font-semibold text-white shadow-lg transition-transform active:scale-[0.98] w-full max-w-[240px]"
@@ -208,7 +208,7 @@
                 <span
                   class="relative z-10 flex items-center justify-center gap-2 w-full"
                 >
-                  <span>Start Verification</span>
+                  <span>Iniciar verificación</span>
                   <svg
                     class="h-3.5 w-3.5"
                     fill="none"
@@ -223,6 +223,12 @@
                   </svg>
                 </span>
               </button>
+              <!-- Mirror Effect -->
+              <div
+                class="absolute -bottom-4 w-[200px] h-full rounded-xl opacity-40 blur-md pointer-events-none z-0"
+                style="background: linear-gradient(to right, #004492 0%, #002D62 40%, #001529 70%, #000000 100%); transform: scaleY(-0.8);"
+              >
+              </div>
             </div>
 
             <p class="text-center text-[9px] text-gray-500 leading-tight px-4">
@@ -264,10 +270,10 @@
           >
             <div class="px-6 text-center mb-6 relative z-10 pt-4">
               <h2 class="text-xl font-bold text-[#004492] mb-1">
-                Select your document
+                Selecciona tu documento
               </h2>
               <p class="text-[11px] text-gray-500">
-                Choose the type of document you want to use for verification
+                Elige el tipo de documento para la verificación
               </p>
             </div>
 
@@ -297,9 +303,11 @@
                     >
                   </div>
                   <div class="ml-3 text-left">
-                    <p class="text-sm font-bold text-white">Driver's License</p>
+                    <p class="text-sm font-bold text-white">
+                      Licencia de Conducir
+                    </p>
                     <p class="text-[10px] text-white/80">
-                      Valid driver's license
+                      Licencia de conducir válida
                     </p>
                   </div>
                 </button>
@@ -330,9 +338,11 @@
                     >
                   </div>
                   <div class="ml-3 text-left">
-                    <p class="text-sm font-bold text-white">Identity Card</p>
+                    <p class="text-sm font-bold text-white">
+                      Documento de Identidad
+                    </p>
                     <p class="text-[10px] text-white/80 hidden">
-                      Official identity document
+                      Documento de identidad oficial
                     </p>
                   </div>
                 </button>
@@ -363,19 +373,19 @@
                     >
                   </div>
                   <div class="ml-3 text-left">
-                    <p class="text-sm font-bold text-white">Passport</p>
+                    <p class="text-sm font-bold text-white">Pasaporte</p>
                     <p class="text-[10px] text-white/80 hidden">
-                      Valid passport
+                      Pasaporte válido
                     </p>
                   </div>
                 </button>
               </div>
             </div>
 
-            <div class="flex justify-center mb-4 px-6 mt-auto">
+            <div class="relative flex justify-center mb-4 px-6 mt-auto">
               <button
                 id="doc-next-btn"
-                class="w-full max-w-[200px] h-10 rounded-full flex items-center justify-center gap-2 transition-transform active:scale-95 shadow-lg border border-[#004492] text-white font-medium text-sm"
+                class="w-full max-w-[200px] h-10 rounded-full flex items-center justify-center gap-2 transition-transform active:scale-95 shadow-lg border border-[#004492] text-white font-medium text-sm relative z-10"
                 style="background: linear-gradient(to right, #004492 0%, #002D62 40%, #001529 70%, #000000 100%);"
               >
                 Siguiente <svg
@@ -387,6 +397,12 @@
                   viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"></path></svg
                 >
               </button>
+              <!-- Mirror Effect -->
+              <div
+                class="absolute -bottom-3 w-[180px] h-full rounded-full opacity-40 blur-md pointer-events-none z-0"
+                style="background: linear-gradient(to right, #004492 0%, #002D62 40%, #001529 70%, #000000 100%); transform: scaleY(-0.8);"
+              >
+              </div>
             </div>
           </div>
         </div>
@@ -408,10 +424,12 @@
               <!-- Title -->
               <div class="mb-4 text-center relative z-20">
                 <h2 class="text-2xl leading-tight text-[#004492]">
-                  Capture <span class="font-bold">Driver's<br />License</span>
+                  Capturar <span class="font-bold"
+                    >Licencia de<br />Conducir</span
+                  >
                 </h2>
                 <p class="text-[11px] text-gray-500 mt-2">
-                  Take a photo of the front of your document
+                  Toma una foto del frente de tu documento
                 </p>
               </div>
 
@@ -443,10 +461,10 @@
               <!-- Bottom Text -->
               <div class="text-center mt-auto">
                 <p class="text-base font-bold text-white mb-1">
-                  Document front
+                  Frente del documento
                 </p>
                 <p class="text-[10px] text-white/90 leading-tight">
-                  Make sure the document is well lit and fully visible
+                  Asegúrate de que el documento esté bien iluminado y visible
                 </p>
               </div>
             </div>
@@ -514,7 +532,7 @@
                   ></path>
                 </svg>
                 <span class="text-xs font-medium text-gray-700"
-                  >Document front</span
+                  >Frente del documento</span
                 >
                 <div
                   class="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#004492]"
@@ -542,10 +560,12 @@
             >
               <div class="mb-4 text-center relative z-20">
                 <h2 class="text-2xl leading-tight text-[#004492]">
-                  Capture <span class="font-bold">Driver's<br />License</span>
+                  Capturar <span class="font-bold"
+                    >Licencia de<br />Conducir</span
+                  >
                 </h2>
                 <p class="text-[11px] text-gray-500 mt-2">
-                  Take a photo of the back of your document
+                  Toma una foto del reverso de tu documento
                 </p>
               </div>
 
@@ -570,9 +590,11 @@
               </div>
 
               <div class="text-center mt-auto">
-                <p class="text-base font-bold text-white mb-1">Document back</p>
+                <p class="text-base font-bold text-white mb-1">
+                  Reverso del documento
+                </p>
                 <p class="text-[10px] text-white/90 leading-tight">
-                  Make sure the document is well lit and fully visible
+                  Asegúrate de que el documento esté bien iluminado y visible
                 </p>
               </div>
             </div>
@@ -636,10 +658,10 @@
           >
             <div class="px-6 text-center mb-6 relative z-10 pt-4">
               <h2 class="text-xl font-bold text-[#004492] mb-1">
-                Selfie Check
+                Verificación Facial
               </h2>
               <p class="text-[11px] text-gray-500">
-                Select the facial verification method
+                Selecciona el método de verificación facial
               </p>
             </div>
 
@@ -668,11 +690,9 @@
                     </svg>
                   </div>
                   <div class="ml-3 text-left">
-                    <p class="text-sm font-bold text-white">
-                      Selfie Check Photo
-                    </p>
+                    <p class="text-sm font-bold text-white">Foto Selfie</p>
                     <p class="text-[10px] text-white/80">
-                      Take a photo of your face
+                      Toma una foto de tu rostro
                     </p>
                   </div>
                 </button>
@@ -700,11 +720,9 @@
                     </svg>
                   </div>
                   <div class="ml-3 text-left">
-                    <p class="text-sm font-bold text-white">
-                      Selfie Check Video
-                    </p>
+                    <p class="text-sm font-bold text-white">Video Selfie</p>
                     <p class="text-[10px] text-white/80 hidden">
-                      Record a video of your face
+                      Graba un video de tu rostro
                     </p>
                   </div>
                 </button>
@@ -723,7 +741,7 @@
                 <span
                   class="relative z-10 flex items-center justify-center gap-2 w-full"
                 >
-                  <span>Start Facial Verification</span>
+                  <span>Iniciar verificación facial</span>
                   <svg
                     class="h-3.5 w-3.5"
                     fill="none"
@@ -1073,17 +1091,17 @@
     btns.docNext.addEventListener("click", () => {
       // Update Capture Screens with selected Doc Type
       const docNames = {
-        license: "Driver's<br>License",
-        identity: "Identity<br>Card",
-        passport: "Passport",
+        license: "Licencia de<br>Conducir",
+        identity: "Documento de<br>Identidad",
+        passport: "Pasaporte",
       };
 
-      const docLabel = docNames[selectedDoc] || "Document";
+      const docLabel = docNames[selectedDoc] || "Documento";
 
       // Update Front Screen
       const frontTitle = document.querySelector("#screen-capture-front h2");
       if (frontTitle)
-        frontTitle.innerHTML = `Capture <span class="font-bold">${docLabel}</span>`;
+        frontTitle.innerHTML = `Capturar <span class="font-bold">${docLabel}</span>`;
 
       // Update Back Screen
       const backTitle = document.querySelector("#screen-capture-back h2");

@@ -5,13 +5,13 @@ import DiscountHeader from "../DiscountHeader.astro";
 const plans = [
   {
     id: "free",
-    title: "Basic",
+    title: "Básico",
     price: "$0",
     features: [
-      "Basic Access",
-      "Limited Promos",
-      "Standard Support",
-      "Community Access",
+      "Acceso Básico",
+      "Promoción Limitada",
+      "Soporte Estándar",
+      "Acceso a la comunidad",
     ],
   },
   {
@@ -19,10 +19,10 @@ const plans = [
     title: "Premium",
     price: "$29",
     features: [
-      "Unlimited Access",
-      "Unlimited Promos",
-      "Priority Support",
-      "Analytics",
+      "Acceso Ilimitado",
+      "Promociones Ilimitadas",
+      "Soporte Prioritario",
+      "Analíticas",
     ],
   },
 ];
@@ -49,10 +49,10 @@ const customColor = "#004492";
       class="absolute top-[165px] z-50 flex flex-col items-center justify-center w-full pointer-events-none"
     >
       <h2 class="text-2xl font-bold" style={`color: ${customColor}`}>
-        Select your plan
+        Selecciona tu plan
       </h2>
       <p class="text-gray-500 font-medium tracking-wide text-xs">
-        Choose the best plan for you
+        Elige el mejor plan para ti
       </p>
     </div>
 
@@ -92,7 +92,7 @@ const customColor = "#004492";
             <h3 class="text-xs text-white mb-0">{plans[0].title}</h3>
             <div class="flex items-center justify-center gap-1 mb-5">
               <span class="text-xl text-white">{plans[0].price}</span>
-              <span class="text-xs text-white/70">/month</span>
+              <span class="text-xs text-white/70">/mes</span>
             </div>
             <div class="space-y-1.5 text-center w-full">
               {
@@ -127,7 +127,7 @@ const customColor = "#004492";
             <h3 class="text-xs text-white mb-0">{plans[1].title}</h3>
             <div class="flex items-center justify-center gap-1 mb-5">
               <span class="text-xl text-white">{plans[1].price}</span>
-              <span class="text-xs text-white/70">/month</span>
+              <span class="text-xs text-white/70">/mes</span>
             </div>
             <div class="space-y-1.5 text-center w-full">
               {
@@ -156,7 +156,7 @@ const customColor = "#004492";
           style={`background: linear-gradient(to right, ${customColor}, #000b1e);`}
           data-next="2"
         >
-          <span class="mr-0">Continue</span>
+          <span class="mr-0">Continuar</span>
           <span
             class="absolute right-6 transition-transform group-hover:translate-x-1"
           >

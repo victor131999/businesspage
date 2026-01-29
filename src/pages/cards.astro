@@ -25,14 +25,15 @@ import CardsApp from "../components/cards/CardsApp.astro";
     <main class="auth-main">
       <section class="auth-hero">
         <h1 class="auth-title">
-          Cumplimiento AML<br />
-          claro, ágil y efectivo.
+          Zelify Cards<br />
+          Emisión sin fronteras.
         </h1>
         <p class="auth-description">
-          Evalúa riesgo automáticamente con listas globales, PEP y medios
-          adversos,<br />
-          monitorea transacciones en tiempo real y aplica reglas dinámicas<br />
-          para prevenir actividades ilícitas sin fricción operativa.
+          Solución completa para la emisión y administración de tarjetas físicas
+          y virtuales, personales y corporativas, que centraliza tokenización,
+          3D Secure, procesamiento, disputas, wallets, control de riesgo,
+          suscripciones, cashback y reportes en tiempo real con altos estándares
+          de seguridad y trazabilidad.
         </p>
         <div class="auth-cta">
           <input
@@ -71,18 +72,19 @@ import CardsApp from "../components/cards/CardsApp.astro";
       <CardsApp />
     </div>
 
-    <!-- Sección de Seguridad Inteligente -->
+    <!-- Sección de Soluciones Principales -->
     <section class="security-section">
       <div class="security-container">
         <h2 class="security-title">
-          Zelify AML<br />
-          detección temprana de riesgo.
+          Infraestructura integral<br />
+          para tu programa de tarjetas.
         </h2>
 
         <div class="security-features">
-          <!-- Feature 1: Evaluación de listas globales -->
+          <!-- Feature 1: Patrocinio BIN -->
           <div class="security-feature">
             <div class="feature-icon">
+              <!-- Icono de Tarjeta/Banco -->
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
@@ -91,27 +93,22 @@ import CardsApp from "../components/cards/CardsApp.astro";
                 stroke-linecap="round"
                 stroke-linejoin="round"
               >
-                <path
-                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-                ></path>
-                <path d="M14 2v6h6"></path>
-                <path d="M16 13H8"></path>
-                <path d="M16 17H8"></path>
-                <path d="M10 9H8"></path>
-                <circle cx="19" cy="5" r="1.5" fill="currentColor"></circle>
-                <path d="M19 4v2M19 6h-1M19 6h1" stroke-width="1"></path>
+                <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+                <line x1="2" y1="10" x2="22" y2="10"></line>
               </svg>
             </div>
-            <h3 class="feature-title">Evaluación de listas globales</h3>
+            <h3 class="feature-title">Patrocinio BIN</h3>
             <p class="feature-description">
-              Verificaciones automáticas contra sanciones, PEP y listas de
-              observación internacionales.
+              Tu programa de tarjetas bajo un BIN patrocinado, con una
+              estructura de access fee que te permite operar sin ser banco
+              emisor, gestionando la relación regulatoria y operativa.
             </p>
           </div>
 
-          <!-- Feature 2: Verificación de listas globales -->
+          <!-- Feature 2: Procesamiento -->
           <div class="security-feature">
             <div class="feature-icon">
+              <!-- Icono de Procesamiento -->
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
@@ -120,21 +117,21 @@ import CardsApp from "../components/cards/CardsApp.astro";
                 stroke-linecap="round"
                 stroke-linejoin="round"
               >
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                <circle cx="12" cy="12" r="3"></circle>
-                <path d="M12 1v4M12 19v4M1 12h4M19 12h4"></path>
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
               </svg>
             </div>
-            <h3 class="feature-title">Verificación de listas globales</h3>
+            <h3 class="feature-title">Procesamiento</h3>
             <p class="feature-description">
-              Cruce continuo con OFAC, ONU, UE, Interpol y FinCEN para detección
-              temprana.
+              Procesa cada transacción aprobada y gestiona el ciclo de vida de
+              cada tarjeta activa a través de un motor que garantiza
+              trazabilidad, estabilidad operativa y control total.
             </p>
           </div>
 
-          <!-- Feature 3: Verificación de listas nacionales PEP -->
+          <!-- Feature 3: Procesamiento Corporativo -->
           <div class="security-feature">
             <div class="feature-icon">
+              <!-- Icono Corporativo -->
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
@@ -143,22 +140,23 @@ import CardsApp from "../components/cards/CardsApp.astro";
                 stroke-linecap="round"
                 stroke-linejoin="round"
               >
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.3"
-                ></circle>
-                <path d="M9 12l2 2 4-4" stroke-width="2"></path>
+                <path d="M3 21h18"></path>
+                <path d="M5 21V7l8-4 8 4v14"></path>
+                <path d="M17 21v-8H7v8"></path>
               </svg>
             </div>
-            <h3 class="feature-title">Verificación de listas nacionales PEP</h3>
+            <h3 class="feature-title">Procesamiento Corporativo</h3>
             <p class="feature-description">
-              Identifica personas políticamente expuestas según normativas
-              locales.
+              Administra programas de tarjetas empresariales con reglas y
+              control en transacciones, otorgando visibilidad completa sobre
+              cada tarjeta activa dentro de la operación.
             </p>
           </div>
 
-          <!-- Feature 4: Monitoreo y operaciones -->
+          <!-- Feature 4: SDK de Cards -->
           <div class="security-feature">
             <div class="feature-icon">
+              <!-- Icono SDK/Código -->
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
@@ -167,104 +165,45 @@ import CardsApp from "../components/cards/CardsApp.astro";
                 stroke-linecap="round"
                 stroke-linejoin="round"
               >
-                <circle cx="12" cy="12" r="10"></circle>
-                <circle cx="12" cy="12" r="6"></circle>
-                <circle cx="12" cy="12" r="2" fill="currentColor"></circle>
-                <path d="M12 2v4M12 18v4M2 12h4M18 12h4"></path>
-                <path
-                  d="M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"
-                ></path>
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
               </svg>
             </div>
-            <h3 class="feature-title">Monitoreo y operaciones</h3>
+            <h3 class="feature-title">SDK de Cards</h3>
             <p class="feature-description">
-              Supervisa transacciones sospechosas con reglas dinámicas y
-              perfiles de riesgo.
-            </p>
-          </div>
-
-          <!-- Feature 5: Medios adversos e inteligencia de riesgo -->
-          <div class="security-feature">
-            <div class="feature-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-                <path d="M12 11v6M9 14h6"></path>
-                <path
-                  d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
-                  opacity="0.3"></path>
-                <path d="M9 12l2 2 4-4" stroke-width="2"></path>
-              </svg>
-            </div>
-            <h3 class="feature-title">
-              Medios adversos e inteligencia de riesgo
-            </h3>
-            <p class="feature-description">
-              Analiza noticias y reportes públicos para riesgos reputacionales o
-              legales.
-            </p>
-          </div>
-
-          <!-- Feature 6: Evaluación de listas internas -->
-          <div class="security-feature">
-            <div class="feature-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <circle cx="12" cy="12" r="10"></circle>
-                <circle cx="12" cy="12" r="6"></circle>
-                <path d="M12 2v4M12 18v4M2 12h4M18 12h4"></path>
-                <circle cx="12" cy="12" r="2" fill="currentColor"></circle>
-                <path d="M8 8l8 8M16 8l-8 8" stroke-width="2"></path>
-              </svg>
-            </div>
-            <h3 class="feature-title">Evaluación de listas internas</h3>
-            <p class="feature-description">
-              Integra tus listas de control y políticas internas dentro del
-              flujo AML.
+              Librerías de desarrollo que facilitan la integración ágil y
+              sencilla para acelerar tu implementación técnica.
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Sección de Control Total -->
+    <!-- Sección de Módulos y Colaterales -->
     <section class="control-section">
       <div class="control-container">
         <div class="control-divider"></div>
-        <h2 class="control-title">Control total de cumplimiento AML</h2>
+        <h2 class="control-title">
+          Solución integral para tu programa de tarjetas
+        </h2>
 
         <div class="control-features">
-          <!-- Feature 1: Evaluación de listas globales -->
           <div class="control-feature">
             <div class="control-feature-card">
               <div class="control-feature-front">
                 <div class="control-feature-image">
                   <img
                     src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=500&fit=crop&q=80"
-                    alt="Evaluación de listas globales"
+                    alt="Patrocinio BIN"
                   />
                 </div>
-                <h3 class="control-feature-title">
-                  Evaluación de listas globales
-                </h3>
+                <h3 class="control-feature-title">Patrocinio BIN</h3>
                 <p class="control-feature-description">
-                  Cruce automático contra listas internacionales para detectar
-                  alertas relevantes.
+                  Opera tu programa de tarjetas sin ser un banco emisor.
+                  Gestionamos la relación regulatoria para acelerar tu salida al
+                  mercado.
                 </p>
-                <button class="control-feature-btn" data-feature="global-lists">
+                <button class="control-feature-btn" data-feature="bin">
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
@@ -279,19 +218,17 @@ import CardsApp from "../components/cards/CardsApp.astro";
                 </button>
               </div>
               <div class="control-feature-back">
-                <h3 class="control-feature-title">
-                  Beneficios de listas globales
-                </h3>
+                <h3 class="control-feature-title">Beneficios de Patrocinio</h3>
                 <ul class="control-feature-benefits">
-                  <li>Detección temprana de coincidencias</li>
-                  <li>Alertas por riesgo regulatorio</li>
-                  <li>Historial de evaluaciones</li>
-                  <li>Filtros y reglas por país</li>
-                  <li>Reducción de falsos positivos</li>
+                  <li>Estructura eficiente de Access Fee</li>
+                  <li>Gestión operativa y regulatoria</li>
+                  <li>Rápido Time-to-Market</li>
+                  <li>Emisión de tarjetas físicas y virtuales</li>
+                  <li>Cumplimiento normativo incluido</li>
                 </ul>
                 <button
                   class="control-feature-btn control-feature-btn-close"
-                  data-feature="global-lists"
+                  data-feature="bin"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -309,22 +246,21 @@ import CardsApp from "../components/cards/CardsApp.astro";
             </div>
           </div>
 
-          <!-- Feature 2: Monitoreo y operaciones -->
           <div class="control-feature">
             <div class="control-feature-card">
               <div class="control-feature-front">
                 <div class="control-feature-image">
                   <img
-                    src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=500&fit=crop&q=80"
-                    alt="Monitoreo y operaciones"
+                    src="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?w=800&h=500&fit=crop&q=80"
+                    alt="Procesamiento de Tarjetas"
                   />
                 </div>
-                <h3 class="control-feature-title">Monitoreo y operaciones</h3>
+                <h3 class="control-feature-title">Motor de Procesamiento</h3>
                 <p class="control-feature-description">
-                  Supervisión continua de alertas y casos con trazabilidad
-                  operativa.
+                  Gestión total del ciclo de vida de la tarjeta y procesamiento
+                  de transacciones aprobadas con máxima estabilidad.
                 </p>
-                <button class="control-feature-btn" data-feature="monitoring">
+                <button class="control-feature-btn" data-feature="processing">
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
@@ -339,17 +275,17 @@ import CardsApp from "../components/cards/CardsApp.astro";
                 </button>
               </div>
               <div class="control-feature-back">
-                <h3 class="control-feature-title">Beneficios de monitoreo</h3>
+                <h3 class="control-feature-title">Control Operativo</h3>
                 <ul class="control-feature-benefits">
-                  <li>Alertas en tiempo real</li>
-                  <li>Gestión de casos centralizada</li>
-                  <li>Flujos de aprobación</li>
-                  <li>Historial de decisiones</li>
-                  <li>Panel operativo unificado</li>
+                  <li>Trazabilidad total de transacciones</li>
+                  <li>Gestión de tarjetas corporativas</li>
+                  <li>Control de reglas transaccionales</li>
+                  <li>Visibilidad en tiempo real</li>
+                  <li>Gestión de disputas y reportes</li>
                 </ul>
                 <button
                   class="control-feature-btn control-feature-btn-close"
-                  data-feature="monitoring"
+                  data-feature="processing"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -367,27 +303,21 @@ import CardsApp from "../components/cards/CardsApp.astro";
             </div>
           </div>
 
-          <!-- Feature 3: Medios adversos e inteligencia de riesgo -->
           <div class="control-feature">
             <div class="control-feature-card">
               <div class="control-feature-front">
                 <div class="control-feature-image">
                   <img
-                    src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&h=500&fit=crop&q=80"
-                    alt="Medios adversos e inteligencia de riesgo"
+                    src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&h=500&fit=crop&q=80"
+                    alt="Seguridad y Capacidades Premium"
                   />
                 </div>
-                <h3 class="control-feature-title">
-                  Medios adversos e inteligencia de riesgo
-                </h3>
+                <h3 class="control-feature-title">Seguridad y Módulos</h3>
                 <p class="control-feature-description">
-                  Análisis de señales públicas para identificar riesgo
-                  reputacional.
+                  Potencia tu programa con tokenización, CVV dinámico y
+                  herramientas contra el fraude como 3DS y Falcon.
                 </p>
-                <button
-                  class="control-feature-btn"
-                  data-feature="adverse-media"
-                >
+                <button class="control-feature-btn" data-feature="premium">
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
@@ -402,19 +332,17 @@ import CardsApp from "../components/cards/CardsApp.astro";
                 </button>
               </div>
               <div class="control-feature-back">
-                <h3 class="control-feature-title">
-                  Beneficios de inteligencia
-                </h3>
+                <h3 class="control-feature-title">Capacidades Premium</h3>
                 <ul class="control-feature-benefits">
-                  <li>Detección de noticias de riesgo</li>
-                  <li>Clasificación por severidad</li>
-                  <li>Contexto y trazabilidad</li>
-                  <li>Alertas configurables</li>
-                  <li>Reducción de exposición reputacional</li>
+                  <li>Tokenización y Apple/Google Wallets</li>
+                  <li>CVV dinámico para compras seguras</li>
+                  <li>Prevención de fraude con Falcon</li>
+                  <li>Autenticación 3D Secure (3DS)</li>
+                  <li>Printing y logística personalizada</li>
                 </ul>
                 <button
                   class="control-feature-btn control-feature-btn-close"
-                  data-feature="adverse-media"
+                  data-feature="premium"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -432,27 +360,21 @@ import CardsApp from "../components/cards/CardsApp.astro";
             </div>
           </div>
 
-          <!-- Feature 4: Evaluación de listas internas -->
           <div class="control-feature">
             <div class="control-feature-card">
               <div class="control-feature-front">
                 <div class="control-feature-image">
                   <img
                     src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=500&fit=crop&q=80"
-                    alt="Evaluación de listas internas"
+                    alt="SDK e Integración"
                   />
                 </div>
-                <h3 class="control-feature-title">
-                  Evaluación de listas internas
-                </h3>
+                <h3 class="control-feature-title">SDK e Integración</h3>
                 <p class="control-feature-description">
-                  Comparación contra listas propias para mayor control y
-                  cumplimiento.
+                  Librerías de desarrollo especializadas y recursos estratégicos
+                  para escalar tu programa de forma sostenible.
                 </p>
-                <button
-                  class="control-feature-btn"
-                  data-feature="internal-lists"
-                >
+                <button class="control-feature-btn" data-feature="sdk-cards">
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
@@ -467,19 +389,17 @@ import CardsApp from "../components/cards/CardsApp.astro";
                 </button>
               </div>
               <div class="control-feature-back">
-                <h3 class="control-feature-title">
-                  Beneficios de listas internas
-                </h3>
+                <h3 class="control-feature-title">Recursos para Escalar</h3>
                 <ul class="control-feature-benefits">
-                  <li>Bloqueos y whitelists</li>
-                  <li>Reglas por segmento</li>
-                  <li>Actualización inmediata</li>
-                  <li>Auditoría interna</li>
-                  <li>Control total del riesgo</li>
+                  <li>SDK de Cards nativo y ágil</li>
+                  <li>Fondeo inicial y garantías</li>
+                  <li>Programas especiales de expansión</li>
+                  <li>Integración avanzada vía APIs</li>
+                  <li>Soporte técnico en implementación</li>
                 </ul>
                 <button
                   class="control-feature-btn control-feature-btn-close"
-                  data-feature="internal-lists"
+                  data-feature="sdk-cards"
                 >
                   <svg
                     viewBox="0 0 24 24"
