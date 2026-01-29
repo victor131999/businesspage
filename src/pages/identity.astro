@@ -35,20 +35,26 @@ import IdentityApp from "../components/identity/IdentityApp.astro";
           integración.
         </p>
         <div class="auth-cta">
-          <input
-            type="email"
-            placeholder="ingresa tu correo"
-            aria-label="Correo electrónico"
-          />
-          <a
-            href="https://alaiza.zelify.com"
-            class="btn-cotizar"
-            target="_blank"
-            rel="noopener noreferrer">cotizar</a
+          <form
+            class="welcome-input-group"
+            action="#"
+            aria-label="Solicitar cotización"
+            novalidate
           >
+            <input
+              class="welcome-input"
+              type="email"
+              name="email"
+              placeholder="ingresa tu correo"
+              aria-label="Ingresa tu correo"
+              data-i18n-placeholder="home.welcome.email.placeholder"
+              data-i18n-aria="home.welcome.email.aria"
+            />
+            <button class="welcome-quote-button" type="submit">cotizar</button>
+          </form>
           <a
             href="https://www.zelify.com/clips"
-            class="btn-demo-hero"
+            class="welcome-demo-button"
             target="_blank"
             rel="noopener noreferrer">demo</a
           >
@@ -670,6 +676,75 @@ import IdentityApp from "../components/identity/IdentityApp.astro";
     box-sizing: border-box;
   }
 
+  .welcome-input-group {
+    display: flex;
+    align-items: center;
+    border: 2px solid #00223e;
+    border-radius: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 1px;
+    padding-right: 3px;
+    background: #ffffff;
+    min-width: min(560px, 100%);
+    max-width: 620px;
+  }
+
+  .welcome-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 1.05rem;
+    padding: 0.75rem 1.25rem;
+    color: #00223e;
+    background: transparent;
+  }
+
+  .welcome-input::placeholder {
+    color: #213f8c;
+    opacity: 0.9;
+  }
+
+  .welcome-quote-button {
+    border: none;
+    background: #213f8c;
+    color: #ffffff;
+    padding: 0.7rem 2.9rem;
+    border-radius: 9px;
+    font-size: 1.1rem;
+    font-weight: 400;
+    cursor: pointer;
+    width: 170px;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .welcome-demo-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #93fb4d;
+    color: #00223e;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 9px;
+    width: 20%;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 1.1rem;
+    box-shadow: 0 10px 22px rgba(147, 251, 77, 0.35);
+    margin-left: 1rem;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .welcome-demo-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 26px rgba(147, 251, 77, 0.4);
+  }
+
   .auth-main {
     display: flex;
     align-items: center;
@@ -714,21 +789,7 @@ import IdentityApp from "../components/identity/IdentityApp.astro";
     flex-wrap: wrap;
   }
 
-  .auth-cta input {
-    border: 1px solid rgba(10, 32, 63, 0.2);
-    border-radius: 999px;
-    padding: 0.65rem 1.5rem;
-    min-width: 260px;
-    font-size: 1rem;
-    outline: none;
-    background: #fff;
-    color: #0a203f;
-    font-family: inherit;
-  }
 
-  .auth-cta input::placeholder {
-    color: rgba(10, 32, 63, 0.5);
-  }
 
   .btn-cotizar {
     border: none;
@@ -830,6 +891,11 @@ import IdentityApp from "../components/identity/IdentityApp.astro";
   .device-frame-wrapper {
     position: relative;
     z-index: 10;
+    transform: scale(1);
+    padding: 2.5rem 2rem;
+    background-color: #f3f4f6;
+    border-radius: 2rem;
+    margin: 3rem auto;
   }
 
   .device-frame {
@@ -939,6 +1005,11 @@ import IdentityApp from "../components/identity/IdentityApp.astro";
     padding: 1rem 1.25rem;
     overflow-y: auto;
     overflow-x: hidden;
+    scrollbar-width: none;
+  }
+
+  .device-content::-webkit-scrollbar {
+    display: none;
   }
 
   /* Header del dispositivo */
@@ -1367,10 +1438,7 @@ import IdentityApp from "../components/identity/IdentityApp.astro";
       align-items: stretch;
     }
 
-    .auth-cta input {
-      width: 100%;
-      min-width: auto;
-    }
+
 
     .btn-cotizar,
     .btn-demo-hero {
