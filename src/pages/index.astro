@@ -12,6 +12,7 @@ import TxProd from "../components/product-cards/tx-prod.astro";
 import DiscountsProd from "../components/product-cards/discounts-prod.astro";
 import AlaizaProd from "../components/product-cards/alaiza-prod.astro";
 import TokensProd from "../components/tokens/tokens-prod.astro";
+import { AlaizaAssistant } from "../components/AlaizaAssistant";
 
 // Configuración del navbar con tema claro/blanco
 const navbarColors = {
@@ -3422,6 +3423,8 @@ const modulesList = [
       }
     })();
   </script>
+    <AlaizaAssistant client:load />
+  </body>
 </html>
 
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer
