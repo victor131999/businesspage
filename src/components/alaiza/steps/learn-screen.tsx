@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
+// import Image from "next/image"; // Not needed in Astro project
 import { FinancialEducationConfig } from "../financial-education-config";
 import { MetricRing } from "../ui/metric-ring";
 import { Card } from "../ui/card";
-import zelifyLogoDark from "@/assets/logos/zelifyLogo_dark.svg";
-import zelifyLogoLight from "@/assets/logos/zelifyLogo_ligth.svg";
+// import zelifyLogoDark from "@/assets/logos/zelifyLogo_dark.svg";
+// import zelifyLogoLight from "@/assets/logos/zelifyLogo_ligth.svg";
 import { useLanguageTranslations } from "@/hooks/use-language-translations";
 import { type Language } from "@/contexts/language-context";
 
@@ -49,13 +49,13 @@ export function LearnScreen({ config, updateConfig }: LearnScreenProps) {
 
   useEffect(() => {
     const checkDarkMode = () => {
-      setIsDarkMode(document.documentElement.classList.contains('dark'));
+      setIsDarkMode(document.documentElement.classList.contains("dark"));
     };
     checkDarkMode();
     const observer = new MutationObserver(checkDarkMode);
     observer.observe(document.documentElement, {
       attributes: true,
-      attributeFilter: ['class']
+      attributeFilter: ["class"],
     });
     return () => observer.disconnect();
   }, []);
@@ -71,21 +71,17 @@ export function LearnScreen({ config, updateConfig }: LearnScreenProps) {
         </button>
         <div className="mb-6 flex justify-center">
           <div className="relative h-6 w-24">
-            <Image
-              src={zelifyLogoLight}
-              fill
-              className="dark:hidden"
+            <img
+              src="/images/zelify_logo.png"
+              className="dark:hidden h-full w-full object-contain"
               alt="Zelify logo"
               role="presentation"
-              quality={100}
             />
-            <Image
-              src={zelifyLogoDark}
-              fill
-              className="hidden dark:block"
+            <img
+              src="/images/zelify_logo.png"
+              className="hidden dark:block h-full w-full object-contain"
               alt="Zelify logo"
               role="presentation"
-              quality={100}
             />
           </div>
         </div>
@@ -113,22 +109,31 @@ export function LearnScreen({ config, updateConfig }: LearnScreenProps) {
 
         {/* Weekly Summary */}
         <div>
-          <h3 className="mb-3 text-sm font-semibold text-gray-900 dark:text-white">{t.weeklySummary}</h3>
+          <h3 className="mb-3 text-sm font-semibold text-gray-900 dark:text-white">
+            {t.weeklySummary}
+          </h3>
           <Card>
-            <p className="text-sm text-gray-700 dark:text-gray-300">{config.weeklySummary}</p>
+            <p className="text-sm text-gray-700 dark:text-gray-300">
+              {config.weeklySummary}
+            </p>
           </Card>
         </div>
 
         {/* Tips Section */}
         <div>
-          <h3 className="mb-3 text-sm font-semibold text-gray-900 dark:text-white">{t.tipsForYou}</h3>
+          <h3 className="mb-3 text-sm font-semibold text-gray-900 dark:text-white">
+            {t.tipsForYou}
+          </h3>
           <div className="grid grid-cols-2 gap-3">
             {config.tips.map((tip) => (
               <Card
                 key={tip.id}
                 className="cursor-pointer overflow-hidden p-0"
                 onClick={() => {
-                  updateConfig({ currentScreen: "learn-content", selectedTip: tip.id });
+                  updateConfig({
+                    currentScreen: "learn-content",
+                    selectedTip: tip.id,
+                  });
                 }}
               >
                 <img
@@ -137,7 +142,9 @@ export function LearnScreen({ config, updateConfig }: LearnScreenProps) {
                   className="h-32 w-full object-cover"
                 />
                 <div className="p-3">
-                  <p className="text-xs font-medium text-gray-900 dark:text-white">{tip.title}</p>
+                  <p className="text-xs font-medium text-gray-900 dark:text-white">
+                    {tip.title}
+                  </p>
                 </div>
               </Card>
             ))}

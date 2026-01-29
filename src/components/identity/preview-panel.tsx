@@ -1,11 +1,3 @@
-"use client";
-
-import { cn } from "@/lib/utils";
-import { useEffect, useState, useRef } from "react";
-import { WorkflowConfig, ViewMode, Country, DocumentType, LivenessType, ScreenStep } from "./workflow-config";
-import { useIdentityWorkflowTranslations } from "./use-identity-translations";
-import { useCTAButtonAnimations } from "@/hooks/use-cta-button-animations";
-
 interface PreviewPanelProps {
   config: WorkflowConfig;
   updateConfig: (updates: Partial<WorkflowConfig>) => void;
@@ -65,7 +57,8 @@ function AnimatedHalftoneBackdrop({ isDarkMode }: { isDarkMode: boolean }) {
     const parent = canvas.parentElement;
     if (!parent) return;
 
-    const dpr = typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1;
+    const dpr =
+      typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1;
 
     const resize = () => {
       const { width, height } = parent.getBoundingClientRect();
@@ -109,7 +102,10 @@ function AnimatedHalftoneBackdrop({ isDarkMode }: { isDarkMode: boolean }) {
           const dy = y - centerY;
           const distance = Math.sqrt(dx * dx + dy * dy);
           const normalizedDistance = distance / maxDistance;
-          const wavePhase = (normalizedDistance * waveFrequency - elapsed * waveSpeed) * Math.PI * 2;
+          const wavePhase =
+            (normalizedDistance * waveFrequency - elapsed * waveSpeed) *
+            Math.PI *
+            2;
           const pulse = (Math.cos(wavePhase) + 1) / 2;
           const edgeFade = Math.pow(1 - normalizedDistance, 1.4);
           const alpha = (baseAlpha + pulse * pulseAlpha) * edgeFade;
@@ -146,9 +142,19 @@ function EdgeFadeOverlay({ isDarkMode }: { isDarkMode: boolean }) {
   );
 }
 
-
 export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
-  const { viewMode, country, currentScreen, enabledScreens, documentTypes, livenessTypes, selectedDocumentType, selectedLivenessType, result, branding } = config;
+  const {
+    viewMode,
+    country,
+    currentScreen,
+    enabledScreens,
+    documentTypes,
+    livenessTypes,
+    selectedDocumentType,
+    selectedLivenessType,
+    result,
+    branding,
+  } = config;
   const identityTranslations = useIdentityWorkflowTranslations();
   const {
     preview: previewTexts,
@@ -156,7 +162,7 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
     documents: documentNames,
     livenessTypeNames,
   } = identityTranslations;
-  
+
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [captureStep, setCaptureStep] = useState<"front" | "back">("front");
   const [isCapturing, setIsCapturing] = useState(false);
@@ -170,16 +176,20 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
   const [cameraError, setCameraError] = useState<string | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [activeWelcomeCard, setActiveWelcomeCard] = useState<number>(0); // Estado para la tarjeta activa
-  const [activeDocumentCard, setActiveDocumentCard] = useState<number | null>(null); // Estado para la tarjeta activa de documentos
-  const [activeLivenessCard, setActiveLivenessCard] = useState<number | null>(null); // Estado para la tarjeta activa de liveness
+  const [activeDocumentCard, setActiveDocumentCard] = useState<number | null>(
+    null,
+  ); // Estado para la tarjeta activa de documentos
+  const [activeLivenessCard, setActiveLivenessCard] = useState<number | null>(
+    null,
+  ); // Estado para la tarjeta activa de liveness
 
   // Configuración compartida para tarjetas verticales (accordion cards / stacked cards)
   // Controla el redondeo de bordes: valores más altos = más redondeado (pastilla), valores más bajos = más cuadrado
   const VERTICAL_CARDS_BORDER_RADIUS = {
-    active: 25,    // Border radius para tarjeta activa (en px)
+    active: 25, // Border radius para tarjeta activa (en px)
     inactive: 16, // Border radius para tarjetas inactivas (en px)
   };
-  
+
   // Resetear activeDocumentCard cuando cambia la pantalla
   useEffect(() => {
     if (currentScreen === "document_selection") {
@@ -187,8 +197,8 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
         .filter(([_, enabled]) => enabled)
         .map(([type]) => type as DocumentType);
       if (availableDocs.length > 0) {
-        const selectedIndex = selectedDocumentType 
-          ? availableDocs.findIndex(doc => doc === selectedDocumentType)
+        const selectedIndex = selectedDocumentType
+          ? availableDocs.findIndex((doc) => doc === selectedDocumentType)
           : 0;
         setActiveDocumentCard(selectedIndex >= 0 ? selectedIndex : 0);
       }
@@ -201,11 +211,16 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
   useEffect(() => {
     if (currentScreen === "liveness_check") {
       const availableLiveness = Object.entries(livenessTypes)
-        .filter(([type, enabled]) => enabled && (type === "selfie_photo" || type === "selfie_video"))
+        .filter(
+          ([type, enabled]) =>
+            enabled && (type === "selfie_photo" || type === "selfie_video"),
+        )
         .map(([type]) => type as "selfie_photo" | "selfie_video");
       if (availableLiveness.length > 0) {
         const selectedIndex = selectedLivenessType
-          ? availableLiveness.findIndex(liveness => liveness === selectedLivenessType)
+          ? availableLiveness.findIndex(
+              (liveness) => liveness === selectedLivenessType,
+            )
           : 0;
         setActiveLivenessCard(selectedIndex >= 0 ? selectedIndex : 0);
       }
@@ -213,12 +228,12 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
       setActiveLivenessCard(null);
     }
   }, [currentScreen, livenessTypes, selectedLivenessType]);
-  
+
   useEffect(() => {
     // Add global styles for animations
-    const styleId = 'workflow-glow-animations';
+    const styleId = "workflow-glow-animations";
     if (!document.getElementById(styleId)) {
-      const style = document.createElement('style');
+      const style = document.createElement("style");
       style.id = styleId;
       style.textContent = `
         @keyframes glowPulse {
@@ -591,18 +606,18 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
     }
 
     const checkDarkMode = () => {
-      const isDark = document.documentElement.classList.contains('dark');
+      const isDark = document.documentElement.classList.contains("dark");
       setIsDarkMode(isDark);
     };
-    
+
     checkDarkMode();
-    
+
     const observer = new MutationObserver(checkDarkMode);
     observer.observe(document.documentElement, {
       attributes: true,
-      attributeFilter: ['class']
+      attributeFilter: ["class"],
     });
-    
+
     return () => observer.disconnect();
   }, []);
 
@@ -641,98 +656,100 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
     if (currentScreen !== "liveness_check" || !isFaceIdScanning) {
       return;
     }
-    
+
     const video = videoRef.current;
     if (!video) {
-      console.log('Video ref not available yet, waiting...');
+      console.log("Video ref not available yet, waiting...");
       // Wait a bit and retry
       const timeout = setTimeout(() => {
         const retryVideo = videoRef.current;
         if (retryVideo && cameraStream) {
-          console.log('Retrying to configure video after delay');
+          console.log("Retrying to configure video after delay");
           retryVideo.srcObject = cameraStream;
           retryVideo.play().catch(console.error);
         }
       }, 100);
       return () => clearTimeout(timeout);
     }
-    
+
     if (cameraStream) {
       // Verify that the stream is active and has active tracks
       const videoTracks = cameraStream.getVideoTracks();
-      const activeTracks = videoTracks.filter(track => track.readyState === 'live');
-      
-      console.log('Setting video srcObject');
-      console.log('Total tracks:', videoTracks.length);
-      console.log('Active tracks:', activeTracks.length);
-      console.log('Stream active:', cameraStream.active);
-      
+      const activeTracks = videoTracks.filter(
+        (track) => track.readyState === "live",
+      );
+
+      console.log("Setting video srcObject");
+      console.log("Total tracks:", videoTracks.length);
+      console.log("Active tracks:", activeTracks.length);
+      console.log("Stream active:", cameraStream.active);
+
       if (activeTracks.length === 0) {
-        console.warn('No active tracks in stream');
+        console.warn("No active tracks in stream");
         // Check if the stream ended
         if (!cameraStream.active) {
-          console.warn('Stream is not active, need to get a new one');
+          console.warn("Stream is not active, need to get a new one");
         }
         return;
       }
-      
+
       // Clean any previous stream
       if (video.srcObject) {
         const oldStream = video.srcObject as MediaStream;
-        oldStream.getTracks().forEach(track => {
-          if (track.readyState !== 'ended') {
+        oldStream.getTracks().forEach((track) => {
+          if (track.readyState !== "ended") {
             track.stop();
           }
         });
       }
-      
+
       video.srcObject = cameraStream;
-      
+
       const handleLoadedMetadata = () => {
-        console.log('Video metadata loaded, attempting to play');
-        video.play().catch(err => {
-          console.error('Error playing video after loading metadata:', err);
+        console.log("Video metadata loaded, attempting to play");
+        video.play().catch((err) => {
+          console.error("Error playing video after loading metadata:", err);
         });
       };
-      
+
       const handleCanPlay = () => {
-        console.log('Video can play');
-        video.play().catch(err => {
-          console.error('Error playing on canplay:', err);
+        console.log("Video can play");
+        video.play().catch((err) => {
+          console.error("Error playing on canplay:", err);
         });
       };
-      
+
       const handlePlaying = () => {
-        console.log('Video is now playing');
+        console.log("Video is now playing");
       };
-      
+
       const handleError = (e: Event) => {
-        console.error('Error in video element:', e);
+        console.error("Error in video element:", e);
       };
-      
+
       const handleEnded = () => {
-        console.warn('Video stream ended unexpectedly');
+        console.warn("Video stream ended unexpectedly");
       };
-      
-      video.addEventListener('loadedmetadata', handleLoadedMetadata);
-      video.addEventListener('canplay', handleCanPlay);
-      video.addEventListener('playing', handlePlaying);
-      video.addEventListener('error', handleError);
-      
+
+      video.addEventListener("loadedmetadata", handleLoadedMetadata);
+      video.addEventListener("canplay", handleCanPlay);
+      video.addEventListener("playing", handlePlaying);
+      video.addEventListener("error", handleError);
+
       // Monitor track state
-      activeTracks.forEach(track => {
-        track.addEventListener('ended', handleEnded);
+      activeTracks.forEach((track) => {
+        track.addEventListener("ended", handleEnded);
       });
-      
+
       // Try to play immediately
       const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise
           .then(() => {
-            console.log('Video playing successfully');
+            console.log("Video playing successfully");
           })
-          .catch(err => {
-            console.error('Error playing video immediately:', err);
+          .catch((err) => {
+            console.error("Error playing video immediately:", err);
             // Try again after a delay
             setTimeout(() => {
               if (video && video.srcObject) {
@@ -741,21 +758,21 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
             }, 300);
           });
       }
-      
+
       return () => {
-        video.removeEventListener('loadedmetadata', handleLoadedMetadata);
-        video.removeEventListener('canplay', handleCanPlay);
-        video.removeEventListener('playing', handlePlaying);
-        video.removeEventListener('error', handleError);
-        activeTracks.forEach(track => {
-          track.removeEventListener('ended', handleEnded);
+        video.removeEventListener("loadedmetadata", handleLoadedMetadata);
+        video.removeEventListener("canplay", handleCanPlay);
+        video.removeEventListener("playing", handlePlaying);
+        video.removeEventListener("error", handleError);
+        activeTracks.forEach((track) => {
+          track.removeEventListener("ended", handleEnded);
         });
       };
     } else {
-      console.log('No camera stream, cleaning video');
+      console.log("No camera stream, cleaning video");
       if (video) {
-      video.srcObject = null;
-    }
+        video.srcObject = null;
+      }
     }
   }, [cameraStream, currentScreen, isFaceIdScanning]);
 
@@ -782,73 +799,80 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
   const requestCameraAccess = async () => {
     try {
       setCameraError(null);
-      
+
       // Stop any previous stream before requesting a new one
       if (cameraStream) {
-        console.log('Stopping previous stream before requesting a new one');
-        cameraStream.getTracks().forEach(track => {
-          if (track.readyState !== 'ended') {
+        console.log("Stopping previous stream before requesting a new one");
+        cameraStream.getTracks().forEach((track) => {
+          if (track.readyState !== "ended") {
             track.stop();
           }
         });
         setCameraStream(null);
         // Wait a moment for the previous stream to clean up completely
-        await new Promise(resolve => setTimeout(resolve, 100));
+        await new Promise((resolve) => setTimeout(resolve, 100));
       }
-      
+
       console.log("Requesting camera access...");
       const stream = await navigator.mediaDevices.getUserMedia({
         video: {
-          facingMode: 'user',
+          facingMode: "user",
           width: { ideal: 1280 },
-          height: { ideal: 720 }
-        }
+          height: { ideal: 720 },
+        },
       });
-      
-      console.log('Camera stream obtained:', stream);
-      console.log('Stream active:', stream.active);
-      console.log('Video tracks:', stream.getVideoTracks());
-      
+
+      console.log("Camera stream obtained:", stream);
+      console.log("Stream active:", stream.active);
+      console.log("Video tracks:", stream.getVideoTracks());
+
       // Verify that tracks are active
-      stream.getVideoTracks().forEach(track => {
-        console.log('Track state:', track.readyState, 'enabled:', track.enabled);
-        console.log('Track ID:', track.id);
-        console.log('Track label:', track.label);
-        
+      stream.getVideoTracks().forEach((track) => {
+        console.log(
+          "Track state:",
+          track.readyState,
+          "enabled:",
+          track.enabled,
+        );
+        console.log("Track ID:", track.id);
+        console.log("Track label:", track.label);
+
         // Set up listeners to monitor track state
         track.onended = () => {
-          console.warn('Video track ended unexpectedly - ID:', track.id);
+          console.warn("Video track ended unexpectedly - ID:", track.id);
         };
-        
+
         track.onmute = () => {
-          console.warn('Video track muted - ID:', track.id);
+          console.warn("Video track muted - ID:", track.id);
         };
-        
+
         track.onunmute = () => {
-          console.log('Video track unmuted - ID:', track.id);
+          console.log("Video track unmuted - ID:", track.id);
         };
       });
-      
+
       // Verify that the stream is actually active before setting it
       if (!stream.active) {
-        console.error('The obtained stream is not active');
-        stream.getTracks().forEach(track => track.stop());
-        throw new Error('Camera stream is not active');
+        console.error("The obtained stream is not active");
+        stream.getTracks().forEach((track) => track.stop());
+        throw new Error("Camera stream is not active");
       }
-      
-      const activeTracks = stream.getVideoTracks().filter(track => track.readyState === 'live');
+
+      const activeTracks = stream
+        .getVideoTracks()
+        .filter((track) => track.readyState === "live");
       if (activeTracks.length === 0) {
-        console.error('No active tracks in the obtained stream');
-        stream.getTracks().forEach(track => track.stop());
-        throw new Error('No active video tracks');
+        console.error("No active tracks in the obtained stream");
+        stream.getTracks().forEach((track) => track.stop());
+        throw new Error("No active video tracks");
       }
-      
-      console.log('Stream verified correctly, setting in state');
+
+      console.log("Stream verified correctly, setting in state");
       setCameraStream(stream);
       return true;
     } catch (error: any) {
-      console.error('Error accessing camera:', error);
-      setCameraError(error.message || 'Could not access camera');
+      console.error("Error accessing camera:", error);
+      setCameraError(error.message || "Could not access camera");
       setCameraStream(null);
       return false;
     }
@@ -857,7 +881,7 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
   // Stop camera
   const stopCamera = () => {
     if (cameraStream) {
-      cameraStream.getTracks().forEach(track => track.stop());
+      cameraStream.getTracks().forEach((track) => track.stop());
       setCameraStream(null);
     }
     if (videoRef.current) {
@@ -867,20 +891,20 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
 
   const handleSelfieCheck = async (type: "selfie_photo" | "selfie_video") => {
     updateConfig({ selectedLivenessType: type });
-    
+
     // First set isFaceIdScanning so the video is in the DOM
     setIsFaceIdScanning(true);
-    
+
     // Wait a moment for React to render the video in the DOM
-    await new Promise(resolve => setTimeout(resolve, 100));
-    
+    await new Promise((resolve) => setTimeout(resolve, 100));
+
     // Request camera access
     const hasAccess = await requestCameraAccess();
     if (!hasAccess) {
       setIsFaceIdScanning(false);
       return;
     }
-    
+
     // Wait a moment for the video to configure with the stream
     setTimeout(() => {
       startFaceIdScan();
@@ -892,42 +916,50 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
     setFaceIdProgress(0);
     setIsCircleFilling(false);
     setShowCheckmark(false);
-    
+
     // Total duration: 5 seconds (5000ms) - similar to iPhone Face ID
     const duration = 5000;
     const interval = 50; // Update every 50ms for smooth animation
     const increment = 100 / (duration / interval); // Calculate increment to reach 100% in 5 seconds
-    
+
     const progressInterval = setInterval(() => {
       setFaceIdProgress((prev) => {
         const newProgress = prev + increment;
         if (newProgress >= 100) {
           clearInterval(progressInterval);
-          
+
           // Capture photo from video when it reaches 100%
           if (videoRef.current && cameraStream) {
             try {
-              const canvas = document.createElement('canvas');
+              const canvas = document.createElement("canvas");
               canvas.width = videoRef.current.videoWidth || 640;
               canvas.height = videoRef.current.videoHeight || 480;
-              const ctx = canvas.getContext('2d');
+              const ctx = canvas.getContext("2d");
               if (ctx && videoRef.current) {
-                ctx.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
+                ctx.drawImage(
+                  videoRef.current,
+                  0,
+                  0,
+                  canvas.width,
+                  canvas.height,
+                );
                 // The captured photo is in the canvas (you can save it or process it here)
-                console.log('Photo captured from Face ID scan');
+                console.log("Photo captured from Face ID scan");
               }
             } catch (error) {
-              console.error('Error capturing photo:', error);
+              console.error("Error capturing photo:", error);
             }
           }
-          
+
           // Stop camera and finish when progress reaches 100%
           setTimeout(() => {
             stopCamera();
             setIsFaceIdScanning(false);
             setIsCircleFilling(false);
             setShowCheckmark(false);
-            updateConfig({ result: Math.random() > 0.3 ? "approved" : "rejected" });
+            updateConfig({
+              result: Math.random() > 0.3 ? "approved" : "rejected",
+            });
             updateConfig({ currentScreen: "result" });
           }, 100);
           return 100;
@@ -936,44 +968,44 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
       });
     }, interval);
   };
-  
+
   const currentBranding = isDarkMode ? branding.dark : branding.light;
-  
+
   // Funciones helper para manipular colores (igual que en auth)
-  const themeColor = currentBranding.customColorTheme || '#004492';
-  
+  const themeColor = currentBranding.customColorTheme || "#004492";
+
   // Inicializar animaciones CTA
   useCTAButtonAnimations(themeColor);
-  
+
   const darkenColor = (color: string, amount: number = 0.3): string => {
-    const hex = color.replace('#', '');
+    const hex = color.replace("#", "");
     const r = parseInt(hex.substring(0, 2), 16);
     const g = parseInt(hex.substring(2, 4), 16);
     const b = parseInt(hex.substring(4, 6), 16);
     const newR = Math.max(0, Math.floor(r * (1 - amount)));
     const newG = Math.max(0, Math.floor(g * (1 - amount)));
     const newB = Math.max(0, Math.floor(b * (1 - amount)));
-    return `#${newR.toString(16).padStart(2, '0')}${newG.toString(16).padStart(2, '0')}${newB.toString(16).padStart(2, '0')}`;
+    return `#${newR.toString(16).padStart(2, "0")}${newG.toString(16).padStart(2, "0")}${newB.toString(16).padStart(2, "0")}`;
   };
-  
+
   const getAlmostBlackColor = (color: string): string => {
     return darkenColor(color, 0.7);
   };
-  
+
   const lightenColor = (color: string, amount: number = 0.2): string => {
-    const hex = color.replace('#', '');
+    const hex = color.replace("#", "");
     const r = parseInt(hex.substring(0, 2), 16);
     const g = parseInt(hex.substring(2, 4), 16);
     const b = parseInt(hex.substring(4, 6), 16);
     const newR = Math.min(255, Math.floor(r + (255 - r) * amount));
     const newG = Math.min(255, Math.floor(g + (255 - g) * amount));
     const newB = Math.min(255, Math.floor(b + (255 - b) * amount));
-    return `#${newR.toString(16).padStart(2, '0')}${newG.toString(16).padStart(2, '0')}${newB.toString(16).padStart(2, '0')}`;
+    return `#${newR.toString(16).padStart(2, "0")}${newG.toString(16).padStart(2, "0")}${newB.toString(16).padStart(2, "0")}`;
   };
-  
+
   const darkThemeColor = darkenColor(themeColor, 0.3);
   const almostBlackColor = getAlmostBlackColor(themeColor);
-  const blackColor = '#000000';
+  const blackColor = "#000000";
 
   const toggleViewMode = () => {
     updateConfig({ viewMode: viewMode === "mobile" ? "web" : "mobile" });
@@ -986,7 +1018,13 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
   };
 
   const getNextScreen = (): ScreenStep | null => {
-    const screens: ScreenStep[] = ["welcome", "document_selection", "document_capture", "liveness_check", "result"];
+    const screens: ScreenStep[] = [
+      "welcome",
+      "document_selection",
+      "document_capture",
+      "liveness_check",
+      "result",
+    ];
     const currentIndex = screens.indexOf(currentScreen);
     if (currentIndex < screens.length - 1) {
       const nextScreen = screens[currentIndex + 1];
@@ -998,7 +1036,13 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
   };
 
   const getPreviousScreen = (): ScreenStep | null => {
-    const screens: ScreenStep[] = ["welcome", "document_selection", "document_capture", "liveness_check", "result"];
+    const screens: ScreenStep[] = [
+      "welcome",
+      "document_selection",
+      "document_capture",
+      "liveness_check",
+      "result",
+    ];
     const currentIndex = screens.indexOf(currentScreen);
     if (currentIndex > 0) {
       const prevScreen = screens[currentIndex - 1];
@@ -1026,76 +1070,280 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
   // Screen 1: Welcome
   const renderWelcomeScreen = () => {
     const { welcome } = previewTexts;
-    
+
     // SVG geométrico (forma organica2.svg) adaptado al customColorTheme
     const GeometricSVG = () => {
       const lightThemeColor = lightenColor(themeColor, 0.3);
-      const baseId = 'identity-welcome';
-      
+      const baseId = "identity-welcome";
+
       return (
         <div className="flex justify-center py-2">
-          <svg 
+          <svg
             id={`Capa_2_${baseId}`}
-            data-name="Capa 2" 
+            data-name="Capa 2"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 215.02 215.02"
             className="h-48 w-48 opacity-80"
           >
             <defs>
-              <linearGradient id={`identity-gradient-${baseId}`} x1="4.35" y1="612.77" x2="210.66" y2="612.77" gradientTransform="translate(0 720.29) scale(1 -1)" gradientUnits="userSpaceOnUse">
+              <linearGradient
+                id={`identity-gradient-${baseId}`}
+                x1="4.35"
+                y1="612.77"
+                x2="210.66"
+                y2="612.77"
+                gradientTransform="translate(0 720.29) scale(1 -1)"
+                gradientUnits="userSpaceOnUse"
+              >
                 <stop offset="0" stopColor={lightThemeColor} />
                 <stop offset="1" stopColor={darkThemeColor} />
               </linearGradient>
-              <linearGradient id={`identity-gradient-2-${baseId}`} x1="5.57" y1="612.78" x2="209.46" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-3-${baseId}`} x1="20.99" y1="612.78" x2="194.05" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-4-${baseId}`} x1="0" y1="612.78" x2="215.02" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-5-${baseId}`} x1="17.91" y1="612.78" x2="197.11" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-6-${baseId}`} x1="7.41" y1="612.77" x2="207.62" y2="612.77" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-7-${baseId}`} x1="2.97" y1="612.78" x2="212.04" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-8-${baseId}`} x1="26.88" y1="612.78" x2="188.15" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-9-${baseId}`} x1=".65" y1="612.78" x2="214.38" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-10-${baseId}`} x1="13.07" y1="612.77" x2="201.95" y2="612.77" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-11-${baseId}`} x1="11.2" y1="612.78" x2="203.81" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-12-${baseId}`} x1="1.17" y1="612.78" x2="213.84" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-13-${baseId}`} x1="29.6" y1="612.77" x2="185.42" y2="612.77" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-14-${baseId}`} x1="2.1" y1="612.77" x2="212.92" y2="612.77" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-15-${baseId}`} x1="8.95" y1="612.78" x2="206.07" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-16-${baseId}`} x1="15.74" y1="612.78" x2="199.28" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-17-${baseId}`} x1=".19" y1="612.77" x2="214.85" y2="612.77" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-18-${baseId}`} x1="23.44" y1="612.78" x2="191.59" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-19-${baseId}`} x1="5.57" y1="612.78" x2="209.46" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-20-${baseId}`} x1="20.99" y1="612.78" x2="194.05" y2="612.78" href={`#identity-gradient-${baseId}`} />
+              <linearGradient
+                id={`identity-gradient-2-${baseId}`}
+                x1="5.57"
+                y1="612.78"
+                x2="209.46"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-3-${baseId}`}
+                x1="20.99"
+                y1="612.78"
+                x2="194.05"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-4-${baseId}`}
+                x1="0"
+                y1="612.78"
+                x2="215.02"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-5-${baseId}`}
+                x1="17.91"
+                y1="612.78"
+                x2="197.11"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-6-${baseId}`}
+                x1="7.41"
+                y1="612.77"
+                x2="207.62"
+                y2="612.77"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-7-${baseId}`}
+                x1="2.97"
+                y1="612.78"
+                x2="212.04"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-8-${baseId}`}
+                x1="26.88"
+                y1="612.78"
+                x2="188.15"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-9-${baseId}`}
+                x1=".65"
+                y1="612.78"
+                x2="214.38"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-10-${baseId}`}
+                x1="13.07"
+                y1="612.77"
+                x2="201.95"
+                y2="612.77"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-11-${baseId}`}
+                x1="11.2"
+                y1="612.78"
+                x2="203.81"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-12-${baseId}`}
+                x1="1.17"
+                y1="612.78"
+                x2="213.84"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-13-${baseId}`}
+                x1="29.6"
+                y1="612.77"
+                x2="185.42"
+                y2="612.77"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-14-${baseId}`}
+                x1="2.1"
+                y1="612.77"
+                x2="212.92"
+                y2="612.77"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-15-${baseId}`}
+                x1="8.95"
+                y1="612.78"
+                x2="206.07"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-16-${baseId}`}
+                x1="15.74"
+                y1="612.78"
+                x2="199.28"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-17-${baseId}`}
+                x1=".19"
+                y1="612.77"
+                x2="214.85"
+                y2="612.77"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-18-${baseId}`}
+                x1="23.44"
+                y1="612.78"
+                x2="191.59"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-19-${baseId}`}
+                x1="5.57"
+                y1="612.78"
+                x2="209.46"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-20-${baseId}`}
+                x1="20.99"
+                y1="612.78"
+                x2="194.05"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
             </defs>
             <g id="object">
               <g>
-                <path fill={`url(#identity-gradient-9-${baseId})`} d="M77.1,210.67l-.14-.25L4.35,77.11,137.91,4.37l.14.25,72.61,133.31-133.56,72.74h0ZM5.13,77.33l72.2,132.57,132.57-72.2L137.7,5.13S5.13,77.33,5.13,77.33Z" />
-                <path fill={`url(#identity-gradient-${baseId})`} d="M141.77,209.45L5.57,141.77l.13-.25L73.26,5.58l136.2,67.68-.13.25-67.56,135.94h0ZM6.33,141.52l135.18,67.18,67.18-135.18L73.51,6.34,6.33,141.52h0Z" />
-                <path fill={`url(#identity-gradient-2-${baseId})`} d="M43.66,194.05l-.04-.28L20.99,43.66l150.39-22.68.04.28,22.63,150.11-150.39,22.68h0ZM21.62,44.14l22.51,149.26,149.26-22.51-22.51-149.26L21.61,44.14h.01Z" />
-                <path fill={`url(#identity-gradient-5-${baseId})`} d="M104.84,215.02l-.2-.21L0,104.83,110.18,0l.2.21,104.64,109.98-110.18,104.83h0ZM.8,104.86l104.05,109.36,109.36-104.05L110.16.81.8,104.86Z" />
-                <path fill={`url(#identity-gradient-6-${baseId})`} d="M166.98,197.11l-149.07-30.13L48.04,17.91l149.07,30.13-30.13,149.07ZM18.58,166.55l147.96,29.9,29.9-147.96L48.48,18.59l-29.9,147.96Z" />
-                <path fill={`url(#identity-gradient-3-${baseId})`} d="M68.23,207.63l-.11-.26L7.41,68.24,146.8,7.41l.11.26,60.71,139.13-139.39,60.83h0ZM8.15,68.53l60.37,138.35,138.35-60.37L146.5,8.16,8.15,68.53Z" />
-                <path fill={`url(#identity-gradient-4-${baseId})`} d="M132.75,212.05l-.24-.15L2.97,132.75,82.26,2.97l.24.15,129.54,79.15-79.29,129.78h0ZM3.75,132.57l128.81,78.7,78.7-128.81L82.45,3.76,3.75,132.57Z" />
-                <path fill={`url(#identity-gradient-7-${baseId})`} d="M36.36,188.15L26.88,36.36l151.79-9.48,9.48,151.79-151.79,9.48ZM27.47,36.89l9.41,150.66,150.66-9.41-9.41-150.66L27.47,36.89Z" />
-                <path fill={`url(#identity-gradient-8-${baseId})`} d="M95.48,214.38l-.18-.22L.65,95.48l.22-.18L119.55.65l.18.22,94.65,118.68-.22.18-118.68,94.65h0ZM1.44,95.57l94.12,118.01,118.01-94.12L119.45,1.45,1.44,95.57h0Z" />
-                <path fill={`url(#identity-gradient-11-${baseId})`} d="M158.95,201.96l-.27-.08L13.07,158.96l.08-.27L56.07,13.08l.27.08,145.61,42.92-.08.27-42.92,145.61h0ZM13.77,158.57l144.79,42.68,42.68-144.79L56.45,13.78,13.77,158.57h0Z" />
-                <path fill={`url(#identity-gradient-12-${baseId})`} d="M59.65,203.82l-.09-.27L11.2,59.66l.27-.09L155.36,11.21l.09.27,48.36,143.89-.27.09-143.89,48.36h0ZM11.92,60.01l48.09,143.09,143.09-48.09L155.01,11.92,11.92,60.01Z" />
-                <path fill={`url(#identity-gradient-13-${baseId})`} d="M123.54,213.85L1.17,123.55,91.47,1.18l122.37,90.3-90.3,122.37h0ZM1.96,123.43l121.46,89.63,89.63-121.46L91.59,1.97,1.96,123.43Z" />
-                <path fill={`url(#identity-gradient-14-${baseId})`} d="M181.64,185.43l-152.04-3.78v-.28l3.78-151.76,152.04,3.78v.28l-3.78,151.76h0ZM30.18,181.09l150.91,3.75,3.75-150.91-150.91-3.75-3.75,150.91Z" />
-                <path fill={`url(#identity-gradient-15-${baseId})`} d="M86.21,212.93L2.1,86.22,128.81,2.11l84.11,126.71-126.71,84.11ZM2.88,86.37l83.48,125.77,125.77-83.48L128.65,2.89,2.88,86.37Z" />
-                <path fill={`url(#identity-gradient-16-${baseId})`} d="M150.52,206.08l-.26-.1L8.95,150.53,64.5,8.95l.26.1,141.31,55.45-55.55,141.58ZM9.68,150.21l140.52,55.14,55.14-140.52L64.82,9.69,9.68,150.21Z" />
-                <path fill={`url(#identity-gradient-19-${baseId})`} d="M51.44,199.28l-.07-.28L15.74,51.44,163.58,15.74l.07.28,35.63,147.56-147.84,35.7ZM16.43,51.86l35.43,146.74,146.74-35.43L163.17,16.43S16.43,51.86,16.43,51.86Z" />
-                <path fill={`url(#identity-gradient-17-${baseId})`} d="M114.22,214.85l-.21-.19L.19,114.22l.19-.21L100.82.19l.21.19,113.82,100.44-.19.21-100.44,113.82h0ZM.98,114.17l113.19,99.88,99.88-113.19L100.86.98.98,114.17h0Z" />
-                <path fill={`url(#identity-gradient-18-${baseId})`} d="M174.57,191.59l-151.13-17.02.03-.28L40.46,23.44l151.13,17.02-.03.28-16.99,150.85ZM24.06,174.07l150,16.89,16.89-150L40.95,24.07l-16.89,150Z" />
-                <path fill={`url(#identity-gradient-9-${baseId})`} d="M77.1,210.67l-.14-.25L4.35,77.11,137.91,4.37l.14.25,72.61,133.31-133.56,72.74h0ZM5.13,77.33l72.2,132.57,132.57-72.2L137.7,5.13S5.13,77.33,5.13,77.33Z" />
-                <path fill={`url(#identity-gradient-${baseId})`} d="M141.77,209.45L5.57,141.77l.13-.25L73.26,5.58l136.2,67.68-.13.25-67.56,135.94h0ZM6.33,141.52l135.18,67.18,67.18-135.18L73.51,6.34,6.33,141.52h0Z" />
-                <path fill={`url(#identity-gradient-2-${baseId})`} d="M43.66,194.05l-.04-.28L20.99,43.66l150.39-22.68.04.28,22.63,150.11-150.39,22.68h0ZM21.62,44.14l22.51,149.26,149.26-22.51-22.51-149.26L21.61,44.14h.01Z" />
+                <path
+                  fill={`url(#identity-gradient-9-${baseId})`}
+                  d="M77.1,210.67l-.14-.25L4.35,77.11,137.91,4.37l.14.25,72.61,133.31-133.56,72.74h0ZM5.13,77.33l72.2,132.57,132.57-72.2L137.7,5.13S5.13,77.33,5.13,77.33Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-${baseId})`}
+                  d="M141.77,209.45L5.57,141.77l.13-.25L73.26,5.58l136.2,67.68-.13.25-67.56,135.94h0ZM6.33,141.52l135.18,67.18,67.18-135.18L73.51,6.34,6.33,141.52h0Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-2-${baseId})`}
+                  d="M43.66,194.05l-.04-.28L20.99,43.66l150.39-22.68.04.28,22.63,150.11-150.39,22.68h0ZM21.62,44.14l22.51,149.26,149.26-22.51-22.51-149.26L21.61,44.14h.01Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-5-${baseId})`}
+                  d="M104.84,215.02l-.2-.21L0,104.83,110.18,0l.2.21,104.64,109.98-110.18,104.83h0ZM.8,104.86l104.05,109.36,109.36-104.05L110.16.81.8,104.86Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-6-${baseId})`}
+                  d="M166.98,197.11l-149.07-30.13L48.04,17.91l149.07,30.13-30.13,149.07ZM18.58,166.55l147.96,29.9,29.9-147.96L48.48,18.59l-29.9,147.96Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-3-${baseId})`}
+                  d="M68.23,207.63l-.11-.26L7.41,68.24,146.8,7.41l.11.26,60.71,139.13-139.39,60.83h0ZM8.15,68.53l60.37,138.35,138.35-60.37L146.5,8.16,8.15,68.53Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-4-${baseId})`}
+                  d="M132.75,212.05l-.24-.15L2.97,132.75,82.26,2.97l.24.15,129.54,79.15-79.29,129.78h0ZM3.75,132.57l128.81,78.7,78.7-128.81L82.45,3.76,3.75,132.57Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-7-${baseId})`}
+                  d="M36.36,188.15L26.88,36.36l151.79-9.48,9.48,151.79-151.79,9.48ZM27.47,36.89l9.41,150.66,150.66-9.41-9.41-150.66L27.47,36.89Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-8-${baseId})`}
+                  d="M95.48,214.38l-.18-.22L.65,95.48l.22-.18L119.55.65l.18.22,94.65,118.68-.22.18-118.68,94.65h0ZM1.44,95.57l94.12,118.01,118.01-94.12L119.45,1.45,1.44,95.57h0Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-11-${baseId})`}
+                  d="M158.95,201.96l-.27-.08L13.07,158.96l.08-.27L56.07,13.08l.27.08,145.61,42.92-.08.27-42.92,145.61h0ZM13.77,158.57l144.79,42.68,42.68-144.79L56.45,13.78,13.77,158.57h0Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-12-${baseId})`}
+                  d="M59.65,203.82l-.09-.27L11.2,59.66l.27-.09L155.36,11.21l.09.27,48.36,143.89-.27.09-143.89,48.36h0ZM11.92,60.01l48.09,143.09,143.09-48.09L155.01,11.92,11.92,60.01Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-13-${baseId})`}
+                  d="M123.54,213.85L1.17,123.55,91.47,1.18l122.37,90.3-90.3,122.37h0ZM1.96,123.43l121.46,89.63,89.63-121.46L91.59,1.97,1.96,123.43Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-14-${baseId})`}
+                  d="M181.64,185.43l-152.04-3.78v-.28l3.78-151.76,152.04,3.78v.28l-3.78,151.76h0ZM30.18,181.09l150.91,3.75,3.75-150.91-150.91-3.75-3.75,150.91Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-15-${baseId})`}
+                  d="M86.21,212.93L2.1,86.22,128.81,2.11l84.11,126.71-126.71,84.11ZM2.88,86.37l83.48,125.77,125.77-83.48L128.65,2.89,2.88,86.37Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-16-${baseId})`}
+                  d="M150.52,206.08l-.26-.1L8.95,150.53,64.5,8.95l.26.1,141.31,55.45-55.55,141.58ZM9.68,150.21l140.52,55.14,55.14-140.52L64.82,9.69,9.68,150.21Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-19-${baseId})`}
+                  d="M51.44,199.28l-.07-.28L15.74,51.44,163.58,15.74l.07.28,35.63,147.56-147.84,35.7ZM16.43,51.86l35.43,146.74,146.74-35.43L163.17,16.43S16.43,51.86,16.43,51.86Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-17-${baseId})`}
+                  d="M114.22,214.85l-.21-.19L.19,114.22l.19-.21L100.82.19l.21.19,113.82,100.44-.19.21-100.44,113.82h0ZM.98,114.17l113.19,99.88,99.88-113.19L100.86.98.98,114.17h0Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-18-${baseId})`}
+                  d="M174.57,191.59l-151.13-17.02.03-.28L40.46,23.44l151.13,17.02-.03.28-16.99,150.85ZM24.06,174.07l150,16.89,16.89-150L40.95,24.07l-16.89,150Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-9-${baseId})`}
+                  d="M77.1,210.67l-.14-.25L4.35,77.11,137.91,4.37l.14.25,72.61,133.31-133.56,72.74h0ZM5.13,77.33l72.2,132.57,132.57-72.2L137.7,5.13S5.13,77.33,5.13,77.33Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-${baseId})`}
+                  d="M141.77,209.45L5.57,141.77l.13-.25L73.26,5.58l136.2,67.68-.13.25-67.56,135.94h0ZM6.33,141.52l135.18,67.18,67.18-135.18L73.51,6.34,6.33,141.52h0Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-2-${baseId})`}
+                  d="M43.66,194.05l-.04-.28L20.99,43.66l150.39-22.68.04.28,22.63,150.11-150.39,22.68h0ZM21.62,44.14l22.51,149.26,149.26-22.51-22.51-149.26L21.61,44.14h.01Z"
+                />
               </g>
             </g>
           </svg>
         </div>
       );
     };
-    
+
     return (
       <div className="flex h-full flex-col overflow-hidden">
         {/* Header con back y logo */}
@@ -1105,7 +1353,11 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
           </button>
           {currentBranding.logo && (
             <div className="absolute left-1/2 -translate-x-1/2">
-              <img src={currentBranding.logo} alt="Logo" className="h-8 max-w-full object-contain" />
+              <img
+                src={currentBranding.logo}
+                alt="Logo"
+                className="h-8 max-w-full object-contain"
+              />
             </div>
           )}
           <div className="w-12"></div> {/* Spacer para centrar el logo */}
@@ -1120,14 +1372,22 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
           />
         </div>
 
-        <div className="relative z-10 flex-1 flex flex-col" style={{ minHeight: 0 }}>
+        <div
+          className="relative z-10 flex-1 flex flex-col"
+          style={{ minHeight: 0 }}
+        >
           {/* Título - fuera de la tarjeta translúcida, debajo del SVG */}
           <div className="text-center mb-3 mt-2">
-            <h2 className="mb-1 text-xl leading-tight" style={{ color: themeColor }}>
-              <span className="font-bold">Verificación</span>{' '}
+            <h2
+              className="mb-1 text-xl leading-tight"
+              style={{ color: themeColor }}
+            >
+              <span className="font-bold">Verificación</span>{" "}
               <span className="font-normal">de identidad</span>
             </h2>
-            <p className="text-xs text-black dark:text-gray-900">{welcome.subtitle}</p>
+            <p className="text-xs text-black dark:text-gray-900">
+              {welcome.subtitle}
+            </p>
           </div>
 
           {/* Spacer para empujar el div hacia abajo */}
@@ -1135,35 +1395,51 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
 
           {/* Tarjeta con fondo gris translúcido - empieza desde abajo del celular */}
           {/* Para ajustar la altura del div, modifica el valor de 'minHeight' abajo */}
-        <div 
+          <div
             className="relative overflow-hidden backdrop-blur-sm flex flex-col"
-          style={{ 
-              backgroundColor: 'rgba(155, 162, 175, 0.20)', // Gris más notorio y translúcido (aumentado de 0.5 a 0.65)
-              padding: '11px',
-              margin: '1px', // Padding con los bordes del celular
-              borderRadius: '20px', // Bordes ligeramente redondeados (no en punta, pero rectangular)
-              marginBottom: '0', // Pegado al borde inferior
-              minHeight: '260px', // Ajusta este valor para cambiar la altura del div (valores más altos = div más grande)
+            style={{
+              backgroundColor: "rgba(155, 162, 175, 0.20)", // Gris más notorio y translúcido (aumentado de 0.5 a 0.65)
+              padding: "11px",
+              margin: "1px", // Padding con los bordes del celular
+              borderRadius: "20px", // Bordes ligeramente redondeados (no en punta, pero rectangular)
+              marginBottom: "0", // Pegado al borde inferior
+              minHeight: "260px", // Ajusta este valor para cambiar la altura del div (valores más altos = div más grande)
             }}
           >
-            <div className="flex flex-col justify-between" style={{ minHeight: '100%', height: '100%' }}>
+            <div
+              className="flex flex-col justify-between"
+              style={{ minHeight: "100%", height: "100%" }}
+            >
               {/* Tarjetas informativas horizontales con efecto acordeón - pegadas arriba */}
-              <div className="relative flex items-center justify-center py-2 overflow-visible" style={{ marginTop: '0' }}>
-                <div className="relative" style={{ width: '100%', height: '70px', maxWidth: '100%', overflow: 'visible', paddingLeft: '40px', paddingRight: '40px' }}>
-                {welcome.checklist.map((item, index) => {
-                  const isActive = activeWelcomeCard === index;
-                  
-                  // Dimensiones de las tarjetas
+              <div
+                className="relative flex items-center justify-center py-2 overflow-visible"
+                style={{ marginTop: "0" }}
+              >
+                <div
+                  className="relative"
+                  style={{
+                    width: "100%",
+                    height: "70px",
+                    maxWidth: "100%",
+                    overflow: "visible",
+                    paddingLeft: "40px",
+                    paddingRight: "40px",
+                  }}
+                >
+                  {welcome.checklist.map((item, index) => {
+                    const isActive = activeWelcomeCard === index;
+
+                    // Dimensiones de las tarjetas
                     const activeCardWidth = 220; // Aumentado para que el texto no se desborde
-                  const inactiveCardWidth = 60;
-                  const visiblePart = 40; // Parte visible de las tarjetas inactivas (30px)
-                  const overlapAmount = inactiveCardWidth - visiblePart; // 20px de superposición
-                  
-                  // Calcular posición según qué tarjeta está activa
+                    const inactiveCardWidth = 60;
+                    const visiblePart = 40; // Parte visible de las tarjetas inactivas (30px)
+                    const overlapAmount = inactiveCardWidth - visiblePart; // 20px de superposición
+
+                    // Calcular posición según qué tarjeta está activa
                     // El contenedor tiene padding de 40px a cada lado para que las tarjetas parcialmente visibles no se corten
                     let leftOffset: number | string = 0;
-                  
-                  if (isActive) {
+
+                    if (isActive) {
                       // La tarjeta activa se alinea según su posición:
                       if (activeWelcomeCard === 0) {
                         // Primera activa: alineada a la izquierda (respetando el padding)
@@ -1175,9 +1451,9 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
                         // Tercera activa: alineada a la derecha (respetando el padding)
                         leftOffset = `calc(100% - ${activeCardWidth}px)`;
                       }
-                  } else if (index < activeWelcomeCard) {
-                    // Tarjetas a la izquierda de la activa - parcialmente visibles
-                    const cardsBefore = activeWelcomeCard - index;
+                    } else if (index < activeWelcomeCard) {
+                      // Tarjetas a la izquierda de la activa - parcialmente visibles
+                      const cardsBefore = activeWelcomeCard - index;
                       if (activeWelcomeCard === 1) {
                         // Segunda activa: las de la izquierda parcialmente visibles
                         // Calcular desde el centro hacia la izquierda
@@ -1188,15 +1464,18 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
                         const rightX = `calc(100% - ${activeCardWidth}px)`;
                         leftOffset = `calc(${rightX} - ${inactiveCardWidth - visiblePart}px * ${cardsBefore})`;
                       }
-                  } else {
-                    // Tarjetas a la derecha de la activa - parcialmente visibles
-                    const cardsAfter = index - activeWelcomeCard;
+                    } else {
+                      // Tarjetas a la derecha de la activa - parcialmente visibles
+                      const cardsAfter = index - activeWelcomeCard;
                       if (activeWelcomeCard === 0) {
                         // Primera activa: las de la derecha parcialmente visibles
                         if (cardsAfter === 1) {
                           leftOffset = activeCardWidth - visiblePart;
                         } else if (cardsAfter === 2) {
-                          leftOffset = activeCardWidth + inactiveCardWidth - visiblePart * 2;
+                          leftOffset =
+                            activeCardWidth +
+                            inactiveCardWidth -
+                            visiblePart * 2;
                         }
                       } else if (activeWelcomeCard === 1) {
                         // Segunda activa: las de la derecha parcialmente visibles
@@ -1204,153 +1483,267 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
                         const centerX = `calc((100% - ${activeCardWidth}px) / 2)`;
                         leftOffset = `calc(${centerX} + ${activeCardWidth}px - ${overlapAmount * cardsAfter}px)`;
                       }
-                  }
-                  
-                  // Asegurar que las tarjetas inactivas sean visibles
-                  // Si la primera está activa, las otras dos deben verse a la derecha
-                  // Si la del centro está activa, las otras dos a los lados
-                  // Si la última está activa, las otras dos a la izquierda
-                  
-                  // Z-index dinámico según qué tarjeta está activa:
-                  // Caso 1: Tarjeta 0 activa -> 0 arriba, 1 medio, 2 abajo
-                  // Caso 2: Tarjeta 1 activa -> 1 arriba, 0 y 2 abajo (mismo nivel)
-                  // Caso 3: Tarjeta 2 activa -> 2 arriba, 1 medio, 0 abajo
-                  let zIndex = 10;
-                  if (isActive) {
-                    zIndex = 30; // La activa siempre arriba
-                  } else {
-                    if (activeWelcomeCard === 0) {
-                      // Caso 1: Tarjeta 0 activa
-                      zIndex = 20 - index; // 0=30 (activa), 1=19, 2=18
-                    } else if (activeWelcomeCard === 1) {
-                      // Caso 2: Tarjeta 1 activa (centro)
-                      zIndex = index === 0 || index === 2 ? 15 : 30; // 0 y 2 en capa 2, 1 arriba
-                    } else if (activeWelcomeCard === 2) {
-                      // Caso 3: Tarjeta 2 activa
-                      zIndex = 20 + index; // 0=20, 1=21, 2=30 (activa)
                     }
-                  }
-                  
-                  return (
-                    <div
-                      key={item.title}
-                      onClick={() => setActiveWelcomeCard(index)}
-                        className={`absolute top-0 flex cursor-pointer items-center gap-3 ${isActive
-                          ? 'shadow-lg rounded-xl' 
-                          : 'border border-stroke bg-gray-2 dark:border-dark-3 dark:bg-dark-2 rounded-xl'
-                      }`}
-                      style={{
-                        ...(isActive 
-                          ? { 
-                              background: `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
-                              border: '2px solid white',
-                            }
-                          : { 
-                              backgroundColor: '#9BA2AF', // Color gris para tarjetas inactivas
-                              border: '2px solid white',
-                            }
-                        ),
-                          left: typeof leftOffset === 'string' ? leftOffset : `${leftOffset}px`,
-                        width: isActive ? `${activeCardWidth}px` : `${inactiveCardWidth}px`,
-                          maxWidth: isActive ? `${activeCardWidth}px` : `${inactiveCardWidth}px`,
-                        height: '60px',
-                          paddingLeft: isActive ? '16px' : (index < activeWelcomeCard ? '0' : (index > activeWelcomeCard && activeWelcomeCard === 1 ? '0' : '0')),
-                          paddingRight: isActive ? '16px' : (index > activeWelcomeCard && activeWelcomeCard === 1 ? '12px' : '0'),
-                          minWidth: isActive ? `${activeCardWidth}px` : `${inactiveCardWidth}px`,
-                          justifyContent: isActive ? 'flex-start' : (index > activeWelcomeCard && activeWelcomeCard === 1 ? 'flex-end' : (index < activeWelcomeCard ? 'center' : 'center')),
-                        zIndex: zIndex,
-                        borderRadius: '12px', // Esquinas curvas pero no tan redondeadas como rounded-full
-                        transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)', // Transición más suave y fluida
-                      }}
-                    >
-                        {/* Icono - siempre visible, centrado cuando inactiva, alineado a la derecha cuando está parcialmente visible a la derecha */}
-                      <div 
-                        className="flex shrink-0 items-center justify-center" 
-                        style={{ 
-                            width: isActive ? '32px' : 'auto',
-                          height: '32px',
-                            marginLeft: isActive ? '0' : (index > activeWelcomeCard && activeWelcomeCard === 1 ? 'auto' : '0'),
-                            marginRight: index > activeWelcomeCard && activeWelcomeCard === 1 && !isActive ? '12px' : '0',
-                        }}
-                      >
-                        {index === 0 && (
-                          <svg className="h-5 w-5" style={{ color: 'white' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                          </svg>
-                        )}
-                        {index === 1 && (
-                          <svg className="h-5 w-5" style={{ color: 'white' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                          </svg>
-                        )}
-                        {index === 2 && (
-                          <svg className="h-5 w-5" style={{ color: 'white' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                        )}
-                      </div>
-                      
-                        {/* Texto - solo visible cuando está activa (en inactivas solo se ven los iconos) */}
-                      <div 
-                          className="flex-1 overflow-hidden"
+
+                    // Asegurar que las tarjetas inactivas sean visibles
+                    // Si la primera está activa, las otras dos deben verse a la derecha
+                    // Si la del centro está activa, las otras dos a los lados
+                    // Si la última está activa, las otras dos a la izquierda
+
+                    // Z-index dinámico según qué tarjeta está activa:
+                    // Caso 1: Tarjeta 0 activa -> 0 arriba, 1 medio, 2 abajo
+                    // Caso 2: Tarjeta 1 activa -> 1 arriba, 0 y 2 abajo (mismo nivel)
+                    // Caso 3: Tarjeta 2 activa -> 2 arriba, 1 medio, 0 abajo
+                    let zIndex = 10;
+                    if (isActive) {
+                      zIndex = 30; // La activa siempre arriba
+                    } else {
+                      if (activeWelcomeCard === 0) {
+                        // Caso 1: Tarjeta 0 activa
+                        zIndex = 20 - index; // 0=30 (activa), 1=19, 2=18
+                      } else if (activeWelcomeCard === 1) {
+                        // Caso 2: Tarjeta 1 activa (centro)
+                        zIndex = index === 0 || index === 2 ? 15 : 30; // 0 y 2 en capa 2, 1 arriba
+                      } else if (activeWelcomeCard === 2) {
+                        // Caso 3: Tarjeta 2 activa
+                        zIndex = 20 + index; // 0=20, 1=21, 2=30 (activa)
+                      }
+                    }
+
+                    return (
+                      <div
+                        key={item.title}
+                        onClick={() => setActiveWelcomeCard(index)}
+                        className={`absolute top-0 flex cursor-pointer items-center gap-3 ${
+                          isActive
+                            ? "shadow-lg rounded-xl"
+                            : "border border-stroke bg-gray-2 dark:border-dark-3 dark:bg-dark-2 rounded-xl"
+                        }`}
                         style={{
-                            opacity: isActive ? 1 : 0,
-                            maxWidth: isActive ? '170px' : '0',
-                          transition: isActive 
-                            ? 'opacity 0.25s ease-out 0.7s, max-width 0s linear 0.7s'
-                              : 'opacity 0.1s ease-in, max-width 0s linear 0.1s',
-                            pointerEvents: isActive ? 'auto' : 'none',
-                          whiteSpace: 'nowrap',
-                            visibility: isActive ? 'visible' : 'hidden',
+                          ...(isActive
+                            ? {
+                                background: `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
+                                border: "2px solid white",
+                              }
+                            : {
+                                backgroundColor: "#9BA2AF", // Color gris para tarjetas inactivas
+                                border: "2px solid white",
+                              }),
+                          left:
+                            typeof leftOffset === "string"
+                              ? leftOffset
+                              : `${leftOffset}px`,
+                          width: isActive
+                            ? `${activeCardWidth}px`
+                            : `${inactiveCardWidth}px`,
+                          maxWidth: isActive
+                            ? `${activeCardWidth}px`
+                            : `${inactiveCardWidth}px`,
+                          height: "60px",
+                          paddingLeft: isActive
+                            ? "16px"
+                            : index < activeWelcomeCard
+                              ? "0"
+                              : index > activeWelcomeCard &&
+                                  activeWelcomeCard === 1
+                                ? "0"
+                                : "0",
+                          paddingRight: isActive
+                            ? "16px"
+                            : index > activeWelcomeCard &&
+                                activeWelcomeCard === 1
+                              ? "12px"
+                              : "0",
+                          minWidth: isActive
+                            ? `${activeCardWidth}px`
+                            : `${inactiveCardWidth}px`,
+                          justifyContent: isActive
+                            ? "flex-start"
+                            : index > activeWelcomeCard &&
+                                activeWelcomeCard === 1
+                              ? "flex-end"
+                              : index < activeWelcomeCard
+                                ? "center"
+                                : "center",
+                          zIndex: zIndex,
+                          borderRadius: "12px", // Esquinas curvas pero no tan redondeadas como rounded-full
+                          transition:
+                            "all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)", // Transición más suave y fluida
                         }}
                       >
+                        {/* Icono - siempre visible, centrado cuando inactiva, alineado a la derecha cuando está parcialmente visible a la derecha */}
+                        <div
+                          className="flex shrink-0 items-center justify-center"
+                          style={{
+                            width: isActive ? "32px" : "auto",
+                            height: "32px",
+                            marginLeft: isActive
+                              ? "0"
+                              : index > activeWelcomeCard &&
+                                  activeWelcomeCard === 1
+                                ? "auto"
+                                : "0",
+                            marginRight:
+                              index > activeWelcomeCard &&
+                              activeWelcomeCard === 1 &&
+                              !isActive
+                                ? "12px"
+                                : "0",
+                          }}
+                        >
+                          {index === 0 && (
+                            <svg
+                              className="h-5 w-5"
+                              style={{ color: "white" }}
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                              />
+                            </svg>
+                          )}
+                          {index === 1 && (
+                            <svg
+                              className="h-5 w-5"
+                              style={{ color: "white" }}
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                              />
+                            </svg>
+                          )}
+                          {index === 2 && (
+                            <svg
+                              className="h-5 w-5"
+                              style={{ color: "white" }}
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                              />
+                            </svg>
+                          )}
+                        </div>
+
+                        {/* Texto - solo visible cuando está activa (en inactivas solo se ven los iconos) */}
+                        <div
+                          className="flex-1 overflow-hidden"
+                          style={{
+                            opacity: isActive ? 1 : 0,
+                            maxWidth: isActive ? "170px" : "0",
+                            transition: isActive
+                              ? "opacity 0.25s ease-out 0.7s, max-width 0s linear 0.7s"
+                              : "opacity 0.1s ease-in, max-width 0s linear 0.1s",
+                            pointerEvents: isActive ? "auto" : "none",
+                            whiteSpace: "nowrap",
+                            visibility: isActive ? "visible" : "hidden",
+                          }}
+                        >
                           <p className="text-[11px] font-bold leading-tight text-white">
-                              {item.title}
-                            </p>
+                            {item.title}
+                          </p>
                           <p className="mt-0.5 text-[9px] leading-tight text-white/90">
-                              {item.description}
-                            </p>
+                            {item.description}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
-            </div>
 
               {/* Sección inferior con botón y texto - pegada al fondo */}
-              <div className="flex flex-col" style={{ marginTop: 'auto', paddingBottom: '4px' }}>
+              <div
+                className="flex flex-col"
+                style={{ marginTop: "auto", paddingBottom: "4px" }}
+              >
                 {/* Botón con gradiente - más estrecho con icono > */}
                 <div className="flex justify-center">
-            <button
-              onClick={() => navigateToScreen("document_selection")}
+                  <button
+                    onClick={() => navigateToScreen("document_selection")}
                     className="group relative flex items-center justify-between overflow-hidden rounded-xl border px-4 py-2.5 text-xs font-semibold text-white transition-all active:scale-[0.98]"
-              style={{
-                background: `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
-                borderColor: themeColor,
-                boxShadow: `0 4px 14px 0 ${themeColor}40`,
-                animation: 'cta-pulse-glow 2s ease-in-out infinite, cta-button-pulse 2.5s ease-in-out infinite',
-                width: 'auto',
-                minWidth: '200px',
-              }}
-            >
-              <span className="absolute inset-0 rounded-xl opacity-60 blur-md -z-10" style={{ background: themeColor, animation: 'cta-pulse-ring 2s ease-in-out infinite' }}></span>
-              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -z-10" style={{ animation: 'cta-shine-sweep 2.5s linear infinite' }}></span>
-              <span className="absolute inset-0 rounded-xl -z-10" style={{ background: `radial-gradient(circle at center, ${themeColor}20 0%, transparent 70%)`, animation: 'cta-glow-pulse 2s ease-in-out infinite' }}></span>
-              <span className="relative z-10 flex items-center justify-center gap-2" style={{ animation: 'cta-glow-pulse 2s ease-in-out infinite' }}>
-                    <span>{welcome.startButton}</span>
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} style={{ animation: 'cta-bounce-arrow 1.2s ease-in-out infinite' }}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                    </svg>
-              </span>
-              <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full"></span>
-            </button>
+                    style={{
+                      background: `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
+                      borderColor: themeColor,
+                      boxShadow: `0 4px 14px 0 ${themeColor}40`,
+                      animation:
+                        "cta-pulse-glow 2s ease-in-out infinite, cta-button-pulse 2.5s ease-in-out infinite",
+                      width: "auto",
+                      minWidth: "200px",
+                    }}
+                  >
+                    <span
+                      className="absolute inset-0 rounded-xl opacity-60 blur-md -z-10"
+                      style={{
+                        background: themeColor,
+                        animation: "cta-pulse-ring 2s ease-in-out infinite",
+                      }}
+                    ></span>
+                    <span
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -z-10"
+                      style={{
+                        animation: "cta-shine-sweep 2.5s linear infinite",
+                      }}
+                    ></span>
+                    <span
+                      className="absolute inset-0 rounded-xl -z-10"
+                      style={{
+                        background: `radial-gradient(circle at center, ${themeColor}20 0%, transparent 70%)`,
+                        animation: "cta-glow-pulse 2s ease-in-out infinite",
+                      }}
+                    ></span>
+                    <span
+                      className="relative z-10 flex items-center justify-center gap-2"
+                      style={{
+                        animation: "cta-glow-pulse 2s ease-in-out infinite",
+                      }}
+                    >
+                      <span>{welcome.startButton}</span>
+                      <svg
+                        className="h-4 w-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                        style={{
+                          animation:
+                            "cta-bounce-arrow 1.2s ease-in-out infinite",
+                        }}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </span>
+                    <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full"></span>
+                  </button>
                 </div>
 
                 {/* Texto de términos debajo del botón */}
-                <p className="text-center text-[10px] text-gray-600 dark:text-gray-400 px-2" style={{ marginTop: '6px', marginBottom: '0' }}>
-                  Al iniciar la verificación aceptas las{' '}
-                  <span className="font-bold">políticas de privacidad</span>
-                  {' '}y{' '}
+                <p
+                  className="text-center text-[10px] text-gray-600 dark:text-gray-400 px-2"
+                  style={{ marginTop: "6px", marginBottom: "0" }}
+                >
+                  Al iniciar la verificación aceptas las{" "}
+                  <span className="font-bold">políticas de privacidad</span> y{" "}
                   <span className="font-bold">términos de servicio</span>
                 </p>
               </div>
@@ -1358,13 +1751,16 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
           </div>
 
           {/* Home indicator del iPhone - dentro del div translúcido */}
-          <div className="flex justify-center" style={{ marginTop: '8px', marginBottom: '4px' }}>
+          <div
+            className="flex justify-center"
+            style={{ marginTop: "8px", marginBottom: "4px" }}
+          >
             <div
               style={{
-                width: '134px',
-                height: '5px',
-                backgroundColor: '#000',
-                borderRadius: '3px',
+                width: "134px",
+                height: "5px",
+                backgroundColor: "#000",
+                borderRadius: "3px",
                 opacity: 0.3,
               }}
             />
@@ -1380,11 +1776,11 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
       .filter(([_, enabled]) => enabled)
       .map(([type]) => type as DocumentType);
     const { documentSelection } = previewTexts;
-    
+
     // Inicializar activeDocumentCard si es null
     if (activeDocumentCard === null && availableDocs.length > 0) {
-      const selectedIndex = selectedDocumentType 
-        ? availableDocs.findIndex(doc => doc === selectedDocumentType)
+      const selectedIndex = selectedDocumentType
+        ? availableDocs.findIndex((doc) => doc === selectedDocumentType)
         : 0;
       if (selectedIndex >= 0) {
         setActiveDocumentCard(selectedIndex);
@@ -1392,69 +1788,273 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
         setActiveDocumentCard(0);
       }
     }
-    
+
     // SVG geométrico reutilizado para document selection (mismo tamaño que welcome)
     const GeometricSVG = () => {
       const lightThemeColor = lightenColor(themeColor, 0.3);
-      const baseId = 'identity-document-selection';
-      
+      const baseId = "identity-document-selection";
+
       return (
         <div className="flex justify-center py-2">
-          <svg 
+          <svg
             id={`Capa_2_${baseId}`}
-            data-name="Capa 2" 
+            data-name="Capa 2"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 215.02 215.02"
             className="h-48 w-48 opacity-80"
           >
             <defs>
-              <linearGradient id={`identity-gradient-${baseId}`} x1="4.35" y1="612.77" x2="210.66" y2="612.77" gradientTransform="translate(0 720.29) scale(1 -1)" gradientUnits="userSpaceOnUse">
+              <linearGradient
+                id={`identity-gradient-${baseId}`}
+                x1="4.35"
+                y1="612.77"
+                x2="210.66"
+                y2="612.77"
+                gradientTransform="translate(0 720.29) scale(1 -1)"
+                gradientUnits="userSpaceOnUse"
+              >
                 <stop offset="0" stopColor={lightThemeColor} />
                 <stop offset="1" stopColor={darkThemeColor} />
               </linearGradient>
-              <linearGradient id={`identity-gradient-2-${baseId}`} x1="5.57" y1="612.78" x2="209.46" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-3-${baseId}`} x1="20.99" y1="612.78" x2="194.05" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-4-${baseId}`} x1="0" y1="612.78" x2="215.02" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-5-${baseId}`} x1="17.91" y1="612.78" x2="197.11" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-6-${baseId}`} x1="7.41" y1="612.77" x2="207.62" y2="612.77" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-7-${baseId}`} x1="2.97" y1="612.78" x2="212.04" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-8-${baseId}`} x1="26.88" y1="612.78" x2="188.15" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-9-${baseId}`} x1=".65" y1="612.78" x2="214.38" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-10-${baseId}`} x1="13.07" y1="612.77" x2="201.95" y2="612.77" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-11-${baseId}`} x1="11.2" y1="612.78" x2="203.81" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-12-${baseId}`} x1="1.17" y1="612.78" x2="213.84" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-13-${baseId}`} x1="29.6" y1="612.77" x2="185.42" y2="612.77" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-14-${baseId}`} x1="2.1" y1="612.77" x2="212.92" y2="612.77" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-15-${baseId}`} x1="8.95" y1="612.78" x2="206.07" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-16-${baseId}`} x1="15.74" y1="612.78" x2="199.28" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-17-${baseId}`} x1=".19" y1="612.77" x2="214.85" y2="612.77" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-18-${baseId}`} x1="23.44" y1="612.78" x2="191.59" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-19-${baseId}`} x1="5.57" y1="612.78" x2="209.46" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-20-${baseId}`} x1="20.99" y1="612.78" x2="194.05" y2="612.78" href={`#identity-gradient-${baseId}`} />
+              <linearGradient
+                id={`identity-gradient-2-${baseId}`}
+                x1="5.57"
+                y1="612.78"
+                x2="209.46"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-3-${baseId}`}
+                x1="20.99"
+                y1="612.78"
+                x2="194.05"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-4-${baseId}`}
+                x1="0"
+                y1="612.78"
+                x2="215.02"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-5-${baseId}`}
+                x1="17.91"
+                y1="612.78"
+                x2="197.11"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-6-${baseId}`}
+                x1="7.41"
+                y1="612.77"
+                x2="207.62"
+                y2="612.77"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-7-${baseId}`}
+                x1="2.97"
+                y1="612.78"
+                x2="212.04"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-8-${baseId}`}
+                x1="26.88"
+                y1="612.78"
+                x2="188.15"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-9-${baseId}`}
+                x1=".65"
+                y1="612.78"
+                x2="214.38"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-10-${baseId}`}
+                x1="13.07"
+                y1="612.77"
+                x2="201.95"
+                y2="612.77"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-11-${baseId}`}
+                x1="11.2"
+                y1="612.78"
+                x2="203.81"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-12-${baseId}`}
+                x1="1.17"
+                y1="612.78"
+                x2="213.84"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-13-${baseId}`}
+                x1="29.6"
+                y1="612.77"
+                x2="185.42"
+                y2="612.77"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-14-${baseId}`}
+                x1="2.1"
+                y1="612.77"
+                x2="212.92"
+                y2="612.77"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-15-${baseId}`}
+                x1="8.95"
+                y1="612.78"
+                x2="206.07"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-16-${baseId}`}
+                x1="15.74"
+                y1="612.78"
+                x2="199.28"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-17-${baseId}`}
+                x1=".19"
+                y1="612.77"
+                x2="214.85"
+                y2="612.77"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-18-${baseId}`}
+                x1="23.44"
+                y1="612.78"
+                x2="191.59"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-19-${baseId}`}
+                x1="5.57"
+                y1="612.78"
+                x2="209.46"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-20-${baseId}`}
+                x1="20.99"
+                y1="612.78"
+                x2="194.05"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
             </defs>
             <g id="object">
               <g>
-                <path fill={`url(#identity-gradient-9-${baseId})`} d="M77.1,210.67l-.14-.25L4.35,77.11,137.91,4.37l.14.25,72.61,133.31-133.56,72.74h0ZM5.13,77.33l72.2,132.57,132.57-72.2L137.7,5.13S5.13,77.33,5.13,77.33Z" />
-                <path fill={`url(#identity-gradient-${baseId})`} d="M141.77,209.45L5.57,141.77l.13-.25L73.26,5.58l136.2,67.68-.13.25-67.56,135.94h0ZM6.33,141.52l135.18,67.18,67.18-135.18L73.51,6.34,6.33,141.52h0Z" />
-                <path fill={`url(#identity-gradient-2-${baseId})`} d="M43.66,194.05l-.04-.28L20.99,43.66l150.39-22.68.04.28,22.63,150.11-150.39,22.68h0ZM21.62,44.14l22.51,149.26,149.26-22.51-22.51-149.26L21.61,44.14h.01Z" />
-                <path fill={`url(#identity-gradient-5-${baseId})`} d="M104.84,215.02l-.2-.21L0,104.83,110.18,0l.2.21,104.64,109.98-110.18,104.83h0ZM.8,104.86l104.05,109.36,109.36-104.05L110.16.81.8,104.86Z" />
-                <path fill={`url(#identity-gradient-6-${baseId})`} d="M166.98,197.11l-149.07-30.13L48.04,17.91l149.07,30.13-30.13,149.07ZM18.58,166.55l147.96,29.9,29.9-147.96L48.48,18.59l-29.9,147.96Z" />
-                <path fill={`url(#identity-gradient-3-${baseId})`} d="M68.23,207.63l-.11-.26L7.41,68.24,146.8,7.41l.11.26,60.71,139.13-139.39,60.83h0ZM8.15,68.53l60.37,138.35,138.35-60.37L146.5,8.16,8.15,68.53Z" />
-                <path fill={`url(#identity-gradient-4-${baseId})`} d="M132.75,212.05l-.24-.15L2.97,132.75,82.26,2.97l.24.15,129.54,79.15-79.29,129.78h0ZM3.75,132.57l128.81,78.7,78.7-128.81L82.45,3.76,3.75,132.57Z" />
-                <path fill={`url(#identity-gradient-7-${baseId})`} d="M36.36,188.15L26.88,36.36l151.79-9.48,9.48,151.79-151.79,9.48ZM27.47,36.89l9.41,150.66,150.66-9.41-9.41-150.66L27.47,36.89Z" />
-                <path fill={`url(#identity-gradient-8-${baseId})`} d="M95.48,214.38l-.18-.22L.65,95.48l.22-.18L119.55.65l.18.22,94.65,118.68-.22.18-118.68,94.65h0ZM1.44,95.57l94.12,118.01,118.01-94.12L119.45,1.45,1.44,95.57h0Z" />
-                <path fill={`url(#identity-gradient-11-${baseId})`} d="M158.95,201.96l-.27-.08L13.07,158.96l.08-.27L56.07,13.08l.27.08,145.61,42.92-.08.27-42.92,145.61h0ZM13.77,158.57l144.79,42.68,42.68-144.79L56.45,13.78,13.77,158.57h0Z" />
-                <path fill={`url(#identity-gradient-12-${baseId})`} d="M59.65,203.82l-.09-.27L11.2,59.66l.27-.09L155.36,11.21l.09.27,48.36,143.89-.27.09-143.89,48.36h0ZM11.92,60.01l48.09,143.09,143.09-48.09L155.01,11.92,11.92,60.01Z" />
-                <path fill={`url(#identity-gradient-13-${baseId})`} d="M123.54,213.85L1.17,123.55,91.47,1.18l122.37,90.3-90.3,122.37h0ZM1.96,123.43l121.46,89.63,89.63-121.46L91.59,1.97,1.96,123.43Z" />
-                <path fill={`url(#identity-gradient-14-${baseId})`} d="M181.64,185.43l-152.04-3.78v-.28l3.78-151.76,152.04,3.78v.28l-3.78,151.76h0ZM30.18,181.09l150.91,3.75,3.75-150.91-150.91-3.75-3.75,150.91Z" />
-                <path fill={`url(#identity-gradient-15-${baseId})`} d="M86.21,212.93L2.1,86.22,128.81,2.11l84.11,126.71-126.71,84.11ZM2.88,86.37l83.48,125.77,125.77-83.48L128.65,2.89,2.88,86.37Z" />
-                <path fill={`url(#identity-gradient-16-${baseId})`} d="M150.52,206.08l-.26-.1L8.95,150.53,64.5,8.95l.26.1,141.31,55.45-55.55,141.58ZM9.68,150.21l140.52,55.14,55.14-140.52L64.82,9.69,9.68,150.21Z" />
-                <path fill={`url(#identity-gradient-19-${baseId})`} d="M51.44,199.28l-.07-.28L15.74,51.44,163.58,15.74l.07.28,35.63,147.56-147.84,35.7ZM16.43,51.86l35.43,146.74,146.74-35.43L163.17,16.43S16.43,51.86,16.43,51.86Z" />
-                <path fill={`url(#identity-gradient-17-${baseId})`} d="M114.22,214.85l-.21-.19L.19,114.22l.19-.21L100.82.19l.21.19,113.82,100.44-.19.21-100.44,113.82h0ZM.98,114.17l113.19,99.88,99.88-113.19L100.86.98.98,114.17h0Z" />
-                <path fill={`url(#identity-gradient-18-${baseId})`} d="M174.57,191.59l-151.13-17.02.03-.28L40.46,23.44l151.13,17.02-.03.28-16.99,150.85ZM24.06,174.07l150,16.89,16.89-150L40.95,24.07l-16.89,150Z" />
-                <path fill={`url(#identity-gradient-9-${baseId})`} d="M77.1,210.67l-.14-.25L4.35,77.11,137.91,4.37l.14.25,72.61,133.31-133.56,72.74h0ZM5.13,77.33l72.2,132.57,132.57-72.2L137.7,5.13S5.13,77.33,5.13,77.33Z" />
-                <path fill={`url(#identity-gradient-${baseId})`} d="M141.77,209.45L5.57,141.77l.13-.25L73.26,5.58l136.2,67.68-.13.25-67.56,135.94h0ZM6.33,141.52l135.18,67.18,67.18-135.18L73.51,6.34,6.33,141.52h0Z" />
-                <path fill={`url(#identity-gradient-2-${baseId})`} d="M43.66,194.05l-.04-.28L20.99,43.66l150.39-22.68.04.28,22.63,150.11-150.39,22.68h0ZM21.62,44.14l22.51,149.26,149.26-22.51-22.51-149.26L21.61,44.14h.01Z" />
+                <path
+                  fill={`url(#identity-gradient-9-${baseId})`}
+                  d="M77.1,210.67l-.14-.25L4.35,77.11,137.91,4.37l.14.25,72.61,133.31-133.56,72.74h0ZM5.13,77.33l72.2,132.57,132.57-72.2L137.7,5.13S5.13,77.33,5.13,77.33Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-${baseId})`}
+                  d="M141.77,209.45L5.57,141.77l.13-.25L73.26,5.58l136.2,67.68-.13.25-67.56,135.94h0ZM6.33,141.52l135.18,67.18,67.18-135.18L73.51,6.34,6.33,141.52h0Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-2-${baseId})`}
+                  d="M43.66,194.05l-.04-.28L20.99,43.66l150.39-22.68.04.28,22.63,150.11-150.39,22.68h0ZM21.62,44.14l22.51,149.26,149.26-22.51-22.51-149.26L21.61,44.14h.01Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-5-${baseId})`}
+                  d="M104.84,215.02l-.2-.21L0,104.83,110.18,0l.2.21,104.64,109.98-110.18,104.83h0ZM.8,104.86l104.05,109.36,109.36-104.05L110.16.81.8,104.86Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-6-${baseId})`}
+                  d="M166.98,197.11l-149.07-30.13L48.04,17.91l149.07,30.13-30.13,149.07ZM18.58,166.55l147.96,29.9,29.9-147.96L48.48,18.59l-29.9,147.96Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-3-${baseId})`}
+                  d="M68.23,207.63l-.11-.26L7.41,68.24,146.8,7.41l.11.26,60.71,139.13-139.39,60.83h0ZM8.15,68.53l60.37,138.35,138.35-60.37L146.5,8.16,8.15,68.53Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-4-${baseId})`}
+                  d="M132.75,212.05l-.24-.15L2.97,132.75,82.26,2.97l.24.15,129.54,79.15-79.29,129.78h0ZM3.75,132.57l128.81,78.7,78.7-128.81L82.45,3.76,3.75,132.57Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-7-${baseId})`}
+                  d="M36.36,188.15L26.88,36.36l151.79-9.48,9.48,151.79-151.79,9.48ZM27.47,36.89l9.41,150.66,150.66-9.41-9.41-150.66L27.47,36.89Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-8-${baseId})`}
+                  d="M95.48,214.38l-.18-.22L.65,95.48l.22-.18L119.55.65l.18.22,94.65,118.68-.22.18-118.68,94.65h0ZM1.44,95.57l94.12,118.01,118.01-94.12L119.45,1.45,1.44,95.57h0Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-11-${baseId})`}
+                  d="M158.95,201.96l-.27-.08L13.07,158.96l.08-.27L56.07,13.08l.27.08,145.61,42.92-.08.27-42.92,145.61h0ZM13.77,158.57l144.79,42.68,42.68-144.79L56.45,13.78,13.77,158.57h0Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-12-${baseId})`}
+                  d="M59.65,203.82l-.09-.27L11.2,59.66l.27-.09L155.36,11.21l.09.27,48.36,143.89-.27.09-143.89,48.36h0ZM11.92,60.01l48.09,143.09,143.09-48.09L155.01,11.92,11.92,60.01Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-13-${baseId})`}
+                  d="M123.54,213.85L1.17,123.55,91.47,1.18l122.37,90.3-90.3,122.37h0ZM1.96,123.43l121.46,89.63,89.63-121.46L91.59,1.97,1.96,123.43Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-14-${baseId})`}
+                  d="M181.64,185.43l-152.04-3.78v-.28l3.78-151.76,152.04,3.78v.28l-3.78,151.76h0ZM30.18,181.09l150.91,3.75,3.75-150.91-150.91-3.75-3.75,150.91Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-15-${baseId})`}
+                  d="M86.21,212.93L2.1,86.22,128.81,2.11l84.11,126.71-126.71,84.11ZM2.88,86.37l83.48,125.77,125.77-83.48L128.65,2.89,2.88,86.37Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-16-${baseId})`}
+                  d="M150.52,206.08l-.26-.1L8.95,150.53,64.5,8.95l.26.1,141.31,55.45-55.55,141.58ZM9.68,150.21l140.52,55.14,55.14-140.52L64.82,9.69,9.68,150.21Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-19-${baseId})`}
+                  d="M51.44,199.28l-.07-.28L15.74,51.44,163.58,15.74l.07.28,35.63,147.56-147.84,35.7ZM16.43,51.86l35.43,146.74,146.74-35.43L163.17,16.43S16.43,51.86,16.43,51.86Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-17-${baseId})`}
+                  d="M114.22,214.85l-.21-.19L.19,114.22l.19-.21L100.82.19l.21.19,113.82,100.44-.19.21-100.44,113.82h0ZM.98,114.17l113.19,99.88,99.88-113.19L100.86.98.98,114.17h0Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-18-${baseId})`}
+                  d="M174.57,191.59l-151.13-17.02.03-.28L40.46,23.44l151.13,17.02-.03.28-16.99,150.85ZM24.06,174.07l150,16.89,16.89-150L40.95,24.07l-16.89,150Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-9-${baseId})`}
+                  d="M77.1,210.67l-.14-.25L4.35,77.11,137.91,4.37l.14.25,72.61,133.31-133.56,72.74h0ZM5.13,77.33l72.2,132.57,132.57-72.2L137.7,5.13S5.13,77.33,5.13,77.33Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-${baseId})`}
+                  d="M141.77,209.45L5.57,141.77l.13-.25L73.26,5.58l136.2,67.68-.13.25-67.56,135.94h0ZM6.33,141.52l135.18,67.18,67.18-135.18L73.51,6.34,6.33,141.52h0Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-2-${baseId})`}
+                  d="M43.66,194.05l-.04-.28L20.99,43.66l150.39-22.68.04.28,22.63,150.11-150.39,22.68h0ZM21.62,44.14l22.51,149.26,149.26-22.51-22.51-149.26L21.61,44.14h.01Z"
+                />
               </g>
             </g>
           </svg>
@@ -1466,7 +2066,7 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
       <div className="flex h-full flex-col overflow-hidden">
         {/* Header con back y logo */}
         <div className="relative mb-3 flex flex-shrink-0 items-center justify-between">
-          <button 
+          <button
             onClick={() => navigateToScreen("welcome")}
             className="text-sm font-medium text-gray-500 dark:text-gray-400"
           >
@@ -1474,7 +2074,11 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
           </button>
           {currentBranding.logo && (
             <div className="absolute left-1/2 -translate-x-1/2">
-              <img src={currentBranding.logo} alt="Logo" className="h-8 max-w-full object-contain" />
+              <img
+                src={currentBranding.logo}
+                alt="Logo"
+                className="h-8 max-w-full object-contain"
+              />
             </div>
           )}
           <div className="w-12"></div> {/* Spacer para centrar el logo */}
@@ -1490,31 +2094,41 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
         </div>
 
         {/* Tarjeta con fondo blanco translúcido - rectangular vertical con bordes ligeramente redondeados */}
-        <div 
+        <div
           className="relative z-10 flex-1 overflow-hidden backdrop-blur-sm"
-          style={{ 
-            backgroundColor: 'rgba(255, 255, 255, 0.35)',
-            padding: '10px',
-            margin: '10px', // Padding con los bordes del celular
-            borderRadius: '20px', // Bordes ligeramente redondeados (no en punta, pero rectangular)
+          style={{
+            backgroundColor: "rgba(255, 255, 255, 0.35)",
+            padding: "10px",
+            margin: "10px", // Padding con los bordes del celular
+            borderRadius: "20px", // Bordes ligeramente redondeados (no en punta, pero rectangular)
           }}
         >
           <div className="space-y-3">
             {/* Título */}
             <div className="text-center">
-              <h2 className="mb-1 text-xl font-bold" style={{ color: themeColor }}>
+              <h2
+                className="mb-1 text-xl font-bold"
+                style={{ color: themeColor }}
+              >
                 {documentSelection.title}
               </h2>
-              <p className="text-xs text-gray-600 dark:text-gray-400">{documentSelection.subtitle}</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400">
+                {documentSelection.subtitle}
+              </p>
             </div>
 
             {/* Tarjetas de documentos en vertical con efecto acordeón */}
             <div className="relative flex items-center justify-center py-2">
-              <div className="relative w-full" style={{ height: `${Math.min(availableDocs.length * 75, 220)}px` }}>
+              <div
+                className="relative w-full"
+                style={{
+                  height: `${Math.min(availableDocs.length * 75, 220)}px`,
+                }}
+              >
                 {availableDocs.map((docType, index) => {
                   const isActive = activeDocumentCard === index;
                   const currentActive = activeDocumentCard ?? 0;
-                  
+
                   // Dimensiones de las tarjetas verticales
                   const activeCardHeight = 75;
                   const inactiveCardHeight = 60; // Aumentado para que se vea mejor el efecto de corte cuando está debajo
@@ -1525,8 +2139,10 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
                   const overlapPercentage2to3 = 0.3; // Cuánto cubre la tarjeta 2 sobre la 3 (cuando 2 está activa)
 
                   // Usar la configuración compartida de borderRadius para tarjetas verticales
-                  const borderRadiusActive = VERTICAL_CARDS_BORDER_RADIUS.active;
-                  const borderRadiusInactive = VERTICAL_CARDS_BORDER_RADIUS.inactive;
+                  const borderRadiusActive =
+                    VERTICAL_CARDS_BORDER_RADIUS.active;
+                  const borderRadiusInactive =
+                    VERTICAL_CARDS_BORDER_RADIUS.inactive;
 
                   // Determinar qué porcentaje usar según la posición
                   let overlapPercentage = 0.3; // Default
@@ -1547,19 +2163,24 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
                     overlapPercentage = 0.3;
                   }
 
-                  const visiblePart = Math.round(inactiveCardHeight * (1 - overlapPercentage)); // Parte visible de la inactiva
+                  const visiblePart = Math.round(
+                    inactiveCardHeight * (1 - overlapPercentage),
+                  ); // Parte visible de la inactiva
                   const overlapAmount = inactiveCardHeight - visiblePart; // Cantidad de superposición
-                  
+
                   // Calcular posición vertical
                   let topOffset = 0;
-                  const containerHeight = Math.min(availableDocs.length * 75, 220);
+                  const containerHeight = Math.min(
+                    availableDocs.length * 75,
+                    220,
+                  );
                   let centerY = (containerHeight - activeCardHeight) / 2;
-                  
+
                   // Cuando la primera tarjeta está activa, mover todo más arriba
                   if (currentActive === 0) {
                     centerY = (containerHeight - activeCardHeight) / 2 - 30; // Mover 30px hacia arriba
                   }
-                  
+
                   if (isActive) {
                     // La tarjeta activa está centrada verticalmente (o más arriba si es la primera)
                     topOffset = centerY;
@@ -1575,36 +2196,56 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
                       // Primera activa (Licencia): controlar independientemente ambas tarjetas de abajo
                       if (cardsBelow === 1) {
                         // Cédula de identidad - posición basada en overlapPercentage1to2 (distancia desde Licencia)
-                        const visiblePart1to2 = Math.round(inactiveCardHeight * (1 - overlapPercentage1to2));
-                        const overlapAmount1to2 = inactiveCardHeight - visiblePart1to2;
-                        topOffset = centerY + activeCardHeight - overlapAmount1to2;
+                        const visiblePart1to2 = Math.round(
+                          inactiveCardHeight * (1 - overlapPercentage1to2),
+                        );
+                        const overlapAmount1to2 =
+                          inactiveCardHeight - visiblePart1to2;
+                        topOffset =
+                          centerY + activeCardHeight - overlapAmount1to2;
                       } else if (cardsBelow === 2) {
                         // Pasaporte - posición basada en overlapPercentage2to3 (distancia desde Cédula)
                         // Primero calcular dónde está Cédula usando overlapPercentage1to2
-                        const visiblePart1to2 = Math.round(inactiveCardHeight * (1 - overlapPercentage1to2));
-                        const overlapAmount1to2 = inactiveCardHeight - visiblePart1to2;
-                        const cedulaTop = centerY + activeCardHeight - overlapAmount1to2;
+                        const visiblePart1to2 = Math.round(
+                          inactiveCardHeight * (1 - overlapPercentage1to2),
+                        );
+                        const overlapAmount1to2 =
+                          inactiveCardHeight - visiblePart1to2;
+                        const cedulaTop =
+                          centerY + activeCardHeight - overlapAmount1to2;
                         // Luego calcular dónde está Pasaporte usando overlapPercentage2to3 desde Cédula
-                        const visiblePart2to3 = Math.round(inactiveCardHeight * (1 - overlapPercentage2to3));
-                        const overlapAmount2to3 = inactiveCardHeight - visiblePart2to3;
-                        topOffset = cedulaTop + inactiveCardHeight - overlapAmount2to3;
+                        const visiblePart2to3 = Math.round(
+                          inactiveCardHeight * (1 - overlapPercentage2to3),
+                        );
+                        const overlapAmount2to3 =
+                          inactiveCardHeight - visiblePart2to3;
+                        topOffset =
+                          cedulaTop + inactiveCardHeight - overlapAmount2to3;
                       }
                     } else if (currentActive === 1) {
                       // Segunda activa: usar overlapPercentage2to3 para la tercera tarjeta
                       if (cardsBelow === 1 && index === 2) {
                         // Tercera tarjeta (index 2) - usar overlapPercentage2to3 directamente
-                        const visiblePart2to3 = Math.round(inactiveCardHeight * (1 - overlapPercentage2to3));
-                        const overlapAmount2to3 = inactiveCardHeight - visiblePart2to3;
-                        topOffset = centerY + activeCardHeight - overlapAmount2to3;
-                    } else {
-                        topOffset = centerY + activeCardHeight - overlapAmount * cardsBelow;
+                        const visiblePart2to3 = Math.round(
+                          inactiveCardHeight * (1 - overlapPercentage2to3),
+                        );
+                        const overlapAmount2to3 =
+                          inactiveCardHeight - visiblePart2to3;
+                        topOffset =
+                          centerY + activeCardHeight - overlapAmount2to3;
+                      } else {
+                        topOffset =
+                          centerY +
+                          activeCardHeight -
+                          overlapAmount * cardsBelow;
                       }
                     } else {
                       // Otras activas: posición normal basada en overlapPercentage
-                      topOffset = centerY + activeCardHeight - overlapAmount * cardsBelow;
+                      topOffset =
+                        centerY + activeCardHeight - overlapAmount * cardsBelow;
                     }
                   }
-                  
+
                   // Z-index dinámico según qué tarjeta está activa (similar a welcome pero vertical)
                   let zIndex = 10;
                   if (isActive) {
@@ -1621,7 +2262,7 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
                       zIndex = 20 + index; // 0=20, 1=21, 2=30 (activa)
                     }
                   }
-                  
+
                   return (
                     <div
                       key={docType}
@@ -1629,70 +2270,106 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
                         setActiveDocumentCard(index);
                         updateConfig({ selectedDocumentType: docType });
                       }}
-                      className={`absolute left-0 right-0 flex cursor-pointer items-center gap-3 rounded-xl transition-all duration-300 ease-in-out ${isActive
-                          ? 'shadow-lg' 
-                          : ''
+                      className={`absolute left-0 right-0 flex cursor-pointer items-center gap-3 rounded-xl transition-all duration-300 ease-in-out ${
+                        isActive ? "shadow-lg" : ""
                       }`}
                       style={{
-                        ...(isActive 
-                          ? { 
+                        ...(isActive
+                          ? {
                               background: `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
-                              border: '2px solid white',
+                              border: "2px solid white",
                             }
-                          : { 
-                              backgroundColor: '#9BA2AF', // Color gris para tarjetas inactivas
-                              border: '2px solid white',
-                            }
-                        ),
+                          : {
+                              backgroundColor: "#9BA2AF", // Color gris para tarjetas inactivas
+                              border: "2px solid white",
+                            }),
                         top: `${topOffset}px`,
-                        height: isActive ? `${activeCardHeight}px` : `${inactiveCardHeight}px`,
-                        width: '100%', // Ambas tarjetas tienen el mismo ancho
-                        paddingLeft: isActive ? '16px' : '0',
-                        paddingRight: isActive ? '16px' : '0',
-                        paddingTop: isActive ? '12px' : '0',
-                        paddingBottom: isActive ? '12px' : '0',
-                        justifyContent: isActive ? 'flex-start' : 'center',
+                        height: isActive
+                          ? `${activeCardHeight}px`
+                          : `${inactiveCardHeight}px`,
+                        width: "100%", // Ambas tarjetas tienen el mismo ancho
+                        paddingLeft: isActive ? "16px" : "0",
+                        paddingRight: isActive ? "16px" : "0",
+                        paddingTop: isActive ? "12px" : "0",
+                        paddingBottom: isActive ? "12px" : "0",
+                        justifyContent: isActive ? "flex-start" : "center",
                         zIndex: zIndex,
-                        borderRadius: isActive ? `${borderRadiusActive}px` : `${borderRadiusInactive}px`, // Controlado por variables
-                        transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                        borderRadius: isActive
+                          ? `${borderRadiusActive}px`
+                          : `${borderRadiusInactive}px`, // Controlado por variables
+                        transition:
+                          "all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                       }}
                     >
                       {/* Icono - siempre visible, centrado cuando inactiva */}
-                      <div 
-                        className="flex shrink-0 items-center justify-center" 
-                        style={{ 
-                          width: isActive ? '48px' : '60px', 
-                          height: isActive ? '48px' : '60px',
+                      <div
+                        className="flex shrink-0 items-center justify-center"
+                        style={{
+                          width: isActive ? "48px" : "60px",
+                          height: isActive ? "48px" : "60px",
                         }}
                       >
                         {docType === "drivers_license" && (
-                          <svg className="h-6 w-6" style={{ color: 'white' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                          <svg
+                            className="h-6 w-6"
+                            style={{ color: "white" }}
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                            />
                           </svg>
                         )}
                         {docType === "id_card" && (
-                          <svg className="h-6 w-6" style={{ color: 'white' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
+                          <svg
+                            className="h-6 w-6"
+                            style={{ color: "white" }}
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"
+                            />
                           </svg>
                         )}
                         {docType === "passport" && (
-                          <svg className="h-6 w-6" style={{ color: 'white' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                          <svg
+                            className="h-6 w-6"
+                            style={{ color: "white" }}
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                            />
                           </svg>
                         )}
                       </div>
-                      
+
                       {/* Texto - visible siempre, pero con diferentes estilos según estado */}
-                      <div 
+                      <div
                         className="flex-1 overflow-hidden"
                         style={{
                           opacity: isActive ? 1 : 1,
-                          maxHeight: isActive ? '100px' : 'none',
-                          transition: isActive 
-                            ? 'opacity 0.25s ease-out 0.7s, max-height 0s linear 0.7s'
-                            : 'opacity 0.1s ease-in',
-                          pointerEvents: 'auto',
-                          visibility: 'visible',
+                          maxHeight: isActive ? "100px" : "none",
+                          transition: isActive
+                            ? "opacity 0.25s ease-out 0.7s, max-height 0s linear 0.7s"
+                            : "opacity 0.1s ease-in",
+                          pointerEvents: "auto",
+                          visibility: "visible",
                         }}
                       >
                         {isActive ? (
@@ -1718,40 +2395,83 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
 
             {/* Botón Siguiente con gradiente y animaciones CTA */}
             <div className="flex justify-center">
-            <button
-              onClick={() => {
-                if (selectedDocumentType) {
-                  navigateToScreen("document_capture");
-                }
-              }}
-              disabled={!selectedDocumentType}
-              className="group relative flex items-center justify-between overflow-hidden rounded-xl border px-4 py-2.5 text-xs font-semibold text-white transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
-              style={{
-                background: selectedDocumentType
-                  ? `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`
-                  : '#9BA2AF',
-                borderColor: selectedDocumentType ? themeColor : '#9BA2AF',
-                boxShadow: selectedDocumentType ? `0 4px 14px 0 ${themeColor}40` : 'none',
-                animation: selectedDocumentType ? 'cta-pulse-glow 2s ease-in-out infinite, cta-button-pulse 2.5s ease-in-out infinite' : 'none',
-                width: 'auto',
-                minWidth: '200px',
-              }}
-            >
-              {selectedDocumentType && (
-                <>
-                  <span className="absolute inset-0 rounded-xl opacity-60 blur-md -z-10" style={{ background: themeColor, animation: 'cta-pulse-ring 2s ease-in-out infinite' }}></span>
-                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -z-10" style={{ animation: 'cta-shine-sweep 2.5s linear infinite' }}></span>
-                  <span className="absolute inset-0 rounded-xl -z-10" style={{ background: `radial-gradient(circle at center, ${themeColor}20 0%, transparent 70%)`, animation: 'cta-glow-pulse 2s ease-in-out infinite' }}></span>
-                </>
-              )}
-              <span className="relative z-10 flex items-center justify-center gap-2" style={{ animation: selectedDocumentType ? 'cta-glow-pulse 2s ease-in-out infinite' : 'none' }}>
-                Siguiente
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} style={{ animation: selectedDocumentType ? 'cta-bounce-arrow 1.2s ease-in-out infinite' : 'none' }}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
-              </span>
-              <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full"></span>
-            </button>
+              <button
+                onClick={() => {
+                  if (selectedDocumentType) {
+                    navigateToScreen("document_capture");
+                  }
+                }}
+                disabled={!selectedDocumentType}
+                className="group relative flex items-center justify-between overflow-hidden rounded-xl border px-4 py-2.5 text-xs font-semibold text-white transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+                style={{
+                  background: selectedDocumentType
+                    ? `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`
+                    : "#9BA2AF",
+                  borderColor: selectedDocumentType ? themeColor : "#9BA2AF",
+                  boxShadow: selectedDocumentType
+                    ? `0 4px 14px 0 ${themeColor}40`
+                    : "none",
+                  animation: selectedDocumentType
+                    ? "cta-pulse-glow 2s ease-in-out infinite, cta-button-pulse 2.5s ease-in-out infinite"
+                    : "none",
+                  width: "auto",
+                  minWidth: "200px",
+                }}
+              >
+                {selectedDocumentType && (
+                  <>
+                    <span
+                      className="absolute inset-0 rounded-xl opacity-60 blur-md -z-10"
+                      style={{
+                        background: themeColor,
+                        animation: "cta-pulse-ring 2s ease-in-out infinite",
+                      }}
+                    ></span>
+                    <span
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -z-10"
+                      style={{
+                        animation: "cta-shine-sweep 2.5s linear infinite",
+                      }}
+                    ></span>
+                    <span
+                      className="absolute inset-0 rounded-xl -z-10"
+                      style={{
+                        background: `radial-gradient(circle at center, ${themeColor}20 0%, transparent 70%)`,
+                        animation: "cta-glow-pulse 2s ease-in-out infinite",
+                      }}
+                    ></span>
+                  </>
+                )}
+                <span
+                  className="relative z-10 flex items-center justify-center gap-2"
+                  style={{
+                    animation: selectedDocumentType
+                      ? "cta-glow-pulse 2s ease-in-out infinite"
+                      : "none",
+                  }}
+                >
+                  Siguiente
+                  <svg
+                    className="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    style={{
+                      animation: selectedDocumentType
+                        ? "cta-bounce-arrow 1.2s ease-in-out infinite"
+                        : "none",
+                    }}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </span>
+                <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full"></span>
+              </button>
             </div>
           </div>
         </div>
@@ -1764,24 +2484,34 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
     const { documentCapture } = previewTexts;
 
     // Construct title: "Capture [Document Type]"
-    const docName = selectedDocumentType ? documentNames[country][selectedDocumentType] : documentCapture.fallbackTitle;
+    const docName = selectedDocumentType
+      ? documentNames[country][selectedDocumentType]
+      : documentCapture.fallbackTitle;
 
-    const captureInstruction = captureStep === "front" ? documentCapture.instructions.front : documentCapture.instructions.back;
-    const overlayTitle = captureStep === "front" ? documentCapture.overlayTitle.front : documentCapture.overlayTitle.back;
+    const captureInstruction =
+      captureStep === "front"
+        ? documentCapture.instructions.front
+        : documentCapture.instructions.back;
+    const overlayTitle =
+      captureStep === "front"
+        ? documentCapture.overlayTitle.front
+        : documentCapture.overlayTitle.back;
 
     // Helper to extract RGB from hex for gradient opacity
     const hexToRgb = (hex: string) => {
       const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
       hex = hex.replace(shorthandRegex, (m, r, g, b) => r + r + g + g + b + b);
       const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-      return result ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}` : '0, 0, 0'; // fail safe
+      return result
+        ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}`
+        : "0, 0, 0"; // fail safe
     };
 
     // Convertir todos los colores del gradiente horizontal a RGB para el gradiente vertical
     const themeRgb = hexToRgb(themeColor);
     const darkThemeRgb = hexToRgb(darkThemeColor);
     const almostBlackRgb = hexToRgb(almostBlackColor);
-    const blackRgb = '0, 0, 0'; // blackColor es '#000000'
+    const blackRgb = "0, 0, 0"; // blackColor es '#000000'
 
     return (
       <div className="flex h-full flex-col relative overflow-hidden bg-white">
@@ -1795,7 +2525,11 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
           </button>
           {currentBranding.logo && (
             <div className="absolute left-1/2 -translate-x-1/2">
-              <img src={currentBranding.logo} alt="Logo" className="h-8 max-w-full object-contain" />
+              <img
+                src={currentBranding.logo}
+                alt="Logo"
+                className="h-8 max-w-full object-contain"
+              />
             </div>
           )}
           <div className="w-12"></div> {/* Spacer para centrar el logo */}
@@ -1803,18 +2537,42 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
 
         {/* CONTENIDO PRINCIPAL */}
         <div className="relative flex-1 flex flex-col w-full h-full z-10 px-6">
-
           {/* Indicador de progreso (solo cuando se captura la parte posterior) - FUERA del div con gradiente */}
           {captureStep === "back" && frontCaptured && (
             <div className="mb-4 flex items-center justify-center gap-2 relative z-20">
               <div className="relative flex items-center gap-2 rounded-full bg-gray-100 px-3 py-1.5">
-                <svg className="h-4 w-4 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
+                <svg
+                  className="h-4 w-4 text-gray-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"
+                  />
                 </svg>
-                <span className="text-xs font-medium text-gray-700">Document front</span>
-                <div className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full" style={{ backgroundColor: themeColor }}>
-                  <svg className="h-3 w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                <span className="text-xs font-medium text-gray-700">
+                  Document front
+                </span>
+                <div
+                  className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full"
+                  style={{ backgroundColor: themeColor }}
+                >
+                  <svg
+                    className="h-3 w-3 text-white"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={3}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M5 13l4 4L19 7"
+                    />
                   </svg>
                 </div>
               </div>
@@ -1827,59 +2585,73 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
             className="relative mx-auto w-full max-w-sm rounded-3xl px-6 py-8 mb-8"
             style={{
               background: `linear-gradient(to top, rgba(${blackRgb}, 1) 0%, rgba(${almostBlackRgb}, 1) 10%, rgba(${darkThemeRgb}, 1) 20%, rgba(${themeRgb}, 0.8) 30%, rgba(${themeRgb}, 0.4) 40%, transparent 50%, transparent 100%)`,
-              minHeight: '400px',
+              minHeight: "400px",
             }}
           >
             {/* Título y subtítulo centrados con mismo ancho */}
             <div className="mb-8 text-center relative z-20">
-              <div className="mx-auto" style={{ width: '100%', maxWidth: '320px' }}>
-                <h2 className="mb-2 text-2xl leading-tight" style={{ color: themeColor }}>
-                  <span className="font-normal">{documentCapture.titlePrefix}</span>{' '}
+              <div
+                className="mx-auto"
+                style={{ width: "100%", maxWidth: "320px" }}
+              >
+                <h2
+                  className="mb-2 text-2xl leading-tight"
+                  style={{ color: themeColor }}
+                >
+                  <span className="font-normal">
+                    {documentCapture.titlePrefix}
+                  </span>{" "}
                   <span className="font-bold">{docName}</span>
-          </h2>
-                <p className="text-sm text-gray-600 dark:text-gray-400 leading-tight" style={{ width: '100%' }}>
+                </h2>
+                <p
+                  className="text-sm text-gray-600 dark:text-gray-400 leading-tight"
+                  style={{ width: "100%" }}
+                >
                   {captureInstruction}
                 </p>
               </div>
-        </div>
+            </div>
 
             {/* Área de captura con borde punteado */}
-            <div className="relative mx-auto mb-6" style={{ width: '100%', maxWidth: '280px', height: '140px' }}>
+            <div
+              className="relative mx-auto mb-6"
+              style={{ width: "100%", maxWidth: "280px", height: "140px" }}
+            >
               <div
                 className="w-full h-full rounded-2xl border-2 border-dashed bg-white"
                 style={{ borderColor: themeColor }}
               >
-            {/* Flash effect when capturing */}
-            {isCapturing && (
-              <div 
+                {/* Flash effect when capturing */}
+                {isCapturing && (
+                  <div
                     className="absolute inset-0 z-20 bg-white rounded-2xl"
-                style={{
-                  animation: 'captureFlash 0.3s ease-out',
-                }}
-              />
-            )}
-            
-            {/* Captured document simulation */}
-            {(frontCaptured || backCaptured) && (
+                    style={{
+                      animation: "captureFlash 0.3s ease-out",
+                    }}
+                  />
+                )}
+
+                {/* Captured document simulation */}
+                {(frontCaptured || backCaptured) && (
                   <div className="absolute inset-4 rounded-lg bg-white shadow-lg">
-                <div className="flex h-full flex-col p-4">
+                    <div className="flex h-full flex-col p-4">
                       <div className="mb-2 h-2 w-16 rounded bg-gray-300"></div>
                       <div className="mb-4 h-2 w-24 rounded bg-gray-300"></div>
                       <div className="mb-2 h-1 w-full rounded bg-gray-200"></div>
                       <div className="mb-2 h-1 w-3/4 rounded bg-gray-200"></div>
                       <div className="mb-2 h-1 w-5/6 rounded bg-gray-200"></div>
-                  <div className="mt-auto flex gap-2">
+                      <div className="mt-auto flex gap-2">
                         <div className="h-16 w-16 rounded bg-gray-200"></div>
-                    <div className="flex-1 space-y-2">
+                        <div className="flex-1 space-y-2">
                           <div className="h-2 w-full rounded bg-gray-200"></div>
                           <div className="h-2 w-2/3 rounded bg-gray-200"></div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
               </div>
-            )}
-          </div>
-        </div>
+            </div>
 
             {/* Texto de instrucciones (frente/reverso) */}
             <div className="text-center">
@@ -1909,12 +2681,30 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
               {isCapturing ? (
                 <div className="h-6 w-6 animate-spin rounded-full border-2 border-white border-t-transparent" />
               ) : (
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M20 19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19V8C4 6.89543 4.89543 6 6 6H7.757L8.757 3.5H15.243L16.243 6H18C19.1046 6 20 6.89543 20 8V19Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  <circle cx="12" cy="13" r="4" stroke="white" strokeWidth="2" />
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M20 19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19V8C4 6.89543 4.89543 6 6 6H7.757L8.757 3.5H15.243L16.243 6H18C19.1046 6 20 6.89543 20 8V19Z"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <circle
+                    cx="12"
+                    cy="13"
+                    r="4"
+                    stroke="white"
+                    strokeWidth="2"
+                  />
                 </svg>
               )}
-              </button>
+            </button>
           </div>
 
           {/* Flash Effect */}
@@ -1931,35 +2721,56 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
     // If scanning Face ID, show the animation
     const { liveness } = previewTexts;
 
-    if (isFaceIdScanning && (selectedLivenessType === "selfie_photo" || selectedLivenessType === "selfie_video")) {
+    if (
+      isFaceIdScanning &&
+      (selectedLivenessType === "selfie_photo" ||
+        selectedLivenessType === "selfie_video")
+    ) {
       const normalizedProgress = Math.min(Math.max(faceIdProgress, 0), 100);
       const progressStrokeWidth = 3;
       const viewBoxSize = 256;
       const perimeterProgressRadius = viewBoxSize / 2 - progressStrokeWidth / 2;
       const perimeterCircumference = 2 * Math.PI * perimeterProgressRadius;
-      const perimeterOffset = perimeterCircumference * (1 - normalizedProgress / 100);
+      const perimeterOffset =
+        perimeterCircumference * (1 - normalizedProgress / 100);
 
       // Helper to extract RGB from hex for gradient opacity (igual que en document_capture)
       const hexToRgb = (hex: string) => {
         const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-        hex = hex.replace(shorthandRegex, (m, r, g, b) => r + r + g + g + b + b);
+        hex = hex.replace(
+          shorthandRegex,
+          (m, r, g, b) => r + r + g + g + b + b,
+        );
         const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-        return result ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}` : '0, 0, 0';
+        return result
+          ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}`
+          : "0, 0, 0";
       };
 
       // Convertir todos los colores del gradiente a RGB
       const themeRgb = hexToRgb(themeColor);
       const darkThemeRgb = hexToRgb(darkThemeColor);
       const almostBlackRgb = hexToRgb(almostBlackColor);
-      const blackRgb = '0, 0, 0';
+      const blackRgb = "0, 0, 0";
 
       return (
-        <div className="flex h-full flex-col relative overflow-hidden bg-white" style={{ paddingBottom: '100px', paddingLeft: '10px', paddingRight: '10px' }}>
+        <div
+          className="flex h-full flex-col relative overflow-hidden bg-white"
+          style={{
+            paddingBottom: "100px",
+            paddingLeft: "10px",
+            paddingRight: "10px",
+          }}
+        >
           {/* Header con logo */}
           <div className="relative mb-3 flex flex-shrink-0 items-center justify-between px-6 pt-6 z-20">
             {currentBranding.logo && (
               <div className="absolute left-1/2 -translate-x-1/2">
-                <img src={currentBranding.logo} alt="Logo" className="h-8 max-w-full object-contain" />
+                <img
+                  src={currentBranding.logo}
+                  alt="Logo"
+                  className="h-8 max-w-full object-contain"
+                />
               </div>
             )}
             <div className="w-full"></div> {/* Spacer para centrar el logo */}
@@ -1970,203 +2781,221 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
             className="relative mx-auto w-full max-w-sm rounded-3xl px-6 py-8 flex-1 flex flex-col"
             style={{
               background: `linear-gradient(to top, rgba(${blackRgb}, 1) 0%, rgba(${almostBlackRgb}, 1) 10%, rgba(${darkThemeRgb}, 1) 20%, rgba(${themeRgb}, 0.8) 30%, rgba(${themeRgb}, 0.4) 40%, transparent 50%, transparent 100%)`,
-              minHeight: '500px',
+              minHeight: "500px",
             }}
           >
             {/* Título arriba del div - pegado a la parte superior */}
             <div className="text-center mb-6 mt-0">
-              <h2 className="text-xl leading-tight" style={{ color: themeColor }}>
+              <h2
+                className="text-xl leading-tight"
+                style={{ color: themeColor }}
+              >
                 <span className="font-bold">Escaneando tu rostro</span>
-
               </h2>
             </div>
 
             {/* Círculo de carga con animaciones - centrado */}
             <div className="relative flex-1 flex items-center justify-center">
               <div className="relative">
-            {/* Container with decorative effects around the circle */}
+                {/* Container with decorative effects around the circle */}
                 <div className="relative h-64 w-64 flex items-center justify-center">
-              {/* Decorative rotating lines around the circle - Layer 1 (with water effect) */}
-              <svg 
-                className="absolute inset-0 w-full h-full"
-                viewBox="0 0 320 320"
-                style={{
-                  animation: 'faceIdRotateAndRipple 8s ease-in-out infinite',
-                  transformOrigin: '50% 50%',
-                }}
-              >
-                <circle
-                  cx="160"
-                  cy="160"
-                  r="140"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeOpacity="0.5"
-                  strokeDasharray="4 8"
-                  style={{
+                  {/* Decorative rotating lines around the circle - Layer 1 (with water effect) */}
+                  <svg
+                    className="absolute inset-0 w-full h-full"
+                    viewBox="0 0 320 320"
+                    style={{
+                      animation:
+                        "faceIdRotateAndRipple 8s ease-in-out infinite",
+                      transformOrigin: "50% 50%",
+                    }}
+                  >
+                    <circle
+                      cx="160"
+                      cy="160"
+                      r="140"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeOpacity="0.5"
+                      strokeDasharray="4 8"
+                      style={{
                         color: themeColor,
-                    animation: 'faceIdDashRotate 3s linear infinite',
-                  }}
-                />
-                <circle
-                  cx="160"
-                  cy="160"
-                  r="150"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeOpacity="0.4"
-                  strokeDasharray="3 6"
-                  style={{
+                        animation: "faceIdDashRotate 3s linear infinite",
+                      }}
+                    />
+                    <circle
+                      cx="160"
+                      cy="160"
+                      r="150"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeOpacity="0.4"
+                      strokeDasharray="3 6"
+                      style={{
                         color: themeColor,
-                    animation: 'faceIdDashRotate 4s linear infinite reverse',
-                  }}
-                />
-              </svg>
-              
-              {/* Decorative rotating lines - Layer 2 (opposite direction with water effect) */}
-              <svg 
-                className="absolute inset-0 w-full h-full"
-                viewBox="0 0 320 320"
-                style={{
-                  animation: 'faceIdRotateAndRipple2 12s ease-in-out infinite',
-                  transformOrigin: '50% 50%',
-                }}
-              >
-                <circle
-                  cx="160"
-                  cy="160"
-                  r="145"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeOpacity="0.35"
-                  strokeDasharray="5 10"
-                  style={{
+                        animation:
+                          "faceIdDashRotate 4s linear infinite reverse",
+                      }}
+                    />
+                  </svg>
+
+                  {/* Decorative rotating lines - Layer 2 (opposite direction with water effect) */}
+                  <svg
+                    className="absolute inset-0 w-full h-full"
+                    viewBox="0 0 320 320"
+                    style={{
+                      animation:
+                        "faceIdRotateAndRipple2 12s ease-in-out infinite",
+                      transformOrigin: "50% 50%",
+                    }}
+                  >
+                    <circle
+                      cx="160"
+                      cy="160"
+                      r="145"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeOpacity="0.35"
+                      strokeDasharray="5 10"
+                      style={{
                         color: themeColor,
-                    animation: 'faceIdDashRotate 5s linear infinite',
-                  }}
-                />
-                <circle
-                  cx="160"
-                  cy="160"
-                  r="130"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1"
-                  strokeOpacity="0.3"
-                  strokeDasharray="2 4"
-                  style={{
+                        animation: "faceIdDashRotate 5s linear infinite",
+                      }}
+                    />
+                    <circle
+                      cx="160"
+                      cy="160"
+                      r="130"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1"
+                      strokeOpacity="0.3"
+                      strokeDasharray="2 4"
+                      style={{
                         color: themeColor,
-                    animation: 'faceIdDashRotate 2.5s linear infinite reverse',
-                  }}
-                />
-              </svg>
-              
-              {/* Decorative rotating lines - Layer 3 (pulsing with water effect) */}
-              <svg 
-                className="absolute inset-0 w-full h-full"
-                viewBox="0 0 320 320"
-                style={{
-                  animation: 'faceIdRotateAndRipple3 10s ease-in-out infinite',
-                  transformOrigin: '50% 50%',
-                }}
-              >
-                <circle
-                  cx="160"
-                  cy="160"
-                  r="135"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1"
-                  strokeOpacity="0.25"
-                  strokeDasharray="6 12"
-                  style={{
+                        animation:
+                          "faceIdDashRotate 2.5s linear infinite reverse",
+                      }}
+                    />
+                  </svg>
+
+                  {/* Decorative rotating lines - Layer 3 (pulsing with water effect) */}
+                  <svg
+                    className="absolute inset-0 w-full h-full"
+                    viewBox="0 0 320 320"
+                    style={{
+                      animation:
+                        "faceIdRotateAndRipple3 10s ease-in-out infinite",
+                      transformOrigin: "50% 50%",
+                    }}
+                  >
+                    <circle
+                      cx="160"
+                      cy="160"
+                      r="135"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1"
+                      strokeOpacity="0.25"
+                      strokeDasharray="6 12"
+                      style={{
                         color: themeColor,
-                    animation: 'faceIdDashRotate 6s linear infinite',
-                  }}
-                />
-              </svg>
-              
-              {/* Camera video inside the circle */}
+                        animation: "faceIdDashRotate 6s linear infinite",
+                      }}
+                    />
+                  </svg>
+
+                  {/* Camera video inside the circle */}
                   <div className="relative h-52 w-52 overflow-hidden rounded-full shadow-2xl bg-gray-900 z-10">
-                {/* Circular perimeter progress indicator */}
-                <svg
-                  className="pointer-events-none absolute inset-0 z-20 h-full w-full"
-                  viewBox={`0 0 ${viewBoxSize} ${viewBoxSize}`}
-                  fill="none"
-                >
-                  <circle
-                    cx={viewBoxSize / 2}
-                    cy={viewBoxSize / 2}
-                    r={perimeterProgressRadius}
+                    {/* Circular perimeter progress indicator */}
+                    <svg
+                      className="pointer-events-none absolute inset-0 z-20 h-full w-full"
+                      viewBox={`0 0 ${viewBoxSize} ${viewBoxSize}`}
+                      fill="none"
+                    >
+                      <circle
+                        cx={viewBoxSize / 2}
+                        cy={viewBoxSize / 2}
+                        r={perimeterProgressRadius}
                         stroke={themeColor}
-                    strokeWidth={progressStrokeWidth}
-                    strokeLinecap="round"
-                    strokeDasharray={perimeterCircumference}
-                    strokeDashoffset={perimeterOffset}
-                    transform={`rotate(-90 ${viewBoxSize / 2} ${viewBoxSize / 2})`}
-                    style={{ transition: "stroke-dashoffset 0.2s ease-out" }}
-                  />
-                </svg>
-                
-                
-                {/* Video always present in the DOM */}
+                        strokeWidth={progressStrokeWidth}
+                        strokeLinecap="round"
+                        strokeDasharray={perimeterCircumference}
+                        strokeDashoffset={perimeterOffset}
+                        transform={`rotate(-90 ${viewBoxSize / 2} ${viewBoxSize / 2})`}
+                        style={{
+                          transition: "stroke-dashoffset 0.2s ease-out",
+                        }}
+                      />
+                    </svg>
+
+                    {/* Video always present in the DOM */}
                     <video
                       ref={videoRef}
                       autoPlay
                       playsInline
                       muted
-                  className="w-full h-full object-cover"
-                      style={{ 
-                    transform: 'scaleX(-1)', // Horizontal mirror
-                        display: 'block',
-                    position: 'relative',
-                    zIndex: 1,
-                    backgroundColor: '#000',
-                  }}
-                />
-                
-                {/* Message overlay */}
-                {!cameraStream && !cameraError && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-gray-900/80 z-10">
-                    <p className="text-white text-sm text-center px-4">{liveness.scanning.startingCamera}</p>
-                  </div>
-                )}
-              
-                {cameraError && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-gray-900/80 z-10">
-                    <p className="text-red-400 text-sm text-center px-4">{cameraError}</p>
-                    </div>
-                  )}
+                      className="w-full h-full object-cover"
+                      style={{
+                        transform: "scaleX(-1)", // Horizontal mirror
+                        display: "block",
+                        position: "relative",
+                        zIndex: 1,
+                        backgroundColor: "#000",
+                      }}
+                    />
+
+                    {/* Message overlay */}
+                    {!cameraStream && !cameraError && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-gray-900/80 z-10">
+                        <p className="text-white text-sm text-center px-4">
+                          {liveness.scanning.startingCamera}
+                        </p>
+                      </div>
+                    )}
+
+                    {cameraError && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-gray-900/80 z-10">
+                        <p className="text-red-400 text-sm text-center px-4">
+                          {cameraError}
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
             </div>
-            
+
             {/* Sección inferior - en la parte oscura del gradiente */}
-            <div className="flex flex-col mt-auto" style={{ paddingBottom: '16px' }}>
+            <div
+              className="flex flex-col mt-auto"
+              style={{ paddingBottom: "16px" }}
+            >
               {/* Textos en blanco */}
               <div className="text-center mb-4">
                 <p className="text-sm text-white mb-1">
                   Completando verificación
-              </p>
+                </p>
                 <p className="text-base font-bold text-white">
                   Verificando identidad
                 </p>
               </div>
 
               {/* Barra de progreso horizontal - gris medio oscuro, se llena con blanco */}
-              <div className="w-full h-2 rounded-full" style={{ backgroundColor: '#4B5563' }}>
-                  <div
+              <div
+                className="w-full h-2 rounded-full"
+                style={{ backgroundColor: "#4B5563" }}
+              >
+                <div
                   className="h-full rounded-full transition-all duration-100 ease-out"
                   style={{
-                    width: normalizedProgress + '%',
-                    backgroundColor: '#FFFFFF',
+                    width: normalizedProgress + "%",
+                    backgroundColor: "#FFFFFF",
                   }}
-                  />
-                </div>
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -2175,13 +3004,18 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
 
     // Filter only selfie check options
     const selfieOptions = Object.entries(livenessTypes)
-      .filter(([type, enabled]) => enabled && (type === "selfie_photo" || type === "selfie_video"))
+      .filter(
+        ([type, enabled]) =>
+          enabled && (type === "selfie_photo" || type === "selfie_video"),
+      )
       .map(([type]) => type as "selfie_photo" | "selfie_video");
 
     // Inicializar activeLivenessCard si es null
     if (activeLivenessCard === null && selfieOptions.length > 0) {
       const selectedIndex = selectedLivenessType
-        ? selfieOptions.findIndex(liveness => liveness === selectedLivenessType)
+        ? selfieOptions.findIndex(
+            (liveness) => liveness === selectedLivenessType,
+          )
         : 0;
       if (selectedIndex >= 0) {
         setActiveLivenessCard(selectedIndex);
@@ -2193,9 +3027,9 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
     // SVG geométrico reutilizado para liveness check
     const GeometricSVG = () => {
       const lightThemeColor = lightenColor(themeColor, 0.3);
-      const baseId = 'identity-liveness-check';
+      const baseId = "identity-liveness-check";
 
-    return (
+      return (
         <div className="flex justify-center py-2">
           <svg
             id={`Capa_2_${baseId}`}
@@ -2205,56 +3039,260 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
             className="h-48 w-48 opacity-80"
           >
             <defs>
-              <linearGradient id={`identity-gradient-${baseId}`} x1="4.35" y1="612.77" x2="210.66" y2="612.77" gradientTransform="translate(0 720.29) scale(1 -1)" gradientUnits="userSpaceOnUse">
+              <linearGradient
+                id={`identity-gradient-${baseId}`}
+                x1="4.35"
+                y1="612.77"
+                x2="210.66"
+                y2="612.77"
+                gradientTransform="translate(0 720.29) scale(1 -1)"
+                gradientUnits="userSpaceOnUse"
+              >
                 <stop offset="0" stopColor={lightThemeColor} />
                 <stop offset="1" stopColor={darkThemeColor} />
               </linearGradient>
-              <linearGradient id={`identity-gradient-2-${baseId}`} x1="5.57" y1="612.78" x2="209.46" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-3-${baseId}`} x1="20.99" y1="612.78" x2="194.05" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-4-${baseId}`} x1="0" y1="612.78" x2="215.02" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-5-${baseId}`} x1="17.91" y1="612.78" x2="197.11" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-6-${baseId}`} x1="7.41" y1="612.77" x2="207.62" y2="612.77" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-7-${baseId}`} x1="2.97" y1="612.78" x2="212.04" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-8-${baseId}`} x1="26.88" y1="612.78" x2="188.15" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-9-${baseId}`} x1=".65" y1="612.78" x2="214.38" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-10-${baseId}`} x1="13.07" y1="612.77" x2="201.95" y2="612.77" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-11-${baseId}`} x1="11.2" y1="612.78" x2="203.81" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-12-${baseId}`} x1="1.17" y1="612.78" x2="213.84" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-13-${baseId}`} x1="29.6" y1="612.77" x2="185.42" y2="612.77" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-14-${baseId}`} x1="2.1" y1="612.77" x2="212.92" y2="612.77" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-15-${baseId}`} x1="8.95" y1="612.78" x2="206.07" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-16-${baseId}`} x1="15.74" y1="612.78" x2="199.28" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-17-${baseId}`} x1=".19" y1="612.77" x2="214.85" y2="612.77" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-18-${baseId}`} x1="23.44" y1="612.78" x2="191.59" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-19-${baseId}`} x1="5.57" y1="612.78" x2="209.46" y2="612.78" href={`#identity-gradient-${baseId}`} />
-              <linearGradient id={`identity-gradient-20-${baseId}`} x1="20.99" y1="612.78" x2="194.05" y2="612.78" href={`#identity-gradient-${baseId}`} />
+              <linearGradient
+                id={`identity-gradient-2-${baseId}`}
+                x1="5.57"
+                y1="612.78"
+                x2="209.46"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-3-${baseId}`}
+                x1="20.99"
+                y1="612.78"
+                x2="194.05"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-4-${baseId}`}
+                x1="0"
+                y1="612.78"
+                x2="215.02"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-5-${baseId}`}
+                x1="17.91"
+                y1="612.78"
+                x2="197.11"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-6-${baseId}`}
+                x1="7.41"
+                y1="612.77"
+                x2="207.62"
+                y2="612.77"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-7-${baseId}`}
+                x1="2.97"
+                y1="612.78"
+                x2="212.04"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-8-${baseId}`}
+                x1="26.88"
+                y1="612.78"
+                x2="188.15"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-9-${baseId}`}
+                x1=".65"
+                y1="612.78"
+                x2="214.38"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-10-${baseId}`}
+                x1="13.07"
+                y1="612.77"
+                x2="201.95"
+                y2="612.77"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-11-${baseId}`}
+                x1="11.2"
+                y1="612.78"
+                x2="203.81"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-12-${baseId}`}
+                x1="1.17"
+                y1="612.78"
+                x2="213.84"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-13-${baseId}`}
+                x1="29.6"
+                y1="612.77"
+                x2="185.42"
+                y2="612.77"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-14-${baseId}`}
+                x1="2.1"
+                y1="612.77"
+                x2="212.92"
+                y2="612.77"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-15-${baseId}`}
+                x1="8.95"
+                y1="612.78"
+                x2="206.07"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-16-${baseId}`}
+                x1="15.74"
+                y1="612.78"
+                x2="199.28"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-17-${baseId}`}
+                x1=".19"
+                y1="612.77"
+                x2="214.85"
+                y2="612.77"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-18-${baseId}`}
+                x1="23.44"
+                y1="612.78"
+                x2="191.59"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-19-${baseId}`}
+                x1="5.57"
+                y1="612.78"
+                x2="209.46"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
+              <linearGradient
+                id={`identity-gradient-20-${baseId}`}
+                x1="20.99"
+                y1="612.78"
+                x2="194.05"
+                y2="612.78"
+                href={`#identity-gradient-${baseId}`}
+              />
             </defs>
             <g id="object">
               <g>
-                <path fill={`url(#identity-gradient-9-${baseId})`} d="M77.1,210.67l-.14-.25L4.35,77.11,137.91,4.37l.14.25,72.61,133.31-133.56,72.74h0ZM5.13,77.33l72.2,132.57,132.57-72.2L137.7,5.13S5.13,77.33,5.13,77.33Z" />
-                <path fill={`url(#identity-gradient-${baseId})`} d="M141.77,209.45L5.57,141.77l.13-.25L73.26,5.58l136.2,67.68-.13.25-67.56,135.94h0ZM6.33,141.52l135.18,67.18,67.18-135.18L73.51,6.34,6.33,141.52h0Z" />
-                <path fill={`url(#identity-gradient-2-${baseId})`} d="M43.66,194.05l-.04-.28L20.99,43.66l150.39-22.68.04.28,22.63,150.11-150.39,22.68h0ZM21.62,44.14l22.51,149.26,149.26-22.51-22.51-149.26L21.61,44.14h.01Z" />
-                <path fill={`url(#identity-gradient-5-${baseId})`} d="M104.84,215.02l-.2-.21L0,104.83,110.18,0l.2.21,104.64,109.98-110.18,104.83h0ZM.8,104.86l104.05,109.36,109.36-104.05L110.16.81.8,104.86Z" />
-                <path fill={`url(#identity-gradient-6-${baseId})`} d="M166.98,197.11l-149.07-30.13L48.04,17.91l149.07,30.13-30.13,149.07ZM18.58,166.55l147.96,29.9,29.9-147.96L48.48,18.59l-29.9,147.96Z" />
-                <path fill={`url(#identity-gradient-3-${baseId})`} d="M68.23,207.63l-.11-.26L7.41,68.24,146.8,7.41l.11.26,60.71,139.13-139.39,60.83h0ZM8.15,68.53l60.37,138.35,138.35-60.37L146.5,8.16,8.15,68.53Z" />
-                <path fill={`url(#identity-gradient-4-${baseId})`} d="M132.75,212.05l-.24-.15L2.97,132.75,82.26,2.97l.24.15,129.54,79.15-79.29,129.78h0ZM3.75,132.57l128.81,78.7,78.7-128.81L82.45,3.76,3.75,132.57Z" />
-                <path fill={`url(#identity-gradient-7-${baseId})`} d="M36.36,188.15L26.88,36.36l151.79-9.48,9.48,151.79-151.79,9.48ZM27.47,36.89l9.41,150.66,150.66-9.41-9.41-150.66L27.47,36.89Z" />
-                <path fill={`url(#identity-gradient-8-${baseId})`} d="M95.48,214.38l-.18-.22L.65,95.48l.22-.18L119.55.65l.18.22,94.65,118.68-.22.18-118.68,94.65h0ZM1.44,95.57l94.12,118.01,118.01-94.12L119.45,1.45,1.44,95.57h0Z" />
-                <path fill={`url(#identity-gradient-11-${baseId})`} d="M158.95,201.96l-.27-.08L13.07,158.96l.08-.27L56.07,13.08l.27.08,145.61,42.92-.08.27-42.92,145.61h0ZM13.77,158.57l144.79,42.68,42.68-144.79L56.45,13.78,13.77,158.57h0Z" />
-                <path fill={`url(#identity-gradient-12-${baseId})`} d="M59.65,203.82l-.09-.27L11.2,59.66l.27-.09L155.36,11.21l.09.27,48.36,143.89-.27.09-143.89,48.36h0ZM11.92,60.01l48.09,143.09,143.09-48.09L155.01,11.92,11.92,60.01Z" />
-                <path fill={`url(#identity-gradient-13-${baseId})`} d="M123.54,213.85L1.17,123.55,91.47,1.18l122.37,90.3-90.3,122.37h0ZM1.96,123.43l121.46,89.63,89.63-121.46L91.59,1.97,1.96,123.43Z" />
-                <path fill={`url(#identity-gradient-14-${baseId})`} d="M181.64,185.43l-152.04-3.78v-.28l3.78-151.76,152.04,3.78v.28l-3.78,151.76h0ZM30.18,181.09l150.91,3.75,3.75-150.91-150.91-3.75-3.75,150.91Z" />
-                <path fill={`url(#identity-gradient-15-${baseId})`} d="M86.21,212.93L2.1,86.22,128.81,2.11l84.11,126.71-126.71,84.11ZM2.88,86.37l83.48,125.77,125.77-83.48L128.65,2.89,2.88,86.37Z" />
-                <path fill={`url(#identity-gradient-16-${baseId})`} d="M150.52,206.08l-.26-.1L8.95,150.53,64.5,8.95l.26.1,141.31,55.45-55.55,141.58ZM9.68,150.21l140.52,55.14,55.14-140.52L64.82,9.69,9.68,150.21Z" />
-                <path fill={`url(#identity-gradient-19-${baseId})`} d="M51.44,199.28l-.07-.28L15.74,51.44,163.58,15.74l.07.28,35.63,147.56-147.84,35.7ZM16.43,51.86l35.43,146.74,146.74-35.43L163.17,16.43S16.43,51.86,16.43,51.86Z" />
-                <path fill={`url(#identity-gradient-17-${baseId})`} d="M114.22,214.85l-.21-.19L.19,114.22l.19-.21L100.82.19l.21.19,113.82,100.44-.19.21-100.44,113.82h0ZM.98,114.17l113.19,99.88,99.88-113.19L100.86.98.98,114.17h0Z" />
-                <path fill={`url(#identity-gradient-18-${baseId})`} d="M174.57,191.59l-151.13-17.02.03-.28L40.46,23.44l151.13,17.02-.03.28-16.99,150.85ZM24.06,174.07l150,16.89,16.89-150L40.95,24.07l-16.89,150Z" />
-                <path fill={`url(#identity-gradient-9-${baseId})`} d="M77.1,210.67l-.14-.25L4.35,77.11,137.91,4.37l.14.25,72.61,133.31-133.56,72.74h0ZM5.13,77.33l72.2,132.57,132.57-72.2L137.7,5.13S5.13,77.33,5.13,77.33Z" />
-                <path fill={`url(#identity-gradient-${baseId})`} d="M141.77,209.45L5.57,141.77l.13-.25L73.26,5.58l136.2,67.68-.13.25-67.56,135.94h0ZM6.33,141.52l135.18,67.18,67.18-135.18L73.51,6.34,6.33,141.52h0Z" />
-                <path fill={`url(#identity-gradient-2-${baseId})`} d="M43.66,194.05l-.04-.28L20.99,43.66l150.39-22.68.04.28,22.63,150.11-150.39,22.68h0ZM21.62,44.14l22.51,149.26,149.26-22.51-22.51-149.26L21.61,44.14h.01Z" />
+                <path
+                  fill={`url(#identity-gradient-9-${baseId})`}
+                  d="M77.1,210.67l-.14-.25L4.35,77.11,137.91,4.37l.14.25,72.61,133.31-133.56,72.74h0ZM5.13,77.33l72.2,132.57,132.57-72.2L137.7,5.13S5.13,77.33,5.13,77.33Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-${baseId})`}
+                  d="M141.77,209.45L5.57,141.77l.13-.25L73.26,5.58l136.2,67.68-.13.25-67.56,135.94h0ZM6.33,141.52l135.18,67.18,67.18-135.18L73.51,6.34,6.33,141.52h0Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-2-${baseId})`}
+                  d="M43.66,194.05l-.04-.28L20.99,43.66l150.39-22.68.04.28,22.63,150.11-150.39,22.68h0ZM21.62,44.14l22.51,149.26,149.26-22.51-22.51-149.26L21.61,44.14h.01Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-5-${baseId})`}
+                  d="M104.84,215.02l-.2-.21L0,104.83,110.18,0l.2.21,104.64,109.98-110.18,104.83h0ZM.8,104.86l104.05,109.36,109.36-104.05L110.16.81.8,104.86Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-6-${baseId})`}
+                  d="M166.98,197.11l-149.07-30.13L48.04,17.91l149.07,30.13-30.13,149.07ZM18.58,166.55l147.96,29.9,29.9-147.96L48.48,18.59l-29.9,147.96Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-3-${baseId})`}
+                  d="M68.23,207.63l-.11-.26L7.41,68.24,146.8,7.41l.11.26,60.71,139.13-139.39,60.83h0ZM8.15,68.53l60.37,138.35,138.35-60.37L146.5,8.16,8.15,68.53Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-4-${baseId})`}
+                  d="M132.75,212.05l-.24-.15L2.97,132.75,82.26,2.97l.24.15,129.54,79.15-79.29,129.78h0ZM3.75,132.57l128.81,78.7,78.7-128.81L82.45,3.76,3.75,132.57Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-7-${baseId})`}
+                  d="M36.36,188.15L26.88,36.36l151.79-9.48,9.48,151.79-151.79,9.48ZM27.47,36.89l9.41,150.66,150.66-9.41-9.41-150.66L27.47,36.89Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-8-${baseId})`}
+                  d="M95.48,214.38l-.18-.22L.65,95.48l.22-.18L119.55.65l.18.22,94.65,118.68-.22.18-118.68,94.65h0ZM1.44,95.57l94.12,118.01,118.01-94.12L119.45,1.45,1.44,95.57h0Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-11-${baseId})`}
+                  d="M158.95,201.96l-.27-.08L13.07,158.96l.08-.27L56.07,13.08l.27.08,145.61,42.92-.08.27-42.92,145.61h0ZM13.77,158.57l144.79,42.68,42.68-144.79L56.45,13.78,13.77,158.57h0Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-12-${baseId})`}
+                  d="M59.65,203.82l-.09-.27L11.2,59.66l.27-.09L155.36,11.21l.09.27,48.36,143.89-.27.09-143.89,48.36h0ZM11.92,60.01l48.09,143.09,143.09-48.09L155.01,11.92,11.92,60.01Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-13-${baseId})`}
+                  d="M123.54,213.85L1.17,123.55,91.47,1.18l122.37,90.3-90.3,122.37h0ZM1.96,123.43l121.46,89.63,89.63-121.46L91.59,1.97,1.96,123.43Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-14-${baseId})`}
+                  d="M181.64,185.43l-152.04-3.78v-.28l3.78-151.76,152.04,3.78v.28l-3.78,151.76h0ZM30.18,181.09l150.91,3.75,3.75-150.91-150.91-3.75-3.75,150.91Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-15-${baseId})`}
+                  d="M86.21,212.93L2.1,86.22,128.81,2.11l84.11,126.71-126.71,84.11ZM2.88,86.37l83.48,125.77,125.77-83.48L128.65,2.89,2.88,86.37Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-16-${baseId})`}
+                  d="M150.52,206.08l-.26-.1L8.95,150.53,64.5,8.95l.26.1,141.31,55.45-55.55,141.58ZM9.68,150.21l140.52,55.14,55.14-140.52L64.82,9.69,9.68,150.21Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-19-${baseId})`}
+                  d="M51.44,199.28l-.07-.28L15.74,51.44,163.58,15.74l.07.28,35.63,147.56-147.84,35.7ZM16.43,51.86l35.43,146.74,146.74-35.43L163.17,16.43S16.43,51.86,16.43,51.86Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-17-${baseId})`}
+                  d="M114.22,214.85l-.21-.19L.19,114.22l.19-.21L100.82.19l.21.19,113.82,100.44-.19.21-100.44,113.82h0ZM.98,114.17l113.19,99.88,99.88-113.19L100.86.98.98,114.17h0Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-18-${baseId})`}
+                  d="M174.57,191.59l-151.13-17.02.03-.28L40.46,23.44l151.13,17.02-.03.28-16.99,150.85ZM24.06,174.07l150,16.89,16.89-150L40.95,24.07l-16.89,150Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-9-${baseId})`}
+                  d="M77.1,210.67l-.14-.25L4.35,77.11,137.91,4.37l.14.25,72.61,133.31-133.56,72.74h0ZM5.13,77.33l72.2,132.57,132.57-72.2L137.7,5.13S5.13,77.33,5.13,77.33Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-${baseId})`}
+                  d="M141.77,209.45L5.57,141.77l.13-.25L73.26,5.58l136.2,67.68-.13.25-67.56,135.94h0ZM6.33,141.52l135.18,67.18,67.18-135.18L73.51,6.34,6.33,141.52h0Z"
+                />
+                <path
+                  fill={`url(#identity-gradient-2-${baseId})`}
+                  d="M43.66,194.05l-.04-.28L20.99,43.66l150.39-22.68.04.28,22.63,150.11-150.39,22.68h0ZM21.62,44.14l22.51,149.26,149.26-22.51-22.51-149.26L21.61,44.14h.01Z"
+                />
               </g>
             </g>
-            </svg>
+          </svg>
         </div>
       );
     };
@@ -2263,7 +3301,7 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
       <div className="flex h-full flex-col overflow-hidden">
         {/* Header con back y logo */}
         <div className="relative mb-3 flex flex-shrink-0 items-center justify-between px-6 pt-6">
-              <button
+          <button
             onClick={() => navigateToScreen("document_capture")}
             className="text-sm font-medium text-gray-500 dark:text-gray-400"
           >
@@ -2271,7 +3309,11 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
           </button>
           {currentBranding.logo && (
             <div className="absolute left-1/2 -translate-x-1/2">
-              <img src={currentBranding.logo} alt="Logo" className="h-8 max-w-full object-contain" />
+              <img
+                src={currentBranding.logo}
+                alt="Logo"
+                className="h-8 max-w-full object-contain"
+              />
             </div>
           )}
           <div className="w-12"></div> {/* Spacer para centrar el logo */}
@@ -2290,22 +3332,32 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
         <div
           className="relative z-10 flex-1 overflow-hidden rounded-2xl p-5 backdrop-blur-sm"
           style={{
-            backgroundColor: 'rgba(255, 255, 255, 0.35)',
+            backgroundColor: "rgba(255, 255, 255, 0.35)",
           }}
           data-tour-id="tour-identity-workflow-liveness-preview"
         >
           <div className="space-y-4">
             {/* Título */}
             <div className="text-center">
-              <h2 className="mb-1 text-xl font-bold" style={{ color: themeColor }}>
+              <h2
+                className="mb-1 text-xl font-bold"
+                style={{ color: themeColor }}
+              >
                 {liveness.title}
               </h2>
-              <p className="text-xs text-gray-600 dark:text-gray-400">{liveness.subtitle}</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400">
+                {liveness.subtitle}
+              </p>
             </div>
 
             {/* Tarjetas de liveness en vertical con efecto acordeón */}
             <div className="relative flex items-center justify-center py-2">
-              <div className="relative w-full" style={{ height: `${Math.min(selfieOptions.length * 75, 220)}px` }}>
+              <div
+                className="relative w-full"
+                style={{
+                  height: `${Math.min(selfieOptions.length * 75, 220)}px`,
+                }}
+              >
                 {selfieOptions.map((livenessType, index) => {
                   const isActive = activeLivenessCard === index;
                   const currentActive = activeLivenessCard ?? 0;
@@ -2319,15 +3371,22 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
                   const overlapPercentage = 0.3; // 42% de superposición (puedes cambiar este valor entre 0.0 y 1.0)
 
                   // Usar la configuración compartida de borderRadius para tarjetas verticales
-                  const borderRadiusActive = VERTICAL_CARDS_BORDER_RADIUS.active;
-                  const borderRadiusInactive = VERTICAL_CARDS_BORDER_RADIUS.inactive;
+                  const borderRadiusActive =
+                    VERTICAL_CARDS_BORDER_RADIUS.active;
+                  const borderRadiusInactive =
+                    VERTICAL_CARDS_BORDER_RADIUS.inactive;
 
-                  const visiblePart = Math.round(inactiveCardHeight * (1 - overlapPercentage)); // Parte visible de la inactiva
+                  const visiblePart = Math.round(
+                    inactiveCardHeight * (1 - overlapPercentage),
+                  ); // Parte visible de la inactiva
                   const overlapAmount = inactiveCardHeight - visiblePart; // Cantidad de superposición
 
                   // Calcular posición vertical (similar a document_selection)
                   let topOffset = 0;
-                  const containerHeight = Math.min(selfieOptions.length * 75, 220);
+                  const containerHeight = Math.min(
+                    selfieOptions.length * 75,
+                    220,
+                  );
                   let centerY = (containerHeight - activeCardHeight) / 2;
 
                   if (currentActive === 0) {
@@ -2347,7 +3406,8 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
                         topOffset = centerY + activeCardHeight - overlapAmount;
                       }
                     } else {
-                      topOffset = centerY + activeCardHeight - overlapAmount * cardsBelow;
+                      topOffset =
+                        centerY + activeCardHeight - overlapAmount * cardsBelow;
                     }
                   }
 
@@ -2370,107 +3430,176 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
                         setActiveLivenessCard(index);
                         updateConfig({ selectedLivenessType: livenessType });
                       }}
-                      className={`absolute left-0 right-0 flex cursor-pointer items-center gap-3 rounded-xl transition-all duration-300 ease-in-out ${isActive ? 'shadow-lg' : ''
-                        }`}
+                      className={`absolute left-0 right-0 flex cursor-pointer items-center gap-3 rounded-xl transition-all duration-300 ease-in-out ${
+                        isActive ? "shadow-lg" : ""
+                      }`}
                       style={{
                         ...(isActive
                           ? {
-                            background: `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
-                            border: '2px solid white',
-                          }
+                              background: `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
+                              border: "2px solid white",
+                            }
                           : {
-                            backgroundColor: '#9BA2AF',
-                            border: '2px solid white',
-                          }
-                        ),
+                              backgroundColor: "#9BA2AF",
+                              border: "2px solid white",
+                            }),
                         top: `${topOffset}px`,
-                        height: isActive ? `${activeCardHeight}px` : `${inactiveCardHeight}px`,
-                        width: '100%', // Ambas tarjetas tienen el mismo ancho
-                        paddingLeft: isActive ? '16px' : '12px',
-                        paddingRight: isActive ? '16px' : '12px',
+                        height: isActive
+                          ? `${activeCardHeight}px`
+                          : `${inactiveCardHeight}px`,
+                        width: "100%", // Ambas tarjetas tienen el mismo ancho
+                        paddingLeft: isActive ? "16px" : "12px",
+                        paddingRight: isActive ? "16px" : "12px",
                         zIndex: zIndex,
-                        borderRadius: isActive ? `${borderRadiusActive}px` : `${borderRadiusInactive}px`, // Controlado por variables
-                        transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                        borderRadius: isActive
+                          ? `${borderRadiusActive}px`
+                          : `${borderRadiusInactive}px`, // Controlado por variables
+                        transition:
+                          "all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)",
                       }}
                     >
                       {/* Icono */}
                       <div
                         className="flex shrink-0 items-center justify-center"
                         style={{
-                          width: isActive ? '32px' : '24px',
-                          height: '32px',
+                          width: isActive ? "32px" : "24px",
+                          height: "32px",
                         }}
                       >
-                    {livenessType === "selfie_photo" && (
-                          <svg className="h-6 w-6" style={{ color: 'white' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                      </svg>
-                    )}
-                    {livenessType === "selfie_video" && (
-                          <svg className="h-6 w-6" style={{ color: 'white' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                      </svg>
-                    )}
-                  </div>
+                        {livenessType === "selfie_photo" && (
+                          <svg
+                            className="h-6 w-6"
+                            style={{ color: "white" }}
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                            />
+                          </svg>
+                        )}
+                        {livenessType === "selfie_video" && (
+                          <svg
+                            className="h-6 w-6"
+                            style={{ color: "white" }}
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                            />
+                          </svg>
+                        )}
+                      </div>
 
                       {/* Texto - visible siempre, pero con diferentes estilos según estado */}
                       <div
                         className="flex-1 overflow-hidden"
                         style={{
                           opacity: isActive ? 1 : 1,
-                          visibility: 'visible',
+                          visibility: "visible",
                         }}
                       >
                         {isActive ? (
                           <>
                             <p className="text-sm font-bold leading-tight text-white">
-                      {liveness.optionTitles[livenessType]}
-                    </p>
+                              {liveness.optionTitles[livenessType]}
+                            </p>
                             <p className="mt-1 text-xs leading-tight text-white/90">
-                      {liveness.optionDescriptions[livenessType]}
-                    </p>
+                              {liveness.optionDescriptions[livenessType]}
+                            </p>
                           </>
                         ) : (
                           <p className="text-xs font-medium leading-tight text-white">
                             {liveness.optionTitles[livenessType]}
                           </p>
-                  )}
-                </div>
+                        )}
+                      </div>
                     </div>
                   );
                 })}
               </div>
             </div>
-              
+
             {/* Botón Iniciar verificación con chevron */}
-            {selectedLivenessType && (selectedLivenessType === "selfie_photo" || selectedLivenessType === "selfie_video") && !isFaceIdScanning && (
+            {selectedLivenessType &&
+              (selectedLivenessType === "selfie_photo" ||
+                selectedLivenessType === "selfie_video") &&
+              !isFaceIdScanning && (
                 <button
-                onClick={() => {
-                  if (selectedLivenessType === "selfie_photo" || selectedLivenessType === "selfie_video") {
-                    handleSelfieCheck(selectedLivenessType);
-                  }
-                }}
-                className="group relative w-full overflow-hidden rounded-xl border px-4 py-2.5 text-xs font-semibold text-white transition-all active:scale-[0.98] flex items-center justify-center gap-2"
+                  onClick={() => {
+                    if (
+                      selectedLivenessType === "selfie_photo" ||
+                      selectedLivenessType === "selfie_video"
+                    ) {
+                      handleSelfieCheck(selectedLivenessType);
+                    }
+                  }}
+                  className="group relative w-full overflow-hidden rounded-xl border px-4 py-2.5 text-xs font-semibold text-white transition-all active:scale-[0.98] flex items-center justify-center gap-2"
                   style={{
                     background: `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
                     borderColor: themeColor,
                     boxShadow: `0 4px 14px 0 ${themeColor}40`,
-                    animation: 'cta-pulse-glow 2s ease-in-out infinite, cta-button-pulse 2.5s ease-in-out infinite',
+                    animation:
+                      "cta-pulse-glow 2s ease-in-out infinite, cta-button-pulse 2.5s ease-in-out infinite",
                   }}
                 >
-                  <span className="absolute inset-0 rounded-xl opacity-60 blur-md -z-10" style={{ background: themeColor, animation: 'cta-pulse-ring 2s ease-in-out infinite' }}></span>
-                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -z-10" style={{ animation: 'cta-shine-sweep 2.5s linear infinite' }}></span>
-                  <span className="absolute inset-0 rounded-xl -z-10" style={{ background: `radial-gradient(circle at center, ${themeColor}20 0%, transparent 70%)`, animation: 'cta-glow-pulse 2s ease-in-out infinite' }}></span>
-                  <span className="relative z-10 flex items-center justify-center gap-2" style={{ animation: 'cta-glow-pulse 2s ease-in-out infinite' }}>
+                  <span
+                    className="absolute inset-0 rounded-xl opacity-60 blur-md -z-10"
+                    style={{
+                      background: themeColor,
+                      animation: "cta-pulse-ring 2s ease-in-out infinite",
+                    }}
+                  ></span>
+                  <span
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -z-10"
+                    style={{
+                      animation: "cta-shine-sweep 2.5s linear infinite",
+                    }}
+                  ></span>
+                  <span
+                    className="absolute inset-0 rounded-xl -z-10"
+                    style={{
+                      background: `radial-gradient(circle at center, ${themeColor}20 0%, transparent 70%)`,
+                      animation: "cta-glow-pulse 2s ease-in-out infinite",
+                    }}
+                  ></span>
+                  <span
+                    className="relative z-10 flex items-center justify-center gap-2"
+                    style={{
+                      animation: "cta-glow-pulse 2s ease-in-out infinite",
+                    }}
+                  >
                     {liveness.startButton}
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} style={{ animation: 'cta-bounce-arrow 1.2s ease-in-out infinite' }}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    <svg
+                      className="h-4 w-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      style={{
+                        animation: "cta-bounce-arrow 1.2s ease-in-out infinite",
+                      }}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 5l7 7-7 7"
+                      />
                     </svg>
                   </span>
                   <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full"></span>
                 </button>
               )}
-            </div>
+          </div>
         </div>
       </div>
     );
@@ -2487,7 +3616,11 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
         <div className="relative mb-3 flex flex-shrink-0 items-center justify-between px-6 pt-6 z-20">
           {currentBranding.logo && (
             <div className="absolute left-1/2 -translate-x-1/2">
-              <img src={currentBranding.logo} alt="Logo" className="h-8 max-w-full object-contain" />
+              <img
+                src={currentBranding.logo}
+                alt="Logo"
+                className="h-8 max-w-full object-contain"
+              />
             </div>
           )}
           <div className="w-full"></div> {/* Spacer para centrar el logo */}
@@ -2498,14 +3631,14 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
           className="relative rounded-3xl flex flex-col items-center justify-center"
           style={{
             background: `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
-            marginTop: '20px',
-            marginLeft: '10px',
-            marginRight: '10px',
-            marginBottom: '80px',
-            width: 'calc(100% - 20px)', // Ancho total menos los márgenes laterales (10px + 10px)
-            height: 'calc(100% - 10px)', // Altura total menos el margen inferior
-            boxSizing: 'border-box',
-            padding: '40px 20px',
+            marginTop: "20px",
+            marginLeft: "10px",
+            marginRight: "10px",
+            marginBottom: "80px",
+            width: "calc(100% - 20px)", // Ancho total menos los márgenes laterales (10px + 10px)
+            height: "calc(100% - 10px)", // Altura total menos el margen inferior
+            boxSizing: "border-box",
+            padding: "40px 20px",
           }}
         >
           {/* Contenido centrado */}
@@ -2514,7 +3647,7 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
             {isApproved ? (
               <svg
                 className="h-24 w-24"
-                style={{ color: 'white' }}
+                style={{ color: "white" }}
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -2524,13 +3657,13 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   d="M5 13l4 4L19 7"
-                  style={{ transform: 'rotate(-2deg)' }}
+                  style={{ transform: "rotate(-2deg)" }}
                 />
               </svg>
             ) : (
               <svg
                 className="h-24 w-24"
-                style={{ color: 'white' }}
+                style={{ color: "white" }}
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -2545,33 +3678,33 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
             )}
 
             {/* Título principal */}
-          <h2
+            <h2
               className="text-3xl font-bold leading-tight"
-              style={{ color: 'white' }}
-          >
-              {isApproved ? 'Verificación Aprobada' : 'Verificación Rechazada'}
-          </h2>
+              style={{ color: "white" }}
+            >
+              {isApproved ? "Verificación Aprobada" : "Verificación Rechazada"}
+            </h2>
 
             {/* Subtítulo */}
             <div className="flex flex-col items-center space-y-2">
               <p
                 className="text-base leading-relaxed"
-                style={{ color: 'white', opacity: 0.9 }}
+                style={{ color: "white", opacity: 0.9 }}
               >
                 {isApproved
-                  ? 'Tu identidad ha sido verificada exitosamente'
-                  : 'No pudimos verificar tu identidad'}
+                  ? "Tu identidad ha sido verificada exitosamente"
+                  : "No pudimos verificar tu identidad"}
               </p>
               {!isApproved && (
                 <p
                   className="text-base leading-relaxed"
-                  style={{ color: 'white', opacity: 0.9 }}
+                  style={{ color: "white", opacity: 0.9 }}
                 >
                   Intenta de nuevo
                 </p>
               )}
             </div>
-        </div>
+          </div>
         </div>
       </div>
     );
@@ -2600,29 +3733,42 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
 
   if (viewMode === "mobile") {
     return (
-      <div className="rounded-lg bg-transparent p-6 shadow-sm dark:bg-transparent" data-tour-id="tour-identity-workflow-preview">
+      <div
+        className="rounded-lg bg-transparent p-6 shadow-sm dark:bg-transparent"
+        data-tour-id="tour-identity-workflow-preview"
+      >
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-xl font-bold text-dark dark:text-white">{previewTexts.toggles.mobilePreview}</h2>
+          <h2 className="text-xl font-bold text-dark dark:text-white">
+            {previewTexts.toggles.mobilePreview}
+          </h2>
           <div className="flex items-center gap-2">
             <button
               onClick={toggleViewMode}
               className="group rounded-full bg-gray-2 p-[5px] text-[#111928] outline-1 outline-primary focus-visible:outline dark:bg-dark-3 dark:text-current"
             >
               <span className="sr-only">
-                {isWebMode ? previewTexts.toggles.switchToMobile : previewTexts.toggles.switchToWeb}
+                {isWebMode
+                  ? previewTexts.toggles.switchToMobile
+                  : previewTexts.toggles.switchToWeb}
               </span>
               <span aria-hidden className="relative flex gap-2.5">
-                <span className={cn(
-                  "absolute h-[38px] w-[90px] rounded-full border border-gray-200 bg-white transition-all dark:border-none dark:bg-dark-2 dark:group-hover:bg-dark-3",
-                  isWebMode && "translate-x-[100px]"
-                )} />
+                <span
+                  className={cn(
+                    "absolute h-[38px] w-[90px] rounded-full border border-gray-200 bg-white transition-all dark:border-none dark:bg-dark-2 dark:group-hover:bg-dark-3",
+                    isWebMode && "translate-x-[100px]",
+                  )}
+                />
                 <span className="relative flex h-[38px] w-[90px] items-center justify-center gap-1.5 rounded-full">
                   <MobileIcon className="h-4 w-4" />
-                  <span className="text-xs font-medium">{previewTexts.toggles.mobileLabel}</span>
+                  <span className="text-xs font-medium">
+                    {previewTexts.toggles.mobileLabel}
+                  </span>
                 </span>
                 <span className="relative flex h-[38px] w-[90px] items-center justify-center gap-1.5 rounded-full">
                   <WebIcon className="h-4 w-4" />
-                  <span className="text-xs font-medium">{previewTexts.toggles.webLabel}</span>
+                  <span className="text-xs font-medium">
+                    {previewTexts.toggles.webLabel}
+                  </span>
                 </span>
               </span>
             </button>
@@ -2630,30 +3776,33 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
         </div>
         <div className="relative -mx-6 w-[calc(100%+3rem)] py-12">
           {/* Interactive animated background with halftone dots and glow */}
-          <div className="absolute inset-0 overflow-hidden rounded-3xl" style={{ minHeight: '850px' }}>
+          <div
+            className="absolute inset-0 overflow-hidden rounded-3xl"
+            style={{ minHeight: "850px" }}
+          >
             {/* Base gradient background */}
-            <div 
+            <div
               className="absolute inset-0 rounded-3xl"
               style={{
                 background: isDarkMode
-                  ? 'linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(2, 6, 23, 1) 50%, rgba(15, 23, 42, 0.95) 100%)'
-                  : 'linear-gradient(135deg, rgba(241, 245, 249, 0.95) 0%, rgba(226, 232, 240, 1) 50%, rgba(241, 245, 249, 0.95) 100%)',
+                  ? "linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(2, 6, 23, 1) 50%, rgba(15, 23, 42, 0.95) 100%)"
+                  : "linear-gradient(135deg, rgba(241, 245, 249, 0.95) 0%, rgba(226, 232, 240, 1) 50%, rgba(241, 245, 249, 0.95) 100%)",
               }}
             ></div>
-            
+
             <AnimatedHalftoneBackdrop isDarkMode={isDarkMode} />
             <EdgeFadeOverlay isDarkMode={isDarkMode} />
-            
+
             {/* Additional animated halftone layer for depth */}
-            <div 
+            <div
               className="absolute inset-0 rounded-3xl mix-blend-overlay"
               style={{
                 backgroundImage: isDarkMode
                   ? `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.2) 1.2px, transparent 0)`
                   : `radial-gradient(circle at 2px 2px, rgba(0,0,0,0.12) 1.2px, transparent 0)`,
-                backgroundSize: '28px 28px',
+                backgroundSize: "28px 28px",
                 opacity: 0.5,
-                animation: 'halftonePulse 8s ease-in-out infinite',
+                animation: "halftonePulse 8s ease-in-out infinite",
               }}
             ></div>
           </div>
@@ -2664,11 +3813,21 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
             disabled={!getPreviousScreen()}
             className={cn(
               "absolute left-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white/90 p-3 shadow-lg backdrop-blur-sm transition-all hover:bg-white hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100 dark:bg-dark-2/90 dark:hover:bg-dark-2",
-              !getPreviousScreen() && "pointer-events-none"
+              !getPreviousScreen() && "pointer-events-none",
             )}
           >
-            <svg className="h-6 w-6 text-dark dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+            <svg
+              className="h-6 w-6 text-dark dark:text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2.5}
+                d="M15 19l-7-7 7-7"
+              />
             </svg>
           </button>
 
@@ -2677,11 +3836,21 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
             disabled={!getNextScreen()}
             className={cn(
               "absolute right-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white/90 p-3 shadow-lg backdrop-blur-sm transition-all hover:bg-white hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100 dark:bg-dark-2/90 dark:hover:bg-dark-2",
-              !getNextScreen() && "pointer-events-none"
+              !getNextScreen() && "pointer-events-none",
             )}
           >
-            <svg className="h-6 w-6 text-dark dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+            <svg
+              className="h-6 w-6 text-dark dark:text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2.5}
+                d="M9 5l7 7-7 7"
+              />
             </svg>
           </button>
 
@@ -2690,7 +3859,9 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
               <div className="relative h-[680px] overflow-hidden rounded-[2.5rem] bg-white dark:bg-black m-0.5 flex flex-col">
                 <div className="relative flex items-center justify-between bg-white dark:bg-black px-6 pt-10 pb-2 flex-shrink-0">
                   <div className="absolute left-6 top-4 flex items-center">
-                    <span className="text-xs font-semibold text-black dark:text-white">9:41</span>
+                    <span className="text-xs font-semibold text-black dark:text-white">
+                      9:41
+                    </span>
                   </div>
                   <div className="absolute left-1/2 top-3 -translate-x-1/2">
                     <div className="h-5 w-24 rounded-full bg-black dark:bg-white/20"></div>
@@ -2709,7 +3880,10 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
                     </div>
                   </div>
                 </div>
-                <div className="flex-1 min-h-0 bg-white dark:bg-black overflow-y-auto" style={{ scrollbarWidth: 'thin' }}>
+                <div
+                  className="flex-1 min-h-0 bg-white dark:bg-black overflow-y-auto"
+                  style={{ scrollbarWidth: "thin" }}
+                >
                   {previewContent}
                 </div>
                 <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex-shrink-0">
@@ -2727,29 +3901,42 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
   }
 
   return (
-    <div className="rounded-lg bg-white p-6 shadow-sm dark:bg-dark-2" data-tour-id="tour-identity-workflow-preview">
+    <div
+      className="rounded-lg bg-white p-6 shadow-sm dark:bg-dark-2"
+      data-tour-id="tour-identity-workflow-preview"
+    >
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-xl font-bold text-dark dark:text-white">{previewTexts.toggles.webPreview}</h2>
+        <h2 className="text-xl font-bold text-dark dark:text-white">
+          {previewTexts.toggles.webPreview}
+        </h2>
         <div className="flex items-center gap-2">
           <button
             onClick={toggleViewMode}
             className="group rounded-full bg-gray-2 p-[5px] text-[#111928] outline-1 outline-primary focus-visible:outline dark:bg-dark-3 dark:text-current"
           >
             <span className="sr-only">
-              {isWebMode ? previewTexts.toggles.switchToMobile : previewTexts.toggles.switchToWeb}
+              {isWebMode
+                ? previewTexts.toggles.switchToMobile
+                : previewTexts.toggles.switchToWeb}
             </span>
             <span aria-hidden className="relative flex gap-2.5">
-              <span className={cn(
-                "absolute h-[38px] w-[90px] rounded-full border border-gray-200 bg-white transition-all dark:border-none dark:bg-dark-2 dark:group-hover:bg-dark-3",
-                isWebMode && "translate-x-[100px]"
-              )} />
+              <span
+                className={cn(
+                  "absolute h-[38px] w-[90px] rounded-full border border-gray-200 bg-white transition-all dark:border-none dark:bg-dark-2 dark:group-hover:bg-dark-3",
+                  isWebMode && "translate-x-[100px]",
+                )}
+              />
               <span className="relative flex h-[38px] w-[90px] items-center justify-center gap-1.5 rounded-full">
                 <MobileIcon className="h-4 w-4" />
-                <span className="text-xs font-medium">{previewTexts.toggles.mobileLabel}</span>
+                <span className="text-xs font-medium">
+                  {previewTexts.toggles.mobileLabel}
+                </span>
               </span>
               <span className="relative flex h-[38px] w-[90px] items-center justify-center gap-1.5 rounded-full">
                 <WebIcon className="h-4 w-4" />
-                <span className="text-xs font-medium">{previewTexts.toggles.webLabel}</span>
+                <span className="text-xs font-medium">
+                  {previewTexts.toggles.webLabel}
+                </span>
               </span>
             </span>
           </button>
@@ -2759,15 +3946,15 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
         {/* Background with halftone gradient and glow dots */}
         <div className="absolute inset-0 -z-10">
           {/* Base gradient background */}
-          <div 
+          <div
             className="absolute inset-0"
             style={{
               background: isDarkMode
-                ? 'linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(2, 6, 23, 1) 50%, rgba(15, 23, 42, 0.95) 100%)'
-                : 'linear-gradient(135deg, rgba(241, 245, 249, 0.95) 0%, rgba(226, 232, 240, 1) 50%, rgba(241, 245, 249, 0.95) 100%)',
+                ? "linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(2, 6, 23, 1) 50%, rgba(15, 23, 42, 0.95) 100%)"
+                : "linear-gradient(135deg, rgba(241, 245, 249, 0.95) 0%, rgba(226, 232, 240, 1) 50%, rgba(241, 245, 249, 0.95) 100%)",
             }}
           ></div>
-          
+
           <AnimatedHalftoneBackdrop isDarkMode={isDarkMode} />
           <EdgeFadeOverlay isDarkMode={isDarkMode} />
         </div>
@@ -2778,11 +3965,21 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
           disabled={!getPreviousScreen()}
           className={cn(
             "absolute left-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white/90 p-3 shadow-lg backdrop-blur-sm transition-all hover:bg-white hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100 dark:bg-dark-2/90 dark:hover:bg-dark-2",
-            !getPreviousScreen() && "pointer-events-none"
+            !getPreviousScreen() && "pointer-events-none",
           )}
         >
-          <svg className="h-6 w-6 text-dark dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+          <svg
+            className="h-6 w-6 text-dark dark:text-white"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2.5}
+              d="M15 19l-7-7 7-7"
+            />
           </svg>
         </button>
 
@@ -2791,11 +3988,21 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
           disabled={!getNextScreen()}
           className={cn(
             "absolute right-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white/90 p-3 shadow-lg backdrop-blur-sm transition-all hover:bg-white hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100 dark:bg-dark-2/90 dark:hover:bg-dark-2",
-            !getNextScreen() && "pointer-events-none"
+            !getNextScreen() && "pointer-events-none",
           )}
         >
-          <svg className="h-6 w-6 text-dark dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+          <svg
+            className="h-6 w-6 text-dark dark:text-white"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2.5}
+              d="M9 5l7 7-7 7"
+            />
           </svg>
         </button>
 

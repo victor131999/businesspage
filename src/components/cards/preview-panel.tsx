@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import { useEffect, useState, useRef } from "react";
 import { CardsConfig } from "./cards-config";
-import Image from "next/image";
+// import Image from "next/image"; // Not needed in Astro project
 import { useLanguage } from "@/contexts/language-context";
 import { cardsTranslations } from "./cards-translations";
 
@@ -36,7 +36,8 @@ function AnimatedHalftoneBackdrop({ isDarkMode }: { isDarkMode: boolean }) {
     const parent = canvas.parentElement;
     if (!parent) return;
 
-    const dpr = typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1;
+    const dpr =
+      typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1;
 
     const resize = () => {
       const { width, height } = parent.getBoundingClientRect();
@@ -77,7 +78,10 @@ function AnimatedHalftoneBackdrop({ isDarkMode }: { isDarkMode: boolean }) {
           const dy = y - centerY;
           const distance = Math.sqrt(dx * dx + dy * dy);
           const normalizedDistance = distance / maxDistance;
-          const wavePhase = (normalizedDistance * waveFrequency - elapsed * waveSpeed) * Math.PI * 2;
+          const wavePhase =
+            (normalizedDistance * waveFrequency - elapsed * waveSpeed) *
+            Math.PI *
+            2;
           const pulse = (Math.cos(wavePhase) + 1) / 2;
           const edgeFade = Math.pow(1 - normalizedDistance, 1.4);
           const alpha = (0.06 + pulse * 0.45) * edgeFade;
@@ -145,23 +149,23 @@ function HorizontalActions({
   const BASE_Z_INDEX = 50; // Z-index base para el cálculo de profundidad
 
   // ===== COLORES =====
-  const COLOR_ACTIVE_BG = '#002A8F'; // Color de fondo cuando está activa
-  const COLOR_ACTIVE_TEXT = 'white'; // Color de texto cuando está activa
-  const COLOR_INACTIVE_BG = '#E5E7EB'; // Color de fondo cuando está inactiva
-  const COLOR_INACTIVE_TEXT = '#9CA3AF'; // Color de texto cuando está inactiva
-  const COLOR_BORDER = 'white'; // Color del borde
+  const COLOR_ACTIVE_BG = "#002A8F"; // Color de fondo cuando está activa
+  const COLOR_ACTIVE_TEXT = "white"; // Color de texto cuando está activa
+  const COLOR_INACTIVE_BG = "#E5E7EB"; // Color de fondo cuando está inactiva
+  const COLOR_INACTIVE_TEXT = "#9CA3AF"; // Color de texto cuando está inactiva
+  const COLOR_BORDER = "white"; // Color del borde
 
   // ===== TIPOGRAFÍA =====
   const ICON_SIZE = 15; // Tamaño del icono SVG (width y height)
-  const LABEL_FONT_SIZE = 'text-sm'; // Tamaño del label (text-xs, text-sm, text-base, etc.)
-  const VALUE_FONT_SIZE = 'text-sm'; // Tamaño del valor (text-xs, text-sm, etc.)
-  const LABEL_FONT_WEIGHT = 'font-semibold'; // Peso de la fuente del label
-  const VALUE_FONT_WEIGHT = 'font-light'; // Peso de la fuente del valor
+  const LABEL_FONT_SIZE = "text-sm"; // Tamaño del label (text-xs, text-sm, text-base, etc.)
+  const VALUE_FONT_SIZE = "text-sm"; // Tamaño del valor (text-xs, text-sm, etc.)
+  const LABEL_FONT_WEIGHT = "font-semibold"; // Peso de la fuente del label
+  const VALUE_FONT_WEIGHT = "font-light"; // Peso de la fuente del valor
   const VALUE_OPACITY = 80; // Opacidad del valor en porcentaje (0-100)
 
   // ===== ANIMACIONES =====
   const TRANSITION_DURATION = 400; // Duración de la transición en milisegundos
-  const TRANSITION_EASING = 'cubic-bezier(0.34, 1.56, 0.64, 1)'; // Curva de animación (easing)
+  const TRANSITION_EASING = "cubic-bezier(0.34, 1.56, 0.64, 1)"; // Curva de animación (easing)
   // Opciones de easing comunes:
   // - 'cubic-bezier(0.34, 1.56, 0.64, 1)' - Bounce suave (actual)
   // - 'cubic-bezier(0.4, 0, 0.2, 1)' - Ease in out
@@ -171,78 +175,132 @@ function HorizontalActions({
   // ===== DEFINICIÓN DE ACCIONES =====
   const ACTIONS = [
     {
-      id: 'number',
+      id: "number",
       label: labels.number,
-      value: '',
+      value: "",
       icon: (
-        <svg width={ICON_SIZE} height={ICON_SIZE} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg
+          width={ICON_SIZE}
+          height={ICON_SIZE}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
           <rect x="2" y="5" width="20" height="14" rx="2" />
           <line x1="2" y1="10" x2="22" y2="10" />
         </svg>
-      )
+      ),
     },
     {
-      id: 'wallet',
+      id: "wallet",
       label: labels.wallet,
       icon: (
-        <svg width={ICON_SIZE} height={ICON_SIZE} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg
+          width={ICON_SIZE}
+          height={ICON_SIZE}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
           <path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4" />
           <path d="M4 6v12c0 1.1.9 2 2 2h14v-4" />
           <path d="M18 12a2 2 0 0 0-2 2c0 1.1.9 2 2 2h4v-4h-4z" />
         </svg>
-      )
+      ),
     },
     {
-      id: 'freeze',
+      id: "freeze",
       label: labels.freeze,
       icon: (
-        <svg width={ICON_SIZE} height={ICON_SIZE} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg
+          width={ICON_SIZE}
+          height={ICON_SIZE}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
           <path d="M12 3v18" />
           <path d="M20 10l-16 4" />
           <path d="M20 14l-16-4" />
         </svg>
-      )
+      ),
     },
     {
-      id: 'security',
+      id: "security",
       label: labels.security,
       icon: (
-        <svg width={ICON_SIZE} height={ICON_SIZE} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg
+          width={ICON_SIZE}
+          height={ICON_SIZE}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
           <path d="M9 12l2 2 4-4" />
         </svg>
-      )
+      ),
     },
     {
-      id: 'more',
+      id: "more",
       label: labels.more,
       icon: (
-        <svg width={ICON_SIZE} height={ICON_SIZE} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg
+          width={ICON_SIZE}
+          height={ICON_SIZE}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
           <circle cx="12" cy="12" r="1" />
           <circle cx="19" cy="12" r="1" />
           <circle cx="5" cy="12" r="1" />
         </svg>
-      )
+      ),
     },
     {
-      id: 'lock',
+      id: "lock",
       label: labels.lock,
       icon: (
-        <svg width={ICON_SIZE} height={ICON_SIZE} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg
+          width={ICON_SIZE}
+          height={ICON_SIZE}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
           <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
           <path d="M7 11V7a5 5 0 0 1 10 0v4" />
         </svg>
-      )
+      ),
     },
   ];
 
-  const activeIndex = ACTIONS.findIndex(item => item.id === activeId);
+  const activeIndex = ACTIONS.findIndex((item) => item.id === activeId);
 
   return (
     <div
       className="flex flex-row items-center justify-center w-full"
       style={{
-        isolation: 'isolate',
+        isolation: "isolate",
         paddingLeft: `${CONTAINER_PADDING_X * 0.25}rem`,
         paddingRight: `${CONTAINER_PADDING_X * 0.25}rem`,
         paddingTop: `${CONTAINER_PADDING_Y * 0.25}rem`,
@@ -258,20 +316,22 @@ function HorizontalActions({
             key={item.id}
             className={cn(
               "flex items-center justify-center cursor-pointer relative overflow-hidden",
-              isActive ? "z-[100]" : ""
+              isActive ? "z-[100]" : "",
             )}
             onClick={() => onActionChange(item.id)}
             style={{
               height: `${CARD_HEIGHT}px`,
-              minWidth: isActive ? `${CARD_ACTIVE_WIDTH}px` : `${CARD_MIN_WIDTH}px`,
+              minWidth: isActive
+                ? `${CARD_ACTIVE_WIDTH}px`
+                : `${CARD_MIN_WIDTH}px`,
               borderRadius: `${CARD_BORDER_RADIUS}px`,
               borderWidth: `${CARD_BORDER_WIDTH}px`,
               borderColor: COLOR_BORDER,
-              borderStyle: 'solid',
+              borderStyle: "solid",
               backgroundColor: isActive ? COLOR_ACTIVE_BG : COLOR_INACTIVE_BG,
               color: isActive ? COLOR_ACTIVE_TEXT : COLOR_INACTIVE_TEXT,
               zIndex: BASE_Z_INDEX - distanceFromActive,
-              transform: isActive ? `scale(${ACTIVE_SCALE})` : 'scale(1)',
+              transform: isActive ? `scale(${ACTIVE_SCALE})` : "scale(1)",
               marginLeft: index === 0 ? 0 : `-${OVERLAP_DISTANCE}px`,
               transition: `all ${TRANSITION_DURATION}ms ${TRANSITION_EASING}`,
             }}
@@ -280,9 +340,7 @@ function HorizontalActions({
               className="flex flex-col items-center justify-center w-full"
               style={{ gap: `${GAP_BETWEEN_ICON_LABEL * 0.25}rem` }}
             >
-              <span className="leading-none">
-                {item.icon}
-              </span>
+              <span className="leading-none">{item.icon}</span>
 
               {isActive && (
                 <div className="flex flex-col items-center leading-none">
@@ -294,7 +352,13 @@ function HorizontalActions({
                       {item.value}
                     </span>
                   )}
-                  <span className={cn(LABEL_FONT_SIZE, LABEL_FONT_WEIGHT, "whitespace-nowrap")}>
+                  <span
+                    className={cn(
+                      LABEL_FONT_SIZE,
+                      LABEL_FONT_WEIGHT,
+                      "whitespace-nowrap",
+                    )}
+                  >
                     {item.label}
                   </span>
                 </div>
@@ -311,7 +375,7 @@ function HorizontalActions({
 function DynamicCVV() {
   const TOTAL_TIME = 30; // 30 segundos totales (estándar para CVV dinámicos)
   const [timeLeft, setTimeLeft] = useState(TOTAL_TIME);
-  const [cvv, setCvv] = useState('123');
+  const [cvv, setCvv] = useState("123");
 
   useEffect(() => {
     // Generar un CVV aleatorio cada vez que se monta
@@ -340,13 +404,13 @@ function DynamicCVV() {
     const percentage = timeLeft / TOTAL_TIME;
     if (percentage > 0.5) {
       // Verde cuando queda más del 50%
-      return '#22c55e'; // green-500
+      return "#22c55e"; // green-500
     } else if (percentage > 0.25) {
       // Amarillo cuando queda entre 25% y 50%
-      return '#eab308'; // yellow-500
+      return "#eab308"; // yellow-500
     } else {
       // Rojo cuando queda menos del 25%
-      return '#ef4444'; // red-500
+      return "#ef4444"; // red-500
     }
   };
 
@@ -414,22 +478,32 @@ function DailySpentCard({
   // Contenido según la acción activa
   const getContent = () => {
     switch (activeId) {
-      case 'number':
+      case "number":
         return {
           title: sheetT.cardDetailsTitle,
           content: (
             <div className="w-full space-y-4">
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
-                  <span className="text-xs text-gray-500 dark:text-gray-400">{sheetT.cardNumberLabel}</span>
-                  <span className="text-sm font-semibold text-gray-900 dark:text-white">**** **** **** 1234</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                    {sheetT.cardNumberLabel}
+                  </span>
+                  <span className="text-sm font-semibold text-gray-900 dark:text-white">
+                    **** **** **** 1234
+                  </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-xs text-gray-500 dark:text-gray-400">{sheetT.expirationLabel}</span>
-                  <span className="text-sm font-semibold text-gray-900 dark:text-white">12/25</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                    {sheetT.expirationLabel}
+                  </span>
+                  <span className="text-sm font-semibold text-gray-900 dark:text-white">
+                    12/25
+                  </span>
                 </div>
                 <div className="flex justify-between items-start">
-                  <span className="text-xs text-gray-500 dark:text-gray-400 pt-2">{sheetT.cvvLabel}</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400 pt-2">
+                    {sheetT.cvvLabel}
+                  </span>
                   <div className="flex flex-col items-end gap-2">
                     <DynamicCVV />
                     {/* Mensaje informativo */}
@@ -440,10 +514,10 @@ function DailySpentCard({
                 </div>
               </div>
             </div>
-          )
+          ),
         };
 
-      case 'wallet':
+      case "wallet":
         const themeColor = customColorTheme || "#002A8F";
         return {
           title: sheetT.dailySpentTitle,
@@ -464,8 +538,8 @@ function DailySpentCard({
                     <div
                       className="h-full transition-all duration-300"
                       style={{
-                        width: '4.07%', // 122.20 / 3000 * 100
-                        backgroundColor: themeColor
+                        width: "4.07%", // 122.20 / 3000 * 100
+                        backgroundColor: themeColor,
                       }}
                     ></div>
                   </div>
@@ -480,7 +554,9 @@ function DailySpentCard({
                     >
                       {sheetT.dailySpendingLimit}
                     </span>
-                    <span className="text-sm font-semibold text-white">$3,000.00</span>
+                    <span className="text-sm font-semibold text-white">
+                      $3,000.00
+                    </span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span
@@ -489,7 +565,9 @@ function DailySpentCard({
                     >
                       {sheetT.posted}
                     </span>
-                    <span className="text-sm font-semibold text-white">$0,00</span>
+                    <span className="text-sm font-semibold text-white">
+                      $0,00
+                    </span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span
@@ -498,7 +576,9 @@ function DailySpentCard({
                     >
                       {sheetT.pending}
                     </span>
-                    <span className="text-sm font-semibold text-white">-$122,20</span>
+                    <span className="text-sm font-semibold text-white">
+                      -$122,20
+                    </span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span
@@ -507,84 +587,122 @@ function DailySpentCard({
                     >
                       {sheetT.available}
                     </span>
-                    <span className="text-sm font-semibold text-white">$2,877.80</span>
+                    <span className="text-sm font-semibold text-white">
+                      $2,877.80
+                    </span>
                   </div>
                 </div>
               </div>
             </div>
-          )
+          ),
         };
 
-      case 'freeze':
+      case "freeze":
         return {
           title: sheetT.freezeStatusTitle,
           content: (
             <div className="w-full space-y-4">
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
-                  <span className="text-xs text-gray-500 dark:text-gray-400">{sheetT.statusLabel}</span>
-                  <span className="text-sm font-semibold text-green-600 dark:text-green-400">{sheetT.statusActive}</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                    {sheetT.statusLabel}
+                  </span>
+                  <span className="text-sm font-semibold text-green-600 dark:text-green-400">
+                    {sheetT.statusActive}
+                  </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-xs text-gray-500 dark:text-gray-400">{sheetT.lastFreezeLabel}</span>
-                  <span className="text-sm font-semibold text-gray-900 dark:text-white">{sheetT.lastFreezeNever}</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                    {sheetT.lastFreezeLabel}
+                  </span>
+                  <span className="text-sm font-semibold text-gray-900 dark:text-white">
+                    {sheetT.lastFreezeNever}
+                  </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-xs text-gray-500 dark:text-gray-400">{sheetT.canFreezeLabel}</span>
-                  <span className="text-sm font-semibold text-gray-900 dark:text-white">{sheetT.yes}</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                    {sheetT.canFreezeLabel}
+                  </span>
+                  <span className="text-sm font-semibold text-gray-900 dark:text-white">
+                    {sheetT.yes}
+                  </span>
                 </div>
               </div>
             </div>
-          )
+          ),
         };
 
-      case 'security':
+      case "security":
         return {
           title: sheetT.securityTitle,
           content: (
             <div className="w-full space-y-4">
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
-                  <span className="text-xs text-gray-500 dark:text-gray-400">{sheetT.twoFaLabel}</span>
-                  <span className="text-sm font-semibold text-green-600 dark:text-green-400">{sheetT.enabled}</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                    {sheetT.twoFaLabel}
+                  </span>
+                  <span className="text-sm font-semibold text-green-600 dark:text-green-400">
+                    {sheetT.enabled}
+                  </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-xs text-gray-500 dark:text-gray-400">{sheetT.notificationsLabel}</span>
-                  <span className="text-sm font-semibold text-gray-900 dark:text-white">{sheetT.enabled}</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                    {sheetT.notificationsLabel}
+                  </span>
+                  <span className="text-sm font-semibold text-gray-900 dark:text-white">
+                    {sheetT.enabled}
+                  </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-xs text-gray-500 dark:text-gray-400">{sheetT.lastAccessLabel}</span>
-                  <span className="text-sm font-semibold text-gray-900 dark:text-white">{sheetT.lastAccessValue}</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                    {sheetT.lastAccessLabel}
+                  </span>
+                  <span className="text-sm font-semibold text-gray-900 dark:text-white">
+                    {sheetT.lastAccessValue}
+                  </span>
                 </div>
               </div>
             </div>
-          )
+          ),
         };
 
-      case 'more':
+      case "more":
         return {
           title: sheetT.moreOptionsTitle,
           content: (
             <div className="w-full space-y-4">
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
-                  <span className="text-xs text-gray-500 dark:text-gray-400">{sheetT.settingsLabel}</span>
-                  <span className="text-sm font-semibold text-gray-900 dark:text-white">{sheetT.availableValue}</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                    {sheetT.settingsLabel}
+                  </span>
+                  <span className="text-sm font-semibold text-gray-900 dark:text-white">
+                    {sheetT.availableValue}
+                  </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-xs text-gray-500 dark:text-gray-400">{sheetT.historyLabel}</span>
-                  <span className="text-sm font-semibold text-gray-900 dark:text-white">{sheetT.viewAllValue}</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                    {sheetT.historyLabel}
+                  </span>
+                  <span className="text-sm font-semibold text-gray-900 dark:text-white">
+                    {sheetT.viewAllValue}
+                  </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-xs text-gray-500 dark:text-gray-400">{sheetT.supportLabel}</span>
-                  <span className="text-sm font-semibold text-gray-900 dark:text-white">{sheetT.contactValue}</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                    {sheetT.supportLabel}
+                  </span>
+                  <span className="text-sm font-semibold text-gray-900 dark:text-white">
+                    {sheetT.contactValue}
+                  </span>
                 </div>
               </div>
             </div>
-          )
+          ),
         };
 
-      case 'lock':
+      case "lock":
       default:
         return {
           title: sheetT.lockTitle,
@@ -593,8 +711,12 @@ function DailySpentCard({
               <div className="space-y-4">
                 {/* Estado actual */}
                 <div className="flex justify-between items-center">
-                  <span className="text-xs text-gray-500 dark:text-gray-400">{sheetT.currentStatusLabel}</span>
-                  <span className="text-sm font-semibold text-green-600 dark:text-green-400">{sheetT.unlockedValue}</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                    {sheetT.currentStatusLabel}
+                  </span>
+                  <span className="text-sm font-semibold text-green-600 dark:text-green-400">
+                    {sheetT.unlockedValue}
+                  </span>
                 </div>
 
                 {/* Información sobre bloqueo */}
@@ -605,24 +727,54 @@ function DailySpentCard({
 
                   <div className="space-y-2">
                     <div className="flex items-start gap-2">
-                      <svg className="w-4 h-4 text-gray-500 dark:text-gray-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      <svg
+                        className="w-4 h-4 text-gray-500 dark:text-gray-400 mt-0.5 flex-shrink-0"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
                       </svg>
                       <span className="text-xs text-gray-600 dark:text-gray-400">
                         {sheetT.lockBullet1}
                       </span>
                     </div>
                     <div className="flex items-start gap-2">
-                      <svg className="w-4 h-4 text-gray-500 dark:text-gray-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      <svg
+                        className="w-4 h-4 text-gray-500 dark:text-gray-400 mt-0.5 flex-shrink-0"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
                       </svg>
                       <span className="text-xs text-gray-600 dark:text-gray-400">
                         {sheetT.lockBullet2}
                       </span>
                     </div>
                     <div className="flex items-start gap-2">
-                      <svg className="w-4 h-4 text-gray-500 dark:text-gray-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      <svg
+                        className="w-4 h-4 text-gray-500 dark:text-gray-400 mt-0.5 flex-shrink-0"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
                       </svg>
                       <span className="text-xs text-gray-600 dark:text-gray-400">
                         {sheetT.lockBullet3}
@@ -637,7 +789,7 @@ function DailySpentCard({
                 </button>
               </div>
             </div>
-          )
+          ),
         };
     }
   };
@@ -677,7 +829,7 @@ function DailySpentCard({
     <div
       className={cn(
         "absolute bottom-0 left-0 right-0 transition-all duration-300 ease-in-out rounded-t-3xl",
-        !isExpanded && "h-[60px] bg-white dark:bg-gray-800"
+        !isExpanded && "h-[60px] bg-white dark:bg-gray-800",
       )}
       style={{
         ...(isExpanded && {
@@ -687,7 +839,7 @@ function DailySpentCard({
             ? `rgba(31, 41, 55, ${BACKGROUND_OPACITY / 100})` // gray-800
             : `rgba(255, 255, 255, ${BACKGROUND_OPACITY / 100})`, // white
         }),
-        boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.1)',
+        boxShadow: "0 -4px 20px rgba(0, 0, 0, 0.1)",
       }}
     >
       <div className="w-full h-full flex flex-col">
@@ -699,22 +851,25 @@ function DailySpentCard({
           <svg
             className={cn(
               "w-5 h-5 transition-transform duration-300",
-              isExpanded ? "rotate-180" : ""
+              isExpanded ? "rotate-180" : "",
             )}
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 15l7-7 7 7"
+            />
           </svg>
           <span className="text-sm font-medium">{title}</span>
         </button>
 
         {/* Contenido expandible */}
         {isExpanded && (
-          <div className="flex-1 overflow-y-auto px-4 pb-4">
-            {content}
-          </div>
+          <div className="flex-1 overflow-y-auto px-4 pb-4">{content}</div>
         )}
       </div>
     </div>
@@ -729,7 +884,7 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
   const { branding } = config;
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [currentTheme, setCurrentTheme] = useState<"light" | "dark">("light");
-  const [activeAction, setActiveAction] = useState('number');
+  const [activeAction, setActiveAction] = useState("number");
   const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
@@ -784,18 +939,30 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
 
         {/* Acciones horizontales */}
         <div className="flex-shrink-0">
-          <HorizontalActions activeId={activeAction} onActionChange={setActiveAction} labels={previewT.actions} />
+          <HorizontalActions
+            activeId={activeAction}
+            onActionChange={setActiveAction}
+            labels={previewT.actions}
+          />
         </div>
 
         {/* Información de la tarjeta */}
         <div className="flex-shrink-0 px-6 py-4 space-y-3">
           <div className="flex justify-between items-center">
-            <span className="text-xs text-gray-500 dark:text-gray-400">{previewT.cardTypeLabel}</span>
-            <span className="text-sm font-medium text-gray-900 dark:text-white">{previewT.cardTypeValue}</span>
+            <span className="text-xs text-gray-500 dark:text-gray-400">
+              {previewT.cardTypeLabel}
+            </span>
+            <span className="text-sm font-medium text-gray-900 dark:text-white">
+              {previewT.cardTypeValue}
+            </span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="text-xs text-gray-500 dark:text-gray-400">{previewT.accountLabel}</span>
-            <span className="text-sm font-medium text-gray-900 dark:text-white">{previewT.accountValue}</span>
+            <span className="text-xs text-gray-500 dark:text-gray-400">
+              {previewT.accountLabel}
+            </span>
+            <span className="text-sm font-medium text-gray-900 dark:text-white">
+              {previewT.accountValue}
+            </span>
           </div>
         </div>
 
@@ -817,7 +984,7 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
   // Funciones auxiliares para ajustar el color del SVG
   function getHueRotate(color: string): number {
     // Convertir hex a HSL y calcular rotación de matiz
-    const hex = color.replace('#', '');
+    const hex = color.replace("#", "");
     const r = parseInt(hex.substr(0, 2), 16) / 255;
     const g = parseInt(hex.substr(2, 2), 16) / 255;
     const b = parseInt(hex.substr(4, 2), 16) / 255;
@@ -844,7 +1011,7 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
 
   function getSaturate(color: string): number {
     // Calcular saturación basada en el color
-    const hex = color.replace('#', '');
+    const hex = color.replace("#", "");
     const r = parseInt(hex.substr(0, 2), 16) / 255;
     const g = parseInt(hex.substr(2, 2), 16) / 255;
     const b = parseInt(hex.substr(4, 2), 16) / 255;
@@ -875,14 +1042,19 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
           {/* iPhone Frame */}
           <div className="relative mx-auto">
             {/* Outer frame with iPhone-like design */}
-            <div className="relative overflow-hidden rounded-[3rem] border-[4px] border-gray-800/80 dark:border-gray-700/60 bg-gray-900/95 dark:bg-gray-800/95 shadow-[0_0_0_1px_rgba(0,0,0,0.1),0_20px_60px_rgba(0,0,0,0.25)] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.05),0_20px_60px_rgba(0,0,0,0.5)]" data-tour-id="tour-cards-preview-main">
+            <div
+              className="relative overflow-hidden rounded-[3rem] border-[4px] border-gray-800/80 dark:border-gray-700/60 bg-gray-900/95 dark:bg-gray-800/95 shadow-[0_0_0_1px_rgba(0,0,0,0.1),0_20px_60px_rgba(0,0,0,0.25)] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.05),0_20px_60px_rgba(0,0,0,0.5)]"
+              data-tour-id="tour-cards-preview-main"
+            >
               {/* Screen - Fixed height container */}
               <div className="relative h-[680px] overflow-hidden rounded-[2.5rem] bg-white dark:bg-black m-0.5 flex flex-col">
                 {/* Status bar with Dynamic Island and icons aligned */}
                 <div className="relative flex items-center justify-between bg-white dark:bg-black px-6 pt-10 pb-2 flex-shrink-0">
                   {/* Left side - Time aligned with Dynamic Island */}
                   <div className="absolute left-6 top-4 flex items-center">
-                    <span className="text-xs font-semibold text-black dark:text-white">9:41</span>
+                    <span className="text-xs font-semibold text-black dark:text-white">
+                      9:41
+                    </span>
                   </div>
 
                   {/* Center - Dynamic Island */}
