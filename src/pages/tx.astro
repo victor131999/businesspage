@@ -934,8 +934,6 @@ import ProductsPanel from "../components/productsPanel.astro";
     flex-wrap: wrap;
   }
 
-
-
   .btn-cotizar {
     border: none;
     background: #0a203f;
@@ -1026,10 +1024,14 @@ import ProductsPanel from "../components/productsPanel.astro";
   .device-container {
     position: relative;
     width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
+    max-width: none;
+    margin: 0;
     z-index: 10;
-    padding: 1rem 0 2rem;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   /* Frame del iPhone */
@@ -1037,10 +1039,15 @@ import ProductsPanel from "../components/productsPanel.astro";
     position: relative;
     z-index: 10;
     transform: scale(1);
-    padding: 2.5rem 2rem;
+    padding: 4rem 3rem;
     background-color: #f3f4f6;
-    border-radius: 2rem;
-    margin: 3rem auto;
+    border-radius: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .device-frame {
@@ -1589,8 +1596,6 @@ import ProductsPanel from "../components/productsPanel.astro";
       flex-direction: column;
       align-items: stretch;
     }
-
-
 
     .btn-cotizar,
     .btn-demo-hero {
