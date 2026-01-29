@@ -5,6 +5,7 @@ export interface Props {
 }
 
 const { title, description = "Mi sitio web con Astro" } = Astro.props;
+import { AlaizaAssistant } from "../components/AlaizaAssistant";
 ---
 
 <!DOCTYPE html>
@@ -19,5 +20,6 @@ const { title, description = "Mi sitio web con Astro" } = Astro.props;
   </head>
   <body>
     <slot />
+    <AlaizaAssistant client:load />
   </body>
 </html>
