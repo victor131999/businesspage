@@ -1,6 +1,8 @@
 ---
-import Navbar from "../components/navbar.astro";
+import Navbar3 from "../components/NavbarSimple.astro";
 import "../styles/navbar.css";
+import ProductsPanel from "../components/productsPanel.astro";
+
 
 const demoVideoUrl =
   "https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/demo_zelify.mp4";
@@ -17,8 +19,8 @@ const demoVideoPoster = "";
   </head>
 
   <body>
-    <Navbar />
-    
+    <Navbar3 />
+    <ProductsPanel />
     <section class="video-section">
       <div class="video-container">
         {demoVideoUrl ? (
@@ -58,8 +60,8 @@ const demoVideoPoster = "";
       "Segoe UI",
       Roboto,
       sans-serif;
-    color: #fff;
-    background-color: #020b18;
+    color: #111827;
+    background-color: #ffffff;
     margin: 0;
     padding: 0;
     min-height: 100vh;
@@ -70,8 +72,8 @@ const demoVideoPoster = "";
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: calc(100vh - 80px);
-    padding: 2rem;
+    min-height: calc(100vh - 96px);
+    padding: 6.5rem 2rem 2rem;
     position: relative;
     z-index: 1;
   }
@@ -84,10 +86,10 @@ const demoVideoPoster = "";
 
   .video-player {
     width: 100%;
-    background: #000;
+    background: #ffffff;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
   }
 
   .demo-video {
@@ -98,18 +100,18 @@ const demoVideoPoster = "";
   }
 
   .video-placeholder {
-    border: 2px dashed #495057;
+    border: 2px dashed #cbd5f5;
     border-radius: 12px;
     padding: 4rem 2rem;
     text-align: center;
-    color: #ced4da;
+    color: #475569;
     font-size: 1rem;
-    background: rgba(255, 255, 255, 0.05);
+    background: #f8fafc;
   }
 
   .video-placeholder code {
     background: rgba(149, 255, 11, 0.2);
-    color: #95FF0B;
+    color: #184090;
     padding: 0.25rem 0.5rem;
     border-radius: 4px;
     font-family: monospace;
@@ -118,8 +120,8 @@ const demoVideoPoster = "";
   /* Responsive */
   @media (max-width: 768px) {
     .video-section {
-      padding: 1rem;
-      min-height: calc(100vh - 60px);
+      padding: 5.5rem 1rem 1.5rem;
+      min-height: calc(100vh - 72px);
     }
 
     .video-placeholder {
