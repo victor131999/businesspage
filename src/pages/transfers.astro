@@ -6,6 +6,7 @@ import TransfersViewApp from "@/components/transfers_payments/TransfersViewApp.a
 import { BASIC_SERVICES_TRANSLATIONS } from "@/components/transfers_payments/use-basic-services-translations";
 import Navbar3 from "../components/NavbarSimple.astro";
 import ProductsPanel from "../components/productsPanel.astro";
+import { AlaizaAssistant } from "../components/AlaizaAssistant";
 ---
 
 <html lang="es">
@@ -3082,3 +3083,5 @@ import ProductsPanel from "../components/productsPanel.astro";
     });
   });
 </script>
+<AlaizaAssistant client:load />
+

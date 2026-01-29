@@ -46,10 +46,21 @@ export const AlaizaAssistant = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages, isOpen, isTyping]);
 
-    // Manejo de reproducción de audio secuencial
+    // Manejo de reproducción de audio
     useEffect(() => {
-        // ... (lógica anterior si la hubiese)
     }, [messages]);
+
+    // Esc para cerrar
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Escape' && isOpen) {
+                setIsOpen(false);
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [isOpen]);
 
     const playAudio = (srcOrPlaylist: string | string[], onEnded?: () => void) => {
         if (audioRef.current) {
@@ -108,7 +119,7 @@ export const AlaizaAssistant = () => {
     const handleOpen = () => {
         setIsOpen(true);
         if (messages.length === 0) {
-            // Mensaje inicial de saludo texto
+            // Mensaje inicial
             addBotMessage("Hola 👋, déjanos tu duda y con gusto te ayudamos.");
 
             // Iniciar experiencia de audio
@@ -155,7 +166,13 @@ export const AlaizaAssistant = () => {
         addOptionsMessage([
             { label: 'OAuth', id: 'oauth', action: () => handleOAuthClick() },
             { label: 'Identity', id: 'identity', action: () => handleIdentityClick() },
+            { label: 'AML', id: 'aml', action: () => handleAMLClick() },
+            { label: 'Connect', id: 'connect', action: () => handleConnectClick() },
+            { label: 'TX', id: 'tx', action: () => handleTXClick() },
             { label: 'Cards', id: 'cards', action: () => handleCardsClick() },
+            { label: 'Pagos y transferencias', id: 'payments', action: () => handlePaymentsClick() },
+            { label: 'Descuentos y cupones', id: 'discounts', action: () => handleDiscountsClick() },
+            { label: 'Alaiza', id: 'alaiza-product', action: () => handleAlaizaProductClick() },
         ]);
     }
 
@@ -264,12 +281,164 @@ export const AlaizaAssistant = () => {
         addUserMessage('Quiero más información de Cards');
 
         const audioPlaylist = [
-            '/audios/36-cards.wav',
-            '/audios/37-quehacecards.wav'
+            '/audios/38-cards.wav',
+            '/audios/39-quehacecards.wav'
         ];
 
         playAudio(audioPlaylist, () => {
             showCardsDeepOptions();
+        });
+    }
+
+    function handleTXClick() {
+        addUserMessage('TX');
+        playAudio('/audios/18-TX.wav', () => {
+            playAudio('/audios/17-quehaceTX.wav', () => {
+                showTXDeepOptions();
+            });
+        });
+    }
+
+    function showTXDeepOptions() {
+        addOptionsMessage([
+            { label: 'Quiero más información de TX', id: 'tx-deep', action: () => handleTXDeepExplanationClick() },
+            { label: 'Quiero ver el resto de productos', id: 'back-products', action: () => handleBackToProducts() },
+        ]);
+    }
+
+    function handleTXDeepExplanationClick() {
+        addUserMessage('Quiero más información de TX');
+
+        const audioPlaylist = [
+            '/audios/42-quehacetx.wav'
+        ];
+
+        playAudio(audioPlaylist, () => {
+            showTXDeepOptions();
+        });
+    }
+
+    function handleConnectClick() {
+        addUserMessage('Connect');
+        playAudio('/audios/13-connect.wav', () => {
+            playAudio('/audios/12-quehacevinculacion.wav', () => {
+                showConnectDeepOptions();
+            });
+        });
+    }
+
+    function showConnectDeepOptions() {
+        addOptionsMessage([
+            { label: 'Quiero más información de Connect', id: 'connect-deep', action: () => handleConnectDeepExplanationClick() },
+            { label: 'Quiero ver el resto de productos', id: 'back-products', action: () => handleBackToProducts() },
+        ]);
+    }
+
+    function handleConnectDeepExplanationClick() {
+        addUserMessage('Quiero más información de Connect');
+
+        const audioPlaylist = [
+            '/audios/36-connect.wav',
+            '/audios/37-quehaceconnect.wav'
+        ];
+
+        playAudio(audioPlaylist, () => {
+            showConnectDeepOptions();
+        });
+    }
+
+    function handleAMLClick() {
+        addUserMessage('AML');
+        playAudio('/audios/08-AML.wav', () => {
+            playAudio('/audios/09-queesAML.wav', () => {
+                showAMLDeepOptions();
+            });
+        });
+    }
+
+    function showAMLDeepOptions() {
+        addOptionsMessage([
+            { label: 'Quiero más información de AML', id: 'aml-deep', action: () => handleAMLDeepExplanationClick() },
+            { label: 'Quiero ver el resto de productos', id: 'back-products', action: () => handleBackToProducts() },
+        ]);
+    }
+
+    function handleAMLDeepExplanationClick() {
+        addUserMessage('Quiero más información de AML');
+
+        const audioPlaylist = [
+            '/audios/30-productoAML.wav',
+            '/audios/31-quehaceAML.wav'
+        ];
+
+        playAudio(audioPlaylist, () => {
+            showAMLDeepOptions();
+        });
+    }
+
+    function handleDiscountsClick() {
+        addUserMessage('Descuentos y cupones');
+        playAudio('/audios/21-descuentosycupones.wav', () => {
+            showDiscountsDeepOptions();
+        });
+    }
+
+    function showDiscountsDeepOptions() {
+        addOptionsMessage([
+            { label: 'Quiero más información de Descuentos', id: 'discounts-deep', action: () => handleDiscountsDeepExplanationClick() },
+            { label: 'Quiero ver el resto de productos', id: 'back-products', action: () => handleBackToProducts() },
+        ]);
+    }
+
+    function handleDiscountsDeepExplanationClick() {
+        addUserMessage('Quiero más información de Descuentos');
+
+        const audioPlaylist = [
+            '/audios/44-cuponesydescuentos.wav',
+            '/audios/45-quehacecuponesydescuentos.wav'
+        ];
+
+        playAudio(audioPlaylist, () => {
+            showDiscountsDeepOptions();
+        });
+    }
+
+    function handlePaymentsClick() {
+        addUserMessage('Pagos y transferencias');
+        playAudio('/audios/16-pagostransfLocales.wav', () => {
+            showPaymentsDeepOptions();
+        });
+    }
+
+    function showPaymentsDeepOptions() {
+        addOptionsMessage([
+            { label: 'Quiero más información de Pagos', id: 'payments-deep', action: () => handlePaymentsDeepExplanationClick() },
+            { label: 'Quiero ver el resto de productos', id: 'back-products', action: () => handleBackToProducts() },
+        ]);
+    }
+
+    function handlePaymentsDeepExplanationClick() {
+        addUserMessage('Quiero más información de Pagos');
+
+        const audioPlaylist = [
+            '/audios/40-paymentsandtransfers.wav',
+            '/audios/41-quehacepaymentstransfers.wav'
+        ];
+
+        playAudio(audioPlaylist, () => {
+            showPaymentsDeepOptions();
+        });
+    }
+
+    function handleAlaizaProductClick() {
+        addUserMessage('Alaiza');
+
+        const audioPlaylist = [
+            '/audios/43-alaiza2.wav',
+            '/audios/46-vendemasconzelify.wav'
+        ];
+        playAudio(audioPlaylist, () => {
+            showTourOptions();
         });
     }
 
@@ -300,18 +469,23 @@ export const AlaizaAssistant = () => {
             <audio ref={audioRef} className="hidden" />
 
             {!isOpen ? (
-                <button
-                    onClick={handleOpen}
-                    className="fixed bottom-6 right-6 z-50 rounded-full shadow-lg hover:scale-105 transition-transform duration-200 p-[10px]"
-                    aria-label="Abrir asistente Alaiza"
-                >
-                    <img
-                        src="/images/iconAlaiza.svg"
-                        alt="Alaiza Icon"
-                        className="w-16 h-16 drop-shadow-md"
-                    />
-                </button>
-            ) : (
+                <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
+                    <div className="relative bg-white/90 backdrop-blur-sm px-4 py-2 rounded-xl rounded-tr-sm shadow-lg border border-gray-100 animate-in fade-in slide-in-from-bottom-2 duration-700">
+                        <p className="text-sm font-medium text-gray-700 whitespace-nowrap">¿Necesitas ayuda?</p>
+                    </div>
+                    <button
+                        onClick={handleOpen}
+                        className="rounded-full hover:scale-105 transition-transform duration-200"
+                        aria-label="Abrir asistente Alaiza"
+                    >
+                        <img
+                            src="/images/iconAlaiza.svg"
+                            alt="Alaiza Icon"
+                            className="w-16 h-16 drop-shadow-md"
+                        />
+                    </button>
+                </div>
+            ) : ( /*chat*/
                 <div className="fixed bottom-6 right-6 z-50 w-[380px] h-[600px] max-h-[80vh] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden font-sans border border-gray-100 animate-in fade-in slide-in-from-bottom-5 duration-300">
                     {/* Header */}
                     <div className="bg-white p-4 border-b border-gray-100 flex justify-between items-center shadow-sm">
@@ -372,12 +546,13 @@ export const AlaizaAssistant = () => {
 
                                     {/* Option Buttons */}
                                     {msg.type === 'options' && (
-                                        <div className="flex flex-col gap-2 mt-2 animate-in fade-in slide-in-from-left-2 duration-300">
+                                        <div className="grid grid-cols-2 gap-2 mt-2 animate-in fade-in slide-in-from-left-2 duration-300">
                                             {msg.options?.map((opt) => (
                                                 <button
                                                     key={opt.id}
                                                     onClick={opt.action}
-                                                    className="text-left px-4 py-3 bg-white border-2 border-[#eaecf0] hover:border-[#95FF0B] hover:bg-[#fafff0] text-gray-700 rounded-xl text-sm font-medium transition-all duration-200 transform hover:scale-[1.02] active:scale-95 shadow-sm"
+                                                    className={`text-left px-3 py-2.5 bg-white border-2 border-[#eaecf0] hover:border-[#95FF0B] hover:bg-[#fafff0] text-gray-700 rounded-xl text-xs font-medium transition-all duration-200 transform hover:scale-[1.02] active:scale-95 shadow-sm break-words flex items-center min-h-[50px]
+                                                    ${msg.options?.length === 1 || (msg.options?.length && msg.options.length % 2 !== 0 && msg.options[msg.options.length - 1].id === opt.id) ? 'col-span-2' : ''}`}
                                                 >
                                                     {opt.label}
                                                 </button>

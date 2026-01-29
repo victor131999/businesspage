@@ -2,6 +2,7 @@
 import Navbar3 from "../components/NavbarSimple.astro";
 import ProductsPanel from "../components/productsPanel.astro";
 import IdentityApp from "../components/identity/IdentityApp.astro";
+import { AlaizaAssistant } from "../components/AlaizaAssistant";
 ---
 
 <html lang="es">
@@ -633,6 +634,7 @@ import IdentityApp from "../components/identity/IdentityApp.astro";
       <p class="footer-copyright">© 2025 Zelify. All rights reserved.</p>
     </div>
   </footer>
+  <AlaizaAssistant client:load />
 </html>
 
 <style>
