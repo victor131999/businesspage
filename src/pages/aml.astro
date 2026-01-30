@@ -3297,6 +3297,496 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
     // Aquí podrías hacer una llamada a la API para enviar el formulario
   });
 
+  const amlTranslations = {
+    es: {
+      hero: {
+        title: "Cumplimiento AML<br />claro, ágil y efectivo.",
+        description:
+          "Evalúa riesgo automáticamente con listas globales, PEP y medios adversos,<br />monitorea transacciones en tiempo real y aplica reglas dinámicas<br />para prevenir actividades ilícitas sin fricción operativa.",
+        emailPlaceholder: "ingresa tu correo",
+        cotizar: "cotizar",
+        demo: "demo",
+      },
+      security: {
+        title: "Zelify AML<br />detección temprana de riesgo.",
+        features: [
+          {
+            title: "Evaluación de listas globales",
+            description:
+              "Verificaciones automáticas contra sanciones, PEP y listas de observación internacionales.",
+          },
+          {
+            title: "Verificación de listas globales",
+            description:
+              "Cruce continuo con OFAC, ONU, UE, Interpol y FinCEN para detección temprana.",
+          },
+          {
+            title: "Verificación de listas nacionales PEP",
+            description:
+              "Identifica personas políticamente expuestas según normativas locales.",
+          },
+          {
+            title: "Monitoreo y operaciones",
+            description:
+              "Supervisa transacciones sospechosas con reglas dinámicas y perfiles de riesgo.",
+          },
+          {
+            title: "Medios adversos e inteligencia de riesgo",
+            description:
+              "Analiza noticias y reportes públicos para riesgos reputacionales o legales.",
+          },
+          {
+            title: "Evaluación de listas internas",
+            description:
+              "Integra tus listas de control y políticas internas dentro del flujo AML.",
+          },
+        ],
+      },
+      control: {
+        title: "Control total de cumplimiento AML",
+        features: [
+          {
+            title: "Evaluación de listas globales",
+            description:
+              "Cruce automático contra listas internacionales para detectar alertas relevantes.",
+            backTitle: "Beneficios de listas globales",
+            benefits: [
+              "Detección temprana de coincidencias",
+              "Alertas por riesgo regulatorio",
+              "Historial de evaluaciones",
+              "Filtros y reglas por país",
+              "Reducción de falsos positivos",
+            ],
+          },
+          {
+            title: "Monitoreo y operaciones",
+            description:
+              "Supervisión continua de alertas y casos con trazabilidad operativa.",
+            backTitle: "Beneficios de monitoreo",
+            benefits: [
+              "Alertas en tiempo real",
+              "Gestión de casos centralizada",
+              "Flujos de aprobación",
+              "Historial de decisiones",
+              "Panel operativo unificado",
+            ],
+          },
+          {
+            title: "Medios adversos e inteligencia de riesgo",
+            description:
+              "Análisis de señales públicas para identificar riesgo reputacional.",
+            backTitle: "Beneficios de inteligencia",
+            benefits: [
+              "Detección de noticias de riesgo",
+              "Clasificación por severidad",
+              "Contexto y trazabilidad",
+              "Alertas configurables",
+              "Reducción de exposición reputacional",
+            ],
+          },
+          {
+            title: "Evaluación de listas internas",
+            description:
+              "Comparación contra listas propias para mayor control y cumplimiento.",
+            backTitle: "Beneficios de listas internas",
+            benefits: [
+              "Bloqueos y whitelists",
+              "Reglas por segmento",
+              "Actualización inmediata",
+              "Auditoría interna",
+              "Control total del riesgo",
+            ],
+          },
+        ],
+      },
+      contact: {
+        title: "Empieza hoy<br />y protege tu<br />plataforma.",
+        formTitle: "Habla con nuestro equipo",
+        placeholders: {
+          nombres: "Nombres",
+          apellidos: "Apellidos",
+          compania: "Nombre de la compañía",
+          email: "Email de la compañía",
+          pais: "País",
+          telefono: "Teléfono (opcional)",
+        },
+        countries: {
+          mx: "México",
+          co: "Colombia",
+          ar: "Argentina",
+          cl: "Chile",
+          pe: "Perú",
+          es: "España",
+          us: "Estados Unidos",
+        },
+        legal: "Al enviar este formulario, aceptas nuestros",
+        terms: "Términos de Servicio",
+        privacy: "Política de Privacidad",
+        submit: "Hablemos",
+      },
+      faqTitle: "Preguntas frecuentes",
+      faqItems: [
+        {
+          question: "¿Qué funcionalidades incluye el producto?",
+          answer:
+            "Nuestro producto incluye autenticación avanzada con biometría, registro personalizable de usuarios, validación de email y teléfono, información detallada del dispositivo, geolocalización estratégica, detección temprana de fraudes, y un SDK de integración sencillo para incorporar todas estas funcionalidades en una sola línea de código.",
+        },
+        {
+          question: "¿Es seguro usar biometría y doble factor?",
+          answer:
+            "Sí, es completamente seguro. La biometría y la autenticación de doble factor (2FA) son estándares de la industria que proporcionan capas adicionales de seguridad. Nuestro sistema utiliza encriptación de extremo a extremo y cumple con los más altos estándares de seguridad para proteger los datos biométricos y las credenciales de tus usuarios.",
+        },
+        {
+          question: "¿Puedo personalizar los campos de registro para mis usuarios?",
+          answer:
+            "Absolutamente. Nuestro sistema de registro es completamente personalizable. Puedes agregar, eliminar o modificar campos según las necesidades de tu negocio. Los campos se adaptan dinámicamente a tus usuarios, permitiéndote crear experiencias de registro únicas y relevantes para tu plataforma.",
+        },
+        {
+          question: "¿Cómo detecta fraudes y accesos sospechosos?",
+          answer:
+            "Nuestro sistema utiliza inteligencia artificial y machine learning para analizar patrones de comportamiento, detectar tráfico inusual, identificar el uso de VPNs, analizar la geolocalización de accesos, y monitorear información del dispositivo en tiempo real. Todo esto permite identificar y prevenir accesos sospechosos antes de que representen una amenaza.",
+        },
+        {
+          question: "¿Funciona en cualquier dispositivo?",
+          answer:
+            "Sí, nuestro producto es multiplataforma y funciona en cualquier dispositivo: smartphones (iOS y Android), tablets, computadoras de escritorio y laptops. La interfaz se adapta automáticamente a cada dispositivo, proporcionando una experiencia óptima sin importar desde dónde accedan tus usuarios.",
+        },
+        {
+          question: "¿Es fácil de integrar a mi sistema actual?",
+          answer:
+            "Muy fácil. Nuestro SDK de integración está diseñado para ser implementado con una sola línea de código. Proporcionamos documentación completa, ejemplos de código, y soporte técnico especializado para ayudarte en el proceso de integración. La mayoría de nuestros clientes completan la integración en menos de una hora.",
+        },
+        {
+          question: "¿Puedo escalar la seguridad a medida que crece mi plataforma?",
+          answer:
+            "Definitivamente. Nuestra arquitectura está construida para escalar automáticamente. A medida que tu plataforma crece, nuestro sistema se adapta sin necesidad de cambios adicionales. Puedes manejar desde cientos hasta millones de usuarios sin preocuparte por la capacidad o el rendimiento del sistema de seguridad.",
+        },
+      ],
+      cta: {
+        title: "Comienza hoy y<br />asegura cada acceso.",
+        button: "cotizar",
+      },
+      footer: {
+        terms: "Términos de Servicio",
+        privacy: "Política de Privacidad",
+      },
+    },
+    en: {
+      hero: {
+        title: "Clear, agile and effective<br />AML compliance.",
+        description:
+          "Automatically evaluate risk with global lists, PEPs and adverse media,<br />monitor transactions in real-time and apply dynamic rules<br />to prevent illicit activities without operational friction.",
+        emailPlaceholder: "enter your email",
+        cotizar: "quote",
+        demo: "demo",
+      },
+      security: {
+        title: "Zelify AML<br />early risk detection.",
+        features: [
+          {
+            title: "Global list evaluation",
+            description:
+              "Automatic checks against sanctions, PEPs and international watchlists.",
+          },
+          {
+            title: "Global list verification",
+            description:
+              "Continuous screening with OFAC, UN, EU, Interpol and FinCEN for early detection.",
+          },
+          {
+            title: "National PEP list verification",
+            description:
+              "Identifies politically exposed persons according to local regulations.",
+          },
+          {
+            title: "Monitoring and operations",
+            description:
+              "Supervises suspicious transactions with dynamic rules and risk profiles.",
+          },
+          {
+            title: "Adverse media and risk intelligence",
+            description:
+              "Analyzes news and public reports for reputational or legal risks.",
+          },
+          {
+            title: "Internal list evaluation",
+            description:
+              "Integrate your control lists and internal policies within the AML flow.",
+          },
+        ],
+      },
+      control: {
+        title: "Total AML compliance control",
+        features: [
+          {
+            title: "Global list evaluation",
+            description:
+              "Automatic cross-checking against international lists to detect relevant alerts.",
+            backTitle: "Global list benefits",
+            benefits: [
+              "Early detection of matches",
+              "Regulatory risk alerts",
+              "Evaluation history",
+              "Country-specific filters and rules",
+              "Reduced false positives",
+            ],
+          },
+          {
+            title: "Monitoring and operations",
+            description:
+              "Continuous supervision of alerts and cases with operational traceability.",
+            backTitle: "Monitoring benefits",
+            benefits: [
+              "Real-time alerts",
+              "Centralized case management",
+              "Approval workflows",
+              "Decision history",
+              "Unified operational dashboard",
+            ],
+          },
+          {
+            title: "Adverse media and risk intelligence",
+            description:
+              "Analysis of public signals to identify reputational risk.",
+            backTitle: "Intelligence benefits",
+            benefits: [
+              "Risk news detection",
+              "Severity classification",
+              "Context and traceability",
+              "Configurable alerts",
+              "Reduced reputational exposure",
+            ],
+          },
+          {
+            title: "Internal list evaluation",
+            description:
+              "Comparison against own lists for greater control and compliance.",
+            backTitle: "Internal list benefits",
+            benefits: [
+              "Blocks and whitelists",
+              "Segment-specific rules",
+              "Immediate updates",
+              "Internal audit",
+              "Total risk control",
+            ],
+          },
+        ],
+      },
+      contact: {
+        title: "Get started today<br />and protect your<br />platform.",
+        formTitle: "Talk to our team",
+        placeholders: {
+          nombres: "First Name",
+          apellidos: "Last Name",
+          compania: "Company Name",
+          email: "Company Email",
+          pais: "Country",
+          telefono: "Phone (optional)",
+        },
+        countries: {
+          mx: "Mexico",
+          co: "Colombia",
+          ar: "Argentina",
+          cl: "Chile",
+          pe: "Peru",
+          es: "Spain",
+          us: "United States",
+        },
+        legal: "By submitting this form, you accept our",
+        terms: "Terms of Service",
+        privacy: "Privacy Policy",
+        submit: "Let's talk",
+      },
+      
+      faqTitle: "Frequently asked questions",
+      faqItems: [
+        {
+          question: "What features does the product include?",
+          answer:
+            "Our product includes advanced authentication with biometrics, customizable user registration, email and phone validation, detailed device information, strategic geolocation, early fraud detection, and an easy-to-integrate SDK to incorporate all these features in a single line of code.",
+        },
+        {
+          question: "Is it safe to use biometrics and two-factor authentication?",
+          answer:
+            "Yes, it is completely safe. Biometrics and two-factor authentication (2FA) are industry standards that provide additional layers of security. Our system uses end-to-end encryption and complies with the highest security standards to protect biometric data and your users' credentials.",
+        },
+        {
+          question: "Can I customize registration fields for my users?",
+          answer:
+            "Absolutely. Our registration system is fully customizable. You can add, remove or modify fields according to your business needs. Fields adapt dynamically to your users, allowing you to create unique and relevant registration experiences for your platform.",
+        },
+        {
+          question: "How does it detect fraud and suspicious access?",
+          answer:
+            "Our system uses artificial intelligence and machine learning to analyze behavioral patterns, detect unusual traffic, identify VPN usage, analyze access geolocation, and monitor device information in real-time. This allows us to identify and prevent suspicious access before it becomes a threat.",
+        },
+        {
+          question: "Does it work on any device?",
+          answer:
+            "Yes, our product is cross-platform and works on any device: smartphones (iOS and Android), tablets, desktop computers and laptops. The interface automatically adapts to each device, providing an optimal experience regardless of where your users access from.",
+        },
+        {
+          question: "Is it easy to integrate into my current system?",
+          answer:
+            "Very easy. Our SDK is designed to be implemented with a single line of code. We provide complete documentation, code examples, and specialized technical support to help you with the integration process. Most of our customers complete the integration in less than an hour.",
+        },
+        {
+          question: "Can I scale security as my platform grows?",
+          answer:
+            "Definitely. Our architecture is built to scale automatically. As your platform grows, our system adapts without the need for additional changes. You can handle from hundreds to millions of users without worrying about the capacity or performance of the security system.",
+        },
+      ],
+      cta: {
+        title: "Get started today and<br />ensure every access.",
+        button: "quote",
+      },
+      footer: {
+        terms: "Terms of Service",
+        privacy: "Privacy Policy",
+      },
+    },
+  };
+
+  function updateAmlContent(lang) {
+    const t = amlTranslations[lang.toLowerCase()] || amlTranslations.es;
+    if (!t) return;
+
+    // Hero section
+    const heroTitle = document.querySelector(".auth-title");
+    const heroDescription = document.querySelector(".auth-description");
+    const emailInput = document.querySelector(".welcome-input");
+    const cotizarBtn = document.querySelector(".welcome-quote-button");
+
+    if (heroTitle) heroTitle.innerHTML = t.hero.title;
+    if (heroDescription)
+      heroDescription.innerHTML = t.hero.description;
+    if (emailInput) emailInput.placeholder = t.hero.emailPlaceholder;
+    if (cotizarBtn) cotizarBtn.textContent = t.hero.cotizar;
+
+    // Security section
+    const securityTitle = document.querySelector(".security-title");
+    if (securityTitle) securityTitle.innerHTML = t.security.title;
+
+    const securityFeatures = document.querySelectorAll(".security-feature");
+    securityFeatures.forEach((feature, index) => {
+      const titleEl = feature.querySelector(".feature-title");
+      const descEl = feature.querySelector(".feature-description");
+      if (titleEl && t.security.features[index])
+        titleEl.textContent = t.security.features[index].title;
+      if (descEl && t.security.features[index])
+        descEl.textContent = t.security.features[index].description;
+    });
+
+    // Control section
+    const controlTitle = document.querySelector(".control-title");
+    if (controlTitle) controlTitle.textContent = t.control.title;
+
+    const controlFeatures = document.querySelectorAll(".control-feature");
+    controlFeatures.forEach((feature, index) => {
+      const frontTitle = feature.querySelector(
+        ".control-feature-front .control-feature-title"
+      );
+      const frontDesc = feature.querySelector(".control-feature-description");
+      const backTitle = feature.querySelector(
+        ".control-feature-back .control-feature-title"
+      );
+      const benefitsList = feature.querySelector(".control-feature-benefits");
+
+      if (frontTitle && t.control.features[index])
+        frontTitle.textContent = t.control.features[index].title;
+      if (frontDesc && t.control.features[index])
+        frontDesc.textContent = t.control.features[index].description;
+      if (backTitle && t.control.features[index])
+        backTitle.textContent = t.control.features[index].backTitle;
+
+      if (benefitsList && t.control.features[index]) {
+        benefitsList.innerHTML = t.control.features[index].benefits
+          .map((benefit) => `<li>${benefit}</li>`)
+          .join("");
+      }
+    });
+
+    // Contact section
+    const contactTitle = document.querySelector(".contact-title");
+    const formTitle = document.querySelector(".contact-form-title");
+    const nombresInput = document.querySelector("#nombres");
+    const apellidosInput = document.querySelector("#apellidos");
+    const companiaInput = document.querySelector("#compania");
+    const emailContactInput = document.querySelector(".contact-form #email");
+    const paisSelect = document.querySelector("#pais");
+    const telefonoInput = document.querySelector("#telefono");
+    const contactLegal = document.querySelector(".contact-legal");
+    const submitBtn = document.querySelector(".contact-submit-btn");
+
+    if (contactTitle) contactTitle.innerHTML = t.contact.title;
+    if (formTitle) formTitle.textContent = t.contact.formTitle;
+    if (nombresInput) nombresInput.placeholder = t.contact.placeholders.nombres;
+    if (apellidosInput)
+      apellidosInput.placeholder = t.contact.placeholders.apellidos;
+    if (companiaInput)
+      companiaInput.placeholder = t.contact.placeholders.compania;
+    if (emailContactInput)
+      emailContactInput.placeholder = t.contact.placeholders.email;
+    if (paisSelect) {
+      const currentValue = paisSelect.value;
+      paisSelect.innerHTML = `<option value="">${t.contact.placeholders.pais}</option>`;
+      Object.entries(t.contact.countries).forEach(([code, country]) => {
+        const option = document.createElement("option");
+        option.value = code;
+        option.textContent = country;
+        paisSelect.appendChild(option);
+      });
+      paisSelect.value = currentValue;
+    }
+    if (telefonoInput)
+      telefonoInput.placeholder = t.contact.placeholders.telefono;
+
+    if (contactLegal) {
+      contactLegal.innerHTML = `
+        ${t.contact.legal} <a href="#">${t.contact.terms}</a> y <a href="#">${t.contact.privacy}</a>.
+      `;
+    }
+    if (submitBtn) submitBtn.textContent = t.contact.submit;
+
+    // CTA section
+    const ctaTitle = document.querySelector(".cta-title");
+    const ctaBtn = document.querySelector(".cta-button");
+    if (ctaTitle) ctaTitle.innerHTML = t.cta.title;
+    if (ctaBtn) ctaBtn.textContent = t.cta.button;
+
+    // FAQ section
+    const faqTitle = document.querySelector(".faq-title");
+    if (faqTitle) faqTitle.textContent = t.faqTitle;
+
+    const faqItems = document.querySelectorAll(".faq-item");
+    faqItems.forEach((item, index) => {
+      const questionSpan = item.querySelector(".faq-question span");
+      const answerP = item.querySelector(".faq-answer p");
+      if (questionSpan && t.faqItems[index])
+        questionSpan.textContent = t.faqItems[index].question;
+      if (answerP && t.faqItems[index])
+        answerP.textContent = t.faqItems[index].answer;
+    });
+  }
+
+    const detectBrowserLanguage = () => {
+      const locale =
+        (navigator.languages && navigator.languages[0]) || navigator.language || "";
+      return locale.toLowerCase().startsWith("es") ? "ES" : "EN";
+    };
+
+  // Event listeners
+  window.addEventListener("ui:languagechange", (e) => {
+    updateAmlContent(e.detail.language);
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+      const storedLanguage = localStorage.getItem("ui-language");
+      const initialLang =
+        window.__uiLanguage || storedLanguage || detectBrowserLanguage();
+      updateAmlContent(initialLang);
+  });
+
   // FAQ Accordion
   document.querySelectorAll(".faq-question").forEach((question) => {
     question.addEventListener("click", () => {

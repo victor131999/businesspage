@@ -3079,7 +3079,7 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
         ]
       },
       contact: {
-        title: "Start today<br />and protect your<br />platform.",
+        title: "Get started today<br />and protect your<br />platform.",
         formTitle: "Talk to our team",
         placeholders: {
           names: "First Name",
@@ -3093,7 +3093,7 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
         submit: "Let's Talk"
       },
       cta: {
-        title: "Start today and<br />secure every access.",
+        title: "Get started today and<br />ensure every access.",
         button: "quote"
       },
       faq: {
@@ -3222,6 +3222,12 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
     if(footerCopyright) footerCopyright.textContent = t.footer.copyright;
   }
 
+  const detectBrowserLanguage = () => {
+    const locale =
+      (navigator.languages && navigator.languages[0]) || navigator.language || "";
+    return locale.toLowerCase().startsWith("es") ? "ES" : "EN";
+  };
+
   // Event Listeners for Language Change
   window.addEventListener("ui:languagechange", (event) => {
     const lang = event.detail?.language || "ES";
@@ -3229,7 +3235,8 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
   });
 
   document.addEventListener("DOMContentLoaded", () => {
-    const stored = localStorage.getItem("ui-language") || "ES";
-    updateTxContent(stored);
+    const stored = localStorage.getItem("ui-language");
+    const initialLang = window.__uiLanguage || stored || detectBrowserLanguage();
+    updateTxContent(initialLang);
   });
 </script>

@@ -3076,7 +3076,7 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
         ]
       },
       contact: {
-        title: "Start today<br />and protect your<br />platform.",
+        title: "Get started today<br />and protect your<br />platform.",
         formTitle: "Talk to our team",
         placeholders: {
           names: "First Name",
@@ -3102,7 +3102,7 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
         ]
       },
       cta: {
-        title: "Start today and<br />secure every access.",
+        title: "Get started today and<br />ensure every access.",
         button: "quote"
       },
       footer: {
@@ -3684,9 +3684,16 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
     updateAuthContent(lang);
   });
 
+  const detectBrowserLanguage = () => {
+    const locale =
+      (navigator.languages && navigator.languages[0]) || navigator.language || "";
+    return locale.toLowerCase().startsWith("es") ? "ES" : "EN";
+  };
+
   document.addEventListener("DOMContentLoaded", () => {
-    const stored = localStorage.getItem("ui-language") || "ES";
-    updateAuthContent(stored);
+    const stored = localStorage.getItem("ui-language");
+    const initialLang = window.__uiLanguage || stored || detectBrowserLanguage();
+    updateAuthContent(initialLang);
   });
 </script>
 <AlaizaAssistant client:load />

@@ -878,10 +878,21 @@ import "../styles/navbar.css";
     }
   });
 
+  const detectBrowserLanguage = () => {
+    const locale =
+      (navigator.languages && navigator.languages[0]) || navigator.language || "";
+    return locale.toLowerCase().startsWith("es") ? "ES" : "EN";
+  };
+
   // Inicializar con el idioma guardado
   document.addEventListener("DOMContentLoaded", () => {
-    const storedLang = localStorage.getItem("ui-language") || "ES";
-    updateLanguage(storedLang);
+    const stored = localStorage.getItem("ui-language");
+    const source = localStorage.getItem("ui-language-source");
+    const initialLang =
+      window.__uiLanguage ||
+      (source === "user" ? stored : null) ||
+      detectBrowserLanguage();
+    updateLanguage(initialLang);
   });
 
   // Iconos inline (ligeros). Para "globe" usamos tu SVG como <img>.
