@@ -3592,9 +3592,19 @@ import AuthApp from "../components/auth/AuthApp.astro";
     updateAuthContent(lang);
   });
 
+  const detectBrowserLanguage = () => {
+    const locale =
+      (navigator.languages && navigator.languages[0]) ||
+      navigator.language ||
+      "";
+    return locale.toLowerCase().startsWith("es") ? "ES" : "EN";
+  };
+
   document.addEventListener("DOMContentLoaded", () => {
-    const stored = localStorage.getItem("ui-language") || "ES";
-    updateAuthContent(stored);
+    const stored = localStorage.getItem("ui-language");
+    const initialLang =
+      window.__uiLanguage || stored || detectBrowserLanguage();
+    updateAuthContent(initialLang);
   });
 </script>
 <AlaizaAssistant client:load />

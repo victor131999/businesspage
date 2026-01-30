@@ -37,14 +37,10 @@
   gap: 0;
   padding: 0;
   margin-top: 0;
-
   border-radius: 22px;
-  background: rgba(230, 232, 240, 0.92); /* fondo más blanco y suave */
-  backdrop-filter: blur(8px);
+  background: #fff;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
   z-index: 1001;
-
-  opacity: 1;
   transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
               transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
               max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
@@ -61,8 +57,7 @@
   flex-direction: column;
   gap: 6px;
   padding: 16px 10px;
-  backdrop-filter: blur(8px);
-  background: rgba(230, 232, 240, 0.92);
+  background: #fff;
   border-top-left-radius: 22px;
   border-bottom-left-radius: 22px;
   overflow-y: auto;
@@ -206,7 +201,7 @@
 .pp-rule {
   margin: 6px 0 16px 0;
   border: 0;
-  border-top: 3px solid #3d6bb0;
+  border-top: 1px solid #3d6bb0;
 }
 
 /* Lista de features */
@@ -287,7 +282,7 @@ a.pp-feature:hover {
    =============================== */
 
 #products-trigger {
-  background: transparent;
+  
   border: none;
   border-radius: 10px;
   padding: 0.6rem 1.2rem;

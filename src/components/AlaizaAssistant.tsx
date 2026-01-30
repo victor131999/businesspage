@@ -34,6 +34,7 @@ export const AlaizaAssistant = () => {
     const [animationData, setAnimationData] = useState<any>(null);
     const [currentLang, setCurrentLang] = useState<'es' | 'en'>('es');
     const langRef = useRef<'es' | 'en'>('es'); // Ref for closures
+    const isWelcomeSequenceRunning = useRef(false); // Prevent duplicate welcome sequences
 
     const t = ALAIZA_TRANSLATIONS[currentLang]; // Access current translations
 
@@ -81,16 +82,21 @@ export const AlaizaAssistant = () => {
                 setCurrentLang(newLang);
                 langRef.current = newLang;
 
-                // Si el chatbot está abierto y el idioma cambió, reiniciarlo
-                if (langChanged && isOpen) {
-                    setMessages([]);
-                    setIsOpen(false);
-                    setIsTyping(false);
-                    setIsPlaying(false);
+                // Si el idioma cambió, reiniciar estado
+                if (langChanged) {
                     // Stop any playing audio
                     if (audioRef.current) {
                         audioRef.current.pause();
                         audioRef.current.currentTime = 0;
+                    }
+
+                    setIsTyping(false);
+                    setIsPlaying(false);
+                    setMessages([]);
+
+                    // Si el chatbot está abierto, cerrarlo
+                    if (isOpen) {
+                        setIsOpen(false);
                     }
                 }
             }
@@ -110,7 +116,7 @@ export const AlaizaAssistant = () => {
 
     const playAudio = (srcOrPlaylist: string | string[], onEnded?: () => void) => {
         // Skip audio playback if language is English
-        if (currentLang === 'en') {
+        if (langRef.current === 'en') {
             if (onEnded) onEnded();
             return;
         }
@@ -180,10 +186,16 @@ export const AlaizaAssistant = () => {
     };
 
     const triggerWelcomeSequence = () => {
+        // Prevenir llamadas duplicadas
+        if (isWelcomeSequenceRunning.current) return;
+
+        isWelcomeSequenceRunning.current = true;
+
         // 1. Audio Bienvenido
         playSoundMessage('/audios/01-Bienvenidos.wav', () => {
             // 2. Mostrar opciones al terminar
             showMainOptions();
+            isWelcomeSequenceRunning.current = false;
         });
     };
 
@@ -208,7 +220,7 @@ export const AlaizaAssistant = () => {
     };
 
     function showMainOptions() {
-        const t = ALAIZA_TRANSLATIONS[currentLang];
+        const t = ALAIZA_TRANSLATIONS[langRef.current];
         addOptionsMessage([
             { label: t.options['Quiénes somos'], labelKey: 'Quiénes somos', id: 'quienes-somos', action: () => handleOptionClick('Quiénes somos', '/audios/02-Quienes somos.wav', showMainOptions) },
             { label: t.options['Quién es Alaiza'], labelKey: 'Quién es Alaiza', id: 'quien-es-alaiza', action: () => handleOptionClick('Quién es Alaiza', '/audios/03-Alaiza.wav', showMainOptions) },

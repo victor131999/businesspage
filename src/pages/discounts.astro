@@ -3422,6 +3422,12 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
     if (footerCopyright) footerCopyright.textContent = t.footer.copyright;
   }
 
+  const detectBrowserLanguage = () => {
+    const locale =
+      (navigator.languages && navigator.languages[0]) || navigator.language || "";
+    return locale.toLowerCase().startsWith("es") ? "ES" : "EN";
+  };
+
   // Listen for language change event
   window.addEventListener("ui:languagechange", (event: Event) => {
     const customEvent = event as CustomEvent<{ language: string }>;
@@ -3431,7 +3437,8 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
 
   // Initialize on page load
   document.addEventListener("DOMContentLoaded", () => {
-    const stored = localStorage.getItem("ui-language") || "ES";
-    updateDiscountsContent(stored);
+    const stored = localStorage.getItem("ui-language");
+    const initialLang = window.__uiLanguage || stored || detectBrowserLanguage();
+    updateDiscountsContent(initialLang);
   });
 </script>

@@ -4,13 +4,22 @@ export function initializeLanguageSystem() {
     const languageButtons = document.querySelectorAll(".lang-toggle");
     if (languageButtons.length === 0) return;
 
-    let currentLang = "EN";
+    const detectBrowserLanguage = () => {
+        const locale = (navigator.languages && navigator.languages[0]) || navigator.language || "";
+        return locale.toLowerCase().startsWith("es") ? "ES" : "EN";
+    };
+
+    let currentLang = detectBrowserLanguage();
 
     try {
         const stored = localStorage.getItem("ui-language");
-        if (stored) currentLang = stored;
+        const source = localStorage.getItem("ui-language-source");
+        if (source === "user" && stored) {
+            currentLang = stored;
+        }
     } catch (error) {
         console.warn("Unable to access localStorage.", error);
+        currentLang = detectBrowserLanguage();
     }
 
     const updateToggleUI = (lang) => {
@@ -50,6 +59,7 @@ export function initializeLanguageSystem() {
         updateToggleUI(currentLang);
         try {
             localStorage.setItem("ui-language", currentLang);
+            localStorage.setItem("ui-language-source", "user");
         } catch (error) {
             console.warn("Unable to persist language preference.", error);
         }

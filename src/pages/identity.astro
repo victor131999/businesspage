@@ -2734,6 +2734,14 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
     showStep(currentStep);
   }
 
+  const detectBrowserLanguage = () => {
+    const locale =
+      (navigator.languages && navigator.languages[0]) ||
+      navigator.language ||
+      "";
+    return locale.toLowerCase().startsWith("es") ? "es" : "en";
+  };
+
   // Event Listeners for Language Change
   window.addEventListener("ui:languagechange", (event) => {
     const customEvent = event as CustomEvent;

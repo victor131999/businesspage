@@ -5096,8 +5096,10 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
       });
 
       document.addEventListener("DOMContentLoaded", () => {
-        const stored = localStorage.getItem("ui-language") || "ES";
-        updateConnectContent(stored);
+        const stored = localStorage.getItem("ui-language");
+        const initialLang =
+          window.__uiLanguage || stored || detectBrowserLanguage();
+        updateConnectContent(initialLang);
       });
     </script>
     <AlaizaAssistant client:load />

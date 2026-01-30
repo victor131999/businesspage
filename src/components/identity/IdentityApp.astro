@@ -1244,15 +1244,26 @@ import DeviceFrame from "../DeviceFrame.astro";
        backTitle.innerHTML = `${t.captureFront.titlePrefix} <span class="font-bold">${docLabel}</span>`;
   }
   
+    const detectBrowserLanguage = () => {
+      const locale =
+        (navigator.languages && navigator.languages[0]) || navigator.language || "";
+      return locale.toLowerCase().startsWith("es") ? "es" : "en";
+    };
+
   window.addEventListener("ui:languagechange", (event) => {
       const customEvent = event as CustomEvent;
-      const lang = customEvent.detail?.language || "es";
+      const lang = customEvent.detail?.language || detectBrowserLanguage();
       updateAppContent(lang.toLowerCase());
   });
 
   document.addEventListener("DOMContentLoaded", () => {
-       const stored = localStorage.getItem("ui-language") || "es";
-       setTimeout(() => updateAppContent(stored.toLowerCase()), 50);
+       const stored = localStorage.getItem("ui-language");
+       const source = localStorage.getItem("ui-language-source");
+       const initialLang =
+         window.__uiLanguage ||
+         (source === "user" ? stored : null) ||
+         detectBrowserLanguage();
+       setTimeout(() => updateAppContent(initialLang.toLowerCase()), 50);
   });
 
   // --- Navigation & State ---

@@ -9,12 +9,12 @@ const {
   logoAlt = "Zelify logo",
   navItems = [
     { label: "Producto", href: "/product" },
-    { label: "Nosotros", href: "/blog" },
+    { label: "Blog", href: "/blog" },
     {
       label: "Desarrollo",
       href: "https://docs.zelify.com/documentation/getting-started",
     },
-    { label: "Otros", href: "/blog" },
+    // { label: "Otros", href: "/blog" },
   ],
   demoHref = "http://www.zelify.com/clips",
   initialLang = "ES",
@@ -300,21 +300,29 @@ const {
         // Guardar en localStorage
         try {
           localStorage.setItem("ui-language", lang);
+          localStorage.setItem("ui-language-source", "user");
         } catch (error) {
           console.warn("Unable to persist language preference.", error);
         }
       };
 
+      const detectBrowserLanguage = () => {
+        const locale =
+          (navigator.languages && navigator.languages[0]) || navigator.language || "";
+        return locale.toLowerCase().startsWith("es") ? "ES" : "EN";
+      };
+
       // Cargar idioma guardado
       try {
         const stored = localStorage.getItem("ui-language");
-        if (stored && (stored === "EN" || stored === "ES")) {
+        const source = localStorage.getItem("ui-language-source");
+        if (source === "user" && stored && (stored === "EN" || stored === "ES")) {
           setLang(stored);
         } else {
-          setLang(getLang());
+          setLang(detectBrowserLanguage());
         }
       } catch (error) {
-        setLang(getLang());
+        setLang(detectBrowserLanguage());
       }
 
       button.addEventListener("click", () => {

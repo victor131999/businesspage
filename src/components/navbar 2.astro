@@ -757,20 +757,23 @@ const cssVars = `
     };
     const languageButtons = document.querySelectorAll(".lang-toggle");
     if (languageButtons.length) {
-      let currentLang = "EN";
+      const detectBrowserLanguage = () => {
+        const locale =
+          (navigator.languages && navigator.languages[0]) || navigator.language || "";
+        return locale.toLowerCase().startsWith("es") ? "ES" : "EN";
+      };
+
+      let currentLang = detectBrowserLanguage();
 
       try {
         const stored = localStorage.getItem("ui-language");
-        if (stored) {
+        const source = localStorage.getItem("ui-language-source");
+        if (source === "user" && stored) {
           currentLang = stored.toUpperCase() === "ES" ? "ES" : "EN";
-        } else {
-          const initial = languageButtons[0].dataset.language?.toUpperCase();
-          if (initial === "ES" || initial === "EN") {
-            currentLang = initial;
-          }
         }
       } catch (error) {
         console.warn("Unable to read stored language preference.", error);
+        currentLang = detectBrowserLanguage();
       }
 
       const updateToggleUI = (lang) => {
@@ -805,6 +808,7 @@ const cssVars = `
         updateToggleUI(currentLang);
         try {
           localStorage.setItem("ui-language", currentLang);
+          localStorage.setItem("ui-language-source", "user");
         } catch (error) {
           console.warn("Unable to persist language preference.", error);
         }

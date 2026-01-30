@@ -2,6 +2,7 @@
 import Navbar3 from "../components/NavbarSimple.astro";
 import "../styles/navbar.css";
 import ProductsPanel from "../components/productsPanel.astro";
+import { AlaizaAssistant } from "../components/AlaizaAssistant"; 
 
 
 const demoVideoUrl =
@@ -42,6 +43,7 @@ const demoVideoPoster = "";
       </div>
     </section>
   </body>
+  <AlaizaAssistant client:load />
 </html>
 
 <style>
@@ -136,3 +138,5 @@ const demoVideoPoster = "";
     }
   }
 </style>
+
+
