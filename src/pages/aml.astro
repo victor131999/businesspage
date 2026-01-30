@@ -3429,7 +3429,8 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
             "Sí, es completamente seguro. La biometría y la autenticación de doble factor (2FA) son estándares de la industria que proporcionan capas adicionales de seguridad. Nuestro sistema utiliza encriptación de extremo a extremo y cumple con los más altos estándares de seguridad para proteger los datos biométricos y las credenciales de tus usuarios.",
         },
         {
-          question: "¿Puedo personalizar los campos de registro para mis usuarios?",
+          question:
+            "¿Puedo personalizar los campos de registro para mis usuarios?",
           answer:
             "Absolutamente. Nuestro sistema de registro es completamente personalizable. Puedes agregar, eliminar o modificar campos según las necesidades de tu negocio. Los campos se adaptan dinámicamente a tus usuarios, permitiéndote crear experiencias de registro únicas y relevantes para tu plataforma.",
         },
@@ -3449,7 +3450,8 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
             "Muy fácil. Nuestro SDK de integración está diseñado para ser implementado con una sola línea de código. Proporcionamos documentación completa, ejemplos de código, y soporte técnico especializado para ayudarte en el proceso de integración. La mayoría de nuestros clientes completan la integración en menos de una hora.",
         },
         {
-          question: "¿Puedo escalar la seguridad a medida que crece mi plataforma?",
+          question:
+            "¿Puedo escalar la seguridad a medida que crece mi plataforma?",
           answer:
             "Definitivamente. Nuestra arquitectura está construida para escalar automáticamente. A medida que tu plataforma crece, nuestro sistema se adapta sin necesidad de cambios adicionales. Puedes manejar desde cientos hasta millones de usuarios sin preocuparte por la capacidad o el rendimiento del sistema de seguridad.",
         },
@@ -3565,7 +3567,7 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
         ],
       },
       contact: {
-        title: "Get started today<br />and protect your<br />platform.",
+        title: "Start building the bank of the future, today.",
         formTitle: "Talk to our team",
         placeholders: {
           nombres: "First Name",
@@ -3589,7 +3591,7 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
         privacy: "Privacy Policy",
         submit: "Let's talk",
       },
-      
+
       faqTitle: "Frequently asked questions",
       faqItems: [
         {
@@ -3598,7 +3600,8 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
             "Our product includes advanced authentication with biometrics, customizable user registration, email and phone validation, detailed device information, strategic geolocation, early fraud detection, and an easy-to-integrate SDK to incorporate all these features in a single line of code.",
         },
         {
-          question: "Is it safe to use biometrics and two-factor authentication?",
+          question:
+            "Is it safe to use biometrics and two-factor authentication?",
           answer:
             "Yes, it is completely safe. Biometrics and two-factor authentication (2FA) are industry standards that provide additional layers of security. Our system uses end-to-end encryption and complies with the highest security standards to protect biometric data and your users' credentials.",
         },
@@ -3650,8 +3653,7 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
     const cotizarBtn = document.querySelector(".welcome-quote-button");
 
     if (heroTitle) heroTitle.innerHTML = t.hero.title;
-    if (heroDescription)
-      heroDescription.innerHTML = t.hero.description;
+    if (heroDescription) heroDescription.innerHTML = t.hero.description;
     if (emailInput) emailInput.placeholder = t.hero.emailPlaceholder;
     if (cotizarBtn) cotizarBtn.textContent = t.hero.cotizar;
 
@@ -3676,11 +3678,11 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
     const controlFeatures = document.querySelectorAll(".control-feature");
     controlFeatures.forEach((feature, index) => {
       const frontTitle = feature.querySelector(
-        ".control-feature-front .control-feature-title"
+        ".control-feature-front .control-feature-title",
       );
       const frontDesc = feature.querySelector(".control-feature-description");
       const backTitle = feature.querySelector(
-        ".control-feature-back .control-feature-title"
+        ".control-feature-back .control-feature-title",
       );
       const benefitsList = feature.querySelector(".control-feature-benefits");
 
@@ -3761,11 +3763,13 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
     });
   }
 
-    const detectBrowserLanguage = () => {
-      const locale =
-        (navigator.languages && navigator.languages[0]) || navigator.language || "";
-      return locale.toLowerCase().startsWith("es") ? "ES" : "EN";
-    };
+  const detectBrowserLanguage = () => {
+    const locale =
+      (navigator.languages && navigator.languages[0]) ||
+      navigator.language ||
+      "";
+    return locale.toLowerCase().startsWith("es") ? "ES" : "EN";
+  };
 
   // Event listeners
   window.addEventListener("ui:languagechange", (e) => {
@@ -3773,10 +3777,10 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
   });
 
   document.addEventListener("DOMContentLoaded", () => {
-      const storedLanguage = localStorage.getItem("ui-language");
-      const initialLang =
-        window.__uiLanguage || storedLanguage || detectBrowserLanguage();
-      updateAmlContent(initialLang);
+    const storedLanguage = localStorage.getItem("ui-language");
+    const initialLang =
+      window.__uiLanguage || storedLanguage || detectBrowserLanguage();
+    updateAmlContent(initialLang);
   });
 
   // FAQ Accordion
