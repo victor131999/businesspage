@@ -985,6 +985,276 @@ import DeviceFrame from "../DeviceFrame.astro";
 </style>
 
 <script>
+  let currentLang = "es";
+  const appTranslations = {
+    es: {
+      header: { back: "atrás" },
+      welcome: {
+        titleHTML: `<span class="font-bold">Verificación</span> <span class="font-light">de Identidad</span>`,
+        desc: "Verificaremos tu identidad de forma segura y rápida",
+        cards: [
+          { title: "Proceso rápido y seguro", desc: "Finaliza en menos de 2 minutos" },
+          { title: "Datos protegidos", desc: "Encriptación de extremo a extremo" },
+          { title: "Verificación en tiempo real", desc: "Verificación en bases de datos globales" }
+        ],
+        btn: "Iniciar verificación",
+        footerHTML: `Al iniciar la verificación aceptas las <span class="font-bold text-gray-700">políticas de privacidad</span> y <span class="font-bold text-gray-700">términos de servicio</span>`
+      },
+      document: {
+        title: "Selecciona tu documento",
+        desc: "Elige el tipo de documento para la verificación",
+        options: {
+          license: { title: "Licencia de Conducir", desc: "Licencia de conducir válida" },
+          identity: { title: "Documento de Identidad", desc: "Documento de identidad oficial" },
+          passport: { title: "Pasaporte", desc: "Pasaporte válido" }
+        },
+        btn: "Siguiente"
+      },
+      captureFront: {
+        titlePrefix: "Capturar",
+        desc: "Toma una foto del frente de tu documento",
+        bottomTitle: "Frente del documento",
+        bottomDesc: "Asegúrate de que el documento esté bien iluminado y visible"
+      },
+      captureBack: {
+        pill: "Frente del documento",
+        desc: "Toma una foto del reverso de tu documento",
+        bottomTitle: "Reverso del documento",
+        bottomDesc: "Asegúrate de que el documento esté bien iluminado y visible"
+      },
+      selfieCheck: {
+        title: "Verificación Facial",
+        desc: "Selecciona el método de verificación facial",
+        options: {
+          photo: { title: "Foto Selfie", desc: "Toma una foto de tu rostro" },
+          video: { title: "Video Selfie", desc: "Graba un video de tu rostro" }
+        },
+        btn: "Iniciar verificación facial"
+      },
+      scanning: {
+        title: "Escaneando tu rostro",
+        bottomTitle: "Verificando identidad",
+        bottomDesc: "Completando verificación"
+      },
+      rejected: { // Used for approved state in this demo
+        titleHTML: `Verificación<br />Aprobada`,
+        descHTML: `Tu identidad ha sido verificada<br />exitosamente`
+      },
+      docLabels: {
+        license: "Licencia de<br>Conducir",
+        identity: "Documento de<br>Identidad",
+        passport: "Pasaporte"
+      }
+    },
+    en: {
+      header: { back: "back" },
+      welcome: {
+        titleHTML: `<span class="font-bold">Identity</span> <span class="font-light">Verification</span>`,
+        desc: "We will verify your identity safely and quickly",
+        cards: [
+          { title: "Fast and secure process", desc: "Finish in less than 2 minutes" },
+          { title: "Protected data", desc: "End-to-end encryption" },
+          { title: "Real-time verification", desc: "Verification in global databases" }
+        ],
+        btn: "Start verification",
+        footerHTML: `By starting verification you accept the <span class="font-bold text-gray-700">privacy policy</span> and <span class="font-bold text-gray-700">terms of service</span>`
+      },
+      document: {
+        title: "Select your document",
+        desc: "Choose the document type for verification",
+        options: {
+          license: { title: "Driver's License", desc: "Valid driver's license" },
+          identity: { title: "Identity Document", desc: "Official identity document" },
+          passport: { title: "Passport", desc: "Valid passport" }
+        },
+        btn: "Next"
+      },
+      captureFront: {
+        titlePrefix: "Capture",
+        desc: "Take a photo of the front of your document",
+        bottomTitle: "Document Front",
+        bottomDesc: "Make sure the document is well lit and visible"
+      },
+      captureBack: {
+        pill: "Document Front",
+        desc: "Take a photo of the back of your document",
+        bottomTitle: "Document Back",
+        bottomDesc: "Make sure the document is well lit and visible"
+      },
+      selfieCheck: {
+        title: "Facial Verification",
+        desc: "Select facial verification method",
+        options: {
+          photo: { title: "Selfie Photo", desc: "Take a photo of your face" },
+          video: { title: "Selfie Video", desc: "Record a video of your face" }
+        },
+        btn: "Start facial verification"
+      },
+      scanning: {
+        title: "Scanning your face",
+        bottomTitle: "Verifying identity",
+        bottomDesc: "Completing verification"
+      },
+      rejected: {
+        titleHTML: `Verification<br />Approved`,
+        descHTML: `Your identity has been verified<br />successfully`
+      },
+      docLabels: {
+        license: "Driver's<br>License",
+        identity: "Identity<br>Document",
+        passport: "Passport"
+      }
+    }
+  };
+
+  function updateAppContent(lang) {
+    const t = appTranslations[lang] || appTranslations.es;
+    currentLang = lang;
+
+    // Header
+    const backBtn = document.querySelector("#back-btn");
+    if(backBtn && backBtn.lastChild) backBtn.lastChild.textContent = " " + t.header.back;
+
+    // Welcome Screen
+    const welcomeTitle = document.querySelector("#screen-welcome h2");
+    if(welcomeTitle) welcomeTitle.innerHTML = t.welcome.titleHTML;
+    const welcomeDesc = document.querySelector("#screen-welcome .text-gray-500");
+    if(welcomeDesc) welcomeDesc.textContent = t.welcome.desc;
+    
+    // Welcome Cards
+    const wCard0 = document.getElementById("w-card-0");
+    if(wCard0) {
+       wCard0.querySelector("p:first-child").textContent = t.welcome.cards[0].title;
+       wCard0.querySelector("p:last-child").textContent = t.welcome.cards[0].desc;
+    }
+    const wCard1 = document.getElementById("w-card-1");
+    if(wCard1) {
+       wCard1.querySelector("p:first-child").textContent = t.welcome.cards[1].title;
+       wCard1.querySelector("p:last-child").textContent = t.welcome.cards[1].desc;
+    }
+    const wCard2 = document.getElementById("w-card-2");
+    if(wCard2) {
+       wCard2.querySelector("p:first-child").textContent = t.welcome.cards[2].title;
+       wCard2.querySelector("p:last-child").textContent = t.welcome.cards[2].desc;
+    }
+
+    const startBtn = document.getElementById("start-btn");
+    if(startBtn) {
+       const span = startBtn.querySelector("span.relative > span:first-child");
+       if(span) span.textContent = t.welcome.btn;
+    }
+    
+    const welcomeFooter = document.querySelector("#screen-welcome .text-center.text-gray-500");
+    if(welcomeFooter) welcomeFooter.innerHTML = t.welcome.footerHTML;
+
+    // Document Screen
+    const docTitle = document.querySelector("#screen-document h2");
+    if(docTitle) docTitle.textContent = t.document.title;
+    const docDesc = document.querySelector("#screen-document .text-gray-500");
+    if(docDesc) docDesc.textContent = t.document.desc;
+    
+    // Doc Options
+    const docLicense = document.getElementById("doc-license");
+    if(docLicense) {
+       docLicense.querySelector("p.font-bold").textContent = t.document.options.license.title;
+       docLicense.querySelector("p.text-white\\/80").textContent = t.document.options.license.desc;
+    }
+    const docIdentity = document.getElementById("doc-identity");
+    if(docIdentity) {
+       docIdentity.querySelector("p.font-bold").textContent = t.document.options.identity.title;
+       docIdentity.querySelector("p.text-white\\/80").textContent = t.document.options.identity.desc;
+    }
+    const docPassport = document.getElementById("doc-passport");
+    if(docPassport) {
+       docPassport.querySelector("p.font-bold").textContent = t.document.options.passport.title;
+       docPassport.querySelector("p.text-white\\/80").textContent = t.document.options.passport.desc;
+    }
+    
+    const docNext = document.getElementById("doc-next-btn");
+    if(docNext && docNext.firstChild) docNext.firstChild.textContent = t.document.btn + " ";
+
+    // Capture Front (Static parts)
+    const capFrontDesc = document.querySelector("#screen-capture-front .text-gray-500");
+    if(capFrontDesc) capFrontDesc.textContent = t.captureFront.desc;
+    const capFrontBottomTitle = document.querySelector("#screen-capture-front .text-base.font-bold");
+    if(capFrontBottomTitle) capFrontBottomTitle.textContent = t.captureFront.bottomTitle;
+    const capFrontBottomDesc = document.querySelector("#screen-capture-front .text-white\\/90");
+    if(capFrontBottomDesc) capFrontBottomDesc.textContent = t.captureFront.bottomDesc;
+    
+    // Capture Back
+    const capBackPill = document.querySelector("#screen-capture-back .bg-gray-100 span");
+    if(capBackPill) capBackPill.textContent = t.captureBack.pill;
+    const capBackDesc = document.querySelector("#screen-capture-back .text-gray-500");
+    if(capBackDesc) capBackDesc.textContent = t.captureBack.desc;
+    const capBackBottomTitle = document.querySelector("#screen-capture-back .text-base.font-bold");
+    if(capBackBottomTitle) capBackBottomTitle.textContent = t.captureBack.bottomTitle;
+    const capBackBottomDesc = document.querySelector("#screen-capture-back .text-white\\/90");
+    if(capBackBottomDesc) capBackBottomDesc.textContent = t.captureBack.bottomDesc;
+
+    // Selfie Check
+    const selfieTitle = document.querySelector("#screen-selfie-check h2");
+    if(selfieTitle) selfieTitle.textContent = t.selfieCheck.title;
+    const selfieDesc = document.querySelector("#screen-selfie-check .text-gray-500");
+    if(selfieDesc) selfieDesc.textContent = t.selfieCheck.desc;
+    
+    const optPhoto = document.getElementById("selfie-opt-photo");
+    if(optPhoto) {
+       optPhoto.querySelector("p.font-bold").textContent = t.selfieCheck.options.photo.title;
+       optPhoto.querySelector("p.text-white\\/80").textContent = t.selfieCheck.options.photo.desc;
+    }
+    const optVideo = document.getElementById("selfie-opt-video");
+    if(optVideo) {
+       optVideo.querySelector("p.font-bold").textContent = t.selfieCheck.options.video.title;
+       optVideo.querySelector("p.text-white\\/80").textContent = t.selfieCheck.options.video.desc; // Note: this was hidden in HTML but script might show it
+    }
+    
+    const startSelfieBtn = document.getElementById("start-selfie-btn");
+    if(startSelfieBtn) {
+        const span = startSelfieBtn.querySelector("span.relative > span:first-child");
+        if(span) span.textContent = t.selfieCheck.btn;
+    }
+
+    // Scanning
+    const scanTitle = document.querySelector("#screen-scanning h2");
+    if(scanTitle) scanTitle.textContent = t.scanning.title;
+    
+    const scanBottomTitle = document.querySelector("#screen-scanning h3");
+    if(scanBottomTitle) scanBottomTitle.textContent = t.scanning.bottomTitle;
+    const scanBottomDesc = document.querySelector("#screen-scanning .text-white\\/90");
+    if(scanBottomDesc) scanBottomDesc.textContent = t.scanning.bottomDesc;
+    
+    // Rejected (Approved)
+    const rejTitle = document.querySelector("#screen-rejected h2");
+    if(rejTitle) rejTitle.innerHTML = t.rejected.titleHTML;
+    const rejDesc = document.querySelector("#screen-rejected p");
+    if(rejDesc) rejDesc.innerHTML = t.rejected.descHTML;
+
+    // Dynamic Titles (Capture Screens)
+    // selectedDoc is defined below but available in this scope when function runs
+    const docLabel = t.docLabels[selectedDoc] || "Documento";
+    
+    // Update Front Screen Title
+    const frontTitle = document.querySelector("#screen-capture-front h2");
+    if (frontTitle)
+       frontTitle.innerHTML = `${t.captureFront.titlePrefix} <span class="font-bold">${docLabel}</span>`;
+
+    // Update Back Screen Title
+    const backTitle = document.querySelector("#screen-capture-back h2");
+    if (backTitle)
+       backTitle.innerHTML = `${t.captureFront.titlePrefix} <span class="font-bold">${docLabel}</span>`;
+  }
+  
+  window.addEventListener("ui:languagechange", (event) => {
+      const customEvent = event as CustomEvent;
+      const lang = customEvent.detail?.language || "es";
+      updateAppContent(lang.toLowerCase());
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+       const stored = localStorage.getItem("ui-language") || "es";
+       setTimeout(() => updateAppContent(stored.toLowerCase()), 50);
+  });
+
   // --- Navigation & State ---
   const screens = {
     welcome: document.getElementById("screen-welcome"),
@@ -1030,25 +1300,36 @@ import DeviceFrame from "../DeviceFrame.astro";
   if (btns.docNext) {
     btns.docNext.addEventListener("click", () => {
       // Update Capture Screens with selected Doc Type
-      const docNames = {
-        license: "Licencia de<br>Conducir",
-        identity: "Documento de<br>Identidad",
-        passport: "Pasaporte",
-      };
+      const t = appTranslations[currentLang] || appTranslations.es;
+      const docNames = t.docLabels;
 
       const docLabel =
         docNames[selectedDoc as keyof typeof docNames] || "Documento";
+      
+      const tFront = t.captureFront;
 
       // Update Front Screen
       const frontTitle = document.querySelector("#screen-capture-front h2");
       if (frontTitle)
-        frontTitle.innerHTML = `Capturar <span class="font-bold">${docLabel}</span>`;
+        frontTitle.innerHTML = `${tFront.titlePrefix} <span class="font-bold">${docLabel}</span>`;
 
       // Update Back Screen
       const backTitle = document.querySelector("#screen-capture-back h2");
       // Back screen title usually just says the doc name in bold
       if (backTitle)
-        backTitle.innerHTML = `<span class="font-bold">${docLabel}</span>`;
+        backTitle.innerHTML = `${tFront.titlePrefix} <span class="font-bold">${docLabel}</span>`; // Actually the original code just had docLabel bold. But wait.
+        // Original: backTitle.innerHTML = `<span class="font-bold">${docLabel}</span>`;
+        // My translation object has `titlePrefix`? No, captureBack doesn't have titlePrefix.
+        // Let's check original. Original line 1051: `backTitle.innerHTML = <span class="font-bold">${docLabel}</span>;`
+        // Wait, line 392 (Front) says: `Capturar <span class="font-bold">Licencia de<br />Conducir</span>`
+        // Line 523 (Back) says: `Capturar <span class="font-bold">Licencia de<br />Conducir</span>`
+        // So BOTH have "Capturar".
+        // My translation object `captureFront` has `titlePrefix`. `captureBack` DOES NOT.
+        // I should probably add `titlePrefix` to captureBack or use `captureFront.titlePrefix`.
+        // Let's use `tFront.titlePrefix` for both as "Capture" is likely the same.
+
+      if (backTitle)
+         backTitle.innerHTML = `${tFront.titlePrefix} <span class="font-bold">${docLabel}</span>`;
 
       // Special case: Passport usually doesn't have a back side capture in some flows,
       // but assuming standard flow for now.

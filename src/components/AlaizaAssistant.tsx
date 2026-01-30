@@ -4,6 +4,7 @@ type MessageType = 'text' | 'options' | 'audio-message';
 
 interface Option {
     label: string;
+    labelKey?: string; // Key para traducion
     action: () => void;
     id: string;
 }
@@ -20,13 +21,21 @@ interface Message {
 
 import Lottie from 'lottie-react';
 
+import { ALAIZA_CONTEXT } from "../config/alaiza-context";
+import { ALAIZA_TRANSLATIONS } from "../config/alaiza-translations";
+
 export const AlaizaAssistant = () => {
+    const linkChat = "https://mailing-production.up.railway.app/ai/process-question";
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([]);
     const [inputText, setInputText] = useState('');
     const [isTyping, setIsTyping] = useState(false);
     const [isPlaying, setIsPlaying] = useState(false);
     const [animationData, setAnimationData] = useState<any>(null);
+    const [currentLang, setCurrentLang] = useState<'es' | 'en'>('es');
+    const langRef = useRef<'es' | 'en'>('es'); // Ref for closures
+
+    const t = ALAIZA_TRANSLATIONS[currentLang]; // Access current translations
 
     // Referencia al elemento de audio actual
     const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -62,7 +71,50 @@ export const AlaizaAssistant = () => {
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [isOpen]);
 
+    // Listener de cambio de idioma
+    useEffect(() => {
+        const handleLanguageChange = (e: any) => {
+            if (e.detail && e.detail.language) {
+                const newLang = e.detail.language.toLowerCase() === 'en' ? 'en' : 'es';
+                const langChanged = newLang !== currentLang;
+
+                setCurrentLang(newLang);
+                langRef.current = newLang;
+
+                // Si el chatbot está abierto y el idioma cambió, reiniciarlo
+                if (langChanged && isOpen) {
+                    setMessages([]);
+                    setIsOpen(false);
+                    setIsTyping(false);
+                    setIsPlaying(false);
+                    // Stop any playing audio
+                    if (audioRef.current) {
+                        audioRef.current.pause();
+                        audioRef.current.currentTime = 0;
+                    }
+                }
+            }
+        };
+
+        // Check initial lang
+        const storedLang = localStorage.getItem("ui-language");
+        if (storedLang) {
+            const initLang = storedLang.toLowerCase() === 'en' ? 'en' : 'es';
+            setCurrentLang(initLang);
+            langRef.current = initLang;
+        }
+
+        window.addEventListener('ui:languagechange', handleLanguageChange);
+        return () => window.removeEventListener('ui:languagechange', handleLanguageChange);
+    }, [isOpen, currentLang]);
+
     const playAudio = (srcOrPlaylist: string | string[], onEnded?: () => void) => {
+        // Skip audio playback if language is English
+        if (currentLang === 'en') {
+            if (onEnded) onEnded();
+            return;
+        }
+
         if (audioRef.current) {
             const playlist = Array.isArray(srcOrPlaylist) ? srcOrPlaylist : [srcOrPlaylist];
             let currentIndex = 0;
@@ -120,7 +172,7 @@ export const AlaizaAssistant = () => {
         setIsOpen(true);
         if (messages.length === 0) {
             // Mensaje inicial
-            addBotMessage("Hola 👋, déjanos tu duda y con gusto te ayudamos.");
+            addBotMessage(t.welcomeMessage);
 
             // Iniciar experiencia de audio
             triggerWelcomeSequence();
@@ -149,48 +201,53 @@ export const AlaizaAssistant = () => {
         playAudio(src, onEndedOrNext);
     };
 
-    const handleOptionClick = (label: string, audioSrc: string, nextAction?: () => void) => {
-        addUserMessage(label);
+    const handleOptionClick = (labelKey: string, audioSrc: string, nextAction?: () => void) => {
+        const text = ALAIZA_TRANSLATIONS[langRef.current].options[labelKey as keyof typeof t.options] || labelKey;
+        addUserMessage(text);
         playAudio(audioSrc, nextAction);
     };
 
     function showMainOptions() {
+        const t = ALAIZA_TRANSLATIONS[currentLang];
         addOptionsMessage([
-            { label: 'Quiénes somos', id: 'quienes-somos', action: () => handleOptionClick('Quiénes somos', '/audios/02-Quienes somos.wav', showMainOptions) },
-            { label: 'Quién es Alaiza', id: 'quien-es-alaiza', action: () => handleOptionClick('Quién es Alaiza', '/audios/03-Alaiza.wav', showMainOptions) },
-            { label: 'Tour productos', id: 'tour-productos', action: () => handleTourClick() },
+            { label: t.options['Quiénes somos'], labelKey: 'Quiénes somos', id: 'quienes-somos', action: () => handleOptionClick('Quiénes somos', '/audios/02-Quienes somos.wav', showMainOptions) },
+            { label: t.options['Quién es Alaiza'], labelKey: 'Quién es Alaiza', id: 'quien-es-alaiza', action: () => handleOptionClick('Quién es Alaiza', '/audios/03-Alaiza.wav', showMainOptions) },
+            { label: t.options['Tour productos'], labelKey: 'Tour productos', id: 'tour-productos', action: () => handleTourClick() },
         ]);
     }
 
     function showTourOptions() {
+        const t = ALAIZA_TRANSLATIONS[currentLang];
         addOptionsMessage([
-            { label: 'OAuth', id: 'oauth', action: () => handleOAuthClick() },
-            { label: 'Identity', id: 'identity', action: () => handleIdentityClick() },
-            { label: 'AML', id: 'aml', action: () => handleAMLClick() },
-            { label: 'Connect', id: 'connect', action: () => handleConnectClick() },
-            { label: 'TX', id: 'tx', action: () => handleTXClick() },
-            { label: 'Cards', id: 'cards', action: () => handleCardsClick() },
-            { label: 'Pagos y transferencias', id: 'payments', action: () => handlePaymentsClick() },
-            { label: 'Descuentos y cupones', id: 'discounts', action: () => handleDiscountsClick() },
-            { label: 'Alaiza', id: 'alaiza-product', action: () => handleAlaizaProductClick() },
+            { label: t.options['OAuth'], labelKey: 'OAuth', id: 'oauth', action: () => handleOAuthClick() },
+            { label: t.options['Identity'], labelKey: 'Identity', id: 'identity', action: () => handleIdentityClick() },
+            { label: t.options['AML'], labelKey: 'AML', id: 'aml', action: () => handleAMLClick() },
+            { label: t.options['Connect'], labelKey: 'Connect', id: 'connect', action: () => handleConnectClick() },
+            { label: t.options['TX'], labelKey: 'TX', id: 'tx', action: () => handleTXClick() },
+            { label: t.options['Cards'], labelKey: 'Cards', id: 'cards', action: () => handleCardsClick() },
+            { label: t.options['Pagos y transferencias'], labelKey: 'Pagos y transferencias', id: 'payments', action: () => handlePaymentsClick() },
+            { label: t.options['Descuentos y cupones'], labelKey: 'Descuentos y cupones', id: 'discounts', action: () => handleDiscountsClick() },
+            { label: t.options['Alaiza'], labelKey: 'Alaiza', id: 'alaiza-product', action: () => handleAlaizaProductClick() },
         ]);
     }
 
     function showOAuthOptions() {
+        const t = ALAIZA_TRANSLATIONS[currentLang];
         addOptionsMessage([
-            { label: 'Qué es OAuth', id: 'que-es-oauth', action: () => handleOptionClick('Qué es OAuth', '/audios/07-OauthQuees.wav', showOAuthDeepOptions) },
+            { label: t.options['Qué es OAuth'], labelKey: 'Qué es OAuth', id: 'que-es-oauth', action: () => handleOptionClick('Qué es OAuth', '/audios/07-OauthQuees.wav', showOAuthDeepOptions) },
         ]);
     }
 
     function showOAuthDeepOptions() {
+        const t = ALAIZA_TRANSLATIONS[currentLang];
         addOptionsMessage([
-            { label: 'Quiero más información de OAuth', id: 'oauth-deep', action: () => handleOauthDeepExplanationClick() },
-            { label: 'Quiero ver el resto de productos', id: 'back-products', action: () => handleBackToProducts() },
+            { label: t.options['Quiero más información de OAuth'], labelKey: 'Quiero más información de OAuth', id: 'oauth-deep', action: () => handleOauthDeepExplanationClick() },
+            { label: t.options['Quiero ver el resto de productos'], labelKey: 'Quiero ver el resto de productos', id: 'back-products', action: () => handleBackToProducts() },
         ]);
     }
 
     function handleOauthDeepExplanationClick(): void {
-        addUserMessage('Quiero más información de OAuth');
+        addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['Quiero más información de OAuth']);
 
         const audioPlaylist = [
             '/audios/22-comenzarauth.wav',
@@ -208,19 +265,19 @@ export const AlaizaAssistant = () => {
     }
 
     function handleBackToProducts() {
-        addUserMessage('Quiero ver el resto de productos');
+        addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['Quiero ver el resto de productos']);
         showTourOptions();
     }
 
     function handleTourClick() {
-        addUserMessage('Tour productos');
+        addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['Tour productos']);
         playAudio('/audios/05-Servicios.wav', () => {
             showTourOptions();
         });
     }
 
     function handleOAuthClick() {
-        addUserMessage('OAuth');
+        addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['OAuth']);
         // Chain 06 then 07 directly
         playAudio('/audios/06-AuthOauth.wav', () => {
             playAudio('/audios/07-OauthQuees.wav', () => {
@@ -230,7 +287,7 @@ export const AlaizaAssistant = () => {
     }
 
     function handleIdentityClick() {
-        addUserMessage('Identity');
+        addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['Identity']);
         playAudio('/audios/10-identidad.wav', () => {
             playAudio('/audios/11-queesidentidad.wav', () => {
                 showIdentityDeepOptions();
@@ -239,14 +296,15 @@ export const AlaizaAssistant = () => {
     }
 
     function showIdentityDeepOptions() {
+        const t = ALAIZA_TRANSLATIONS[currentLang];
         addOptionsMessage([
-            { label: 'Quiero más información de Identity', id: 'identity-deep', action: () => handleIdentityDeepExplanationClick() },
-            { label: 'Quiero ver el resto de productos', id: 'back-products', action: () => handleBackToProducts() },
+            { label: t.options['Quiero más información de Identity'], labelKey: 'Quiero más información de Identity', id: 'identity-deep', action: () => handleIdentityDeepExplanationClick() },
+            { label: t.options['Quiero ver el resto de productos'], labelKey: 'Quiero ver el resto de productos', id: 'back-products', action: () => handleBackToProducts() },
         ]);
     }
 
     function handleIdentityDeepExplanationClick() {
-        addUserMessage('Quiero más información de Identity');
+        addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['Quiero más información de Identity']);
 
         // Playlist inferida para Identity basada en los archivos disponibles
         const audioPlaylist = [
@@ -262,7 +320,7 @@ export const AlaizaAssistant = () => {
     }
 
     function handleCardsClick() {
-        addUserMessage('Cards');
+        addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['Cards']);
         playAudio('/audios/14-cards.wav', () => {
             playAudio('/audios/15-quehacecards.wav', () => {
                 showCardsDeepOptions();
@@ -271,14 +329,15 @@ export const AlaizaAssistant = () => {
     }
 
     function showCardsDeepOptions() {
+        const t = ALAIZA_TRANSLATIONS[currentLang];
         addOptionsMessage([
-            { label: 'Quiero más información de Cards', id: 'cards-deep', action: () => handleCardsDeepExplanationClick() },
-            { label: 'Quiero ver el resto de productos', id: 'back-products', action: () => handleBackToProducts() },
+            { label: t.options['Quiero más información de Cards'], labelKey: 'Quiero más información de Cards', id: 'cards-deep', action: () => handleCardsDeepExplanationClick() },
+            { label: t.options['Quiero ver el resto de productos'], labelKey: 'Quiero ver el resto de productos', id: 'back-products', action: () => handleBackToProducts() },
         ]);
     }
 
     function handleCardsDeepExplanationClick() {
-        addUserMessage('Quiero más información de Cards');
+        addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['Quiero más información de Cards']);
 
         const audioPlaylist = [
             '/audios/38-cards.wav',
@@ -291,7 +350,7 @@ export const AlaizaAssistant = () => {
     }
 
     function handleTXClick() {
-        addUserMessage('TX');
+        addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['TX']);
         playAudio('/audios/18-TX.wav', () => {
             playAudio('/audios/17-quehaceTX.wav', () => {
                 showTXDeepOptions();
@@ -300,14 +359,15 @@ export const AlaizaAssistant = () => {
     }
 
     function showTXDeepOptions() {
+        const t = ALAIZA_TRANSLATIONS[currentLang];
         addOptionsMessage([
-            { label: 'Quiero más información de TX', id: 'tx-deep', action: () => handleTXDeepExplanationClick() },
-            { label: 'Quiero ver el resto de productos', id: 'back-products', action: () => handleBackToProducts() },
+            { label: t.options['Quiero más información de TX'], labelKey: 'Quiero más información de TX', id: 'tx-deep', action: () => handleTXDeepExplanationClick() },
+            { label: t.options['Quiero ver el resto de productos'], labelKey: 'Quiero ver el resto de productos', id: 'back-products', action: () => handleBackToProducts() },
         ]);
     }
 
     function handleTXDeepExplanationClick() {
-        addUserMessage('Quiero más información de TX');
+        addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['Quiero más información de TX']);
 
         const audioPlaylist = [
             '/audios/42-quehacetx.wav'
@@ -319,7 +379,7 @@ export const AlaizaAssistant = () => {
     }
 
     function handleConnectClick() {
-        addUserMessage('Connect');
+        addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['Connect']);
         playAudio('/audios/13-connect.wav', () => {
             playAudio('/audios/12-quehacevinculacion.wav', () => {
                 showConnectDeepOptions();
@@ -328,14 +388,15 @@ export const AlaizaAssistant = () => {
     }
 
     function showConnectDeepOptions() {
+        const t = ALAIZA_TRANSLATIONS[currentLang];
         addOptionsMessage([
-            { label: 'Quiero más información de Connect', id: 'connect-deep', action: () => handleConnectDeepExplanationClick() },
-            { label: 'Quiero ver el resto de productos', id: 'back-products', action: () => handleBackToProducts() },
+            { label: t.options['Quiero más información de Connect'], labelKey: 'Quiero más información de Connect', id: 'connect-deep', action: () => handleConnectDeepExplanationClick() },
+            { label: t.options['Quiero ver el resto de productos'], labelKey: 'Quiero ver el resto de productos', id: 'back-products', action: () => handleBackToProducts() },
         ]);
     }
 
     function handleConnectDeepExplanationClick() {
-        addUserMessage('Quiero más información de Connect');
+        addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['Quiero más información de Connect']);
 
         const audioPlaylist = [
             '/audios/36-connect.wav',
@@ -431,7 +492,7 @@ export const AlaizaAssistant = () => {
     }
 
     function handleAlaizaProductClick() {
-        addUserMessage('Alaiza');
+        addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['Alaiza']);
 
         const audioPlaylist = [
             '/audios/43-alaiza2.wav',
@@ -442,19 +503,43 @@ export const AlaizaAssistant = () => {
         });
     }
 
-    const handleInputSubmit = (e: React.FormEvent) => {
+    const handleInputSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!inputText.trim()) return;
 
-        addUserMessage(inputText);
+        const userQuestion = inputText;
+        addUserMessage(userQuestion);
         setInputText('');
-
-        // Simular respuesta por defecto
         setIsTyping(true);
-        setTimeout(() => {
+
+        try {
+            const response = await fetch(linkChat, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    question: userQuestion,
+                    context: ALAIZA_CONTEXT
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`API error: ${response.status}`);
+            }
+
+            const data = await response.json();
+            const aiText = data.answer || data.message || "Lo siento, no pude procesar la respuesta.";
+
             setIsTyping(false);
-            addBotMessage("Estamos trabajando en una respuesta para tu solicitud.");
-        }, 1000);
+            addBotMessage(aiText);
+
+        } catch (error) {
+            console.error("Error fetching AI response:", error);
+            setIsTyping(false);
+            const t = ALAIZA_TRANSLATIONS[currentLang]; // Get current message
+            addBotMessage(t.errorMessage);
+        }
     };
 
     const handleSkip = () => {
@@ -471,7 +556,7 @@ export const AlaizaAssistant = () => {
             {!isOpen ? (
                 <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
                     <div className="relative bg-white/90 backdrop-blur-sm px-4 py-2 rounded-xl rounded-tr-sm shadow-lg border border-gray-100 animate-in fade-in slide-in-from-bottom-2 duration-700">
-                        <p className="text-sm font-medium text-gray-700 whitespace-nowrap">¿Necesitas ayuda?</p>
+                        <p className="text-sm font-medium text-gray-700 whitespace-nowrap">{t.helperText}</p>
                     </div>
                     <button
                         onClick={handleOpen}
@@ -500,11 +585,11 @@ export const AlaizaAssistant = () => {
                                 )}
                             </div>
                             <div>
-                                <h3 className="font-bold text-gray-800 text-lg">Alaiza</h3>
+                                <h3 className="font-bold text-gray-800 text-lg">{t.headerTitle}</h3>
                                 <div className="flex items-center gap-2">
                                     <p className="text-xs text-gray-500 flex items-center gap-1">
                                         <span className={`w-2 h-2 rounded-full ${isPlaying ? 'bg-green-500 animate-ping' : 'bg-green-500 animate-pulse'}`}></span>
-                                        {isPlaying ? 'Hablando...' : 'En línea'}
+                                        {isPlaying ? t.statusTalking : t.statusOnline}
                                     </p>
                                     {isPlaying && (
                                         <button
@@ -512,7 +597,7 @@ export const AlaizaAssistant = () => {
                                             className="text-[16px] bg-gray-100 hover:bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full transition-colors border border-gray-200"
                                             title="Saltar audio"
                                         >
-                                            Saltar
+                                            {t.skipButton}
                                         </button>
                                     )}
                                 </div>
@@ -544,8 +629,8 @@ export const AlaizaAssistant = () => {
                                         </div>
                                     )}
 
-                                    {/* Option Buttons */}
-                                    {msg.type === 'options' && (
+                                    {/* Option Buttons - Only show in Spanish */}
+                                    {msg.type === 'options' && currentLang === 'es' && (
                                         <div className="grid grid-cols-2 gap-2 mt-2 animate-in fade-in slide-in-from-left-2 duration-300">
                                             {msg.options?.map((opt) => (
                                                 <button
@@ -554,7 +639,7 @@ export const AlaizaAssistant = () => {
                                                     className={`text-left px-3 py-2.5 bg-white border-2 border-[#eaecf0] hover:border-[#95FF0B] hover:bg-[#fafff0] text-gray-700 rounded-xl text-xs font-medium transition-all duration-200 transform hover:scale-[1.02] active:scale-95 shadow-sm break-words flex items-center min-h-[50px]
                                                     ${msg.options?.length === 1 || (msg.options?.length && msg.options.length % 2 !== 0 && msg.options[msg.options.length - 1].id === opt.id) ? 'col-span-2' : ''}`}
                                                 >
-                                                    {opt.label}
+                                                    {opt.labelKey ? t.options[opt.labelKey as keyof typeof t.options] || opt.label : opt.label}
                                                 </button>
                                             ))}
                                         </div>
@@ -582,7 +667,7 @@ export const AlaizaAssistant = () => {
                                 type="text"
                                 value={inputText}
                                 onChange={(e) => setInputText(e.target.value)}
-                                placeholder="Escribe tu duda..."
+                                placeholder={t.inputPlaceholder}
                                 className="w-full bg-[#cdcfd5] text-gray-800 placeholder-gray-500 rounded-full py-3 px-5 pr-12 text-sm focus:outline-none focus:ring-2 focus:ring-[#95FF0B] transition-all"
                             />
                             <button

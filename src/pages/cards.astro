@@ -2956,4 +2956,303 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
       }
     });
   });
+
+  // === TRADUCCIÓN CARDS ===
+  const cardsTranslations = {
+    es: {
+      hero: {
+        title: "Zelify Cards<br />Emisión sin fronteras.",
+        description: "Solución completa para la emisión y administración de tarjetas físicas y virtuales, personales y corporativas, que centraliza tokenización, 3D Secure, procesamiento, disputas, wallets, control de riesgo, suscripciones, cashback y reportes en tiempo real con altos estándares de seguridad y trazabilidad.",
+        ctaInputPlaceholder: "ingresa tu correo",
+        ctaButton: "cotizar",
+        demoButton: "demo"
+      },
+      security: {
+        title: "Infraestructura integral<br />para tu programa de tarjetas.",
+        features: [
+          {
+            title: "Patrocinio BIN",
+            desc: "Tu programa de tarjetas bajo un BIN patrocinado, con una estructura de access fee que te permite operar sin ser banco emisor, gestionando la relación regulatoria y operativa."
+          },
+          {
+            title: "Procesamiento",
+            desc: "Procesa cada transacción aprobada y gestiona el ciclo de vida de cada tarjeta activa a través de un motor que garantiza trazabilidad, estabilidad operativa y control total."
+          },
+          {
+            title: "Procesamiento Corporativo",
+            desc: "Administra programas de tarjetas empresariales con reglas y control en transacciones, otorgando visibilidad completa sobre cada tarjeta activa dentro de la operación."
+          },
+          {
+            title: "SDK de Cards",
+            desc: "Librerías de desarrollo que facilitan la integración ágil y sencilla para acelerar tu implementación técnica."
+          }
+        ]
+      },
+      control: {
+        title: "Solución integral para tu programa de tarjetas",
+        features: [
+          {
+            title: "Patrocinio BIN",
+            desc: "Opera tu programa de tarjetas sin ser un banco emisor. Gestionamos la relación regulatoria para acelerar tu salida al mercado.",
+            backTitle: "Beneficios de Patrocinio",
+            benefits: ["Estructura eficiente de Access Fee", "Gestión operativa y regulatoria", "Rápido Time-to-Market", "Emisión de tarjetas físicas y virtuales", "Cumplimiento normativo incluido"]
+          },
+          {
+            title: "Motor de Procesamiento",
+            desc: "Gestión total del ciclo de vida de la tarjeta y procesamiento de transacciones aprobadas con máxima estabilidad.",
+            backTitle: "Control Operativo",
+            benefits: ["Trazabilidad total de transacciones", "Gestión de tarjetas corporativas", "Control de reglas transaccionales", "Visibilidad en tiempo real", "Gestión de disputas y reportes"]
+          },
+          {
+            title: "Seguridad y Módulos",
+            desc: "Potencia tu programa con tokenización, CVV dinámico y herramientas contra el fraude como 3DS y Falcon.",
+            backTitle: "Capacidades Premium",
+            benefits: ["Tokenización y Apple/Google Wallets", "CVV dinámico para compras seguras", "Prevención de fraude con Falcon", "Autenticación 3D Secure (3DS)", "Printing y logística personalizada"]
+          },
+          {
+            title: "SDK e Integración",
+            desc: "Librerías de desarrollo y APIs que facilitan la integración ágil con tu plataforma.",
+            backTitle: "Beneficios de SDK",
+            benefits: ["SDK de Cards nativo y ágil", "Fondeo inicial y garantías", "Programas especiales de expansión", "Integración avanzada vía APIs", "Soporte técnico en implementación"]
+          }
+        ]
+      },
+      contact: {
+        title: "Empieza hoy<br />y protege tu<br />plataforma.",
+        formTitle: "Habla con nuestro equipo",
+        placeholders: {
+          names: "Nombres",
+          surnames: "Apellidos",
+          company: "Nombre de la compañía",
+          email: "Email de la compañía",
+          phone: "Teléfono (opcional)"
+        },
+        countryDefault: "País",
+        legal: "Al enviar este formulario, aceptas nuestros <a href='#'>Términos de Servicio</a> y <a href='#'>Política de Privacidad</a>.",
+        submit: "Hablemos"
+      },
+      cta: {
+        title: "Comienza hoy y<br />asegura cada acceso.",
+        button: "cotizar"
+      },
+      faq: {
+        title: "Preguntas frecuentes",
+        items: [
+          { q: "¿Qué funcionalidades incluye el producto?", a: "Nuestro producto incluye autenticación avanzada con biometría, registro personalizable de usuarios, validación de email y teléfono, información detallada del dispositivo, geolocalización estratégica, detección temprana de fraudes, y un SDK de integración sencillo para incorporar todas estas funcionalidades en una sola línea de código." },
+          { q: "¿Es seguro usar biometría y doble factor?", a: "Sí, es completamente seguro. La biometría y la autenticación de doble factor (2FA) son estándares de la industria que proporcionan capas adicionales de seguridad. Nuestro sistema utiliza encriptación de extremo a extremo y cumple con los más altos estándares de seguridad para proteger los datos biométricos y las credenciales de tus usuarios." },
+          { q: "¿Puedo personalizar los campos de registro para mis usuarios?", a: "Absolutamente. Nuestro sistema de registro es completamente personalizable. Puedes agregar, eliminar o modificar campos según las necesidades de tu negocio. Los campos se adaptan dinámicamente a tus usuarios, permitiéndote crear experiencias de registro únicas y relevantes para tu plataforma." },
+          { q: "¿Cómo detecta fraudes y accesos sospechosos?", a: "Nuestro sistema utiliza inteligencia artificial y machine learning para analizar patrones de comportamiento, detectar tráfico inusual, identificar el uso de VPNs, analizar la geolocalización de accesos, y monitorear información del dispositivo en tiempo real. Todo esto permite identificar y prevenir accesos sospechosos antes de que representen una amenaza." },
+          { q: "¿Funciona en cualquier dispositivo?", a: "Sí, nuestro producto es multiplataforma y funciona en cualquier dispositivo: smartphones (iOS y Android), tablets, computadoras de escritorio y laptops. La interfaz se adapta automáticamente a cada dispositivo, proporcionando una experiencia óptima sin importar desde dónde accedan tus usuarios." },
+          { q: "¿Es fácil de integrar a mi sistema actual?", a: "Muy fácil. Nuestro SDK de integración está diseñado para ser implementado con una sola línea de código. Proporcionamos documentación completa, ejemplos de código, y soporte técnico especializado para ayudarte en el proceso de integración. La mayoría de nuestros clientes completan la integración en menos de una hora." },
+          { q: "¿Puedo escalar la seguridad a medida que crece mi plataforma?", a: "Definitivamente. Nuestra arquitectura está construida para escalar automáticamente. A medida que tu plataforma crece, nuestro sistema se adapta sin necesidad de cambios adicionales. Puedes manejar desde cientos hasta millones de usuarios sin preocuparte por la capacidad o el rendimiento del sistema de seguridad." }
+        ]
+      },
+      footer: {
+        quickLinks: "Enlaces rápidos",
+        disclaimer: "Zelify is a technology platform currently in a development phase, not yet deployed or operational, and does not provide or process financial services directly; all financial operations are conducted exclusively through regulated third-party partners.",
+        copyright: "© 2025 Zelify. All rights reserved."
+      }
+    },
+    en: {
+      hero: {
+        title: "Zelify Cards<br />Borderless issuance.",
+        description: "Complete solution for issuing and managing physical and virtual cards, personal and corporate, that centralizes tokenization, 3D Secure, processing, disputes, wallets, risk control, subscriptions, cashback and real-time reporting with high security and traceability standards.",
+        ctaInputPlaceholder: "enter your email",
+        ctaButton: "quote",
+        demoButton: "demo"
+      },
+      security: {
+        title: "Comprehensive infrastructure<br />for your card program.",
+        features: [
+          {
+            title: "BIN Sponsorship",
+            desc: "Your card program under a sponsored BIN, with an access fee structure that allows you to operate without being an issuing bank, managing regulatory and operational relationships."
+          },
+          {
+            title: "Processing",
+            desc: "Process every approved transaction and manage the lifecycle of every active card through an engine that guarantees traceability, operational stability and total control."
+          },
+          {
+            title: "Corporate Processing",
+            desc: "Manage corporate card programs with rules and transaction control, providing complete visibility over every active card in the operation."
+          },
+          {
+            title: "Cards SDK",
+            desc: "Development libraries that facilitate agile and simple integration to accelerate your technical implementation."
+          }
+        ]
+      },
+      control: {
+        title: "Comprehensive solution for your card program",
+        features: [
+          {
+            title: "BIN Sponsorship",
+            desc: "Operate your card program without being an issuing bank. We manage regulatory relationships to accelerate your market entry.",
+            backTitle: "Sponsorship Benefits",
+            benefits: ["Efficient Access Fee structure", "Operational and regulatory management", "Fast Time-to-Market", "Physical and virtual card issuance", "Regulatory compliance included"]
+          },
+          {
+            title: "Processing Engine",
+            desc: "Complete management of card lifecycle and processing of approved transactions with maximum stability.",
+            backTitle: "Operational Control",
+            benefits: ["Complete transaction traceability", "Corporate card management", "Transactional rules control", "Real-time visibility", "Dispute and report management"]
+          },
+          {
+            title: "Security and Modules",
+            desc: "Enhance your program with tokenization, dynamic CVV and fraud prevention tools like 3DS and Falcon.",
+            backTitle: "Premium Capabilities",
+            benefits: ["Tokenization and Apple/Google Wallets", "Dynamic CVV for secure purchases", "Fraud prevention with Falcon", "3D Secure (3DS) authentication", "Custom printing and logistics"]
+          },
+          {
+            title: "SDK and Integration",
+            desc: "Development libraries and APIs that facilitate agile integration with your platform.",
+            backTitle: "SDK Benefits",
+            benefits: ["Native and agile Cards SDK", "Initial funding and guarantees", "Special expansion programs", "Advanced integration via APIs", "Technical implementation support"]
+          }
+        ]
+      },
+      contact: {
+        title: "Start today<br />and protect your<br />platform.",
+        formTitle: "Talk to our team",
+        placeholders: {
+          names: "First Name",
+          surnames: "Last Name",
+          company: "Company Name",
+          email: "Company Email",
+          phone: "Phone (optional)"
+        },
+        countryDefault: "Country",
+        legal: "By submitting this form, you accept our <a href='#'>Terms of Service</a> and <a href='#'>Privacy Policy</a>.",
+        submit: "Let's Talk"
+      },
+      cta: {
+        title: "Start today and<br />secure every access.",
+        button: "quote"
+      },
+      footer: {
+        quickLinks: "Quick links",
+        disclaimer: "Zelify is a technology platform currently in a development phase, not yet deployed or operational, and does not provide or process financial services directly; all financial operations are conducted exclusively through regulated third-party partners.",
+        copyright: "© 2025 Zelify. All rights reserved."
+      }
+    }
+  };
+
+  // Función para actualizar contenidos
+  function updateCardsContent(lang) {
+    const t = cardsTranslations[lang.toLowerCase()] || cardsTranslations.es;
+    document.documentElement.lang = lang.toLowerCase();
+
+    // Hero
+    const heroTitle = document.querySelector(".auth-title");
+    if(heroTitle) heroTitle.innerHTML = t.hero.title;
+    
+    const heroDesc = document.querySelector(".auth-description");
+    if(heroDesc) heroDesc.innerHTML = t.hero.description;
+    
+    const heroEmail = document.querySelector(".welcome-input");
+    if (heroEmail) {
+        heroEmail.placeholder = t.hero.ctaInputPlaceholder;
+        heroEmail.ariaLabel = t.hero.ctaInputPlaceholder;
+    }
+    const heroBtn = document.querySelector(".welcome-quote-button");
+    if (heroBtn) heroBtn.textContent = t.hero.ctaButton;
+    
+    const demoBtn = document.querySelector(".welcome-demo-button");
+    if (demoBtn) demoBtn.textContent = t.hero.demoButton;
+
+    // Security Section
+    const secTitle = document.querySelector(".security-title");
+    if(secTitle) secTitle.innerHTML = t.security.title;
+    
+    const secFeatures = document.querySelectorAll(".security-feature");
+    secFeatures.forEach((el, idx) => {
+        if (t.security.features[idx]) {
+            el.querySelector(".feature-title").textContent = t.security.features[idx].title;
+            el.querySelector(".feature-description").textContent = t.security.features[idx].desc;
+        }
+    });
+
+    // Control Section
+    const ctrlTitle = document.querySelector(".control-title");
+    if(ctrlTitle) ctrlTitle.textContent = t.control.title;
+    
+    const ctrlFeatures = document.querySelectorAll(".control-feature");
+    ctrlFeatures.forEach((el, idx) => {
+        if (t.control.features[idx]) {
+            const data = t.control.features[idx];
+            el.querySelector(".control-feature-front .control-feature-title").textContent = data.title;
+            el.querySelector(".control-feature-front .control-feature-description").textContent = data.desc;
+            el.querySelector(".control-feature-back .control-feature-title").textContent = data.backTitle;
+            const ul = el.querySelector(".control-feature-benefits");
+            ul.innerHTML = data.benefits.map(b => `<li>${b}</li>`).join("");
+        }
+    });
+
+    // Contact Section
+    const contactTitle = document.querySelector(".contact-title");
+    if(contactTitle) contactTitle.innerHTML = t.contact.title;
+    
+    const contactFormTitle = document.querySelector(".contact-form-title");
+    if(contactFormTitle) contactFormTitle.textContent = t.contact.formTitle;
+    
+    const contactForm = document.getElementById("contactForm");
+    if (contactForm) {
+        contactForm.querySelector("#nombres").placeholder = t.contact.placeholders.names;
+        contactForm.querySelector("#apellidos").placeholder = t.contact.placeholders.surnames;
+        contactForm.querySelector("#compania").placeholder = t.contact.placeholders.company;
+        contactForm.querySelector("#email").placeholder = t.contact.placeholders.email;
+        contactForm.querySelector("#telefono").placeholder = t.contact.placeholders.phone;
+        const submitBtn = contactForm.querySelector(".contact-submit-btn");
+        if (submitBtn) submitBtn.textContent = t.contact.submit;
+        const legalText = contactForm.querySelector(".contact-legal");
+        if (legalText) legalText.innerHTML = t.contact.legal;
+        
+        const countrySelect = contactForm.querySelector("#pais");
+        if (countrySelect && countrySelect.options.length > 0) {
+            countrySelect.options[0].textContent = t.contact.countryDefault;
+        }
+    }
+
+    // CTA Section
+    const ctaTitle = document.querySelector(".cta-title");
+    if(ctaTitle) ctaTitle.innerHTML = t.cta.title;
+    
+    const ctaBtn = document.querySelector(".cta-button");
+    if(ctaBtn) ctaBtn.textContent = t.cta.button;
+
+    // FAQ Section
+    const faqTitle = document.querySelector(".faq-title");
+    if (faqTitle) faqTitle.textContent = t.faq.title;
+
+    const faqItems = document.querySelectorAll(".faq-item");
+    faqItems.forEach((item, index) => {
+      if (t.faq.items[index]) {
+        const questionSpan = item.querySelector(".faq-question span");
+        const answerP = item.querySelector(".faq-answer p");
+        if (questionSpan) questionSpan.textContent = t.faq.items[index].q;
+        if (answerP) answerP.textContent = t.faq.items[index].a;
+      }
+    });
+
+    // Footer
+    const footerLinksTitle = document.querySelector(".footer-links-title");
+    if(footerLinksTitle) footerLinksTitle.textContent = t.footer.quickLinks;
+    
+    const footerDisclaimer = document.querySelector(".footer-disclaimer");
+    if(footerDisclaimer) footerDisclaimer.textContent = t.footer.disclaimer;
+    
+    const footerCopyright = document.querySelector(".footer-copyright");
+    if(footerCopyright) footerCopyright.textContent = t.footer.copyright;
+  }
+
+  // Event Listeners for Language Change
+  window.addEventListener("ui:languagechange", (event) => {
+    const lang = event.detail?.language || "ES";
+    updateCardsContent(lang);
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const stored = localStorage.getItem("ui-language") || "ES";
+    updateCardsContent(stored);
+  });
 </script>
