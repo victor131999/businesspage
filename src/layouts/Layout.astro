@@ -6,6 +6,8 @@ export interface Props {
 
 const { title, description = "Mi sitio web con Astro" } = Astro.props;
 import { AlaizaAssistant } from "../components/AlaizaAssistant";
+const pathname = new URL(Astro.request.url).pathname;
+const isDesarrollo = pathname.includes('/desarrollo');
 ---
 
 <!DOCTYPE html>
@@ -20,6 +22,6 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
   </head>
   <body>
     <slot />
-    <AlaizaAssistant client:load />
+    {!isDesarrollo && <AlaizaAssistant client:load />}
   </body>
 </html>

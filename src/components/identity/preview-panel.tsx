@@ -219,8 +219,8 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
       if (availableLiveness.length > 0) {
         const selectedIndex = selectedLivenessType
           ? availableLiveness.findIndex(
-              (liveness) => liveness === selectedLivenessType,
-            )
+            (liveness) => liveness === selectedLivenessType,
+          )
           : 0;
         setActiveLivenessCard(selectedIndex >= 0 ? selectedIndex : 0);
       }
@@ -1514,21 +1514,20 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
                       <div
                         key={item.title}
                         onClick={() => setActiveWelcomeCard(index)}
-                        className={`absolute top-0 flex cursor-pointer items-center gap-3 ${
-                          isActive
+                        className={`absolute top-0 flex cursor-pointer items-center gap-3 ${isActive
                             ? "shadow-lg rounded-xl"
                             : "border border-stroke bg-gray-2 dark:border-dark-3 dark:bg-dark-2 rounded-xl"
-                        }`}
+                          }`}
                         style={{
                           ...(isActive
                             ? {
-                                background: `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
-                                border: "2px solid white",
-                              }
+                              background: `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
+                              border: "2px solid white",
+                            }
                             : {
-                                backgroundColor: "#9BA2AF", // Color gris para tarjetas inactivas
-                                border: "2px solid white",
-                              }),
+                              backgroundColor: "#9BA2AF", // Color gris para tarjetas inactivas
+                              border: "2px solid white",
+                            }),
                           left:
                             typeof leftOffset === "string"
                               ? leftOffset
@@ -1545,13 +1544,13 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
                             : index < activeWelcomeCard
                               ? "0"
                               : index > activeWelcomeCard &&
-                                  activeWelcomeCard === 1
+                                activeWelcomeCard === 1
                                 ? "0"
                                 : "0",
                           paddingRight: isActive
                             ? "16px"
                             : index > activeWelcomeCard &&
-                                activeWelcomeCard === 1
+                              activeWelcomeCard === 1
                               ? "12px"
                               : "0",
                           minWidth: isActive
@@ -1560,7 +1559,7 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
                           justifyContent: isActive
                             ? "flex-start"
                             : index > activeWelcomeCard &&
-                                activeWelcomeCard === 1
+                              activeWelcomeCard === 1
                               ? "flex-end"
                               : index < activeWelcomeCard
                                 ? "center"
@@ -1580,13 +1579,13 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
                             marginLeft: isActive
                               ? "0"
                               : index > activeWelcomeCard &&
-                                  activeWelcomeCard === 1
+                                activeWelcomeCard === 1
                                 ? "auto"
                                 : "0",
                             marginRight:
                               index > activeWelcomeCard &&
-                              activeWelcomeCard === 1 &&
-                              !isActive
+                                activeWelcomeCard === 1 &&
+                                !isActive
                                 ? "12px"
                                 : "0",
                           }}
@@ -2270,19 +2269,18 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
                         setActiveDocumentCard(index);
                         updateConfig({ selectedDocumentType: docType });
                       }}
-                      className={`absolute left-0 right-0 flex cursor-pointer items-center gap-3 rounded-xl transition-all duration-300 ease-in-out ${
-                        isActive ? "shadow-lg" : ""
-                      }`}
+                      className={`absolute left-0 right-0 flex cursor-pointer items-center gap-3 rounded-xl transition-all duration-300 ease-in-out ${isActive ? "shadow-lg" : ""
+                        }`}
                       style={{
                         ...(isActive
                           ? {
-                              background: `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
-                              border: "2px solid white",
-                            }
+                            background: `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
+                            border: "2px solid white",
+                          }
                           : {
-                              backgroundColor: "#9BA2AF", // Color gris para tarjetas inactivas
-                              border: "2px solid white",
-                            }),
+                            backgroundColor: "#9BA2AF", // Color gris para tarjetas inactivas
+                            border: "2px solid white",
+                          }),
                         top: `${topOffset}px`,
                         height: isActive
                           ? `${activeCardHeight}px`
@@ -3014,8 +3012,8 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
     if (activeLivenessCard === null && selfieOptions.length > 0) {
       const selectedIndex = selectedLivenessType
         ? selfieOptions.findIndex(
-            (liveness) => liveness === selectedLivenessType,
-          )
+          (liveness) => liveness === selectedLivenessType,
+        )
         : 0;
       if (selectedIndex >= 0) {
         setActiveLivenessCard(selectedIndex);
@@ -3430,19 +3428,18 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
                         setActiveLivenessCard(index);
                         updateConfig({ selectedLivenessType: livenessType });
                       }}
-                      className={`absolute left-0 right-0 flex cursor-pointer items-center gap-3 rounded-xl transition-all duration-300 ease-in-out ${
-                        isActive ? "shadow-lg" : ""
-                      }`}
+                      className={`absolute left-0 right-0 flex cursor-pointer items-center gap-3 rounded-xl transition-all duration-300 ease-in-out ${isActive ? "shadow-lg" : ""
+                        }`}
                       style={{
                         ...(isActive
                           ? {
-                              background: `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
-                              border: "2px solid white",
-                            }
+                            background: `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
+                            border: "2px solid white",
+                          }
                           : {
-                              backgroundColor: "#9BA2AF",
-                              border: "2px solid white",
-                            }),
+                            backgroundColor: "#9BA2AF",
+                            border: "2px solid white",
+                          }),
                         top: `${topOffset}px`,
                         height: isActive
                           ? `${activeCardHeight}px`

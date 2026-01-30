@@ -3,6 +3,7 @@ import TransfersViewApp from "@/components/transfers_payments/TransfersViewApp.a
 import DeviceFrame from "../components/DeviceFrame.astro";
 import Navbar3 from "../components/NavbarSimple.astro";
 import ProductsPanel from "../components/productsPanel.astro";
+import { AlaizaAssistant } from "../components/AlaizaAssistant";
 ---
 
 <html lang="es">
@@ -777,6 +778,7 @@ import ProductsPanel from "../components/productsPanel.astro";
         <p class="footer-copyright">© 2025 Zelify. All rights reserved.</p>
       </div>
     </footer>
+    <AlaizaAssistant client:load />
   </body>
 </html>
 
@@ -2906,5 +2908,328 @@ import ProductsPanel from "../components/productsPanel.astro";
         faqItem.classList.add("active");
       }
     });
+  });
+
+  // === TRADUCCIÓN TX ===
+  const txTranslations = {
+    es: {
+      hero: {
+        title: "Cotización y conversión<br />de divisas",
+        description: "Mecanismo integral que permite generar y obtener cotizaciones precisas en tiempo real,<br />facilitando el acceso a tasas de cambio dinámicas para una amplia variedad de monedas admitidas.<br />Este proceso asegura transparencia en la conversión, aplicando márgenes<br />y comisiones configurables antes de iniciar cualquier operación.",
+        ctaInputPlaceholder: "ingresa tu correo",
+        ctaButton: "cotizar",
+        demoButton: "demo"
+      },
+      security: {
+        title: "Ciclo de vida<br />de la transacción",
+        features: [
+          {
+            title: "Cotización FX",
+            desc: "Acceso a tasas de cambio dinámicas con márgenes y comisiones configurables en tiempo real."
+          },
+          {
+            title: "Valida cuentas",
+            desc: "Verificación de formatos estandarizados IBAN, CLABE o SWIFT para reducir rechazos."
+          },
+          {
+            title: "Inicio de transferencia",
+            desc: "Procesamiento ágil capturando datos de remitente, beneficiario y propósito del pago."
+          },
+          {
+            title: "Seguimiento Real-time",
+            desc: "Visibilidad total del ciclo de vida y obtención de estados a medida que avanza la red."
+          },
+          {
+            title: "Liquidación y Lotes",
+            desc: "Procesos con proveedores de liquidez y consulta de estados por lotes de operaciones."
+          },
+          {
+            title: "Conciliación Perfecta",
+            desc: "Informes detallados por montos, divisas convertidas y cargos aplicados."
+          }
+        ]
+      },
+      control: {
+        title: "Control total de transferencias",
+        features: [
+          {
+            title: "Validación Internacional",
+            desc: "Herramienta de seguridad para validar la cuenta del beneficiario antes de procesar el pago.",
+            backTitle: "Seguridad Operativa",
+            benefits: ["Verifica cumplimiento de formato IBAN", "Soporte para cuentas CLABE y SWIFT", "Reduce drásticamente errores operativos", "Validación previa al movimiento de fondos", "Minimiza el riesgo de rechazos bancarios"]
+          },
+          {
+            title: "Conversión de Divisas",
+            desc: "Mecanismo integral para generar cotizaciones precisas con tasas de cambio dinámicas.",
+            backTitle: "Transparencia en FX",
+            benefits: ["Acceso a múltiples monedas admitidas", "Márgenes y comisiones configurables", "Generación de cotizaciones en tiempo real", "Asegura transparencia en la conversión", "Cotización previa al inicio de operación"]
+          },
+          {
+            title: "Seguimiento y Recibos",
+            desc: "Obtén estados de la transferencia en tiempo real y genera comprobantes oficiales automáticos.",
+            backTitle: "Trazabilidad Total",
+            benefits: ["Estados de transferencia en tiempo real", "Generación de recibo digital automático", "Comprobante oficial para usuario final", "Visibilidad del ciclo de vida operativo", "Monitoreo por la red de pagos"]
+          },
+          {
+            title: "Control Pos-operativo",
+            desc: "Módulo avanzado para conciliación contable e informes de liquidación detallados.",
+            backTitle: "Conciliación Financiera",
+            benefits: ["Informes por montos y divisas", "Reporte de cargos y comisiones aplicados", "Liquidación manual o automática", "Conciliación contable garantizada", "Consulta de estados de lotes (batches)"]
+          }
+        ]
+      },
+      contact: {
+        title: "Empieza hoy<br />y protege tu<br />plataforma.",
+        formTitle: "Habla con nuestro equipo",
+        placeholders: {
+          names: "Nombres",
+          surnames: "Apellidos",
+          company: "Nombre de la compañía",
+          email: "Email de la compañía",
+          phone: "Teléfono (opcional)"
+        },
+        countryDefault: "País",
+        legal: "Al enviar este formulario, aceptas nuestros <a href='#'>Términos de Servicio</a> y <a href='#'>Política de Privacidad</a>.",
+        submit: "Hablemos"
+      },
+      cta: {
+        title: "Comienza hoy y<br />asegura cada acceso.",
+        button: "cotizar"
+      },
+      faq: {
+        title: "Preguntas frecuentes",
+        items: [
+          { q: "¿Qué funcionalidades incluye el módulo de International Transfers?", a: "Nuestro módulo permite cotizar FX con márgenes configurables, validar cuentas internacionales (SWIFT, IBAN, CLABE), procesar transferencias de forma segura y realizar un seguimiento en tiempo real con comprobantes digitales. Además, incluye herramientas avanzadas de liquidación y conciliación contable." },
+          { q: "¿Cómo se gestionan las tasas de cambio y las comisiones?", a: "El sistema ofrece un mecanismo de cotización en tiempo real con acceso a tasas de cambio dinámicas para múltiples divisas. Permite aplicar márgenes y comisiones personalizables antes de confirmar la operación, garantizando total transparencia en la conversión de fondos." },
+          { q: "¿Qué tipos de cuentas internacionales se pueden validar?", a: "Para reducir errores operativos y rechazos, nuestra herramienta valida automáticamente formatos estandarizados como SWIFT, IBAN y CLABE. Esto asegura que la información del beneficiario sea correcta antes de orquestar el movimiento de fondos." },
+          { q: "¿Cómo pueden los usuarios rastrear el estado de su envío?", a: "Ofrecemos visibilidad total sobre el ciclo de vida de la transacción. Los usuarios pueden consultar los estados en tiempo real mientras la transferencia avanza por la red de pagos y obtener un recibo digital automático que sirve como comprobante oficial de la operación." },
+          { q: "¿Cómo se maneja la liquidación con proveedores de liquidez?", a: "Contamos con un módulo de control financiero pos-operativo que permite generar informes detallados y realizar procesos de liquidación manuales o automáticos. Esto facilita la consulta del estado de cada lote de operaciones para asegurar una conciliación contable perfecta." },
+          { q: "¿Es difícil integrar las transferencias internacionales en mi App?", a: "No, gracias al SDK de Zelify TX, la integración es ágil y sencilla. El SDK está diseñado para reducir la complejidad técnica y el cumplimiento normativo, permitiendo a las instituciones financieras acelerar su tiempo de salida al mercado con una solución robusta." }
+        ]
+      },
+      footer: {
+        disclaimer: "Zelify is a technology platform currently in a development phase, not yet deployed or operational, and does not provide or process financial services directly; all financial operations are conducted exclusively through regulated third-party partners.",
+        copyright: "© 2025 Zelify. All rights reserved."
+      }
+    },
+    en: {
+      hero: {
+        title: "Quote and currency<br />conversion",
+        description: "Comprehensive mechanism that allows you to generate and obtain accurate quotes in real-time,<br />facilitating access to dynamic exchange rates for a wide variety of supported currencies.<br />This process ensures transparency in the conversion, applying configurable<br />margins and commissions before starting any operation.",
+        ctaInputPlaceholder: "enter your email",
+        ctaButton: "quote",
+        demoButton: "demo"
+      },
+      security: {
+        title: "Transaction<br />lifecycle",
+        features: [
+          {
+            title: "FX Quote",
+            desc: "Access to dynamic exchange rates with configurable margins and commissions in real-time."
+          },
+          {
+            title: "Validates accounts",
+            desc: "Verification of standardized formats IBAN, CLABE or SWIFT to reduce rejections."
+          },
+          {
+            title: "Transfer initiation",
+            desc: "Agile processing capturing sender, beneficiary and payment purpose data."
+          },
+          {
+            title: "Real-time Tracking",
+            desc: "Complete visibility of the lifecycle and obtaining statuses as it advances through the network."
+          },
+          {
+            title: "Settlement and Batches",
+            desc: "Processes with liquidity providers and status inquiry by operation batches."
+          },
+          {
+            title: "Perfect Reconciliation",
+            desc: "Detailed reports by amounts, converted currencies and applied charges."
+          }
+        ]
+      },
+      control: {
+        title: "Total control of transfers",
+        features: [
+          {
+            title: "International Validation",
+            desc: "Security tool to validate the beneficiary account before processing the payment.",
+            backTitle: "Operational Security",
+            benefits: ["Verifies IBAN format compliance", "Support for CLABE and SWIFT accounts", "Drastically reduces operational errors", "Pre-validation before funds movement", "Minimizes risk of bank rejections"]
+          },
+          {
+            title: "Currency Conversion",
+            desc: "Comprehensive mechanism to generate precise quotes with dynamic exchange rates.",
+            backTitle: "FX Transparency",
+            benefits: ["Access to multiple supported currencies", "Configurable margins and commissions", "Real-time quote generation", "Ensures transparency in conversion", "Pre-operation quoting"]
+          },
+          {
+            title: "Tracking and Receipts",
+            desc: "Get transfer status in real-time and generate automatic official vouchers.",
+            backTitle: "Complete Traceability",
+            benefits: ["Real-time transfer status", "Automatic digital receipt generation", "Official voucher for end user", "Visibility of operational lifecycle", "Network payment monitoring"]
+          },
+          {
+            title: "Post-operative Control",
+            desc: "Advanced module for accounting reconciliation and detailed settlement reports.",
+            backTitle: "Financial Reconciliation",
+            benefits: ["Reports by amounts and currencies", "Applied charges and commission reporting", "Manual or automatic settlement", "Guaranteed accounting reconciliation", "Batch status inquiry (batches)"]
+          }
+        ]
+      },
+      contact: {
+        title: "Start today<br />and protect your<br />platform.",
+        formTitle: "Talk to our team",
+        placeholders: {
+          names: "First Name",
+          surnames: "Last Name",
+          company: "Company Name",
+          email: "Company Email",
+          phone: "Phone (optional)"
+        },
+        countryDefault: "Country",
+        legal: "By submitting this form, you accept our <a href='#'>Terms of Service</a> and <a href='#'>Privacy Policy</a>.",
+        submit: "Let's Talk"
+      },
+      cta: {
+        title: "Start today and<br />secure every access.",
+        button: "quote"
+      },
+      faq: {
+        title: "Frequently Asked Questions",
+        items: [
+          { q: "What features does the International Transfers module include?", a: "Our module allows you to quote FX with configurable margins, validate international accounts (SWIFT, IBAN, CLABE), securely process transfers, and track in real-time with digital receipts. It also includes advanced settlement and accounting reconciliation tools." },
+          { q: "How are exchange rates and fees managed?", a: "The system offers a real-time quotation mechanism with access to dynamic exchange rates for multiple currencies. It allows applying customizable margins and commissions before confirming the operation, ensuring full transparency in the conversion of funds." },
+          { q: "What types of international accounts can be validated?", a: "To reduce operational errors and rejections, our tool automatically validates standardized formats such as SWIFT, IBAN, and CLABE. This ensures that the beneficiary's information is correct before orchestrating the movement of funds." },
+          { q: "How can users track the status of their transfer?", a: "We offer full visibility into the transaction lifecycle. Users can check statuses in real-time as the transfer progresses through the payment network and receive an automatic digital receipt that serves as an official voucher for the operation." },
+          { q: "How is settlement handled with liquidity providers?", a: "We have a post-operative financial control module that allows generating detailed reports and performing manual or automatic settlement processes. This facilitates checking the status of each batch of operations to ensure perfect accounting reconciliation." },
+          { q: "Is it difficult to integrate international transfers into my App?", a: "No, thanks to the Zelify TX SDK, integration is agile and simple. The SDK is designed to reduce technical complexity and regulatory compliance, allowing financial institutions to accelerate their time to market with a robust solution." }
+        ]
+      },
+      footer: {
+        disclaimer: "Zelify is a technology platform currently in a development phase, not yet deployed or operational, and does not provide or process financial services directly; all financial operations are conducted exclusively through regulated third-party partners.",
+        copyright: "© 2025 Zelify. All rights reserved."
+      }
+    }
+  };
+
+  // Función para actualizar contenidos
+  function updateTxContent(lang) {
+    const t = txTranslations[lang.toLowerCase()] || txTranslations.es;
+    document.documentElement.lang = lang.toLowerCase();
+
+    // Hero
+    const heroTitle = document.querySelector(".auth-title");
+    if(heroTitle) heroTitle.innerHTML = t.hero.title;
+    
+    const heroDesc = document.querySelector(".auth-description");
+    if(heroDesc) heroDesc.innerHTML = t.hero.description;
+    
+    const heroEmail = document.querySelector(".welcome-input");
+    if (heroEmail) {
+        heroEmail.placeholder = t.hero.ctaInputPlaceholder;
+        heroEmail.ariaLabel = t.hero.ctaInputPlaceholder;
+    }
+    const heroBtn = document.querySelector(".welcome-quote-button");
+    if (heroBtn) heroBtn.textContent = t.hero.ctaButton;
+    
+    const demoBtn = document.querySelector(".welcome-demo-button");
+    if (demoBtn) demoBtn.textContent = t.hero.demoButton;
+
+    // Security Section
+    const secTitle = document.querySelector(".security-title");
+    if(secTitle) secTitle.innerHTML = t.security.title;
+    
+    const secFeatures = document.querySelectorAll(".security-feature");
+    secFeatures.forEach((el, idx) => {
+        if (t.security.features[idx]) {
+            el.querySelector(".feature-title").textContent = t.security.features[idx].title;
+            el.querySelector(".feature-description").textContent = t.security.features[idx].desc;
+        }
+    });
+
+    // Control Section
+    const ctrlTitle = document.querySelector(".control-title");
+    if(ctrlTitle) ctrlTitle.textContent = t.control.title;
+    
+    const ctrlFeatures = document.querySelectorAll(".control-feature");
+    ctrlFeatures.forEach((el, idx) => {
+        if (t.control.features[idx]) {
+            const data = t.control.features[idx];
+            el.querySelector(".control-feature-front .control-feature-title").textContent = data.title;
+            el.querySelector(".control-feature-front .control-feature-description").textContent = data.desc;
+            el.querySelector(".control-feature-back .control-feature-title").textContent = data.backTitle;
+            const ul = el.querySelector(".control-feature-benefits");
+            ul.innerHTML = data.benefits.map(b => `<li>${b}</li>`).join("");
+        }
+    });
+
+    // Contact Section
+    const contactTitle = document.querySelector(".contact-title");
+    if(contactTitle) contactTitle.innerHTML = t.contact.title;
+    
+    const contactFormTitle = document.querySelector(".contact-form-title");
+    if(contactFormTitle) contactFormTitle.textContent = t.contact.formTitle;
+    
+    const contactForm = document.getElementById("contactForm");
+    if (contactForm) {
+        contactForm.querySelector("#nombres").placeholder = t.contact.placeholders.names;
+        contactForm.querySelector("#apellidos").placeholder = t.contact.placeholders.surnames;
+        contactForm.querySelector("#compania").placeholder = t.contact.placeholders.company;
+        contactForm.querySelector("#email").placeholder = t.contact.placeholders.email;
+        contactForm.querySelector("#telefono").placeholder = t.contact.placeholders.phone;
+        const submitBtn = contactForm.querySelector(".contact-submit-btn");
+        if (submitBtn) submitBtn.textContent = t.contact.submit;
+        const legalText = contactForm.querySelector(".contact-legal");
+        if (legalText) legalText.innerHTML = t.contact.legal;
+        
+        const countrySelect = contactForm.querySelector("#pais");
+        if (countrySelect && countrySelect.options.length > 0) {
+            countrySelect.options[0].textContent = t.contact.countryDefault;
+        }
+    }
+
+    // CTA Section
+    const ctaTitle = document.querySelector(".cta-title");
+    if(ctaTitle) ctaTitle.innerHTML = t.cta.title;
+    
+    const ctaBtn = document.querySelector(".cta-button");
+    if(ctaBtn) ctaBtn.textContent = t.cta.button;
+
+    // FAQ Section
+    const faqTitle = document.querySelector(".faq-title");
+    if (faqTitle) faqTitle.textContent = t.faq.title;
+
+    const faqItems = document.querySelectorAll(".faq-item");
+    faqItems.forEach((item, index) => {
+      if (t.faq.items[index]) {
+        const questionSpan = item.querySelector(".faq-question span");
+        const answerP = item.querySelector(".faq-answer p");
+        if (questionSpan) questionSpan.textContent = t.faq.items[index].q;
+        if (answerP) answerP.textContent = t.faq.items[index].a;
+      }
+    });
+
+    // Footer
+    const footerLinksTitle = document.querySelector(".footer-links-title");
+    if(footerLinksTitle) footerLinksTitle.textContent = t.footer.quickLinks;
+    
+    const footerDisclaimer = document.querySelector(".footer-disclaimer");
+    if(footerDisclaimer) footerDisclaimer.textContent = t.footer.disclaimer;
+    
+    const footerCopyright = document.querySelector(".footer-copyright");
+    if(footerCopyright) footerCopyright.textContent = t.footer.copyright;
+  }
+
+  // Event Listeners for Language Change
+  window.addEventListener("ui:languagechange", (event) => {
+    const lang = event.detail?.language || "ES";
+    updateTxContent(lang);
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const stored = localStorage.getItem("ui-language") || "ES";
+    updateTxContent(stored);
   });
 </script>

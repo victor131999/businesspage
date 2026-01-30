@@ -35,8 +35,13 @@ export default function AlaizaChat() {
 
     // Refs
     const messagesEndRef = useRef<HTMLDivElement>(null);
+    const messagesContainerRef = useRef<HTMLDivElement>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const typingIntervalRef = useRef<NodeJS.Timeout | null>(null);
+    const transferTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const demoRunningRef = useRef(false);
+    const demoTimeoutsRef = useRef<NodeJS.Timeout[]>([]);
+    const hasUserMessageRef = useRef(false);
 
     // Theme
     const themeColor = "#004492";
@@ -53,25 +58,58 @@ export default function AlaizaChat() {
 
     // Scroll to bottom
     useEffect(() => {
-        if (messagesEndRef.current) {
-            messagesEndRef.current.scrollIntoView({
+        if (messagesContainerRef.current) {
+            messagesContainerRef.current.scrollTo({
+                top: messagesContainerRef.current.scrollHeight,
                 behavior: "smooth",
-                block: "end",
             });
         }
     }, [messages, isTyping, typingMessage, isTransferring, isTransferred]);
 
+    useEffect(() => {
+        return () => {
+            if (typingIntervalRef.current) {
+                clearInterval(typingIntervalRef.current);
+                typingIntervalRef.current = null;
+            }
+            if (transferTimeoutRef.current) {
+                clearTimeout(transferTimeoutRef.current);
+                transferTimeoutRef.current = null;
+            }
+            demoTimeoutsRef.current.forEach(clearTimeout);
+            demoTimeoutsRef.current = [];
+            demoRunningRef.current = false;
+        };
+    }, []);
+
+    useEffect(() => {
+        hasUserMessageRef.current = messages.some((m) => m.sender === "user");
+    }, [messages]);
+
     // Response Generation Logic
+    const normalize = (value: string) =>
+        value
+            .toLowerCase()
+            .trim()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "");
+
     const generateResponse = (userMessage: string): string => {
-        const message = userMessage.toLowerCase().trim();
+        const message = normalize(userMessage);
         if (message.includes('hola') || message.includes('buenos') || message.includes('buenas')) {
             return "¡Hola! Me alegra saludarte. ¿Cómo puedo ayudarte con tus finanzas hoy?";
         }
-        if (message.includes('saldo') || (message.includes('dinero') && message.includes('tengo'))) {
+        if (message.includes('como puedes ayudarme') || message.includes('en que puedes ayudarme')) {
+            return "Puedo ayudarte con saldos, transferencias, pagos, tarjetas, movimientos y seguridad. ¿Qué necesitas hacer ahora?";
+        }
+        if (message.includes('donde reviso mis fondos') || message.includes('revisar mis fondos')) {
+            return "Puedes revisar tus fondos en la sección 'Cuentas' o 'Saldo'. ¿Quieres que te muestre los movimientos también?";
+        }
+        if (message.includes('saldo') || message.includes('fondos') || (message.includes('dinero') && message.includes('tengo'))) {
             return "Tu saldo actual es de $1,250.00 MXN. ¿Te gustaría ver tus movimientos recientes?";
         }
-        if (message.includes('transferir') || message.includes('transferencia')) {
-            return "Para realizar una transferencia, puedes usar la opción 'Transferencias' en el menú principal. ¿Necesitas ayuda con algún paso específico?";
+        if (message.includes('como se hace una transferencia') || message.includes('hacer una transferencia') || message.includes('transferir') || message.includes('transferencia')) {
+            return "Para hacer una transferencia ve a 'Transferencias', elige destinatario, monto y confirma. ¿Quieres que te guíe paso a paso?";
         }
         if (message.includes('pagar') || message.includes('pago')) {
             return "Puedes realizar pagos desde la sección 'Pagos' de la app. ¿Quieres pagar con tarjeta o transferencia?";
@@ -94,21 +132,57 @@ export default function AlaizaChat() {
         return "Entiendo tu consulta. ¿Podrías ser más específico? Puedo ayudarte con saldos, transferencias, pagos, tarjetas y más.";
     };
 
-    const handleSendMessage = () => {
-        if (!inputText.trim() || isTyping || isTransferring || isTransferred) return;
+    const stopDemo = () => {
+        demoRunningRef.current = false;
+        demoTimeoutsRef.current.forEach(clearTimeout);
+        demoTimeoutsRef.current = [];
+    };
+
+    const sleep = (ms: number) =>
+        new Promise<void>((resolve) => {
+            const id = setTimeout(resolve, ms);
+            demoTimeoutsRef.current.push(id);
+        });
+
+    const waitForIdle = (maxMs: number = 8000) =>
+        new Promise<void>((resolve) => {
+            const start = Date.now();
+            const id = setInterval(() => {
+                if (!demoRunningRef.current) {
+                    clearInterval(id);
+                    resolve();
+                    return;
+                }
+                if (!isTyping && !isTransferring) {
+                    clearInterval(id);
+                    resolve();
+                    return;
+                }
+                if (Date.now() - start >= maxMs) {
+                    clearInterval(id);
+                    resolve();
+                }
+            }, 120);
+            demoTimeoutsRef.current.push(id as unknown as NodeJS.Timeout);
+        });
+
+    const handleSendText = (rawText: string, options?: { skipTransfer?: boolean }) => {
+        const text = rawText.trim();
+        if (!text || isTyping || isTransferring || isTransferred) return;
+        if (!options?.skipTransfer && demoRunningRef.current) stopDemo();
 
         // Hide intro on first message
         if (showIntro) setShowIntro(false);
 
         const userMessage: Message = {
             id: Date.now().toString(),
-            text: inputText.trim(),
+            text,
             sender: "user",
             timestamp: formatTime(),
         };
 
         setMessages((prev) => [...prev, userMessage]);
-        const userInput = inputText.trim();
+        const userInput = text;
         setInputText("");
 
         if (textareaRef.current) {
@@ -118,12 +192,12 @@ export default function AlaizaChat() {
         const userMessagesCount = messages.filter(m => m.sender === "user").length + 1;
 
         // Simulate Human Transfer after 3 messages (Demo Flow)
-        if (userMessagesCount >= 3) {
+        if (!options?.skipTransfer && userMessagesCount >= 3) {
             setIsTyping(true);
             setIsTransferring(true);
             setTypingMessage("");
 
-            setTimeout(() => {
+            transferTimeoutRef.current = setTimeout(() => {
                 setIsTyping(false);
                 setIsTransferring(false);
                 setIsTransferred(true);
@@ -168,8 +242,51 @@ export default function AlaizaChat() {
                 setMessages((prev) => [...prev, botMessage]);
                 setTypingMessage("");
             }
-        }, 30);
+            }, 30);
     };
+
+    const handleSendMessage = () => {
+        handleSendText(inputText);
+    };
+
+    const sendQuickPrompt = (text: string) => {
+        if (isTyping || isTransferring || isTransferred) return;
+        setInputText(text);
+        requestAnimationFrame(() => handleSendText(text));
+    };
+
+    useEffect(() => {
+        const startDemo = async () => {
+            if (demoRunningRef.current || isTransferred || isTyping || isTransferring) return;
+            if (hasUserMessageRef.current) return;
+            demoRunningRef.current = true;
+
+            const script = [
+                "¿Cómo puedes ayudarme?",
+                "¿Cómo se hace una transferencia?",
+                "¿Dónde reviso mis fondos?",
+            ];
+
+            for (const line of script) {
+                if (!demoRunningRef.current) break;
+                handleSendText(line, { skipTransfer: true });
+                await sleep(500);
+                await waitForIdle();
+                await sleep(900);
+            }
+        };
+
+        const stop = () => stopDemo();
+
+        window.addEventListener("zelify:demo-start", startDemo);
+        window.addEventListener("zelify:demo-end", stop);
+
+        return () => {
+            window.removeEventListener("zelify:demo-start", startDemo);
+            window.removeEventListener("zelify:demo-end", stop);
+            stopDemo();
+        };
+    }, [isTyping, isTransferring, isTransferred]);
 
     return (
         <div className="flex flex-col h-full bg-white relative overflow-hidden">
@@ -220,11 +337,30 @@ export default function AlaizaChat() {
                                 <p className="text-sm text-[#8B5CF6] font-medium">AI Financial Assistant</p>
                             </div>
                         </div>
+                        <div className="mt-4 flex flex-wrap gap-2">
+                            {[
+                                "¿Cómo puedes ayudarme?",
+                                "¿Cómo se hace una transferencia?",
+                                "¿Dónde reviso mis fondos?"
+                            ].map((q) => (
+                                <button
+                                    key={q}
+                                    onClick={() => sendQuickPrompt(q)}
+                                    className="rounded-full border border-gray-200 bg-white px-3 py-1.5 text-xs font-semibold text-gray-600 shadow-sm hover:bg-gray-50 transition-colors"
+                                >
+                                    {q}
+                                </button>
+                            ))}
+                        </div>
                     </div>
                 )}
 
                 {/* Messages Area */}
-                <div className="flex-1 overflow-y-auto min-h-0 flex flex-col px-5 pb-4 pt-4">
+                <div
+                    ref={messagesContainerRef}
+                    className="flex-1 overflow-y-auto min-h-0 flex flex-col px-5 pb-4 pt-4"
+                    style={{ overflowAnchor: "none" }}
+                >
                     <div className="space-y-4">
                         {messages.map((message, index) => {
                             // System Message

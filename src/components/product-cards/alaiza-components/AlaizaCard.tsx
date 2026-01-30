@@ -10,6 +10,7 @@ type ModuleType = "chat" | "financial-education" | "behavior-analysis";
 export default function AlaizaCard({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) {
     // Module Navigation
     const [currentModule, setCurrentModule] = useState<ModuleType>("chat");
+    const [moduleKey, setModuleKey] = useState(0);
     const isRunningRef = useRef(false);
 
     // ========== DEMO FLOW ==========
@@ -30,6 +31,12 @@ export default function AlaizaCard({ isDemoEnabled = true }: { isDemoEnabled?: b
         requestAnimationFrame(check);
     });
 
+    const switchModule = (next: ModuleType) => {
+        if (next === currentModule) return;
+        setCurrentModule(next);
+        setModuleKey((prev) => prev + 1);
+    };
+
     const handlePlayDemo = async () => {
         if (!isDemoEnabled || isRunningRef.current) return;
         isRunningRef.current = true;
@@ -38,19 +45,19 @@ export default function AlaizaCard({ isDemoEnabled = true }: { isDemoEnabled?: b
         try {
             while (isRunningRef.current) {
                 // Reset to initial state
-                setCurrentModule("chat");
-                await wait(4000); // Stay on Chat
+                switchModule("chat");
+                await wait(20000); // Stay on Chat
 
                 if (!isRunningRef.current) break;
-                setCurrentModule("financial-education");
-                await wait(5000); // Show Summary
+                switchModule("financial-education");
+                await wait(10000); // Show Summary
 
                 if (!isRunningRef.current) break;
-                setCurrentModule("behavior-analysis");
-                await wait(5000); // Show behavior
+                switchModule("behavior-analysis");
+                await wait(10000); // Show behavior
 
                 if (!isRunningRef.current) break;
-                await wait(2000); // Small pause before loop reset
+                await wait(4000); // Small pause before loop reset
             }
         } catch (error) {
             // Demo aborted
@@ -86,19 +93,19 @@ export default function AlaizaCard({ isDemoEnabled = true }: { isDemoEnabled?: b
             <div className="absolute top-20 left-0 right-0 z-30 px-4 pointer-events-none flex justify-center">
                 <div className="flex justify-center gap-1 bg-white/90 backdrop-blur-md rounded-full p-1 shadow-lg pointer-events-auto border border-gray-100">
                     <button
-                        onClick={() => setCurrentModule("chat")}
+                        onClick={() => switchModule("chat")}
                         className={`px-3 py-1.5 rounded-full text-[10px] font-bold transition-all ${currentModule === "chat" ? "bg-[#004492] text-white shadow-sm" : "text-gray-500 hover:bg-gray-100"}`}
                     >
                         Chat
                     </button>
                     <button
-                        onClick={() => setCurrentModule("financial-education")}
+                        onClick={() => switchModule("financial-education")}
                         className={`px-3 py-1.5 rounded-full text-[10px] font-bold transition-all ${currentModule === "financial-education" ? "bg-[#004492] text-white shadow-sm" : "text-gray-500 hover:bg-gray-100"}`}
                     >
                         Educación
                     </button>
                     <button
-                        onClick={() => setCurrentModule("behavior-analysis")}
+                        onClick={() => switchModule("behavior-analysis")}
                         className={`px-3 py-1.5 rounded-full text-[10px] font-bold transition-all ${currentModule === "behavior-analysis" ? "bg-[#004492] text-white shadow-sm" : "text-gray-500 hover:bg-gray-100"}`}
                     >
                         Análisis
@@ -113,23 +120,30 @@ export default function AlaizaCard({ isDemoEnabled = true }: { isDemoEnabled?: b
             {renderModuleSelector()}
 
             <div className="flex-1 min-h-0 relative">
-                {/* 
-                    We could animate transitions between modules here.
-                    For now, simple conditional rendering.
-                 */}
+                <div key={`${currentModule}-${moduleKey}`} className="absolute inset-0 animate-module-fade">
+                    {currentModule === "chat" && (
+                        <AlaizaChat />
+                    )}
 
-                {currentModule === "chat" && (
-                    <AlaizaChat />
-                )}
+                    {currentModule === "financial-education" && (
+                        <AlaizaEducation />
+                    )}
 
-                {currentModule === "financial-education" && (
-                    <AlaizaEducation />
-                )}
-
-                {currentModule === "behavior-analysis" && (
-                    <AlaizaBehavior onBack={() => setCurrentModule("chat")} />
-                )}
+                    {currentModule === "behavior-analysis" && (
+                        <AlaizaBehavior onBack={() => switchModule("chat")} />
+                    )}
+                </div>
             </div>
+
+            <style>{`
+                .animate-module-fade {
+                    animation: moduleFadeIn 0.4s ease-out;
+                }
+                @keyframes moduleFadeIn {
+                    from { opacity: 0; transform: translateY(6px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+            `}</style>
         </div>
     );
 }

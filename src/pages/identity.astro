@@ -2,6 +2,7 @@
 import Navbar3 from "../components/NavbarSimple.astro";
 import ProductsPanel from "../components/productsPanel.astro";
 import IdentityApp from "../components/identity/IdentityApp.astro";
+import { AlaizaAssistant } from "../components/AlaizaAssistant";
 ---
 
 <html lang="es">
@@ -633,6 +634,7 @@ import IdentityApp from "../components/identity/IdentityApp.astro";
       <p class="footer-copyright">© 2025 Zelify. All rights reserved.</p>
     </div>
   </footer>
+  <AlaizaAssistant client:load />
 </html>
 
 <style>
@@ -2325,7 +2327,311 @@ import IdentityApp from "../components/identity/IdentityApp.astro";
 </style>
 
 <script>
+  let currentLang = "es";
+
+  const identityTranslations = {
+    es: {
+      hero: {
+        title: "Zelify Identity",
+        description: "Permite verificar la identidad de los usuarios mediante validación de documentos y reconocimiento facial, reduciendo el fraude y asegurando que cada persona es quien dice ser. Cumple con estándares internacionales de seguridad y protección de datos, y se integra de forma nativa con los módulos de Auth, AML y Cards para ofrecer flujos de verificación personalizables, bajo demanda y desde una única integración.",
+        ctaInputPlaceholder: "ingresa tu correo",
+        ctaButton: "cotizar",
+        demoButton: "demo"
+      },
+      control: {
+        title: "Verificación de identidad inteligente y segura",
+        features: [
+          {
+            title: "Extracción Documental",
+            desc: "Tecnología avanzada de escaneo y OCR que permite extraer datos automáticamente de documentos oficiales como cédulas de ciudadanía, pasaportes y licencias de conducir, validando su autenticidad y agilizando el proceso de registro.",
+            backTitle: "Documentos Soportados",
+            benefits: ["Escaneo de cédula de ciudadanía", "Escaneo de pasaporte", "Escaneo de licencia de conducir"]
+          },
+          {
+            title: "Verificación de Prueba de Vida",
+            desc: "Confirma la identidad del usuario comparando su rostro con la imagen del documento oficial y aplicando pruebas de vida avanzadas.",
+            backTitle: "Métodos de Validación",
+            benefitsHTML: `<p class="text-sm"><strong>Selfie:</strong> Captura de imagen facial optimizada con detección automática de calidad, iluminación y posición, diseñada para una validación rápida, precisa y con alta tasa de aprobación.</p><p class="text-sm"><strong>Video Selfie (Toma):</strong> Grabación de video en tiempo real que permite verificar movimientos, gestos y profundidad facial, fortaleciendo la prueba de vida.</p>`
+          },
+          {
+            title: "Capa de Integración (SDK/API)",
+            desc: "Centraliza la identidad digital para su reutilización en otros módulos a través de APIs o SDKs.",
+            backTitle: "Beneficios Integrales",
+            benefits: ["Conexión nativa con Auth y AML", "Integración con módulo de Cards", "SDKs y APIs personalizables", "Reutilización de identidad digital", "Implementación ágil y escalable"]
+          }
+        ]
+      },
+      contact: {
+        title: "Empieza hoy<br />y protege tu<br />plataforma.",
+        formTitle: "Habla con nuestro equipo",
+        placeholders: {
+          names: "Nombres",
+          surnames: "Apellidos",
+          company: "Nombre de la compañía",
+          email: "Email de la compañía",
+          phone: "Teléfono (opcional)"
+        },
+        countryDefault: "País",
+        legal: "Al enviar este formulario, aceptas nuestros <a href='#'>Términos de Servicio</a> y <a href='#'>Política de Privacidad</a>.",
+        submit: "Hablemos"
+      },
+      faq: {
+        title: "Preguntas frecuentes",
+        items: [
+          { q: "¿Qué funcionalidades incluye el producto?", a: "Nuestro producto incluye autenticación avanzada con biometría, registro personalizable de usuarios, validación de email y teléfono, información detallada del dispositivo, geolocalización estratégica, detección temprana de fraudes, y un SDK de integración sencillo para incorporar todas estas funcionalidades en una sola línea de código." },
+          { q: "¿Es seguro usar biometría y doble factor?", a: "Sí, es completamente seguro. La biometría y la autenticación de doble factor (2FA) son estándares de la industria que proporcionan capas adicionales de seguridad. Nuestro sistema utiliza encriptación de extremo a extremo y cumple con los más altos estándares de seguridad para proteger los datos biométricos y las credenciales de tus usuarios." },
+          { q: "¿Puedo personalizar los campos de registro para mis usuarios?", a: "Absolutamente. Nuestro sistema de registro es completamente personalizable. Puedes agregar, eliminar o modificar campos según las necesidades de tu negocio. Los campos se adaptan dinámicamente a tus usuarios, permitiéndote crear experiencias de registro únicas y relevantes para tu plataforma." },
+          { q: "¿Cómo detecta fraudes y accesos sospechosos?", a: "Nuestro sistema utiliza inteligencia artificial y machine learning para analizar patrones de comportamiento, detectar tráfico inusual, identificar el uso de VPNs, analizar la geolocalización de accesos, y monitorear información del dispositivo en tiempo real. Todo esto permite identificar y prevenir accesos sospechosos antes de que representen una amenaza." },
+          { q: "¿Funciona en cualquier dispositivo?", a: "Sí, nuestro producto es multiplataforma y funciona en cualquier dispositivo: smartphones (iOS y Android), tablets, computadoras de escritorio y laptops. La interfaz se adapta automáticamente a cada dispositivo, proporcionando una experiencia óptima sin importar desde dónde accedan tus usuarios." },
+          { q: "¿Es fácil de integrar a mi sistema actual?", a: "Muy fácil. Nuestro SDK de integración está diseñado para ser implementado con una sola línea de código. Proporcionamos documentación completa, ejemplos de código, y soporte técnico especializado para ayudarte en el proceso de integración. La mayoría de nuestros clientes completan la integración en menos de una hora." },
+          { q: "¿Puedo escalar la seguridad a medida que crece mi plataforma?", a: "Definitivamente. Nuestra arquitectura está construida para escalar automáticamente. A medida que tu plataforma crece, nuestro sistema se adapta sin necesidad de cambios adicionales. Puedes manejar desde cientos hasta millones de usuarios sin preocuparte por la capacidad o el rendimiento del sistema de seguridad." }
+        ]
+      },
+      cta: {
+        title: "Comienza hoy y<br />asegura cada acceso.",
+        button: "cotizar"
+      },
+      footer: {
+        quickLinks: "Enlaces rápidos",
+        products: "Productos",
+        about: "Nosotros",
+        developers: "Desarrolladores",
+        others: "Otros",
+        disclaimer: "Zelify es una plataforma tecnológica actualmente en fase de desarrollo, aún no desplegada ni operativa, y no proporciona ni procesa servicios financieros directamente; todas las operaciones financieras se realizan exclusivamente a través de socios terceros regulados.",
+        copyright: "© 2025 Zelify. Todos los derechos reservados."
+      },
+      steps: {
+        step1: { title: "Crear Cuenta", desc: "Ingresa tu nombre y correo electrónico para empezar. Te enviaremos un código de verificación.", errorName: "El nombre debe tener al menos 2 caracteres", errorEmail: "Correo electrónico inválido" },
+        step2: { title: "Verifica tu Correo", descPrefix: "Hemos enviado un código de 6 dígitos a<br />" },
+        step3: { title: "Agrega tu Teléfono", desc: "Te enviaremos un código de verificación por SMS para confirmar tu número de teléfono.", errorPhone: "Número de teléfono inválido" },
+        step4: { title: "Verifica tu Teléfono", descPrefix: "Hemos enviado un código de 6 dígitos a<br />" },
+        step5: { title: "Completa tu Perfil", desc: "Completa la información restante para finalizar la configuración de tu cuenta.", errorPass: "La contraseña debe tener al menos 8 caracteres", errorMatch: "Las contraseñas no coinciden" }
+      }
+    },
+    en: {
+      hero: {
+        title: "Zelify Identity",
+        description: "Verify user identity through document validation and facial recognition, reducing fraud and ensuring every person is who they claim to be. Complies with international security and data protection standards, and integrates natively with Auth, AML, and Cards modules to offer customizable, on-demand verification flows from a single integration.",
+        ctaInputPlaceholder: "enter your email",
+        ctaButton: "quote",
+        demoButton: "demo"
+      },
+      control: {
+        title: "Smart and secure identity verification",
+        features: [
+          {
+            title: "Document Extraction",
+            desc: "Advanced scanning and OCR technology that automatically extracts data from official documents like ID cards, passports, and driver's licenses, validating their authenticity and speeding up the registration process.",
+            backTitle: "Supported Documents",
+            benefits: ["ID Card Scanning", "Passport Scanning", "Driver's License Scanning"]
+          },
+          {
+            title: "Liveness Verification",
+            desc: "Confirms user identity by comparing their face with the official document image and applying advanced liveness tests.",
+            backTitle: "Validation Methods",
+            benefitsHTML: `<p class="text-sm"><strong>Selfie:</strong> Optimized facial image capture with automatic quality, lighting, and position detection, designed for fast, accurate validation with high approval rates.</p><p class="text-sm"><strong>Video Selfie:</strong> Real-time video recording to verify movements, gestures, and facial depth, strengthening liveness proof.</p>`
+          },
+          {
+            title: "Integration Layer (SDK/API)",
+            desc: "Centralizes digital identity for reuse in other modules via APIs or SDKs.",
+            backTitle: "Comprehensive Benefits",
+            benefits: ["Native connection with Auth and AML", "Integration with Cards module", "Customizable SDKs and APIs", "Digital identity reuse", "Agile and scalable implementation"]
+          }
+        ]
+      },
+      contact: {
+        title: "Start today<br />and protect your<br />platform.",
+        formTitle: "Talk to our team",
+        placeholders: {
+          names: "First Name",
+          surnames: "Last Name",
+          company: "Company Name",
+          email: "Company Email",
+          phone: "Phone (optional)"
+        },
+        countryDefault: "Country",
+        legal: "By submitting this form, you accept our <a href='#'>Terms of Service</a> and <a href='#'>Privacy Policy</a>.",
+        submit: "Let's Talk"
+      },
+      faq: {
+        title: "Frequently Asked Questions",
+        items: [
+          { q: "What features does the product include?", a: "Our product includes advanced biometric authentication, customizable user registration, email and phone validation, detailed device information, strategic geolocation, early fraud detection, and a simple integration SDK to incorporate all these features with a single line of code." },
+          { q: "Is it safe to use biometrics and 2FA?", a: "Yes, it is completely safe. Biometrics and two-factor authentication (2FA) are industry standards that provide additional security layers. Our system uses end-to-end encryption and complies with the highest security standards to protect your users' biometric data and credentials." },
+          { q: "Can I customize the registration fields for my users?", a: "Absolutely. Our registration system is completely customizable. You can add, remove, or modify fields according to your business needs. Fields dynamically adapt to your users, allowing you to create unique and relevant registration experiences for your platform." },
+          { q: "How does it detect fraud and suspicious access?", a: "Our system uses artificial intelligence and machine learning to analyze behavior patterns, detect unusual traffic, identify VPN usage, analyze access geolocation, and monitor device information in real-time. All this allows identifying and preventing suspicious access before they represent a threat." },
+            { q: "Does it work on any device?", a: "Yes, our product is cross-platform and works on any device: smartphones (iOS and Android), tablets, desktops, and laptops. The interface automatically adapts to each device, providing an optimal experience regardless of where your users access from." },
+            { q: "Is it easy to integrate into my current system?", a: "Very easy. Our integration SDK is designed to be implemented with a single line of code. We provide complete documentation, code examples, and specialized technical support to help you throughout the integration process. Most of our clients complete the integration in less than an hour." },
+            { q: "Can I scale security as my platform grows?", a: "Definitely. Our architecture is built to scale automatically. As your platform grows, our system adapts without needing additional changes. You can handle from hundreds to millions of users without worrying about the capacity or performance of the security system." }
+        ]
+      },
+      cta: {
+        title: "Start today and<br />secure every access.",
+        button: "quote"
+      },
+      footer: {
+        quickLinks: "Quick links",
+        products: "Products",
+        about: "About us",
+        developers: "Developers",
+        others: "Others",
+        disclaimer: "Zelify is a technology platform currently in a development phase, not yet deployed or operational, and does not provide or process financial services directly; all financial operations are conducted exclusively through regulated third-party partners.",
+        copyright: "© 2025 Zelify. All rights reserved."
+      },
+      steps: {
+        step1: { title: "Create Account", desc: "Enter your name and email to start. We will send you a verification code.", errorName: "Name must be at least 2 characters", errorEmail: "Invalid email" },
+        step2: { title: "Verify Your Email", descPrefix: "We sent a 6-digit code to<br />" },
+        step3: { title: "Add Your Phone", desc: "We will send you an SMS verification code to confirm your phone number.", errorPhone: "Invalid phone number" },
+        step4: { title: "Verify Your Phone", descPrefix: "We sent a 6-digit code to<br />" },
+        step5: { title: "Complete Profile", desc: "Complete the remaining information to finish your account setup.", errorPass: "Password must be at least 8 characters", errorMatch: "Passwords do not match" }
+      }
+    }
+  };
+
+  function updateIdentityContent(lang) {
+      const t = identityTranslations[lang] || identityTranslations.es;
+      currentLang = lang;
+      
+      // Hero
+      const heroTitle = document.querySelector(".auth-title");
+      if(heroTitle) heroTitle.innerHTML = t.hero.title;
+      
+      const heroDesc = document.querySelector(".auth-description");
+      if(heroDesc) heroDesc.innerHTML = t.hero.description;
+      
+      const heroEmail = document.querySelector(".welcome-input");
+      if (heroEmail instanceof HTMLInputElement) {
+          heroEmail.placeholder = t.hero.ctaInputPlaceholder;
+          heroEmail.ariaLabel = t.hero.ctaInputPlaceholder;
+      }
+      const heroBtn = document.querySelector(".welcome-quote-button");
+      if (heroBtn) heroBtn.textContent = t.hero.ctaButton;
+      
+      const demoBtn = document.querySelector(".welcome-demo-button");
+      if (demoBtn) demoBtn.textContent = t.hero.demoButton;
+
+      // Control Section
+      const ctrlTitle = document.querySelector(".control-title");
+      if(ctrlTitle) ctrlTitle.textContent = t.control.title;
+      
+      const ctrlFeatures = document.querySelectorAll(".control-feature");
+      ctrlFeatures.forEach((el, idx) => {
+          if (t.control.features[idx]) {
+              const data = t.control.features[idx];
+              const titleFront = el.querySelector(".control-feature-front .control-feature-title");
+              if (titleFront) titleFront.textContent = data.title;
+              
+              const descFront = el.querySelector(".control-feature-front .control-feature-description");
+              if (descFront) descFront.textContent = data.desc;
+              
+              const titleBack = el.querySelector(".control-feature-back .control-feature-title");
+              if (titleBack) titleBack.textContent = data.backTitle;
+              
+              if (data.benefits) {
+                const ul = el.querySelector(".control-feature-benefits");
+                if (ul) ul.innerHTML = data.benefits.map((b) => `<li>${b}</li>`).join("");
+              } else if (data.benefitsHTML) {
+                 const div = el.querySelector(".control-feature-benefits");
+                 if (div) div.innerHTML = data.benefitsHTML;
+              }
+          }
+      });
+
+      // Contact Section
+      const contactTitle = document.querySelector(".contact-title");
+      if(contactTitle) contactTitle.innerHTML = t.contact.title;
+      
+      const contactFormTitle = document.querySelector(".contact-form-title");
+      if(contactFormTitle) contactFormTitle.textContent = t.contact.formTitle;
+      
+      const contactForm = document.getElementById("contactForm");
+      if (contactForm) {
+          const names = contactForm.querySelector("#nombres");
+          if(names instanceof HTMLInputElement) names.placeholder = t.contact.placeholders.names;
+          
+          const surnames = contactForm.querySelector("#apellidos");
+          if(surnames instanceof HTMLInputElement) surnames.placeholder = t.contact.placeholders.surnames;
+          
+          const company = contactForm.querySelector("#compania");
+          if(company instanceof HTMLInputElement) company.placeholder = t.contact.placeholders.company;
+          
+          const email = contactForm.querySelector("#email");
+          if(email instanceof HTMLInputElement) email.placeholder = t.contact.placeholders.email;
+          
+          const phone = contactForm.querySelector("#telefono");
+          if(phone instanceof HTMLInputElement) phone.placeholder = t.contact.placeholders.phone;
+          
+          const submitBtn = contactForm.querySelector(".contact-submit-btn");
+          if(submitBtn) submitBtn.textContent = t.contact.submit;
+          
+          const legal = contactForm.querySelector(".contact-legal");
+          if(legal) legal.innerHTML = t.contact.legal;
+          
+          const countrySelect = contactForm.querySelector("#pais");
+          if (countrySelect instanceof HTMLSelectElement && countrySelect.options.length > 0) {
+              countrySelect.options[0].textContent = t.contact.countryDefault;
+          }
+      }
+
+      // FAQ Section
+      const faqTitle = document.querySelector(".faq-title");
+      if(faqTitle) faqTitle.textContent = t.faq.title;
+      
+      const faqItems = document.querySelectorAll(".faq-item");
+      faqItems.forEach((el, idx) => {
+          if (t.faq.items[idx]) {
+              const q = el.querySelector(".faq-question span");
+              if(q) q.textContent = t.faq.items[idx].q;
+              
+              const a = el.querySelector(".faq-answer p");
+              if(a) a.textContent = t.faq.items[idx].a;
+          }
+      });
+
+      // CTA Section
+      const ctaTitle = document.querySelector(".cta-title");
+      if(ctaTitle) ctaTitle.innerHTML = t.cta.title;
+      
+      const ctaBtn = document.querySelector(".cta-button");
+      if(ctaBtn) ctaBtn.textContent = t.cta.button;
+
+      // Footer
+      const footerTitle = document.querySelector(".footer-links-title");
+      if(footerTitle) footerTitle.textContent = t.footer.quickLinks;
+      
+      const footerNav = document.querySelectorAll(".footer-nav a");
+      const footerKeys = ["products", "about", "developers", "others"];
+      footerNav.forEach((link, idx) => {
+         if(footerKeys[idx]) link.textContent = t.footer[footerKeys[idx]];
+      });
+
+      const footerDisclaimer = document.querySelector(".footer-disclaimer");
+      if(footerDisclaimer) footerDisclaimer.textContent = t.footer.disclaimer;
+      
+      const footerCopyright = document.querySelector(".footer-copyright");
+      if(footerCopyright) footerCopyright.textContent = t.footer.copyright;
+      
+      document.documentElement.lang = lang;
+      
+      // Update Step if visible
+      showStep(currentStep);
+  }
+
+  // Event Listeners for Language Change
+  window.addEventListener("ui:languagechange", (event) => {
+      const customEvent = event as CustomEvent;
+      const lang = customEvent.detail?.language || "es";
+      updateIdentityContent(lang.toLowerCase());
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+      const stored = localStorage.getItem("ui-language") || "es";
+      // Delay slightly to ensure elements exist
+      setTimeout(() => updateIdentityContent(stored.toLowerCase()), 100);
+  });
+
   let currentStep = 1;
+
   const formData = {
     fullName: "",
     email: "",
@@ -2430,34 +2736,33 @@ import IdentityApp from "../components/identity/IdentityApp.astro";
     const loginLink = document.getElementById("login-link");
     if (!titleEl || !descEl || !loginLink) return;
 
+    const t = identityTranslations[currentLang] || identityTranslations.es;
+
     if (step === 1) {
-      titleEl.textContent = "Crear Cuenta";
-      descEl.innerHTML =
-        "Ingresa tu nombre y correo electrónico para empezar. Te enviaremos un código de verificación.";
+      titleEl.textContent = t.steps.step1.title;
+      descEl.innerHTML = t.steps.step1.desc;
       loginLink.style.display = "none";
     } else if (step === 2) {
-      titleEl.textContent = "Verifica tu Correo";
+      titleEl.textContent = t.steps.step2.title;
       descEl.innerHTML =
-        'Hemos enviado un código de 6 dígitos a<br /><strong id="email-display">' +
+        t.steps.step2.descPrefix + '<strong id="email-display">' +
         formData.email +
         "</strong>";
       loginLink.style.display = "none";
     } else if (step === 3) {
-      titleEl.textContent = "Agrega tu Teléfono";
-      descEl.textContent =
-        "Te enviaremos un código de verificación por SMS para confirmar tu número de teléfono.";
+      titleEl.textContent = t.steps.step3.title;
+      descEl.textContent = t.steps.step3.desc;
       loginLink.style.display = "none";
     } else if (step === 4) {
-      titleEl.textContent = "Verifica tu Teléfono";
+      titleEl.textContent = t.steps.step4.title;
       descEl.innerHTML =
-        'Hemos enviado un código de 6 dígitos a<br /><strong id="phone-display">' +
+         t.steps.step4.descPrefix + '<strong id="phone-display">' +
         formData.phone +
         "</strong>";
       loginLink.style.display = "none";
     } else if (step === 5) {
-      titleEl.textContent = "Completa tu Perfil";
-      descEl.textContent =
-        "Completa la información restante para finalizar la configuración de tu cuenta.";
+      titleEl.textContent = t.steps.step5.title;
+      descEl.textContent = t.steps.step5.desc;
       loginLink.style.display = "block";
     }
 
@@ -2535,13 +2840,15 @@ import IdentityApp from "../components/identity/IdentityApp.astro";
 
     let hasErrors = false;
 
+    const t = identityTranslations[currentLang] || identityTranslations.es;
+
     if (!validateFullName(fullName)) {
-      showFieldError("fullName", "El nombre debe tener al menos 2 caracteres");
+      showFieldError("fullName", t.steps.step1.errorName);
       hasErrors = true;
     }
 
     if (!validateEmail(email)) {
-      showFieldError("email", "Correo electrónico inválido");
+      showFieldError("email", t.steps.step1.errorEmail);
       hasErrors = true;
     }
 
@@ -2632,7 +2939,8 @@ import IdentityApp from "../components/identity/IdentityApp.astro";
     const phone = phoneEl.value.trim();
 
     if (!validatePhone(phone)) {
-      showFieldError("phone", "Número de teléfono inválido");
+      const t = identityTranslations[currentLang] || identityTranslations.es;
+      showFieldError("phone", t.steps.step3.errorPhone);
       return;
     }
 
@@ -2708,16 +3016,18 @@ import IdentityApp from "../components/identity/IdentityApp.astro";
 
     let hasErrors = false;
 
+    const t = identityTranslations[currentLang] || identityTranslations.es;
+
     if (!validatePassword(password)) {
       showFieldError(
         "password",
-        "La contraseña debe tener al menos 8 caracteres",
+        t.steps.step5.errorPass,
       );
       hasErrors = true;
     }
 
     if (password !== confirmPassword) {
-      showFieldError("confirmPassword", "Las contraseñas no coinciden");
+      showFieldError("confirmPassword", t.steps.step5.errorMatch);
       hasErrors = true;
     }
 

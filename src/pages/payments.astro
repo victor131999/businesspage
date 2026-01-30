@@ -1,6 +1,7 @@
 ---
 import Navbar from "../components/navbar.astro";
 import ProductsPanel from "../components/productsPanel.astro";
+import { AlaizaAssistant } from "../components/AlaizaAssistant";
 import "../styles/navbar.css";
 ---
 
@@ -138,6 +139,7 @@ import "../styles/navbar.css";
       </div>
     </section>
   </body>
+  <AlaizaAssistant client:load />
 </html>
 
 <style>

@@ -158,7 +158,6 @@ const useAnimatedNumber = (target: number, duration: number = 2000, delay: numbe
 
 export default function TokensDashboard() {
     const t = translations['es'];
-    const [isDarkMode, setIsDarkMode] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
 
     // Config for cycle
@@ -292,23 +291,10 @@ export default function TokensDashboard() {
     const usagePercentage = (tokenData.used / tokenData.total) * 100;
 
     const getFillClass = (percent: number) => {
-        if (percent >= 85) return "bg-red-500";
-        if (percent >= 60) return "bg-amber-400";
-        return "bg-emerald-500";
+        if (percent >= 85) return "bg-[#6AFF00]";
+        if (percent >= 60) return "bg-[#004196]";
+        return "bg-[#000223]";
     };
-
-    useEffect(() => {
-        const checkDarkMode = () => {
-            setIsDarkMode(document.documentElement.classList.contains('dark'));
-        };
-        checkDarkMode();
-        const observer = new MutationObserver(checkDarkMode);
-        observer.observe(document.documentElement, {
-            attributes: true,
-            attributeFilter: ['class']
-        });
-        return () => observer.disconnect();
-    }, []);
 
     useEffect(() => {
         setIsVisible(true);
@@ -321,50 +307,50 @@ export default function TokensDashboard() {
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
                 {/* Available / Total */}
                 <div
-                    className="card-animate rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 relative overflow-hidden"
+                    className="card-animate rounded-lg border border-[#D6DBE2] bg-white p-4  relative overflow-hidden"
                 >
                     <div className="absolute top-0 right-0 p-2 opacity-10">
-                        <svg className="w-8 h-8 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg className="w-8 h-8 text-[#004196]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
-                    <div className="mb-2 text-xs font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wider">
+                    <div className="mb-2 text-xs font-medium text-[#004196] uppercase tracking-wider">
                         {t.totalTokens}
                     </div>
-                    <div className="text-xl font-bold text-gray-900 dark:text-white tabular-nums tracking-tight">
+                    <div className="text-xl font-bold text-[#000223] tabular-nums tracking-tight">
                         {animatedTotal.toLocaleString()}
                     </div>
                     {/* Progress Line for visual flair */}
-                    <div className="absolute bottom-0 left-0 h-1 bg-slate-100 dark:bg-slate-700/60 w-full">
-                        <div className="h-full bg-slate-200 dark:bg-slate-600 transition-all duration-200" style={{ width: '100%' }}></div>
+                    <div className="absolute bottom-0 left-0 h-1 bg-[#D6DBE2] w-full">
+                        <div className="h-full bg-[#004196]/20 transition-all duration-200" style={{ width: '100%' }}></div>
                     </div>
                 </div>
 
                 {/* Used (Live Pulse) */}
                 <div
-                    className={`card-animate rounded-lg border bg-white p-4 shadow-sm relative overflow-hidden transition-colors duration-500 ${isDraining ? 'border-amber-400/30 bg-amber-50/50 dark:border-amber-500/20 dark:bg-amber-900/10' : 'border-slate-200/70 bg-slate-50/60 dark:border-slate-700 dark:bg-slate-800/60'}`}
+                    className={`card-animate rounded-lg border bg-white p-4  relative overflow-hidden transition-colors duration-500 ${isDraining ? 'border-[#004196]/40 bg-[#004196]/5' : 'border-[#D6DBE2] bg-[#D6DBE2]/25'}`}
                 >
                     <div className="absolute top-0 right-0 p-2 opacity-20">
                         <div className={`${isDraining ? 'animate-pulse' : 'animate-spin-slow'}`}>
-                            <svg className={`w-8 h-8 ${isDraining ? 'text-amber-500' : 'text-slate-400'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg className={`w-8 h-8 ${isDraining ? 'text-[#004196]' : 'text-[#000223]'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                             </svg>
                         </div>
                     </div>
-                    <div className={`mb-2 text-xs font-medium uppercase tracking-wider flex items-center justify-between ${isDraining ? 'text-amber-600 dark:text-amber-300' : 'text-slate-600 dark:text-slate-300'}`}>
+                    <div className={`mb-2 text-xs font-medium uppercase tracking-wider flex items-center justify-between ${isDraining ? 'text-[#004196]' : 'text-[#000223]'}`}>
                         {t.tokensUsed}
                         <span className="flex h-2 w-2 relative">
-                            <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-60 ${isDraining ? 'bg-amber-400' : 'bg-slate-400'}`}></span>
-                            <span className={`relative inline-flex rounded-full h-2 w-2 ${isDraining ? 'bg-amber-500' : 'bg-slate-500'}`}></span>
+                            <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-60 ${isDraining ? 'bg-[#004196]/60' : 'bg-[#000223]/40'}`}></span>
+                            <span className={`relative inline-flex rounded-full h-2 w-2 ${isDraining ? 'bg-[#004196]' : 'bg-[#000223]'}`}></span>
                         </span>
                     </div>
-                    <div className="text-2xl font-black text-slate-900 dark:text-slate-100 tabular-nums tracking-tight">
+                    <div className="text-2xl font-black text-[#000223] tabular-nums tracking-tight">
                         {animatedUsed.toLocaleString()}
                     </div>
                     {/* Capacity bar */}
-                    <div className="mt-2 w-full h-1.5 bg-slate-200 dark:bg-slate-700/60 rounded-full overflow-hidden">
+                    <div className="mt-2 w-full h-1.5 bg-[#D6DBE2] rounded-full overflow-hidden">
                         <div
-                            className={`h-full rounded-full transition-[width] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${isDraining ? 'bg-amber-500/90' : 'bg-slate-600'}`}
+                            className={`h-full rounded-full transition-[width] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${isDraining ? 'bg-[#004196]' : 'bg-[#000223]'}`}
                             style={{ width: `${Math.min(usagePercentage, 100)}%` }}
                         ></div>
                     </div>
@@ -372,12 +358,12 @@ export default function TokensDashboard() {
 
                 {/* Remaining */}
                 <div
-                    className="card-animate rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800"
+                    className="card-animate rounded-lg border border-[#D6DBE2] bg-white p-4 "
                 >
-                    <div className="mb-2 text-xs font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wider">
+                    <div className="mb-2 text-xs font-medium text-[#004196] uppercase tracking-wider">
                         {t.tokensRemaining}
                     </div>
-                    <div className="text-xl font-bold text-gray-900 dark:text-white tabular-nums tracking-tight">
+                    <div className="text-xl font-bold text-[#000223] tabular-nums tracking-tight">
                         {animatedRemaining.toLocaleString()}
                     </div>
                 </div>
@@ -386,8 +372,8 @@ export default function TokensDashboard() {
             {/* Middle Section: Live Bars */}
             <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
                 {/* Users Bar Chart */}
-                <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-                    <h3 className="mb-3 text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-2">
+                <div className="rounded-lg border border-[#D6DBE2] bg-white p-4 ">
+                    <h3 className="mb-3 text-xs font-bold text-[#004196] uppercase tracking-wider flex items-center gap-2">
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                         {t.byUser}
                     </h3>
@@ -395,10 +381,10 @@ export default function TokensDashboard() {
                         {tokenData.byUser.slice(0, 5).map((item, index) => (
                             <div key={item.user} className="w-full">
                                 <div className="flex justify-between text-xs mb-1">
-                                    <span className="font-medium truncate text-gray-700 dark:text-gray-300 w-24">{item.user.split('@')[0]}</span>
-                                    <span className="font-mono text-gray-500">{item.tokens.toLocaleString()}</span>
+                                    <span className="font-medium truncate text-[#000223] w-24">{item.user.split('@')[0]}</span>
+                                    <span className="font-mono text-[#004196]">{item.tokens.toLocaleString()}</span>
                                 </div>
-                                <div className="h-1.5 w-full bg-slate-100 dark:bg-slate-700/60 rounded-full overflow-hidden">
+                                <div className="h-1.5 w-full bg-[#D6DBE2] rounded-full overflow-hidden">
                                     {(() => {
                                         const percent = Math.min((item.tokens / (tokenData.byUser[0].tokens || 1)) * 100, 100);
                                         return (
@@ -415,8 +401,8 @@ export default function TokensDashboard() {
                 </div>
 
                 {/* Services Bar Chart */}
-                <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-                    <h3 className="mb-3 text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-2">
+                <div className="rounded-lg border border-[#D6DBE2] bg-white p-4 ">
+                    <h3 className="mb-3 text-xs font-bold text-[#004196] uppercase tracking-wider flex items-center gap-2">
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
                         {t.byService}
                     </h3>
@@ -424,10 +410,10 @@ export default function TokensDashboard() {
                         {tokenData.byService.slice(0, 5).map((item, index) => (
                             <div key={item.service} className="w-full">
                                 <div className="flex justify-between text-xs mb-1">
-                                    <span className="font-medium text-gray-700 dark:text-gray-300">{item.service}</span>
-                                    <span className="font-mono text-gray-500">{item.tokens.toLocaleString()}</span>
+                                    <span className="font-medium text-[#000223]">{item.service}</span>
+                                    <span className="font-mono text-[#004196]">{item.tokens.toLocaleString()}</span>
                                 </div>
-                                <div className="h-1.5 w-full bg-slate-100 dark:bg-slate-700/60 rounded-full overflow-hidden">
+                                <div className="h-1.5 w-full bg-[#D6DBE2] rounded-full overflow-hidden">
                                     {(() => {
                                         const percent = Math.min((item.tokens / (tokenData.byService[0].tokens || 1)) * 100, 100);
                                         return (
@@ -445,13 +431,13 @@ export default function TokensDashboard() {
             </div>
 
             {/* Live Logs Section (New Ticker) */}
-            <div className="flex-1 min-h-0 rounded-lg border border-gray-200 bg-gray-50 p-4 shadow-inner dark:border-gray-700 dark:bg-gray-900/50 flex flex-col">
-                <h3 className="mb-2 text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center justify-between">
+            <div className="flex-1 min-h-0 rounded-lg border border-[#D6DBE2] bg-[#D6DBE2]/35 p-4  flex flex-col">
+                <h3 className="mb-2 text-xs font-bold text-[#004196] uppercase tracking-wider flex items-center justify-between">
                     <span className="flex items-center gap-2">
-                        <svg className={`w-4 h-4 animate-pulse ${isDraining ? 'text-red-500' : 'text-green-500'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <svg className={`w-4 h-4 animate-pulse ${isDraining ? 'text-[#004196]' : 'text-[#6AFF00]'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         Live Traffic
                     </span>
-                    <span className="font-mono text-[10px] bg-gray-200 dark:bg-gray-700 px-1 rounded text-gray-600">
+                    <span className="font-mono text-[10px] bg-white px-1 rounded text-[#000223]">
                         {isDraining ? 'DRAINING BUFFER' : 'PROCESSING REQUESTS'}
                     </span>
                 </h3>
@@ -461,22 +447,22 @@ export default function TokensDashboard() {
                         {liveLogs.map((log) => (
                             <div
                                 key={log.id}
-                                className="flex items-center justify-between text-xs p-2 bg-white dark:bg-gray-800 rounded border border-gray-100 dark:border-gray-700 shadow-sm animate-in slide-in-from-top-2 fade-in duration-300"
+                                className="flex items-center justify-between text-xs p-2 bg-white rounded border border-[#D6DBE2]  animate-in slide-in-from-top-2 fade-in duration-300"
                             >
                                 <div className="flex items-center gap-3">
-                                    <span className="font-mono text-gray-400 text-[10px]">{log.time}</span>
-                                    <span className={`w-1.5 h-1.5 rounded-full ${log.status === 'success' ? 'bg-green-500' : 'bg-red-500'}`}></span>
-                                    <span className="font-medium text-gray-700 dark:text-gray-300">{log.service}</span>
+                                    <span className="font-mono text-[#004196] text-[10px]">{log.time}</span>
+                                    <span className={`w-1.5 h-1.5 rounded-full ${log.status === 'success' ? 'bg-[#6AFF00]' : 'bg-[#004196]'}`}></span>
+                                    <span className="font-medium text-[#000223]">{log.service}</span>
                                 </div>
                                 <div className="flex items-center gap-4">
-                                    <span className="text-gray-500 max-w-[120px] truncate hidden sm:block">{log.user}</span>
-                                    <span className="font-mono font-semibold text-gray-900 dark:text-white">+{log.tokens} tkns</span>
+                                    <span className="text-[#004196] max-w-[120px] truncate hidden sm:block">{log.user}</span>
+                                    <span className="font-mono font-semibold text-[#000223]">+{log.tokens} tkns</span>
                                 </div>
                             </div>
                         ))}
                     </div>
                     {/* Gradient Fade at bottom */}
-                    <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-gray-50 dark:from-gray-900 to-transparent pointer-events-none"></div>
+                    <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-[#D6DBE2]/60 to-transparent pointer-events-none"></div>
                 </div>
             </div>
         </div>
