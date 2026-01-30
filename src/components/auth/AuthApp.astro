@@ -1,0 +1,2267 @@
+---
+// Componente AuthApp - Dispositivo móvil con flujo de autenticación
+---
+
+<!-- Contenedor del dispositivo móvil -->
+<div class="device-container">
+  <!-- Frame del iPhone -->
+  <div class="device-frame-wrapper">
+    <div class="device-frame">
+      <!-- Pantalla del dispositivo -->
+      <div class="device-screen">
+        <!-- Status Bar con Dynamic Island -->
+        <div class="device-status-bar">
+          <div class="status-time">9:41</div>
+          <div class="dynamic-island">
+            <div class="island-shape"></div>
+            <div class="island-speaker"></div>
+          </div>
+          <div class="status-icons">
+            <svg class="signal-icon" fill="none" viewBox="0 0 20 12">
+              <path
+                d="M1 8h2v2H1V8zm3-2h2v4H4V6zm3-2h2v6H7V4zm3-1h2v7h-2V3z"
+                fill="currentColor"></path>
+            </svg>
+            <div class="battery-icon">
+              <div class="battery-level"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contenido del dispositivo -->
+        <div class="device-content">
+          <!-- Header con back y logo -->
+          <div class="device-header">
+            <button class="device-back-btn" id="device-back-btn"
+              >&lt; back</button
+            >
+            <div class="device-logo">
+              <img src="/images/zelify_logo.png" alt="Zelify" />
+            </div>
+            <div class="device-header-spacer"></div>
+          </div>
+
+          <!-- Animación GIF según el paso -->
+          <div class="device-animation">
+            <img
+              id="step-animation-1"
+              src="/gift/ANIMACION 1.gif"
+              alt="Auth animation step 1"
+              style="display: block;"
+            />
+            <img
+              id="step-animation-2"
+              src="/gift/ANIMACION 1.gif"
+              alt="Auth animation step 2"
+              style="display: none;"
+            />
+            <img
+              id="step-animation-3"
+              src="/gift/ANIMACION 1.gif"
+              alt="Auth animation step 3"
+              style="display: none;"
+            />
+            <img
+              id="step-animation-4"
+              src="/gift/ANIMACION 1.gif"
+              alt="Auth animation step 4"
+              style="display: none;"
+            />
+            <img
+              id="step-animation-5"
+              src="/gift/ANIMACION 1.gif"
+              alt="Auth animation step 5"
+              style="display: none;"
+            />
+          </div>
+
+          <!-- Tarjeta con fondo translúcido -->
+          <div class="device-card">
+            <div class="auth-phone-card">
+              <!-- Indicador de progreso -->
+              <div class="phone-card-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+              </div>
+
+              <h2 class="phone-card-title" id="step-title">Crear Cuenta</h2>
+              <p class="phone-card-description" id="step-description">
+                Ingresa tu nombre y correo electrónico para empezar. Te
+                enviaremos un código de verificación.
+              </p>
+
+              <!-- Paso 1: Crear Cuenta -->
+              <div id="step-1" class="auth-step">
+                <form class="phone-card-form" id="form-step-1">
+                  <div class="form-field">
+                    <label>Nombre Completo<span class="required">*</span></label
+                    >
+                    <input
+                      type="text"
+                      id="fullName"
+                      placeholder="John Doe"
+                      required
+                    />
+                    <span class="field-error-message"></span>
+                  </div>
+                  <div class="form-field">
+                    <label>Correo<span class="required">*</span></label>
+                    <input
+                      type="email"
+                      id="email"
+                      placeholder="email@example.com"
+                      required
+                    />
+                    <span class="field-error-message"></span>
+                  </div>
+                  <button type="submit" class="btn-continuar">
+                    Continuar →
+                  </button>
+                </form>
+              </div>
+
+              <div id="step-2" class="auth-step" style="display: none;">
+                <form class="phone-card-form" id="form-step-2">
+                  <div class="otp-wrapper">
+                    <div class="otp-inputs" id="otp-email">
+                      <!-- OTP Input 0 -->
+                      <div class="otp-input-item" data-index="0">
+                        <!-- SVG Border Overlay -->
+                        <svg
+                          class="otp-border-svg"
+                          width="42"
+                          height="48"
+                          style="display: none;"
+                        >
+                          <rect
+                            x="2"
+                            y="2"
+                            width="38"
+                            height="44"
+                            rx="10"
+                            fill="none"
+                            stroke="#213f8c"
+                            stroke-width="2"
+                            stroke-dasharray="140"
+                            stroke-dashoffset="140"
+                            stroke-linecap="round"
+                            class="otp-border-rect"></rect>
+                        </svg>
+                        <!-- Checkmark Overlay -->
+                        <div
+                          class="otp-checkmark-overlay"
+                          style="display: none;"
+                        >
+                          <svg
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#213f8c"
+                            stroke-width="3"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <path d="M20 6L9 17L4 12" class="otp-checkmark-path"
+                            ></path>
+                          </svg>
+                        </div>
+                        <!-- Error X Overlay -->
+                        <div class="otp-error-overlay" style="display: none;">
+                          <svg
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#EF4444"
+                            stroke-width="3"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                          </svg>
+                        </div>
+                        <input
+                          type="text"
+                          class="otp-input"
+                          maxlength="1"
+                          inputmode="numeric"
+                          data-index="0"
+                        />
+                      </div>
+                      <!-- OTP Input 1 -->
+                      <div class="otp-input-item" data-index="1">
+                        <svg
+                          class="otp-border-svg"
+                          width="42"
+                          height="48"
+                          style="display: none;"
+                        >
+                          <rect
+                            x="2"
+                            y="2"
+                            width="38"
+                            height="44"
+                            rx="10"
+                            fill="none"
+                            stroke="#213f8c"
+                            stroke-width="2"
+                            stroke-dasharray="140"
+                            stroke-dashoffset="140"
+                            stroke-linecap="round"
+                            class="otp-border-rect"></rect>
+                        </svg>
+                        <input
+                          type="text"
+                          class="otp-input"
+                          maxlength="1"
+                          inputmode="numeric"
+                          data-index="1"
+                        />
+                      </div>
+                      <!-- OTP Input 2 -->
+                      <div class="otp-input-item" data-index="2">
+                        <svg
+                          class="otp-border-svg"
+                          width="42"
+                          height="48"
+                          style="display: none;"
+                        >
+                          <rect
+                            x="2"
+                            y="2"
+                            width="38"
+                            height="44"
+                            rx="10"
+                            fill="none"
+                            stroke="#213f8c"
+                            stroke-width="2"
+                            stroke-dasharray="140"
+                            stroke-dashoffset="140"
+                            stroke-linecap="round"
+                            class="otp-border-rect"></rect>
+                        </svg>
+                        <input
+                          type="text"
+                          class="otp-input"
+                          maxlength="1"
+                          inputmode="numeric"
+                          data-index="2"
+                        />
+                      </div>
+                      <!-- OTP Input 3 -->
+                      <div class="otp-input-item" data-index="3">
+                        <svg
+                          class="otp-border-svg"
+                          width="42"
+                          height="48"
+                          style="display: none;"
+                        >
+                          <rect
+                            x="2"
+                            y="2"
+                            width="38"
+                            height="44"
+                            rx="10"
+                            fill="none"
+                            stroke="#213f8c"
+                            stroke-width="2"
+                            stroke-dasharray="140"
+                            stroke-dashoffset="140"
+                            stroke-linecap="round"
+                            class="otp-border-rect"></rect>
+                        </svg>
+                        <input
+                          type="text"
+                          class="otp-input"
+                          maxlength="1"
+                          inputmode="numeric"
+                          data-index="3"
+                        />
+                      </div>
+                      <!-- OTP Input 4 -->
+                      <div class="otp-input-item" data-index="4">
+                        <svg
+                          class="otp-border-svg"
+                          width="42"
+                          height="48"
+                          style="display: none;"
+                        >
+                          <rect
+                            x="2"
+                            y="2"
+                            width="38"
+                            height="44"
+                            rx="10"
+                            fill="none"
+                            stroke="#213f8c"
+                            stroke-width="2"
+                            stroke-dasharray="140"
+                            stroke-dashoffset="140"
+                            stroke-linecap="round"
+                            class="otp-border-rect"></rect>
+                        </svg>
+                        <input
+                          type="text"
+                          class="otp-input"
+                          maxlength="1"
+                          inputmode="numeric"
+                          data-index="4"
+                        />
+                      </div>
+                      <!-- OTP Input 5 -->
+                      <div class="otp-input-item" data-index="5">
+                        <svg
+                          class="otp-border-svg"
+                          width="42"
+                          height="48"
+                          style="display: none;"
+                        >
+                          <rect
+                            x="2"
+                            y="2"
+                            width="38"
+                            height="44"
+                            rx="10"
+                            fill="none"
+                            stroke="#213f8c"
+                            stroke-width="2"
+                            stroke-dasharray="140"
+                            stroke-dashoffset="140"
+                            stroke-linecap="round"
+                            class="otp-border-rect"></rect>
+                        </svg>
+                        <input
+                          type="text"
+                          class="otp-input"
+                          maxlength="1"
+                          inputmode="numeric"
+                          data-index="5"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn-continuar">
+                    Verificar →
+                  </button>
+                  <p class="resend-code">
+                    ¿No recibiste el código? <a href="#" id="resend-email"
+                      >Reenviar</a
+                    >
+                  </p>
+                </form>
+              </div>
+
+              <!-- Paso 3: Agregar Teléfono -->
+              <div id="step-3" class="auth-step" style="display: none;">
+                <form class="phone-card-form" id="form-step-3">
+                  <div class="phone-input-group">
+                    <!-- Country Selector -->
+                    <div class="country-selector">
+                      <button
+                        type="button"
+                        class="country-selector-btn"
+                        id="country-selector-btn"
+                      >
+                        <span class="country-flag">🇺🇸</span>
+                        <span class="country-code">+1</span>
+                        <svg
+                          class="country-arrow"
+                          width="12"
+                          height="12"
+                          viewBox="0 0 12 12"
+                          fill="none"
+                        >
+                          <path
+                            d="M3 4.5L6 7.5L9 4.5"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                        </svg>
+                      </button>
+                      <!-- Dropdown (hidden by default) -->
+                      <div
+                        class="country-dropdown"
+                        id="country-dropdown"
+                        style="display: none;"
+                      >
+                        <div
+                          class="country-option"
+                          data-code="+1"
+                          data-flag="🇺🇸"
+                          data-name="United States"
+                        >
+                          <span class="country-flag">🇺🇸</span>
+                          <span>United States (+1)</span>
+                        </div>
+                        <div
+                          class="country-option"
+                          data-code="+52"
+                          data-flag="🇲🇽"
+                          data-name="Mexico"
+                        >
+                          <span class="country-flag">🇲🇽</span>
+                          <span>Mexico (+52)</span>
+                        </div>
+                        <div
+                          class="country-option"
+                          data-code="+57"
+                          data-flag="🇨🇴"
+                          data-name="Colombia"
+                        >
+                          <span class="country-flag">🇨🇴</span>
+                          <span>Colombia (+57)</span>
+                        </div>
+                        <div
+                          class="country-option"
+                          data-code="+593"
+                          data-flag="🇪🇨"
+                          data-name="Ecuador"
+                        >
+                          <span class="country-flag">🇪🇨</span>
+                          <span>Ecuador (+593)</span>
+                        </div>
+                        <div
+                          class="country-option"
+                          data-code="+51"
+                          data-flag="🇵🇪"
+                          data-name="Peru"
+                        >
+                          <span class="country-flag">🇵🇪</span>
+                          <span>Peru (+51)</span>
+                        </div>
+                        <div
+                          class="country-option"
+                          data-code="+54"
+                          data-flag="🇦🇷"
+                          data-name="Argentina"
+                        >
+                          <span class="country-flag">🇦🇷</span>
+                          <span>Argentina (+54)</span>
+                        </div>
+                        <div
+                          class="country-option"
+                          data-code="+56"
+                          data-flag="🇨🇱"
+                          data-name="Chile"
+                        >
+                          <span class="country-flag">🇨🇱</span>
+                          <span>Chile (+56)</span>
+                        </div>
+                        <div
+                          class="country-option"
+                          data-code="+34"
+                          data-flag="🇪🇸"
+                          data-name="Spain"
+                        >
+                          <span class="country-flag">🇪🇸</span>
+                          <span>Spain (+34)</span>
+                        </div>
+                        <div
+                          class="country-option"
+                          data-code="+44"
+                          data-flag="🇬🇧"
+                          data-name="United Kingdom"
+                        >
+                          <span class="country-flag">🇬🇧</span>
+                          <span>United Kingdom (+44)</span>
+                        </div>
+                        <div
+                          class="country-option"
+                          data-code="+1"
+                          data-flag="🇨🇦"
+                          data-name="Canada"
+                        >
+                          <span class="country-flag">🇨🇦</span>
+                          <span>Canada (+1)</span>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Phone Input -->
+                    <div class="phone-input-wrapper">
+                      <input
+                        type="tel"
+                        id="phone"
+                        placeholder="Número de teléfono"
+                        required
+                        class="phone-input"
+                      />
+                      <span class="field-error-message"></span>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn-continuar">
+                    Continuar →
+                  </button>
+                </form>
+              </div>
+
+              <!-- Paso 4: Verificar Teléfono -->
+              <div id="step-4" class="auth-step" style="display: none;">
+                <form class="phone-card-form" id="form-step-4">
+                  <div class="otp-wrapper">
+                    <div class="otp-inputs" id="otp-phone">
+                      <!-- Same structure as step-2, copy paste -->
+                      <div class="otp-input-item" data-index="0">
+                        <svg
+                          class="otp-border-svg"
+                          width="42"
+                          height="48"
+                          style="display: none;"
+                        >
+                          <rect
+                            x="2"
+                            y="2"
+                            width="38"
+                            height="44"
+                            rx="10"
+                            fill="none"
+                            stroke="#213f8c"
+                            stroke-width="2"
+                            stroke-dasharray="140"
+                            stroke-dashoffset="140"
+                            stroke-linecap="round"
+                            class="otp-border-rect"></rect>
+                        </svg>
+                        <div
+                          class="otp-checkmark-overlay"
+                          style="display: none;"
+                        >
+                          <svg
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#213f8c"
+                            stroke-width="3"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <path d="M20 6L9 17L4 12" class="otp-checkmark-path"
+                            ></path>
+                          </svg>
+                        </div>
+                        <div class="otp-error-overlay" style="display: none;">
+                          <svg
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#EF4444"
+                            stroke-width="3"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                          </svg>
+                        </div>
+                        <input
+                          type="text"
+                          class="otp-input"
+                          maxlength="1"
+                          inputmode="numeric"
+                          data-index="0"
+                        />
+                      </div>
+                      <div class="otp-input-item" data-index="1">
+                        <svg
+                          class="otp-border-svg"
+                          width="42"
+                          height="48"
+                          style="display: none;"
+                        >
+                          <rect
+                            x="2"
+                            y="2"
+                            width="38"
+                            height="44"
+                            rx="10"
+                            fill="none"
+                            stroke="#213f8c"
+                            stroke-width="2"
+                            stroke-dasharray="140"
+                            stroke-dashoffset="140"
+                            stroke-linecap="round"
+                            class="otp-border-rect"></rect>
+                        </svg>
+                        <input
+                          type="text"
+                          class="otp-input"
+                          maxlength="1"
+                          inputmode="numeric"
+                          data-index="1"
+                        />
+                      </div>
+                      <div class="otp-input-item" data-index="2">
+                        <svg
+                          class="otp-border-svg"
+                          width="42"
+                          height="48"
+                          style="display: none;"
+                        >
+                          <rect
+                            x="2"
+                            y="2"
+                            width="38"
+                            height="44"
+                            rx="10"
+                            fill="none"
+                            stroke="#213f8c"
+                            stroke-width="2"
+                            stroke-dasharray="140"
+                            stroke-dashoffset="140"
+                            stroke-linecap="round"
+                            class="otp-border-rect"></rect>
+                        </svg>
+                        <input
+                          type="text"
+                          class="otp-input"
+                          maxlength="1"
+                          inputmode="numeric"
+                          data-index="2"
+                        />
+                      </div>
+                      <div class="otp-input-item" data-index="3">
+                        <svg
+                          class="otp-border-svg"
+                          width="42"
+                          height="48"
+                          style="display: none;"
+                        >
+                          <rect
+                            x="2"
+                            y="2"
+                            width="38"
+                            height="44"
+                            rx="10"
+                            fill="none"
+                            stroke="#213f8c"
+                            stroke-width="2"
+                            stroke-dasharray="140"
+                            stroke-dashoffset="140"
+                            stroke-linecap="round"
+                            class="otp-border-rect"></rect>
+                        </svg>
+                        <input
+                          type="text"
+                          class="otp-input"
+                          maxlength="1"
+                          inputmode="numeric"
+                          data-index="3"
+                        />
+                      </div>
+                      <div class="otp-input-item" data-index="4">
+                        <svg
+                          class="otp-border-svg"
+                          width="42"
+                          height="48"
+                          style="display: none;"
+                        >
+                          <rect
+                            x="2"
+                            y="2"
+                            width="38"
+                            height="44"
+                            rx="10"
+                            fill="none"
+                            stroke="#213f8c"
+                            stroke-width="2"
+                            stroke-dasharray="140"
+                            stroke-dashoffset="140"
+                            stroke-linecap="round"
+                            class="otp-border-rect"></rect>
+                        </svg>
+                        <input
+                          type="text"
+                          class="otp-input"
+                          maxlength="1"
+                          inputmode="numeric"
+                          data-index="4"
+                        />
+                      </div>
+                      <div class="otp-input-item" data-index="5">
+                        <svg
+                          class="otp-border-svg"
+                          width="42"
+                          height="48"
+                          style="display: none;"
+                        >
+                          <rect
+                            x="2"
+                            y="2"
+                            width="38"
+                            height="44"
+                            rx="10"
+                            fill="none"
+                            stroke="#213f8c"
+                            stroke-width="2"
+                            stroke-dasharray="140"
+                            stroke-dashoffset="140"
+                            stroke-linecap="round"
+                            class="otp-border-rect"></rect>
+                        </svg>
+                        <input
+                          type="text"
+                          class="otp-input"
+                          maxlength="1"
+                          inputmode="numeric"
+                          data-index="5"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn-continuar">
+                    Verificar →
+                  </button>
+                  <p class="resend-code">
+                    ¿No recibiste el código? <a href="#" id="resend-phone"
+                      >Reenviar</a
+                    >
+                  </p>
+                </form>
+              </div>
+
+              <!-- Paso 5: Completar Perfil -->
+              <div id="step-5" class="auth-step" style="display: none;">
+                <form class="phone-card-form" id="form-step-5">
+                  <div class="form-field">
+                    <label>Contraseña<span class="required">*</span></label>
+                    <input
+                      type="password"
+                      id="password"
+                      placeholder="Mínimo 8 caracteres"
+                      required
+                    />
+                    <span class="field-error-message"></span>
+                  </div>
+                  <div class="form-field">
+                    <label
+                      >Confirmar Contraseña<span class="required">*</span
+                      ></label
+                    >
+                    <input
+                      type="password"
+                      id="confirmPassword"
+                      placeholder="Confirma tu contraseña"
+                      required
+                    />
+                    <span class="field-error-message"></span>
+                  </div>
+                  <button type="submit" class="btn-continuar">
+                    Crear Cuenta →
+                  </button>
+                </form>
+              </div>
+
+              <p
+                class="phone-card-login"
+                id="login-link"
+                style="display: none;"
+              >
+                ¿Ya tienes una cuenta? <a href="#">Ingresa</a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Home Indicator -->
+        <div class="device-home-indicator"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ===== COMPONENTE AUTHAPP - ESTILOS DEL DISPOSITIVO MÓVIL ===== */
+
+  /* Contenedor del dispositivo */
+  .device-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    z-index: 10;
+    padding: 1rem 0 2rem;
+  }
+
+  /* Frame del iPhone */
+  div:global(.auth-background-section) .device-frame-wrapper {
+    position: relative !important;
+    z-index: 10 !important;
+    transform: scale(1) !important;
+    padding: 2.5rem 2rem !important;
+    background-color: #f3f4f6 !important;
+    border-radius: 2rem !important;
+    margin: 3rem auto !important;
+  }
+
+  .device-frame {
+    position: relative;
+    overflow: hidden;
+    border-radius: 3rem;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  /* Pantalla del dispositivo */
+  .device-screen {
+    position: relative;
+    height: 900px;
+    overflow: hidden;
+    border-radius: 2.5rem;
+    background: #ffffff;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    box-shadow:
+      0 0 0 1px rgba(0, 0, 0, 0.05),
+      0 20px 60px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Status Bar */
+  .device-status-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #ffffff;
+    padding: 2.5rem 1.5rem 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .status-time {
+    position: absolute;
+    left: 1.5rem;
+    top: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #000000;
+  }
+
+  .dynamic-island {
+    position: absolute;
+    left: 50%;
+    top: 0.75rem;
+    transform: translateX(-50%);
+  }
+
+  .island-shape {
+    width: 96px;
+    height: 20px;
+    border-radius: 999px;
+    background: #000000;
+  }
+
+  .island-speaker {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 2px;
+    border-radius: 999px;
+    background: rgba(31, 41, 55, 0.3);
+  }
+
+  .status-icons {
+    position: absolute;
+    right: 1.5rem;
+    top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+  }
+
+  .signal-icon {
+    width: 20px;
+    height: 12px;
+    color: #000000;
+  }
+
+  .battery-icon {
+    width: 24px;
+    height: 10px;
+    border: 1px solid #000000;
+    border-radius: 2px;
+    padding: 1px;
+  }
+
+  .battery-level {
+    width: 80%;
+    height: 100%;
+    background: #000000;
+    border-radius: 1px;
+  }
+
+  /* Contenido del dispositivo */
+  .device-content {
+    flex: 1;
+    min-height: 0;
+    background: #ffffff;
+    padding: 1rem 1.25rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .device-content::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+
+  /* Header del dispositivo */
+  .device-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .device-back-btn {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #6b7280;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .device-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .device-logo img {
+    height: 32px;
+    width: auto;
+  }
+
+  .device-header-spacer {
+    width: 48px;
+  }
+
+  /* Animación GIF */
+  .device-animation {
+    position: relative;
+    margin-bottom: -3.5rem;
+    z-index: 0;
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .device-animation img {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+    opacity: 0.9;
+  }
+
+  /* Tarjeta translúcida */
+  .device-card {
+    position: relative;
+    z-index: 10;
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    border-radius: 1rem;
+    padding: 1rem 1.25rem;
+    backdrop-filter: blur(4px);
+    background: rgba(255, 255, 255, 0.35);
+    min-height: 0;
+  }
+
+  .device-card::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+
+  .auth-phone-card {
+    width: 100%;
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    position: relative;
+  }
+
+  /* Home Indicator */
+  .device-home-indicator {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 128px;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.3);
+    flex-shrink: 0;
+  }
+
+  .phone-card-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .phone-card-dots .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #d0d0d0;
+    transition: background 0.3s ease;
+  }
+
+  .phone-card-dots .dot.active {
+    background: #213f8c;
+  }
+
+  .phone-card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0a203f;
+    margin: 0 0 0.5rem 0;
+    text-align: center;
+  }
+
+  .phone-card-description {
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin: 0 0 1rem 0;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .btn-google {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    border: 1px solid #e5e7eb;
+    background: #f9fafb;
+    border-radius: 12px;
+    padding: 0.75rem 1.25rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: 1rem;
+    color: #0a203f;
+  }
+
+  .btn-google:hover {
+    background: #f3f4f6;
+    border-color: #d1d5db;
+  }
+
+  .phone-card-divider {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: #e5e7eb;
+  }
+
+  .divider-text {
+    font-size: 0.75rem;
+    color: #6b7280;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .phone-card-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-field label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #374151;
+  }
+
+  .form-field .required {
+    color: #ef4444;
+    margin-left: 2px;
+  }
+
+  .form-field input {
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 0.625rem 0.875rem;
+    font-size: 0.875rem;
+    outline: none;
+    background: #f9fafb;
+    color: #0a203f;
+    font-family: inherit;
+    transition: border-color 0.2s ease;
+  }
+
+  .form-field input:focus {
+    border-color: #213f8c;
+    background: #ffffff;
+  }
+
+  .form-field input.field-error {
+    border-color: #ef4444;
+    background: #fef2f2;
+  }
+
+  .form-field input.field-error:focus {
+    border-color: #ef4444;
+    background: #fef2f2;
+  }
+
+  .field-error-message {
+    display: none;
+    margin-top: 0.25rem;
+    font-size: 0.7rem;
+    color: #ef4444;
+  }
+
+  /* Country Selector Styles */
+  .phone-input-group {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .country-selector {
+    position: relative;
+    width: 112px;
+    flex-shrink: 0;
+  }
+
+  .country-selector-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.65rem 0.75rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    background: #f9fafb;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .country-selector-btn:hover {
+    border-color: #213f8c;
+    background: #ffffff;
+  }
+
+  .country-selector-btn:focus {
+    outline: none;
+    border-color: #213f8c;
+    background: #ffffff;
+  }
+
+  .country-flag {
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+
+  .country-code {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #0a203f;
+    flex: 1;
+  }
+
+  .country-arrow {
+    color: #6b7280;
+    transition: transform 0.2s ease;
+  }
+
+  .country-selector-btn[aria-expanded="true"] .country-arrow {
+    transform: rotate(180deg);
+  }
+
+  .country-dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  .country-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-size: 0.875rem;
+  }
+
+  .country-option:hover {
+    background-color: #f3f4f6;
+  }
+
+  .country-option.selected {
+    background-color: #eff6ff;
+    color: #213f8c;
+    font-weight: 500;
+  }
+
+  .phone-input-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .phone-input {
+    width: 100%;
+    padding: 0.65rem 1rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: #0a203f;
+    background: #f9fafb;
+    transition: all 0.2s ease;
+  }
+
+  .phone-input:focus {
+    outline: none;
+    border-color: #213f8c;
+    background: #ffffff;
+  }
+
+  .phone-input.field-error {
+    border-color: #ef4444;
+    background: #fef2f2;
+  }
+
+  .form-field input::placeholder {
+    color: #9ca3af;
+  }
+
+  /* Estilos OTP */
+  .otp-container {
+    margin-bottom: 1rem;
+  }
+
+  .otp-inputs {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .otp-input {
+    width: 42px;
+    height: 48px;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    background: #f9fafb;
+    transition: all 0.2s ease;
+    outline: none;
+    color: #0a203f;
+    font-family: inherit;
+  }
+
+  .otp-input:focus {
+    border-color: #213f8c;
+    background: #ffffff;
+  }
+
+  .otp-input.otp-verifying {
+    border-color: #213f8c;
+    animation: otp-pulse 1s ease-in-out infinite;
+  }
+
+  .otp-input.otp-success {
+    border-color: #10b981;
+    background: #f0fdf4;
+  }
+
+  .otp-input.otp-error {
+    border-color: #ef4444;
+    background: #fef2f2;
+    animation: otp-shake 0.5s ease-in-out;
+  }
+
+  @keyframes otp-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.6;
+    }
+  }
+
+  @keyframes otp-shake {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-4px);
+    }
+    75% {
+      transform: translateX(4px);
+    }
+  }
+
+  /* Animación del borde progresivo */
+  @keyframes borderDash {
+    0% {
+      stroke-dashoffset: 140;
+    }
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* Animación del checkmark */
+  @keyframes drawCheck {
+    0% {
+      stroke-dashoffset: 100;
+      opacity: 0;
+    }
+    100% {
+      stroke-dashoffset: 0;
+      opacity: 1;
+    }
+  }
+
+  /* Animación de la X de error */
+  @keyframes drawX {
+    0% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Wrapper para OTP con altura fija */
+  .otp-wrapper {
+    position: relative;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Input item con animaciones */
+  .otp-input-item {
+    position: relative;
+    width: 42px;
+    height: 48px;
+    border-radius: 12px;
+    transition:
+      transform 1s cubic-bezier(0.2, 0, 0, 1),
+      opacity 0.5s ease-out;
+  }
+
+  /* Estados del input item */
+  .otp-input-item.collapsed {
+    opacity: 0;
+  }
+
+  .otp-input-item.collapsed:first-child {
+    opacity: 1;
+  }
+
+  /* SVG overlay para borde animado */
+  .otp-border-svg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .otp-border-rect {
+    animation: borderDash 0.8s linear forwards;
+  }
+
+  /* Checkmark overlay */
+  .otp-checkmark-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+    pointer-events: none;
+  }
+
+  .otp-checkmark-path {
+    animation: drawCheck 0.5s ease-out forwards;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+  }
+
+  /* Error X overlay */
+  .otp-error-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+    pointer-events: none;
+    animation: drawX 0.4s ease-out forwards;
+  }
+
+  .resend-code {
+    font-size: 0.75rem;
+    color: #6b7280;
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+
+  .resend-code a {
+    color: #213f8c;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .resend-code a:hover {
+    text-decoration: underline;
+  }
+
+  .btn-continuar {
+    position: relative;
+    border: none;
+    background: linear-gradient(
+      to right,
+      #213f8c 0%,
+      #1a2f6b 40%,
+      #0f1f4d 70%,
+      #0a203f 100%
+    );
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 0.85rem 1.5rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+    margin-top: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 4px 14px 0 rgba(33, 63, 140, 0.4);
+    animation:
+      cta-pulse-glow 2s ease-in-out infinite,
+      cta-button-pulse 2.5s ease-in-out infinite;
+  }
+
+  .btn-continuar::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    opacity: 0.6;
+    background: #213f8c;
+    filter: blur(8px);
+    z-index: -1;
+    animation: cta-pulse-ring 2s ease-in-out infinite;
+  }
+
+  .btn-continuar::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    transform: translateX(-100%);
+    animation: cta-shine-sweep 2.5s linear infinite;
+    z-index: 1;
+  }
+
+  .btn-continuar:hover {
+    transform: translateY(-1px);
+  }
+
+  .btn-continuar:active {
+    transform: scale(0.98);
+  }
+
+  @keyframes cta-pulse-glow {
+    0%,
+    100% {
+      box-shadow: 0 4px 14px 0 rgba(33, 63, 140, 0.4);
+    }
+    50% {
+      box-shadow:
+        0 4px 20px 0 rgba(33, 63, 140, 0.8),
+        0 0 30px 0 rgba(33, 63, 140, 0.4);
+    }
+  }
+
+  @keyframes cta-button-pulse {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.02);
+    }
+  }
+
+  @keyframes cta-pulse-ring {
+    0%,
+    100% {
+      opacity: 0.4;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.7;
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes cta-shine-sweep {
+    0% {
+      transform: translateX(-100%) skewX(-15deg);
+    }
+    100% {
+      transform: translateX(200%) skewX(-15deg);
+    }
+  }
+
+  .phone-card-login {
+    text-align: center;
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin: 0.5rem 0 0 0;
+  }
+
+  .phone-card-login a {
+    color: #213f8c;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .phone-card-login a:hover {
+    text-decoration: underline;
+  }
+
+  /* Auth Steps */
+  .auth-step {
+    display: none;
+  }
+
+  .auth-step:first-of-type {
+    display: block;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .auth-phone-card {
+      position: relative;
+      top: auto;
+      left: auto;
+      transform: none;
+      margin: 2rem auto;
+      max-width: 100%;
+      width: calc(100% - 2rem);
+    }
+
+    .otp-inputs {
+      gap: 0.5rem;
+    }
+
+    .otp-input {
+      width: 42px;
+      height: 42px;
+      font-size: 1.1rem;
+    }
+  }
+</style>
+
+<script>
+  // Estado del flujo
+  let currentStep = 1;
+  let formData: Record<string, any> = {};
+  let validationErrors: Record<string, string> = {};
+  let emailOTPStatus = "idle";
+  let phoneOTPStatus = "idle";
+  let currentLang = localStorage.getItem("ui-language") || "ES";
+
+  // Inicializar OTP inputs
+  function initOTPInputs(containerId: string) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    const inputs = container.querySelectorAll(
+      ".otp-input",
+    ) as NodeListOf<HTMLInputElement>;
+
+    inputs.forEach((input, index) => {
+      input.addEventListener("input", (e) => {
+        const target = e.target as HTMLInputElement;
+        const value = target.value.replace(/[^0-9]/g, "");
+        target.value = value;
+
+        if (value && index < inputs.length - 1) {
+          (inputs[index + 1] as HTMLInputElement).focus();
+        }
+      });
+
+      input.addEventListener("keydown", (e: Event) => {
+        const keyboardEvent = e as KeyboardEvent;
+        const target = e.target as HTMLInputElement;
+        if (keyboardEvent.key === "Backspace" && !target.value && index > 0) {
+          (inputs[index - 1] as HTMLInputElement).focus();
+        }
+      });
+
+      input.addEventListener("paste", (e: Event) => {
+        const clipboardEvent = e as ClipboardEvent;
+        e.preventDefault();
+        const pasted =
+          clipboardEvent.clipboardData
+            ?.getData("text")
+            .replace(/[^0-9]/g, "")
+            .slice(0, 6) || "";
+        pasted.split("").forEach((char: string, i: number) => {
+          if (inputs[i]) {
+            (inputs[i] as HTMLInputElement).value = char;
+          }
+        });
+        if (pasted.length === 6) {
+          (inputs[5] as HTMLInputElement).focus();
+        }
+      });
+    });
+  }
+
+  // Actualizar dots de progreso
+  function updateProgressDots(step: number) {
+    const dots = document.querySelectorAll(".phone-card-dots .dot");
+    dots.forEach((dot, index) => {
+      if (index < step) {
+        dot.classList.add("active");
+      } else {
+        dot.classList.remove("active");
+      }
+    });
+  }
+
+  // Mostrar paso
+  function showStep(step: number) {
+    document.querySelectorAll(".auth-step").forEach((el, index) => {
+      (el as HTMLElement).style.display = index + 1 === step ? "block" : "none";
+    });
+
+    // Cambiar animación según el paso
+    for (let i = 1; i <= 5; i++) {
+      const animation = document.getElementById(`step-animation-${i}`);
+      if (animation) {
+        (animation as HTMLElement).style.display =
+          i === step ? "block" : "none";
+      }
+    }
+
+    const titleEl = document.getElementById("step-title");
+    const descEl = document.getElementById("step-description");
+    const loginLink = document.getElementById("login-link");
+
+    if (!titleEl || !descEl || !loginLink) return;
+
+    // Aquí se pueden agregar las traducciones dinámicas
+    const steps: Record<
+      number,
+      { title: string; desc?: string; descPrefix?: string }
+    > = {
+      1: {
+        title: "Crear Cuenta",
+        desc: "Ingresa tu nombre y correo electrónico para empezar. Te enviaremos un código de verificación.",
+      },
+      2: {
+        title: "Verifica tu Correo",
+        descPrefix: "Hemos enviado un código de 6 dígitos a<br /><strong>",
+      },
+      3: {
+        title: "Agrega tu Teléfono",
+        desc: "Te enviaremos un código de verificación por SMS para confirmar tu número de teléfono.",
+      },
+      4: {
+        title: "Verifica tu Teléfono",
+        descPrefix: "Hemos enviado un código de 6 dígitos a<br /><strong>",
+      },
+      5: {
+        title: "Completa tu Perfil",
+        desc: "Completa la información restante para finalizar la configuración de tu cuenta.",
+      },
+    };
+
+    titleEl.textContent = steps[step].title;
+
+    if (step === 2 && steps[step].descPrefix) {
+      descEl.innerHTML =
+        steps[step].descPrefix + (formData as any).email + "</strong>";
+      loginLink.style.display = "none";
+    } else if (step === 4 && steps[step].descPrefix) {
+      descEl.innerHTML =
+        steps[step].descPrefix + (formData as any).phone + "</strong>";
+      loginLink.style.display = "none";
+    } else {
+      descEl.innerHTML = steps[step].desc || "";
+      loginLink.style.display = step === 5 ? "block" : "none";
+    }
+
+    updateProgressDots(step);
+    currentStep = step;
+  }
+
+  // Funciones de validación
+  function validateFullName(name: string) {
+    return name.trim().length >= 2;
+  }
+
+  function validateEmail(email: string) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function validatePhone(phone: string) {
+    return phone.trim().length >= 10;
+  }
+
+  function validatePassword(password: string) {
+    return password.length >= 8;
+  }
+
+  function showFieldError(fieldId: string, message: string) {
+    validationErrors[fieldId] = message;
+    const field = document.getElementById(fieldId) as HTMLInputElement | null;
+    if (field) {
+      field.classList.add("field-error");
+      const errorEl = field.parentElement?.querySelector(
+        ".field-error-message",
+      ) as HTMLElement | null;
+      if (errorEl) {
+        errorEl.textContent = message;
+        errorEl.style.display = "block";
+      }
+    }
+  }
+
+  function clearFieldError(fieldId: string) {
+    delete validationErrors[fieldId];
+    const field = document.getElementById(fieldId) as HTMLInputElement | null;
+    if (field) {
+      field.classList.remove("field-error");
+      const errorEl = field.parentElement?.querySelector(
+        ".field-error-message",
+      ) as HTMLElement | null;
+      if (errorEl) {
+        errorEl.style.display = "none";
+      }
+    }
+  }
+
+  function clearAllErrors() {
+    Object.keys(validationErrors).forEach((key) => clearFieldError(key));
+  }
+
+  // Paso 1: Crear cuenta
+  document.getElementById("form-step-1")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    clearAllErrors();
+
+    const fullName = (
+      document.getElementById("fullName") as HTMLInputElement
+    ).value.trim();
+    const email = (
+      document.getElementById("email") as HTMLInputElement
+    ).value.trim();
+
+    let hasErrors = false;
+
+    if (!validateFullName(fullName)) {
+      showFieldError(
+        "fullName",
+        currentLang === "EN"
+          ? "Name must be at least 2 characters"
+          : "El nombre debe tener al menos 2 caracteres",
+      );
+      hasErrors = true;
+    }
+
+    if (!validateEmail(email)) {
+      showFieldError(
+        "email",
+        currentLang === "EN" ? "Invalid email" : "Correo electrónico inválido",
+      );
+      hasErrors = true;
+    }
+
+    if (hasErrors) {
+      return;
+    }
+
+    (formData as any).fullName = fullName;
+    (formData as any).email = email;
+
+    showStep(2);
+    initOTPInputs("otp-email");
+  });
+
+  document.getElementById("fullName")?.addEventListener("input", () => {
+    clearFieldError("fullName");
+  });
+
+  document.getElementById("email")?.addEventListener("input", () => {
+    clearFieldError("email");
+  });
+
+  // Paso 2: Verificar email
+  document.getElementById("form-step-2")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const inputs = document.querySelectorAll(
+      "#otp-email .otp-input",
+    ) as NodeListOf<HTMLInputElement>;
+    const otp = Array.from(inputs)
+      .map((input) => input.value)
+      .join("");
+
+    if (otp.length !== 6) {
+      return;
+    }
+
+    emailOTPStatus = "verifying";
+    updateOTPStatus("otp-email", "verifying");
+
+    const isValid = otp === "202601";
+
+    setTimeout(() => {
+      if (isValid) {
+        emailOTPStatus = "success";
+        updateOTPStatus("otp-email", "success");
+        (formData as any).emailOTP = otp;
+
+        setTimeout(() => {
+          emailOTPStatus = "idle";
+          showStep(3);
+        }, 3000);
+      } else {
+        emailOTPStatus = "error";
+        updateOTPStatus("otp-email", "error");
+
+        setTimeout(() => {
+          emailOTPStatus = "idle";
+          updateOTPStatus("otp-email", "idle");
+          inputs.forEach((input) => (input.value = ""));
+          inputs[0].focus();
+        }, 2000);
+      }
+    }, 1000);
+  });
+
+  function updateOTPStatus(containerId: string, status: string) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    const items = container.querySelectorAll(".otp-input-item");
+    const inputs = container.querySelectorAll(".otp-input");
+
+    if (status === "verifying") {
+      // Mostrar bordes animados en todos los items
+      items.forEach((item) => {
+        const svg = item.querySelector(".otp-border-svg") as HTMLElement;
+        if (svg) {
+          svg.style.display = "block";
+          const rect = svg.querySelector(".otp-border-rect") as SVGRectElement;
+          if (rect) {
+            // Restart animation
+            rect.style.animation = "none";
+            setTimeout(() => {
+              rect.style.animation = "borderDash 0.8s linear forwards";
+            }, 10);
+          }
+        }
+      });
+
+      // Hacer transparente el borde del input
+      inputs.forEach((input) => {
+        (input as HTMLInputElement).style.borderColor = "transparent";
+      });
+    } else if (status === "success" || status === "error") {
+      // Card stack collapse animation
+      const centerIndex = (items.length - 1) / 2;
+      const itemWidthWithGap = 48; // 42px width + 6px gap
+
+      items.forEach((item, index) => {
+        const translateX = (centerIndex - index) * itemWidthWithGap;
+        const htmlItem = item as HTMLElement;
+
+        // Apply transform and opacity transitions
+        htmlItem.style.transition = `transform 1s cubic-bezier(0.2, 0, 0, 1) ${index * 120}ms, opacity 0.5s ease-out ${index * 120 + 600}ms`;
+        htmlItem.style.transform = `translateX(${translateX}px)`;
+        htmlItem.style.zIndex = (items.length - index + 10).toString();
+
+        if (index !== 0) {
+          htmlItem.style.opacity = "0";
+        } else {
+          htmlItem.style.opacity = "1";
+          // Add glow effect to first item
+          if (status === "success") {
+            htmlItem.style.boxShadow = "0 0 15px #213f8c, 0 0 30px #213f8c66";
+          } else {
+            htmlItem.style.boxShadow = "0 0 15px #EF4444, 0 0 30px #EF444466";
+          }
+        }
+
+        // Hide SVG borders during collapse
+        const svg = item.querySelector(".otp-border-svg") as HTMLElement;
+        if (svg) {
+          svg.style.display = "block";
+          // Set stroke color for error
+          const rect = svg.querySelector(".otp-border-rect") as SVGRectElement;
+          if (rect) {
+            rect.setAttribute(
+              "stroke",
+              status === "error" ? "#EF4444" : "#213f8c",
+            );
+            rect.setAttribute("stroke-dashoffset", "0");
+          }
+        }
+
+        // Fade out text on first item
+        const input = item.querySelector(".otp-input") as HTMLInputElement;
+        if (input && index === 0) {
+          input.style.borderColor = "transparent";
+          input.style.color = status === "error" ? "#EF4444" : "#213f8c";
+        }
+      });
+
+      // Show checkmark or error X after collapse (1000ms + delay for first el)
+      setTimeout(() => {
+        const firstItem = items[0];
+        if (status === "success") {
+          const checkmarkOverlay = firstItem.querySelector(
+            ".otp-checkmark-overlay",
+          ) as HTMLElement;
+          if (checkmarkOverlay) {
+            checkmarkOverlay.style.display = "flex";
+          }
+        } else if (status === "error") {
+          const errorOverlay = firstItem.querySelector(
+            ".otp-error-overlay",
+          ) as HTMLElement;
+          if (errorOverlay) {
+            errorOverlay.style.display = "flex";
+          }
+        }
+
+        // Fade out input text
+        const firstInput = firstItem.querySelector(
+          ".otp-input",
+        ) as HTMLInputElement;
+        if (firstInput) {
+          firstInput.style.opacity = "0.3";
+        }
+      }, 1000);
+    } else if (status === "idle") {
+      // Reset all animations and styles
+      items.forEach((item, index) => {
+        const htmlItem = item as HTMLElement;
+        htmlItem.style.transform = "";
+        htmlItem.style.opacity = "1";
+        htmlItem.style.zIndex = "0";
+        htmlItem.style.boxShadow = "none";
+
+        // Hide overlays
+        const svg = item.querySelector(".otp-border-svg") as HTMLElement;
+        if (svg) svg.style.display = "none";
+
+        const checkmark = item.querySelector(
+          ".otp-checkmark-overlay",
+        ) as HTMLElement;
+        if (checkmark) checkmark.style.display = "none";
+
+        const errorX = item.querySelector(".otp-error-overlay") as HTMLElement;
+        if (errorX) errorX.style.display = "none";
+
+        // Reset input styles
+        const input = item.querySelector(".otp-input") as HTMLInputElement;
+        if (input) {
+          input.style.borderColor = "";
+          input.style.color = "";
+          input.style.opacity = "1";
+        }
+      });
+    }
+  }
+
+  // Paso 3: Agregar teléfono
+  document.getElementById("form-step-3")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    clearAllErrors();
+
+    const phone = (
+      document.getElementById("phone") as HTMLInputElement
+    ).value.trim();
+
+    if (!validatePhone(phone)) {
+      showFieldError(
+        "phone",
+        currentLang === "EN"
+          ? "Invalid phone number"
+          : "Número de teléfono inválido",
+      );
+      return;
+    }
+
+    (formData as any).phone = phone;
+    showStep(4);
+    initOTPInputs("otp-phone");
+  });
+
+  document.getElementById("phone")?.addEventListener("input", () => {
+    clearFieldError("phone");
+  });
+
+  // Paso 4: Verificar teléfono
+  document.getElementById("form-step-4")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const inputs = document.querySelectorAll(
+      "#otp-phone .otp-input",
+    ) as NodeListOf<HTMLInputElement>;
+    const otp = Array.from(inputs)
+      .map((input) => input.value)
+      .join("");
+
+    if (otp.length !== 6) {
+      return;
+    }
+
+    phoneOTPStatus = "verifying";
+    updateOTPStatus("otp-phone", "verifying");
+
+    const isValid = otp === "202601";
+
+    setTimeout(() => {
+      if (isValid) {
+        phoneOTPStatus = "success";
+        updateOTPStatus("otp-phone", "success");
+        (formData as any).phoneOTP = otp;
+
+        setTimeout(() => {
+          phoneOTPStatus = "idle";
+          showStep(5);
+        }, 3000);
+      } else {
+        phoneOTPStatus = "error";
+        updateOTPStatus("otp-phone", "error");
+
+        setTimeout(() => {
+          phoneOTPStatus = "idle";
+          updateOTPStatus("otp-phone", "idle");
+          inputs.forEach((input) => (input.value = ""));
+          inputs[0].focus();
+        }, 2000);
+      }
+    }, 1000);
+  });
+
+  // Paso 5: Completar perfil
+  document.getElementById("form-step-5")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    clearAllErrors();
+
+    const password = (document.getElementById("password") as HTMLInputElement)
+      .value;
+    const confirmPassword = (
+      document.getElementById("confirmPassword") as HTMLInputElement
+    ).value;
+
+    let hasErrors = false;
+
+    if (!validatePassword(password)) {
+      showFieldError(
+        "password",
+        currentLang === "EN"
+          ? "Password must be at least 8 characters"
+          : "La contraseña debe tener al menos 8 caracteres",
+      );
+      hasErrors = true;
+    }
+
+    if (password !== confirmPassword) {
+      showFieldError(
+        "confirmPassword",
+        currentLang === "EN"
+          ? "Passwords do not match"
+          : "Las contraseñas no coinciden",
+      );
+      hasErrors = true;
+    }
+
+    if (hasErrors) {
+      return;
+    }
+
+    (formData as any).password = password;
+    (formData as any).confirmPassword = confirmPassword;
+
+    console.log("Registro completado", formData);
+  });
+
+  document.getElementById("password")?.addEventListener("input", () => {
+    clearFieldError("password");
+  });
+
+  document.getElementById("confirmPassword")?.addEventListener("input", () => {
+    clearFieldError("confirmPassword");
+  });
+
+  // Delegated listeners for resend links
+  document.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    if (target && target.id === "resend-email") {
+      e.preventDefault();
+      console.log("Código reenviado a", (formData as any).email);
+    }
+    if (target && target.id === "resend-phone") {
+      e.preventDefault();
+      console.log("Código reenviado a", (formData as any).phone);
+    }
+  });
+
+  // Back button functionality
+  const backBtn = document.getElementById("device-back-btn");
+  if (backBtn) {
+    backBtn.addEventListener("click", () => {
+      if (currentStep > 1) {
+        // Reset OTP status when going back from OTP steps
+        if (currentStep === 2) {
+          emailOTPStatus = "idle";
+          updateOTPStatus("otp-email", "idle");
+        } else if (currentStep === 4) {
+          phoneOTPStatus = "idle";
+          updateOTPStatus("otp-phone", "idle");
+        }
+
+        showStep(currentStep - 1);
+      }
+    });
+  }
+
+  // Update back button visibility based on current step
+  function updateBackButtonVisibility() {
+    if (backBtn) {
+      if (currentStep === 1) {
+        backBtn.style.visibility = "hidden";
+      } else {
+        backBtn.style.visibility = "visible";
+      }
+    }
+  }
+
+  // Modify showStep to update back button visibility
+  const originalShowStep = showStep;
+  showStep = function (step: number) {
+    originalShowStep(step);
+    updateBackButtonVisibility();
+  };
+
+  // Country Selector functionality
+  const countrySelectorBtn = document.getElementById("country-selector-btn");
+  const countryDropdown = document.getElementById("country-dropdown");
+  let selectedCountryCode = "+1";
+  let selectedCountryFlag = "🇺🇸";
+
+  if (countrySelectorBtn && countryDropdown) {
+    // Toggle dropdown
+    countrySelectorBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isOpen = countryDropdown.style.display === "block";
+      countryDropdown.style.display = isOpen ? "none" : "block";
+      countrySelectorBtn.setAttribute("aria-expanded", (!isOpen).toString());
+    });
+
+    // Select country
+    const countryOptions = countryDropdown.querySelectorAll(".country-option");
+    countryOptions.forEach((option) => {
+      option.addEventListener("click", () => {
+        const code = option.getAttribute("data-code") || "+1";
+        const flag = option.getAttribute("data-flag") || "🇺🇸";
+
+        selectedCountryCode = code;
+        selectedCountryFlag = flag;
+
+        // Update button
+        const flagEl = countrySelectorBtn.querySelector(".country-flag");
+        const codeEl = countrySelectorBtn.querySelector(".country-code");
+        if (flagEl) flagEl.textContent = flag;
+        if (codeEl) codeEl.textContent = code;
+
+        // Update selected state
+        countryOptions.forEach((opt) => opt.classList.remove("selected"));
+        option.classList.add("selected");
+
+        // Close dropdown
+        countryDropdown.style.display = "none";
+        countrySelectorBtn.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener("click", (e) => {
+      if (
+        !countrySelectorBtn.contains(e.target as Node) &&
+        !countryDropdown.contains(e.target as Node)
+      ) {
+        countryDropdown.style.display = "none";
+        countrySelectorBtn.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+
+  // Inicializar
+  updateProgressDots(1);
+  updateBackButtonVisibility();
+</script>

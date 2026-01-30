@@ -486,9 +486,7 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
           <!-- Texto izquierdo -->
           <div class="contact-text">
             <h2 class="contact-title">
-              Empieza hoy<br />
-              y protege tu<br />
-              plataforma.
+              Comienza a construir el banco del futuro, hoy.
             </h2>
           </div>
 
@@ -765,8 +763,7 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
     <section class="cta-section">
       <div class="cta-container">
         <h2 class="cta-title">
-          Comienza hoy y<br />
-          asegura cada acceso.
+          Comienza a construir el banco del futuro, hoy.
         </h2>
         <a
           href="https://alaiza.zelify.com"
@@ -967,8 +964,6 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
     gap: 0.75rem;
     flex-wrap: wrap;
   }
-
-
 
   .btn-cotizar {
     border: none;
@@ -1611,8 +1606,6 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
       flex-direction: column;
       align-items: stretch;
     }
-
-
 
     .btn-cotizar,
     .btn-demo-hero {
@@ -2510,53 +2503,62 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
     confirmPassword: "",
   };
 
-  const validationErrors = {};
+  const validationErrors: Record<string, string> = {};
   let emailOTPStatus = "idle"; // 'idle' | 'verifying' | 'success' | 'error'
   let phoneOTPStatus = "idle";
 
   // Inicializar OTP inputs
-  function initOTPInputs(containerId) {
+  // Inicializar OTP inputs
+  function initOTPInputs(containerId: string) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
     const inputs = container.querySelectorAll(".otp-input");
 
     inputs.forEach((input, index) => {
+      if (!(input instanceof HTMLInputElement)) return;
       input.addEventListener("input", (e) => {
-        const value = e.target.value.replace(/[^0-9]/g, "");
-        e.target.value = value;
+        const target = e.target as HTMLInputElement;
+        const value = target.value.replace(/[^0-9]/g, "");
+        target.value = value;
 
         if (value && index < inputs.length - 1) {
-          inputs[index + 1].focus();
+          const nextInput = inputs[index + 1];
+          if (nextInput instanceof HTMLInputElement) nextInput.focus();
         }
       });
 
       input.addEventListener("keydown", (e) => {
-        if (e.key === "Backspace" && !e.target.value && index > 0) {
-          inputs[index - 1].focus();
+        const keyboardEvent = e as KeyboardEvent;
+        const target = e.target as HTMLInputElement;
+        if (keyboardEvent.key === "Backspace" && !target.value && index > 0) {
+          const prevInput = inputs[index - 1];
+          if (prevInput instanceof HTMLInputElement) prevInput.focus();
         }
       });
 
       input.addEventListener("paste", (e) => {
-        e.preventDefault();
-        const pasted = e.clipboardData
-          .getData("text")
+        const clipboardEvent = e as ClipboardEvent;
+        clipboardEvent.preventDefault();
+        const pasted = (clipboardEvent.clipboardData?.getData("text") || "")
           .replace(/[^0-9]/g, "")
           .slice(0, 6);
         pasted.split("").forEach((char, i) => {
-          if (inputs[i]) {
-            inputs[i].value = char;
+          const charInput = inputs[i];
+          if (charInput instanceof HTMLInputElement) {
+            charInput.value = char;
           }
         });
         if (pasted.length === 6) {
-          inputs[5].focus();
+          const lastInput = inputs[5];
+          if (lastInput instanceof HTMLInputElement) lastInput.focus();
         }
       });
     });
   }
 
   // Actualizar dots de progreso
-  function updateProgressDots(step) {
+  function updateProgressDots(step: number) {
     const dots = document.querySelectorAll(".phone-card-dots .dot");
     dots.forEach((dot, index) => {
       if (index < step) {
@@ -2568,9 +2570,11 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
   }
 
   // Mostrar paso
-  function showStep(step) {
+  function showStep(step: number) {
     document.querySelectorAll(".auth-step").forEach((el, index) => {
-      el.style.display = index + 1 === step ? "block" : "none";
+      if (el instanceof HTMLElement) {
+        el.style.display = index + 1 === step ? "block" : "none";
+      }
     });
 
     // Actualizar título y descripción según el paso
@@ -2578,35 +2582,37 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
     const descEl = document.getElementById("step-description");
     const loginLink = document.getElementById("login-link");
 
-    if (step === 1) {
-      titleEl.textContent = "Crear Cuenta";
-      descEl.innerHTML =
-        "Ingresa tu nombre y correo electrónico para empezar. Te enviaremos un código de verificación.";
-      loginLink.style.display = "none";
-    } else if (step === 2) {
-      titleEl.textContent = "Verifica tu Correo";
-      descEl.innerHTML =
-        'Hemos enviado un código de 6 dígitos a<br /><strong id="email-display">' +
-        formData.email +
-        "</strong>";
-      loginLink.style.display = "none";
-    } else if (step === 3) {
-      titleEl.textContent = "Agrega tu Teléfono";
-      descEl.textContent =
-        "Te enviaremos un código de verificación por SMS para confirmar tu número de teléfono.";
-      loginLink.style.display = "none";
-    } else if (step === 4) {
-      titleEl.textContent = "Verifica tu Teléfono";
-      descEl.innerHTML =
-        'Hemos enviado un código de 6 dígitos a<br /><strong id="phone-display">' +
-        formData.phone +
-        "</strong>";
-      loginLink.style.display = "none";
-    } else if (step === 5) {
-      titleEl.textContent = "Completa tu Perfil";
-      descEl.textContent =
-        "Completa la información restante para finalizar la configuración de tu cuenta.";
-      loginLink.style.display = "block";
+    if (titleEl && descEl && loginLink) {
+      if (step === 1) {
+        titleEl.textContent = "Crear Cuenta";
+        descEl.innerHTML =
+          "Ingresa tu nombre y correo electrónico para empezar. Te enviaremos un código de verificación.";
+        loginLink.style.display = "none";
+      } else if (step === 2) {
+        titleEl.textContent = "Verifica tu Correo";
+        descEl.innerHTML =
+          'Hemos enviado un código de 6 dígitos a<br /><strong id="email-display">' +
+          formData.email +
+          "</strong>";
+        loginLink.style.display = "none";
+      } else if (step === 3) {
+        titleEl.textContent = "Agrega tu Teléfono";
+        descEl.textContent =
+          "Te enviaremos un código de verificación por SMS para confirmar tu número de teléfono.";
+        loginLink.style.display = "none";
+      } else if (step === 4) {
+        titleEl.textContent = "Verifica tu Teléfono";
+        descEl.innerHTML =
+          'Hemos enviado un código de 6 dígitos a<br /><strong id="phone-display">' +
+          formData.phone +
+          "</strong>";
+        loginLink.style.display = "none";
+      } else if (step === 5) {
+        titleEl.textContent = "Completa tu Perfil";
+        descEl.textContent =
+          "Completa la información restante para finalizar la configuración de tu cuenta.";
+        loginLink.style.display = "block";
+      }
     }
 
     updateProgressDots(step);
@@ -2614,42 +2620,46 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
   }
 
   // Funciones de validación
-  function validateFullName(name) {
+  function validateFullName(name: string) {
     return name.trim().length >= 2;
   }
 
-  function validateEmail(email) {
+  function validateEmail(email: string) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
-  function validatePhone(phone) {
+  function validatePhone(phone: string) {
     return phone.trim().length >= 10;
   }
 
-  function validatePassword(password) {
+  function validatePassword(password: string) {
     return password.length >= 8;
   }
 
-  function showFieldError(fieldId, message) {
+  function showFieldError(fieldId: string, message: string) {
     validationErrors[fieldId] = message;
     const field = document.getElementById(fieldId);
     if (field) {
       field.classList.add("field-error");
-      const errorEl = field.parentElement.querySelector(".field-error-message");
-      if (errorEl) {
+      const errorEl = field.parentElement?.querySelector(
+        ".field-error-message",
+      );
+      if (errorEl instanceof HTMLElement) {
         errorEl.textContent = message;
         errorEl.style.display = "block";
       }
     }
   }
 
-  function clearFieldError(fieldId) {
+  function clearFieldError(fieldId: string) {
     delete validationErrors[fieldId];
     const field = document.getElementById(fieldId);
     if (field) {
       field.classList.remove("field-error");
-      const errorEl = field.parentElement.querySelector(".field-error-message");
-      if (errorEl) {
+      const errorEl = field.parentElement?.querySelector(
+        ".field-error-message",
+      );
+      if (errorEl instanceof HTMLElement) {
         errorEl.style.display = "none";
       }
     }
@@ -2664,8 +2674,18 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
     e.preventDefault();
     clearAllErrors();
 
-    const fullName = document.getElementById("fullName").value.trim();
-    const email = document.getElementById("email").value.trim();
+    const fullNameInput = document.getElementById("fullName");
+    const emailInput = document.getElementById("email");
+
+    if (
+      !(fullNameInput instanceof HTMLInputElement) ||
+      !(emailInput instanceof HTMLInputElement)
+    ) {
+      return;
+    }
+
+    const fullName = fullNameInput.value.trim();
+    const email = emailInput.value.trim();
 
     let hasErrors = false;
 
@@ -2704,7 +2724,7 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
     e.preventDefault();
     const inputs = document.querySelectorAll("#otp-email .otp-input");
     const otp = Array.from(inputs)
-      .map((input) => input.value)
+      .map((input) => (input instanceof HTMLInputElement ? input.value : ""))
       .join("");
 
     if (otp.length !== 6) {
@@ -2734,14 +2754,17 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
         setTimeout(() => {
           emailOTPStatus = "idle";
           updateOTPStatus("otp-email", "idle");
-          inputs.forEach((input) => (input.value = ""));
-          inputs[0].focus();
+          inputs.forEach((input) => {
+            if (input instanceof HTMLInputElement) input.value = "";
+          });
+          const firstInput = inputs[0];
+          if (firstInput instanceof HTMLInputElement) firstInput.focus();
         }, 2000);
       }
     }, 1000);
   });
 
-  function updateOTPStatus(containerId, status) {
+  function updateOTPStatus(containerId: string, status: string) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
@@ -2759,7 +2782,10 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
     e.preventDefault();
     clearAllErrors();
 
-    const phone = document.getElementById("phone").value.trim();
+    const phoneInput = document.getElementById("phone");
+    if (!(phoneInput instanceof HTMLInputElement)) return;
+
+    const phone = phoneInput.value.trim();
 
     if (!validatePhone(phone)) {
       showFieldError("phone", "Número de teléfono inválido");
@@ -2780,7 +2806,7 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
     e.preventDefault();
     const inputs = document.querySelectorAll("#otp-phone .otp-input");
     const otp = Array.from(inputs)
-      .map((input) => input.value)
+      .map((input) => (input instanceof HTMLInputElement ? input.value : ""))
       .join("");
 
     if (otp.length !== 6) {
@@ -2810,8 +2836,11 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
         setTimeout(() => {
           phoneOTPStatus = "idle";
           updateOTPStatus("otp-phone", "idle");
-          inputs.forEach((input) => (input.value = ""));
-          inputs[0].focus();
+          inputs.forEach((input) => {
+            if (input instanceof HTMLInputElement) input.value = "";
+          });
+          const firstInput = inputs[0];
+          if (firstInput instanceof HTMLInputElement) firstInput.focus();
         }, 2000);
       }
     }, 1000);
@@ -2822,8 +2851,16 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
     e.preventDefault();
     clearAllErrors();
 
-    const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("confirmPassword").value;
+    const passwordInput = document.getElementById("password");
+    const confirmInput = document.getElementById("confirmPassword");
+    if (
+      !(passwordInput instanceof HTMLInputElement) ||
+      !(confirmInput instanceof HTMLInputElement)
+    )
+      return;
+
+    const password = passwordInput.value;
+    const confirmPassword = confirmInput.value;
 
     let hasErrors = false;
 
@@ -2892,13 +2929,18 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
   document.getElementById("contactForm")?.addEventListener("submit", (e) => {
     e.preventDefault();
 
+    const getVal = (id: string) => {
+      const el = document.getElementById(id);
+      return el instanceof HTMLInputElement ? el.value : "";
+    };
+
     const formData = {
-      nombres: document.getElementById("nombres").value,
-      apellidos: document.getElementById("apellidos").value,
-      compania: document.getElementById("compania").value,
-      email: document.getElementById("email").value,
-      pais: document.getElementById("pais").value,
-      telefono: document.getElementById("telefono").value,
+      nombres: getVal("nombres"),
+      apellidos: getVal("apellidos"),
+      compania: getVal("compania"),
+      email: getVal("email"),
+      pais: getVal("pais"),
+      telefono: getVal("telefono"),
     };
 
     console.log("Formulario enviado:", formData);
@@ -2928,231 +2970,332 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
     es: {
       hero: {
         title: "Gestión integral de<br />descuentos y beneficios",
-        description: "Centraliza la relación con comercios para crear y difundir beneficios. Permite registrar negocios con su información operativa, diseñar y publicar descuentos o campañas, geolocalizar establecimientos en el mapa y habilitar pagos con posterior liquidación dentro de la red Zelify. Incluye reportes comerciales para seguimiento de ventas, redenciones y conciliación.",
+        description:
+          "Centraliza la relación con comercios para crear y difundir beneficios. Permite registrar negocios con su información operativa, diseñar y publicar descuentos o campañas, geolocalizar establecimientos en un mapa interactivo y habilitar pagos con posterior liquidación dentro de la red Zelify. Incluye reportes comerciales para seguimiento de ventas, redenciones y conciliación.",
         inputPlaceholder: "ingresa tu correo",
         inputAria: "Ingresa tu correo",
         quoteButton: "cotizar",
-        demoButton: "demo"
+        demoButton: "demo",
       },
       security: {
         title: "Registro de comercios<br />y gestión operativa",
         features: [
-          { title: "Gestión de Comercios", description: "Registro y administración integral de identidad del negocio, catálogos, productos y categorías para mantener la oferta actualizada y visible." },
-          { title: "Descuentos y Promociones", description: "Diseño y control total del ciclo de vida de los beneficios, campañas dinámicas y promociones con vigencia configurable." },
-          { title: "Descuentos por Cercanía", description: "Visibilidad espacial: descuentos geoloca­lizados que muestra a usuarios las promociones disponibles en negocios cercanos." },
-          { title: "Redenciones Comerciales", description: "Gestión de redenciones: los comercios consultan beneficios redimidos en tiempo real desde el dashboard operacional." },
-          { title: "Pagos y Liquidación", description: "Control financiero transparente: consulta estatus de pagos y liquidaciones derivadas de las promociones redimidas." },
-          { title: "Análisis y Reportes", description: "Inteligencia de negocios: genera informes de ventas detallados y evalúa el rendimiento de tus descuentos y clientes." }
-        ]
+          {
+            title: "Gestión de Comercios",
+            description:
+              "Registro y administración integral de identidad del negocio, catálogos, productos y categorías para mantener la oferta actualizada y visible.",
+          },
+          {
+            title: "Descuentos y Promociones",
+            description:
+              "Diseño y control total del ciclo de vida de los beneficios, campañas dinámicas y promociones con vigencia configurable.",
+          },
+          {
+            title: "Descuentos por Cercanía",
+            description:
+              "Visibilidad espacial: descuentos geoloca­lizados que muestra a usuarios las promociones disponibles en negocios cercanos.",
+          },
+          {
+            title: "Redenciones Comerciales",
+            description:
+              "Gestión de redenciones: los comercios consultan beneficios redimidos en tiempo real desde el dashboard operacional.",
+          },
+          {
+            title: "Pagos y Liquidación",
+            description:
+              "Control financiero transparente: consulta estatus de pagos y liquidaciones derivadas de las promociones redimidas.",
+          },
+          {
+            title: "Análisis y Reportes",
+            description:
+              "Inteligencia de negocios: genera informes de ventas detallados y evalúa el rendimiento de tus descuentos y clientes.",
+          },
+        ],
       },
       control: {
         title: "Gestión integral de beneficios y comercios",
         features: [
           {
             title: "Gestión de Comercios",
-            description: "Administración integral de la identidad del negocio, catálogos, productos y categorías para mantener la oferta actualizada.",
+            description:
+              "Administración integral de la identidad del negocio, catálogos, productos y categorías para mantener la oferta actualizada.",
             benefits: [
               "Perfil de negocio completo y editable",
               "Gestión de catálogo de productos",
               "Alta y baja de categorías",
               "Actualización de oferta en tiempo real",
-              "Control de identidad corporativa"
-            ]
+              "Control de identidad corporativa",
+            ],
           },
           {
             title: "Descuentos y Promociones",
-            description: "Control total del ciclo de vida de los beneficios para diseñar estrategias dinámicas y campañas ágiles.",
+            description:
+              "Control total del ciclo de vida de los beneficios para diseñar estrategias dinámicas y campañas ágiles.",
             benefits: [
               "Creación de campañas dinámicas",
               "Control de vigencia y disponibilidad",
               "Activación y desactivación inmediata",
               "Gestión individual de promociones",
-              "Respuesta ágil al mercado"
-            ]
+              "Respuesta ágil al mercado",
+            ],
           },
           {
             title: "Geolocalización",
-            description: "Visibilidad espacial en mapas interactivos para que los usuarios encuentren puntos de venta y beneficios cercanos.",
+            description:
+              "Visibilidad espacial en mapas interactivos para que los usuarios encuentren puntos de venta y beneficios cercanos.",
             benefits: [
               "Visibilidad en mapa interactivo",
               "Tráfico a puntos de venta físicos",
               "Descuentos basados en cercanía",
               "Actualización de coordenadas",
-              "Geolocalización de establecimientos"
-            ]
+              "Geolocalización de establecimientos",
+            ],
           },
           {
             title: "Análisis y Reportes",
-            description: "Inteligencia de negocios para la toma de decisiones, control financiero y conciliación de pagos y redenciones.",
+            description:
+              "Inteligencia de negocios para la toma de decisiones, control financiero y conciliación de pagos y redenciones.",
             benefits: [
               "Informes de ventas detallados",
               "Rendimiento de descuentos",
               "Estatus de pagos y liquidación",
               "Análisis de comportamiento de clientes",
-              "Resúmenes transaccionales"
-            ]
-          }
-        ]
+              "Resúmenes transaccionales",
+            ],
+          },
+        ],
       },
       contact: {
-        title: "Empieza hoy<br />y protege tu<br />plataforma.",
+        title: "Comienza a construir el banco del futuro, hoy.",
         formTitle: "Habla con nuestro equipo",
         placeholders: {
           nombres: "Nombres",
           apellidos: "Apellidos",
           compania: "Nombre de la compañía",
           email: "Email de la compañía",
-          telefono: "Teléfono (opcional)"
+          telefono: "Teléfono (opcional)",
         },
         countryDefault: "País",
-        legal: "Al enviar este formulario, aceptas nuestros <a href='#'>Términos de Servicio</a> y <a href='#'>Política de Privacidad</a>.",
-        submitButton: "Hablemos"
+        legal:
+          "Al enviar este formulario, aceptas nuestros <a href='#'>Términos de Servicio</a> y <a href='#'>Política de Privacidad</a>.",
+        submitButton: "Hablemos",
       },
       cta: {
-        title: "Comienza hoy y<br />asegura cada acceso.",
-        button: "cotizar"
+        title: "Comienza a construir el banco del futuro, hoy.",
+        button: "cotizar",
       },
       faq: {
         title: "Preguntas frecuentes",
         items: [
-          { q: "¿Qué funcionalidades incluye el módulo de Discounts?", a: "El módulo centraliza la relación con comercios para crear y difundir beneficios. Permite registrar negocios, gestionar catálogos de productos y categorías, diseñar campañas de descuentos, geolocalizar establecimientos en un mapa interactivo y habilitar pagos con su respectiva liquidación dentro de la red Zelify." },
-          { q: "¿Cómo puedo gestionar los productos y categorías de mi comercio?", a: "A través de la gestión integral de identidad, puedes crear, actualizar y organizar tu catálogo. El sistema permite administrar categorías y productos de forma independiente, dándote la flexibilidad de activar, desactivar o eliminar artículos según la disponibilidad de tu inventario en tiempo real." },
-          { q: "¿Qué control tengo sobre la vigencia de mis promociones?", a: "Tienes control total sobre el ciclo de vida de cada beneficio. Puedes crear, activar o desactivar descuentos y promociones de manera individual, lo que te permite responder ágilmente a las necesidades del mercado y gestionar la disponibilidad de cada oferta de forma estratégica." },
-          { q: "¿Cómo ayuda la geolocalización a la visibilidad de mi negocio?", a: "El módulo incluye herramientas de visibilidad espacial que permiten a los usuarios finales localizar físicamente tus puntos de venta a través de un mapa interactivo. Esto asegura que los beneficios disponibles se muestren a los clientes que se encuentren en la cercanía de tu establecimiento." },
-          { q: "¿Cómo se maneja la liquidación de las promociones redimidas?", a: "Zelify proporciona un control financiero transparente. Puedes consultar el estado de pago de las transacciones y obtener reportes específicos de los pagos derivados de redenciones, garantizando un flujo de fondos ordenado y una correcta liquidación para los comercios participantes." },
-          { q: "¿Es difícil integrar el módulo de descuentos en mi app?", a: "No, contamos con un SDK de Descuentos que incluye librerías de desarrollo pre-construidas. Esto facilita una integración rápida y estandarizada, reduciendo la complejidad técnica para manejar catálogos, promociones y reportes comerciales desde tu propia plataforma." }
-        ]
+          {
+            q: "¿Qué funcionalidades incluye el módulo de Discounts?",
+            a: "El módulo centraliza la relación con comercios para crear y difundir beneficios. Permite registrar negocios, gestionar catálogos de productos y categorías, diseñar campañas de descuentos, geolocalizar establecimientos en un mapa interactivo y habilitar pagos con su respectiva liquidación dentro de la red Zelify.",
+          },
+          {
+            q: "¿Cómo puedo gestionar los productos y categorías de mi comercio?",
+            a: "A través de la gestión integral de identidad, puedes crear, actualizar y organizar tu catálogo. El sistema permite administrar categorías y productos de forma independiente, dándote la flexibilidad de activar, desactivar o eliminar artículos según la disponibilidad de tu inventario en tiempo real.",
+          },
+          {
+            q: "¿Qué control tengo sobre la vigencia de mis promociones?",
+            a: "Tienes control total sobre el ciclo de vida de cada beneficio. Puedes crear, activar o desactivar descuentos y promociones de manera individual, lo que te permite responder ágilmente a las necesidades del mercado y gestionar la disponibilidad de cada oferta de forma estratégica.",
+          },
+          {
+            q: "¿Cómo ayuda la geolocalización a la visibilidad de mi negocio?",
+            a: "El módulo incluye herramientas de visibilidad espacial que permiten a los usuarios finales localizar físicamente tus puntos de venta a través de un mapa interactivo. Esto asegura que los beneficios disponibles se muestren a los clientes que se encuentren en la cercanía de tu establecimiento.",
+          },
+          {
+            q: "¿Cómo se maneja la liquidación de las promociones redimidas?",
+            a: "Zelify proporciona un control financiero transparente. Puedes consultar el estado de pago de las transacciones y obtener reportes específicos de los pagos derivados de redenciones, garantizando un flujo de fondos ordenado y una correcta liquidación para los comercios participantes.",
+          },
+          {
+            q: "¿Es difícil integrar el módulo de descuentos en mi app?",
+            a: "No, contamos con un SDK de Descuentos que incluye librerías de desarrollo pre-construidas. Esto facilita una integración rápida y estandarizada, reduciendo la complejidad técnica para manejar catálogos, promociones y reportes comerciales desde tu propia plataforma.",
+          },
+        ],
       },
       footer: {
         linksTitle: "Quick links",
-        disclaimer: "Zelify is a technology platform currently in a development phase, not yet deployed or operational, and does not provide or process financial services directly; all financial operations are conducted exclusively through regulated third-party partners.",
-        copyright: "© 2025 Zelify. All rights reserved."
-      }
+        disclaimer:
+          "Zelify is a technology platform currently in a development phase, not yet deployed or operational, and does not provide or process financial services directly; all financial operations are conducted exclusively through regulated third-party partners.",
+        copyright: "© 2025 Zelify. All rights reserved.",
+      },
     },
     en: {
       hero: {
         title: "Comprehensive management of<br />discounts and benefits",
-        description: "Centralize your relationship with merchants to create and distribute benefits. Register businesses with their operational information, design and publish discounts or campaigns, geolocate establishments on the map, and enable payments with subsequent settlement within the Zelify network. Includes commercial reports for tracking sales, redemptions, and reconciliation.",
+        description:
+          "Centralize your relationship with merchants to create and distribute benefits. Register businesses with their operational information, design and publish discounts or campaigns, geolocate establishments on the map, and enable payments with subsequent settlement within the Zelify network. Includes commercial reports for tracking sales, redemptions, and reconciliation.",
         inputPlaceholder: "enter your email",
         inputAria: "Enter your email",
         quoteButton: "quote",
-        demoButton: "demo"
+        demoButton: "demo",
       },
       security: {
         title: "Merchant registration<br />and operational management",
         features: [
-          { title: "Merchant Management", description: "Comprehensive registration and administration of business identity, catalogs, products, and categories to keep your offering updated and visible." },
-          { title: "Discounts and Promotions", description: "Design and complete control over the lifecycle of benefits, dynamic campaigns, and promotions with configurable expiration dates." },
-          { title: "Proximity-Based Discounts", description: "Spatial visibility: geolocated discounts that show users available promotions in nearby businesses." },
-          { title: "Commercial Redemptions", description: "Redemption management: merchants check redeemed benefits in real-time from the operational dashboard." },
-          { title: "Payments and Settlement", description: "Transparent financial control: check payment status and settlements derived from redeemed promotions." },
-          { title: "Analytics and Reports", description: "Business intelligence: generate detailed sales reports and evaluate the performance of your discounts and customers." }
-        ]
+          {
+            title: "Merchant Management",
+            description:
+              "Comprehensive registration and administration of business identity, catalogs, products, and categories to keep your offering updated and visible.",
+          },
+          {
+            title: "Discounts and Promotions",
+            description:
+              "Design and complete control over the lifecycle of benefits, dynamic campaigns, and promotions with configurable expiration dates.",
+          },
+          {
+            title: "Proximity-Based Discounts",
+            description:
+              "Spatial visibility: geolocated discounts that show users available promotions in nearby businesses.",
+          },
+          {
+            title: "Commercial Redemptions",
+            description:
+              "Redemption management: merchants check redeemed benefits in real-time from the operational dashboard.",
+          },
+          {
+            title: "Payments and Settlement",
+            description:
+              "Transparent financial control: check payment status and settlements derived from redeemed promotions.",
+          },
+          {
+            title: "Analytics and Reports",
+            description:
+              "Business intelligence: generate detailed sales reports and evaluate the performance of your discounts and customers.",
+          },
+        ],
       },
       control: {
         title: "Comprehensive benefits and merchant management",
         features: [
           {
             title: "Merchant Management",
-            description: "Comprehensive administration of business identity, catalogs, products, and categories to keep your offering updated.",
+            description:
+              "Comprehensive administration of business identity, catalogs, products, and categories to keep your offering updated.",
             benefits: [
               "Complete and editable business profile",
               "Product catalog management",
               "Category creation and deletion",
               "Real-time offer updates",
-              "Corporate identity control"
-            ]
+              "Corporate identity control",
+            ],
           },
           {
             title: "Discounts and Promotions",
-            description: "Complete control over the benefits lifecycle to design dynamic strategies and agile campaigns.",
+            description:
+              "Complete control over the benefits lifecycle to design dynamic strategies and agile campaigns.",
             benefits: [
               "Dynamic campaign creation",
               "Validity and availability control",
               "Immediate activation and deactivation",
               "Individual promotion management",
-              "Agile market response"
-            ]
+              "Agile market response",
+            ],
           },
           {
             title: "Geolocation",
-            description: "Spatial visibility in interactive maps so users can find points of sale and nearby benefits.",
+            description:
+              "Spatial visibility in interactive maps so users can find points of sale and nearby benefits.",
             benefits: [
               "Visibility on interactive map",
               "Traffic to physical points of sale",
               "Proximity-based discounts",
               "Coordinate updates",
-              "Establishment geolocation"
-            ]
+              "Establishment geolocation",
+            ],
           },
           {
             title: "Analytics and Reports",
-            description: "Business intelligence for decision making, financial control, and payment and redemption reconciliation.",
+            description:
+              "Business intelligence for decision making, financial control, and payment and redemption reconciliation.",
             benefits: [
               "Detailed sales reports",
               "Discount performance",
               "Payment and settlement status",
               "Customer behavior analysis",
-              "Transaction summaries"
-            ]
-          }
-        ]
+              "Transaction summaries",
+            ],
+          },
+        ],
       },
       contact: {
-        title: "Get started today<br />and protect your<br />platform.",
+        title: "Start building the bank of the future, today.",
         formTitle: "Talk to our team",
         placeholders: {
           nombres: "First Name",
           apellidos: "Last Name",
           compania: "Company Name",
           email: "Company Email",
-          telefono: "Phone (optional)"
+          telefono: "Phone (optional)",
         },
         countryDefault: "Country",
-        legal: "By submitting this form, you accept our <a href='#'>Terms of Service</a> and <a href='#'>Privacy Policy</a>.",
-        submitButton: "Let's Talk"
+        legal:
+          "By submitting this form, you accept our <a href='#'>Terms of Service</a> and <a href='#'>Privacy Policy</a>.",
+        submitButton: "Let's Talk",
       },
       cta: {
-        title: "Get started today and<br />ensure every access.",
-        button: "quote"
+        title: "Start building the bank of the future, today.",
+        button: "quote",
       },
       faq: {
         title: "Frequently Asked Questions",
         items: [
-          { q: "What features does the Discounts module include?", a: "The module centralizes the relationship with merchants to create and distribute benefits. It allows registering businesses, managing product and category catalogs, designing discount campaigns, geolocating establishments on an interactive map, and enabling payments with their respective settlement within the Zelify network." },
-          { q: "How can I manage my business's products and categories?", a: "Through comprehensive identity management, you can create, update, and organize your catalog. The system allows you to manage categories and products independently, giving you the flexibility to activate, deactivate, or remove items according to your inventory availability in real-time." },
-          { q: "What control do I have over the validity of my promotions?", a: "You have complete control over the lifecycle of each benefit. You can create, activate, or deactivate discounts and promotions individually, allowing you to respond agilely to market needs and strategically manage the availability of each offer." },
-          { q: "How does geolocation help my business visibility?", a: "The module includes spatial visibility tools that allow end users to physically locate your points of sale through an interactive map. This ensures that available benefits are shown to customers who are in the vicinity of your establishment." },
-          { q: "How is the settlement of redeemed promotions handled?", a: "Zelify provides transparent financial control. You can check the payment status of transactions and obtain specific reports on payments derived from redemptions, ensuring an orderly flow of funds and proper settlement for participating merchants." },
-          { q: "Is it difficult to integrate the discounts module into my app?", a: "No, we have a Discounts SDK that includes pre-built development libraries. This facilitates fast and standardized integration, reducing technical complexity to manage catalogs, promotions, and commercial reports from your own platform." }
-        ]
+          {
+            q: "What features does the Discounts module include?",
+            a: "The module centralizes the relationship with merchants to create and distribute benefits. It allows registering businesses, managing product and category catalogs, designing discount campaigns, geolocating establishments on an interactive map, and enabling payments with their respective settlement within the Zelify network.",
+          },
+          {
+            q: "How can I manage my business's products and categories?",
+            a: "Through comprehensive identity management, you can create, update, and organize your catalog. The system allows you to manage categories and products independently, giving you the flexibility to activate, deactivate, or remove items according to your inventory availability in real-time.",
+          },
+          {
+            q: "What control do I have over the validity of my promotions?",
+            a: "You have complete control over the lifecycle of each benefit. You can create, activate, or deactivate discounts and promotions individually, allowing you to respond agilely to market needs and strategically manage the availability of each offer.",
+          },
+          {
+            q: "How does geolocation help my business visibility?",
+            a: "The module includes spatial visibility tools that allow end users to physically locate your points of sale through an interactive map. This ensures that available benefits are shown to customers who are in the vicinity of your establishment.",
+          },
+          {
+            q: "How is the settlement of redeemed promotions handled?",
+            a: "Zelify provides transparent financial control. You can check the payment status of transactions and obtain specific reports on payments derived from redemptions, ensuring an orderly flow of funds and proper settlement for participating merchants.",
+          },
+          {
+            q: "Is it difficult to integrate the discounts module into my app?",
+            a: "No, we have a Discounts SDK that includes pre-built development libraries. This facilitates fast and standardized integration, reducing technical complexity to manage catalogs, promotions, and commercial reports from your own platform.",
+          },
+        ],
       },
       footer: {
         linksTitle: "Quick links",
-        disclaimer: "Zelify is a technology platform currently in a development phase, not yet deployed or operational, and does not provide or process financial services directly; all financial operations are conducted exclusively through regulated third-party partners.",
-        copyright: "© 2025 Zelify. All rights reserved."
-      }
-    }
+        disclaimer:
+          "Zelify is a technology platform currently in a development phase, not yet deployed or operational, and does not provide or process financial services directly; all financial operations are conducted exclusively through regulated third-party partners.",
+        copyright: "© 2025 Zelify. All rights reserved.",
+      },
+    },
   };
 
   function updateDiscountsContent(lang = "ES") {
-    const langKey = lang.toUpperCase() === "EN" ? "en" : "es";
+    const langKey = (
+      lang.toUpperCase() === "EN" ? "en" : "es"
+    ) as keyof typeof discountsTranslations;
     const t = discountsTranslations[langKey];
     document.documentElement.lang = langKey;
 
     // Hero section
     const heroTitle = document.querySelector(".auth-title");
     if (heroTitle) heroTitle.innerHTML = t.hero.title;
-    
+
     const heroDesc = document.querySelector(".auth-description");
     if (heroDesc) heroDesc.textContent = t.hero.description;
-    
+
     const emailInput = document.querySelector(".welcome-input");
-    if (emailInput) emailInput.placeholder = t.hero.inputPlaceholder;
-    
+    if (emailInput instanceof HTMLInputElement)
+      emailInput.placeholder = t.hero.inputPlaceholder;
+
     const quoteBtn = document.querySelector(".welcome-quote-button");
     if (quoteBtn) quoteBtn.textContent = t.hero.quoteButton;
-    
+
     const demoBtn = document.querySelector(".welcome-demo-button");
     if (demoBtn) demoBtn.textContent = t.hero.demoButton;
 
@@ -3177,18 +3320,27 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
     const controlFeatures = document.querySelectorAll(".control-feature");
     controlFeatures.forEach((feature, index) => {
       if (t.control.features[index]) {
-        const frontTitle = feature.querySelector(".control-feature-front .control-feature-title");
-        const frontDesc = feature.querySelector(".control-feature-front .control-feature-description");
-        const backTitle = feature.querySelector(".control-feature-back .control-feature-title");
+        const frontTitle = feature.querySelector(
+          ".control-feature-front .control-feature-title",
+        );
+        const frontDesc = feature.querySelector(
+          ".control-feature-front .control-feature-description",
+        );
+        const backTitle = feature.querySelector(
+          ".control-feature-back .control-feature-title",
+        );
         const benefitsList = feature.querySelector(".control-feature-benefits");
 
-        if (frontTitle) frontTitle.textContent = t.control.features[index].title;
-        if (frontDesc) frontDesc.textContent = t.control.features[index].description;
-        if (backTitle) backTitle.textContent = t.control.features[index].title + " Benefits";
+        if (frontTitle)
+          frontTitle.textContent = t.control.features[index].title;
+        if (frontDesc)
+          frontDesc.textContent = t.control.features[index].description;
+        if (backTitle)
+          backTitle.textContent = t.control.features[index].title + " Benefits";
 
         if (benefitsList) {
           benefitsList.innerHTML = t.control.features[index].benefits
-            .map(benefit => `<li>${benefit}</li>`)
+            .map((benefit) => `<li>${benefit}</li>`)
             .join("");
         }
       }
@@ -3204,28 +3356,36 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
     const contactForm = document.getElementById("contactForm");
     if (contactForm) {
       const nombresInput = contactForm.querySelector("#nombres");
-      if (nombresInput) nombresInput.placeholder = t.contact.placeholders.nombres;
-      
+      if (nombresInput instanceof HTMLInputElement)
+        nombresInput.placeholder = t.contact.placeholders.nombres;
+
       const apellidosInput = contactForm.querySelector("#apellidos");
-      if (apellidosInput) apellidosInput.placeholder = t.contact.placeholders.apellidos;
-      
+      if (apellidosInput instanceof HTMLInputElement)
+        apellidosInput.placeholder = t.contact.placeholders.apellidos;
+
       const companiaInput = contactForm.querySelector("#compania");
-      if (companiaInput) companiaInput.placeholder = t.contact.placeholders.compania;
-      
+      if (companiaInput instanceof HTMLInputElement)
+        companiaInput.placeholder = t.contact.placeholders.compania;
+
       const emailInput2 = contactForm.querySelector("#email");
-      if (emailInput2) emailInput2.placeholder = t.contact.placeholders.email;
-      
+      if (emailInput2 instanceof HTMLInputElement)
+        emailInput2.placeholder = t.contact.placeholders.email;
+
       const telefonoInput = contactForm.querySelector("#telefono");
-      if (telefonoInput) telefonoInput.placeholder = t.contact.placeholders.telefono;
-      
+      if (telefonoInput instanceof HTMLInputElement)
+        telefonoInput.placeholder = t.contact.placeholders.telefono;
+
       const countrySelect = contactForm.querySelector("#pais");
-      if (countrySelect && countrySelect.options.length > 0) {
+      if (
+        countrySelect instanceof HTMLSelectElement &&
+        countrySelect.options.length > 0
+      ) {
         countrySelect.options[0].textContent = t.contact.countryDefault;
       }
-      
+
       const submitBtn = contactForm.querySelector(".contact-submit-btn");
       if (submitBtn) submitBtn.textContent = t.contact.submitButton;
-      
+
       const legalText = contactForm.querySelector(".contact-legal");
       if (legalText) legalText.innerHTML = t.contact.legal;
     }
@@ -3263,8 +3423,9 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
   }
 
   // Listen for language change event
-  window.addEventListener("ui:languagechange", (event) => {
-    const lang = event.detail?.language || "ES";
+  window.addEventListener("ui:languagechange", (event: Event) => {
+    const customEvent = event as CustomEvent<{ language: string }>;
+    const lang = customEvent.detail?.language || "ES";
     updateDiscountsContent(lang);
   });
 

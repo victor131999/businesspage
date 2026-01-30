@@ -2,6 +2,7 @@
 import Navbar3 from "../components/NavbarSimple.astro";
 import ProductsPanel from "../components/productsPanel.astro";
 import { AlaizaAssistant } from "../components/AlaizaAssistant";
+import AuthApp from "../components/auth/AuthApp.astro";
 ---
 
 <html lang="es">
@@ -74,310 +75,7 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
       </div>
 
       <!-- Contenedor del dispositivo móvil -->
-      <div class="device-container">
-        <!-- Frame del iPhone -->
-        <div class="device-frame-wrapper">
-          <div class="device-frame">
-            <!-- Pantalla del dispositivo -->
-            <div class="device-screen">
-              <!-- Status Bar con Dynamic Island -->
-              <div class="device-status-bar">
-                <div class="status-time">9:41</div>
-                <div class="dynamic-island">
-                  <div class="island-shape"></div>
-                  <div class="island-speaker"></div>
-                </div>
-                <div class="status-icons">
-                  <svg class="signal-icon" fill="none" viewBox="0 0 20 12">
-                    <path
-                      d="M1 8h2v2H1V8zm3-2h2v4H4V6zm3-2h2v6H7V4zm3-1h2v7h-2V3z"
-                      fill="currentColor"></path>
-                  </svg>
-                  <div class="battery-icon">
-                    <div class="battery-level"></div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Contenido del dispositivo -->
-              <div class="device-content">
-                <!-- Header con back y logo -->
-                <div class="device-header">
-                  <button class="device-back-btn">&lt; back</button>
-                  <div class="device-logo">
-                    <img src="/images/zelify_logo.png" alt="Zelify" />
-                  </div>
-                  <div class="device-header-spacer"></div>
-                </div>
-
-                <!-- Animación GIF -->
-                <div class="device-animation">
-                  <img src="/gift/ANIMACION 1.gif" alt="Auth animation" />
-                </div>
-
-                <!-- Tarjeta con fondo translúcido -->
-                <div class="device-card">
-                  <div class="auth-phone-card">
-                    <!-- Indicador de progreso -->
-                    <div class="phone-card-dots">
-                      <span class="dot active"></span>
-                      <span class="dot"></span>
-                      <span class="dot"></span>
-                      <span class="dot"></span>
-                      <span class="dot"></span>
-                    </div>
-
-                    <h2 class="phone-card-title" id="step-title">
-                      Crear Cuenta
-                    </h2>
-                    <p class="phone-card-description" id="step-description">
-                      Ingresa tu nombre y correo electrónico para empezar. Te
-                      enviaremos un código de verificación.
-                    </p>
-
-                    <button class="btn-google">
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M19.6 10.2273C19.6 9.51818 19.5364 8.83636 19.4182 8.18182H10V12.05H15.3818C15.15 13.3 14.4455 14.3591 13.3864 15.0682V17.5773H16.6182C18.5091 15.8364 19.6 13.2727 19.6 10.2273Z"
-                          fill="#4285F4"></path>
-                        <path
-                          d="M10 20C12.7 20 14.9636 19.1045 16.6182 17.5773L13.3864 15.0682C12.4909 15.6682 11.3455 16.0227 10 16.0227C7.39545 16.0227 5.19091 14.2636 4.40455 11.9H1.06364V14.4909C2.70909 17.7591 6.09091 20 10 20Z"
-                          fill="#34A853"></path>
-                        <path
-                          d="M4.40455 11.9C4.20455 11.3 4.09091 10.6591 4.09091 10C4.09091 9.34091 4.20455 8.7 4.40455 8.1V5.50909H1.06364C0.386364 6.85909 0 8.38636 0 10C0 11.6136 0.386364 13.1409 1.06364 14.4909L4.40455 11.9Z"
-                          fill="#FBBC05"></path>
-                        <path
-                          d="M10 3.97727C11.4682 3.97727 12.7864 4.46818 13.8227 5.42273L16.6909 2.55455C14.9591 0.940909 12.6955 0 10 0C6.09091 0 2.70909 2.24091 1.06364 5.50909L4.40455 8.1C5.19091 5.73636 7.39545 3.97727 10 3.97727Z"
-                          fill="#EA4335"></path>
-                      </svg>
-                      Crear cuenta con Google
-                    </button>
-
-                    <div class="phone-card-divider">
-                      <span class="divider-line"></span>
-                      <span class="divider-text">O crea cuenta con correo</span>
-                      <span class="divider-line"></span>
-                    </div>
-
-                    <!-- Paso 1: Crear Cuenta -->
-                    <div id="step-1" class="auth-step">
-                      <form class="phone-card-form" id="form-step-1">
-                        <div class="form-field">
-                          <label
-                            >Nombre Completo<span class="required">*</span
-                            ></label
-                          >
-                          <input
-                            type="text"
-                            id="fullName"
-                            placeholder="John Doe"
-                            required
-                          />
-                          <span class="field-error-message"></span>
-                        </div>
-                        <div class="form-field">
-                          <label>Correo<span class="required">*</span></label>
-                          <input
-                            type="email"
-                            id="email"
-                            placeholder="email@example.com"
-                            required
-                          />
-                          <span class="field-error-message"></span>
-                        </div>
-                        <button type="submit" class="btn-continuar">
-                          Continuar →
-                        </button>
-                      </form>
-                    </div>
-
-                    <!-- Paso 2: Verificar Email -->
-                    <div id="step-2" class="auth-step" style="display: none;">
-                      <form class="phone-card-form" id="form-step-2">
-                        <div class="otp-container">
-                          <div class="otp-inputs" id="otp-email">
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                          </div>
-                        </div>
-                        <button type="submit" class="btn-continuar">
-                          Verificar →
-                        </button>
-                        <p class="resend-code">
-                          ¿No recibiste el código? <a href="#" id="resend-email"
-                            >Reenviar</a
-                          >
-                        </p>
-                      </form>
-                    </div>
-
-                    <!-- Paso 3: Agregar Teléfono -->
-                    <div id="step-3" class="auth-step" style="display: none;">
-                      <form class="phone-card-form" id="form-step-3">
-                        <div class="form-field">
-                          <label
-                            >Número de Teléfono<span class="required">*</span
-                            ></label
-                          >
-                          <input
-                            type="tel"
-                            id="phone"
-                            placeholder="+1 234 567 8900"
-                            required
-                          />
-                          <span class="field-error-message"></span>
-                        </div>
-                        <button type="submit" class="btn-continuar">
-                          Continuar →
-                        </button>
-                      </form>
-                    </div>
-
-                    <!-- Paso 4: Verificar Teléfono -->
-                    <div id="step-4" class="auth-step" style="display: none;">
-                      <form class="phone-card-form" id="form-step-4">
-                        <div class="otp-container">
-                          <div class="otp-inputs" id="otp-phone">
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                            <input
-                              type="text"
-                              class="otp-input"
-                              maxlength="1"
-                              inputmode="numeric"
-                            />
-                          </div>
-                        </div>
-                        <button type="submit" class="btn-continuar">
-                          Verificar →
-                        </button>
-                        <p class="resend-code">
-                          ¿No recibiste el código? <a href="#" id="resend-phone"
-                            >Reenviar</a
-                          >
-                        </p>
-                      </form>
-                    </div>
-
-                    <!-- Paso 5: Completar Perfil -->
-                    <div id="step-5" class="auth-step" style="display: none;">
-                      <form class="phone-card-form" id="form-step-5">
-                        <div class="form-field">
-                          <label
-                            >Contraseña<span class="required">*</span></label
-                          >
-                          <input
-                            type="password"
-                            id="password"
-                            placeholder="Mínimo 8 caracteres"
-                            required
-                          />
-                          <span class="field-error-message"></span>
-                        </div>
-                        <div class="form-field">
-                          <label
-                            >Confirmar Contraseña<span class="required">*</span
-                            ></label
-                          >
-                          <input
-                            type="password"
-                            id="confirmPassword"
-                            placeholder="Confirma tu contraseña"
-                            required
-                          />
-                          <span class="field-error-message"></span>
-                        </div>
-                        <button type="submit" class="btn-continuar">
-                          Crear Cuenta →
-                        </button>
-                      </form>
-                    </div>
-
-                    <p
-                      class="phone-card-login"
-                      id="login-link"
-                      style="display: none;"
-                    >
-                      ¿Ya tienes una cuenta? <a href="#">Ingresa</a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Home Indicator -->
-              <div class="device-home-indicator"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <AuthApp />
     </div>
 
     <!-- Sección de Seguridad Inteligente -->
@@ -800,9 +498,7 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
           <!-- Texto izquierdo -->
           <div class="contact-text">
             <h2 class="contact-title">
-              Empieza hoy<br />
-              y protege tu<br />
-              plataforma.
+              Comienza a construir el banco del futuro, hoy.
             </h2>
           </div>
 
@@ -2876,19 +2572,37 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
     es: {
       hero: {
         title: "Entrada simple, control<br />total, cero fricción.",
-        description: "Autenticación avanzada con biometría y doble factor,<br />captura inteligente de datos del dispositivo y detección<br />temprana de tráfico inusual para prevenir fraudes<br />y garantizar usuarios confiables.",
+        description:
+          "Autenticación avanzada con biometría y doble factor,<br />captura inteligente de datos del dispositivo y detección<br />temprana de tráfico inusual para prevenir fraudes<br />y garantizar usuarios confiables.",
         ctaInputPlaceholder: "ingresa tu correo",
         ctaButton: "cotizar",
-        demoButton: "demo"
+        demoButton: "demo",
       },
       device: {
         back: "< back",
         steps: {
-          1: { title: "Crear Cuenta", desc: "Ingresa tu nombre y correo electrónico para empezar. Te enviaremos un código de verificación." },
-          2: { title: "Verifica tu Correo", descPrefix: "Hemos enviado un código de 6 dígitos a<br /><strong id='email-display'>" },
-          3: { title: "Agrega tu Teléfono", desc: "Te enviaremos un código de verificación por SMS para confirmar tu número de teléfono." },
-          4: { title: "Verifica tu Teléfono", descPrefix: "Hemos enviado un código de 6 dígitos a<br /><strong id='phone-display'>" },
-          5: { title: "Completa tu Perfil", desc: "Completa la información restante para finalizar la configuración de tu cuenta." }
+          1: {
+            title: "Crear Cuenta",
+            desc: "Ingresa tu nombre y correo electrónico para empezar. Te enviaremos un código de verificación.",
+          },
+          2: {
+            title: "Verifica tu Correo",
+            descPrefix:
+              "Hemos enviado un código de 6 dígitos a<br /><strong id='email-display'>",
+          },
+          3: {
+            title: "Agrega tu Teléfono",
+            desc: "Te enviaremos un código de verificación por SMS para confirmar tu número de teléfono.",
+          },
+          4: {
+            title: "Verifica tu Teléfono",
+            descPrefix:
+              "Hemos enviado un código de 6 dígitos a<br /><strong id='phone-display'>",
+          },
+          5: {
+            title: "Completa tu Perfil",
+            desc: "Completa la información restante para finalizar la configuración de tu cuenta.",
+          },
         },
         buttons: {
           google: "Crear cuenta con Google",
@@ -2897,33 +2611,52 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
           verify: "Verificar →",
           create: "Crear Cuenta →",
           login: "¿Ya tienes una cuenta? <a href='#'>Ingresa</a>",
-          resend: "¿No recibiste el código? <a href='#' class='resend-link'>Reenviar</a>"
+          resend:
+            "¿No recibiste el código? <a href='#' class='resend-link'>Reenviar</a>",
         },
         placeholders: {
           name: "John Doe",
           email: "email@example.com",
           phone: "+1 234 567 8900",
           password: "Mínimo 8 caracteres",
-          confirm: "Confirma tu contraseña"
+          confirm: "Confirma tu contraseña",
         },
         labels: {
           name: "Nombre Completo",
           email: "Correo",
           phone: "Número de Teléfono",
           password: "Contraseña",
-          confirm: "Confirmar Contraseña"
-        }
+          confirm: "Confirmar Contraseña",
+        },
       },
       security: {
         title: "Seguridad inteligente<br />desde el primer acceso.",
         features: [
-          { title: "Registro a tu medida", desc: "Campos personalizados que se adaptan a tu negocio y a tus usuarios." },
-          { title: "Acceso rápido y seguro", desc: "Biometría y autenticación multifactor sin fricciones." },
-          { title: "Seguridad desde el primer clic", desc: "Protección avanzada en cada inicio de sesión." },
-          { title: "Inteligencia del dispositivo", desc: "Validación automática del entorno desde donde se conecta el usuario." },
-          { title: "Usuarios verificados", desc: "Cada usuario vinculado a un entorno confiable y trazable." },
-          { title: "Detección temprana de fraude", desc: "Identifica tráfico inusual, VPNs y accesos sospechosos en tiempo real." }
-        ]
+          {
+            title: "Registro a tu medida",
+            desc: "Campos personalizados que se adaptan a tu negocio y a tus usuarios.",
+          },
+          {
+            title: "Acceso rápido y seguro",
+            desc: "Biometría y autenticación multifactor sin fricciones.",
+          },
+          {
+            title: "Seguridad desde el primer clic",
+            desc: "Protección avanzada en cada inicio de sesión.",
+          },
+          {
+            title: "Inteligencia del dispositivo",
+            desc: "Validación automática del entorno desde donde se conecta el usuario.",
+          },
+          {
+            title: "Usuarios verificados",
+            desc: "Cada usuario vinculado a un entorno confiable y trazable.",
+          },
+          {
+            title: "Detección temprana de fraude",
+            desc: "Identifica tráfico inusual, VPNs y accesos sospechosos en tiempo real.",
+          },
+        ],
       },
       control: {
         title: "Control total del acceso a tu plataforma",
@@ -2932,57 +2665,103 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
             title: "Autenticación",
             desc: "Registro de usuarios, inicios de sesión seguros y validación de correo y número de teléfono.",
             backTitle: "Beneficios de Autenticación",
-            benefits: ["Registro personalizado con campos adaptables", "Verificación de email y teléfono en tiempo real", "Autenticación multifactor sin fricciones", "Biometría integrada para acceso rápido", "Gestión segura de sesiones"]
+            benefits: [
+              "Registro personalizado con campos adaptables",
+              "Verificación de email y teléfono en tiempo real",
+              "Autenticación multifactor sin fricciones",
+              "Biometría integrada para acceso rápido",
+              "Gestión segura de sesiones",
+            ],
           },
           {
             title: "Información de dispositivo",
             desc: "Servicio de inteligencia para identificar información del dispositivo desde básica hasta avanzada.",
             backTitle: "Beneficios de Información de Dispositivo",
-            benefits: ["Identificación automática del dispositivo", "Detección de características avanzadas", "Análisis de entorno y configuración", "Validación de seguridad del dispositivo", "Información detallada en tiempo real"]
+            benefits: [
+              "Identificación automática del dispositivo",
+              "Detección de características avanzadas",
+              "Análisis de entorno y configuración",
+              "Validación de seguridad del dispositivo",
+              "Información detallada en tiempo real",
+            ],
           },
           {
             title: "Geolocalización",
             desc: "Convierte coordenadas en información estratégica y de valor.",
             backTitle: "Beneficios de Geolocalización",
-            benefits: ["Análisis de ubicación en tiempo real", "Detección de accesos sospechosos", "Información estratégica de coordenadas", "Validación de entorno geográfico", "Prevención de fraudes por ubicación"]
+            benefits: [
+              "Análisis de ubicación en tiempo real",
+              "Detección de accesos sospechosos",
+              "Información estratégica de coordenadas",
+              "Validación de entorno geográfico",
+              "Prevención de fraudes por ubicación",
+            ],
           },
           {
             title: "SDK de integración",
             desc: "Incorpora estas interfaces mediante una única integración ágil y sencilla.",
             backTitle: "Beneficios del SDK",
-            benefits: ["Integración rápida y sencilla", "Una sola línea de código", "Documentación completa y ejemplos", "Soporte técnico especializado", "Actualizaciones automáticas"]
-          }
-        ]
+            benefits: [
+              "Integración rápida y sencilla",
+              "Una sola línea de código",
+              "Documentación completa y ejemplos",
+              "Soporte técnico especializado",
+              "Actualizaciones automáticas",
+            ],
+          },
+        ],
       },
       contact: {
-        title: "Empieza hoy<br />y protege tu<br />plataforma.",
+        title: "Comienza a construir el banco del futuro, hoy.",
         formTitle: "Habla con nuestro equipo",
         placeholders: {
           names: "Nombres",
           surnames: "Apellidos",
           company: "Nombre de la compañía",
           email: "Email de la compañía",
-          phone: "Teléfono (opcional)"
+          phone: "Teléfono (opcional)",
         },
         countryDefault: "País",
-        legal: "Al enviar este formulario, aceptas nuestros <a href='#'>Términos de Servicio</a> y <a href='#'>Política de Privacidad</a>.",
-        submit: "Hablemos"
+        legal:
+          "Al enviar este formulario, aceptas nuestros <a href='#'>Términos de Servicio</a> y <a href='#'>Política de Privacidad</a>.",
+        submit: "Hablemos",
       },
       faq: {
         title: "Preguntas frecuentes",
         items: [
-          { q: "¿Qué funcionalidades incluye el producto?", a: "Nuestro producto incluye autenticación avanzada con biometría, registro personalizable de usuarios, validación de email y teléfono, información detallada del dispositivo, geolocalización estratégica, detección temprana de fraudes, y un SDK de integración sencillo para incorporar todas estas funcionalidades en una sola línea de código." },
-          { q: "¿Es seguro usar biometría y doble factor?", a: "Sí, es completamente seguro. La biometría y la autenticación de doble factor (2FA) son estándares de la industria que proporcionan capas adicionales de seguridad. Nuestro sistema utiliza encriptación de extremo a extremo y cumple con los más altos estándares de seguridad para proteger los datos biométricos y las credenciales de tus usuarios." },
-          { q: "¿Puedo personalizar los campos de registro para mis usuarios?", a: "Absolutamente. Nuestro sistema de registro es completamente personalizable. Puedes agregar, eliminar o modificar campos según las necesidades de tu negocio. Los campos se adaptan dinámicamente a tus usuarios, permitiéndote crear experiencias de registro únicas y relevantes para tu plataforma." },
-          { q: "¿Cómo detecta fraudes y accesos sospechosos?", a: "Nuestro sistema utiliza inteligencia artificial y machine learning para analizar patrones de comportamiento, detectar tráfico inusual, identificar el uso de VPNs, analizar la geolocalización de accesos, y monitorear información del dispositivo en tiempo real. Todo esto permite identificar y prevenir accesos sospechosos antes de que representen una amenaza." },
-          { q: "¿Funciona en cualquier dispositivo?", a: "Sí, nuestro producto es multiplataforma y funciona en cualquier dispositivo: smartphones (iOS y Android), tablets, computadoras de escritorio y laptops. La interfaz se adapta automáticamente a cada dispositivo, proporcionando una experiencia óptima sin importar desde dónde accedan tus usuarios." },
-          { q: "¿Es fácil de integrar a mi sistema actual?", a: "Muy fácil. Nuestro SDK de integración está diseñado para ser implementado con una sola línea de código. Proporcionamos documentación completa, ejemplos de código, y soporte técnico especializado para ayudarte en el proceso de integración. La mayoría de nuestros clientes completan la integración en menos de una hora." },
-          { q: "¿Puedo escalar la seguridad a medida que crece mi plataforma?", a: "Definitivamente. Nuestra arquitectura está construida para escalar automáticamente. A medida que tu plataforma crece, nuestro sistema se adapta sin necesidad de cambios adicionales. Puedes manejar desde cientos hasta millones de usuarios sin preocuparte por la capacidad o el rendimiento del sistema de seguridad." }
-        ]
+          {
+            q: "¿Qué funcionalidades incluye el producto?",
+            a: "Nuestro producto incluye autenticación avanzada con biometría, registro personalizable de usuarios, validación de email y teléfono, información detallada del dispositivo, geolocalización estratégica, detección temprana de fraudes, y un SDK de integración sencillo para incorporar todas estas funcionalidades en una sola línea de código.",
+          },
+          {
+            q: "¿Es seguro usar biometría y doble factor?",
+            a: "Sí, es completamente seguro. La biometría y la autenticación de doble factor (2FA) son estándares de la industria que proporcionan capas adicionales de seguridad. Nuestro sistema utiliza encriptación de extremo a extremo y cumple con los más altos estándares de seguridad para proteger los datos biométricos y las credenciales de tus usuarios.",
+          },
+          {
+            q: "¿Puedo personalizar los campos de registro para mis usuarios?",
+            a: "Absolutamente. Nuestro sistema de registro es completamente personalizable. Puedes agregar, eliminar o modificar campos según las necesidades de tu negocio. Los campos se adaptan dinámicamente a tus usuarios, permitiéndote crear experiencias de registro únicas y relevantes para tu plataforma.",
+          },
+          {
+            q: "¿Cómo detecta fraudes y accesos sospechosos?",
+            a: "Nuestro sistema utiliza inteligencia artificial y machine learning para analizar patrones de comportamiento, detectar tráfico inusual, identificar el uso de VPNs, analizar la geolocalización de accesos, y monitorear información del dispositivo en tiempo real. Todo esto permite identificar y prevenir accesos sospechosos antes de que representen una amenaza.",
+          },
+          {
+            q: "¿Funciona en cualquier dispositivo?",
+            a: "Sí, nuestro producto es multiplataforma y funciona en cualquier dispositivo: smartphones (iOS y Android), tablets, computadoras de escritorio y laptops. La interfaz se adapta automáticamente a cada dispositivo, proporcionando una experiencia óptima sin importar desde dónde accedan tus usuarios.",
+          },
+          {
+            q: "¿Es fácil de integrar a mi sistema actual?",
+            a: "Muy fácil. Nuestro SDK de integración está diseñado para ser implementado con una sola línea de código. Proporcionamos documentación completa, ejemplos de código, y soporte técnico especializado para ayudarte en el proceso de integración. La mayoría de nuestros clientes completan la integración en menos de una hora.",
+          },
+          {
+            q: "¿Puedo escalar la seguridad a medida que crece mi plataforma?",
+            a: "Definitivamente. Nuestra arquitectura está construida para escalar automáticamente. A medida que tu plataforma crece, nuestro sistema se adapta sin necesidad de cambios adicionales. Puedes manejar desde cientos hasta millones de usuarios sin preocuparte por la capacidad o el rendimiento del sistema de seguridad.",
+          },
+        ],
       },
       cta: {
-        title: "Comienza hoy y<br />asegura cada acceso.",
-        button: "cotizar"
+        title: "Comienza a construir el banco del futuro, hoy.",
+        button: "cotizar",
       },
       footer: {
         quickLinks: "Enlaces rápidos",
@@ -2990,26 +2769,45 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
         about: "Nosotros",
         developers: "Desarrolladores",
         others: "Otros",
-        disclaimer: "Zelify es una plataforma tecnológica actualmente en fase de desarrollo, aún no desplegada ni operativa, y no proporciona ni procesa servicios financieros directamente; todas las operaciones financieras se realizan exclusivamente a través de socios terceros regulados.",
-        copyright: "© 2025 Zelify. Todos los derechos reservados."
-      }
+        disclaimer:
+          "Zelify es una plataforma tecnológica actualmente en fase de desarrollo, aún no desplegada ni operativa, y no proporciona ni procesa servicios financieros directamente; todas las operaciones financieras se realizan exclusivamente a través de socios terceros regulados.",
+        copyright: "© 2025 Zelify. Todos los derechos reservados.",
+      },
     },
     en: {
       hero: {
         title: "Simple entry, total<br />control, zero friction.",
-        description: "Advanced authentication with biometrics and 2FA,<br />intelligent device data capture, and early<br />unusual traffic detection to prevent fraud<br />and ensure trusted users.",
+        description:
+          "Advanced authentication with biometrics and 2FA,<br />intelligent device data capture, and early<br />unusual traffic detection to prevent fraud<br />and ensure trusted users.",
         ctaInputPlaceholder: "enter your email",
         ctaButton: "quote",
-        demoButton: "demo"
+        demoButton: "demo",
       },
       device: {
         back: "< back",
         steps: {
-          1: { title: "Create Account", desc: "Enter your name and email to start. We will send you a verification code." },
-          2: { title: "Verify your Email", descPrefix: "We sent a 6-digit code to<br /><strong id='email-display'>" },
-          3: { title: "Add your Phone", desc: "We will send you a verification code via SMS to confirm your phone number." },
-          4: { title: "Verify your Phone", descPrefix: "We sent a 6-digit code to<br /><strong id='phone-display'>" },
-          5: { title: "Complete Profile", desc: "Complete the remaining information to finish your account setup." }
+          1: {
+            title: "Create Account",
+            desc: "Enter your name and email to start. We will send you a verification code.",
+          },
+          2: {
+            title: "Verify your Email",
+            descPrefix:
+              "We sent a 6-digit code to<br /><strong id='email-display'>",
+          },
+          3: {
+            title: "Add your Phone",
+            desc: "We will send you a verification code via SMS to confirm your phone number.",
+          },
+          4: {
+            title: "Verify your Phone",
+            descPrefix:
+              "We sent a 6-digit code to<br /><strong id='phone-display'>",
+          },
+          5: {
+            title: "Complete Profile",
+            desc: "Complete the remaining information to finish your account setup.",
+          },
         },
         buttons: {
           google: "Create account with Google",
@@ -3018,33 +2816,52 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
           verify: "Verify →",
           create: "Create Account →",
           login: "Already have an account? <a href='#'>Log in</a>",
-          resend: "Didn't receive the code? <a href='#' class='resend-link'>Resend</a>"
+          resend:
+            "Didn't receive the code? <a href='#' class='resend-link'>Resend</a>",
         },
         placeholders: {
           name: "John Doe",
           email: "email@example.com",
           phone: "+1 234 567 8900",
           password: "Min 8 characters",
-          confirm: "Confirm your password"
+          confirm: "Confirm your password",
         },
         labels: {
           name: "Full Name",
           email: "Email",
           phone: "Phone Number",
           password: "Password",
-          confirm: "Confirm Password"
-        }
+          confirm: "Confirm Password",
+        },
       },
       security: {
         title: "Smart security<br />from the first access.",
         features: [
-          { title: "Tailored Registration", desc: "Custom fields that adapt to your business and your users." },
-          { title: "Fast and Secure Access", desc: "Frictionless biometrics and multi-factor authentication." },
-          { title: "Security from First Click", desc: "Advanced protection on every login." },
-          { title: "Device Intelligence", desc: "Automatic validation of the user's connection environment." },
-          { title: "Verified Users", desc: "Every user linked to a trusted and traceable environment." },
-          { title: "Early Fraud Detection", desc: "Identifies unusual traffic, VPNs, and suspicious access in real-time." }
-        ]
+          {
+            title: "Tailored Registration",
+            desc: "Custom fields that adapt to your business and your users.",
+          },
+          {
+            title: "Fast and Secure Access",
+            desc: "Frictionless biometrics and multi-factor authentication.",
+          },
+          {
+            title: "Security from First Click",
+            desc: "Advanced protection on every login.",
+          },
+          {
+            title: "Device Intelligence",
+            desc: "Automatic validation of the user's connection environment.",
+          },
+          {
+            title: "Verified Users",
+            desc: "Every user linked to a trusted and traceable environment.",
+          },
+          {
+            title: "Early Fraud Detection",
+            desc: "Identifies unusual traffic, VPNs, and suspicious access in real-time.",
+          },
+        ],
       },
       control: {
         title: "Total control of access to your platform",
@@ -3053,57 +2870,103 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
             title: "Authentication",
             desc: "User registration, secure logins, and email/phone validation.",
             backTitle: "Authentication Benefits",
-            benefits: ["Custom registration with adaptable fields", "Real-time email and phone verification", "Frictionless multi-factor authentication", "Integrated biometrics for fast access", "Secure session management"]
+            benefits: [
+              "Custom registration with adaptable fields",
+              "Real-time email and phone verification",
+              "Frictionless multi-factor authentication",
+              "Integrated biometrics for fast access",
+              "Secure session management",
+            ],
           },
           {
             title: "Device Information",
             desc: "Intelligence service to identify device information from basic to advanced.",
             backTitle: "Device Info Benefits",
-            benefits: ["Automatic device identification", "Detection of advanced features", "Environment and configuration analysis", "Device security validation", "Detailed real-time information"]
+            benefits: [
+              "Automatic device identification",
+              "Detection of advanced features",
+              "Environment and configuration analysis",
+              "Device security validation",
+              "Detailed real-time information",
+            ],
           },
           {
             title: "Geolocation",
             desc: "Converts coordinates into strategic and valuable information.",
             backTitle: "Geolocation Benefits",
-            benefits: ["Real-time location analysis", "Suspicious access detection", "Strategic coordinate information", "Geographic environment validation", "Location-based fraud prevention"]
+            benefits: [
+              "Real-time location analysis",
+              "Suspicious access detection",
+              "Strategic coordinate information",
+              "Geographic environment validation",
+              "Location-based fraud prevention",
+            ],
           },
           {
             title: "Integration SDK",
             desc: "Incorporate these interfaces through a single agile and simple integration.",
             backTitle: "SDK Benefits",
-            benefits: ["Fast and simple integration", "A single line of code", "Complete documentation and examples", "Specialized technical support", "Automatic updates"]
-          }
-        ]
+            benefits: [
+              "Fast and simple integration",
+              "A single line of code",
+              "Complete documentation and examples",
+              "Specialized technical support",
+              "Automatic updates",
+            ],
+          },
+        ],
       },
       contact: {
-        title: "Start today<br />and protect your<br />platform.",
+        title: "Start building the bank of the future, today.",
         formTitle: "Talk to our team",
         placeholders: {
           names: "First Name",
           surnames: "Last Name",
           company: "Company Name",
           email: "Company Email",
-          phone: "Phone (optional)"
+          phone: "Phone (optional)",
         },
         countryDefault: "Country",
-        legal: "By submitting this form, you accept our <a href='#'>Terms of Service</a> and <a href='#'>Privacy Policy</a>.",
-        submit: "Let's Talk"
+        legal:
+          "By submitting this form, you accept our <a href='#'>Terms of Service</a> and <a href='#'>Privacy Policy</a>.",
+        submit: "Let's Talk",
       },
       faq: {
         title: "Frequently Asked Questions",
         items: [
-          { q: "What features does the product include?", a: "Our product includes advanced authentication with biometrics, customizable user registration, email and phone validation, detailed device information, strategic geolocation, early fraud detection, and a simple integration SDK to incorporate all these features with a single line of code." },
-          { q: "Is it safe to use biometrics and 2FA?", a: "Yes, it is completely safe. Biometrics and two-factor authentication (2FA) are industry standards that provide additional security layers. Our system uses end-to-end encryption and complies with the highest security standards to protect your users' biometric data and credentials." },
-          { q: "Can I customize the registration fields for my users?", a: "Absolutely. Our registration system is completely customizable. You can add, remove, or modify fields according to your business needs. Fields dynamically adapt to your users, allowing you to create unique and relevant registration experiences for your platform." },
-          { q: "How does it detect fraud and suspicious access?", a: "Our system uses artificial intelligence and machine learning to analyze behavior patterns, detect unusual traffic, identify VPN usage, analyze access geolocation, and monitor device information in real-time. All this allows identifying and preventing suspicious access before they represent a threat." },
-          { q: "Does it work on any device?", a: "Yes, our product is cross-platform and works on any device: smartphones (iOS and Android), tablets, desktops, and laptops. The interface automatically adapts to each device, providing an optimal experience regardless of where your users access from." },
-          { q: "Is it easy to integrate into my current system?", a: "Very easy. Our integration SDK is designed to be implemented with a single line of code. We provide complete documentation, code examples, and specialized technical support to help you throughout the integration process. Most of our clients complete the integration in less than an hour." },
-          { q: "Can I scale security as my platform grows?", a: "Definitely. Our architecture is built to scale automatically. As your platform grows, our system adapts without needing additional changes. You can handle from hundreds to millions of users without worrying about the capacity or performance of the security system." }
-        ]
+          {
+            q: "What features does the product include?",
+            a: "Our product includes advanced authentication with biometrics, customizable user registration, email and phone validation, detailed device information, strategic geolocation, early fraud detection, and a simple integration SDK to incorporate all these features with a single line of code.",
+          },
+          {
+            q: "Is it safe to use biometrics and 2FA?",
+            a: "Yes, it is completely safe. Biometrics and two-factor authentication (2FA) are industry standards that provide additional security layers. Our system uses end-to-end encryption and complies with the highest security standards to protect your users' biometric data and credentials.",
+          },
+          {
+            q: "Can I customize the registration fields for my users?",
+            a: "Absolutely. Our registration system is completely customizable. You can add, remove, or modify fields according to your business needs. Fields dynamically adapt to your users, allowing you to create unique and relevant registration experiences for your platform.",
+          },
+          {
+            q: "How does it detect fraud and suspicious access?",
+            a: "Our system uses artificial intelligence and machine learning to analyze behavior patterns, detect unusual traffic, identify VPN usage, analyze access geolocation, and monitor device information in real-time. All this allows identifying and preventing suspicious access before they represent a threat.",
+          },
+          {
+            q: "Does it work on any device?",
+            a: "Yes, our product is cross-platform and works on any device: smartphones (iOS and Android), tablets, desktops, and laptops. The interface automatically adapts to each device, providing an optimal experience regardless of where your users access from.",
+          },
+          {
+            q: "Is it easy to integrate into my current system?",
+            a: "Very easy. Our integration SDK is designed to be implemented with a single line of code. We provide complete documentation, code examples, and specialized technical support to help you throughout the integration process. Most of our clients complete the integration in less than an hour.",
+          },
+          {
+            q: "Can I scale security as my platform grows?",
+            a: "Definitely. Our architecture is built to scale automatically. As your platform grows, our system adapts without needing additional changes. You can handle from hundreds to millions of users without worrying about the capacity or performance of the security system.",
+          },
+        ],
       },
       cta: {
         title: "Start today and<br />secure every access.",
-        button: "quote"
+        button: "quote",
       },
       footer: {
         quickLinks: "Quick links",
@@ -3111,10 +2974,11 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
         about: "About us",
         developers: "Developers",
         others: "Others",
-        disclaimer: "Zelify is a technology platform currently in a development phase, not yet deployed or operational, and does not provide or process financial services directly; all financial operations are conducted exclusively through regulated third-party partners.",
-        copyright: "© 2025 Zelify. All rights reserved."
-      }
-    }
+        disclaimer:
+          "Zelify is a technology platform currently in a development phase, not yet deployed or operational, and does not provide or process financial services directly; all financial operations are conducted exclusively through regulated third-party partners.",
+        copyright: "© 2025 Zelify. All rights reserved.",
+      },
+    },
   };
 
   // Función para actualizar contenidos
@@ -3125,32 +2989,32 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
 
     // Hero
     const heroTitle = document.querySelector(".auth-title");
-    if(heroTitle) heroTitle.innerHTML = t.hero.title;
-    
+    if (heroTitle) heroTitle.innerHTML = t.hero.title;
+
     const heroDesc = document.querySelector(".auth-description");
-    if(heroDesc) heroDesc.innerHTML = t.hero.description;
-    
+    if (heroDesc) heroDesc.innerHTML = t.hero.description;
+
     const heroEmail = document.querySelector(".welcome-input");
     if (heroEmail) {
-        heroEmail.placeholder = t.hero.ctaInputPlaceholder;
-        heroEmail.ariaLabel = t.hero.ctaInputPlaceholder;
+      heroEmail.placeholder = t.hero.ctaInputPlaceholder;
+      heroEmail.ariaLabel = t.hero.ctaInputPlaceholder;
     }
     const heroBtn = document.querySelector(".welcome-quote-button");
     if (heroBtn) heroBtn.textContent = t.hero.ctaButton;
-    
+
     const demoBtn = document.querySelector(".welcome-demo-button");
     if (demoBtn) demoBtn.textContent = t.hero.demoButton;
 
     // Device static texts
     const deviceBack = document.querySelector(".device-back-btn");
     if (deviceBack) deviceBack.textContent = t.device.back;
-    
+
     const googleBtn = document.querySelector(".btn-google");
     if (googleBtn) {
-       const googleText = googleBtn.childNodes[googleBtn.childNodes.length - 1];
-       if (googleText && googleText.nodeType === Node.TEXT_NODE) {
-          googleText.textContent = " " + t.device.buttons.google;
-       }
+      const googleText = googleBtn.childNodes[googleBtn.childNodes.length - 1];
+      if (googleText && googleText.nodeType === Node.TEXT_NODE) {
+        googleText.textContent = " " + t.device.buttons.google;
+      }
     }
 
     const dividerText = document.querySelector(".divider-text");
@@ -3158,131 +3022,154 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
 
     // Field labels and placeholders (Device Demo)
     const fieldMap = {
-        "fullName": { label: t.device.labels.name, ph: t.device.placeholders.name },
-        "email": { label: t.device.labels.email, ph: t.device.placeholders.email },
-        "phone": { label: t.device.labels.phone, ph: t.device.placeholders.phone },
-        "password": { label: t.device.labels.password, ph: t.device.placeholders.password },
-        "confirmPassword": { label: t.device.labels.confirm, ph: t.device.placeholders.confirm }
+      fullName: { label: t.device.labels.name, ph: t.device.placeholders.name },
+      email: { label: t.device.labels.email, ph: t.device.placeholders.email },
+      phone: { label: t.device.labels.phone, ph: t.device.placeholders.phone },
+      password: {
+        label: t.device.labels.password,
+        ph: t.device.placeholders.password,
+      },
+      confirmPassword: {
+        label: t.device.labels.confirm,
+        ph: t.device.placeholders.confirm,
+      },
     };
 
     for (const [id, texts] of Object.entries(fieldMap)) {
-        const input = document.getElementById(id);
-        if (input) {
-            input.placeholder = texts.ph;
-            const label = input.closest(".form-field")?.querySelector("label");
-            if (label) {
-               const span = label.querySelector("span");
-               label.textContent = texts.label;
-               if (span) label.appendChild(span);
-            }
+      const input = document.getElementById(id);
+      if (input) {
+        input.placeholder = texts.ph;
+        const label = input.closest(".form-field")?.querySelector("label");
+        if (label) {
+          const span = label.querySelector("span");
+          label.textContent = texts.label;
+          if (span) label.appendChild(span);
         }
+      }
     }
-    
+
     // Demo flow buttons
-    document.querySelectorAll(".btn-continuar").forEach(btn => {
-       if (btn.closest("#step-1") || btn.closest("#step-3")) {
-           btn.textContent = t.device.buttons.continue;
-       } else if (btn.closest("#step-2") || btn.closest("#step-4")) {
-           btn.textContent = t.device.buttons.verify;
-       } else if (btn.closest("#step-5")) {
-           btn.textContent = t.device.buttons.create;
-       }
+    document.querySelectorAll(".btn-continuar").forEach((btn) => {
+      if (btn.closest("#step-1") || btn.closest("#step-3")) {
+        btn.textContent = t.device.buttons.continue;
+      } else if (btn.closest("#step-2") || btn.closest("#step-4")) {
+        btn.textContent = t.device.buttons.verify;
+      } else if (btn.closest("#step-5")) {
+        btn.textContent = t.device.buttons.create;
+      }
     });
 
     // Resend links
-    document.querySelectorAll(".resend-code").forEach(p => {
-        const link = p.querySelector("a");
-        if (link) {
-           const id = link.id;
-           p.innerHTML = t.device.buttons.resend.replace("class='resend-link'", `id='${id}'`);
-        }
+    document.querySelectorAll(".resend-code").forEach((p) => {
+      const link = p.querySelector("a");
+      if (link) {
+        const id = link.id;
+        p.innerHTML = t.device.buttons.resend.replace(
+          "class='resend-link'",
+          `id='${id}'`,
+        );
+      }
     });
 
     // Security Section
     const secTitle = document.querySelector(".security-title");
-    if(secTitle) secTitle.innerHTML = t.security.title;
-    
+    if (secTitle) secTitle.innerHTML = t.security.title;
+
     const secFeatures = document.querySelectorAll(".security-feature");
     secFeatures.forEach((el, idx) => {
-        if (t.security.features[idx]) {
-            el.querySelector(".feature-title").textContent = t.security.features[idx].title;
-            el.querySelector(".feature-description").textContent = t.security.features[idx].desc;
-        }
+      if (t.security.features[idx]) {
+        el.querySelector(".feature-title").textContent =
+          t.security.features[idx].title;
+        el.querySelector(".feature-description").textContent =
+          t.security.features[idx].desc;
+      }
     });
 
     // Control Section
     const ctrlTitle = document.querySelector(".control-title");
-    if(ctrlTitle) ctrlTitle.textContent = t.control.title;
-    
+    if (ctrlTitle) ctrlTitle.textContent = t.control.title;
+
     const ctrlFeatures = document.querySelectorAll(".control-feature");
     ctrlFeatures.forEach((el, idx) => {
-        if (t.control.features[idx]) {
-            const data = t.control.features[idx];
-            el.querySelector(".control-feature-front .control-feature-title").textContent = data.title;
-            el.querySelector(".control-feature-front .control-feature-description").textContent = data.desc;
-            el.querySelector(".control-feature-back .control-feature-title").textContent = data.backTitle;
-            const ul = el.querySelector(".control-feature-benefits");
-            ul.innerHTML = data.benefits.map(b => `<li>${b}</li>`).join("");
-        }
+      if (t.control.features[idx]) {
+        const data = t.control.features[idx];
+        el.querySelector(
+          ".control-feature-front .control-feature-title",
+        ).textContent = data.title;
+        el.querySelector(
+          ".control-feature-front .control-feature-description",
+        ).textContent = data.desc;
+        el.querySelector(
+          ".control-feature-back .control-feature-title",
+        ).textContent = data.backTitle;
+        const ul = el.querySelector(".control-feature-benefits");
+        ul.innerHTML = data.benefits.map((b) => `<li>${b}</li>`).join("");
+      }
     });
 
     // Contact Section
     const contactTitle = document.querySelector(".contact-title");
-    if(contactTitle) contactTitle.innerHTML = t.contact.title;
-    
+    if (contactTitle) contactTitle.innerHTML = t.contact.title;
+
     const contactFormTitle = document.querySelector(".contact-form-title");
-    if(contactFormTitle) contactFormTitle.textContent = t.contact.formTitle;
-    
+    if (contactFormTitle) contactFormTitle.textContent = t.contact.formTitle;
+
     const contactForm = document.getElementById("contactForm");
     if (contactForm) {
-        contactForm.querySelector("#nombres").placeholder = t.contact.placeholders.names;
-        contactForm.querySelector("#apellidos").placeholder = t.contact.placeholders.surnames;
-        contactForm.querySelector("#compania").placeholder = t.contact.placeholders.company;
-        contactForm.querySelector("#email").placeholder = t.contact.placeholders.email;
-        contactForm.querySelector("#telefono").placeholder = t.contact.placeholders.phone;
-        contactForm.querySelector(".contact-submit-btn").textContent = t.contact.submit;
-        contactForm.querySelector(".contact-legal").innerHTML = t.contact.legal;
-        
-        const countrySelect = contactForm.querySelector("#pais");
-        if (countrySelect && countrySelect.options.length > 0) {
-            countrySelect.options[0].textContent = t.contact.countryDefault;
-        }
+      contactForm.querySelector("#nombres").placeholder =
+        t.contact.placeholders.names;
+      contactForm.querySelector("#apellidos").placeholder =
+        t.contact.placeholders.surnames;
+      contactForm.querySelector("#compania").placeholder =
+        t.contact.placeholders.company;
+      contactForm.querySelector("#email").placeholder =
+        t.contact.placeholders.email;
+      contactForm.querySelector("#telefono").placeholder =
+        t.contact.placeholders.phone;
+      contactForm.querySelector(".contact-submit-btn").textContent =
+        t.contact.submit;
+      contactForm.querySelector(".contact-legal").innerHTML = t.contact.legal;
+
+      const countrySelect = contactForm.querySelector("#pais");
+      if (countrySelect && countrySelect.options.length > 0) {
+        countrySelect.options[0].textContent = t.contact.countryDefault;
+      }
     }
 
     // FAQ Section
     const faqTitle = document.querySelector(".faq-title");
-    if(faqTitle) faqTitle.textContent = t.faq.title;
-    
+    if (faqTitle) faqTitle.textContent = t.faq.title;
+
     const faqItems = document.querySelectorAll(".faq-item");
     faqItems.forEach((el, idx) => {
-        if (t.faq.items[idx]) {
-            el.querySelector(".faq-question span").textContent = t.faq.items[idx].q;
-            el.querySelector(".faq-answer p").textContent = t.faq.items[idx].a;
-        }
+      if (t.faq.items[idx]) {
+        el.querySelector(".faq-question span").textContent = t.faq.items[idx].q;
+        el.querySelector(".faq-answer p").textContent = t.faq.items[idx].a;
+      }
     });
 
     // CTA Section
     const ctaTitle = document.querySelector(".cta-title");
-    if(ctaTitle) ctaTitle.innerHTML = t.cta.title;
-    
+    if (ctaTitle) ctaTitle.innerHTML = t.cta.title;
+
     const ctaBtn = document.querySelector(".cta-button");
-    if(ctaBtn) ctaBtn.textContent = t.cta.button;
+    if (ctaBtn) ctaBtn.textContent = t.cta.button;
 
     // Footer
     const footerTitle = document.querySelector(".footer-links-title");
-    if(footerTitle) footerTitle.textContent = t.footer.quickLinks;
-    
+    if (footerTitle) footerTitle.textContent = t.footer.quickLinks;
+
     const footerNav = document.querySelectorAll(".footer-nav a");
     const footerKeys = ["products", "about", "developers", "others"];
     footerNav.forEach((link, idx) => {
-       if(footerKeys[idx]) link.textContent = t.footer[footerKeys[idx]];
+      if (footerKeys[idx]) link.textContent = t.footer[footerKeys[idx]];
     });
 
     const footerDisclaimer = document.querySelector(".footer-disclaimer");
-    if(footerDisclaimer) footerDisclaimer.textContent = t.footer.disclaimer;
-    
+    if (footerDisclaimer) footerDisclaimer.textContent = t.footer.disclaimer;
+
     const footerCopyright = document.querySelector(".footer-copyright");
-    if(footerCopyright) footerCopyright.textContent = t.footer.copyright;
+    if (footerCopyright) footerCopyright.textContent = t.footer.copyright;
 
     showStep(currentStep);
   }
@@ -3342,7 +3229,8 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
 
   // Mostrar paso
   function showStep(step) {
-    const t = authTranslations[currentLang.toLowerCase()] || authTranslations.es;
+    const t =
+      authTranslations[currentLang.toLowerCase()] || authTranslations.es;
     const stepData = t.device.steps[step];
 
     document.querySelectorAll(".auth-step").forEach((el, index) => {
@@ -3367,9 +3255,9 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
       descEl.innerHTML = stepData.desc;
       loginLink.style.display = step === 5 ? "block" : "none";
     }
-    
+
     if (step === 5) {
-        loginLink.innerHTML = t.device.buttons.login;
+      loginLink.innerHTML = t.device.buttons.login;
     }
 
     updateProgressDots(step);
@@ -3433,12 +3321,20 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
     let hasErrors = false;
 
     if (!validateFullName(fullName)) {
-      showFieldError("fullName", currentLang === 'EN' ? "Name must be at least 2 characters" : "El nombre debe tener al menos 2 caracteres");
+      showFieldError(
+        "fullName",
+        currentLang === "EN"
+          ? "Name must be at least 2 characters"
+          : "El nombre debe tener al menos 2 caracteres",
+      );
       hasErrors = true;
     }
 
     if (!validateEmail(email)) {
-      showFieldError("email", currentLang === 'EN' ? "Invalid email" : "Correo electrónico inválido");
+      showFieldError(
+        "email",
+        currentLang === "EN" ? "Invalid email" : "Correo electrónico inválido",
+      );
       hasErrors = true;
     }
 
@@ -3523,7 +3419,12 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
     const phone = document.getElementById("phone").value.trim();
 
     if (!validatePhone(phone)) {
-      showFieldError("phone", currentLang === 'EN' ? "Invalid phone number" : "Número de teléfono inválido");
+      showFieldError(
+        "phone",
+        currentLang === "EN"
+          ? "Invalid phone number"
+          : "Número de teléfono inválido",
+      );
       return;
     }
 
@@ -3590,13 +3491,20 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
     if (!validatePassword(password)) {
       showFieldError(
         "password",
-        currentLang === 'EN' ? "Password must be at least 8 characters" : "La contraseña debe tener al menos 8 caracteres",
+        currentLang === "EN"
+          ? "Password must be at least 8 characters"
+          : "La contraseña debe tener al menos 8 caracteres",
       );
       hasErrors = true;
     }
 
     if (password !== confirmPassword) {
-      showFieldError("confirmPassword", currentLang === 'EN' ? "Passwords do not match" : "Las contraseñas no coinciden");
+      showFieldError(
+        "confirmPassword",
+        currentLang === "EN"
+          ? "Passwords do not match"
+          : "Las contraseñas no coinciden",
+      );
       hasErrors = true;
     }
 
@@ -3620,14 +3528,14 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
 
   // Delegated listeners for resend links
   document.addEventListener("click", (e) => {
-     if (e.target && e.target.id === "resend-email") {
-        e.preventDefault();
-        console.log("Código reenviado a", formData.email);
-     }
-     if (e.target && e.target.id === "resend-phone") {
-        e.preventDefault();
-        console.log("Código reenviado a", formData.phone);
-     }
+    if (e.target && e.target.id === "resend-email") {
+      e.preventDefault();
+      console.log("Código reenviado a", formData.email);
+    }
+    if (e.target && e.target.id === "resend-phone") {
+      e.preventDefault();
+      console.log("Código reenviado a", formData.phone);
+    }
   });
 
   // Inicializar
@@ -3649,7 +3557,7 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
   document.getElementById("contactForm")?.addEventListener("submit", (e) => {
     e.preventDefault();
     const form = e.target;
-    
+
     const formData = {
       nombres: form.querySelector("#nombres").value,
       apellidos: form.querySelector("#apellidos").value,
