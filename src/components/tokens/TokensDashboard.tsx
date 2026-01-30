@@ -161,7 +161,7 @@ export default function TokensDashboard() {
     const [isVisible, setIsVisible] = useState(false);
 
     // Config for cycle
-    const CYCLE_DURATION = 12000; // 12 seconds full cycle
+    const CYCLE_DURATION = 18000; // 18 seconds full cycle
 
     // State for dynamic data
     const [tokenData, setTokenData] = useState(mockTokenData);
@@ -193,8 +193,8 @@ export default function TokensDashboard() {
             } else {
                 // Draining Phase (Faster)
                 let progress = 1 - (elapsed / (CYCLE_DURATION * 0.18)); // 18% of time is draining
-                if (progress <= 0) {
-                    progress = 0;
+                if (progress <= 0.15) { // Never go below 15% to avoid visual flash
+                    progress = 0.15;
                     setIsDraining(false);
                     startTime = Date.now(); // Reset for fill phase
                 }
