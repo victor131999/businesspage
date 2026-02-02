@@ -242,7 +242,7 @@ export default function AlaizaChat() {
                 setMessages((prev) => [...prev, botMessage]);
                 setTypingMessage("");
             }
-            }, 30);
+        }, 30);
     };
 
     const handleSendMessage = () => {
@@ -405,7 +405,7 @@ export default function AlaizaChat() {
                                     </div>
                                     <div className="relative flex h-8 w-8 shrink-0 items-center justify-center mt-1">
                                         <div className="h-8 w-8 rounded-full overflow-hidden bg-gray-200 ring-2 ring-white shadow-sm">
-                                            <img src="/images/user/user-03.png" alt="User" className="h-full w-full object-cover" />
+                                            <img src="/images/team/user-02.png" alt="User" className="h-full w-full object-cover" />
                                         </div>
                                         <div className="absolute -bottom-0.5 -left-0.5 h-3 w-3 rounded-full bg-green-500 border-2 border-white z-10"></div>
                                     </div>
