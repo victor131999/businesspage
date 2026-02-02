@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 type Language = 'en' | 'es';
 
@@ -156,57 +156,67 @@ const useAnimatedNumber = (target: number, duration: number = 2000, delay: numbe
     return current;
 };
 
+const FILL_DURATION_MS = 14000; // ~14 seconds to fill all bars (consumption animation)
+
 export default function TokensDashboard() {
     const t = translations['es'];
     const [isVisible, setIsVisible] = useState(false);
 
-    // Config for cycle
-    const CYCLE_DURATION = 18000; // 18 seconds full cycle
+    // Play/pause: animation only runs when isPlaying. Start at 0, fill to 1, then stop and reset to 0.
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [cyclePhase, setCyclePhase] = useState(0); // 0 to 1 (progress of filling)
+    const [isDraining, setIsDraining] = useState(false); // Visual mode when near full (kept for UI styling)
+    const startTimeRef = useRef(Date.now());
 
-    // State for dynamic data
     const [tokenData, setTokenData] = useState(mockTokenData);
     const [liveLogs, setLiveLogs] = useState(mockLogs.slice(0, 7));
-    const [cyclePhase, setCyclePhase] = useState(0); // 0 to 1 (progress of filling)
-    const [isDraining, setIsDraining] = useState(false); // Mode
 
-    // Cycle Engine
+    // Listen for play/pause from parent (index.astro button)
     useEffect(() => {
-        let startTime = Date.now();
+        const onPlay = () => {
+            startTimeRef.current = Date.now();
+            setCyclePhase(0);
+            setIsDraining(false);
+            setIsPlaying(true);
+            window.dispatchEvent(new CustomEvent("tokens:state", { detail: { isPlaying: true } }));
+        };
+        const onPause = () => {
+            setIsPlaying(false);
+            window.dispatchEvent(new CustomEvent("tokens:state", { detail: { isPlaying: false } }));
+        };
+        window.addEventListener("tokens:play", onPlay);
+        window.addEventListener("tokens:pause", onPause);
+        return () => {
+            window.removeEventListener("tokens:play", onPlay);
+            window.removeEventListener("tokens:pause", onPause);
+        };
+    }, []);
+
+    // Cycle Engine: only runs when isPlaying. Fill 0 -> 1, then stop and reset to 0.
+    useEffect(() => {
+        if (!isPlaying) return;
+
         let frameId: number;
-
         const animate = () => {
-            const now = Date.now();
-            const elapsed = now - startTime;
+            const elapsed = Date.now() - startTimeRef.current;
+            const progress = Math.min(elapsed / FILL_DURATION_MS, 1);
 
-            // Calculate phase based on time
-            // We want: 0 -> 1 (Filling) over X seconds, then Fast Drain 1 -> 0
+            setCyclePhase(progress);
+            if (progress >= 0.95) setIsDraining(true);
 
-            if (!isDraining) {
-                // Filling Phase
-                let progress = elapsed / (CYCLE_DURATION * 0.82); // 82% of time is filling
-                if (progress >= 1) {
-                    progress = 1;
-                    setIsDraining(true);
-                    startTime = Date.now(); // Reset time for drain phase
-                }
-                setCyclePhase(progress);
-            } else {
-                // Draining Phase (Faster)
-                let progress = 1 - (elapsed / (CYCLE_DURATION * 0.18)); // 18% of time is draining
-                if (progress <= 0.15) { // Never go below 15% to avoid visual flash
-                    progress = 0.15;
-                    setIsDraining(false);
-                    startTime = Date.now(); // Reset for fill phase
-                }
-                setCyclePhase(progress);
+            if (progress >= 1) {
+                // All bars full: stop and reset to zero
+                setIsPlaying(false);
+                setCyclePhase(0);
+                setIsDraining(false);
+                window.dispatchEvent(new CustomEvent("tokens:state", { detail: { isPlaying: false } }));
+                return;
             }
-
             frameId = requestAnimationFrame(animate);
         };
-
         frameId = requestAnimationFrame(animate);
         return () => cancelAnimationFrame(frameId);
-    }, [isDraining]);
+    }, [isPlaying]);
 
     // Apply phase to data
     useEffect(() => {
@@ -221,24 +231,27 @@ export default function TokensDashboard() {
         const smoothNoise = Math.floor(20000 * (0.5 + 0.5 * Math.sin(time / 1200))); // Subtle, smooth noise
         const currentTotalUsed = Math.floor(MAX_TOTAL * 0.9 * cyclePhase) + smoothNoise; // Up to 90% full + subtle noise
 
-        // Update users
+        // Update users: cada item tiene su "maxTokens" (valor al 100%) para que todas las barras puedan llenarse
         const newByUser = mockTokenData.byUser.map((u, i) => {
-            // Each user has a slightly different curve
-            const curve = Math.pow(cyclePhase, 1 + (i * 0.1)); // Different exponential growth
+            const curve = Math.pow(cyclePhase, 1 + (i * 0.1));
             const wobble = 0.96 + 0.04 * Math.sin(time / 1400 + i);
+            const maxTokens = Math.max(1, Math.floor((u.tokens * 2.3) * 1 * 1)); // valor cuando cyclePhase = 1
             return {
                 ...u,
-                tokens: Math.max(0, Math.floor((u.tokens * 2.3) * curve * wobble)) // Scale up existing mock as base
+                tokens: Math.max(0, Math.floor((u.tokens * 2.3) * curve * wobble)),
+                maxTokens
             };
         }).sort((a, b) => b.tokens - a.tokens);
 
-        // Update services
+        // Update services: igual, maxTokens por item para que todas las barras lleguen al 100%
         const newByService = mockTokenData.byService.map((s, i) => {
             const curve = Math.pow(cyclePhase, 1 + (i * 0.05));
             const wobble = 0.96 + 0.04 * Math.sin(time / 1500 + i);
+            const maxTokens = Math.max(1, Math.floor((s.tokens * 2.3) * 1 * 1));
             return {
                 ...s,
-                tokens: Math.max(0, Math.floor((s.tokens * 2.3) * curve * wobble))
+                tokens: Math.max(0, Math.floor((s.tokens * 2.3) * curve * wobble)),
+                maxTokens
             };
         }).sort((a, b) => b.tokens - a.tokens);
 
@@ -254,9 +267,10 @@ export default function TokensDashboard() {
     }, [cyclePhase]);
 
 
-    // Logs Ticker (Separate interval)
+    // Logs Ticker (Separate interval) - only when animation is playing and filling
     useEffect(() => {
         const interval = setInterval(() => {
+            if (!isPlaying || cyclePhase < 0.05) return;
             // Only add logs when there is activity (filling phase or high cyclePhase)
             if (cyclePhase > 0.1) {
                 const now = new Date();
@@ -279,7 +293,7 @@ export default function TokensDashboard() {
             }
         }, 600);
         return () => clearInterval(interval);
-    }, [cyclePhase]);
+    }, [cyclePhase, isPlaying]);
 
 
     // Animated numbers hooks
@@ -386,7 +400,8 @@ export default function TokensDashboard() {
                                 </div>
                                 <div className="h-1.5 w-full bg-[#D6DBE2] rounded-full overflow-hidden">
                                     {(() => {
-                                        const percent = Math.min((item.tokens / (tokenData.byUser[0].tokens || 1)) * 100, 100);
+                                        const maxT = (item as { maxTokens?: number }).maxTokens ?? tokenData.byUser[0]?.tokens ?? 1;
+                                        const percent = Math.min((item.tokens / maxT) * 100, 100);
                                         return (
                                             <div
                                                 className={`h-full rounded-full transition-[width] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${getFillClass(percent)}`}
@@ -415,7 +430,8 @@ export default function TokensDashboard() {
                                 </div>
                                 <div className="h-1.5 w-full bg-[#D6DBE2] rounded-full overflow-hidden">
                                     {(() => {
-                                        const percent = Math.min((item.tokens / (tokenData.byService[0].tokens || 1)) * 100, 100);
+                                        const maxT = (item as { maxTokens?: number }).maxTokens ?? tokenData.byService[0]?.tokens ?? 1;
+                                        const percent = Math.min((item.tokens / maxT) * 100, 100);
                                         return (
                                             <div
                                                 className={`h-full rounded-full transition-[width] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${getFillClass(percent)}`}

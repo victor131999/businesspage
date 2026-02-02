@@ -720,30 +720,21 @@ const modulesList = [
             type="button"
             aria-label="Reproducir Demo"
           >
-            <svg
+            <img
               id="demo-play-icon"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M8 5V19L19 12L8 5Z" fill="#213f8c"></path>
-            </svg>
-            <svg
+              src="/icons/play.svg"
+              alt=""
+              width="44"
+              height="44"
+            />
+            <img
               id="demo-pause-icon"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+              src="/icons/pause.svg"
+              alt=""
+              width="44"
+              height="44"
               style="display: none;"
-            >
-              <rect x="6" y="5" width="4" height="14" rx="1" fill="#213f8c"
-              ></rect>
-              <rect x="14" y="5" width="4" height="14" rx="1" fill="#213f8c"
-              ></rect>
-            </svg>
+            />
           </button>
         </div>
 
@@ -883,15 +874,7 @@ const modulesList = [
               type="button"
               aria-label="Reproducir"
             >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M8 5V19L19 12L8 5Z" fill="#213f8c"></path>
-              </svg>
+              <img src="/icons/play.svg" alt="" width="32" height="32" />
             </button>
           </div>
         </div>
@@ -902,32 +885,72 @@ const modulesList = [
       <div class="why-zelify-divider"></div>
       <div class="why-zelify-content">
         <div class="why-zelify-left">
-          <div class="ai-illustration-card">
-            <img
-              src="/images/ai.svg"
-              alt="AI Illustration"
-              class="ai-illustration-image"
-              width="300"
-              height="300"
-            />
-            <button
-              class="ai-illustration-play-button"
-              type="button"
-              aria-label="Reproducir"
-            >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+          <div class="login-card">
+            <h3 class="login-card-title" data-i18n="home.how.login.title">
+              Ingreso
+            </h3>
+            <p class="login-card-subtitle" data-i18n="home.how.login.subtitle">
+              Bienvenido de regreso
+            </p>
+            <form class="login-form">
+              <div class="login-field">
+                <label for="email" data-i18n="home.how.login.email.label"
+                  >Correo</label
+                >
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="email@example.com"
+                  data-i18n-placeholder="home.how.login.email.placeholder"
+                />
+              </div>
+              <div class="login-field">
+                <label for="password" data-i18n="home.how.login.password.label"
+                  >Contraseña</label
+                >
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="••••••••"
+                  data-i18n-placeholder="home.how.login.password.placeholder"
+                />
+              </div>
+              <button
+                type="submit"
+                class="login-button"
+                data-i18n="home.how.login.button"
               >
-                <path d="M8 5V19L19 12L8 5Z" fill="#213f8c"></path>
-              </svg>
-            </button>
+                Ingresa
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M6 12L10 8L6 4"
+                    stroke="white"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                </svg>
+              </button>
+            </form>
+            <p class="login-create-account" data-i18n="home.how.login.create">
+              O crea una nueva cuenta
+            </p>
           </div>
+          <button
+            class="how-it-works-play-button"
+            type="button"
+            aria-label="Reproducir"
+          >
+            <img src="/icons/play.svg" alt="" width="32" height="32" />
+          </button>
         </div>
-
         <div class="why-zelify-right">
           <h2 class="why-zelify-title" data-i18n="home.why.title">
             Cada producto, potenciado por IA.
@@ -947,1014 +970,1932 @@ const modulesList = [
         </div>
       </div>
     </section>
+  </body>
 
-    <section class="bench-section section-gap-200">
-      <div class="bench-section-2-content">
-        <div class="bench-tabs">
-          <button class="bench-tab active" data-bench="1">Cards</button>
-          <!-- <button class="bench-tab" data-bench="2">Bench 2</button>
+  <section class="bench-section section-gap-200">
+    <div class="bench-section-2-content">
+      <div class="bench-tabs">
+        <button class="bench-tab active" data-bench="1">Cards</button>
+        <!-- <button class="bench-tab" data-bench="2">Bench 2</button>
           <button class="bench-tab" data-bench="3">Bench 3</button>
           <button class="bench-tab" data-bench="4">Bench 4</button> -->
-        </div>
+      </div>
 
-        <div class="bench-content-area">
-          <div class="bench-content-placeholder" data-bench-content="1">
-            <!-- Contenido para Bench 1 -->
-            <video
-              class="bench-video"
-              autoplay
-              muted
-              loop
-              playsinline
-              preload="metadata"
-            >
-              <source
-                src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/cards_bench_clip.mp4"
-                type="video/mp4"
-              />
-            </video>
-          </div>
-          <!-- <div
+      <div class="bench-content-area">
+        <div class="bench-content-placeholder" data-bench-content="1">
+          <!-- Contenido para Bench 1 -->
+          <video
+            class="bench-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          >
+            <source
+              src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/cards_bench_clip.mp4"
+              type="video/mp4"
+            />
+          </video>
+        </div>
+        <!-- <div
             class="bench-content-placeholder"
             data-bench-content="2"
             style="display: none;"
           >
             aui nuevo contenido
           </div> -->
-        </div>
-
-        <div class="bench-text-content">
-          <h2 class="bench-title" data-i18n="home.bench.title">
-            Paga solo lo que usas
-          </h2>
-          <p class="bench-subtitle" data-i18n="home.bench.subtitle">
-            y escala sin fricción con los precios más bajos del mercado.
-          </p>
-        </div>
-
-        <div class="bench-cta">
-          <button class="bench-cta-button" data-i18n="home.bench.button"
-            >Cards</button
-          >
-        </div>
       </div>
-    </section>
 
-    <section class="tokens-section section-gap-150">
-      <div class="tokens-container">
-        <div class="tokens-left">
-          <h2 class="tokens-title" data-i18n="home.tokens.title">Tokens</h2>
-          <p class="tokens-description" data-i18n="home.tokens.description">
-            Zelify integra en una sola plataforma digital: autenticación y
-            validación de identidad, cumplimiento AML, digitalización de
-            cuentas, emisión y procesamiento de tarjetas, transferencias locales
-            e internacionales, pagos múltiples, programas de descuentos y
-            cupones.
-          </p>
-          <a
-            href="https://www.zelify.com/clips/"
-            class="tokens-demo-button"
-            data-i18n="home.tokens.demo">Demo</a
-          >
-        </div>
-        <div class="tokens-right">
-          <div class="tokens-content-placeholder">
-            <TokensProd />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="action-products-section section-gap-150">
-      <div class="action-products-content">
-        <h2
-          class="action-products-title"
-          data-i18n="home.action.products.title"
-        >
-          Nuestros productos en acción
+      <div class="bench-text-content">
+        <h2 class="bench-title" data-i18n="home.bench.title">
+          Paga solo lo que usas
         </h2>
-
-        <div class="action-products-container">
-          <div class="action-products-card">
-            <div class="action-card-wrapper" data-action-card="auth">
-              <AuthProd noInteraction={false} isDemoEnabled={false} />
-            </div>
-            <div
-              class="action-card-wrapper"
-              data-action-card="identity"
-              style="display: none;"
-            >
-              <IdentityProd noInteraction={false} isDemoEnabled={false} />
-            </div>
-            <div
-              class="action-card-wrapper"
-              data-action-card="aml"
-              style="display: none;"
-            >
-              <AmlProd noInteraction={false} isDemoEnabled={false} />
-            </div>
-          </div>
-        </div>
-
-        <div class="action-products-nav">
-          <button
-            class="action-nav-button active"
-            data-action="auth"
-            data-i18n="home.action.products.auth">Auth</button
-          >
-          <button
-            class="action-nav-button"
-            data-action="identity"
-            data-i18n="home.action.products.identity">Identity</button
-          >
-          <button
-            class="action-nav-button"
-            data-action="aml"
-            data-i18n="home.action.products.aml">AML</button
-          >
-        </div>
+        <p class="bench-subtitle" data-i18n="home.bench.subtitle">
+          y escala sin fricción con los precios más bajos del mercado.
+        </p>
       </div>
-    </section>
 
-    <section class="ai-section section-gap-150">
-      <div class="ai-section-content">
-        <h2 class="ai-section-title" data-i18n="home.ai.title.line1">
-          Construye la banca del futuro,<br />
-          potenciada por IA.
-        </h2>
-        <a href="/hablemos" class="ai-section-button" data-i18n="home.ai.quote"
-          >Cotizar</a
+      <div class="bench-cta">
+        <button class="bench-cta-button" data-i18n="home.bench.button"
+          >Cards</button
         >
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer class="demo-footer">
-      <div class="footer-container">
-        <div class="footer-top">
-          <div class="footer-logo">
-            <span class="logo-z">Z</span>
-            <span class="logo-text">Zelify</span>
-          </div>
-          <div class="footer-quick-links">
-            <h4 class="quick-links-title" data-i18n="footer.quicklinks">
-              Quick links
-            </h4>
-            <ul class="quick-links-list">
-              <li><a href="/" data-i18n="footer.products">Products</a></li>
-              <li><a href="/" data-i18n="footer.about">About us</a></li>
-              <li>
-                <a href="https://docs.zelify.com" data-i18n="footer.developers"
-                  >Developers</a
-                >
-              </li>
-              <li><a href="/" data-i18n="footer.others">Others</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <p class="footer-legal" data-i18n="footer.legal">
-            Zelify is a technology platform currently in a development phase,
-            not yet deployed or operational, and does not provide or process
-            financial services directly; all financial operations are conducted
-            exclusively through regulated third-party partners.
-          </p>
-          <p class="footer-copyright" data-i18n="footer.copyright">
-            © 2025 Zelify. All rights reserved.
-          </p>
+  <section class="tokens-section section-gap-150">
+    <div class="tokens-container">
+      <div class="tokens-left">
+        <h2 class="tokens-title" data-i18n="home.tokens.title">Tokens</h2>
+        <p class="tokens-description" data-i18n="home.tokens.description">
+          Zelify integra en una sola plataforma digital: autenticación y
+          validación de identidad, cumplimiento AML, digitalización de cuentas,
+          emisión y procesamiento de tarjetas, transferencias locales e
+          internacionales, pagos múltiples, programas de descuentos y cupones.
+        </p>
+        <a
+          href="https://www.zelify.com/clips/"
+          class="tokens-demo-button"
+          data-i18n="home.tokens.demo">Demo</a
+        >
+      </div>
+      <div class="tokens-right">
+        <div class="tokens-content-placeholder">
+          <TokensProd />
         </div>
       </div>
-    </footer>
-  </body>
+      <button
+        type="button"
+        id="tokens-play-pause-btn"
+        class="tokens-play-pause-btn"
+        aria-label="Reproducir animación"
+        title="Reproducir / Pausar animación de consumo"
+      >
+        <img
+          id="tokens-play-icon"
+          src="/icons/play.svg"
+          alt=""
+          width="28"
+          height="28"
+        />
+        <img
+          id="tokens-pause-icon"
+          src="/icons/pause.svg"
+          alt=""
+          width="28"
+          height="28"
+          style="display: none;"
+        />
+      </button>
+    </div>
+  </section>
 
-  <style>
-    @font-face {
-      font-family: "NataSans";
-      src: url("/fonts/Nata_Sans/NataSans-Light.ttf") format("truetype");
-      font-weight: 300;
-      font-display: swap;
-    }
+  <section class="action-products-section section-gap-150">
+    <div class="action-products-content">
+      <h2 class="action-products-title" data-i18n="home.action.products.title">
+        Nuestros productos en acción
+      </h2>
 
-    @font-face {
-      font-family: "NataSans";
-      src: url("/fonts/NataSans-VariableFont_wght.ttf") format("truetype");
-      font-weight: 100 900;
-      font-display: swap;
-    }
+      <div class="action-products-container">
+        <div class="action-products-card">
+          <div class="action-card-wrapper" data-action-card="auth">
+            <AuthProd noInteraction={false} isDemoEnabled={false} />
+          </div>
+          <div
+            class="action-card-wrapper"
+            data-action-card="identity"
+            style="display: none;"
+          >
+            <IdentityProd noInteraction={false} isDemoEnabled={false} />
+          </div>
+          <div
+            class="action-card-wrapper"
+            data-action-card="aml"
+            style="display: none;"
+          >
+            <AmlProd noInteraction={false} isDemoEnabled={false} />
+          </div>
+        </div>
+      </div>
 
-    * {
-      box-sizing: border-box;
-      font-family:
-        "NataSans",
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        sans-serif;
-    }
+      <div class="action-products-nav">
+        <button
+          class="action-nav-button active"
+          data-action="auth"
+          data-i18n="home.action.products.auth">Auth</button
+        >
+        <button
+          class="action-nav-button"
+          data-action="identity"
+          data-i18n="home.action.products.identity">Identity</button
+        >
+        <button
+          class="action-nav-button"
+          data-action="aml"
+          data-i18n="home.action.products.aml">AML</button
+        >
+      </div>
+    </div>
+  </section>
 
-    body {
-      font-family:
-        "NataSans",
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        sans-serif;
-      color: #212529;
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+  <section class="ai-section section-gap-150">
+    <div class="ai-section-content">
+      <h2 class="ai-section-title" data-i18n="home.ai.title.line1">
+        Construye la banca del futuro,<br />
+        potenciada por IA.
+      </h2>
+      <a href="/hablemos" class="ai-section-button" data-i18n="home.ai.quote"
+        >Cotizar</a
+      >
+    </div>
+  </section>
 
-    /* Espaciado general entre secciones (por defecto 150px) */
-    section + section {
-      margin-top: 150px;
-    }
+  <!-- Footer -->
+  <footer class="demo-footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-logo">
+          <span class="logo-z">Z</span>
+          <span class="logo-text">Zelify</span>
+        </div>
+        <div class="footer-quick-links">
+          <h4 class="quick-links-title" data-i18n="footer.quicklinks">
+            Quick links
+          </h4>
+          <ul class="quick-links-list">
+            <li><a href="/" data-i18n="footer.products">Products</a></li>
+            <li><a href="/" data-i18n="footer.about">About us</a></li>
+            <li>
+              <a href="https://docs.zelify.com" data-i18n="footer.developers"
+                >Developers</a
+              >
+            </li>
+            <li><a href="/" data-i18n="footer.others">Others</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-legal" data-i18n="footer.legal">
+          Zelify is a technology platform currently in a development phase, not
+          yet deployed or operational, and does not provide or process financial
+          services directly; all financial operations are conducted exclusively
+          through regulated third-party partners.
+        </p>
+        <p class="footer-copyright" data-i18n="footer.copyright">
+          © 2025 Zelify. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </footer>
+</html>
 
-    /* Espaciado específico entre dos secciones: añade la clase a la sección ANTERIOR al hueco que quieres cambiar.
+<style>
+  @font-face {
+    font-family: "NataSans";
+    src: url("/fonts/Nata_Sans/NataSans-Light.ttf") format("truetype");
+    font-weight: 300;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "NataSans";
+    src: url("/fonts/NataSans-VariableFont_wght.ttf") format("truetype");
+    font-weight: 100 900;
+    font-display: swap;
+  }
+
+  * {
+    box-sizing: border-box;
+    font-family:
+      "NataSans",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      sans-serif;
+  }
+
+  body {
+    font-family:
+      "NataSans",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      sans-serif;
+    color: #212529;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Espaciado general entre secciones (por defecto 150px) */
+  section + section {
+    margin-top: 150px;
+  }
+
+  /* Espaciado específico entre dos secciones: añade la clase a la sección ANTERIOR al hueco que quieres cambiar.
        Orden: welcome → product-showcase → how-it-works → why-zelify → bench → tokens → action-products → ai → footer */
-    section.section-gap-0 + section { margin-top: 0; }
-    section.section-gap-35 + section { margin-top: 35px; }
-    section.section-gap-50 + section { margin-top: 50px; }
-    section.section-gap-80 + section { margin-top: 80px; }
-    section.section-gap-100 + section { margin-top: 100px; }
-    section.section-gap-150 + section { margin-top: 150px; }
-    section.section-gap-200 + section { margin-top: 200px; }
-    section.section-gap-250 + section { margin-top: 250px; }
+  section.section-gap-0 + section {
+    margin-top: 0;
+  }
+  section.section-gap-35 + section {
+    margin-top: 35px;
+  }
+  section.section-gap-50 + section {
+    margin-top: 50px;
+  }
+  section.section-gap-80 + section {
+    margin-top: 80px;
+  }
+  section.section-gap-100 + section {
+    margin-top: 100px;
+  }
+  section.section-gap-150 + section {
+    margin-top: 150px;
+  }
+  section.section-gap-200 + section {
+    margin-top: 200px;
+  }
+  section.section-gap-250 + section {
+    margin-top: 250px;
+  }
 
+  .product-showcase {
+    padding: 0 clamp(0.09rem, 0.2vw, 0.25rem);
+    display: flex;
+    justify-content: center;
+    position: relative;
+    /* Altura fija: no se redimensiona al achicar la ventana en alto */
+    height: 840px;
+    min-height: 840px;
+    max-height: 640px;
+    overflow: hidden;
+  }
+
+  .product-showcase__video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 640px;
+    min-height: 640px;
+    max-height: 640px;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  .product-showcase__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    /* Gradient fade: solid white at top, transparent middle, solid white at bottom */
+    background: linear-gradient(
+      to bottom,
+      #ffffff 0%,
+      transparent 15%,
+      transparent 85%,
+      #ffffff 100%
+    );
+    pointer-events: none; /* Allow clicks to pass through to content if needed */
+  }
+
+  /* Content wrapper sits above video */
+  .product-showcase__grid {
+    width: min(1300px, 100%);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    align-items: start;
+    position: relative;
+    z-index: 2;
+  }
+
+  .product-showcase__overlay-card {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 840px;
+    min-height: 720px;
+    transform: translate(-50%, -50%);
+    width: clamp(320px, 40vw, 550px);
+    background-color: #f3f4f6;
+    border-radius: 24px;
+    z-index: 10;
+    pointer-events: auto;
+    padding: 6.5rem 4rem 1rem; /* 3rem arriba, 2rem lados, 1rem abajo */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .product-showcase__inner-card {
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    background-color: #ffffff;
+    border-radius: 16px;
+    margin-bottom: 4.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-card-wrapper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .product-showcase__play-button {
+    position: absolute;
+    bottom: 1.5rem; /* Adjusted for inside card */
+    right: 1.5rem; /* Adjusted for inside card */
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #ffffff00;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 1;
+  }
+
+  .product-showcase__play-button:hover,
+  .product-showcase__play-button:focus {
+    opacity: 1 !important;
+  }
+
+  .product-showcase__play-button svg,
+  .product-showcase__play-button img {
+    width: 28px;
+    height: 28px;
+    margin-left: 2px;
+    object-fit: contain;
+    opacity: 1;
+  }
+
+  .product-showcase__menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    color: #00223e;
+    position: relative;
+    z-index: 1;
+  }
+
+  .product-showcase__nav {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+  }
+
+  .product-showcase__item {
+    /* Default divider line for each item */
+    border-bottom: 1px solid rgba(33, 63, 140, 0.25);
+    position: relative;
+    z-index: 1;
+  }
+
+  .product-showcase__item.is-active {
+    /* Active item underline (thicker + black) */
+    border-bottom: 3px solid #000;
+  }
+
+  .product-showcase__nav-item {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    font-size: 1.1rem;
+    padding: 1rem 0;
+    color: #213f8c;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    font-weight: 500;
+  }
+
+  .product-showcase__nav-item:hover {
+    color: #00223e;
+  }
+
+  .product-showcase__item.is-active .product-showcase__nav-item {
+    color: #00223e;
+    font-weight: 700;
+    padding-bottom: 0.25rem;
+  }
+
+  .product-showcase__panel {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition:
+      max-height 0.4s ease,
+      opacity 0.4s ease,
+      padding 0.4s ease;
+    background: transparent;
+  }
+
+  .product-showcase__item.is-active .product-showcase__panel {
+    max-height: 500px;
+    opacity: 1;
+    padding: 0 0 2rem;
+    /* Allow CTA shadow/rounding to render without being clipped */
+    overflow: visible;
+  }
+
+  .product-showcase__panel-inner {
+    display: grid; /* Usa CSS Grid como sistema de layout */
+    grid-template-columns: minmax(280px, 1fr) minmax(280px, 1fr); /* 2 columnas, mínimo 280px, máximo 1fr cada una */
+    gap: clamp(
+      1rem,
+      8vw,
+      6rem
+    ); /* Espacio entre columnas/filas: min 2rem, fluido 8vw, max 6rem */
+    align-items: start; /* Alinea los elementos del grid en la parte superior */
+    position: relative; /* Permite posicionar hijos con position:absolute */
+    z-index: 1; /* Controla la capa (profundidad) del contenedor */
+  }
+
+  .product-showcase__panel-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+    text-align: left;
+    position: relative;
+    z-index: 1;
+  }
+
+  .product-showcase__title {
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    line-height: 1.25;
+
+    color: #00223e;
+    font-weight: 700;
+    max-width: 380px;
+    word-wrap: break-word;
+  }
+
+  .product-showcase__title .title-strong {
+    /* Title strong: set weight/size/color here */
+    font-weight: 700;
+    font-family: "NataSans";
+    font-size: 2rem;
+    color: #000000;
+  }
+
+  .product-showcase__title .title-strong :global(.title-light) {
+    /* Lighter weight for specific words inside title-strong */
+    font-family: "NataSans";
+    font-variation-settings: "wght" 300;
+    font-weight: 300 !important;
+  }
+
+  .product-showcase__title .title-accent {
+    /* Accent color/weight for the second part */
+    color: #004195;
+    font-weight: 500;
+  }
+
+  .product-showcase__title .title-accent:empty {
+    display: none;
+  }
+
+  .product-showcase__title .title-accent:empty {
+    display: none;
+  }
+
+  .product-showcase__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    /* CTA size controls: tweak padding for overall size; add width/min-width if you want a fixed width */
+    background: #93fb4d;
+    color: #00223e;
+    padding: 0.6rem 1.6rem;
+    /* Rounded corners (more squared than pill) */
+    margin-top: 0.5rem;
+    border-radius: 12px;
+    min-height: 44px;
+    min-width: 220px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .product-showcase__cta:hover {
+    transform: translateY(-1px);
+  }
+
+  .product-showcase__copy {
+    margin: 0;
+    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+    line-height: 1.6;
+    color: #00223e;
+    text-align: right;
+    justify-self: end;
+    /* Push the copy closer to the bottom of the panel column */
+    align-self: end;
+    max-width: 300px;
+    font-weight: 400;
+    word-wrap: break-word;
+    position: relative;
+    z-index: 1;
+  }
+
+  .welcome-section {
+    margin-top: 110px; /* espacio para navbar fijo */
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .welcome-content {
+    max-width: 1000px;
+    width: 100%;
+    text-align: center;
+    color: #00223e;
+  }
+
+  .welcome-title {
+    font-size: 4.4rem;
+    font-weight: 500;
+    color: #09213c;
+    line-height: 1.12;
+    margin: 0 0 1.4rem;
+    letter-spacing: 0.01em;
+  }
+
+  .welcome-title-line {
+    display: block;
+  }
+
+  .welcome-subtitle {
+    font-size: clamp(1.05rem, 1.6vw, 1.45rem);
+    line-height: 1.6;
+    color: #213f8c;
+    margin: 0 auto 2.6rem;
+    max-width: 760px;
+    font-family: "NataSans";
+    font-weight: 300;
+  }
+
+  .welcome-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .welcome-honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .welcome-captcha {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70px;
+  }
+
+  /* Modal Styles */
+  .captcha-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .captcha-modal.is-active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .captcha-modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 34, 62, 0.4);
+    backdrop-filter: blur(8px);
+  }
+
+  .captcha-modal-content {
+    position: relative;
+    background: #ffffff;
+    padding: 2.5rem 2rem;
+    border-radius: 24px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow:
+      0 20px 25px -5px rgba(0, 0, 0, 0.1),
+      0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    text-align: center;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+  }
+
+  .captcha-modal.is-active .captcha-modal-content {
+    transform: translateY(0);
+  }
+
+  .captcha-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .captcha-modal-close:hover {
+    background: #f1f5f9;
+    color: #00223e;
+  }
+
+  .captcha-modal-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #00223e;
+    margin-bottom: 0.5rem;
+  }
+
+  .captcha-modal-subtitle {
+    font-size: 0.95rem;
+    color: #64748b;
+    margin-bottom: 1.5rem;
+  }
+
+  .welcome-form-message {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #00223e;
+    min-height: 1.4rem;
+    text-align: center;
+    width: 100%;
+  }
+
+  .welcome-input.is-error {
+    border-color: #d92d20;
+    box-shadow: 0 0 0 3px rgba(217, 45, 32, 0.12);
+  }
+
+  @media (max-width: 640px) {
+    .welcome-title {
+      line-height: 1.18;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .welcome-title {
+      line-height: 1.1;
+    }
+  }
+
+  .welcome-input-group {
+    display: flex;
+    align-items: center;
+    border: 2px solid #00223e;
+    border-radius: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 1px;
+    padding-right: 3px;
+    background: #ffffff;
+    min-width: min(560px, 100%);
+    max-width: 620px;
+  }
+
+  .welcome-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 1.05rem;
+    padding: 0.75rem 1.25rem;
+    color: #00223e;
+    background: transparent;
+  }
+
+  .welcome-input::placeholder {
+    color: #213f8c;
+    opacity: 0.9;
+  }
+
+  .welcome-quote-button {
+    border: none;
+    background: #213f8c;
+    color: #ffffff;
+    padding: 0.7rem 2.9rem;
+    border-radius: 9px;
+    font-size: 1.1rem;
+    font-weight: 400;
+    cursor: pointer;
+    width: 170px;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .welcome-demo-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #93fb4d;
+    color: #00223e;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 9px;
+    width: 20%;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 1.1rem;
+    box-shadow: 0 10px 22px rgba(147, 251, 77, 0.35);
+    margin-left: 1rem;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .welcome-demo-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 26px rgba(147, 251, 77, 0.4);
+  }
+
+  /* How It Works Section */
+  .how-it-works-section {
+    padding: 0 2rem;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .how-it-works-divider {
+    position: absolute;
+    top: 52.5%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #154091;
+    z-index: 1;
+    transform: translateY(-50%);
+    margin-left: 140px;
+    margin-right: 140px;
+  }
+
+  .how-it-works-content {
+    max-width: 1300px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 50% 55%;
+    gap: 2rem;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .how-it-works-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 2;
+  }
+
+  .how-it-works-title {
+    font-size: 4.4rem;
+    font-weight: 500;
+    color: #09213c;
+    margin: 0;
+    line-height: 1.1;
+    text-transform: none;
+    width: 50%;
+  }
+
+  .how-it-works-description {
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
+    line-height: 1.6;
+    color: #213f8c;
+    margin: 0;
+    max-width: 440px;
+    font-weight: 300;
+    opacity: 0.9;
+    margin-top: 4rem;
+  }
+
+  .how-it-works-demo-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #93fb4d;
+    color: #00223e;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+    padding-left: 2.8rem;
+    padding-right: 2.8rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 1.1rem;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    width: fit-content;
+  }
+
+  .how-it-works-demo-button:hover {
+    transform: translateY(-3px) scale(1.02);
+  }
+
+  .how-it-works-right {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    z-index: 3;
+    width: 88%;
+  }
+
+  .right-bg-panel {
+    background-color: #f3f4f6;
+
+    padding-right: 5.5rem;
+    padding-left: 5.5rem;
+
+    padding-top: 4.5rem;
+    padding-bottom: 4.5rem;
+
+    border-radius: 32px;
+    width: 100%;
+    max-width: 920px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .login-card {
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 2.5rem;
+    width: 100%;
+    position: relative;
+    z-index: 4;
+  }
+
+  .login-card-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #00223e;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -0.02em;
+  }
+
+  .login-card-subtitle {
+    font-size: 1.05rem;
+    color: #213f8c;
+    margin: 0 0 1.25rem 0;
+    opacity: 0.8;
+  }
+
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .login-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .login-field label {
+    font-size: 0.95rem;
+    color: #00223e;
+    font-weight: 600;
+    margin-left: 0.2rem;
+  }
+
+  .login-field input {
+    padding: 1rem 1.2rem;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    font-size: 1rem;
+    color: #00223e;
+    background-color: #f8f9fa;
+    outline: none;
+    transition: all 0.2s ease;
+    width: 100%;
+  }
+
+  .login-field input:focus {
+    border-color: #213f8c;
+    background-color: #ffffff;
+  }
+
+  .login-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    background: linear-gradient(135deg, #213f8c 0%, #152a5e 100%);
+    color: #ffffff;
+    border: none;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+  }
+
+  .login-button:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #2a4fa8 0%, #1a3475 100%);
+  }
+
+  .login-create-account {
+    text-align: center;
+    font-size: 0.95rem;
+    color: #213f8c;
+    margin: 2rem 0 0 0;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+
+  .login-create-account:hover {
+    color: #00223e;
+    text-decoration: underline;
+  }
+
+  .how-it-works-play-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: #ffffff00;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 1;
+  }
+
+  .how-it-works-play-button:hover,
+  .how-it-works-play-button:focus {
+    opacity: 1 !important;
+  }
+
+  .how-it-works-play-button svg,
+  .how-it-works-play-button img {
+    width: 32px;
+    height: 32px;
+    margin-left: 2px;
+    object-fit: contain;
+    opacity: 1;
+  }
+
+  /* Why Zelify Section */
+  .why-zelify-section {
+    padding: 0 2rem;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .why-zelify-divider {
+    position: absolute;
+    top: 48%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #154091;
+    z-index: 1;
+    transform: translateY(-50%);
+    margin-left: 140px;
+    margin-right: 140px;
+  }
+
+  .why-zelify-content {
+    max-width: 1300px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 1.5rem;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Mismo criterio que .right-bg-panel: espaciado y contenedor de la tarjeta de login */
+  .why-zelify-left {
+    background-color: #f3f4f6;
+    padding-right: 5.5rem;
+    padding-left: 5.5rem;
+    padding-top: 4.5rem;
+    padding-bottom: 4.5rem;
+    border-radius: 32px;
+    width: 100%;
+    max-width: 920px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .why-zelify-left .login-card {
+    margin-bottom: 1.5rem;
+  }
+
+  .ai-illustration-card {
+    background-color: #f3f4f6;
+
+    padding-right: 5.5rem;
+    padding-left: 5.5rem;
+
+    padding-top: 4.5rem;
+    padding-bottom: 4.5rem;
+
+    border-radius: 32px;
+    width: 100%;
+    height: 600px;
+    max-width: 920px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-illustration-image {
+    max-width: 100%;
+    height: auto;
+    max-height: 80%;
+    object-fit: contain;
+  }
+
+  .ai-illustration-play-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 11;
+    opacity: 1;
+  }
+
+  .ai-illustration-play-button:hover,
+  .ai-illustration-play-button:focus {
+    opacity: 1 !important;
+  }
+
+  .ai-illustration-play-button svg,
+  .ai-illustration-play-button img {
+    width: 28px;
+    height: 28px;
+    margin-left: 2px;
+    object-fit: contain;
+    opacity: 1;
+  }
+
+  .why-zelify-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    z-index: 2;
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .why-zelify-title {
+    font-size: 4.4rem;
+    font-weight: 500;
+    color: #09213c;
+    margin: 0;
+    line-height: 1.1;
+    text-transform: none;
+    text-align: right;
+    width: 90%;
+    max-width: 600px;
+    padding-bottom: 30px;
+  }
+
+  .why-zelify-description {
+    padding-top: 30px;
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
+    line-height: 1.6;
+    color: #213f8c;
+    margin: 0;
+    max-width: 440px;
+    font-weight: 300;
+    opacity: 0.9;
+    margin-top: 0.5rem;
+    text-align: right;
+  }
+
+  .why-zelify-demo-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #93fb4d;
+    color: #00223e;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+    padding-left: 2.8rem;
+    padding-right: 2.8rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 1.1rem;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    width: fit-content;
+  }
+
+  .why-zelify-demo-button:hover {
+    transform: translateY(-3px) scale(1.02);
+  }
+
+  /* Bench Section */
+  .bench-section {
+    padding: 0 clamp(1rem, 5vw, 4rem);
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+  }
+
+  .bench-section-2-content {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .bench-tabs {
+    display: flex;
+    gap: 5.8rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    border-bottom: 0.5px solid #213f8c;
+    width: fit-content;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  .bench-tab {
+    justify-content: center;
+    background: transparent;
+    border: none;
+    font-size: 1.1rem;
+    color: #283e87;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.2s ease;
+    font-weight: 400;
+  }
+
+  .bench-tab:hover {
+    color: #213f8c;
+  }
+
+  .bench-tab.active {
+    color: #283e87;
+    font-weight: 400;
+  }
+
+  .bench-tab.active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #00223e;
+    width: 110%;
+    margin-left: -5%;
+  }
+
+  .bench-content-area {
+    width: 100%;
+    min-height: 200px;
+    height: 500px;
+    background-color: #f3f4f6;
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bench-content-placeholder {
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bench-video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .bench-text-content {
+    text-align: center;
+    max-width: 800px;
+  }
+
+  .bench-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    color: #00223e;
+    margin: 0 0 1rem 0;
+    line-height: 1.2;
+  }
+
+  .bench-subtitle {
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    color: #213f8c;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .bench-cta {
+    display: flex;
+    justify-content: center;
+  }
+
+  .bench-cta-button {
+    background: #93fb4d;
+    color: #1a22ad;
+    border: none;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+    padding-left: 2.8rem;
+    padding-right: 2.8rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 1.1rem;
+    cursor: pointer;
+    text-transform: none;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+    box-shadow: 0 4px 12px rgba(147, 251, 77, 0.3);
+  }
+
+  .bench-cta-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(147, 251, 77, 0.4);
+  }
+
+  /* Tokens Section */
+  .tokens-section {
+    padding: 0 clamp(1rem, 5vw, 4rem);
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+  }
+
+  .tokens-container {
+    position: relative;
+    max-width: 1400px;
+    width: 100%;
+    background-color: #f0f3f7;
+    border-radius: 20px;
+    padding: 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .tokens-left {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .tokens-title {
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 600;
+    color: #213f8c;
+    margin: 0;
+    line-height: 1.1;
+  }
+
+  .tokens-description {
+    font-size: clamp(1rem, 1.5vw, 1.15rem);
+    line-height: 1.8;
+    color: #213f8c;
+    margin: 0;
+    opacity: 0.8;
+    width: 65%;
+    text-align: left;
+  }
+
+  .tokens-demo-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #93fb4d;
+    color: #00223e;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+    padding-left: 2.8rem;
+    padding-right: 2.8rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 1.1rem;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+    width: fit-content;
+    margin-top: 0.5rem;
+  }
+
+  .tokens-demo-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(147, 251, 77, 0.4);
+  }
+
+  .tokens-right {
+    position: relative;
+    margin-right: 3cqb;
+  }
+
+  .tokens-content-placeholder {
+    width: 100%;
+    min-height: 450px;
+    max-height: 600px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+    overflow: hidden;
+  }
+
+  .tokens-play-pause-btn {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+    opacity: 1;
+  }
+
+  .tokens-play-pause-btn:hover,
+  .tokens-play-pause-btn:focus {
+    opacity: 1 !important;
+  }
+
+  .tokens-play-pause-btn img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    opacity: 1;
+  }
+
+  .tokens-play-button {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px solid #213f8c;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    pointer-events: auto;
+    z-index: 11;
+    opacity: 1;
+  }
+
+  .tokens-play-button:hover,
+  .tokens-play-button:focus {
+    opacity: 1 !important;
+  }
+
+  .tokens-play-button svg,
+  .tokens-play-button img {
+    width: 28px;
+    height: 28px;
+    margin-left: 2px;
+    object-fit: contain;
+    opacity: 1;
+  }
+
+  /* Action Products Section */
+  .action-products-section {
+    padding: 0 clamp(1rem, 5vw, 4rem);
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+  }
+
+  .action-products-content {
+    max-width: 1200px;
+    width: 100%;
+    margin-left: 40px;
+    margin-right: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6rem;
+  }
+
+  .action-products-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    color: #00223e;
+    margin: 0;
+    text-align: center;
+  }
+
+  .action-products-container {
+    width: 100%;
+    background-color: #f3f4f6;
+    border-radius: 16px;
+    padding: 4rem;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .action-products-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    width: 340px;
+    height: 600px;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .action-card-wrapper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  /* Asegurar que los componentes hijos se ajusten al contenedor */
+  .action-card-wrapper :global(.auth-card-wrapper),
+  .action-card-wrapper :global(.identity-card-root),
+  .action-card-wrapper :global(.aml-card-root) {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    overflow: hidden !important;
+    box-sizing: border-box;
+  }
+
+  .card-header-graphic {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  .progress-indicators {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+
+  .progress-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #e8e9eb;
+    transition: background-color 0.2s ease;
+  }
+
+  .progress-dot.active {
+    background-color: #213f8c;
+  }
+
+  .card-subtitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #213f8c;
+    margin: 0 0 0.75rem 0;
+    text-align: center;
+  }
+
+  .card-description {
+    font-size: 0.95rem;
+    color: #213f8c;
+    margin: 0 0 2rem 0;
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  .profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-field label {
+    font-size: 0.9rem;
+    color: #00223e;
+    font-weight: 500;
+  }
+
+  .required {
+    color: #dc3545;
+    margin-left: 2px;
+  }
+
+  .form-field input {
+    padding: 0.875rem 1rem;
+    border: 1px solid #e8e9eb;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #00223e;
+    background-color: #f3f4f6;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+
+  .form-field input:focus {
+    border-color: #213f8c;
+    background-color: #ffffff;
+  }
+
+  .form-field input::placeholder {
+    color: rgba(33, 63, 140, 0.4);
+  }
+
+  .create-account-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: #213f8c;
+    color: #ffffff;
+    border: none;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+    margin-top: 0.5rem;
+  }
+
+  .create-account-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(33, 63, 140, 0.3);
+  }
+
+  .legal-text {
+    font-size: 0.75rem;
+    color: rgba(33, 63, 140, 0.5);
+    text-align: center;
+    margin: 1.5rem 0 0 0;
+    line-height: 1.5;
+  }
+
+  .action-products-nav {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .action-nav-button {
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+    padding-left: 2.8rem;
+    padding-right: 2.8rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid #000000;
+    background-color: #ffffff;
+    color: #00223e;
+  }
+
+  .action-nav-button:hover {
+    background-color: #f3f4f6;
+  }
+
+  .action-nav-button.active {
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+    padding-left: 2.8rem;
+    padding-right: 2.8rem;
+    border-radius: 12px;
+    text-decoration: none;
+    background-color: #000000;
+    color: #ffffff;
+    border-color: #000000;
+  }
+
+  /* AI Section */
+  .ai-section {
+    padding: 0 clamp(1rem, 5vw, 4rem);
+    background-color: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+  }
+
+  .ai-section-content {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    text-align: center;
+  }
+
+  .ai-section-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 600;
+    color: #213f8c;
+    margin: 0;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .ai-section-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #93fb4d;
+    color: #00223e;
+    padding: 1rem 3rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-transform: lowercase;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .ai-section-button:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Footer */
+  .demo-footer {
+    width: 100%;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    background: #102137;
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .logo-z {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #93fb4d;
+  }
+
+  .logo-text {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #ffffff;
+  }
+
+  .footer-quick-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+  }
+
+  .quick-links-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+  }
+
+  .quick-links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+  }
+
+  .quick-links-list li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.2s ease;
+  }
+
+  .quick-links-list li a:hover {
+    color: #93fb4d;
+  }
+
+  .footer-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .footer-legal {
+    font-size: 0.85rem;
+    color: #ffffff;
+    line-height: 1.6;
+    margin: 0;
+    max-width: 900px;
+  }
+
+  .footer-copyright {
+    font-size: 0.85rem;
+    color: #ffffff;
+    margin: 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .hero-title {
+      font-size: 3rem;
+    }
+
+    .capabilities-title,
+    .composition-title,
+    .alaiza-title,
+    .who-title,
+    .tokens-title,
+    .pricing-title {
+      font-size: 2.5rem;
+    }
+  }
+
+  @media (max-width: 768px) {
     .product-showcase {
-      padding: 0 clamp(0.09rem, 0.2vw, 0.25rem);
-      display: flex;
-      justify-content: center;
-      position: relative;
-      /* Altura fija: no se redimensiona al achicar la ventana en alto */
-      height: 840px;
-      min-height: 840px;
-      max-height: 640px;
-      overflow: hidden;
+      padding: 0 1.25rem;
+      height: 520px;
+      min-height: 520px;
+      max-height: 520px;
     }
 
-    .product-showcase__video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 640px;
-      min-height: 640px;
-      max-height: 640px;
-      object-fit: cover;
-      object-position: center;
-      z-index: 0;
-      opacity: 0.4;
-    }
-
-    .product-showcase__overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      /* Gradient fade: solid white at top, transparent middle, solid white at bottom */
-      background: linear-gradient(
-        to bottom,
-        #ffffff 0%,
-        transparent 15%,
-        transparent 85%,
-        #ffffff 100%
-      );
-      pointer-events: none; /* Allow clicks to pass through to content if needed */
-    }
-
-    /* Content wrapper sits above video */
     .product-showcase__grid {
-      width: min(1300px, 100%);
-      display: grid;
       grid-template-columns: 1fr;
       gap: 0;
-      align-items: start;
-      position: relative;
-      z-index: 2;
-    }
-
-    .product-showcase__overlay-card {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      height: 850px;
-      min-height: 720px;
-      transform: translate(-50%, -50%);
-      width: clamp(320px, 40vw, 550px);
-      background-color: #f3f4f6;
-      border-radius: 24px;
-      z-index: 10;
-      pointer-events: auto;
-      padding: 6.5rem 4rem 1rem; /* 3rem arriba, 2rem lados, 1rem abajo */
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-    }
-
-    .product-showcase__inner-card {
-      width: 100%;
-      flex: 1;
-      min-height: 0;
-      background-color: #ffffff;
-      border-radius: 16px;
-      margin-bottom: 4.5rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .product-card-wrapper {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-
-    .product-showcase__play-button {
-      position: absolute;
-      bottom: 1.5rem; /* Adjusted for inside card */
-      right: 1.5rem; /* Adjusted for inside card */
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.9);
-      border: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      z-index: 10;
-    }
-
-    .product-showcase__play-button:hover {
-      transform: scale(1.05);
-    }
-
-    .product-showcase__play-button svg {
-      width: 20px;
-      height: 20px;
-      margin-left: 2px;
-    }
-
-    .product-showcase__menu {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      color: #00223e;
-      position: relative;
-      z-index: 1;
-    }
-
-    .product-showcase__nav {
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      z-index: 1;
-    }
-
-    .product-showcase__item {
-      /* Default divider line for each item */
-      border-bottom: 1px solid rgba(33, 63, 140, 0.25);
-      position: relative;
-      z-index: 1;
-    }
-
-    .product-showcase__item.is-active {
-      /* Active item underline (thicker + black) */
-      border-bottom: 3px solid #000;
-    }
-
-    .product-showcase__nav-item {
-      width: 100%;
-      text-align: left;
-      background: transparent;
-      border: none;
-      font-size: 1.1rem;
-      padding: 1rem 0;
-      color: #213f8c;
-      cursor: pointer;
-      transition: color 0.2s ease;
-      font-weight: 500;
-    }
-
-    .product-showcase__nav-item:hover {
-      color: #00223e;
-    }
-
-    .product-showcase__item.is-active .product-showcase__nav-item {
-      color: #00223e;
-      font-weight: 700;
-      padding-bottom: 0.25rem;
-    }
-
-    .product-showcase__panel {
-      max-height: 0;
-      opacity: 0;
-      overflow: hidden;
-      transition:
-        max-height 0.4s ease,
-        opacity 0.4s ease,
-        padding 0.4s ease;
-      background: transparent;
-    }
-
-    .product-showcase__item.is-active .product-showcase__panel {
-      max-height: 500px;
-      opacity: 1;
-      padding: 0 0 2rem;
-      /* Allow CTA shadow/rounding to render without being clipped */
-      overflow: visible;
     }
 
     .product-showcase__panel-inner {
-      display: grid; /* Usa CSS Grid como sistema de layout */
-      grid-template-columns: minmax(280px, 1fr) minmax(280px, 1fr); /* 2 columnas, mínimo 280px, máximo 1fr cada una */
-      gap: clamp(
-        1rem,
-        8vw,
-        6rem
-      ); /* Espacio entre columnas/filas: min 2rem, fluido 8vw, max 6rem */
-      align-items: start; /* Alinea los elementos del grid en la parte superior */
-      position: relative; /* Permite posicionar hijos con position:absolute */
-      z-index: 1; /* Controla la capa (profundidad) del contenedor */
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
     }
 
-    .product-showcase__panel-left {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      align-items: flex-start;
-      text-align: left;
-      position: relative;
-      z-index: 1;
-    }
-
-    .product-showcase__title {
-      font-size: clamp(1.4rem, 2.5vw, 2rem);
-      line-height: 1.25;
-
-      color: #00223e;
-      font-weight: 700;
-      max-width: 380px;
-      word-wrap: break-word;
-    }
-
-    .product-showcase__title .title-strong {
-      /* Title strong: set weight/size/color here */
-      font-weight: 700;
-      font-family: "NataSans";
-      font-size: 2rem;
-      color: #000000;
-    }
-
-    .product-showcase__title .title-strong :global(.title-light) {
-      /* Lighter weight for specific words inside title-strong */
-      font-family: "NataSans";
-      font-variation-settings: "wght" 300;
-      font-weight: 300 !important;
-    }
-
-    .product-showcase__title .title-accent {
-      /* Accent color/weight for the second part */
-      color: #004195;
-      font-weight: 500;
-    }
-
-    .product-showcase__title .title-accent:empty {
+    .product-showcase__overlay-card {
       display: none;
-    }
-
-    .product-showcase__title .title-accent:empty {
-      display: none;
-    }
-
-    .product-showcase__cta {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      /* CTA size controls: tweak padding for overall size; add width/min-width if you want a fixed width */
-      background: #93fb4d;
-      color: #00223e;
-      padding: 0.6rem 1.6rem;
-      /* Rounded corners (more squared than pill) */
-      margin-top: 0.5rem;
-      border-radius: 12px;
-      min-height: 44px;
-      min-width: 220px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-    }
-
-    .product-showcase__cta:hover {
-      transform: translateY(-1px);
     }
 
     .product-showcase__copy {
-      margin: 0;
-      font-size: clamp(0.9rem, 1.2vw, 1.1rem);
-      line-height: 1.6;
-      color: #00223e;
-      text-align: right;
-      justify-self: end;
-      /* Push the copy closer to the bottom of the panel column */
-      align-self: end;
-      max-width: 300px;
-      font-weight: 400;
-      word-wrap: break-word;
-      position: relative;
-      z-index: 1;
+      text-align: left;
+      justify-self: start;
+      max-width: 100%;
     }
 
-    .welcome-section {
-      margin-top: 110px; /* espacio para navbar fijo */
-      padding: 0 1.5rem;
-      display: flex;
-      justify-content: center;
-    }
-
-    .welcome-content {
-      max-width: 1000px;
-      width: 100%;
-      text-align: center;
-      color: #00223e;
-    }
-
-    .welcome-title {
-      font-size: 4.4rem;
-      font-weight: 500;
-      color: #09213c;
-      line-height: 1.12;
-      margin: 0 0 1.4rem;
-      letter-spacing: 0.01em;
-    }
-
-    .welcome-title-line {
-      display: block;
-    }
-
-    .welcome-subtitle {
-      font-size: clamp(1.05rem, 1.6vw, 1.45rem);
-      line-height: 1.6;
-      color: #213f8c;
-      margin: 0 auto 2.6rem;
-      max-width: 760px;
-      font-family: "NataSans";
-      font-weight: 300;
-    }
-
-    .welcome-cta {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      flex-wrap: wrap;
-    }
-
-    .welcome-honeypot {
-      position: absolute;
-      left: -9999px;
-      width: 1px;
-      height: 1px;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .welcome-captcha {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 70px;
-    }
-
-    /* Modal Styles */
-    .captcha-modal {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-
-    .captcha-modal.is-active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .captcha-modal-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 34, 62, 0.4);
-      backdrop-filter: blur(8px);
-    }
-
-    .captcha-modal-content {
-      position: relative;
-      background: #ffffff;
-      padding: 2.5rem 2rem;
-      border-radius: 24px;
-      width: 90%;
-      max-width: 400px;
-      box-shadow:
-        0 20px 25px -5px rgba(0, 0, 0, 0.1),
-        0 10px 10px -5px rgba(0, 0, 0, 0.04);
-      text-align: center;
-      transform: translateY(20px);
-      transition: transform 0.3s ease;
-    }
-
-    .captcha-modal.is-active .captcha-modal-content {
-      transform: translateY(0);
-    }
-
-    .captcha-modal-close {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: transparent;
-      border: none;
-      color: #94a3b8;
-      cursor: pointer;
-      padding: 0.5rem;
-      border-radius: 50%;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .captcha-modal-close:hover {
-      background: #f1f5f9;
-      color: #00223e;
-    }
-
-    .captcha-modal-title {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: #00223e;
-      margin-bottom: 0.5rem;
-    }
-
-    .captcha-modal-subtitle {
-      font-size: 0.95rem;
-      color: #64748b;
-      margin-bottom: 1.5rem;
-    }
-
-    .welcome-form-message {
-      margin: 0;
-      font-size: 0.95rem;
-      color: #00223e;
-      min-height: 1.4rem;
-      text-align: center;
-      width: 100%;
-    }
-
-    .welcome-input.is-error {
-      border-color: #d92d20;
-      box-shadow: 0 0 0 3px rgba(217, 45, 32, 0.12);
-    }
-
-    @media (max-width: 640px) {
-      .welcome-title {
-        line-height: 1.18;
-      }
-    }
-
-    @media (min-width: 1200px) {
-      .welcome-title {
-        line-height: 1.1;
-      }
-    }
-
-    .welcome-input-group {
-      display: flex;
-      align-items: center;
-      border: 2px solid #00223e;
-      border-radius: 10px;
-      padding-top: 2px;
-      padding-bottom: 2px;
-      padding-left: 1px;
-      padding-right: 3px;
-      background: #ffffff;
-      min-width: min(560px, 100%);
-      max-width: 620px;
-    }
-
-    .welcome-input {
-      flex: 1;
-      border: none;
-      outline: none;
-      font-size: 1.05rem;
-      padding: 0.75rem 1.25rem;
-      color: #00223e;
-      background: transparent;
-    }
-
-    .welcome-input::placeholder {
-      color: #213f8c;
-      opacity: 0.9;
-    }
-
-    .welcome-quote-button {
-      border: none;
-      background: #213f8c;
-      color: #ffffff;
-      padding: 0.7rem 2.9rem;
-      border-radius: 9px;
-      font-size: 1.1rem;
-      font-weight: 400;
-      cursor: pointer;
-      width: 170px;
-      transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-    }
-
-    .welcome-demo-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: #93fb4d;
-      color: #00223e;
-      padding-top: 10px;
-      padding-bottom: 10px;
-      border-radius: 9px;
-      width: 20%;
-      text-decoration: none;
-      font-weight: 400;
-      font-size: 1.1rem;
-      box-shadow: 0 10px 22px rgba(147, 251, 77, 0.35);
-      margin-left: 1rem;
-      transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-    }
-
-    .welcome-demo-button:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 14px 26px rgba(147, 251, 77, 0.4);
-    }
-
-    /* How It Works Section */
     .how-it-works-section {
-      padding: 0 2rem;
-      background-color: #ffffff;
-      display: flex;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
+      padding: 0 1.5rem;
     }
 
     .how-it-works-divider {
-      position: absolute;
-      top: 52.5%;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background-color: #154091;
-      z-index: 1;
-      transform: translateY(-50%);
-      margin-left: 140px;
-      margin-right: 140px;
-    }
-
-    .how-it-works-content {
-      max-width: 1300px;
-      width: 100%;
-      display: grid;
-      grid-template-columns: 45% 55%;
-      gap: 2rem;
-      align-items: center;
-      position: relative;
-      z-index: 2;
-    }
-
-    .how-it-works-left {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      z-index: 2;
-    }
-
-    .how-it-works-title {
-      font-size: 4.4rem;
-      font-weight: 500;
-      color: #09213c;
-      margin: 0;
-      line-height: 1.1;
-      text-transform: none;
-      width: 50%;
-    }
-
-    .how-it-works-description {
-      font-size: clamp(1rem, 1.4vw, 1.25rem);
-      line-height: 1.6;
-      color: #213f8c;
-      margin: 0;
-      max-width: 440px;
-      font-weight: 300;
-      opacity: 0.9;
-      margin-top: 4rem;
-    }
-
-    .how-it-works-demo-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: #93fb4d;
-      color: #00223e;
-      padding-top: 0.4rem;
-      padding-bottom: 0.4rem;
-      padding-left: 2.8rem;
-      padding-right: 2.8rem;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: 400;
-      font-size: 1.1rem;
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      width: fit-content;
-    }
-
-    .how-it-works-demo-button:hover {
-      transform: translateY(-3px) scale(1.02);
-    }
-
-    .how-it-works-right {
-      display: flex;
-      justify-content: flex-end;
-      position: relative;
-      z-index: 3;
-      width: 88%;
-    }
-
-    .right-bg-panel {
-      background-color: #f3f4f6;
-
-      padding-right: 5.5rem;
-      padding-left: 5.5rem;
-
-      padding-top: 4.5rem;
-      padding-bottom: 4.5rem;
-
-      border-radius: 32px;
-      width: 100%;
-      max-width: 920px;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .login-card {
-      background-color: #ffffff;
-      border-radius: 20px;
-      padding: 2.5rem;
-      width: 100%;
-      position: relative;
-      z-index: 4;
-    }
-
-    .login-card-title {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #00223e;
-      margin: 0 0 0.5rem 0;
-      letter-spacing: -0.02em;
-    }
-
-    .login-card-subtitle {
-      font-size: 1.05rem;
-      color: #213f8c;
-      margin: 0 0 2.5rem 0;
-      opacity: 0.8;
-    }
-
-    .login-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1.8rem;
-    }
-
-    .login-field {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-
-    .login-field label {
-      font-size: 0.95rem;
-      color: #00223e;
-      font-weight: 600;
-      margin-left: 0.2rem;
-    }
-
-    .login-field input {
-      padding: 1rem 1.2rem;
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      border-radius: 12px;
-      font-size: 1rem;
-      color: #00223e;
-      background-color: #f8f9fa;
-      outline: none;
-      transition: all 0.2s ease;
-      width: 100%;
-    }
-
-    .login-field input:focus {
-      border-color: #213f8c;
-      background-color: #ffffff;
-    }
-
-    .login-button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.7rem;
-      background: linear-gradient(135deg, #213f8c 0%, #152a5e 100%);
-      color: #ffffff;
-      border: none;
-      padding: 1rem 1.5rem;
-      border-radius: 12px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      margin-top: 0.5rem;
-    }
-
-    .login-button:hover {
-      transform: translateY(-2px);
-      background: linear-gradient(135deg, #2a4fa8 0%, #1a3475 100%);
-    }
-
-    .login-create-account {
-      text-align: center;
-      font-size: 0.95rem;
-      color: #213f8c;
-      margin: 2rem 0 0 0;
-      cursor: pointer;
-      transition: color 0.2s ease;
-    }
-
-    .login-create-account:hover {
-      color: #00223e;
-      text-decoration: underline;
-    }
-
-    .how-it-works-play-button {
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      background-color: #ffffff;
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      z-index: 10;
-    }
-
-    .how-it-works-play-button:hover {
-      transform: scale(1.1) rotate(5deg);
-    }
-
-    .how-it-works-play-button svg {
-      width: 24px;
-      height: 24px;
-      margin-left: 2px;
-    }
-
-    /* Why Zelify Section */
-    .why-zelify-section {
-      padding: 0 2rem;
-      background-color: #ffffff;
-      display: flex;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .why-zelify-divider {
       position: absolute;
       top: 45%;
       left: 0;
@@ -1967,454 +2908,102 @@ const modulesList = [
       margin-right: 140px;
     }
 
-    .why-zelify-content {
-      max-width: 1300px;
-      width: 100%;
-      display: grid;
-      grid-template-columns: 55% 45%;
-      gap: 2rem;
-      align-items: center;
-      position: relative;
-      z-index: 2;
-    }
-
-    .why-zelify-left {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      position: relative;
-      z-index: 3;
-      width: 88%;
-    }
-
-    .ai-illustration-card {
-      background-color: #f3f4f6;
-
-      padding-right: 5.5rem;
-      padding-left: 5.5rem;
-
-      padding-top: 4.5rem;
-      padding-bottom: 4.5rem;
-
-      border-radius: 32px;
-      width: 100%;
-      height: 600px;
-      max-width: 920px;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .ai-illustration-image {
-      max-width: 100%;
-      height: auto;
-      max-height: 80%;
-      object-fit: contain;
-    }
-
-    .ai-illustration-play-button {
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      background-color: #ffffff;
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      z-index: 11;
-    }
-
-    .ai-illustration-play-button:hover {
-      transform: scale(1.1) rotate(5deg);
-    }
-
-    .ai-illustration-play-button svg {
-      width: 20px;
-      height: 20px;
-      margin-left: 2px;
-    }
-
-    .why-zelify-right {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      z-index: 2;
-      align-items: flex-end;
-      text-align: right;
-    }
-
-    .why-zelify-title {
-      font-size: 4.4rem;
-      font-weight: 500;
-      color: #09213c;
-      margin: 0;
-      line-height: 1.1;
-      text-transform: none;
-      text-align: right;
-      width: 90%;
-      max-width: 600px;
-    }
-
-    .why-zelify-description {
-      font-size: clamp(1rem, 1.4vw, 1.25rem);
-      line-height: 1.6;
-      color: #213f8c;
-      margin: 0;
-      max-width: 440px;
-      font-weight: 300;
-      opacity: 0.9;
-      margin-top: 4rem;
-      text-align: right;
-    }
-
-    .why-zelify-demo-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: #93fb4d;
-      color: #00223e;
-      padding-top: 0.4rem;
-      padding-bottom: 0.4rem;
-      padding-left: 2.8rem;
-      padding-right: 2.8rem;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: 400;
-      font-size: 1.1rem;
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      width: fit-content;
-    }
-
-    .why-zelify-demo-button:hover {
-      transform: translateY(-3px) scale(1.02);
-    }
-
-    /* Bench Section */
-    .bench-section {
-      padding: 0 clamp(1rem, 5vw, 4rem);
-      background-color: #ffffff;
-      display: flex;
-      justify-content: center;
-    }
-
-    .bench-section-2-content {
-      max-width: 1200px;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    .how-it-works-content {
+      grid-template-columns: 1fr;
       gap: 3rem;
     }
 
-    .bench-tabs {
-      display: flex;
-      gap: 5.8rem;
+    .how-it-works-right {
       justify-content: center;
-      flex-wrap: wrap;
-      border-bottom: 0.5px solid #213f8c;
-      width: fit-content;
-      margin-bottom: 1rem;
-      font-weight: 600;
     }
 
-    .bench-tab {
-      justify-content: center;
-      background: transparent;
-      border: none;
-      font-size: 1.1rem;
-      color: #283e87;
-      cursor: pointer;
+    .right-bg-panel {
+      padding: 2rem 1.5rem;
+      border-radius: 24px;
+    }
+
+    .login-card {
+      padding: 1.5rem;
+    }
+
+    .how-it-works-play-button {
       position: relative;
-      transition: color 0.2s ease;
-      font-weight: 400;
+      bottom: auto;
+      right: auto;
+      margin-top: 1rem;
     }
 
-    .bench-tab:hover {
-      color: #213f8c;
+    .why-zelify-section {
+      padding: 0 1.5rem;
     }
 
-    .bench-tab.active {
-      color: #283e87;
-      font-weight: 400;
+    .why-zelify-divider {
+      display: none;
     }
 
-    .bench-tab.active::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background-color: #00223e;
-      width: 110%;
-      margin-left: -5%;
-    }
-
-    .bench-content-area {
-      width: 100%;
-      min-height: 200px;
-      height: 500px;
-      background-color: #f3f4f6;
-      border-radius: 16px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .bench-content-placeholder {
-      width: 100%;
-      height: 100%;
-      min-height: 400px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .bench-video {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;
-    }
-
-    .bench-text-content {
-      text-align: center;
-      max-width: 800px;
-    }
-
-    .bench-title {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 600;
-      color: #00223e;
-      margin: 0 0 1rem 0;
-      line-height: 1.2;
-    }
-
-    .bench-subtitle {
-      font-size: clamp(1rem, 1.5vw, 1.2rem);
-      color: #213f8c;
-      margin: 0;
-      line-height: 1.6;
-    }
-
-    .bench-cta {
-      display: flex;
-      justify-content: center;
-    }
-
-    .bench-cta-button {
-      background: #93fb4d;
-      color: #1a22ad;
-      border: none;
-      padding-top: 0.4rem;
-      padding-bottom: 0.4rem;
-      padding-left: 2.8rem;
-      padding-right: 2.8rem;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: 400;
-      font-size: 1.1rem;
-      cursor: pointer;
-      text-transform: lowercase;
-      transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-      box-shadow: 0 4px 12px rgba(147, 251, 77, 0.3);
-    }
-
-    .bench-cta-button:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 16px rgba(147, 251, 77, 0.4);
-    }
-
-    /* Tokens Section */
-    .tokens-section {
-      padding: 0 clamp(1rem, 5vw, 4rem);
-      background-color: #ffffff;
-      display: flex;
-      justify-content: center;
-    }
-
-    .tokens-container {
-      max-width: 1400px;
-      width: 100%;
-      background-color: #f0f3f7;
-      border-radius: 20px;
-      padding: 4rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
-
-    .tokens-left {
-      display: flex;
-      flex-direction: column;
+    .why-zelify-content {
+      grid-template-columns: 1fr;
       gap: 1.5rem;
     }
 
-    .tokens-title {
-      font-size: clamp(3rem, 6vw, 5rem);
-      font-weight: 600;
-      color: #213f8c;
-      margin: 0;
-      line-height: 1.1;
-    }
-
-    .tokens-description {
-      font-size: clamp(1rem, 1.5vw, 1.15rem);
-      line-height: 1.8;
-      color: #213f8c;
-      margin: 0;
-      opacity: 0.8;
-      width: 65%;
-      text-align: left;
-    }
-
-    .tokens-demo-button {
-      display: inline-flex;
-      align-items: center;
+    .why-zelify-left {
       justify-content: center;
-      background: #93fb4d;
-      color: #00223e;
-      padding-top: 0.4rem;
-      padding-bottom: 0.4rem;
-      padding-left: 2.8rem;
-      padding-right: 2.8rem;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: 400;
-      font-size: 1.1rem;
-      transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-      width: fit-content;
-      margin-top: 0.5rem;
+      padding: 2rem 1.5rem;
     }
 
-    .tokens-demo-button:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 16px rgba(147, 251, 77, 0.4);
+    .ai-illustration-card {
+      max-width: 100%;
+      height: 300px;
     }
 
-    .tokens-right {
-      position: relative;
+    .bench-section {
+      padding: 0 1.5rem;
+    }
+
+    .bench-tabs {
+      gap: 1.5rem;
+    }
+
+    .bench-content-area {
+      min-height: 300px;
+    }
+
+    .tokens-section {
+      padding: 0 1.5rem;
+    }
+
+    .tokens-container {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 2rem;
     }
 
     .tokens-content-placeholder {
-      width: 100%;
-      min-height: 450px;
-      max-height: 600px;
-      background-color: #ffffff;
-      border-radius: 16px;
-      position: relative;
-      display: flex;
-      align-items: stretch;
-      justify-content: stretch;
-      overflow: hidden;
+      min-height: 350px;
+      max-height: 500px;
     }
 
-    .tokens-play-button {
-      position: absolute;
-      bottom: 1.5rem;
-      right: 1.5rem;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      border: 2px solid #213f8c;
-      background-color: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      pointer-events: auto;
-      transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-      z-index: 11;
-    }
-
-    .tokens-play-button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 12px rgba(33, 63, 140, 0.3);
-    }
-
-    .tokens-play-button svg {
-      width: 20px;
-      height: 20px;
-      margin-left: 2px;
-    }
-
-    /* Action Products Section */
     .action-products-section {
-      padding: 0 clamp(1rem, 5vw, 4rem);
-      background-color: #ffffff;
-      display: flex;
-      justify-content: center;
-    }
-
-    .action-products-content {
-      max-width: 1200px;
-      width: 100%;
-      margin-left: 40px;
-      margin-right: 40px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6rem;
-    }
-
-    .action-products-title {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 600;
-      color: #00223e;
-      margin: 0;
-      text-align: center;
+      padding: 0 1.5rem;
     }
 
     .action-products-container {
-      width: 100%;
-      background-color: #f3f4f6;
-      border-radius: 16px;
-      padding: 4rem;
-      min-height: 500px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
+      padding: 1rem;
+      min-height: 400px;
     }
 
     .action-products-card {
-      background-color: #ffffff;
-      border-radius: 16px;
       width: 340px;
-      height: 600px;
-      display: flex;
-      position: relative;
-      overflow: hidden;
-      box-sizing: border-box;
+      height: 500px;
+      margin-left: 0;
     }
 
     .action-card-wrapper {
       width: 100%;
       height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       box-sizing: border-box;
     }
 
-    /* Asegurar que los componentes hijos se ajusten al contenedor */
     .action-card-wrapper :global(.auth-card-wrapper),
     .action-card-wrapper :global(.identity-card-root),
     .action-card-wrapper :global(.aml-card-root) {
@@ -2426,1011 +3015,578 @@ const modulesList = [
       box-sizing: border-box;
     }
 
-    .card-header-graphic {
-      width: 100%;
-      margin-bottom: 2rem;
-    }
-
-    .progress-indicators {
-      display: flex;
-      gap: 0.75rem;
-      justify-content: center;
-      margin-bottom: 2rem;
-    }
-
-    .progress-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background-color: #e8e9eb;
-      transition: background-color 0.2s ease;
-    }
-
-    .progress-dot.active {
-      background-color: #213f8c;
-    }
-
-    .card-subtitle {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: #213f8c;
-      margin: 0 0 0.75rem 0;
-      text-align: center;
-    }
-
-    .card-description {
-      font-size: 0.95rem;
-      color: #213f8c;
-      margin: 0 0 2rem 0;
-      text-align: center;
-      line-height: 1.6;
-    }
-
-    .profile-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .form-field {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .form-field label {
-      font-size: 0.9rem;
-      color: #00223e;
-      font-weight: 500;
-    }
-
-    .required {
-      color: #dc3545;
-      margin-left: 2px;
-    }
-
-    .form-field input {
-      padding: 0.875rem 1rem;
-      border: 1px solid #e8e9eb;
-      border-radius: 8px;
-      font-size: 1rem;
-      color: #00223e;
-      background-color: #f3f4f6;
-      outline: none;
-      transition: border-color 0.2s ease;
-    }
-
-    .form-field input:focus {
-      border-color: #213f8c;
-      background-color: #ffffff;
-    }
-
-    .form-field input::placeholder {
-      color: rgba(33, 63, 140, 0.4);
-    }
-
-    .create-account-button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      background-color: #213f8c;
-      color: #ffffff;
-      border: none;
-      padding: 1rem 1.5rem;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-      margin-top: 0.5rem;
-    }
-
-    .create-account-button:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(33, 63, 140, 0.3);
-    }
-
-    .legal-text {
-      font-size: 0.75rem;
-      color: rgba(33, 63, 140, 0.5);
-      text-align: center;
-      margin: 1.5rem 0 0 0;
-      line-height: 1.5;
-    }
-
     .action-products-nav {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
+      gap: 0.75rem;
     }
 
     .action-nav-button {
-      padding-top: 0.4rem;
-      padding-bottom: 0.4rem;
-      padding-left: 2.8rem;
-      padding-right: 2.8rem;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      border: 1px solid #000000;
-      background-color: #ffffff;
-      color: #00223e;
+      padding: 0.625rem 1.5rem;
+      font-size: 0.9rem;
     }
 
-    .action-nav-button:hover {
-      background-color: #f3f4f6;
-    }
-
-    .action-nav-button.active {
-      padding-top: 0.4rem;
-      padding-bottom: 0.4rem;
-      padding-left: 2.8rem;
-      padding-right: 2.8rem;
-      border-radius: 12px;
-      text-decoration: none;
-      background-color: #000000;
-      color: #ffffff;
-      border-color: #000000;
-    }
-
-    /* AI Section */
     .ai-section {
-      padding: 0 clamp(1rem, 5vw, 4rem);
-      background-color: #f0f4f8;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 60vh;
+      padding: 0 1.5rem;
     }
 
     .ai-section-content {
-      max-width: 1200px;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3rem;
-      text-align: center;
-    }
-
-    .ai-section-title {
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      font-weight: 600;
-      color: #213f8c;
-      margin: 0;
-      line-height: 1.2;
-      text-align: center;
+      gap: 2rem;
     }
 
     .ai-section-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: #93fb4d;
-      color: #00223e;
-      padding: 1rem 3rem;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1.1rem;
-      text-transform: lowercase;
-      transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-    }
-
-    .ai-section-button:hover {
-      transform: translateY(-2px);
-    }
-
-    /* Footer */
-    .demo-footer {
-      width: 100%;
-      padding: 0 clamp(1rem, 5vw, 4rem);
-      background: #102137;
-      position: relative;
-      z-index: 1;
-    }
-
-    .footer-container {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 3rem;
+      padding: 0.875rem 2.5rem;
+      font-size: 1rem;
     }
 
     .footer-top {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       gap: 2rem;
-      align-items: start;
-    }
-
-    .footer-logo {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .logo-z {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #93fb4d;
-    }
-
-    .logo-text {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: #ffffff;
     }
 
     .footer-quick-links {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 1rem;
-    }
-
-    .quick-links-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #ffffff;
-      margin: 0;
+      align-items: flex-start;
     }
 
     .quick-links-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 0.5rem;
-    }
-
-    .quick-links-list li a {
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 1rem;
-      transition: color 0.2s ease;
-    }
-
-    .quick-links-list li a:hover {
-      color: #93fb4d;
-    }
-
-    .footer-bottom {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-      text-align: center;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      align-items: flex-start;
     }
 
     .footer-legal {
-      font-size: 0.85rem;
-      color: #ffffff;
-      line-height: 1.6;
-      margin: 0;
-      max-width: 900px;
+      font-size: 0.75rem;
     }
 
     .footer-copyright {
-      font-size: 0.85rem;
-      color: #ffffff;
-      margin: 0;
+      font-size: 0.75rem;
     }
+  }
+</style>
 
-    /* Responsive */
-    @media (max-width: 1024px) {
-      .hero-title {
-        font-size: 3rem;
-      }
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    const showcase = document.querySelector("[data-showcase]");
+    if (!showcase) return;
 
-      .capabilities-title,
-      .composition-title,
-      .alaiza-title,
-      .who-title,
-      .tokens-title,
-      .pricing-title {
-        font-size: 2.5rem;
-      }
-    }
+    const items = showcase.querySelectorAll(".product-showcase__item");
+    const cardWrappers = document.querySelectorAll(".product-card-wrapper");
+    const playBtn = document.getElementById("demo-play-button");
+    let currentActiveModule = "auth";
 
-    @media (max-width: 768px) {
-      .product-showcase {
-        padding: 0 1.25rem;
-        height: 520px;
-        min-height: 520px;
-        max-height: 520px;
-      }
-
-      .product-showcase__grid {
-        grid-template-columns: 1fr;
-        gap: 0;
-      }
-
-      .product-showcase__panel-inner {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-
-      .product-showcase__overlay-card {
-        display: none;
-      }
-
-      .product-showcase__copy {
-        text-align: left;
-        justify-self: start;
-        max-width: 100%;
-      }
-
-      .how-it-works-section {
-        padding: 0 1.5rem;
-      }
-
-      .how-it-works-divider {
-        display: none;
-      }
-
-      .how-it-works-content {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-      }
-
-      .how-it-works-right {
-        justify-content: center;
-      }
-
-      .right-bg-panel {
-        padding: 2rem 1.5rem;
-        border-radius: 24px;
-      }
-
-      .login-card {
-        padding: 1.5rem;
-      }
-
-      .how-it-works-play-button {
-        position: relative;
-        bottom: auto;
-        right: auto;
-        margin-top: 2rem;
-      }
-
-      .why-zelify-section {
-        padding: 0 1.5rem;
-      }
-
-      .why-zelify-divider {
-        display: none;
-      }
-
-      .why-zelify-content {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-      }
-
-      .why-zelify-left {
-        justify-content: center;
-      }
-
-      .ai-illustration-card {
-        max-width: 100%;
-        height: 300px;
-      }
-
-      .bench-section {
-        padding: 0 1.5rem;
-      }
-
-      .bench-tabs {
-        gap: 1.5rem;
-      }
-
-      .bench-content-area {
-        min-height: 300px;
-      }
-
-      .tokens-section {
-        padding: 0 1.5rem;
-      }
-
-      .tokens-container {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        padding: 2rem;
-      }
-
-      .tokens-content-placeholder {
-        min-height: 350px;
-        max-height: 500px;
-      }
-
-      .action-products-section {
-        padding: 0 1.5rem;
-      }
-
-      .action-products-container {
-        padding: 1rem;
-        min-height: 400px;
-      }
-
-      .action-products-card {
-        width: 340px;
-        height: 500px;
-        margin-left: 0;
-      }
-
-      .action-card-wrapper {
-        width: 100%;
-        height: 100%;
-        box-sizing: border-box;
-      }
-
-      .action-card-wrapper :global(.auth-card-wrapper),
-      .action-card-wrapper :global(.identity-card-root),
-      .action-card-wrapper :global(.aml-card-root) {
-        width: 100% !important;
-        height: 100% !important;
-        max-width: 100% !important;
-        max-height: 100% !important;
-        overflow: hidden !important;
-        box-sizing: border-box;
-      }
-
-      .action-products-nav {
-        gap: 0.75rem;
-      }
-
-      .action-nav-button {
-        padding: 0.625rem 1.5rem;
-        font-size: 0.9rem;
-      }
-
-      .ai-section {
-        padding: 0 1.5rem;
-      }
-
-      .ai-section-content {
-        gap: 2rem;
-      }
-
-      .ai-section-button {
-        padding: 0.875rem 2.5rem;
-        font-size: 1rem;
-      }
-
-      .footer-top {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-
-      .footer-quick-links {
-        align-items: flex-start;
-      }
-
-      .quick-links-list {
-        align-items: flex-start;
-      }
-
-      .footer-legal {
-        font-size: 0.75rem;
-      }
-
-      .footer-copyright {
-        font-size: 0.75rem;
-      }
-    }
-  </style>
-
-  <script is:inline>
-    document.addEventListener("DOMContentLoaded", () => {
-      const showcase = document.querySelector("[data-showcase]");
-      if (!showcase) return;
-
-      const items = showcase.querySelectorAll(".product-showcase__item");
-      const cardWrappers = document.querySelectorAll(".product-card-wrapper");
-      const playBtn = document.getElementById("demo-play-button");
-      let currentActiveModule = "auth";
-
-      function updateProductCard(moduleId) {
-        // Stop the previous module's demo
-        if (currentActiveModule && currentActiveModule !== moduleId) {
-          window.dispatchEvent(
-            new CustomEvent(`zelify:stop-demo:${currentActiveModule}`),
-          );
-        }
-
-        // Hide all cards
-        cardWrappers.forEach((wrapper) => {
-          wrapper.style.display = "none";
-        });
-
-        // Show the active card
-        const activeCard = document.querySelector(
-          `[data-card-id="${moduleId}"]`,
+    function updateProductCard(moduleId) {
+      // Stop the previous module's demo
+      if (currentActiveModule && currentActiveModule !== moduleId) {
+        window.dispatchEvent(
+          new CustomEvent(`zelify:stop-demo:${currentActiveModule}`)
         );
-        if (activeCard) {
-          activeCard.style.display = "block";
-        }
+      }
 
-        // Auto-play the new module's demo
-        currentActiveModule = moduleId;
+      // Hide all cards
+      cardWrappers.forEach((wrapper) => {
+        wrapper.style.display = "none";
+      });
+
+      // Show the active card
+      const activeCard = document.querySelector(`[data-card-id="${moduleId}"]`);
+      if (activeCard) {
+        activeCard.style.display = "block";
+      }
+
+      // Auto-play the new module's demo
+      currentActiveModule = moduleId;
+      setTimeout(() => {
+        window.dispatchEvent(new CustomEvent(`zelify:play-demo:${moduleId}`));
+      }, 300); // Small delay for visual transition
+    }
+
+    items.forEach((item) => {
+      const button = item.querySelector(".product-showcase__nav-item");
+      const moduleId = item.getAttribute("data-ps-item");
+
+      button?.addEventListener("click", () => {
+        if (item.classList.contains("is-active")) return;
+
+        items.forEach((other) => {
+          other.classList.remove("is-active");
+        });
+
+        item.classList.add("is-active");
+
+        if (moduleId) {
+          updateProductCard(moduleId);
+        }
+      });
+    });
+
+    // Initialize with first active item
+    const firstActive = document.querySelector(
+      ".product-showcase__item.is-active"
+    );
+    if (firstActive) {
+      const firstModuleId = firstActive.getAttribute("data-ps-item");
+      if (firstModuleId) {
+        // Trigger initial play
         setTimeout(() => {
-          window.dispatchEvent(new CustomEvent(`zelify:play-demo:${moduleId}`));
-        }, 300); // Small delay for visual transition
+          updateProductCard(firstModuleId);
+        }, 1000); // Wait a bit after load
       }
+    }
+  });
 
-      items.forEach((item) => {
-        const button = item.querySelector(".product-showcase__nav-item");
-        const moduleId = item.getAttribute("data-ps-item");
+  // Bench Section 2 Tabs
+  document.addEventListener("DOMContentLoaded", () => {
+    const benchTabs = document.querySelectorAll(".bench-tab");
+    const benchContents = document.querySelectorAll(
+      ".bench-content-placeholder"
+    );
+    const benchCtaButton = document.querySelector(".bench-cta-button");
 
-        button?.addEventListener("click", () => {
-          if (item.classList.contains("is-active")) return;
+    benchTabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const benchNumber = tab.getAttribute("data-bench");
 
-          items.forEach((other) => {
-            other.classList.remove("is-active");
-          });
+        // Remove active class from all tabs
+        benchTabs.forEach((t) => t.classList.remove("active"));
 
-          item.classList.add("is-active");
+        // Add active class to clicked tab
+        tab.classList.add("active");
 
-          if (moduleId) {
-            updateProductCard(moduleId);
-          }
+        // Hide all content
+        benchContents.forEach((content) => {
+          content.style.display = "none";
         });
-      });
 
-      // Initialize with first active item
-      const firstActive = document.querySelector(
-        ".product-showcase__item.is-active",
-      );
-      if (firstActive) {
-        const firstModuleId = firstActive.getAttribute("data-ps-item");
-        if (firstModuleId) {
-          // Trigger initial play
-          setTimeout(() => {
-            updateProductCard(firstModuleId);
-          }, 1000); // Wait a bit after load
+        // Show selected content
+        const selectedContent = document.querySelector(
+          `[data-bench-content="${benchNumber}"]`
+        );
+        if (selectedContent) {
+          selectedContent.style.display = "flex";
         }
-      }
-    });
 
-    // Bench Section 2 Tabs
-    document.addEventListener("DOMContentLoaded", () => {
-      const benchTabs = document.querySelectorAll(".bench-tab");
-      const benchContents = document.querySelectorAll(
-        ".bench-content-placeholder",
-      );
-      const benchCtaButton = document.querySelector(".bench-cta-button");
-
-      benchTabs.forEach((tab) => {
-        tab.addEventListener("click", () => {
-          const benchNumber = tab.getAttribute("data-bench");
-
-          // Remove active class from all tabs
-          benchTabs.forEach((t) => t.classList.remove("active"));
-
-          // Add active class to clicked tab
-          tab.classList.add("active");
-
-          // Hide all content
-          benchContents.forEach((content) => {
-            content.style.display = "none";
-          });
-
-          // Show selected content
-          const selectedContent = document.querySelector(
-            `[data-bench-content="${benchNumber}"]`,
-          );
-          if (selectedContent) {
-            selectedContent.style.display = "flex";
-          }
-
-          // Update CTA button text
-          if (benchCtaButton) {
-            benchCtaButton.textContent = `bench ${benchNumber}`;
-          }
-        });
+        // Update CTA button text
+        if (benchCtaButton) {
+          benchCtaButton.textContent = `bench ${benchNumber}`;
+        }
       });
     });
-  </script>
+  });
 
-  <script is:inline>
-    // Sistema de traducciones para home.astro
-    (function () {
-      // Traducciones inline para evitar problemas de carga
-      const homeTranslations = {
-        en: {
-          "home.welcome.title.line1":
-            "Build the bank of<br />the future, in one integration.",
-          "home.welcome.title.line2": "Powered by AI.",
-          "home.welcome.subtitle":
-            "We digitize services for financial institutions,<br />building neobank stacks with a single line of code",
-          "home.welcome.email.placeholder": "Enter your email",
-          "home.welcome.email.aria": "Enter your email",
-          "home.welcome.quote": "Quote",
-          "home.welcome.demo": "Demo",
-          "home.welcome.quote.aria": "Request quote",
-          "home.bench.title": "Pay only what you use",
-          "home.bench.subtitle":
-            "and scale without friction with the lowest prices in the market.",
-          "home.bench.button": "Cards",
-          "home.tokens.title": "Tokens",
-          "home.tokens.description":
-            "Zelify integrates into a single digital platform: authentication and identity validation, AML compliance, account digitization, card issuance and processing, local and international transfers, multiple payments, discount and coupon programs.",
-          "home.tokens.demo": "Demo",
-          "home.action.products.title": "Our products in action",
-          "home.action.products.auth": "Auth",
-          "home.action.products.identity": "Identity",
-          "home.action.products.aml": "AML",
-          "home.ai.title.line1": "Build the bank of the future,",
-          "home.ai.title.line2": "powered by AI.",
-          "home.ai.quote": "Quote",
+  // Tokens: play/pause animación de consumo (barras 0 → llenar → parar y reset a 0)
+  document.addEventListener("DOMContentLoaded", () => {
+    const tokensBtn = document.getElementById("tokens-play-pause-btn");
+    const tokensPlayIcon = document.getElementById("tokens-play-icon");
+    const tokensPauseIcon = document.getElementById("tokens-pause-icon");
+    if (!tokensBtn || !tokensPlayIcon || !tokensPauseIcon) return;
 
-          // How it works section
-          "home.how.title": "How Does Zelify Work?",
-          "home.how.description":
-            "Zelify integrates into a single digital platform: authentication and identity validation, AML compliance, account digitization, card issuance and processing, local and international transfers, multiple payments, discount and coupon programs.",
-          "home.how.demo": "Demo",
-          "home.how.login.title": "Login",
-          "home.how.login.subtitle": "Welcome back",
-          "home.how.login.email.label": "Email",
-          "home.how.login.email.placeholder": "email@example.com",
-          "home.how.login.password.label": "Password",
-          "home.how.login.password.placeholder": "••••••••",
-          "home.how.login.button": "Sign in",
-          "home.how.login.create": "Or create a new account",
+    let tokensIsPlaying = false;
 
-          // Why zelify section
-          "home.why.title": "Every product, powered by AI.",
-          "home.why.description":
-            "Zelify integrates into a single digital platform: authentication and identity validation, AML compliance, account digitization, card issuance and processing, local and international transfers, multiple payments, discount and coupon programs.",
-          "home.why.demo": "Demo",
-
-          // Footer
-          "footer.quicklinks": "Quick links",
-          "footer.products": "Products",
-          "footer.about": "About us",
-          "footer.developers": "Developers",
-          "footer.others": "Others",
-          "footer.legal":
-            "Zelify is a technology platform currently in a development phase, not yet deployed or operational, and does not provide or process financial services directly; all financial operations are conducted exclusively through regulated third-party partners.",
-          "footer.copyright": "© 2025 Zelify. All rights reserved.",
-
-          // Product Showcase Modules
-          "modules.auth.label": "Auth",
-          "modules.auth.titleStrong": "Authentication",
-          "modules.auth.titleAccent": "<br />and Control",
-          "modules.auth.copy":
-            "User authentication and access control. Protect access and manage identities securely.",
-          "modules.auth.cta": "View Auth",
-          "modules.identity.label": "Identity",
-          "modules.identity.titleStrong": "Identity",
-          "modules.identity.titleAccent": "Digital",
-          "modules.identity.copy":
-            "Digital identity management and validation. Verify users with biometrics and document analysis.",
-          "modules.identity.cta": "View Identity",
-          "modules.aml.label": "AML",
-          "modules.aml.titleStrong": "Money Laundering",
-          "modules.aml.titleAccent": "<br />Prevention",
-          "modules.aml.copy":
-            "Risk assessment and regulatory compliance. Continuous monitoring and watchlists.",
-          "modules.aml.cta": "View AML",
-          "modules.connect.label": "Connect",
-          "modules.connect.titleStrong": "Bank",
-          "modules.connect.titleAccent": "Connection",
-          "modules.connect.copy":
-            "Secure connection to bank accounts. Access financial information and facilitate payments.",
-          "modules.connect.cta": "View Connect",
-          "modules.cards.label": "Cards",
-          "modules.cards.titleStrong": "Issuance",
-          "modules.cards.titleAccent": "<br />of Cards",
-          "modules.cards.copy":
-            "Card issuance and processing. Create physical and virtual card programs.",
-          "modules.cards.cta": "View Cards",
-          "modules.payments-transfers.label": "Payments & Transfers",
-          "modules.payments-transfers.titleStrong":
-            'Payments <span class="title-light">of services</span> <br /> and transfers',
-          "modules.payments-transfers.titleAccent": "<br />local",
-          "modules.payments-transfers.copy":
-            "Payment acceptance and processing, and money movement between accounts. Multiple integrated payment methods and fast, secure transfers.",
-          "modules.payments-transfers.cta": "View Payments & Transfers",
-          "modules.tx.label": "TX",
-          "modules.tx.titleStrong": "Transactions",
-          "modules.tx.titleAccent": "International",
-          "modules.tx.copy":
-            "Cross-border transaction management and traceability, and currency conversion.",
-          "modules.tx.cta": "View TX",
-          "modules.discounts.label": "Discounts",
-          "modules.discounts.titleStrong": "Discounts and",
-          "modules.discounts.titleAccent": "<br />Benefits",
-          "modules.discounts.copy":
-            "Benefit rules and promotions. Manage loyalty campaigns and coupons.",
-          "modules.discounts.cta": "View Discounts",
-          "modules.alaiza.label": "Alaiza Fintech AI Core",
-          "modules.alaiza.titleStrong": "Financial AI",
-          "modules.alaiza.titleAccent": "",
-          "modules.alaiza.copy":
-            "Artificial intelligence for quick decisions, fraud prevention and data analysis.",
-          "modules.alaiza.cta": "Explore Alaiza",
-        },
-        es: {
-          "home.welcome.title.line1":
-            "Construye la banca del<br />futuro, en una integración.",
-          "home.welcome.title.line2": "Potenciada por IA.",
-          "home.welcome.subtitle":
-            "Digitalizamos servicios a instituciones financieras,<br />construyendo stacks neobancarios con una sola línea de código.",
-          "home.welcome.email.placeholder": "Ingresa tu correo",
-          "home.welcome.email.aria": "Ingresa tu correo",
-          "home.welcome.quote": "Cotizar",
-          "home.welcome.demo": "Demo",
-          "home.welcome.quote.aria": "Solicitar cotización",
-          "home.bench.title": "Paga solo lo que usas",
-          "home.bench.subtitle":
-            "y escala sin fricción con los precios más bajos del mercado.",
-          "home.bench.button": "Tarjetas",
-          "home.tokens.title": "Tokens",
-          "home.tokens.description":
-            "Controla el consumo y tus costos con total visibilidad. Monitorea tokens por usuario y por servicio, detecta picos y optimiza presupuesto con métricas claras y trazabilidad.",
-          "home.tokens.demo": "Demo",
-          "home.action.products.title": "Nuestros productos en acción",
-          "home.action.products.auth": "Auth",
-          "home.action.products.identity": "Identity",
-          "home.action.products.aml": "AML",
-          "home.ai.title.line1": "Construye la banca del futuro,",
-          "home.ai.title.line2": "potenciada por IA.",
-          "home.ai.quote": "Cotizar",
-
-          // How it works section
-          "home.how.title": "¿Cómo Funciona Zelify?",
-          "home.how.description":
-            "Integra una vez y activa capacidades bajo demanda. Con Zelify conectas autenticación, identidad, AML, onboarding, cuentas, pagos y tarjetas desde una sola plataforma, lista para producción.",
-          "home.how.demo": "Demo",
-          "home.how.login.title": "Ingreso",
-          "home.how.login.subtitle": "Bienvenido de regreso",
-          "home.how.login.email.label": "Correo",
-          "home.how.login.email.placeholder": "email@example.com",
-          "home.how.login.password.label": "Contraseña",
-          "home.how.login.password.placeholder": "••••••••",
-          "home.how.login.button": "Ingresa",
-          "home.how.login.create": "O crea una nueva cuenta",
-
-          // Why zelify section
-          "home.why.title": "Cada producto, potenciado <br />por IA.",
-          "home.why.description":
-            "Potenciados por IA, operamos como un stack tecnológico neobancario con modelos entrenados para el sector financiero. Desde un chat conversación inteligente, hasta análisis del comportamiento financiero potenciada con Inteligencia Artificial para una educación financiera personalizada.",
-          "home.why.demo": "Demo",
-
-          // Footer
-          "footer.quicklinks": "Enlaces rápidos",
-          "footer.products": "Productos",
-          "footer.about": "Nosotros",
-          "footer.developers": "Desarrolladores",
-          "footer.others": "Otros",
-          "footer.legal":
-            "Zelify es una plataforma tecnológica actualmente en fase de desarrollo, aún no desplegada u operativa, y no proporciona ni procesa servicios financieros directamente; todas las operaciones financieras se realizan exclusivamente a través de socios terceros regulados.",
-          "footer.copyright": "© 2025 Zelify. Todos los derechos reservados.",
-
-          // Product Showcase Modules
-          "modules.auth.label": "Auth",
-          "modules.auth.titleStrong": "Autenticación",
-          "modules.auth.titleAccent": "<br />y Control",
-          "modules.auth.copy":
-            "Autenticación y control de acceso de usuarios. Protege el acceso y gestiona identidades de forma segura.",
-          "modules.auth.cta": "Explorar Auth",
-          "modules.identity.label": "Identity",
-          "modules.identity.titleStrong": "Identidad",
-          "modules.identity.titleAccent": "Digital",
-          "modules.identity.copy":
-            "Gestión y validación de identidad digital. Verifica usuarios con biometría y análisis de documentos.",
-          "modules.identity.cta": "Explorar Identity",
-          "modules.aml.label": "AML",
-          "modules.aml.titleStrong": "Prevención de Lavado",
-          "modules.aml.titleAccent": "<br /> de dinero",
-          "modules.aml.copy":
-            "Evaluación de riesgo y cumplimiento regulatorio. Monitoreo continuo y listas de control.",
-          "modules.aml.cta": "Explorar AML",
-          "modules.connect.label": "Connect",
-          "modules.connect.titleStrong": "Conexión",
-          "modules.connect.titleAccent": "Bancaria",
-          "modules.connect.copy":
-            "Conexión segura a cuentas bancarias. Accede a información financiera y facilita pagos.",
-          "modules.connect.cta": "Explorar Connect",
-          "modules.cards.label": "Cards",
-          "modules.cards.titleStrong": "Emisión",
-          "modules.cards.titleAccent": "<br />de Tarjetas",
-          "modules.cards.copy":
-            "Emisión y procesamiento de tarjetas. Crea programas de tarjetas físicas y virtuales.",
-          "modules.cards.cta": "Explorar Cards",
-          "modules.payments-transfers.label": "Pagos y Transferencias",
-          "modules.payments-transfers.titleStrong":
-            'Pagos <span class="title-light">de servicios</span> <br /> y transferencias',
-          "modules.payments-transfers.titleAccent": "<br />locales",
-          "modules.payments-transfers.copy":
-            "Aceptación y procesamiento de pagos, y movimiento de dinero entre cuentas. Múltiples métodos de pago integrados y transferencias rápidas y seguras.",
-          "modules.payments-transfers.cta": "Explorar Pago y Transferencias",
-          "modules.tx.label": "TX",
-          "modules.tx.titleStrong": "Transacciones",
-          "modules.tx.titleAccent": "Internacionales",
-          "modules.tx.copy":
-            "Gestión y trazabilidad de transacciones transfronterizas y conversión de divisas.",
-          "modules.tx.cta": "Explorar TX",
-          "modules.discounts.label": "Discounts",
-          "modules.discounts.titleStrong": "Descuentos y",
-          "modules.discounts.titleAccent": "<br />Beneficios",
-          "modules.discounts.copy":
-            "Reglas de beneficios y promociones. Gestiona campañas de lealtad y cupones.",
-          "modules.discounts.cta": "Explorar Discounts",
-          "modules.alaiza.label": "Alaiza Fintech AI Core",
-          "modules.alaiza.titleStrong": "IA Financiera",
-          "modules.alaiza.titleAccent": "",
-          "modules.alaiza.copy":
-            "Inteligencia artificial para decisiones rápidas, prevención de fraudes y análisis de datos.",
-          "modules.alaiza.cta": "Explora Alaiza",
-        },
-      };
-
-      function applyHomeTranslations(lang = "es") {
-        const langKey = lang.toLowerCase();
-        const translations = homeTranslations[langKey] || homeTranslations.es;
-
-        // Actualizar elementos con data-i18n
-        const elements = document.querySelectorAll("[data-i18n]");
-        elements.forEach((element) => {
-          const key = element.getAttribute("data-i18n");
-          if (!key || !translations[key]) return;
-
-          // Para títulos con múltiples líneas (welcome-title)
-          if (element.classList.contains("welcome-title")) {
-            const line1Key = "home.welcome.title.line1";
-            const line2Key = "home.welcome.title.line2";
-            if (translations[line1Key] && translations[line2Key]) {
-              element.innerHTML = `${translations[line1Key]} <span class="welcome-title-line" data-i18n="${line2Key}">${translations[line2Key]}</span>`;
-            }
-          }
-          // Para títulos con múltiples líneas (ai-section-title)
-          else if (element.classList.contains("ai-section-title")) {
-            const line1Key = "home.ai.title.line1";
-            const line2Key = "home.ai.title.line2";
-            if (translations[line1Key] && translations[line2Key]) {
-              element.innerHTML = `${translations[line1Key]}<br />${translations[line2Key]}`;
-            }
-          }
-          // Para contenido normal
-          else {
-            element.innerHTML = translations[key];
-          }
-        });
-
-        // Actualizar placeholders
-        document
-          .querySelectorAll("[data-i18n-placeholder]")
-          .forEach((element) => {
-            const key = element.getAttribute("data-i18n-placeholder");
-            if (translations[key]) {
-              element.setAttribute("placeholder", translations[key]);
-            }
-          });
-
-        // Actualizar aria-labels
-        document
-          .querySelectorAll("[data-i18n-aria], [data-i18n-aria-label]")
-          .forEach((element) => {
-            const key =
-              element.getAttribute("data-i18n-aria") ||
-              element.getAttribute("data-i18n-aria-label");
-            if (translations[key]) {
-              element.setAttribute("aria-label", translations[key]);
-            }
-          });
-
-        // Actualizar módulos del product-showcase (elementos dinámicos)
-        const moduleItems = document.querySelectorAll("[data-ps-item]");
-        moduleItems.forEach((item) => {
-          const moduleId = item.getAttribute("data-ps-item");
-          if (!moduleId) return;
-
-          // Actualizar label del botón
-          const navButton = item.querySelector(".product-showcase__nav-item");
-          if (navButton) {
-            const labelKey = `modules.${moduleId}.label`;
-            if (translations[labelKey]) {
-              navButton.textContent = translations[labelKey];
-            }
-          }
-
-          // Actualizar título
-          const titleStrong = item.querySelector("[data-ps-title-strong]");
-          if (titleStrong) {
-            const strongKey = `modules.${moduleId}.titleStrong`;
-            if (translations[strongKey]) {
-              titleStrong.innerHTML = translations[strongKey];
-            }
-          }
-
-          const titleAccent = item.querySelector("[data-ps-title-accent]");
-          if (titleAccent) {
-            const accentKey = `modules.${moduleId}.titleAccent`;
-            if (translations[accentKey] !== undefined) {
-              titleAccent.innerHTML = translations[accentKey];
-            }
-          }
-
-          // Actualizar copy
-          const copy = item.querySelector("[data-ps-copy]");
-          if (copy) {
-            const copyKey = `modules.${moduleId}.copy`;
-            if (translations[copyKey]) {
-              copy.textContent = translations[copyKey];
-            }
-          }
-
-          // Actualizar CTA
-          const cta = item.querySelector("[data-ps-cta]");
-          if (cta) {
-            const ctaKey = `modules.${moduleId}.cta`;
-            if (translations[ctaKey]) {
-              cta.textContent = translations[ctaKey];
-            }
-          }
-        });
-      }
-
-      // Función para aplicar traducciones
-      function applyTranslations(lang) {
-        const langKey = lang === "EN" ? "en" : "es";
-        // Usar requestAnimationFrame para asegurar que el DOM esté listo
-        requestAnimationFrame(() => {
-          applyHomeTranslations(langKey);
-        });
-      }
-
-      // Registrar listener inmediatamente (antes de DOMContentLoaded)
-      window.addEventListener(
-        "ui:languagechange",
-        (event) => {
-          const lang = event.detail?.language || "ES";
-          applyTranslations(lang);
-        },
-        true,
+    function setTokensButtonState(playing) {
+      tokensIsPlaying = playing;
+      tokensPlayIcon.style.display = playing ? "none" : "block";
+      tokensPauseIcon.style.display = playing ? "block" : "none";
+      tokensBtn.setAttribute(
+        "aria-label",
+        playing ? "Pausar animación" : "Reproducir animación"
       );
+    }
 
-      // Aplicar traducciones al cargar la página
-      function initTranslations() {
-        let currentLang = "ES";
-        try {
-          const stored = localStorage.getItem("ui-language");
-          if (stored && (stored === "EN" || stored === "ES")) {
-            currentLang = stored;
-          }
-        } catch (error) {
-          console.warn("Unable to access localStorage.", error);
-        }
-        applyTranslations(currentLang);
-      }
+    window.addEventListener("tokens:state", (e) => {
+      const isPlaying = e.detail && e.detail.isPlaying === true;
+      setTokensButtonState(isPlaying);
+    });
 
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", () => {
-          setTimeout(initTranslations, 100);
-        });
+    tokensBtn.addEventListener("click", () => {
+      if (tokensIsPlaying) {
+        window.dispatchEvent(new CustomEvent("tokens:pause"));
       } else {
-        setTimeout(initTranslations, 100);
+        window.dispatchEvent(new CustomEvent("tokens:play"));
       }
-    })();
-  </script>
-    <AlaizaAssistant client:load />
-  </body>
-</html>
+    });
+  });
+</script>
+
+<script is:inline>
+  // Sistema de traducciones para home.astro
+  (function () {
+    // Traducciones inline para evitar problemas de carga
+    const homeTranslations = {
+      en: {
+        "home.welcome.title.line1":
+          "Build the bank of<br />the future, in one integration.",
+        "home.welcome.title.line2": "Powered by AI.",
+        "home.welcome.subtitle":
+          "We digitize services for financial institutions,<br />building neobank stacks with a single line of code",
+        "home.welcome.email.placeholder": "Enter your email",
+        "home.welcome.email.aria": "Enter your email",
+        "home.welcome.quote": "Quote",
+        "home.welcome.demo": "Demo",
+        "home.welcome.quote.aria": "Request quote",
+        "home.bench.title": "Pay only what you use",
+        "home.bench.subtitle":
+          "and scale without friction with the lowest prices in the market.",
+        "home.bench.button": "Cards",
+        "home.tokens.title": "Tokens",
+        "home.tokens.description":
+          "Zelify integrates into a single digital platform: authentication and identity validation, AML compliance, account digitization, card issuance and processing, local and international transfers, multiple payments, discount and coupon programs.",
+        "home.tokens.demo": "Demo",
+        "home.action.products.title": "Our products in action",
+        "home.action.products.auth": "Auth",
+        "home.action.products.identity": "Identity",
+        "home.action.products.aml": "AML",
+        "home.ai.title.line1": "Build the bank of the future,",
+        "home.ai.title.line2": "powered by AI.",
+        "home.ai.quote": "Quote",
+
+        // How it works section
+        "home.how.title": "How Does Zelify Work?",
+        "home.how.description":
+          "Zelify integrates into a single digital platform: authentication and identity validation, AML compliance, account digitization, card issuance and processing, local and international transfers, multiple payments, discount and coupon programs.",
+        "home.how.demo": "Demo",
+        "home.how.login.title": "Login",
+        "home.how.login.subtitle": "Welcome back",
+        "home.how.login.email.label": "Email",
+        "home.how.login.email.placeholder": "email@example.com",
+        "home.how.login.password.label": "Password",
+        "home.how.login.password.placeholder": "••••••••",
+        "home.how.login.button": "Sign in",
+        "home.how.login.create": "Or create a new account",
+
+        // Why zelify section
+        "home.why.title": "Every product, powered by AI.",
+        "home.why.description":
+          "Zelify integrates into a single digital platform: authentication and identity validation, AML compliance, account digitization, card issuance and processing, local and international transfers, multiple payments, discount and coupon programs.",
+        "home.why.demo": "Demo",
+
+        // Footer
+        "footer.quicklinks": "Quick links",
+        "footer.products": "Products",
+        "footer.about": "About us",
+        "footer.developers": "Developers",
+        "footer.others": "Others",
+        "footer.legal":
+          "Zelify is a technology platform currently in a development phase, not yet deployed or operational, and does not provide or process financial services directly; all financial operations are conducted exclusively through regulated third-party partners.",
+        "footer.copyright": "© 2025 Zelify. All rights reserved.",
+
+        // Product Showcase Modules
+        "modules.auth.label": "Auth",
+        "modules.auth.titleStrong": "Authentication",
+        "modules.auth.titleAccent": "<br />and Control",
+        "modules.auth.copy":
+          "User authentication and access control. Protect access and manage identities securely.",
+        "modules.auth.cta": "View Auth",
+        "modules.identity.label": "Identity",
+        "modules.identity.titleStrong": "Identity",
+        "modules.identity.titleAccent": "Digital",
+        "modules.identity.copy":
+          "Digital identity management and validation. Verify users with biometrics and document analysis.",
+        "modules.identity.cta": "View Identity",
+        "modules.aml.label": "AML",
+        "modules.aml.titleStrong": "Money Laundering",
+        "modules.aml.titleAccent": "<br />Prevention",
+        "modules.aml.copy":
+          "Risk assessment and regulatory compliance. Continuous monitoring and watchlists.",
+        "modules.aml.cta": "View AML",
+        "modules.connect.label": "Connect",
+        "modules.connect.titleStrong": "Bank",
+        "modules.connect.titleAccent": "Connection",
+        "modules.connect.copy":
+          "Secure connection to bank accounts. Access financial information and facilitate payments.",
+        "modules.connect.cta": "View Connect",
+        "modules.cards.label": "Cards",
+        "modules.cards.titleStrong": "Issuance",
+        "modules.cards.titleAccent": "<br />of Cards",
+        "modules.cards.copy":
+          "Card issuance and processing. Create physical and virtual card programs.",
+        "modules.cards.cta": "View Cards",
+        "modules.payments-transfers.label": "Payments & Transfers",
+        "modules.payments-transfers.titleStrong":
+          'Payments <span class="title-light">of services</span> <br /> and transfers',
+        "modules.payments-transfers.titleAccent": "<br />local",
+        "modules.payments-transfers.copy":
+          "Payment acceptance and processing, and money movement between accounts. Multiple integrated payment methods and fast, secure transfers.",
+        "modules.payments-transfers.cta": "View Payments & Transfers",
+        "modules.tx.label": "TX",
+        "modules.tx.titleStrong": "Transactions",
+        "modules.tx.titleAccent": "International",
+        "modules.tx.copy":
+          "Cross-border transaction management and traceability, and currency conversion.",
+        "modules.tx.cta": "View TX",
+        "modules.discounts.label": "Discounts",
+        "modules.discounts.titleStrong": "Discounts and",
+        "modules.discounts.titleAccent": "<br />Benefits",
+        "modules.discounts.copy":
+          "Benefit rules and promotions. Manage loyalty campaigns and coupons.",
+        "modules.discounts.cta": "View Discounts",
+        "modules.alaiza.label": "Alaiza Fintech AI Core",
+        "modules.alaiza.titleStrong": "Financial AI",
+        "modules.alaiza.titleAccent": "",
+        "modules.alaiza.copy":
+          "Artificial intelligence for quick decisions, fraud prevention and data analysis.",
+        "modules.alaiza.cta": "Explore Alaiza",
+      },
+      es: {
+        "home.welcome.title.line1":
+          "Construye la banca del<br />futuro, en una integración.",
+        "home.welcome.title.line2": "Potenciada por IA.",
+        "home.welcome.subtitle":
+          "Digitalizamos servicios a instituciones financieras,<br />construyendo stacks neobancarios con una sola línea de código.",
+        "home.welcome.email.placeholder": "Ingresa tu correo",
+        "home.welcome.email.aria": "Ingresa tu correo",
+        "home.welcome.quote": "Cotizar",
+        "home.welcome.demo": "Demo",
+        "home.welcome.quote.aria": "Solicitar cotización",
+        "home.bench.title": "Paga solo lo que usas",
+        "home.bench.subtitle":
+          "y escala sin fricción con los precios más bajos del mercado.",
+        "home.bench.button": "Tarjetas",
+        "home.tokens.title": "Tokens",
+        "home.tokens.description":
+          "Controla el consumo y tus costos con total visibilidad. Monitorea tokens por usuario y por servicio, detecta picos y optimiza presupuesto con métricas claras y trazabilidad.",
+        "home.tokens.demo": "Demo",
+        "home.action.products.title": "Nuestros productos en acción",
+        "home.action.products.auth": "Auth",
+        "home.action.products.identity": "Identity",
+        "home.action.products.aml": "AML",
+        "home.ai.title.line1": "Construye la banca del futuro,",
+        "home.ai.title.line2": "potenciada por IA.",
+        "home.ai.quote": "Cotizar",
+
+        // How it works section
+        "home.how.title": "¿Cómo Funciona Zelify?",
+        "home.how.description":
+          "Integra una vez y activa capacidades bajo demanda. Con Zelify conectas autenticación, identidad, AML, onboarding, cuentas, pagos y tarjetas desde una sola plataforma, lista para producción.",
+        "home.how.demo": "Demo",
+        "home.how.login.title": "Ingreso",
+        "home.how.login.subtitle": "Bienvenido de regreso",
+        "home.how.login.email.label": "Correo",
+        "home.how.login.email.placeholder": "email@example.com",
+        "home.how.login.password.label": "Contraseña",
+        "home.how.login.password.placeholder": "••••••••",
+        "home.how.login.button": "Ingresa",
+        "home.how.login.create": "O crea una nueva cuenta",
+
+        // Why zelify section
+        "home.why.title": "Cada producto, potenciado <br />por IA.",
+        "home.why.description":
+          "Potenciados por IA, operamos como un stack tecnológico neobancario con modelos entrenados para el sector financiero. Desde un chat conversación inteligente, hasta análisis del comportamiento financiero potenciada con Inteligencia Artificial para una educación financiera personalizada.",
+        "home.why.demo": "Demo",
+
+        // Footer
+        "footer.quicklinks": "Enlaces rápidos",
+        "footer.products": "Productos",
+        "footer.about": "Nosotros",
+        "footer.developers": "Desarrolladores",
+        "footer.others": "Otros",
+        "footer.legal":
+          "Zelify es una plataforma tecnológica actualmente en fase de desarrollo, aún no desplegada u operativa, y no proporciona ni procesa servicios financieros directamente; todas las operaciones financieras se realizan exclusivamente a través de socios terceros regulados.",
+        "footer.copyright": "© 2025 Zelify. Todos los derechos reservados.",
+
+        // Product Showcase Modules
+        "modules.auth.label": "Auth",
+        "modules.auth.titleStrong": "Autenticación",
+        "modules.auth.titleAccent": "<br />y Control",
+        "modules.auth.copy":
+          "Autenticación y control de acceso de usuarios. Protege el acceso y gestiona identidades de forma segura.",
+        "modules.auth.cta": "Explorar Auth",
+        "modules.identity.label": "Identity",
+        "modules.identity.titleStrong": "Identidad",
+        "modules.identity.titleAccent": "Digital",
+        "modules.identity.copy":
+          "Gestión y validación de identidad digital. Verifica usuarios con biometría y análisis de documentos.",
+        "modules.identity.cta": "Explorar Identity",
+        "modules.aml.label": "AML",
+        "modules.aml.titleStrong": "Prevención de Lavado",
+        "modules.aml.titleAccent": "<br /> de dinero",
+        "modules.aml.copy":
+          "Evaluación de riesgo y cumplimiento regulatorio. Monitoreo continuo y listas de control.",
+        "modules.aml.cta": "Explorar AML",
+        "modules.connect.label": "Connect",
+        "modules.connect.titleStrong": "Conexión",
+        "modules.connect.titleAccent": "Bancaria",
+        "modules.connect.copy":
+          "Conexión segura a cuentas bancarias. Accede a información financiera y facilita pagos.",
+        "modules.connect.cta": "Explorar Connect",
+        "modules.cards.label": "Cards",
+        "modules.cards.titleStrong": "Emisión",
+        "modules.cards.titleAccent": "<br />de Tarjetas",
+        "modules.cards.copy":
+          "Emisión y procesamiento de tarjetas. Crea programas de tarjetas físicas y virtuales.",
+        "modules.cards.cta": "Explorar Cards",
+        "modules.payments-transfers.label": "Pagos y Transferencias",
+        "modules.payments-transfers.titleStrong":
+          'Pagos <span class="title-light">de servicios</span> <br /> y transferencias',
+        "modules.payments-transfers.titleAccent": "<br />locales",
+        "modules.payments-transfers.copy":
+          "Aceptación y procesamiento de pagos, y movimiento de dinero entre cuentas. Múltiples métodos de pago integrados y transferencias rápidas y seguras.",
+        "modules.payments-transfers.cta": "Explorar Pago y Transferencias",
+        "modules.tx.label": "TX",
+        "modules.tx.titleStrong": "Transacciones",
+        "modules.tx.titleAccent": "Internacionales",
+        "modules.tx.copy":
+          "Gestión y trazabilidad de transacciones transfronterizas y conversión de divisas.",
+        "modules.tx.cta": "Explorar TX",
+        "modules.discounts.label": "Discounts",
+        "modules.discounts.titleStrong": "Descuentos y",
+        "modules.discounts.titleAccent": "<br />Beneficios",
+        "modules.discounts.copy":
+          "Reglas de beneficios y promociones. Gestiona campañas de lealtad y cupones.",
+        "modules.discounts.cta": "Explorar Discounts",
+        "modules.alaiza.label": "Alaiza Fintech AI Core",
+        "modules.alaiza.titleStrong": "IA Financiera",
+        "modules.alaiza.titleAccent": "",
+        "modules.alaiza.copy":
+          "Inteligencia artificial para decisiones rápidas, prevención de fraudes, educación financiera y análisis de datos.",
+        "modules.alaiza.cta": "Explora Alaiza",
+      },
+    };
+
+    function applyHomeTranslations(lang = "es") {
+      const langKey = lang.toLowerCase();
+      const translations = homeTranslations[langKey] || homeTranslations.es;
+
+      // Actualizar elementos con data-i18n
+      const elements = document.querySelectorAll("[data-i18n]");
+      elements.forEach((element) => {
+        const key = element.getAttribute("data-i18n");
+        if (!key || !translations[key]) return;
+
+        // Para títulos con múltiples líneas (welcome-title)
+        if (element.classList.contains("welcome-title")) {
+          const line1Key = "home.welcome.title.line1";
+          const line2Key = "home.welcome.title.line2";
+          if (translations[line1Key] && translations[line2Key]) {
+            element.innerHTML = `${translations[line1Key]} <span class="welcome-title-line" data-i18n="${line2Key}">${translations[line2Key]}</span>`;
+          }
+        }
+        // Para títulos con múltiples líneas (ai-section-title)
+        else if (element.classList.contains("ai-section-title")) {
+          const line1Key = "home.ai.title.line1";
+          const line2Key = "home.ai.title.line2";
+          if (translations[line1Key] && translations[line2Key]) {
+            element.innerHTML = `${translations[line1Key]}<br />${translations[line2Key]}`;
+          }
+        }
+        // Para contenido normal
+        else {
+          element.innerHTML = translations[key];
+        }
+      });
+
+      // Actualizar placeholders
+      document
+        .querySelectorAll("[data-i18n-placeholder]")
+        .forEach((element) => {
+          const key = element.getAttribute("data-i18n-placeholder");
+          if (translations[key]) {
+            element.setAttribute("placeholder", translations[key]);
+          }
+        });
+
+      // Actualizar aria-labels
+      document
+        .querySelectorAll("[data-i18n-aria], [data-i18n-aria-label]")
+        .forEach((element) => {
+          const key =
+            element.getAttribute("data-i18n-aria") ||
+            element.getAttribute("data-i18n-aria-label");
+          if (translations[key]) {
+            element.setAttribute("aria-label", translations[key]);
+          }
+        });
+
+      // Actualizar módulos del product-showcase (elementos dinámicos)
+      const moduleItems = document.querySelectorAll("[data-ps-item]");
+      moduleItems.forEach((item) => {
+        const moduleId = item.getAttribute("data-ps-item");
+        if (!moduleId) return;
+
+        // Actualizar label del botón
+        const navButton = item.querySelector(".product-showcase__nav-item");
+        if (navButton) {
+          const labelKey = `modules.${moduleId}.label`;
+          if (translations[labelKey]) {
+            navButton.textContent = translations[labelKey];
+          }
+        }
+
+        // Actualizar título
+        const titleStrong = item.querySelector("[data-ps-title-strong]");
+        if (titleStrong) {
+          const strongKey = `modules.${moduleId}.titleStrong`;
+          if (translations[strongKey]) {
+            titleStrong.innerHTML = translations[strongKey];
+          }
+        }
+
+        const titleAccent = item.querySelector("[data-ps-title-accent]");
+        if (titleAccent) {
+          const accentKey = `modules.${moduleId}.titleAccent`;
+          if (translations[accentKey] !== undefined) {
+            titleAccent.innerHTML = translations[accentKey];
+          }
+        }
+
+        // Actualizar copy
+        const copy = item.querySelector("[data-ps-copy]");
+        if (copy) {
+          const copyKey = `modules.${moduleId}.copy`;
+          if (translations[copyKey]) {
+            copy.textContent = translations[copyKey];
+          }
+        }
+
+        // Actualizar CTA
+        const cta = item.querySelector("[data-ps-cta]");
+        if (cta) {
+          const ctaKey = `modules.${moduleId}.cta`;
+          if (translations[ctaKey]) {
+            cta.textContent = translations[ctaKey];
+          }
+        }
+      });
+    }
+
+    // Función para aplicar traducciones
+    function applyTranslations(lang) {
+      const langKey = lang === "EN" ? "en" : "es";
+      // Usar requestAnimationFrame para asegurar que el DOM esté listo
+      requestAnimationFrame(() => {
+        applyHomeTranslations(langKey);
+      });
+    }
+
+    // Registrar listener inmediatamente (antes de DOMContentLoaded)
+    window.addEventListener(
+      "ui:languagechange",
+      (event) => {
+        const lang = event.detail?.language || "ES";
+        applyTranslations(lang);
+      },
+      true
+    );
+
+    // Aplicar traducciones al cargar la página
+    function initTranslations() {
+      let currentLang = "ES";
+      try {
+        const stored = localStorage.getItem("ui-language");
+        if (stored && (stored === "EN" || stored === "ES")) {
+          currentLang = stored;
+        }
+      } catch (error) {
+        console.warn("Unable to access localStorage.", error);
+      }
+      applyTranslations(currentLang);
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", () => {
+        setTimeout(initTranslations, 100);
+      });
+    } else {
+      setTimeout(initTranslations, 100);
+    }
+  })();
+</script>
+<AlaizaAssistant client:load />
 
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer
 ></script>
@@ -3560,7 +3716,7 @@ const modulesList = [
               "Content-Type": "application/json",
             },
             body: JSON.stringify(payload),
-          },
+          }
         );
 
         if (!response.ok) throw new Error("Request failed");
@@ -3648,7 +3804,7 @@ const modulesList = [
 
         // Find active module
         const activeItem = document.querySelector(
-          ".product-showcase__item.is-active",
+          ".product-showcase__item.is-active"
         );
         const moduleId = activeItem
           ? activeItem.getAttribute("data-ps-item")
@@ -3677,7 +3833,7 @@ const modulesList = [
 
       // Show the active card
       const activeCard = document.querySelector(
-        `[data-action-card="${actionId}"]`,
+        `[data-action-card="${actionId}"]`
       );
       if (activeCard) {
         (activeCard as HTMLElement).style.display = "block";
