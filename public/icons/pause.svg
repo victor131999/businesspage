@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 196.46 196.46">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#Degradado_sin_nombre_4-2);
+      }
+
+      .cls-2 {
+        fill: url(#Degradado_sin_nombre_4-3);
+      }
+
+      .cls-3 {
+        fill: url(#Degradado_sin_nombre_4);
+      }
+    </style>
+    <linearGradient id="Degradado_sin_nombre_4" data-name="Degradado sin nombre 4" x1="0" y1="98.12" x2="196.46" y2="98.12" gradientTransform="translate(0 196.35) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00429b"/>
+      <stop offset="0" stop-color="#00429b"/>
+      <stop offset="1" stop-color="#00112b"/>
+    </linearGradient>
+    <linearGradient id="Degradado_sin_nombre_4-2" data-name="Degradado sin nombre 4" x1="80.1" y1="97.51" x2="94.75" y2="97.51" xlink:href="#Degradado_sin_nombre_4"/>
+    <linearGradient id="Degradado_sin_nombre_4-3" data-name="Degradado sin nombre 4" x1="101.69" y1="97.51" x2="116.34" y2="97.51" xlink:href="#Degradado_sin_nombre_4"/>
+  </defs>
+  <g id="Layer_1" data-name="Layer 1">
+    <g>
+      <path class="cls-3" d="M98.23,0C44.07,0,0,44.07,0,98.23s44.07,98.23,98.23,98.23,98.23-44.07,98.23-98.23S152.39,0,98.23,0ZM98.23,191.73c-51.56,0-93.5-41.94-93.5-93.5S46.67,4.73,98.23,4.73s93.5,41.95,93.5,93.5-41.94,93.5-93.5,93.5Z"/>
+      <rect class="cls-1" x="80.1" y="60.46" width="14.65" height="76.76"/>
+      <rect class="cls-2" x="101.69" y="60.46" width="14.65" height="76.76"/>
+    </g>
+  </g>
+</svg>
