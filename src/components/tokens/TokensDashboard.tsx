@@ -121,11 +121,15 @@ const mockActiveServices = [
     { id: 6, name: "Transfers", status: "active", requests: 450, tokens: 45000 },
 ];
 
-// Hook para animar números
+// Hook para animar números. Si duration === 0, muestra target al instante (para reset a cero).
 const useAnimatedNumber = (target: number, duration: number = 2000, delay: number = 0) => {
     const [current, setCurrent] = useState(0);
 
     useEffect(() => {
+        if (duration <= 0) {
+            setCurrent(target);
+            return;
+        }
         const timer = setTimeout(() => {
             const startTime = Date.now();
             const startValue = current;
@@ -162,8 +166,8 @@ export default function TokensDashboard() {
     const t = translations['es'];
     const [isVisible, setIsVisible] = useState(false);
 
-    // Play/pause: animation only runs when isPlaying. Start at 0, fill to 1, then stop and reset to 0.
-    const [isPlaying, setIsPlaying] = useState(false);
+    // Play/pause: auto-play al cargar. Si pausas, se para; si vuelves a Play, empieza desde cero.
+    const [isPlaying, setIsPlaying] = useState(true);
     const [cyclePhase, setCyclePhase] = useState(0); // 0 to 1 (progress of filling)
     const [isDraining, setIsDraining] = useState(false); // Visual mode when near full (kept for UI styling)
     const startTimeRef = useRef(Date.now());
@@ -171,7 +175,12 @@ export default function TokensDashboard() {
     const [tokenData, setTokenData] = useState(mockTokenData);
     const [liveLogs, setLiveLogs] = useState(mockLogs.slice(0, 7));
 
-    // Listen for play/pause from parent (index.astro button)
+    // Sincronizar estado inicial con el botón (auto-play = mostrar icono pause)
+    useEffect(() => {
+        window.dispatchEvent(new CustomEvent("tokens:state", { detail: { isPlaying: true } }));
+    }, []);
+
+    // Listen for play/pause from parent (index.astro button). Play = empezar desde cero.
     useEffect(() => {
         const onPlay = () => {
             startTimeRef.current = Date.now();
@@ -192,29 +201,33 @@ export default function TokensDashboard() {
         };
     }, []);
 
-    // Cycle Engine: only runs when isPlaying. Fill 0 -> 1, then stop and reset to 0.
+    // Cycle Engine: solo corre cuando isPlaying. Al dar Play, esperamos 1 frame pintando todo en 0, luego arrancamos.
     useEffect(() => {
         if (!isPlaying) return;
 
         let frameId: number;
-        const animate = () => {
-            const elapsed = Date.now() - startTimeRef.current;
-            const progress = Math.min(elapsed / FILL_DURATION_MS, 1);
+        const startLoop = () => {
+            startTimeRef.current = Date.now(); // Reiniciar crono aquí para que el primer frame sea progreso 0
+            const animate = () => {
+                const elapsed = Date.now() - startTimeRef.current;
+                const progress = Math.min(elapsed / FILL_DURATION_MS, 1);
 
-            setCyclePhase(progress);
-            if (progress >= 0.95) setIsDraining(true);
+                setCyclePhase(progress);
+                if (progress >= 0.95) setIsDraining(true);
 
-            if (progress >= 1) {
-                // All bars full: stop and reset to zero
-                setIsPlaying(false);
-                setCyclePhase(0);
-                setIsDraining(false);
-                window.dispatchEvent(new CustomEvent("tokens:state", { detail: { isPlaying: false } }));
-                return;
-            }
+                if (progress >= 1) {
+                    setIsPlaying(false);
+                    setCyclePhase(0);
+                    setIsDraining(false);
+                    window.dispatchEvent(new CustomEvent("tokens:state", { detail: { isPlaying: false } }));
+                    return;
+                }
+                frameId = requestAnimationFrame(animate);
+            };
             frameId = requestAnimationFrame(animate);
         };
-        frameId = requestAnimationFrame(animate);
+        // Un frame de retraso para pintar cyclePhase=0 (todos los valores en cero) antes de arrancar el loop
+        frameId = requestAnimationFrame(startLoop);
         return () => cancelAnimationFrame(frameId);
     }, [isPlaying]);
 
@@ -229,7 +242,8 @@ export default function TokensDashboard() {
 
         const time = Date.now();
         const smoothNoise = Math.floor(20000 * (0.5 + 0.5 * Math.sin(time / 1200))); // Subtle, smooth noise
-        const currentTotalUsed = Math.floor(MAX_TOTAL * 0.9 * cyclePhase) + smoothNoise; // Up to 90% full + subtle noise
+        // Escalar ruido por cyclePhase para que al reinicio (cyclePhase=0) todo sea 0 y coherente con Por Usuario / Por Servicio
+        const currentTotalUsed = Math.floor(MAX_TOTAL * 0.9 * cyclePhase) + Math.floor(smoothNoise * cyclePhase);
 
         // Update users: cada item tiene su "maxTokens" (valor al 100%) para que todas las barras puedan llenarse
         const newByUser = mockTokenData.byUser.map((u, i) => {
@@ -296,18 +310,30 @@ export default function TokensDashboard() {
     }, [cyclePhase, isPlaying]);
 
 
-    // Animated numbers hooks
-    // Use a very short duration because the state updates are frequent (animation frame driven)
+    // Animated numbers: al reset (used/remaining en cero/total) duración 0 para ver cero al instante
     const animatedTotal = useAnimatedNumber(tokenData.total, 580);
-    const animatedUsed = useAnimatedNumber(tokenData.used, 580);
-    const animatedRemaining = useAnimatedNumber(tokenData.remaining, 580);
+    const animatedUsed = useAnimatedNumber(tokenData.used, tokenData.used === 0 ? 0 : 580);
+    const animatedRemaining = useAnimatedNumber(tokenData.remaining, tokenData.remaining === tokenData.total ? 0 : 580);
 
     const usagePercentage = (tokenData.used / tokenData.total) * 100;
 
-    const getFillClass = (percent: number) => {
-        if (percent >= 85) return "bg-[#6AFF00]";
-        if (percent >= 60) return "bg-[#004196]";
-        return "bg-[#000223]";
+    // Interpola entre dos colores hex; t en [0,1]. Suavizado con ease para transición suave.
+    const lerpHex = (hex1: string, hex2: string, t: number): string => {
+        const smooth = (x: number) => x * x * (3 - 2 * x); // smoothstep
+        const s = smooth(Math.max(0, Math.min(1, t)));
+        const r1 = parseInt(hex1.slice(1, 3), 16), g1 = parseInt(hex1.slice(3, 5), 16), b1 = parseInt(hex1.slice(5, 7), 16);
+        const r2 = parseInt(hex2.slice(1, 3), 16), g2 = parseInt(hex2.slice(3, 5), 16), b2 = parseInt(hex2.slice(5, 7), 16);
+        const r = Math.round(r1 + (r2 - r1) * s);
+        const g = Math.round(g1 + (g2 - g1) * s);
+        const b = Math.round(b1 + (b2 - b1) * s);
+        return `rgb(${r},${g},${b})`;
+    };
+
+    // Color de la barra según porcentaje: azul oscuro (inicio) → azul claro (~50%) → verde (100%), todo suave.
+    const getBarColor = (percent: number): string => {
+        const p = Math.min(100, Math.max(0, percent)) / 100;
+        if (p <= 0.5) return lerpHex("#000223", "#004196", p * 2); // 0% → 50%: oscuro → azul claro
+        return lerpHex("#004196", "#6AFF00", (p - 0.5) * 2);         // 50% → 100%: azul claro → verde
     };
 
     useEffect(() => {
@@ -364,8 +390,8 @@ export default function TokensDashboard() {
                     {/* Capacity bar */}
                     <div className="mt-2 w-full h-1.5 bg-[#D6DBE2] rounded-full overflow-hidden">
                         <div
-                            className={`h-full rounded-full transition-[width] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${isDraining ? 'bg-[#004196]' : 'bg-[#000223]'}`}
-                            style={{ width: `${Math.min(usagePercentage, 100)}%` }}
+                            className="h-full rounded-full transition-[width,background-color] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                            style={{ width: `${Math.min(usagePercentage, 100)}%`, backgroundColor: getBarColor(usagePercentage) }}
                         ></div>
                     </div>
                 </div>
@@ -404,8 +430,8 @@ export default function TokensDashboard() {
                                         const percent = Math.min((item.tokens / maxT) * 100, 100);
                                         return (
                                             <div
-                                                className={`h-full rounded-full transition-[width] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${getFillClass(percent)}`}
-                                                style={{ width: `${percent}%` }}
+                                                className="h-full rounded-full transition-[width,background-color] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                                                style={{ width: `${percent}%`, backgroundColor: getBarColor(percent) }}
                                             />
                                         );
                                     })()}
@@ -434,8 +460,8 @@ export default function TokensDashboard() {
                                         const percent = Math.min((item.tokens / maxT) * 100, 100);
                                         return (
                                             <div
-                                                className={`h-full rounded-full transition-[width] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${getFillClass(percent)}`}
-                                                style={{ width: `${percent}%` }}
+                                                className="h-full rounded-full transition-[width,background-color] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                                                style={{ width: `${percent}%`, backgroundColor: getBarColor(percent) }}
                                             />
                                         );
                                     })()}
