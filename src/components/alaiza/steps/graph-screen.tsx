@@ -1,11 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import { FinancialEducationConfig } from "../financial-education-config";
 import { BottomActionButton } from "../ui/bottom-action-button";
-import zelifyLogoDark from "@/assets/logos/zelifyLogo_dark.svg";
-import zelifyLogoLight from "@/assets/logos/zelifyLogo_ligth.svg";
 import { useLanguageTranslations } from "@/hooks/use-language-translations";
 import { type Language } from "@/contexts/language-context";
 
@@ -81,21 +78,17 @@ export function GraphScreen({ config, updateConfig }: GraphScreenProps) {
         </button>
         <div className="mb-4 flex justify-center">
           <div className="relative h-6 w-24">
-            <Image
-              src={zelifyLogoLight}
-              fill
-              className="dark:hidden"
+            <img
+              src="/images/zelify_logo2.png"
+              className="h-full w-full object-contain dark:hidden"
               alt="Zelify logo"
-              role="presentation"
-              quality={100}
+              loading="lazy"
             />
-            <Image
-              src={zelifyLogoDark}
-              fill
-              className="hidden dark:block"
+            <img
+              src="/images/zelify_logo3.png"
+              className="hidden h-full w-full object-contain dark:block"
               alt="Zelify logo"
-              role="presentation"
-              quality={100}
+              loading="lazy"
             />
           </div>
         </div>
