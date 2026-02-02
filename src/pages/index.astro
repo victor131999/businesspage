@@ -585,7 +585,7 @@ const modulesList = [
               class="welcome-input"
               type="email"
               name="email"
-              placeholder="ingresa tu correo"
+              placeholder="Ingresa tu correo"
               aria-label="Ingresa tu correo"
               data-i18n-placeholder="home.welcome.email.placeholder"
               data-i18n-aria="home.welcome.email.aria"
@@ -593,7 +593,7 @@ const modulesList = [
             <button
               class="welcome-quote-button"
               type="submit"
-              data-i18n="home.welcome.quote">cotizar</button
+              data-i18n="home.welcome.quote">Cotizar</button
             >
           </form>
           <div id="captcha-modal" class="captcha-modal">
@@ -633,7 +633,7 @@ const modulesList = [
           <a
             class="welcome-demo-button"
             href="https://www.zelify.com/clips/"
-            data-i18n="home.welcome.demo">demo</a
+            data-i18n="home.welcome.demo">Demo</a
           >
         </div>
       </div>
@@ -811,7 +811,7 @@ const modulesList = [
           <a
             href="https://www.zelify.com/clips/"
             class="how-it-works-demo-button"
-            data-i18n="home.how.demo">demo</a
+            data-i18n="home.how.demo">Demo</a
           >
         </div>
         <div class="how-it-works-right">
@@ -942,7 +942,7 @@ const modulesList = [
           <a
             href="https://www.zelify.com/clips/"
             class="why-zelify-demo-button"
-            data-i18n="home.why.demo">demo</a
+            data-i18n="home.why.demo">Demo</a
           >
         </div>
       </div>
@@ -1014,7 +1014,7 @@ const modulesList = [
           <a
             href="https://www.zelify.com/clips/"
             class="tokens-demo-button"
-            data-i18n="home.tokens.demo">demo</a
+            data-i18n="home.tokens.demo">Demo</a
           >
         </div>
         <div class="tokens-right">
@@ -1083,7 +1083,7 @@ const modulesList = [
           potenciada por IA.
         </h2>
         <a href="/hablemos" class="ai-section-button" data-i18n="home.ai.quote"
-          >cotizar</a
+          >Cotizar</a
         >
       </div>
     </section>
@@ -1173,7 +1173,10 @@ const modulesList = [
       display: flex;
       justify-content: center;
       position: relative;
-      height: 100vh;
+      /* Altura acotada por breakpoint: no estirar en Macs grandes */
+      min-height: 640px;
+      height: min(88vh, 900px);
+      max-height: 900px;
       overflow: hidden; /* Ensure video doesn't spill out */
     }
 
@@ -2728,6 +2731,9 @@ const modulesList = [
     @media (max-width: 768px) {
       .product-showcase {
         padding: 3.5rem 1.25rem 4rem;
+        min-height: 520px;
+        height: auto;
+        max-height: none;
       }
 
       .product-showcase__grid {
@@ -3035,8 +3041,8 @@ const modulesList = [
             "We digitize services for financial institutions,<br />building neobank stacks with a single line of code",
           "home.welcome.email.placeholder": "Enter your email",
           "home.welcome.email.aria": "Enter your email",
-          "home.welcome.quote": "quote",
-          "home.welcome.demo": "demo",
+          "home.welcome.quote": "Quote",
+          "home.welcome.demo": "Demo",
           "home.welcome.quote.aria": "Request quote",
           "home.bench.title": "Pay only what you use",
           "home.bench.subtitle":
@@ -3045,20 +3051,20 @@ const modulesList = [
           "home.tokens.title": "Tokens",
           "home.tokens.description":
             "Zelify integrates into a single digital platform: authentication and identity validation, AML compliance, account digitization, card issuance and processing, local and international transfers, multiple payments, discount and coupon programs.",
-          "home.tokens.demo": "demo",
+          "home.tokens.demo": "Demo",
           "home.action.products.title": "Our products in action",
           "home.action.products.auth": "Auth",
           "home.action.products.identity": "Identity",
           "home.action.products.aml": "AML",
           "home.ai.title.line1": "Build the bank of the future,",
           "home.ai.title.line2": "powered by AI.",
-          "home.ai.quote": "quote",
+          "home.ai.quote": "Quote",
 
           // How it works section
           "home.how.title": "How Does Zelify Work?",
           "home.how.description":
             "Zelify integrates into a single digital platform: authentication and identity validation, AML compliance, account digitization, card issuance and processing, local and international transfers, multiple payments, discount and coupon programs.",
-          "home.how.demo": "demo",
+          "home.how.demo": "Demo",
           "home.how.login.title": "Login",
           "home.how.login.subtitle": "Welcome back",
           "home.how.login.email.label": "Email",
@@ -3072,7 +3078,7 @@ const modulesList = [
           "home.why.title": "Every product, powered by AI.",
           "home.why.description":
             "Zelify integrates into a single digital platform: authentication and identity validation, AML compliance, account digitization, card issuance and processing, local and international transfers, multiple payments, discount and coupon programs.",
-          "home.why.demo": "demo",
+          "home.why.demo": "Demo",
 
           // Footer
           "footer.quicklinks": "Quick links",
@@ -3146,11 +3152,11 @@ const modulesList = [
             "Construye la banca del<br />futuro, en una integración.",
           "home.welcome.title.line2": "Potenciada por IA.",
           "home.welcome.subtitle":
-            "Digitalizamos servicios a instituciones financieras,<br />construyendo stacks neobancarios con una sola línea de código",
-          "home.welcome.email.placeholder": "ingresa tu correo",
+            "Digitalizamos servicios a instituciones financieras,<br />construyendo stacks neobancarios con una sola línea de código.",
+          "home.welcome.email.placeholder": "Ingresa tu correo",
           "home.welcome.email.aria": "Ingresa tu correo",
-          "home.welcome.quote": "cotizar",
-          "home.welcome.demo": "demo",
+          "home.welcome.quote": "Cotizar",
+          "home.welcome.demo": "Demo",
           "home.welcome.quote.aria": "Solicitar cotización",
           "home.bench.title": "Paga solo lo que usas",
           "home.bench.subtitle":
@@ -3159,20 +3165,20 @@ const modulesList = [
           "home.tokens.title": "Tokens",
           "home.tokens.description":
             "Controla el consumo y tus costos con total visibilidad. Monitorea tokens por usuario y por servicio, detecta picos y optimiza presupuesto con métricas claras y trazabilidad.",
-          "home.tokens.demo": "demo",
+          "home.tokens.demo": "Demo",
           "home.action.products.title": "Nuestros productos en acción",
           "home.action.products.auth": "Auth",
           "home.action.products.identity": "Identity",
           "home.action.products.aml": "AML",
           "home.ai.title.line1": "Construye la banca del futuro,",
           "home.ai.title.line2": "potenciada por IA.",
-          "home.ai.quote": "cotizar",
+          "home.ai.quote": "Cotizar",
 
           // How it works section
           "home.how.title": "¿Cómo Funciona Zelify?",
           "home.how.description":
             "Integra una vez y activa capacidades bajo demanda. Con Zelify conectas autenticación, identidad, AML, onboarding, cuentas, pagos y tarjetas desde una sola plataforma, lista para producción.",
-          "home.how.demo": "demo",
+          "home.how.demo": "Demo",
           "home.how.login.title": "Ingreso",
           "home.how.login.subtitle": "Bienvenido de regreso",
           "home.how.login.email.label": "Correo",
@@ -3186,7 +3192,7 @@ const modulesList = [
           "home.why.title": "Cada producto, potenciado <br />por IA.",
           "home.why.description":
             "Cada producto de Zelify está potenciado por IA con Alaiza AI Core: analizamos el comportamiento financiero (gasto, ahorro y deuda) para detectar hábitos, anticipar necesidades y generar alertas. Sumamos educación financiera y recomendaciones personalizadas —presupuestos, recordatorios de pago y metas— y un chat de soporte inteligente.",
-          "home.why.demo": "demo",
+          "home.why.demo": "Demo",
 
           // Footer
           "footer.quicklinks": "Enlaces rápidos",

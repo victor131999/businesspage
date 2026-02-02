@@ -39,7 +39,7 @@ const translations: Record<Language, GraphTranslations> = {
     discoverMore: "Discover More",
   },
   es: {
-    back: "atrás",
+    back: "Atrás",
     today: "Hoy",
     filters: {
       all: "Todo",

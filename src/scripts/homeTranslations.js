@@ -7,19 +7,19 @@ export const homeTranslations = {
     "home.welcome.subtitle": "We digitize services for financial institutions,<br />building neobank stacks with a single line of code",
     "home.welcome.email.placeholder": "Enter your email",
     "home.welcome.email.aria": "Enter your email",
-    "home.welcome.quote": "quote",
-    "home.welcome.demo": "demo",
+    "home.welcome.quote": "Quote",
+    "home.welcome.demo": "Demo",
     "home.welcome.quote.aria": "Request quote",
 
     // Bench Section
     "home.bench.title": "Pay only what you use",
     "home.bench.subtitle": "and scale without friction with the lowest prices in the market.",
-    "home.bench.button": "bench 1",
+    "home.bench.button": "Bench 1",
 
     // Tokens Section
     "home.tokens.title": "Tokens",
     "home.tokens.description": "Zelify integrates into a single digital platform: authentication and identity validation, AML compliance, account digitization, card issuance and processing, local and international transfers, multiple payments, discount and coupon programs.",
-    "home.tokens.demo": "demo",
+    "home.tokens.demo": "Demo",
 
     // Action Products Section
     "home.action.products.title": "Our products in action",
@@ -30,7 +30,7 @@ export const homeTranslations = {
     // AI Section
     "home.ai.title.line1": "Build the bank of the future,",
     "home.ai.title.line2": "powered by AI.",
-    "home.ai.quote": "quote",
+    "home.ai.quote": "Quote",
 
     // Navbar
     "nav.producto": "Products",
@@ -42,22 +42,22 @@ export const homeTranslations = {
     // Welcome Section
     "home.welcome.title.line1": "Construye la banca del <br/> futuro, en una integración.",
     "home.welcome.title.line2": "Potenciada por IA.",
-    "home.welcome.subtitle": "Digitalizamos servicios a instituciones financieras,<br />construyendo stacks neobancarios con una sola línea de código",
-    "home.welcome.email.placeholder": "ingresa tu correo",
+    "home.welcome.subtitle": "Digitalizamos servicios a instituciones financieras,<br />construyendo stacks neobancarios con una sola línea de código.",
+    "home.welcome.email.placeholder": "Ingresa tu correo",
     "home.welcome.email.aria": "Ingresa tu correo",
-    "home.welcome.quote": "cotizar",
-    "home.welcome.demo": "demo",
+    "home.welcome.quote": "Cotizar",
+    "home.welcome.demo": "Demo",
     "home.welcome.quote.aria": "Solicitar cotización",
 
     // Bench Section
     "home.bench.title": "Paga solo lo que usas",
     "home.bench.subtitle": "y escala sin fricción con los precios más bajos del mercado.",
-    "home.bench.button": "bench 1",
+    "home.bench.button": "Bench 1",
 
     // Tokens Section
     "home.tokens.title": "Tokens",
     "home.tokens.description": "Zelify integra en una sola plataforma digital: autenticación y validación de identidad, cumplimiento AML, digitalización de cuentas, emisión y procesamiento de tarjetas, transferencias locales e internacionales, pagos múltiples, programas de descuentos y cupones.",
-    "home.tokens.demo": "demo",
+    "home.tokens.demo": "Demo",
 
     // Action Products Section
     "home.action.products.title": "Nuestros productos en acción",
@@ -68,7 +68,7 @@ export const homeTranslations = {
     // AI Section
     "home.ai.title.line1": "Construye la banca del futuro,",
     "home.ai.title.line2": "potenciada por IA.",
-    "home.ai.quote": "cotizar",
+    "home.ai.quote": "Cotizar",
   }
 };
 

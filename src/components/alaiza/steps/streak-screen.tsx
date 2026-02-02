@@ -38,7 +38,7 @@ const translations: Record<Language, StreakTranslations> = {
     days: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
   },
   es: {
-    back: "atrás",
+    back: "Atrás",
     dayStreak: "días de racha",
     streakStarted: "Racha Iniciada",
     maxStreak: "Racha Máxima",

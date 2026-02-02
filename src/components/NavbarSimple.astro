@@ -9,11 +9,11 @@ const {
   logoAlt = "Zelify logo",
   navItems = [
     { label: "Producto", href: "/product" },
-    { label: "Blog", href: "/blog" },
     {
       label: "Desarrollo",
       href: "https://docs.zelify.com/documentation/getting-started",
     },
+    { label: "Blog", href: "/blog" },
     // { label: "Otros", href: "/blog" },
   ],
   demoHref = "http://www.zelify.com/clips",
@@ -63,10 +63,15 @@ const {
             i18nKey = "navbar.others";
           }
 
+          const isExternal =
+            item.label.toLowerCase() === "desarrollo" ||
+            item.href.startsWith("http");
           return (
             <a
               class="simple-navbar__link"
               href={item.href}
+              target={isExternal ? "_blank" : undefined}
+              rel={isExternal ? "noopener noreferrer" : undefined}
               data-i18n={i18nKey || undefined}
               data-nav-index={index}
             >
@@ -79,7 +84,7 @@ const {
 
     <div class="simple-navbar__actions">
       <a class="simple-navbar__demo" href={demoHref} data-i18n="navbar.demo"
-        >demo</a
+        >Demo</a
       >
       <button
         class="simple-navbar__lang"
@@ -188,7 +193,6 @@ const {
     border-radius: 12px;
     text-decoration: none;
     font-weight: 600;
-    text-transform: lowercase;
     box-shadow: 0 8px 20px rgba(147, 251, 77, 0.35);
     transition:
       transform 0.2s ease,
@@ -236,15 +240,15 @@ const {
       "navbar.about": "About us",
       "navbar.developers": "Developers",
       "navbar.others": "Others",
-      "navbar.demo": "demo",
+      "navbar.demo": "Demo",
       "navbar.changeLanguage": "Change language",
     },
     es: {
-      "navbar.products": "Producto",
+      "navbar.products": "Productos",
       "navbar.about": "Nosotros",
       "navbar.developers": "Desarrollo",
       "navbar.others": "Otros",
-      "navbar.demo": "demo",
+      "navbar.demo": "Demo",
       "navbar.changeLanguage": "Cambiar idioma",
     },
   };

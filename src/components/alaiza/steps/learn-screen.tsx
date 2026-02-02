@@ -34,7 +34,7 @@ const translations: Record<Language, LearnTranslations> = {
     tipsForYou: "Our tips for you",
   },
   es: {
-    back: "atrás",
+    back: "Atrás",
     increasing: "aumentando",
     spending: "gastos",
     savings: "ahorros",
