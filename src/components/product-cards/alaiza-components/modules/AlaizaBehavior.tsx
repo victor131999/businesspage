@@ -229,12 +229,14 @@ export default function AlaizaBehavior({ onBack }: { onBack: () => void }) {
 
             {/* Status Bar Replica */}
             <div className="relative z-20 flex items-center justify-between px-6 pt-10 pb-2">
-                <div className="text-white text-xs font-semibold">9:41</div>
+                <div className="text-white text-xs font-semibold">
+                    {currentTime.getHours() + ":" + currentTime.getMinutes()}
+                </div>
                 <div className="absolute left-1/2 top-3 -translate-x-1/2">
                     {/* Notch Placeholder */}
-                    <div className="h-7 w-28 rounded-full bg-black flex items-center justify-center">
+                    {/* <div className="h-7 w-28 rounded-full bg-black flex items-center justify-center">
                         <div className="h-1 w-16 rounded-full bg-gray-900/50"></div>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="flex items-center gap-1.5 text-white">
                     <svg className="h-3 w-4" fill="currentColor" viewBox="0 0 20 12"><path d="M1 8h2v2H1V8zm3-2h2v4H4V6zm3-2h2v6H7V4zm3-1h2v7h-2V3z"></path></svg>
@@ -242,12 +244,12 @@ export default function AlaizaBehavior({ onBack }: { onBack: () => void }) {
                 </div>
             </div>
 
-            {/* Back Button */}
+            {/* Back Button
             <div className="absolute top-12 left-6 z-30">
                 <button onClick={(e) => { e.stopPropagation(); onBack(); }} className="text-white/80 text-sm font-medium hover:text-white transition-colors flex items-center gap-1 backdrop-blur-md bg-black/20 px-3 py-1.5 rounded-full">
                     <span>←</span> Back
                 </button>
-            </div>
+            </div> */}
 
             {/* Clock */}
             <div className="relative z-10 mt-12 text-center text-white transition-opacity duration-300" style={{ opacity: isExpanded ? 0.3 : 1, filter: isExpanded ? 'blur(4px)' : 'none' }}>

@@ -13,7 +13,7 @@ export default function AlaizaCard({ isDemoEnabled = true }: { isDemoEnabled?: b
     const [moduleKey, setModuleKey] = useState(0);
     const isRunningRef = useRef(false);
 
-    // ========== DEMO FLOW ==========
+    // DEMO FLOW
     const wait = (ms: number) => new Promise<void>((resolve, reject) => {
         const start = Date.now();
         const check = () => {
@@ -89,30 +89,32 @@ export default function AlaizaCard({ isDemoEnabled = true }: { isDemoEnabled?: b
         // Behavior Analysis is a full-screen immersive view (lock screen style).
         // Let's keep it visible on Chat and Education.
 
+
         return (
-            <div className="absolute top-20 left-0 right-0 z-30 px-4 pointer-events-none flex justify-center">
-                <div className="flex justify-center gap-1 bg-white/90 backdrop-blur-md rounded-full p-1 shadow-lg pointer-events-auto border border-gray-100">
+            <div className="flex-none pt-3 pb-2 px-4 flex justify-center z-30 bg-white">
+                <div className="flex justify-center gap-1 bg-gray-50 rounded-full p-1 shadow-sm border border-gray-100 pointer-events-auto">
                     <button
                         onClick={() => switchModule("chat")}
-                        className={`px-3 py-1.5 rounded-full text-[10px] font-bold transition-all ${currentModule === "chat" ? "bg-[#004492] text-white shadow-sm" : "text-gray-500 hover:bg-gray-100"}`}
+                        className={`px-3 py-1.5 rounded-full text-[10px] font-bold transition-all ${currentModule === "chat" ? "bg-[#004492] text-white shadow-sm" : "text-gray-500 hover:bg-gray-200"}`}
                     >
                         Chat
                     </button>
                     <button
                         onClick={() => switchModule("financial-education")}
-                        className={`px-3 py-1.5 rounded-full text-[10px] font-bold transition-all ${currentModule === "financial-education" ? "bg-[#004492] text-white shadow-sm" : "text-gray-500 hover:bg-gray-100"}`}
+                        className={`px-3 py-1.5 rounded-full text-[10px] font-bold transition-all ${currentModule === "financial-education" ? "bg-[#004492] text-white shadow-sm" : "text-gray-500 hover:bg-gray-200"}`}
                     >
                         Educación
                     </button>
                     <button
                         onClick={() => switchModule("behavior-analysis")}
-                        className={`px-3 py-1.5 rounded-full text-[10px] font-bold transition-all ${currentModule === "behavior-analysis" ? "bg-[#004492] text-white shadow-sm" : "text-gray-500 hover:bg-gray-100"}`}
+                        className={`px-3 py-1.5 rounded-full text-[10px] font-bold transition-all ${currentModule === "behavior-analysis" ? "bg-[#004492] text-white shadow-sm" : "text-gray-500 hover:bg-gray-200"}`}
                     >
                         Análisis
                     </button>
                 </div>
             </div>
         );
+
     };
 
     return (
