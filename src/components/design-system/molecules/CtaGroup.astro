@@ -1,0 +1,36 @@
+---
+/**
+ * Molecule: CtaGroup
+ * Contenedor flex para form + enlace Demo (welcome CTA). Mensaje y captcha opcionales via slot.
+ * Responsive: flex-wrap; en móvil los hijos pueden ocupar 100%.
+ */
+interface Props {
+  class?: string;
+}
+const { class: className = "" } = Astro.props;
+---
+<div class:list={["ds-cta-group", "welcome-cta", className]}>
+  <slot />
+</div>
+<style is:global>
+  .ds-cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .ds-cta-group .welcome-form-message,
+  .ds-cta-group .welcome-captcha {
+    flex-basis: 100%;
+  }
+  @media (max-width: 639px) {
+    .ds-cta-group {
+      padding: 0 1rem;
+    }
+  }
+</style>

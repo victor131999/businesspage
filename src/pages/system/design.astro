@@ -1,0 +1,373 @@
+---
+/**
+ * Página de documentación del Sistema de Diseño (Atomic Design)
+ * Ruta: /system/design
+ */
+import Layout from "../../layouts/Layout.astro";
+import "../../components/design-system/tokens.css";
+---
+
+<Layout title="Sistema de Diseño — Zelify" description="Documentación del design system basado en Atomic Design">
+  <div class="design-doc">
+    <header class="design-doc__header">
+      <h1 class="design-doc__title">Sistema de Diseño Zelify</h1>
+      <p class="design-doc__lead">
+        Diseño atómico para consistencia y reutilización en la home y el resto de páginas.
+        Todos los componentes de layout son <strong>responsivos</strong> y están documentados aquí.
+      </p>
+    </header>
+
+    <nav class="design-doc__nav" aria-label="Contenido del sistema de diseño">
+      <h2>Contenido</h2>
+      <ul>
+        <li><a href="#atomic-design">Atomic Design</a></li>
+        <li><a href="#breakpoints">Breakpoints y responsividad</a></li>
+        <li><a href="#tokens">Design tokens</a></li>
+        <li><a href="#atoms">Átomos</a></li>
+        <li><a href="#molecules">Moléculas</a></li>
+        <li><a href="#organisms">Organismos</a></li>
+        <li><a href="#usage">Uso en home (index.astro)</a></li>
+      </ul>
+    </nav>
+
+    <main class="design-doc__main">
+      <section id="atomic-design" class="design-doc__section">
+        <h2>Atomic Design</h2>
+        <p>
+          Organizamos la UI en tres niveles reutilizables dentro de <code>src/components/design-system/</code>:
+        </p>
+        <ul>
+          <li><strong>Átomos</strong> — Elementos indivisibles: botones, inputs, títulos, texto, iconos, divisores.</li>
+          <li><strong>Moléculas</strong> — Agrupaciones de átomos con una función clara: formulario email+cotizar, CTA group, tarjeta de login, modal, tabs.</li>
+          <li><strong>Organismos</strong> — Secciones completas que combinan moléculas y átomos: WelcomeHero, QuoteModal con HubSpot, SectionTwoCol.</li>
+        </ul>
+        <p>
+          Cada elemento de layout está pensado para ser <strong>responsivo</strong>: usa tokens de espaciado, tipografía fluida (clamp) y breakpoints consistentes (ver abajo).
+        </p>
+      </section>
+
+      <section id="breakpoints" class="design-doc__section">
+        <h2>Breakpoints y responsividad</h2>
+        <p>
+          Todos los componentes del design system utilizan los mismos breakpoints para mantener coherencia entre páginas.
+        </p>
+        <table class="design-doc__table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Rango</th>
+              <th>Uso en media queries</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>xs</td>
+              <td>0 – 479px</td>
+              <td><code>@media (max-width: 479px)</code></td>
+            </tr>
+            <tr>
+              <td>sm</td>
+              <td>480px – 639px</td>
+              <td><code>@media (max-width: 639px)</code></td>
+            </tr>
+            <tr>
+              <td>md</td>
+              <td>640px – 767px</td>
+              <td><code>@media (max-width: 767px)</code></td>
+            </tr>
+            <tr>
+              <td>lg</td>
+              <td>768px – 1023px</td>
+              <td><code>@media (max-width: 1023px)</code></td>
+            </tr>
+            <tr>
+              <td>xl</td>
+              <td>1024px – 1199px</td>
+              <td><code>@media (min-width: 1024px)</code></td>
+            </tr>
+            <tr>
+              <td>2xl</td>
+              <td>1200px+</td>
+              <td><code>@media (min-width: 1200px)</code></td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          <strong>Comportamiento estándar:</strong> en viewports &lt; 640px (sm) se reducen paddings, tamaños de fuente y muchos layouts pasan a una sola columna. Entre 640px y 1023px se adaptan grids y espaciados. A partir de 1024px se considera desktop.
+        </p>
+      </section>
+
+      <section id="tokens" class="design-doc__section">
+        <h2>Design tokens</h2>
+        <p>
+          Los tokens se definen en <code>src/components/design-system/tokens.css</code> como variables CSS (<code>:root</code>).
+          Incluyen: colores (primario, acento, texto, fondos, bordes), tipografía (familia, tamaños, pesos), espaciado, radios, sombras.
+        </p>
+        <p>
+          Uso en componentes: <code>var(--ds-color-primary)</code>, <code>var(--ds-font-size-lg)</code>, <code>var(--ds-radius-md)</code>, etc.
+          Así cualquier cambio de tema o escala se propaga sin tocar cada componente.
+        </p>
+      </section>
+
+      <section id="atoms" class="design-doc__section">
+        <h2>Átomos</h2>
+        <p>Ubicación: <code>src/components/design-system/atoms/</code></p>
+        <table class="design-doc__table">
+          <thead>
+            <tr>
+              <th>Componente</th>
+              <th>Props principales</th>
+              <th>Responsividad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>Button.astro</code></td>
+              <td>variant (primary | secondary | ghost), type, href, ariaLabel, dataI18n</td>
+              <td>Padding y font-size se reducen en &lt; 640px; opción <code>ds-button--full-mobile</code> para ancho 100%.</td>
+            </tr>
+            <tr>
+              <td><code>Input.astro</code></td>
+              <td>type, name, placeholder, required, invalid, dataI18nPlaceholder</td>
+              <td>Padding y font-size menores en móvil.</td>
+            </tr>
+            <tr>
+              <td><code>Title.astro</code></td>
+              <td>level (1|2|3), variant (hero | section | card), dataI18n</td>
+              <td>hero/section usan clamp(); line-height ajustado en 640px y 1200px.</td>
+            </tr>
+            <tr>
+              <td><code>Text.astro</code></td>
+              <td>variant (body | subtitle | caption | muted), as (p | span)</td>
+              <td>Tamaños con clamp en body/subtitle; en móvil font-size base 1rem.</td>
+            </tr>
+            <tr>
+              <td><code>IconButton.astro</code></td>
+              <td>ariaLabel, type; slot para icono</td>
+              <td>Tamaño fijo; variante <code>--lg</code> reduce en &lt; 640px.</td>
+            </tr>
+            <tr>
+              <td><code>Divider.astro</code></td>
+              <td>vertical (boolean)</td>
+              <td>Márgenes laterales 140px → 2rem (1023px) → 1rem (639px).</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="molecules" class="design-doc__section">
+        <h2>Moléculas</h2>
+        <p>Ubicación: <code>src/components/design-system/molecules/</code></p>
+        <table class="design-doc__table">
+          <thead>
+            <tr>
+              <th>Componente</th>
+              <th>Uso</th>
+              <th>Responsividad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>EmailQuoteForm.astro</code></td>
+              <td>Input email + botón Cotizar en un solo borde (welcome CTA).</td>
+              <td>min/max-width 480px–720px; en &lt; 639px ancho 100%, paddings reducidos.</td>
+            </tr>
+            <tr>
+              <td><code>CtaGroup.astro</code></td>
+              <td>Contenedor flex para form + Demo + mensaje + captcha.</td>
+              <td>max-width 960px, centrado; en móvil padding horizontal 1rem.</td>
+            </tr>
+            <tr>
+              <td><code>LoginFormCard.astro</code></td>
+              <td>Tarjeta con título, subtítulo, campos email/contraseña, botón, “crear cuenta”.</td>
+              <td>Padding y títulos más pequeños en &lt; 639px.</td>
+            </tr>
+            <tr>
+              <td><code>Modal.astro</code></td>
+              <td>Overlay + contenido + botón cerrar (X). Slot para body.</td>
+              <td>Ancho 90%, max-width 700px; padding body reducido en móvil.</td>
+            </tr>
+            <tr>
+              <td><code>TabList.astro</code></td>
+              <td>Lista de tabs (ej. Bench). Props: tabs[], dataAttr.</td>
+              <td>Scroll horizontal en &lt; 639px; tabs no wrap.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="organisms" class="design-doc__section">
+        <h2>Organismos</h2>
+        <p>Ubicación: <code>src/components/design-system/organisms/</code></p>
+        <table class="design-doc__table">
+          <thead>
+            <tr>
+              <th>Componente</th>
+              <th>Uso</th>
+              <th>Responsividad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>WelcomeHero.astro</code></td>
+              <td>Sección hero: título, subtítulo, CtaGroup (EmailQuoteForm + Demo + mensaje + captcha).</td>
+              <td>Título con clamp y line-height por breakpoint; contenido centrado max-width 1000px; padding reducido en móvil.</td>
+            </tr>
+            <tr>
+              <td><code>QuoteModalHubSpot.astro</code></td>
+              <td>Modal de cotización con embed HubSpot Meetings (iframe).</td>
+              <td>Modal 90% ancho; body e iframe min-height 400px → 320px en móvil.</td>
+            </tr>
+            <tr>
+              <td><code>SectionTwoCol.astro</code></td>
+              <td>Sección de dos columnas con slots left/right; divider opcional; reverseOnMobile.</td>
+              <td>Grid 2 cols → 1 col en &lt; 1024px; márgenes del divider según breakpoint.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="usage" class="design-doc__section">
+        <h2>Uso en home (index.astro)</h2>
+        <p>
+          En <code>src/pages/index.astro</code> se pueden reemplazar bloques de HTML + estilos por estos componentes para mantener consistencia y reutilización. Ejemplo de uso del organismo WelcomeHero y del modal:
+        </p>
+        <pre class="design-doc__code"><code>import WelcomeHero from "../components/design-system/organisms/WelcomeHero.astro";
+import QuoteModalHubSpot from "../components/design-system/organisms/QuoteModalHubSpot.astro";
+
+// En el body:
+&lt;WelcomeHero /&gt;
+&lt;QuoteModalHubSpot /&gt;</code></pre>
+        <p>
+          Los estilos específicos de la home que ya existen (clases como <code>welcome-title</code>, <code>welcome-input-group</code>, etc.) se mantienen en el index o se migran gradualmente a los componentes del design system. Cada componente documenta su comportamiento responsivo en esta página.
+        </p>
+      </section>
+    </main>
+
+    <footer class="design-doc__footer">
+      <p>Zelify — Sistema de diseño basado en Atomic Design. Layouts responsivos documentados.</p>
+    </footer>
+  </div>
+</Layout>
+
+<style>
+  .design-doc {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    font-family: var(--ds-font-family, system-ui, sans-serif);
+    color: #1e293b;
+    line-height: 1.6;
+  }
+  .design-doc__header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .design-doc__title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: #0f172a;
+  }
+  .design-doc__lead {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #475569;
+  }
+  .design-doc__nav {
+    margin-bottom: 2rem;
+    padding: 1.25rem;
+    background: #f8fafc;
+    border-radius: 12px;
+  }
+  .design-doc__nav h2 {
+    font-size: 1rem;
+    margin: 0 0 0.75rem 0;
+    color: #64748b;
+  }
+  .design-doc__nav ul {
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+  .design-doc__nav a {
+    color: #213f8c;
+    text-decoration: none;
+  }
+  .design-doc__nav a:hover {
+    text-decoration: underline;
+  }
+  .design-doc__main {
+    margin-bottom: 2rem;
+  }
+  .design-doc__section {
+    margin-bottom: 2.5rem;
+  }
+  .design-doc__section h2 {
+    font-size: 1.5rem;
+    margin: 0 0 1rem 0;
+    color: #0f172a;
+  }
+  .design-doc__section p,
+  .design-doc__section ul {
+    margin: 0 0 0.75rem 0;
+  }
+  .design-doc__section code {
+    background: #f1f5f9;
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  .design-doc__table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.95rem;
+  }
+  .design-doc__table th,
+  .design-doc__table td {
+    border: 1px solid #e2e8f0;
+    padding: 0.6rem 0.75rem;
+    text-align: left;
+  }
+  .design-doc__table th {
+    background: #f8fafc;
+    font-weight: 600;
+    color: #334155;
+  }
+  .design-doc__table code {
+    font-size: 0.85em;
+  }
+  .design-doc__code {
+    background: #1e293b;
+    color: #e2e8f0;
+    padding: 1rem 1.25rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+  }
+  .design-doc__code code {
+    background: none;
+    padding: 0;
+    color: inherit;
+  }
+  .design-doc__footer {
+    padding-top: 1.5rem;
+    border-top: 1px solid #e2e8f0;
+    font-size: 0.9rem;
+    color: #64748b;
+  }
+  @media (max-width: 639px) {
+    .design-doc {
+      padding: 1.25rem 1rem;
+    }
+    .design-doc__table {
+      font-size: 0.85rem;
+    }
+    .design-doc__table th,
+    .design-doc__table td {
+      padding: 0.5rem;
+    }
+  }
+</style>

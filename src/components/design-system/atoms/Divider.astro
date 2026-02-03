@@ -1,0 +1,44 @@
+---
+/**
+ * Atom: Divider
+ * Línea horizontal para separar secciones. Opcional: vertical (en layouts de dos columnas).
+ * Responsive: márgenes laterales se reducen en móvil.
+ */
+interface Props {
+  vertical?: boolean;
+  class?: string;
+}
+const { vertical = false, class: className = "" } = Astro.props;
+---
+<div
+  class:list={["ds-divider", vertical && "ds-divider--vertical", className]}
+  role="presentation"
+  aria-hidden="true"
+/>
+<style is:global>
+  .ds-divider {
+    height: 1px;
+    background-color: #154091;
+    margin-left: 140px;
+    margin-right: 140px;
+  }
+  .ds-divider--vertical {
+    width: 1px;
+    height: auto;
+    margin: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  @media (max-width: 1023px) {
+    .ds-divider {
+      margin-left: 2rem;
+      margin-right: 2rem;
+    }
+  }
+  @media (max-width: 639px) {
+    .ds-divider {
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+  }
+</style>

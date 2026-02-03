@@ -1,0 +1,96 @@
+---
+/**
+ * Organism: SectionTwoCol
+ * Sección de dos columnas (grid). Slot "left" y "right". Divider opcional.
+ * Responsive: grid 1 col en móvil, 2 en desktop; gap y padding adaptativos.
+ */
+interface Props {
+  sectionClass?: string;
+  gap?: "small" | "medium" | "large";
+  divider?: boolean;
+  reverseOnMobile?: boolean;
+}
+const { sectionClass = "", gap = "medium", divider = false, reverseOnMobile = false } = Astro.props;
+---
+
+<section class:list={["ds-section-two-col", sectionClass, reverseOnMobile && "ds-section-two-col--reverse-mobile"]}>
+  {divider && <div class="ds-section-two-col__divider how-it-works-divider" />}
+  <div class:list={["ds-section-two-col__grid", `ds-section-two-col__grid--${gap}`]}>
+    <div class="ds-section-two-col__left">
+      <slot name="left" />
+    </div>
+    <div class="ds-section-two-col__right">
+      <slot name="right" />
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .ds-section-two-col {
+    padding: 0 2rem;
+    background-color: var(--ds-color-bg);
+    display: flex;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .ds-section-two-col__divider {
+    position: absolute;
+    top: 52.5%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #154091;
+    z-index: 1;
+    transform: translateY(-50%);
+    margin-left: 140px;
+    margin-right: 140px;
+  }
+  .ds-section-two-col__grid {
+    max-width: 1300px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+  .ds-section-two-col__grid--small {
+    gap: 1rem;
+  }
+  .ds-section-two-col__grid--medium {
+    gap: 2rem;
+  }
+  .ds-section-two-col__grid--large {
+    gap: 3rem;
+  }
+  .ds-section-two-col__left,
+  .ds-section-two-col__right {
+    min-width: 0;
+  }
+  @media (max-width: 1023px) {
+    .ds-section-two-col__grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    .ds-section-two-col--reverse-mobile .ds-section-two-col__grid {
+      direction: rtl;
+    }
+    .ds-section-two-col--reverse-mobile .ds-section-two-col__grid > * {
+      direction: ltr;
+    }
+    .ds-section-two-col__divider {
+      margin-left: 2rem;
+      margin-right: 2rem;
+    }
+  }
+  @media (max-width: 639px) {
+    .ds-section-two-col {
+      padding: 0 1rem;
+    }
+    .ds-section-two-col__divider {
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+  }
+</style>

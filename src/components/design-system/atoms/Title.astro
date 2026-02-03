@@ -1,0 +1,49 @@
+---
+/**
+ * Atom: Title
+ * Niveles: h1 | h2 | h3. Control de tamaño con level y variant (hero, section, card).
+ * Responsive: font-size con clamp en hero/section.
+ */
+interface Props {
+  level?: 1 | 2 | 3;
+  variant?: "hero" | "section" | "card";
+  class?: string;
+  dataI18n?: string;
+}
+const { level = 1, variant = "section", class: className = "", dataI18n } = Astro.props;
+const Tag = `h${level}` as "h1" | "h2" | "h3";
+---
+<Tag class:list={["ds-title", `ds-title--${variant}`, className]} data-i18n={dataI18n}>
+  <slot />
+</Tag>
+<style is:global>
+  .ds-title {
+    margin: 0;
+    font-family: var(--ds-font-family);
+    font-weight: var(--ds-font-weight-medium, 500);
+    color: var(--ds-color-text);
+    line-height: var(--ds-line-height-tight);
+  }
+  .ds-title--hero {
+    font-size: var(--ds-font-size-hero, clamp(2rem, 5vw, 4.4rem));
+    letter-spacing: 0.01em;
+  }
+  .ds-title--section {
+    font-size: clamp(1.75rem, 4vw, 4.4rem);
+  }
+  .ds-title--card {
+    font-size: var(--ds-font-size-3xl, 2rem);
+    font-weight: var(--ds-font-weight-bold, 700);
+    letter-spacing: -0.02em;
+  }
+  @media (max-width: 639px) {
+    .ds-title--hero {
+      line-height: 1.18;
+    }
+  }
+  @media (min-width: 1200px) {
+    .ds-title--hero {
+      line-height: 1.1;
+    }
+  }
+</style>

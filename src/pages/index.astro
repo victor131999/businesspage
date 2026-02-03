@@ -1,7 +1,11 @@
 ---
 import "../styles/navbar.css";
+import "../components/design-system/tokens.css";
 import Navbar3 from "../components/NavbarSimple.astro";
 import ProductsPanel from "../components/productsPanel.astro";
+import WelcomeHero from "../components/design-system/organisms/WelcomeHero.astro";
+import QuoteModalHubSpot from "../components/design-system/organisms/QuoteModalHubSpot.astro";
+import Button from "../components/design-system/atoms/Button.astro";
 import AuthProd from "../components/product-cards/auth-prod.astro";
 import IdentityProd from "../components/product-cards/identity-prod.astro";
 import AmlProd from "../components/product-cards/aml-prod.astro";
@@ -553,84 +557,8 @@ const modulesList = [
   <body class="demo-page">
     <Navbar3 />
     <ProductsPanel />
-    <section class="welcome-section section-gap-80">
-      <div class="welcome-content">
-        <h1 class="welcome-title" data-i18n="home.welcome.title.line1">
-          Construye la banca del <br />futuro, en una integración.
-          <span class="welcome-title-line" data-i18n="home.welcome.title.line2"
-            >Potenciada por IA.</span
-          >
-        </h1>
-        <p class="welcome-subtitle" data-i18n="home.welcome.subtitle">
-          Digitalizamos servicios a instituciones financieras,<br />construyendo
-          stacks neobancarios con una sola línea de código
-        </p>
-        <div class="welcome-cta">
-          <form
-            class="welcome-input-group"
-            action="#"
-            aria-label="Solicitar cotización"
-            data-i18n-aria-label="home.welcome.quote.aria"
-            novalidate
-          >
-            <input
-              class="welcome-input"
-              type="email"
-              name="email"
-              placeholder="Ingresa tu correo"
-              aria-label="Ingresa tu correo"
-              data-i18n-placeholder="home.welcome.email.placeholder"
-              data-i18n-aria="home.welcome.email.aria"
-            />
-            <button
-              class="welcome-quote-button"
-              type="submit"
-              data-i18n="home.welcome.quote">Cotizar</button
-            >
-          </form>
-          <a
-            class="welcome-demo-button"
-            href="https://www.zelify.com/clips/"
-            data-i18n="home.welcome.demo"
-            >Demo</a
-          >
-          <p class="welcome-form-message" role="status" aria-live="polite"></p>
-          <div class="welcome-captcha">
-            <div id="turnstile-widget"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Modal Cotizar (vacío por ahora) -->
-    <div id="quote-modal" class="quote-modal" aria-hidden="true" aria-label="Solicitar cotización">
-      <div class="quote-modal-overlay" data-close-quote-modal></div>
-      <div class="quote-modal-content" role="dialog">
-        <button
-          type="button"
-          id="close-quote-modal"
-          class="quote-modal-close"
-          aria-label="Cerrar"
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M18 6L6 18M6 6l12 12" />
-          </svg>
-        </button>
-        <div class="quote-modal-body">
-          <!-- Start of Meetings Embed Script -->
-          <div
-            class="meetings-iframe-container"
-            data-src="https://meetings.hubspot.com/eramos5?embed=true"
-          ></div>
-          <script
-            type="text/javascript"
-            src="https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js"
-          ></script>
-          <!-- End of Meetings Embed Script -->
-        </div>
-      </div>
-    </div>
-
+    <WelcomeHero />
+    <QuoteModalHubSpot />
     <section class="product-showcase section-gap-200">
       <div class="product-showcase__overlay"></div>
       <video class="product-showcase__video" autoplay loop muted playsinline>
@@ -792,11 +720,13 @@ const modulesList = [
             e internacionales, pagos múltiples, programas de descuentos y
             cupones.
           </p>
-          <a
+          <Button
             href="https://www.zelify.com/clips/"
-            class="how-it-works-demo-button"
-            data-i18n="home.how.demo">Demo</a
+            variant="secondary"
+            dataI18n="home.how.demo"
           >
+            Demo
+          </Button>
         </div>
         <div class="how-it-works-right">
           <div class="right-bg-panel">
@@ -836,10 +766,11 @@ const modulesList = [
                     data-i18n-placeholder="home.how.login.password.placeholder"
                   />
                 </div>
-                <button
+                <Button
                   type="submit"
+                  variant="primary"
                   class="login-button"
-                  data-i18n="home.how.login.button"
+                  dataI18n="home.how.login.button"
                 >
                   Ingresa
                   <svg
@@ -848,6 +779,7 @@ const modulesList = [
                     viewBox="0 0 16 16"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
                   >
                     <path
                       d="M6 12L10 8L6 4"
@@ -856,7 +788,7 @@ const modulesList = [
                       stroke-linecap="round"
                       stroke-linejoin="round"></path>
                   </svg>
-                </button>
+                </Button>
               </form>
               <p class="login-create-account" data-i18n="home.how.login.create">
                 O crea una nueva cuenta
@@ -910,10 +842,11 @@ const modulesList = [
                   data-i18n-placeholder="home.how.login.password.placeholder"
                 />
               </div>
-              <button
+              <Button
                 type="submit"
+                variant="primary"
                 class="login-button"
-                data-i18n="home.how.login.button"
+                dataI18n="home.how.login.button"
               >
                 Ingresa
                 <svg
@@ -922,6 +855,7 @@ const modulesList = [
                   viewBox="0 0 16 16"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
                 >
                   <path
                     d="M6 12L10 8L6 4"
@@ -930,7 +864,7 @@ const modulesList = [
                     stroke-linecap="round"
                     stroke-linejoin="round"></path>
                 </svg>
-              </button>
+              </Button>
             </form>
             <p class="login-create-account" data-i18n="home.how.login.create">
               O crea una nueva cuenta
@@ -955,212 +889,251 @@ const modulesList = [
             e internacionales, pagos múltiples, programas de descuentos y
             cupones.
           </p>
-          <a
+          <Button
             href="https://www.zelify.com/clips/"
-            class="why-zelify-demo-button"
-            data-i18n="home.why.demo">Demo</a
+            variant="secondary"
+            dataI18n="home.why.demo"
           >
+            Demo
+          </Button>
         </div>
       </div>
     </section>
-  </body>
 
-  <section class="bench-section section-gap-200">
-    <div class="bench-section-2-content">
-      <div class="bench-tabs">
-        <button class="bench-tab active" data-bench="1">Cards</button>
-        <!-- <button class="bench-tab" data-bench="2">Bench 2</button>
-          <button class="bench-tab" data-bench="3">Bench 3</button>
-          <button class="bench-tab" data-bench="4">Bench 4</button> -->
-      </div>
-
-      <div class="bench-content-area">
-        <div class="bench-content-placeholder" data-bench-content="1">
-          <!-- Contenido para Bench 1 -->
-          <video
-            class="bench-video"
-            autoplay
-            muted
-            loop
-            playsinline
-            preload="metadata"
+    <section class="bench-section section-gap-200">
+      <div class="bench-section-2-content">
+        <div class="bench-tabs">
+          <Button
+            type="button"
+            variant="outline"
+            class="bench-tab active"
+            data-bench="1">Borderless</Button
           >
-            <source
-              src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/cards_bench_clip.mp4"
-              type="video/mp4"
-            />
-          </video>
+          <Button
+            type="button"
+            variant="outline"
+            class="bench-tab"
+            data-bench="2">Bench 2</Button
+          >
+          <Button
+            type="button"
+            variant="outline"
+            class="bench-tab"
+            data-bench="3">Bench 3</Button
+          >
+          <Button
+            type="button"
+            variant="outline"
+            class="bench-tab"
+            data-bench="4">Bench 4</Button
+          >
         </div>
-        <!-- <div
+
+        <div class="bench-content-area">
+          <div class="bench-content-placeholder" data-bench-content="1">
+            <!-- Contenido para Bench 1 -->
+            <video
+              class="bench-video"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+            >
+              <source
+                src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/cards_bench_clip.mp4"
+                type="video/mp4"
+              />
+            </video>
+          </div>
+          <div
             class="bench-content-placeholder"
             data-bench-content="2"
             style="display: none;"
           >
             aui nuevo contenido
-          </div> -->
-      </div>
+          </div>
+        </div>
 
-      <div class="bench-text-content">
-        <h2 class="bench-title" data-i18n="home.bench.title">
-          Paga solo lo que usas
+        <div class="bench-text-content">
+          <h2 class="bench-title" data-i18n="home.bench.title">
+            Paga solo lo que usas
+          </h2>
+          <p class="bench-subtitle" data-i18n="home.bench.subtitle">
+            y escala sin fricción con los precios más bajos del mercado.
+          </p>
+        </div>
+
+        <div class="bench-cta">
+          <Button
+            type="button"
+            variant="secondary"
+            class="bench-cta-button"
+            dataI18n="home.bench.button"
+          >
+            Cards
+          </Button>
+        </div>
+      </div>
+    </section>
+
+    <section class="tokens-section section-gap-150">
+      <div class="tokens-container">
+        <div class="tokens-left">
+          <h2 class="tokens-title" data-i18n="home.tokens.title">Tokens</h2>
+          <p class="tokens-description" data-i18n="home.tokens.description">
+            Zelify integra en una sola plataforma digital: autenticación y
+            validación de identidad, cumplimiento AML, digitalización de
+            cuentas, emisión y procesamiento de tarjetas, transferencias locales
+            e internacionales, pagos múltiples, programas de descuentos y
+            cupones.
+          </p>
+          <Button
+            href="https://www.zelify.com/clips/"
+            variant="secondary"
+            dataI18n="home.tokens.demo"
+          >
+            Demo
+          </Button>
+        </div>
+        <div class="tokens-right">
+          <div class="tokens-content-placeholder">
+            <TokensProd />
+          </div>
+        </div>
+        <button
+          type="button"
+          id="tokens-play-pause-btn"
+          class="tokens-play-pause-btn"
+          aria-label="Reproducir animación"
+          title="Reproducir / Pausar animación de consumo"
+        >
+          <img
+            id="tokens-play-icon"
+            src="/icons/play.svg"
+            alt=""
+            width="28"
+            height="28"
+          />
+          <img
+            id="tokens-pause-icon"
+            src="/icons/pause.svg"
+            alt=""
+            width="28"
+            height="28"
+            style="display: none;"
+          />
+        </button>
+      </div>
+    </section>
+
+    <section class="action-products-section section-gap-150">
+      <div class="action-products-content">
+        <h2
+          class="action-products-title"
+          data-i18n="home.action.products.title"
+        >
+          Nuestros productos en acción
         </h2>
-        <p class="bench-subtitle" data-i18n="home.bench.subtitle">
-          y escala sin fricción con los precios más bajos del mercado.
-        </p>
-      </div>
 
-      <div class="bench-cta">
-        <button class="bench-cta-button" data-i18n="home.bench.button"
-          >Cards</button
-        >
-      </div>
-    </div>
-  </section>
-
-  <section class="tokens-section section-gap-150">
-    <div class="tokens-container">
-      <div class="tokens-left">
-        <h2 class="tokens-title" data-i18n="home.tokens.title">Tokens</h2>
-        <p class="tokens-description" data-i18n="home.tokens.description">
-          Zelify integra en una sola plataforma digital: autenticación y
-          validación de identidad, cumplimiento AML, digitalización de cuentas,
-          emisión y procesamiento de tarjetas, transferencias locales e
-          internacionales, pagos múltiples, programas de descuentos y cupones.
-        </p>
-        <a
-          href="https://www.zelify.com/clips/"
-          class="tokens-demo-button"
-          data-i18n="home.tokens.demo">Demo</a
-        >
-      </div>
-      <div class="tokens-right">
-        <div class="tokens-content-placeholder">
-          <TokensProd />
-        </div>
-      </div>
-      <button
-        type="button"
-        id="tokens-play-pause-btn"
-        class="tokens-play-pause-btn"
-        aria-label="Reproducir animación"
-        title="Reproducir / Pausar animación de consumo"
-      >
-        <img
-          id="tokens-play-icon"
-          src="/icons/play.svg"
-          alt=""
-          width="28"
-          height="28"
-        />
-        <img
-          id="tokens-pause-icon"
-          src="/icons/pause.svg"
-          alt=""
-          width="28"
-          height="28"
-          style="display: none;"
-        />
-      </button>
-    </div>
-  </section>
-
-  <section class="action-products-section section-gap-150">
-    <div class="action-products-content">
-      <h2 class="action-products-title" data-i18n="home.action.products.title">
-        Nuestros productos en acción
-      </h2>
-
-      <div class="action-products-container">
-        <div class="action-products-card">
-          <div class="action-card-wrapper" data-action-card="auth">
-            <AuthProd noInteraction={false} isDemoEnabled={false} />
+        <div class="action-products-container">
+          <div class="action-products-card">
+            <div class="action-card-wrapper" data-action-card="auth">
+              <AuthProd noInteraction={false} isDemoEnabled={false} />
+            </div>
+            <div
+              class="action-card-wrapper"
+              data-action-card="identity"
+              style="display: none;"
+            >
+              <IdentityProd noInteraction={false} isDemoEnabled={false} />
+            </div>
+            <div
+              class="action-card-wrapper"
+              data-action-card="aml"
+              style="display: none;"
+            >
+              <AmlProd noInteraction={false} isDemoEnabled={false} />
+            </div>
           </div>
-          <div
-            class="action-card-wrapper"
-            data-action-card="identity"
-            style="display: none;"
+        </div>
+
+        <div class="action-products-nav">
+          <Button
+            type="button"
+            variant="outline"
+            class="action-nav-button active"
+            data-action="auth"
+            dataI18n="home.action.products.auth">Auth</Button
           >
-            <IdentityProd noInteraction={false} isDemoEnabled={false} />
-          </div>
-          <div
-            class="action-card-wrapper"
-            data-action-card="aml"
-            style="display: none;"
+          <Button
+            type="button"
+            variant="outline"
+            class="action-nav-button"
+            data-action="identity"
+            dataI18n="home.action.products.identity">Identity</Button
           >
-            <AmlProd noInteraction={false} isDemoEnabled={false} />
+          <Button
+            type="button"
+            variant="outline"
+            class="action-nav-button"
+            data-action="aml"
+            dataI18n="home.action.products.aml">AML</Button
+          >
+        </div>
+      </div>
+    </section>
+
+    <section class="ai-section section-gap-150">
+      <div class="ai-section-content">
+        <h2 class="ai-section-title" data-i18n="home.ai.title.line1">
+          Construye la banca del futuro,<br />
+          potenciada por IA.
+        </h2>
+        <Button href="/hablemos" variant="secondary" dataI18n="home.ai.quote">
+          Cotizar
+        </Button>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="demo-footer">
+      <div class="footer-container">
+        <div class="footer-top">
+          <div class="footer-logo">
+            <span class="logo-z">Z</span>
+            <span class="logo-text">Zelify</span>
+          </div>
+          <div class="footer-quick-links">
+            <h4 class="quick-links-title" data-i18n="footer.quicklinks">
+              Quick links
+            </h4>
+            <ul class="quick-links-list">
+              <li><a href="/" data-i18n="footer.products">Products</a></li>
+              <li><a href="/" data-i18n="footer.about">About us</a></li>
+              <li>
+                <a href="https://docs.zelify.com" data-i18n="footer.developers"
+                  >Developers</a
+                >
+              </li>
+              <li><a href="/" data-i18n="footer.others">Others</a></li>
+            </ul>
           </div>
         </div>
-      </div>
-
-      <div class="action-products-nav">
-        <button
-          class="action-nav-button active"
-          data-action="auth"
-          data-i18n="home.action.products.auth">Auth</button
-        >
-        <button
-          class="action-nav-button"
-          data-action="identity"
-          data-i18n="home.action.products.identity">Identity</button
-        >
-        <button
-          class="action-nav-button"
-          data-action="aml"
-          data-i18n="home.action.products.aml">AML</button
-        >
-      </div>
-    </div>
-  </section>
-
-  <section class="ai-section section-gap-150">
-    <div class="ai-section-content">
-      <h2 class="ai-section-title" data-i18n="home.ai.title.line1">
-        Construye la banca del futuro,<br />
-        potenciada por IA.
-      </h2>
-      <a href="/hablemos" class="ai-section-button" data-i18n="home.ai.quote"
-        >Cotizar</a
-      >
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="demo-footer">
-    <div class="footer-container">
-      <div class="footer-top">
-        <div class="footer-logo">
-          <span class="logo-z">Z</span>
-          <span class="logo-text">Zelify</span>
-        </div>
-        <div class="footer-quick-links">
-          <h4 class="quick-links-title" data-i18n="footer.quicklinks">
-            Quick links
-          </h4>
-          <ul class="quick-links-list">
-            <li><a href="/" data-i18n="footer.products">Products</a></li>
-            <li><a href="/" data-i18n="footer.about">About us</a></li>
-            <li>
-              <a href="https://docs.zelify.com" data-i18n="footer.developers"
-                >Developers</a
-              >
-            </li>
-            <li><a href="/" data-i18n="footer.others">Others</a></li>
-          </ul>
+        <div class="footer-bottom">
+          <p class="footer-legal" data-i18n="footer.legal">
+            Zelify is a technology platform currently in a development phase,
+            not yet deployed or operational, and does not provide or process
+            financial services directly; all financial operations are conducted
+            exclusively through regulated third-party partners.
+          </p>
+          <p class="footer-copyright" data-i18n="footer.copyright">
+            © 2025 Zelify. All rights reserved.
+          </p>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p class="footer-legal" data-i18n="footer.legal">
-          Zelify is a technology platform currently in a development phase, not
-          yet deployed or operational, and does not provide or process financial
-          services directly; all financial operations are conducted exclusively
-          through regulated third-party partners.
-        </p>
-        <p class="footer-copyright" data-i18n="footer.copyright">
-          © 2025 Zelify. All rights reserved.
-        </p>
-      </div>
-    </div>
-  </footer>
+    </footer>
+  </body>
 </html>
 
 <style>
@@ -1721,7 +1694,9 @@ const modulesList = [
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.2s ease, color 0.2s ease;
+    transition:
+      background 0.2s ease,
+      color 0.2s ease;
   }
 
   .quote-modal-close:hover {
@@ -1763,7 +1738,8 @@ const modulesList = [
     content: "";
     width: 20px;
     height: 20px;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2315803d' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M5 13l4 4L19 7'/%3E%3C/svg%3E") no-repeat center;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2315803d' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M5 13l4 4L19 7'/%3E%3C/svg%3E")
+      no-repeat center;
     flex-shrink: 0;
   }
 
@@ -1812,44 +1788,10 @@ const modulesList = [
     opacity: 0.9;
   }
 
+  /* Solo overrides para el botón Cotizar dentro del form (átomo Button en EmailQuoteForm) */
   .welcome-quote-button {
-    border: none;
-    background: #213f8c;
-    color: #ffffff;
     margin: 1px;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    border-radius: 12px ;
-    font-size: 1.1rem;
-    font-weight: 500;
-    cursor: pointer;
-    white-space: nowrap;
-    transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
-  }
-
-  .welcome-demo-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: #93fb4d;
-    color: #00223e;
-    padding: 0.75rem 2rem;
-    border-radius: 14px;
-    min-height: 48px;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 1.1rem;
-    box-shadow: 0 10px 22px rgba(147, 251, 77, 0.35);
-    transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
-  }
-
-  .welcome-demo-button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 14px 26px rgba(147, 251, 77, 0.4);
+    border-radius: 0 14px 14px 0;
   }
 
   /* How It Works Section */
@@ -1914,27 +1856,7 @@ const modulesList = [
     margin-top: 4rem;
   }
 
-  .how-it-works-demo-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: #93fb4d;
-    color: #00223e;
-    padding-top: 0.4rem;
-    padding-bottom: 0.4rem;
-    padding-left: 2.8rem;
-    padding-right: 2.8rem;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: 400;
-    font-size: 1.1rem;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    width: fit-content;
-  }
-
-  .how-it-works-demo-button:hover {
-    transform: translateY(-3px) scale(1.02);
-  }
+  /* Botón Demo: usa átomo Button (ds-button--secondary) */
 
   .how-it-works-right {
     display: flex;
@@ -2022,26 +1944,9 @@ const modulesList = [
     background-color: #ffffff;
   }
 
+  /* Override: margen del botón Ingresa (átomo Button primary) */
   .login-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.7rem;
-    background: linear-gradient(135deg, #213f8c 0%, #152a5e 100%);
-    color: #ffffff;
-    border: none;
-    padding: 1rem 1.5rem;
-    border-radius: 12px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
     margin-top: 0.5rem;
-  }
-
-  .login-button:hover {
-    transform: translateY(-2px);
-    background: linear-gradient(135deg, #2a4fa8 0%, #1a3475 100%);
   }
 
   .login-create-account {
@@ -2236,27 +2141,7 @@ const modulesList = [
     text-align: right;
   }
 
-  .why-zelify-demo-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: #93fb4d;
-    color: #00223e;
-    padding-top: 0.4rem;
-    padding-bottom: 0.4rem;
-    padding-left: 2.8rem;
-    padding-right: 2.8rem;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: 400;
-    font-size: 1.1rem;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    width: fit-content;
-  }
-
-  .why-zelify-demo-button:hover {
-    transform: translateY(-3px) scale(1.02);
-  }
+  /* Botón Demo: usa átomo Button (ds-button--secondary) */
 
   /* Bench Section */
   .bench-section {
@@ -2286,25 +2171,9 @@ const modulesList = [
     font-weight: 600;
   }
 
+  /* bench-tab: átomo Button outline; solo indicador de subrayado */
   .bench-tab {
-    justify-content: center;
-    background: transparent;
-    border: none;
-    font-size: 1.1rem;
-    color: #283e87;
-    cursor: pointer;
     position: relative;
-    transition: color 0.2s ease;
-    font-weight: 400;
-  }
-
-  .bench-tab:hover {
-    color: #213f8c;
-  }
-
-  .bench-tab.active {
-    color: #283e87;
-    font-weight: 400;
   }
 
   .bench-tab.active::after {
@@ -2370,30 +2239,7 @@ const modulesList = [
     justify-content: center;
   }
 
-  .bench-cta-button {
-    background: #93fb4d;
-    color: #1a22ad;
-    border: none;
-    padding-top: 0.4rem;
-    padding-bottom: 0.4rem;
-    padding-left: 2.8rem;
-    padding-right: 2.8rem;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: 400;
-    font-size: 1.1rem;
-    cursor: pointer;
-    text-transform: none;
-    transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
-    box-shadow: 0 4px 12px rgba(147, 251, 77, 0.3);
-  }
-
-  .bench-cta-button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(147, 251, 77, 0.4);
-  }
+  /* bench-cta-button: átomo Button secondary */
 
   /* Tokens Section */
   .tokens-section {
@@ -2440,31 +2286,7 @@ const modulesList = [
     text-align: left;
   }
 
-  .tokens-demo-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: #93fb4d;
-    color: #00223e;
-    padding-top: 0.4rem;
-    padding-bottom: 0.4rem;
-    padding-left: 2.8rem;
-    padding-right: 2.8rem;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: 400;
-    font-size: 1.1rem;
-    transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
-    width: fit-content;
-    margin-top: 0.5rem;
-  }
-
-  .tokens-demo-button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(147, 251, 77, 0.4);
-  }
+  /* tokens-demo-button: átomo Button secondary */
 
   .tokens-right {
     position: relative;
@@ -2741,36 +2563,7 @@ const modulesList = [
     flex-wrap: wrap;
   }
 
-  .action-nav-button {
-    padding-top: 0.4rem;
-    padding-bottom: 0.4rem;
-    padding-left: 2.8rem;
-    padding-right: 2.8rem;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    border: 1px solid #000000;
-    background-color: #ffffff;
-    color: #00223e;
-  }
-
-  .action-nav-button:hover {
-    background-color: #f3f4f6;
-  }
-
-  .action-nav-button.active {
-    padding-top: 0.4rem;
-    padding-bottom: 0.4rem;
-    padding-left: 2.8rem;
-    padding-right: 2.8rem;
-    border-radius: 12px;
-    text-decoration: none;
-    background-color: #000000;
-    color: #ffffff;
-    border-color: #000000;
-  }
+  /* action-nav-button: átomo Button outline (+ .active) */
 
   /* AI Section */
   .ai-section {
@@ -2801,26 +2594,7 @@ const modulesList = [
     text-align: center;
   }
 
-  .ai-section-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: #93fb4d;
-    color: #00223e;
-    padding: 1rem 3rem;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1.1rem;
-    text-transform: lowercase;
-    transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
-  }
-
-  .ai-section-button:hover {
-    transform: translateY(-2px);
-  }
+  /* ai-section-button: átomo Button secondary */
 
   /* Footer */
   .demo-footer {
@@ -3097,8 +2871,9 @@ const modulesList = [
     }
 
     .action-nav-button {
-      padding: 0.625rem 1.5rem;
-      font-size: 0.9rem;
+      min-height: 44px;
+      padding: 0.7rem 1.5rem;
+      font-size: 1rem;
     }
 
     .ai-section {
@@ -3151,7 +2926,7 @@ const modulesList = [
       // Stop the previous module's demo
       if (currentActiveModule && currentActiveModule !== moduleId) {
         window.dispatchEvent(
-          new CustomEvent(`zelify:stop-demo:${currentActiveModule}`),
+          new CustomEvent(`zelify:stop-demo:${currentActiveModule}`)
         );
       }
 
@@ -3194,7 +2969,7 @@ const modulesList = [
 
     // Initialize with first active item
     const firstActive = document.querySelector(
-      ".product-showcase__item.is-active",
+      ".product-showcase__item.is-active"
     );
     if (firstActive) {
       const firstModuleId = firstActive.getAttribute("data-ps-item");
@@ -3211,7 +2986,7 @@ const modulesList = [
   document.addEventListener("DOMContentLoaded", () => {
     const benchTabs = document.querySelectorAll(".bench-tab");
     const benchContents = document.querySelectorAll(
-      ".bench-content-placeholder",
+      ".bench-content-placeholder"
     );
     const benchCtaButton = document.querySelector(".bench-cta-button");
 
@@ -3232,7 +3007,7 @@ const modulesList = [
 
         // Show selected content
         const selectedContent = document.querySelector(
-          `[data-bench-content="${benchNumber}"]`,
+          `[data-bench-content="${benchNumber}"]`
         );
         if (selectedContent) {
           selectedContent.style.display = "flex";
@@ -3261,7 +3036,7 @@ const modulesList = [
       tokensPauseIcon.style.display = playing ? "block" : "none";
       tokensBtn.setAttribute(
         "aria-label",
-        playing ? "Pausar animación" : "Reproducir animación",
+        playing ? "Pausar animación" : "Reproducir animación"
       );
     }
 
@@ -3315,7 +3090,7 @@ const modulesList = [
         // How it works section
         "home.how.title": "How Does Zelify Work?",
         "home.how.description":
-          "Zelify integrates into a single digital platform: authentication and identity validation, AML compliance, account digitization, card issuance and processing, local and international transfers, multiple payments, discount and coupon programs.",
+          "Zelify brings together an all-in-one financial platform that integrates digital identity, regulatory compliance, accounts, cards, local and international transfers, and payments. It also incorporates an AI-powered assistant that drives financial education and intelligent data analysis, enabling better and more informed decision-making.",
         "home.how.demo": "Demo",
         "home.how.login.title": "Login",
         "home.how.login.subtitle": "Welcome back",
@@ -3329,7 +3104,7 @@ const modulesList = [
         // Why zelify section
         "home.why.title": "Every product, powered by AI.",
         "home.why.description":
-          "Zelify integrates into a single digital platform: authentication and identity validation, AML compliance, account digitization, card issuance and processing, local and international transfers, multiple payments, discount and coupon programs.",
+          "We operate as a neobanking technology stack built with models trained specifically for the financial sector. From continuous monitoring to operational optimization, AI is the core engine through which we transform and modernize financial services.",
         "home.why.demo": "Demo",
 
         // Footer
@@ -3429,7 +3204,7 @@ const modulesList = [
         // How it works section
         "home.how.title": "¿Cómo Funciona Zelify?",
         "home.how.description":
-          "Integra una vez y activa capacidades bajo demanda. Con Zelify conectas autenticación, identidad, AML, onboarding, cuentas, pagos y tarjetas desde una sola plataforma, lista para producción.",
+          "Zelify integra en una plataforma financiera todo-en-uno: Identidad digital, cumplimiento normativo, cuentas, tarjetas, transferencias locales e internacionales y pagos. Además incorpora un asistente de IA que impulsa la educación financiera y el análisis inteligente de datos para una mejor toma de decisiones.",
         "home.how.demo": "Demo",
         "home.how.login.title": "Ingreso",
         "home.how.login.subtitle": "Bienvenido de regreso",
@@ -3443,7 +3218,7 @@ const modulesList = [
         // Why zelify section
         "home.why.title": "Cada producto, potenciado <br />por IA.",
         "home.why.description":
-          "Potenciados por IA, operamos como un stack tecnológico neobancario con modelos entrenados para el sector financiero. Desde un chat conversación inteligente, hasta análisis del comportamiento financiero potenciada con Inteligencia Artificial para una educación financiera personalizada.",
+          "Operamos como un stack tecnológico neobancario con modelos entrenados para el sector financiero. Desde el monitoreo continuo hasta la optimización operativa, la IA es el núcleo con el cual revolucionamos los servicios financieros.",
         "home.why.demo": "Demo",
 
         // Footer
@@ -3637,7 +3412,7 @@ const modulesList = [
         const lang = event.detail?.language || "ES";
         applyTranslations(lang);
       },
-      true,
+      true
     );
 
     // Aplicar traducciones al cargar la página
@@ -3673,7 +3448,9 @@ const modulesList = [
     const form = document.querySelector(".welcome-input-group");
     const quoteModal = document.querySelector("#quote-modal");
     const closeQuoteBtn = document.querySelector("#close-quote-modal");
-    const quoteModalOverlay = document.querySelector("[data-close-quote-modal]");
+    const quoteModalOverlay = document.querySelector(
+      "[data-close-quote-modal]"
+    );
 
     const MEETINGS_BASE_URL = "https://meetings.hubspot.com/eramos5?embed=true";
 
@@ -3681,7 +3458,8 @@ const modulesList = [
       if (!quoteModal) return;
 
       const emailInput = document.querySelector(".welcome-input");
-      const email = emailInput && emailInput.value ? emailInput.value.trim() : "";
+      const email =
+        emailInput && emailInput.value ? emailInput.value.trim() : "";
       const embedUrl = email
         ? MEETINGS_BASE_URL + "&email=" + encodeURIComponent(email)
         : MEETINGS_BASE_URL;
@@ -3728,7 +3506,6 @@ const modulesList = [
   })();
 </script>
 
-
 <script>
   /* Ensure this script runs after DOM load */
   document.addEventListener("DOMContentLoaded", () => {
@@ -3766,7 +3543,7 @@ const modulesList = [
 
         // Find active module
         const activeItem = document.querySelector(
-          ".product-showcase__item.is-active",
+          ".product-showcase__item.is-active"
         );
         const moduleId = activeItem
           ? activeItem.getAttribute("data-ps-item")
@@ -3795,7 +3572,7 @@ const modulesList = [
 
       // Show the active card
       const activeCard = document.querySelector(
-        `[data-action-card="${actionId}"]`,
+        `[data-action-card="${actionId}"]`
       );
       if (activeCard) {
         (activeCard as HTMLElement).style.display = "block";

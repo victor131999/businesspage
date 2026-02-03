@@ -1,0 +1,109 @@
+---
+/**
+ * Atom: Button
+ * Variantes: primary | secondary | ghost | outline (tabs/nav)
+ * Responsive: padding y font-size se adaptan; en móvil el ancho puede ser 100% con clase modifier.
+ */
+interface Props {
+  variant?: "primary" | "secondary" | "ghost" | "outline";
+  type?: "button" | "submit";
+  href?: string;
+  class?: string;
+  disabled?: boolean;
+  ariaLabel?: string;
+  dataI18n?: string;
+  [key: string]: unknown;
+}
+const { variant = "primary", type = "button", href, class: className = "", disabled = false, ariaLabel, dataI18n, ...rest } = Astro.props;
+const isLink = !!href;
+---
+{isLink ? (
+  <a
+    href={href}
+    class:list={["ds-button", `ds-button--${variant}`, className]}
+    aria-label={ariaLabel}
+    data-i18n={dataI18n}
+    {...rest}
+  >
+    <slot />
+  </a>
+) : (
+  <button
+    type={type}
+    class:list={["ds-button", `ds-button--${variant}`, className]}
+    disabled={disabled}
+    aria-label={ariaLabel}
+    data-i18n={dataI18n}
+    {...rest}
+  >
+    <slot />
+  </button>
+)}
+<style is:global>
+  .ds-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 2rem;
+    min-height: 48px;
+    border-radius: var(--ds-radius-lg, 14px);
+    font-family: var(--ds-font-family);
+    font-size: var(--ds-font-size-lg, 1.1rem);
+    font-weight: var(--ds-font-weight-medium, 500);
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    white-space: nowrap;
+  }
+  .ds-button--primary {
+    background: var(--ds-color-primary, #213f8c);
+    color: #ffffff;
+  }
+  .ds-button--primary:hover:not(:disabled) {
+    background: var(--ds-color-primary-light, #2a4fa8);
+  }
+  .ds-button--secondary {
+    background: var(--ds-color-accent, #93fb4d);
+    color: var(--ds-color-text, #00223e);
+    box-shadow: var(--ds-shadow-cta);
+  }
+  .ds-button--secondary:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: var(--ds-shadow-cta-hover);
+  }
+  .ds-button--ghost {
+    background: transparent;
+    color: var(--ds-color-text);
+  }
+  .ds-button--ghost:hover:not(:disabled) {
+    background: var(--ds-color-bg-subtle, #f8f9fa);
+  }
+  .ds-button--outline {
+    background: transparent;
+    color: var(--ds-color-text, #00223e);
+    border: 2px solid var(--ds-color-border, #00223e);
+  }
+  .ds-button--outline:hover:not(:disabled) {
+    background: var(--ds-color-bg-subtle, #f8f9fa);
+  }
+  .ds-button--outline.active {
+    background: var(--ds-color-border, #00223e);
+    color: #ffffff;
+    border-color: var(--ds-color-border, #00223e);
+  }
+  .ds-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  @media (max-width: 639px) {
+    .ds-button {
+      padding: 0.7rem 1.5rem;
+      font-size: 1rem;
+    }
+    .ds-button.ds-button--full-mobile {
+      width: 100%;
+    }
+  }
+</style>

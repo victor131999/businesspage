@@ -1,0 +1,103 @@
+---
+/**
+ * Molecule: Modal
+ * Overlay + contenido + botón cerrar (X). Slot para el body.
+ * Responsive: ancho 90%, max-width; padding reducido en móvil.
+ */
+interface Props {
+  id: string;
+  ariaLabel: string;
+  closeAriaLabel?: string;
+  class?: string;
+}
+const { id, ariaLabel, closeAriaLabel = "Cerrar", class: className = "" } = Astro.props;
+---
+<div id={id} class:list={["ds-modal", "quote-modal", className]} aria-hidden="true" aria-label={ariaLabel}>
+  <div class="ds-modal__overlay quote-modal-overlay" data-close-quote-modal></div>
+  <div class="ds-modal__content quote-modal-content" role="dialog">
+    <button
+      type="button"
+      id={`close-${id}`}
+      class="ds-modal__close quote-modal-close"
+      aria-label={closeAriaLabel}
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M18 6L6 18M6 6l12 12" />
+      </svg>
+    </button>
+    <div class="ds-modal__body quote-modal-body">
+      <slot />
+    </div>
+  </div>
+</div>
+<style is:global>
+  .ds-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .ds-modal.is-active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .ds-modal__overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--ds-color-overlay, rgba(0, 34, 62, 0.4));
+    backdrop-filter: blur(8px);
+  }
+  .ds-modal__content {
+    position: relative;
+    background: var(--ds-color-bg);
+    border-radius: var(--ds-radius-2xl, 24px);
+    width: 90%;
+    max-width: 700px;
+    min-height: 320px;
+    box-shadow: var(--ds-shadow-modal);
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+  }
+  .ds-modal.is-active .ds-modal__content {
+    transform: translateY(0);
+  }
+  .ds-modal__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    color: var(--ds-color-text-light, #94a3b8);
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .ds-modal__close:hover {
+    background: var(--ds-color-bg-subtle, #f1f5f9);
+    color: var(--ds-color-text);
+  }
+  .ds-modal__body {
+    padding: 3rem 2rem 2rem;
+    min-height: 400px;
+  }
+  @media (max-width: 639px) {
+    .ds-modal {
+      padding: 0.75rem;
+    }
+    .ds-modal__body {
+      padding: 2.5rem 1.25rem 1.5rem;
+      min-height: 320px;
+    }
+  }
+</style>

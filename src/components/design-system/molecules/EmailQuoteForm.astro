@@ -1,0 +1,100 @@
+---
+/**
+ * Molecule: EmailQuoteForm
+ * Input de email + botón "Cotizar" (submit). Usa átomo Button para el submit.
+ * Responsive: el grupo se apila o reduce en móvil según layout del padre.
+ */
+import Button from "../atoms/Button.astro";
+
+interface Props {
+  formAriaLabel?: string;
+  inputPlaceholder?: string;
+  inputAriaLabel?: string;
+  buttonLabel?: string;
+  dataI18nPlaceholder?: string;
+  dataI18nAria?: string;
+  dataI18nButton?: string;
+  dataI18nFormAria?: string;
+}
+const {
+  formAriaLabel = "Solicitar cotización",
+  inputPlaceholder = "Ingresa tu correo",
+  inputAriaLabel = "Ingresa tu correo",
+  buttonLabel = "Cotizar",
+  dataI18nPlaceholder,
+  dataI18nAria,
+  dataI18nButton,
+  dataI18nFormAria,
+} = Astro.props;
+---
+<form
+  class="ds-email-quote-form welcome-input-group"
+  action="#"
+  aria-label={formAriaLabel}
+  data-i18n-aria-label={dataI18nFormAria}
+  novalidate
+>
+  <input
+    class="ds-email-quote-form__input welcome-input"
+    type="email"
+    name="email"
+    placeholder={inputPlaceholder}
+    aria-label={inputAriaLabel}
+    data-i18n-placeholder={dataI18nPlaceholder}
+    data-i18n-aria={dataI18nAria}
+  />
+  <Button
+    type="submit"
+    variant="primary"
+    class="ds-email-quote-form__submit welcome-quote-button"
+    dataI18n={dataI18nButton}
+  >
+    {buttonLabel}
+  </Button>
+</form>
+<style is:global>
+  .ds-email-quote-form {
+    display: flex;
+    align-items: stretch;
+    border: 2px solid var(--ds-color-border, #00223e);
+    border-radius: var(--ds-radius-lg, 14px);
+    overflow: hidden;
+    background: var(--ds-color-bg);
+    min-width: min(480px, 100%);
+    max-width: 720px;
+    flex: 1;
+  }
+  .ds-email-quote-form__input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    outline: none;
+    font-size: var(--ds-font-size-md, 1.05rem);
+    padding: 0.75rem 1.25rem;
+    color: var(--ds-color-text);
+    background: transparent;
+    border-radius: 12px 0 0 12px;
+  }
+  .ds-email-quote-form__input::placeholder {
+    color: var(--ds-color-text-muted);
+    opacity: 0.9;
+  }
+  /* Overrides para Button atom dentro del form (pegado al input) */
+  .ds-email-quote-form__submit {
+    margin: 1px;
+    border-radius: 0 14px 14px 0;
+    white-space: nowrap;
+  }
+  @media (max-width: 639px) {
+    .ds-email-quote-form {
+      min-width: 100%;
+      max-width: 100%;
+    }
+    .ds-email-quote-form__input {
+      padding: 0.65rem 1rem;
+    }
+    .ds-email-quote-form__submit {
+      padding: 0.7rem 1.5rem;
+    }
+  }
+</style>

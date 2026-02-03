@@ -1,0 +1,84 @@
+---
+/**
+ * Organism: WelcomeHero
+ * Sección hero: título, subtítulo, CTA (form email + cotizar + demo). Responsive.
+ * Usa el átomo Button para el enlace Demo.
+ */
+import EmailQuoteForm from "../molecules/EmailQuoteForm.astro";
+import CtaGroup from "../molecules/CtaGroup.astro";
+import Button from "../atoms/Button.astro";
+---
+
+<section class="ds-welcome-hero welcome-section section-gap-80">
+  <div class="ds-welcome-hero__content welcome-content">
+    <h1 class="ds-welcome-hero__title welcome-title" data-i18n="home.welcome.title.line1">
+      Construye la banca del <br />futuro, en una integración.
+      <span class="welcome-title-line" data-i18n="home.welcome.title.line2">Potenciada por IA.</span>
+    </h1>
+    <p class="ds-welcome-hero__subtitle welcome-subtitle" data-i18n="home.welcome.subtitle">
+      Digitalizamos servicios a instituciones financieras,<br />construyendo stacks neobancarios con una sola línea de código
+    </p>
+    <CtaGroup>
+      <EmailQuoteForm
+        dataI18nFormAria="home.welcome.quote.aria"
+        dataI18nPlaceholder="home.welcome.email.placeholder"
+        dataI18nAria="home.welcome.email.aria"
+        dataI18nButton="home.welcome.quote"
+      />
+      <Button
+        href="https://www.zelify.com/clips/"
+        variant="secondary"
+        class="welcome-demo-button"
+        dataI18n="home.welcome.demo"
+      >
+        Demo
+      </Button>
+      <p class="welcome-form-message" role="status" aria-live="polite"></p>
+      <div class="welcome-captcha">
+        <div id="turnstile-widget"></div>
+      </div>
+    </CtaGroup>
+  </div>
+</section>
+
+<style is:global>
+  .ds-welcome-hero {
+    padding: 0 1rem;
+  }
+  .ds-welcome-hero__content {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    color: var(--ds-color-text);
+  }
+  .ds-welcome-hero__title {
+    font-size: var(--ds-font-size-hero, clamp(2rem, 5vw, 4.4rem));
+    font-weight: 500;
+    color: #09213c;
+    line-height: 1.12;
+    margin: 0 0 1.4rem;
+    letter-spacing: 0.01em;
+  }
+  .ds-welcome-hero__subtitle {
+    font-size: clamp(1.05rem, 1.6vw, 1.45rem);
+    line-height: 1.6;
+    color: var(--ds-color-text-muted);
+    margin: 0 auto 2.6rem;
+    max-width: 760px;
+    font-weight: 300;
+  }
+  @media (max-width: 639px) {
+    .ds-welcome-hero__title {
+      line-height: 1.18;
+    }
+    .ds-welcome-hero {
+      padding: 0 0.75rem;
+    }
+  }
+  @media (min-width: 1200px) {
+    .ds-welcome-hero__title {
+      line-height: 1.1;
+    }
+  }
+</style>

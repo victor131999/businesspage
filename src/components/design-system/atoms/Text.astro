@@ -1,0 +1,50 @@
+---
+/**
+ * Atom: Text
+ * Variantes: body | subtitle | caption | muted.
+ * Responsive: font-size con clamp en body/subtitle.
+ */
+interface Props {
+  variant?: "body" | "subtitle" | "caption" | "muted";
+  as?: "p" | "span";
+  class?: string;
+  dataI18n?: string;
+}
+const { variant = "body", as: Tag = "p", class: className = "", dataI18n } = Astro.props;
+---
+<Tag class:list={["ds-text", `ds-text--${variant}`, className]} data-i18n={dataI18n}>
+  <slot />
+</Tag>
+<style is:global>
+  .ds-text {
+    margin: 0;
+    font-family: var(--ds-font-family);
+    line-height: var(--ds-line-height-normal);
+    color: var(--ds-color-text);
+  }
+  .ds-text--body {
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
+    color: var(--ds-color-text-muted);
+    font-weight: var(--ds-font-weight-light, 300);
+  }
+  .ds-text--subtitle {
+    font-size: clamp(1.05rem, 1.6vw, 1.45rem);
+    color: var(--ds-color-text-muted);
+    font-weight: var(--ds-font-weight-light, 300);
+  }
+  .ds-text--caption {
+    font-size: var(--ds-font-size-xs, 0.95rem);
+    color: var(--ds-color-text-light);
+  }
+  .ds-text--muted {
+    font-size: var(--ds-font-size-sm, 1rem);
+    color: var(--ds-color-text-muted);
+    opacity: 0.9;
+  }
+  @media (max-width: 639px) {
+    .ds-text--body,
+    .ds-text--subtitle {
+      font-size: 1rem;
+    }
+  }
+</style>
