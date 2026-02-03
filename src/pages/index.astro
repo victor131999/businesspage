@@ -2413,8 +2413,7 @@ const modulesList = [
     width: 52px;
     height: 52px;
     border-radius: 50%;
-    
-    
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -3074,7 +3073,7 @@ const modulesList = [
       // Stop the previous module's demo
       if (currentActiveModule && currentActiveModule !== moduleId) {
         window.dispatchEvent(
-          new CustomEvent(`zelify:stop-demo:${currentActiveModule}`)
+          new CustomEvent(`zelify:stop-demo:${currentActiveModule}`),
         );
       }
 
@@ -3117,7 +3116,7 @@ const modulesList = [
 
     // Initialize with first active item
     const firstActive = document.querySelector(
-      ".product-showcase__item.is-active"
+      ".product-showcase__item.is-active",
     );
     if (firstActive) {
       const firstModuleId = firstActive.getAttribute("data-ps-item");
@@ -3134,7 +3133,7 @@ const modulesList = [
   document.addEventListener("DOMContentLoaded", () => {
     const benchTabs = document.querySelectorAll(".bench-tab");
     const benchContents = document.querySelectorAll(
-      ".bench-content-placeholder"
+      ".bench-content-placeholder",
     );
     const benchCtaButton = document.querySelector(".bench-cta-button");
 
@@ -3155,7 +3154,7 @@ const modulesList = [
 
         // Show selected content
         const selectedContent = document.querySelector(
-          `[data-bench-content="${benchNumber}"]`
+          `[data-bench-content="${benchNumber}"]`,
         );
         if (selectedContent) {
           selectedContent.style.display = "flex";
@@ -3184,7 +3183,7 @@ const modulesList = [
       tokensPauseIcon.style.display = playing ? "block" : "none";
       tokensBtn.setAttribute(
         "aria-label",
-        playing ? "Pausar animación" : "Reproducir animación"
+        playing ? "Pausar animación" : "Reproducir animación",
       );
     }
 
@@ -3560,7 +3559,7 @@ const modulesList = [
         const lang = event.detail?.language || "ES";
         applyTranslations(lang);
       },
-      true
+      true,
     );
 
     // Aplicar traducciones al cargar la página
@@ -3716,7 +3715,7 @@ const modulesList = [
               "Content-Type": "application/json",
             },
             body: JSON.stringify(payload),
-          }
+          },
         );
 
         if (!response.ok) throw new Error("Request failed");
@@ -3804,7 +3803,7 @@ const modulesList = [
 
         // Find active module
         const activeItem = document.querySelector(
-          ".product-showcase__item.is-active"
+          ".product-showcase__item.is-active",
         );
         const moduleId = activeItem
           ? activeItem.getAttribute("data-ps-item")
@@ -3833,7 +3832,7 @@ const modulesList = [
 
       // Show the active card
       const activeCard = document.querySelector(
-        `[data-action-card="${actionId}"]`
+        `[data-action-card="${actionId}"]`,
       );
       if (activeCard) {
         (activeCard as HTMLElement).style.display = "block";

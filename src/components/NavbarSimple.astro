@@ -97,8 +97,81 @@ const {
           >{initialLang.toUpperCase() === "EN" ? "EN" : "ES"}</span
         >
       </button>
+
+      <!-- Mobile Menu Toggle -->
+      <button
+        class="simple-navbar__mobile-toggle"
+        type="button"
+        aria-label="Menu"
+        aria-expanded="false"
+        id="mobile-menu-toggle"
+      >
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
     </div>
   </nav>
+
+  <!-- Mobile Menu Dropdown -->
+  <div class="simple-navbar__mobile-menu" id="mobile-menu">
+    {
+      navItems.map((item, index) => {
+        // Logica duplicada para el menu movil
+        if (
+          item.label.toLowerCase() === "producto" ||
+          item.label.toLowerCase() === "productos"
+        ) {
+          return (
+            <button
+              class="simple-navbar__link simple-navbar__link--button"
+              type="button"
+              data-products-trigger
+              data-i18n="navbar.products"
+              data-nav-index={index}
+            >
+              {item.label}
+            </button>
+          );
+        }
+        let i18nKey = "";
+        if (item.label.toLowerCase() === "nosotros") {
+          i18nKey = "navbar.about";
+        } else if (item.label.toLowerCase() === "desarrollo") {
+          i18nKey = "navbar.developers";
+        } else if (item.label.toLowerCase() === "otros") {
+          i18nKey = "navbar.others";
+        }
+
+        const isExternal =
+          item.label.toLowerCase() === "desarrollo" ||
+          item.href.startsWith("http");
+        return (
+          <a
+            class="simple-navbar__link"
+            href={item.href}
+            target={isExternal ? "_blank" : undefined}
+            rel={isExternal ? "noopener noreferrer" : undefined}
+            data-i18n={i18nKey || undefined}
+            data-nav-index={index}
+          >
+            {item.label}
+          </a>
+        );
+      })
+    }
+  </div>
 </header>
 
 <style>
@@ -141,6 +214,7 @@ const {
     display: flex;
     align-items: center;
     gap: clamp(1.5rem, 3vw, 3rem);
+    position: relative;
   }
 
   .simple-navbar__logo img {
@@ -225,9 +299,65 @@ const {
     outline-offset: 2px;
   }
 
+  /* Mobile Styles */
+  .simple-navbar__mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    color: #184090;
+    margin-left: 0.5rem;
+  }
+
+  .simple-navbar__mobile-toggle:hover {
+    opacity: 0.8;
+  }
+
+  .simple-navbar__mobile-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    display: none;
+    flex-direction: column;
+    padding: 1rem 0;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    z-index: 90;
+  }
+
+  .simple-navbar__mobile-menu.is-active {
+    display: flex;
+  }
+
+  .simple-navbar__mobile-menu .simple-navbar__link {
+    padding: 1rem 2rem;
+    width: 100%;
+    text-align: left;
+    display: block;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .simple-navbar__mobile-menu .simple-navbar__link:last-child {
+    border-bottom: none;
+  }
+
   @media (max-width: 900px) {
     .simple-navbar__links {
       display: none;
+    }
+
+    .simple-navbar__mobile-toggle {
+      display: block;
+    }
+  }
+
+  @media (min-width: 901px) {
+    .simple-navbar__mobile-menu,
+    .simple-navbar__mobile-menu.is-active {
+      display: none !important;
     }
   }
 </style>
@@ -312,7 +442,9 @@ const {
 
       const detectBrowserLanguage = () => {
         const locale =
-          (navigator.languages && navigator.languages[0]) || navigator.language || "";
+          (navigator.languages && navigator.languages[0]) ||
+          navigator.language ||
+          "";
         return locale.toLowerCase().startsWith("es") ? "ES" : "EN";
       };
 
@@ -320,7 +452,11 @@ const {
       try {
         const stored = localStorage.getItem("ui-language");
         const source = localStorage.getItem("ui-language-source");
-        if (source === "user" && stored && (stored === "EN" || stored === "ES")) {
+        if (
+          source === "user" &&
+          stored &&
+          (stored === "EN" || stored === "ES")
+        ) {
           setLang(stored);
         } else {
           setLang(detectBrowserLanguage());
@@ -370,26 +506,41 @@ const {
     }
 
     // Products Panel toggle logic
-    const productsTrigger = document.querySelector("[data-products-trigger]");
+    const productsTrigger = document.querySelectorAll(
+      "[data-products-trigger]",
+    );
     const productsPanel = document.getElementById("products-panel");
 
-    if (productsTrigger && productsPanel) {
-      // Abrir panel
-      productsTrigger.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        productsPanel.classList.remove("hidden");
+    if (productsTrigger.length > 0 && productsPanel) {
+      // Abrir panel (handle multiple triggers)
+      productsTrigger.forEach((trigger) => {
+        trigger.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          productsPanel.classList.remove("hidden");
+
+          // Close mobile menu if open
+          const mobileMenu = document.getElementById("mobile-menu");
+          if (mobileMenu && mobileMenu.classList.contains("is-active")) {
+            mobileMenu.classList.remove("is-active");
+          }
+        });
       });
 
       // Cerrar panel al hacer clic fuera
       document.addEventListener("click", (e) => {
         const target = e.target;
+        // Check if click is inside panel or triggers
+        let isTrigger = false;
+        productsTrigger.forEach((t) => {
+          if (t.contains(target)) isTrigger = true;
+        });
+
         if (
           productsPanel &&
           target instanceof Node &&
           !productsPanel.contains(target) &&
-          productsTrigger instanceof Node &&
-          !productsTrigger.contains(target) &&
+          !isTrigger &&
           !productsPanel.classList.contains("hidden")
         ) {
           productsPanel.classList.add("hidden");
@@ -405,6 +556,40 @@ const {
         ) {
           productsPanel.classList.add("hidden");
         }
+      });
+    }
+
+    // Mobile Menu Logic
+    const mobileToggle = document.getElementById("mobile-menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    if (mobileToggle && mobileMenu) {
+      mobileToggle.addEventListener("click", () => {
+        const isExpanded =
+          mobileToggle.getAttribute("aria-expanded") === "true";
+        mobileToggle.setAttribute("aria-expanded", !isExpanded);
+        mobileMenu.classList.toggle("is-active");
+      });
+
+      // Cierra el menu si se hace click fuera
+      document.addEventListener("click", (e) => {
+        if (
+          !mobileToggle.contains(e.target) &&
+          !mobileMenu.contains(e.target) &&
+          mobileMenu.classList.contains("is-active")
+        ) {
+          mobileMenu.classList.remove("is-active");
+          mobileToggle.setAttribute("aria-expanded", "false");
+        }
+      });
+
+      // Close menu on link click
+      const mobileLinks = mobileMenu.querySelectorAll("a");
+      mobileLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.remove("is-active");
+          mobileToggle.setAttribute("aria-expanded", "false");
+        });
       });
     }
   });
