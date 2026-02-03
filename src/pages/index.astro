@@ -6,6 +6,7 @@ import ProductsPanel from "../components/productsPanel.astro";
 import WelcomeHero from "../components/design-system/organisms/WelcomeHero.astro";
 import QuoteModalHubSpot from "../components/design-system/organisms/QuoteModalHubSpot.astro";
 import Button from "../components/design-system/atoms/Button.astro";
+import LoginFormCard from "../components/design-system/molecules/LoginFormCard.astro";
 import AuthProd from "../components/product-cards/auth-prod.astro";
 import IdentityProd from "../components/product-cards/identity-prod.astro";
 import AmlProd from "../components/product-cards/aml-prod.astro";
@@ -659,11 +660,12 @@ const modulesList = [
             <div class="phone-frame__home-indicator" aria-hidden="true"></div>
           </div>
 
-          <button
+          <Button
             id="demo-play-button"
+            variant="icon"
             class="product-showcase__play-button"
             type="button"
-            aria-label="Reproducir Demo"
+            ariaLabel="Reproducir Demo"
           >
             <img
               id="demo-play-icon"
@@ -680,7 +682,7 @@ const modulesList = [
               height="44"
               style="display: none;"
             />
-          </button>
+          </Button>
         </div>
 
         <aside class="product-showcase__menu">
@@ -709,13 +711,14 @@ const modulesList = [
                             set:html={module.titleAccent}
                           />
                         </h2>
-                        <a
-                          class="product-showcase__cta"
+                        <Button
                           href={module.href}
+                          variant="secondary"
+                          class="product-showcase__cta"
                           data-ps-cta
                         >
                           {module.cta}
-                        </a>
+                        </Button>
                       </div>
                       <p class="product-showcase__copy" data-ps-copy>
                         {module.copy}
@@ -747,84 +750,35 @@ const modulesList = [
           <Button
             href="https://www.zelify.com/clips/"
             variant="secondary"
-            dataI18n="home.how.demo"
+            dataI18n="welcome-demo-button"
           >
             Demo
           </Button>
         </div>
         <div class="how-it-works-right">
           <div class="right-bg-panel">
-            <div class="login-card">
-              <h3 class="login-card-title" data-i18n="home.how.login.title">
-                Ingreso
-              </h3>
-              <p
-                class="login-card-subtitle"
-                data-i18n="home.how.login.subtitle"
-              >
-                Bienvenido de regreso
-              </p>
-              <form class="login-form">
-                <div class="login-field">
-                  <label for="email" data-i18n="home.how.login.email.label"
-                    >Correo</label
-                  >
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="email@example.com"
-                    data-i18n-placeholder="home.how.login.email.placeholder"
-                  />
-                </div>
-                <div class="login-field">
-                  <label
-                    for="password"
-                    data-i18n="home.how.login.password.label">Contraseña</label
-                  >
-                  <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    placeholder="••••••••"
-                    data-i18n-placeholder="home.how.login.password.placeholder"
-                  />
-                </div>
-                <Button
-                  type="submit"
-                  variant="primary"
-                  class="login-button"
-                  dataI18n="home.how.login.button"
-                >
-                  Ingresa
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M6 12L10 8L6 4"
-                      stroke="white"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"></path>
-                  </svg>
-                </Button>
-              </form>
-              <p class="login-create-account" data-i18n="home.how.login.create">
-                O crea una nueva cuenta
-              </p>
-            </div>
-            <button
+            <LoginFormCard
+              title="Ingreso"
+              subtitle="Bienvenido de regreso"
+              submitLabel="Ingresa"
+              createAccountText="O crea una nueva cuenta"
+              dataI18nTitle="home.how.login.title"
+              dataI18nSubtitle="home.how.login.subtitle"
+              dataI18nEmailLabel="home.how.login.email.label"
+              dataI18nEmailPlaceholder="home.how.login.email.placeholder"
+              dataI18nPasswordLabel="home.how.login.password.label"
+              dataI18nPasswordPlaceholder="home.how.login.password.placeholder"
+              dataI18nButton="home.how.login.button"
+              dataI18nCreate="home.how.login.create"
+            />
+            <Button
+              variant="icon"
               class="how-it-works-play-button"
               type="button"
-              aria-label="Reproducir"
+              ariaLabel="Reproducir"
             >
               <img src="/icons/play.svg" alt="" width="32" height="32" />
-            </button>
+            </Button>
           </div>
         </div>
       </div>
@@ -834,73 +788,28 @@ const modulesList = [
       <div class="why-zelify-divider"></div>
       <div class="why-zelify-content">
         <div class="why-zelify-left">
-          <div class="login-card">
-            <h3 class="login-card-title" data-i18n="home.how.login.title">
-              Ingreso
-            </h3>
-            <p class="login-card-subtitle" data-i18n="home.how.login.subtitle">
-              Bienvenido de regreso
-            </p>
-            <form class="login-form">
-              <div class="login-field">
-                <label for="email" data-i18n="home.how.login.email.label"
-                  >Correo</label
-                >
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="email@example.com"
-                  data-i18n-placeholder="home.how.login.email.placeholder"
-                />
-              </div>
-              <div class="login-field">
-                <label for="password" data-i18n="home.how.login.password.label"
-                  >Contraseña</label
-                >
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  placeholder="••••••••"
-                  data-i18n-placeholder="home.how.login.password.placeholder"
-                />
-              </div>
-              <Button
-                type="submit"
-                variant="primary"
-                class="login-button"
-                dataI18n="home.how.login.button"
-              >
-                Ingresa
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M6 12L10 8L6 4"
-                    stroke="white"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"></path>
-                </svg>
-              </Button>
-            </form>
-            <p class="login-create-account" data-i18n="home.how.login.create">
-              O crea una nueva cuenta
-            </p>
-          </div>
-          <button
+          <LoginFormCard
+            title="Ingreso"
+            subtitle="Bienvenido de regreso"
+            submitLabel="Ingresa"
+            createAccountText="O crea una nueva cuenta"
+            dataI18nTitle="home.how.login.title"
+            dataI18nSubtitle="home.how.login.subtitle"
+            dataI18nEmailLabel="home.how.login.email.label"
+            dataI18nEmailPlaceholder="home.how.login.email.placeholder"
+            dataI18nPasswordLabel="home.how.login.password.label"
+            dataI18nPasswordPlaceholder="home.how.login.password.placeholder"
+            dataI18nButton="home.how.login.button"
+            dataI18nCreate="home.how.login.create"
+          />
+          <Button
+            variant="icon"
             class="how-it-works-play-button"
             type="button"
-            aria-label="Reproducir"
+            ariaLabel="Reproducir"
           >
             <img src="/icons/play.svg" alt="" width="32" height="32" />
-          </button>
+          </Button>
         </div>
         <div class="why-zelify-right">
           <h2 class="why-zelify-title" data-i18n="home.why.title">
@@ -1025,11 +934,12 @@ const modulesList = [
             <TokensProd />
           </div>
         </div>
-        <button
+        <Button
           type="button"
+          variant="icon"
           id="tokens-play-pause-btn"
           class="tokens-play-pause-btn"
-          aria-label="Reproducir animación"
+          ariaLabel="Reproducir animación"
           title="Reproducir / Pausar animación de consumo"
         >
           <img
@@ -1047,7 +957,7 @@ const modulesList = [
             height="28"
             style="display: none;"
           />
-        </button>
+        </Button>
       </div>
     </section>
 
@@ -1412,6 +1322,7 @@ const modulesList = [
     height: auto;
   }
 
+<<<<<<< Updated upstream
   /* Botón play/pause fuera del celular, esquina inferior derecha del marco */
   .product-showcase__play-button {
     position: absolute;
@@ -1429,20 +1340,9 @@ const modulesList = [
     z-index: 10;
     opacity: 1;
   }
+=======
+>>>>>>> Stashed changes
 
-  .product-showcase__play-button:hover,
-  .product-showcase__play-button:focus {
-    opacity: 1 !important;
-  }
-
-  .product-showcase__play-button svg,
-  .product-showcase__play-button img {
-    width: 28px;
-    height: 28px;
-    margin-left: 2px;
-    object-fit: contain;
-    opacity: 1;
-  }
 
   .product-showcase__menu {
     display: flex;
@@ -1576,30 +1476,7 @@ const modulesList = [
     display: none;
   }
 
-  .product-showcase__cta {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    /* CTA size controls: tweak padding for overall size; add width/min-width if you want a fixed width */
-    background: #93fb4d;
-    color: #00223e;
-    padding: 0.6rem 1.6rem;
-    /* Rounded corners (more squared than pill) */
-    margin-top: 0.5rem;
-    border-radius: 12px;
-    min-height: 44px;
-    min-width: 220px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
-  }
 
-  .product-showcase__cta:hover {
-    transform: translateY(-1px);
-  }
 
   .product-showcase__copy {
     margin: 0;
@@ -1946,6 +1823,7 @@ const modulesList = [
     flex-direction: column;
     gap: 0.5rem;
     z-index: 2;
+    align-items: flex-start;
   }
 
   .how-it-works-title {
@@ -2076,36 +1954,7 @@ const modulesList = [
     text-decoration: underline;
   }
 
-  .how-it-works-play-button {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    background-color: #ffffff00;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 10;
-    opacity: 1;
-  }
-
-  .how-it-works-play-button:hover,
-  .how-it-works-play-button:focus {
-    opacity: 1 !important;
-  }
-
-  .how-it-works-play-button svg,
-  .how-it-works-play-button img {
-    width: 44px;
-    height: 44px;
-    margin-left: 2px;
-    object-fit: contain;
-    opacity: 1;
-  }
 
   /* Why Zelify Section */
   .why-zelify-section {
@@ -2284,22 +2133,7 @@ const modulesList = [
     font-weight: 600;
   }
 
-  /* bench-tab: átomo Button outline; solo indicador de subrayado */
-  .bench-tab {
-    position: relative;
-  }
 
-  .bench-tab.active::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background-color: #00223e;
-    width: 110%;
-    margin-left: -5%;
-  }
 
   .bench-content-area {
     width: 100%;
@@ -2379,6 +2213,7 @@ const modulesList = [
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    align-items: flex-start;
   }
 
   .tokens-title {
@@ -2419,33 +2254,7 @@ const modulesList = [
     overflow: hidden;
   }
 
-  .tokens-play-pause-btn {
-    position: absolute;
-    bottom: 1rem;
-    right: 1rem;
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 20;
-    opacity: 1;
-  }
-
-  .tokens-play-pause-btn:hover,
-  .tokens-play-pause-btn:focus {
-    opacity: 1 !important;
-  }
-
-  .tokens-play-pause-btn img {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
-    opacity: 1;
-  }
 
   .tokens-play-button {
     position: absolute;

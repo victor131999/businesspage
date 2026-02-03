@@ -1,12 +1,13 @@
 ---
 /**
  * Atom: Button
- * Variantes: primary | secondary | ghost | outline (tabs/nav)
- * Responsive: padding y font-size se adaptan; en móvil el ancho puede ser 100% con clase modifier.
+ * Variantes: primary | secondary | ghost | outline | icon
+ * Tamaños: sm | md | lg
  */
 interface Props {
-  variant?: "primary" | "secondary" | "ghost" | "outline";
-  type?: "button" | "submit";
+  variant?: "primary" | "secondary" | "ghost" | "outline" | "icon";
+  size?: "sm" | "md" | "lg";
+  type?: "button" | "submit" | "reset";
   href?: string;
   class?: string;
   disabled?: boolean;
@@ -14,49 +15,74 @@ interface Props {
   dataI18n?: string;
   [key: string]: unknown;
 }
-const { variant = "primary", type = "button", href, class: className = "", disabled = false, ariaLabel, dataI18n, ...rest } = Astro.props;
+
+const {
+  variant = "primary",
+  size = "md",
+  type = "button",
+  href,
+  class: className = "",
+  disabled = false,
+  ariaLabel,
+  dataI18n,
+  ...rest
+} = Astro.props;
+
 const isLink = !!href;
+const Tag = isLink ? "a" : "button";
 ---
-{isLink ? (
-  <a
-    href={href}
-    class:list={["ds-button", `ds-button--${variant}`, className]}
-    aria-label={ariaLabel}
-    data-i18n={dataI18n}
-    {...rest}
-  >
-    <slot />
-  </a>
-) : (
-  <button
-    type={type}
-    class:list={["ds-button", `ds-button--${variant}`, className]}
-    disabled={disabled}
-    aria-label={ariaLabel}
-    data-i18n={dataI18n}
-    {...rest}
-  >
-    <slot />
-  </button>
-)}
+
+<Tag
+  href={href}
+  type={!isLink ? type : undefined}
+  class:list={[
+    "ds-button",
+    `ds-button--${variant}`,
+    `ds-button--${size}`,
+    className,
+  ]}
+  disabled={disabled}
+  aria-label={ariaLabel}
+  data-i18n={dataI18n}
+  {...rest}
+>
+  <slot />
+</Tag>
+
 <style is:global>
   .ds-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 0.75rem 2rem;
-    min-height: 48px;
-    border-radius: var(--ds-radius-lg, 14px);
     font-family: var(--ds-font-family);
-    font-size: var(--ds-font-size-lg, 1.1rem);
     font-weight: var(--ds-font-weight-medium, 500);
     cursor: pointer;
     border: none;
     text-decoration: none;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    transition: all 0.2s ease;
     white-space: nowrap;
+    border-radius: var(--ds-radius-lg, 14px);
   }
+
+  /* Sizes */
+  .ds-button--sm {
+    padding: 0.5rem 1rem;
+    font-size: var(--ds-font-size-sm, 1rem);
+    min-height: 36px;
+  }
+  .ds-button--md {
+    padding: 0.75rem 2rem;
+    font-size: var(--ds-font-size-lg, 1.1rem);
+    min-height: 48px;
+  }
+  .ds-button--lg {
+    padding: 1rem 2.5rem;
+    font-size: var(--ds-font-size-xl, 1.25rem);
+    min-height: 56px;
+  }
+
+  /* Variant: Primary */
   .ds-button--primary {
     background: var(--ds-color-primary, #213f8c);
     color: #ffffff;
@@ -64,6 +90,8 @@ const isLink = !!href;
   .ds-button--primary:hover:not(:disabled) {
     background: var(--ds-color-primary-light, #2a4fa8);
   }
+
+  /* Variant: Secondary (Neon Green) */
   .ds-button--secondary {
     background: var(--ds-color-accent, #93fb4d);
     color: var(--ds-color-text, #00223e);
@@ -73,13 +101,8 @@ const isLink = !!href;
     transform: translateY(-1px);
     box-shadow: var(--ds-shadow-cta-hover);
   }
-  .ds-button--ghost {
-    background: transparent;
-    color: var(--ds-color-text);
-  }
-  .ds-button--ghost:hover:not(:disabled) {
-    background: var(--ds-color-bg-subtle, #f8f9fa);
-  }
+
+  /* Variant: Outline */
   .ds-button--outline {
     background: transparent;
     color: var(--ds-color-text, #00223e);
@@ -93,16 +116,47 @@ const isLink = !!href;
     color: #ffffff;
     border-color: var(--ds-color-border, #00223e);
   }
+
+  /* Variant: Ghost */
+  .ds-button--ghost {
+    background: transparent;
+    color: var(--ds-color-text);
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .ds-button--ghost:hover:not(:disabled) {
+    background: var(--ds-color-bg-subtle, #f8f9fa);
+  }
+
+  /* Variant: Icon (Circular) */
+  .ds-button--icon {
+    padding: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: transparent; 
+   /* Default transparent, can be overridden or specific styles added if needed */
+  }
+  .ds-button--icon img, .ds-button--icon svg {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+  }
+
+  /* Disabled state */
   .ds-button:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+    pointer-events: none;
   }
+
   @media (max-width: 639px) {
-    .ds-button {
+    .ds-button--md {
       padding: 0.7rem 1.5rem;
       font-size: 1rem;
     }
-    .ds-button.ds-button--full-mobile {
+    .ds-button-full-mobile {
       width: 100%;
     }
   }
