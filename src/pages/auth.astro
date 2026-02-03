@@ -15,6 +15,7 @@ import AuthApp from "../components/auth/AuthApp.astro";
       href="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/ISO-ZELIFY-2025.png"
     />
     <title>Zelify — Auth</title>
+    <script src="https://js.hsforms.net/forms/embed/50894304.js" defer></script>
   </head>
 
   <body>
@@ -493,101 +494,23 @@ import AuthApp from "../components/auth/AuthApp.astro";
 
     <!-- Sección de Contacto -->
     <section class="contact-section">
-      <div class="contact-container">
-        <div class="contact-content">
-          <!-- Texto izquierdo -->
-          <div class="contact-text">
+      <div class="contact-inner">
+        <div class="contact-grid">
+          <div class="contact-headline">
             <h2 class="contact-title">
-              Comienza a construir el banco del futuro, hoy.
+              Empieza hoy<br />
+              y protege<br />
+              tu plataforma.
             </h2>
           </div>
-
-          <!-- Formulario derecho -->
-          <div class="contact-form-wrapper">
-            <div class="contact-form-card">
-              <h3 class="contact-form-title">Habla con nuestro equipo</h3>
-
-              <form class="contact-form" id="contactForm">
-                <div class="form-row">
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      id="nombres"
-                      placeholder="Nombres"
-                      required
-                    />
-                  </div>
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      id="apellidos"
-                      placeholder="Apellidos"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div class="form-row">
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      id="compania"
-                      placeholder="Nombre de la compañía"
-                      required
-                    />
-                  </div>
-                  <div class="form-group">
-                    <input
-                      type="email"
-                      id="email"
-                      placeholder="Email de la compañía"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div class="form-row">
-                  <div class="form-group">
-                    <select id="pais" required>
-                      <option value="">País</option>
-                      <option value="mx">México</option>
-                      <option value="co">Colombia</option>
-                      <option value="ar">Argentina</option>
-                      <option value="cl">Chile</option>
-                      <option value="pe">Perú</option>
-                      <option value="es">España</option>
-                      <option value="us">Estados Unidos</option>
-                    </select>
-                    <svg
-                      class="select-arrow"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                  </div>
-                  <div class="form-group">
-                    <input
-                      type="tel"
-                      id="telefono"
-                      placeholder="Teléfono (opcional)"
-                    />
-                  </div>
-                </div>
-
-                <p class="contact-legal">
-                  Al enviar este formulario, aceptas nuestros <a href="#"
-                    >Términos de Servicio</a
-                  > y <a href="#">Política de Privacidad</a>.
-                </p>
-
-                <button type="submit" class="contact-submit-btn">
-                  Hablemos
-                </button>
-              </form>
-            </div>
+          <div class="contact-form-card">
+            <h3 class="contact-form-title">Habla con nuestro equipo</h3>
+            <div
+              class="hs-form-frame"
+              data-region="na1"
+              data-form-id="c2a86711-5b88-4cf7-9fbf-0d5c25a73d96"
+              data-portal-id="50894304"
+            ></div>
           </div>
         </div>
       </div>
@@ -2031,26 +1954,26 @@ import AuthApp from "../components/auth/AuthApp.astro";
     }
   }
 
-  /* Sección de Contacto */
+  /* start section contact hubspot form */
   .contact-section {
     width: 100%;
     background: #ffffff;
     padding: 5rem 2rem;
   }
 
-  .contact-container {
+  .contact-inner {
     max-width: 1200px;
     margin: 0 auto;
   }
 
-  .contact-content {
+  .contact-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    grid-template-columns: 2fr 2fr;
+    gap: 2rem;
     align-items: center;
   }
 
-  .contact-text {
+  .contact-headline {
     display: flex;
     align-items: center;
   }
@@ -2068,17 +1991,11 @@ import AuthApp from "../components/auth/AuthApp.astro";
     display: block;
   }
 
-  .contact-form-wrapper {
-    display: flex;
-    justify-content: flex-end;
-  }
-
   .contact-form-card {
     background: #f3f4f6;
     border-radius: 24px;
-    padding: 3rem;
-    max-width: 600px;
     width: 100%;
+    justify-self: end;
   }
 
   .contact-form-title {
@@ -2086,113 +2003,61 @@ import AuthApp from "../components/auth/AuthApp.astro";
     font-weight: 600;
     color: #0a203f;
     margin: 0 0 2rem 0;
+    text-align: center;
   }
 
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+  .contact-form-card .hs-form-frame {
+    min-height: 280px;
   }
 
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-
-  .form-group {
-    position: relative;
-  }
-
-  .contact-form input,
-  .contact-form select {
+  .contact-form-card .hs-form input[type="text"],
+  .contact-form-card .hs-form input[type="email"],
+  .contact-form-card .hs-form input[type="tel"],
+  .contact-form-card .hs-form select,
+  .contact-form-card .hs-form textarea {
     width: 100%;
     padding: 0.875rem 1rem;
-    border: none;
-    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
     background: #ffffff;
     font-size: 0.95rem;
     color: #0a203f;
     font-family: inherit;
     outline: none;
-    transition: all 0.2s ease;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
   }
 
-  .contact-form input::placeholder {
-    color: #9ca3af;
-  }
-
-  .contact-form input:focus,
-  .contact-form select:focus {
+  .contact-form-card .hs-form input:focus,
+  .contact-form-card .hs-form select:focus,
+  .contact-form-card .hs-form textarea:focus {
+    border-color: #213f8c;
     box-shadow: 0 0 0 3px rgba(33, 63, 140, 0.1);
   }
 
-  .contact-form select {
-    appearance: none;
-    cursor: pointer;
-    padding-right: 2.5rem;
-  }
-
-  .select-arrow {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 16px;
-    height: 16px;
-    color: #6b7280;
-    pointer-events: none;
-  }
-
-  .contact-legal {
-    font-size: 0.85rem;
-    color: #6b7280;
-    line-height: 1.5;
-    margin: 0.5rem 0 0 0;
-  }
-
-  .contact-legal a {
-    color: #6b7280;
-    text-decoration: underline;
-    transition: color 0.2s ease;
-  }
-
-  .contact-legal a:hover {
-    color: #213f8c;
-  }
-
-  .contact-submit-btn {
+  .contact-form-card .hs-form .hs-button {
     width: 100%;
-    padding: 1rem 2rem;
-    background: #8dff2b;
-    color: #082436;
-    border: none;
-    border-radius: 12px;
+    background: #8dff2b !important;
+    color: #082436 !important;
+    border: none !important;
+    border-radius: 10px;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: background 0.2s ease, transform 0.2s ease;
     margin-top: 1rem;
-    box-shadow: 0 10px 20px rgba(141, 255, 43, 0.45);
   }
 
-  .contact-submit-btn:hover {
-    background: #a5ff4d;
-    transform: translateY(-2px);
-    box-shadow: 0 12px 24px rgba(141, 255, 43, 0.5);
+  .contact-form-card .hs-form .hs-button:hover {
+    background: #a5ff4d !important;
+    transform: translateY(-1px);
   }
 
-  .contact-submit-btn:active {
-    transform: translateY(0);
-  }
-
-  /* Tablet */
   @media (max-width: 1024px) {
     .contact-section {
       padding: 4rem 2rem;
     }
 
-    .contact-content {
+    .contact-grid {
       gap: 3rem;
     }
 
@@ -2201,15 +2066,18 @@ import AuthApp from "../components/auth/AuthApp.astro";
     }
   }
 
-  /* Mobile */
   @media (max-width: 768px) {
     .contact-section {
       padding: 3rem 1.5rem;
     }
 
-    .contact-content {
+    .contact-grid {
       grid-template-columns: 1fr;
       gap: 3rem;
+    }
+
+    .contact-headline {
+      justify-content: center;
     }
 
     .contact-title {
@@ -2217,16 +2085,10 @@ import AuthApp from "../components/auth/AuthApp.astro";
       text-align: center;
     }
 
-    .contact-form-wrapper {
-      justify-content: center;
-    }
-
     .contact-form-card {
+      max-width: none;
+      justify-self: center;
       padding: 2rem;
-    }
-
-    .form-row {
-      grid-template-columns: 1fr;
     }
 
     .contact-form-title {
@@ -2234,6 +2096,7 @@ import AuthApp from "../components/auth/AuthApp.astro";
       text-align: center;
     }
   }
+  /* end styles hubspot form */
 
   /* Sección de FAQ */
   .faq-section {
@@ -2712,7 +2575,7 @@ import AuthApp from "../components/auth/AuthApp.astro";
         ],
       },
       contact: {
-        title: "Comienza a construir el banco del futuro, hoy.",
+        title: "Empieza hoy<br />y protege<br />tu plataforma.",
         formTitle: "Habla con nuestro equipo",
         placeholders: {
           names: "Nombres",
@@ -2917,7 +2780,7 @@ import AuthApp from "../components/auth/AuthApp.astro";
         ],
       },
       contact: {
-        title: "Start building the bank of the future, today.",
+        title: "Start today<br />and protect<br />your platform.",
         formTitle: "Talk to our team",
         placeholders: {
           names: "First Name",
