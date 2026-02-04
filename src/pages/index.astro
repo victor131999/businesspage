@@ -1148,8 +1148,8 @@ const modulesList = [
     display: flex;
     justify-content: center;
     position: relative;
-    /* Altura fija: no se redimensiona al achicar la ventana en alto */
-    height: 840px;
+    /* Altura dinámica para contenido extenso */
+    height: auto;
     min-height: 840px;
     overflow: hidden;
   }
@@ -1159,8 +1159,8 @@ const modulesList = [
     top: 0;
     left: 0;
     width: 100%;
-    height: 840px;
-    min-height: 840px;
+    height: 100%;
+    min-height: 100%;
     object-fit: cover;
     object-position: center;
     z-index: 0;
@@ -1185,6 +1185,18 @@ const modulesList = [
     pointer-events: none; /* Allow clicks to pass through to content if needed */
   }
 
+  @media (max-width: 768px) {
+    .product-showcase__overlay {
+      background: linear-gradient(
+        to bottom,
+        #ffffff 0%,
+        transparent 5%,
+        transparent 95%,
+        #ffffff 100%
+      );
+    }
+  }
+
   /* Content wrapper sits above video */
   .product-showcase__grid {
     width: min(1300px, 100%);
@@ -1194,6 +1206,13 @@ const modulesList = [
     align-items: start;
     position: relative;
     z-index: 2;
+    padding-bottom: 50px; /* Espacio extra para que no se oculte el final */
+  }
+
+  @media (max-width: 768px) {
+    .product-showcase__grid {
+      padding-bottom: 100px; /* Más espacio en móvil para evitar corte abrupto */
+    }
   }
 
   /* Marco tipo iPhone: bezel oscuro, más estrecho y bordes bien redondeados */
@@ -1222,6 +1241,22 @@ const modulesList = [
       0 25px 50px -12px rgba(0, 0, 0, 0.4),
       inset 0 1px 0 rgba(255, 255, 255, 0.06);
     overflow: visible;
+  }
+
+  @media (max-width: 768px) {
+    .product-showcase__overlay-card.product-showcase__phone-frame {
+      display: none !important;
+    }
+    .product-showcase {
+      height: auto !important;
+      min-height: unset !important;
+    }
+    /* Ensure the video covers the full height of the container in mobile view */
+    .product-showcase__video {
+      height: 100% !important;
+      min-height: unset !important;
+      position: absolute !important;
+    }
   }
 
   .phone-frame__screen {
@@ -1322,7 +1357,6 @@ const modulesList = [
     height: auto;
   }
 
-<<<<<<< Updated upstream
   /* Botón play/pause fuera del celular, esquina inferior derecha del marco */
   .product-showcase__play-button {
     position: absolute;
@@ -1340,8 +1374,6 @@ const modulesList = [
     z-index: 10;
     opacity: 1;
   }
-=======
->>>>>>> Stashed changes
 
 
   .product-showcase__menu {
@@ -1414,6 +1446,12 @@ const modulesList = [
     overflow: visible;
   }
 
+  @media (max-width: 768px) {
+    .product-showcase__item.is-active .product-showcase__panel {
+      max-height: none !important;
+    }
+  }
+
   .product-showcase__panel-inner {
     display: grid; /* Usa CSS Grid como sistema de layout */
     grid-template-columns: minmax(280px, 1fr) minmax(280px, 1fr); /* 2 columnas, mínimo 280px, máximo 1fr cada una */
@@ -1425,6 +1463,35 @@ const modulesList = [
     align-items: start; /* Alinea los elementos del grid en la parte superior */
     position: relative; /* Permite posicionar hijos con position:absolute */
     z-index: 1; /* Controla la capa (profundidad) del contenedor */
+  }
+
+  @media (max-width: 768px) {
+    .product-showcase__panel-inner {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 1.5rem !important;
+    }
+    
+    .product-showcase__panel-left {
+      display: contents !important;
+    }
+    
+    .product-showcase__title {
+      order: 1;
+      max-width: 100%;
+    }
+    
+    .product-showcase__copy {
+      order: 2;
+      text-align: left !important;
+      max-width: 100%;
+      margin: 0 !important;
+    }
+    
+    .product-showcase__cta {
+      order: 3;
+      align-self: flex-start;
+    }
   }
 
   .product-showcase__panel-left {
@@ -2684,6 +2751,30 @@ const modulesList = [
     .how-it-works-content {
       grid-template-columns: 1fr;
       gap: 3rem;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .how-it-works-left {
+      display: contents;
+    }
+    
+    .how-it-works-title {
+      order: 1;
+    }
+    
+    .how-it-works-right {
+      order: 2;
+    }
+    
+    .how-it-works-description {
+      order: 3;
+      max-width: 100%;
+      margin-top: 0 !important;
+    }
+    
+    .how-it-works-left > .ds-button {
+      order: 4;
     }
 
     .how-it-works-right {
@@ -2717,11 +2808,33 @@ const modulesList = [
     .why-zelify-content {
       grid-template-columns: 1fr;
       gap: 1.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .why-zelify-right {
+      display: contents;
+    }
+    
+    .why-zelify-title {
+      order: 1;
+      text-align: center;
     }
 
     .why-zelify-left {
+      order: 2;
       justify-content: center;
       padding: 2rem 1.5rem;
+    }
+    
+    .why-zelify-description {
+      order: 3;
+      text-align: center;
+    }
+    
+    .why-zelify-right > .ds-button {
+      order: 4;
+      align-self: center;
     }
 
     .ai-illustration-card {
@@ -2750,10 +2863,40 @@ const modulesList = [
       gap: 2rem;
       padding: 2rem;
     }
+    
+    .tokens-left {
+      align-items: center;
+      text-align: center;
+    }
+    
+    .tokens-description {
+      width: 100%;
+      text-align: center;
+    }
+    
+    .tokens-left > .ds-button {
+      align-self: center;
+    }
 
     .tokens-content-placeholder {
-      min-height: 350px;
-      max-height: 500px;
+      min-height: auto;
+      max-height: none;
+      height: auto;
+      overflow: visible;
+    }
+    
+    .tokens-right {
+      margin-right: 0;
+    }
+    
+    /* Ajustar el dashboard de tokens para móvil */
+    .tokens-content-placeholder :global(.tokens-dashboard) {
+      transform: none;
+      transform-origin: top center;
+      height: auto !important;
+      min-height: auto !important;
+      max-height: none !important;
+      overflow: visible !important;
     }
 
     .action-products-section {
@@ -2762,18 +2905,23 @@ const modulesList = [
 
     .action-products-container {
       padding: 1rem;
-      min-height: 400px;
+      min-height: auto;
+      height: auto;
     }
 
     .action-products-card {
-      width: 340px;
-      height: 500px;
+      width: min(340px, 90vw);
+      height: auto;
+      min-height: 70vh;
+      max-height: none;
       margin-left: 0;
     }
-
+    
     .action-card-wrapper {
       width: 100%;
-      height: 100%;
+      height: auto;
+      min-height: 70vh;
+      position: relative;
       box-sizing: border-box;
     }
 
@@ -2781,10 +2929,11 @@ const modulesList = [
     .action-card-wrapper :global(.identity-card-root),
     .action-card-wrapper :global(.aml-card-root) {
       width: 100% !important;
-      height: 100% !important;
+      height: auto !important;
+      min-height: 70vh !important;
       max-width: 100% !important;
-      max-height: 100% !important;
-      overflow: hidden !important;
+      max-height: none !important;
+      overflow: visible !important;
       box-sizing: border-box;
     }
 
