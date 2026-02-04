@@ -1154,6 +1154,14 @@ const modulesList = [
     overflow: hidden;
   }
 
+  @media (max-width: 768px) {
+    .product-showcase {
+      height: auto;
+      min-height: unset;
+      overflow: visible;
+    }
+  }
+
   .product-showcase__video {
     position: absolute;
     top: 0;
@@ -1539,12 +1547,6 @@ const modulesList = [
     display: none;
   }
 
-  .product-showcase__title .title-accent:empty {
-    display: none;
-  }
-
-
-
   .product-showcase__copy {
     margin: 0;
     font-size: clamp(0.9rem, 1.2vw, 1.1rem);
@@ -1859,6 +1861,13 @@ const modulesList = [
     justify-content: center;
     position: relative;
     overflow: hidden;
+  }
+
+  @media (max-width: 768px) {
+    .how-it-works-section {
+      margin-top: 400px !important;
+      padding-top: 3rem;
+    }
   }
 
   .how-it-works-divider {
@@ -2910,75 +2919,244 @@ const modulesList = [
     }
 
     .action-products-card {
-      width: min(340px, 90vw);
       height: auto;
       min-height: 70vh;
-      max-height: none;
-      margin-left: 0;
-    }
-    
-    .action-card-wrapper {
-      width: 100%;
-      height: auto;
-      min-height: 70vh;
-      position: relative;
-      box-sizing: border-box;
-    }
-
-    .action-card-wrapper :global(.auth-card-wrapper),
-    .action-card-wrapper :global(.identity-card-root),
-    .action-card-wrapper :global(.aml-card-root) {
-      width: 100% !important;
-      height: auto !important;
-      min-height: 70vh !important;
-      max-width: 100% !important;
-      max-height: none !important;
-      overflow: visible !important;
-      box-sizing: border-box;
-    }
-
-    .action-products-nav {
-      gap: 0.75rem;
-    }
-
-    .action-nav-button {
-      min-height: 44px;
-      padding: 0.7rem 1.5rem;
-      font-size: 1rem;
-    }
-
-    .ai-section {
-      padding: 0 1.5rem;
-    }
-
-    .ai-section-content {
-      gap: 2rem;
-    }
-
-    .ai-section-button {
-      padding: 0.875rem 2.5rem;
-      font-size: 1rem;
+      width: 90vw;
     }
 
     .footer-top {
-      grid-template-columns: 1fr;
-      gap: 2rem;
+      display: flex;
+      justify-content: space-between;
+      width: 90%;
+      margin: 0 auto;
     }
 
     .footer-quick-links {
-      align-items: flex-start;
+      text-align: right;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .product-showcase {
+      padding: 0 1rem;
+      height: 400px;
+      min-height: 400px;
+      max-height: 400px;
     }
 
-    .quick-links-list {
-      align-items: flex-start;
+    .product-showcase__grid {
+      grid-template-columns: 1fr;
+      gap: 0;
     }
 
-    .footer-legal {
-      font-size: 0.75rem;
+    .product-showcase__panel-inner {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
     }
 
-    .footer-copyright {
-      font-size: 0.75rem;
+    .product-showcase__overlay-card {
+      display: none;
+    }
+
+    .product-showcase__copy {
+      text-align: left;
+      justify-self: start;
+      max-width: 100%;
+    }
+
+    .how-it-works-section {
+      padding: 0 1.5rem;
+    }
+
+    .how-it-works-divider {
+      position: absolute;
+      top: 45%;
+      left: 0;
+      right: 0;
+      height: 1.5px;
+      background-color: #154091;
+      z-index: 1;
+      transform: translateY(-50%);
+      margin-left: 140px;
+      margin-right: 140px;
+    }
+
+    .how-it-works-content {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .how-it-works-left {
+      display: contents;
+    }
+    
+    .how-it-works-title {
+      order: 1;
+    }
+    
+    .how-it-works-right {
+      order: 2;
+    }
+    
+    .how-it-works-description {
+      order: 3;
+      max-width: 100%;
+      margin-top: 0 !important;
+    }
+    
+    .how-it-works-left > .ds-button {
+      order: 4;
+    }
+
+    .how-it-works-right {
+      justify-content: center;
+    }
+
+    .right-bg-panel {
+      padding: 2rem 1.5rem;
+      border-radius: 24px;
+    }
+
+    .login-card {
+      padding: 1.5rem;
+    }
+
+    .how-it-works-play-button {
+      position: relative;
+      bottom: auto;
+      right: auto;
+      margin-top: 1rem;
+    }
+
+    .why-zelify-section {
+      padding: 0 1.5rem;
+    }
+
+    .why-zelify-divider {
+      display: none;
+    }
+
+    .why-zelify-content {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .why-zelify-right {
+      display: contents;
+    }
+    
+    .why-zelify-title {
+      order: 1;
+      text-align: center;
+    }
+
+    .why-zelify-left {
+      order: 2;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+    }
+    
+    .why-zelify-description {
+      order: 3;
+      text-align: center;
+    }
+    
+    .why-zelify-right > .ds-button {
+      order: 4;
+      align-self: center;
+    }
+
+    .ai-illustration-card {
+      max-width: 100%;
+      height: 300px;
+    }
+
+    .bench-section {
+      padding: 0 1.5rem;
+    }
+
+    .bench-tabs {
+      gap: 1.5rem;
+    }
+
+    .bench-content-area {
+      min-height: 300px;
+    }
+
+    .tokens-section {
+      padding: 0 1.5rem;
+    }
+
+    .tokens-container {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 2rem;
+    }
+    
+    .tokens-left {
+      align-items: center;
+      text-align: center;
+    }
+    
+    .tokens-description {
+      width: 100%;
+      text-align: center;
+    }
+    
+    .tokens-left > .ds-button {
+      align-self: center;
+    }
+
+    .tokens-content-placeholder {
+      min-height: auto;
+      max-height: none;
+      height: auto;
+      overflow: visible;
+    }
+    
+    .tokens-right {
+      margin-right: 0;
+    }
+    
+    /* Ajustar el dashboard de tokens para móvil */
+    .tokens-content-placeholder :global(.tokens-dashboard) {
+      transform: none;
+      transform-origin: top center;
+      height: auto !important;
+      min-height: auto !important;
+      max-height: none !important;
+      overflow: visible !important;
+    }
+
+    .action-products-section {
+      padding: 0 1.5rem;
+    }
+
+    .action-products-container {
+      padding: 1rem;
+      min-height: auto;
+      height: auto;
+    }
+
+    .action-products-card {
+      height: auto;
+      min-height: 70vh;
+      width: 90vw;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      width: 90%;
+      margin: 0 auto;
+    }
+
+    .footer-quick-links {
+      text-align: right;
     }
   }
 </style>
@@ -3148,15 +3326,15 @@ const modulesList = [
         "home.bench.button": "Cards",
         "home.tokens.title": "Tokens",
         "home.tokens.description":
-          "Zelify integrates into a single digital platform: authentication and identity validation, AML compliance, account digitization, card issuance and processing, local and international transfers, multiple payments, discount and coupon programs.",
+          "Controla el consumo y tus costos con total visibilidad. Monitorea tokens por usuario y por servicio, detecta picos y optimiza presupuesto con métricas claras y trazabilidad.",
         "home.tokens.demo": "Demo",
         "home.action.products.title": "Our products in action",
         "home.action.products.auth": "Auth",
         "home.action.products.identity": "Identity",
         "home.action.products.aml": "AML",
         "home.ai.title.line1": "Build the bank of the future,",
-        "home.ai.title.line2": "powered by AI.",
-        "home.ai.quote": "Quote",
+        "home.ai.title.line2": "potenciada por IA.",
+        "home.ai.quote": "Cotizar",
 
         // How it works section
         "home.how.title": "How Does Zelify Work?",
@@ -3173,7 +3351,7 @@ const modulesList = [
         "home.how.login.create": "Or create a new account",
 
         // Why zelify section
-        "home.why.title": "Every product, powered by AI.",
+        "home.why.title": "Every product, powered <br />by AI.",
         "home.why.description":
           "We operate as a neobanking technology stack built with models trained specifically for the financial sector. From continuous monitoring to operational optimization, AI is the core engine through which we transform and modernize financial services.",
         "home.why.demo": "Demo",
@@ -3236,13 +3414,13 @@ const modulesList = [
         "modules.discounts.titleStrong": "Discounts and",
         "modules.discounts.titleAccent": "<br />Benefits",
         "modules.discounts.copy":
-          "Benefit rules and promotions. Manage loyalty campaigns and coupons.",
+          "Reglas de beneficios y promociones. Gestiona campañas de lealtad y cupones.",
         "modules.discounts.cta": "View Discounts",
         "modules.alaiza.label": "Alaiza Fintech AI Core",
         "modules.alaiza.titleStrong": "Financial AI",
         "modules.alaiza.titleAccent": "",
         "modules.alaiza.copy":
-          "Artificial intelligence for quick decisions, fraud prevention and data analysis.",
+          "Inteligencia artificial para decisiones rápidas, prevención de fraudes, educación financiera y análisis de datos.",
         "modules.alaiza.cta": "Explore Alaiza",
       },
       es: {
@@ -3356,7 +3534,7 @@ const modulesList = [
         "modules.alaiza.titleStrong": "IA Financiera",
         "modules.alaiza.titleAccent": "",
         "modules.alaiza.copy":
-          "Inteligencia artificial para decisiones rápidas, prevención de fraudes, educación financiera y análisis de datos.",
+          "Inteligencia artificial para decisiones rápidas, prevención de fraudes y análisis de datos.",
         "modules.alaiza.cta": "Explora Alaiza",
       },
     };
