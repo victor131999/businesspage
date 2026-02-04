@@ -43,6 +43,7 @@ import Button from "../atoms/Button.astro";
 
 <style is:global>
   .ds-welcome-hero {
+    margin-top: 110px !important; /* espacio para navbar fijo */
     padding: 0 1rem;
   }
   .ds-welcome-hero__content {
@@ -69,6 +70,9 @@ import Button from "../atoms/Button.astro";
     font-weight: 300;
   }
   @media (max-width: 639px) {
+    .ds-welcome-hero {
+      margin-top: 120px !important;
+    }
     .ds-welcome-hero__title {
       line-height: 1.18;
     }
