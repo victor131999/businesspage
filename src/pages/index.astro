@@ -22,6 +22,7 @@ import TokensProd from "../components/tokens/tokens-prod.astro";
 import { AlaizaAssistant } from "../components/AlaizaAssistant";
 import DeviceFrame from "@/components/design-system/organisms/device-frame/DeviceFrame.astro";
 import CardTabs from "../components/design-system/organisms/CardTabs.astro";
+import TokensPanel from "../components/design-system/organisms/TokensPanel.astro";
 
 // Configuración del navbar con tema claro/blanco
 const navbarColors = {
@@ -502,9 +503,9 @@ const modulesList = [
       }
     });
 
-    // Tokens
-    const tokensTitle = document.querySelector(".tokens-title");
-    const tokensDesc = document.querySelector(".tokens-description");
+    // Tokens (organismo TokensPanel)
+    const tokensTitle = document.querySelector(".ds-tokens-panel__title");
+    const tokensDesc = document.querySelector(".ds-tokens-panel__description");
     const tokensDesc2 = document.querySelector(".tokens-description2");
     if (tokensTitle) tokensTitle.textContent = content.tokens.title;
     if (tokensDesc) tokensDesc.textContent = content.tokens.description;
@@ -793,16 +794,16 @@ const modulesList = [
       </div>
     </section>
 
-   <section class="bench-section section-gap-200">
+    <section class="bench-section section-gap-200">
       <div class="bench-section-2-content">
         <CardTabs
           id="home-bench-tabs"
           cta={{ label: "Borderless", href: "/cards" }}
           tabs={[
             { value: "bench1", label: "Borderless", active: true },
-            { value: "bench2", label: "Plug & Play" },
-            { value: "bench3", label: "Custom Made" },
-            { value: "bench4", label: "On-Demand" },
+            // { value: "bench2", label: "Plug & Play" },
+            // { value: "bench3", label: "Custom Made" },
+            // { value: "bench4", label: "On-Demand" },
           ]}
           class="bench-section-tabs"
         >
@@ -827,99 +828,89 @@ const modulesList = [
               </video>
             </div>
             <div class="bench-panel-copy">
-              <Title level={3} variant="card" class="bench-panel-title">Tarjetas internacionales al instante</Title>
+              <Title level={3} variant="card" class="bench-panel-title"
+                >Tarjetas internacionales al instante</Title
+              >
               <Text variant="body" class="bench-panel-text">
-                Emite tarjetas y personalízalas de forma inmediata y sin fronteras, listas para usarse en compras y pagos a nivel global.
+                Emite tarjetas y personalízalas de forma inmediata y sin
+                fronteras, listas para usarse en compras y pagos a nivel global.
               </Text>
             </div>
           </div>
           <!-- Plug & Play -->
-          <div
+          <!-- <div
             class="bench-content-placeholder bench-content-panel"
             data-card-content="bench2"
-            style="display: none; min-height: 320px;"
+            style="display: none;"
           >
-            <Title level={3} variant="card" class="bench-panel-title">Una sola integración</Title>
+            <Title level={3} variant="card" class="bench-panel-title"
+              >Una sola integración</Title
+            >
             <Text variant="body" class="bench-panel-text">
-              Digitalizamos servicios financieros completos para instituciones con una única línea de código, reduciendo tiempo, costos y complejidad.
+              Digitalizamos servicios financieros completos para instituciones
+              con una única línea de código, reduciendo tiempo, costos y
+              complejidad.
             </Text>
-          </div>
+          </div> -->
           <!-- Custom Made -->
-          <div
+          <!-- <div
             class="bench-content-placeholder bench-content-panel"
             data-card-content="bench3"
-            style="display: none; min-height: 320px;"
+            style="display: none;"
           >
-            <Title level={3} variant="card" class="bench-panel-title">Sistema modular</Title>
+            <Title level={3} variant="card" class="bench-panel-title"
+              >Sistema modular</Title
+            >
             <Text variant="body" class="bench-panel-text">
-              Elige y combina solo los productos que tu negocio necesita, con la flexibilidad de escalar o ajustar según tus objetivos.
+              Elige y combina solo los productos que tu negocio necesita, con la
+              flexibilidad de escalar o ajustar según tus objetivos.
             </Text>
-          </div>
+          </div> -->
           <!-- On-Demand -->
-          <div
+          <!-- <div
             class="bench-content-placeholder bench-content-panel"
             data-card-content="bench4"
-            style="display: none; min-height: 320px;"
+            style="display: none;"
           >
-            <Title level={3} variant="card" class="bench-panel-title">Pay As You Go</Title>
+            <Title level={3} variant="card" class="bench-panel-title"
+              >Pay As You Go</Title
+            >
             <Text variant="body" class="bench-panel-text">
-              Sin paquetes rígidos ni compromisos innecesarios: paga únicamente por los servicios que usas.
+              Sin paquetes rígidos ni compromisos innecesarios: paga únicamente
+              por los servicios que usas.
             </Text>
-          </div>
+          </div> -->
         </CardTabs>
       </div>
-    </section> 
-
-    <section class="tokens-section section-gap-150">
-      <div class="tokens-container">
-        <div class="tokens-left">
-          <h2 class="tokens-title" data-i18n="home.tokens.title">Tokens</h2>
-          <p class="tokens-description" data-i18n="home.tokens.description">
-            Zelify integra en una sola plataforma digital: autenticación y
-            validación de identidad, cumplimiento AML, digitalización de
-            cuentas, emisión y procesamiento de tarjetas, transferencias locales
-            e internacionales, pagos múltiples, programas de descuentos y
-            cupones.
-          </p>
-          <Button
-            href="https://www.zelify.com/clips/"
-            variant="secondary"
-            dataI18n="home.tokens.demo"
-          >
-            Demo
-          </Button>
-        </div>
-        <div class="tokens-right">
-          <div class="tokens-content-placeholder">
-            <TokensProd />
-          </div>
-        </div>
-        <Button
-          type="button"
-          variant="icon"
-          id="tokens-play-pause-btn"
-          class="tokens-play-pause-btn"
-          ariaLabel="Reproducir animación"
-          title="Reproducir / Pausar animación de consumo"
-        >
-          <img
-            id="tokens-play-icon"
-            src="/icons/play.svg"
-            alt=""
-            width="28"
-            height="28"
-          />
-          <img
-            id="tokens-pause-icon"
-            src="/icons/pause.svg"
-            alt=""
-            width="28"
-            height="28"
-            style="display: none;"
-          />
-        </Button>
-      </div>
     </section>
+
+    <TokensPanel
+      title="Tokens"
+      description="Zelify integra en una sola plataforma digital: autenticación y validación de identidad, cumplimiento AML, digitalización de cuentas, emisión y procesamiento de tarjetas, transferencias locales e internacionales, pagos múltiples, programas de descuentos y cupones."
+      ctaHref="https://www.zelify.com/clips/"
+      ctaLabel="Demo"
+      showPlayPause={true}
+      playPauseId="tokens-play-pause-btn"
+      dataI18nTitle="home.tokens.title"
+      dataI18nDescription="home.tokens.description"
+      dataI18nCta="home.tokens.demo"
+    >
+      <video
+        id="tokens-panel-video"
+        class="tokens-panel-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata" 
+        style="object-fit: cover;"
+      >
+        <source
+          src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/coins.mp4"
+          type="video/mp4"
+        />
+      </video>
+    </TokensPanel>
 
     <section class="action-products-section section-gap-150">
       <div class="action-products-content">
@@ -1765,7 +1756,7 @@ const modulesList = [
 
   .how-it-works-divider {
     position: absolute;
-    top: 52.5%;
+    top: 46%;
     left: 0;
     right: 0;
     height: 1px;
@@ -2144,22 +2135,28 @@ const modulesList = [
     align-items: stretch;
   }
 
-  /* Wrapper solo recorta la parte superior del video; evita recorte feo en esquinas inferiores */
+  /* Wrapper: altura fija; las 4 esquinas redondeadas donde se reproduce el video */
   .bench-video-wrapper {
     flex: 0 0 auto;
-    max-height: 380px;
-    border-radius: var(--ds-radius-lg, 20px) var(--ds-radius-lg, 20px) 0 0;
+    width: 100%;
+    height: 320px;
+    max-height: 320px;
+    min-height: 320px;
+    border-radius: var(--ds-radius-lg, 20px);
     overflow: hidden;
+    position: relative;
   }
 
   .bench-content-placeholder[data-card-content="borderless"] .bench-video,
   .bench-content-placeholder[data-card-content="bench1"] .bench-video {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    max-height: 380px;
     object-fit: cover;
+    object-position: center;
     display: block;
-    vertical-align: top;
   }
 
   .bench-panel-copy {
@@ -2181,7 +2178,11 @@ const modulesList = [
     padding-top: calc(1.5rem + 1px);
   }
 
-  .bench-content-panel:not([data-card-content="borderless"]):not([data-card-content="bench1"]) {
+  /* Paneles sin video: misma altura mínima que la tarjeta con video para consistencia al cambiar de tab */
+  .bench-content-panel:not([data-card-content="borderless"]):not(
+      [data-card-content="bench1"]
+    ) {
+    min-height: 400px;
     padding: 2.5rem 2rem;
     flex-direction: column;
     gap: 1.25rem;
@@ -2217,103 +2218,7 @@ const modulesList = [
     object-fit: cover;
   }
 
-  /* Tokens Section */
-  .tokens-section {
-    padding: 0 clamp(1rem, 5vw, 4rem);
-    background-color: #ffffff;
-    display: flex;
-    justify-content: center;
-  }
-
-  .tokens-container {
-    position: relative;
-    max-width: 1400px;
-    width: 100%;
-    background-color: #f0f3f7;
-    border-radius: 20px;
-    padding: 4rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-  }
-
-  .tokens-left {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    align-items: flex-start;
-  }
-
-  .tokens-title {
-    font-size: clamp(3rem, 6vw, 5rem);
-    font-weight: 600;
-    color: #213f8c;
-    margin: 0;
-    line-height: 1.1;
-  }
-
-  .tokens-description {
-    font-size: clamp(1rem, 1.5vw, 1.15rem);
-    line-height: 1.8;
-    color: #213f8c;
-    margin: 0;
-    opacity: 0.8;
-    width: 65%;
-    text-align: left;
-  }
-
-  /* tokens-demo-button: átomo Button secondary */
-
-  .tokens-right {
-    position: relative;
-    margin-right: 3cqb;
-  }
-
-  .tokens-content-placeholder {
-    width: 100%;
-    min-height: 450px;
-    max-height: 600px;
-    background-color: #ffffff;
-    border-radius: 16px;
-    position: relative;
-    display: flex;
-    align-items: stretch;
-    justify-content: stretch;
-    overflow: hidden;
-  }
-
-  .tokens-play-button {
-    position: absolute;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    border: 2px solid #213f8c;
-    background-color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    pointer-events: auto;
-    z-index: 11;
-    opacity: 1;
-  }
-
-  .tokens-play-button:hover,
-  .tokens-play-button:focus {
-    opacity: 1 !important;
-  }
-
-  .tokens-play-button svg,
-  .tokens-play-button img {
-    width: 28px;
-    height: 28px;
-    margin-left: 2px;
-    object-fit: contain;
-    opacity: 1;
-  }
+  /* Tokens: ver organismo TokensPanel.astro */
 
   /* Action Products Section */
   .action-products-section {
@@ -2664,8 +2569,10 @@ const modulesList = [
     .composition-title,
     .alaiza-title,
     .who-title,
-    .tokens-title,
     .pricing-title {
+      font-size: 2.5rem;
+    }
+    .ds-tokens-panel__title {
       font-size: 2.5rem;
     }
   }
@@ -2819,51 +2726,6 @@ const modulesList = [
 
     .bench-content-area {
       min-height: 300px;
-    }
-
-    .tokens-section {
-      padding: 0 1.5rem;
-    }
-
-    .tokens-container {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-      padding: 2rem;
-    }
-
-    .tokens-left {
-      align-items: center;
-      text-align: center;
-    }
-
-    .tokens-description {
-      width: 100%;
-      text-align: center;
-    }
-
-    .tokens-left > .ds-button {
-      align-self: center;
-    }
-
-    .tokens-content-placeholder {
-      min-height: auto;
-      max-height: none;
-      height: auto;
-      overflow: visible;
-    }
-
-    .tokens-right {
-      margin-right: 0;
-    }
-
-    /* Ajustar el dashboard de tokens para móvil */
-    .tokens-content-placeholder :global(.tokens-dashboard) {
-      transform: none;
-      transform-origin: top center;
-      height: auto !important;
-      min-height: auto !important;
-      max-height: none !important;
-      overflow: visible !important;
     }
 
     .action-products-section {
@@ -3045,51 +2907,6 @@ const modulesList = [
       min-height: 300px;
     }
 
-    .tokens-section {
-      padding: 0 1.5rem;
-    }
-
-    .tokens-container {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-      padding: 2rem;
-    }
-
-    .tokens-left {
-      align-items: center;
-      text-align: center;
-    }
-
-    .tokens-description {
-      width: 100%;
-      text-align: center;
-    }
-
-    .tokens-left > .ds-button {
-      align-self: center;
-    }
-
-    .tokens-content-placeholder {
-      min-height: auto;
-      max-height: none;
-      height: auto;
-      overflow: visible;
-    }
-
-    .tokens-right {
-      margin-right: 0;
-    }
-
-    /* Ajustar el dashboard de tokens para móvil */
-    .tokens-content-placeholder :global(.tokens-dashboard) {
-      transform: none;
-      transform-origin: top center;
-      height: auto !important;
-      min-height: auto !important;
-      max-height: none !important;
-      overflow: visible !important;
-    }
-
     .action-products-section {
       padding: 0 1.5rem;
     }
@@ -3228,23 +3045,31 @@ const modulesList = [
     });
   });
 
-  // Tokens: play/pause animación de consumo (barras 0 → llenar → parar y reset a 0)
+  // Tokens: play/pause del video (o animación) en el panel
   document.addEventListener("DOMContentLoaded", () => {
     const tokensBtn = document.getElementById("tokens-play-pause-btn");
     const tokensPlayIcon = document.getElementById("tokens-play-icon");
     const tokensPauseIcon = document.getElementById("tokens-pause-icon");
+    const tokensVideo = document.getElementById("tokens-panel-video");
     if (!tokensBtn || !tokensPlayIcon || !tokensPauseIcon) return;
 
-    let tokensIsPlaying = false;
+    let tokensIsPlaying = tokensVideo ? !tokensVideo.paused : false;
 
     function setTokensButtonState(playing) {
       tokensIsPlaying = playing;
       tokensPlayIcon.style.display = playing ? "none" : "block";
       tokensPauseIcon.style.display = playing ? "block" : "none";
-      tokensBtn.setAttribute(
+      tokensBtn?.setAttribute(
         "aria-label",
         playing ? "Pausar animación" : "Reproducir animación",
       );
+    }
+
+    // Sincronizar botón con el video si existe
+    if (tokensVideo) {
+      tokensVideo.addEventListener("play", () => setTokensButtonState(true));
+      tokensVideo.addEventListener("pause", () => setTokensButtonState(false));
+      setTokensButtonState(!tokensVideo.paused);
     }
 
     window.addEventListener("tokens:state", (e) => {
@@ -3253,10 +3078,18 @@ const modulesList = [
     });
 
     tokensBtn.addEventListener("click", () => {
-      if (tokensIsPlaying) {
-        window.dispatchEvent(new CustomEvent("tokens:pause"));
+      if (tokensVideo) {
+        if (tokensIsPlaying) {
+          tokensVideo.pause();
+        } else {
+          tokensVideo.play();
+        }
       } else {
-        window.dispatchEvent(new CustomEvent("tokens:play"));
+        if (tokensIsPlaying) {
+          window.dispatchEvent(new CustomEvent("tokens:pause"));
+        } else {
+          window.dispatchEvent(new CustomEvent("tokens:play"));
+        }
       }
     });
   });

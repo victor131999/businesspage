@@ -4,15 +4,26 @@
  * Variantes: body | subtitle | caption | muted.
  * Responsive: font-size con clamp en body/subtitle.
  */
-interface Props {
+interface Props extends astroHTML.JSX.HTMLAttributes {
   variant?: "body" | "subtitle" | "caption" | "muted";
   as?: "p" | "span";
   class?: string;
   dataI18n?: string;
 }
-const { variant = "body", as: Tag = "p", class: className = "", dataI18n } = Astro.props;
+const {
+  variant = "body",
+  as: Tag = "p",
+  class: className = "",
+  dataI18n,
+  ...rest
+} = Astro.props;
 ---
-<Tag class:list={["ds-text", `ds-text--${variant}`, className]} data-i18n={dataI18n}>
+
+<Tag
+  class:list={["ds-text", `ds-text--${variant}`, className]}
+  data-i18n={dataI18n}
+  {...rest}
+>
   <slot />
 </Tag>
 <style is:global>
