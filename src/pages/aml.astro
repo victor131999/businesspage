@@ -88,14 +88,16 @@ import Button from "../components/design-system/atoms/Button.astro";
                 >
                   <polyline points="15 18 9 12 15 6"></polyline>
                 </svg>
-                Atrás
+                <span id="aml-back-text">Atrás</span>
               </button>
             </div>
 
             <!-- Main Content -->
             <div class="scan-container">
-              <h2 class="scan-title">
-                <span class="highlight">Escaneando</span> tu rostro
+              <h2 class="scan-title" id="aml-scan-title">
+                <span class="highlight" id="aml-scan-highlight">Escaneando</span
+                >
+                <span id="aml-scan-suffix">tu rostro</span>
               </h2>
 
               <div class="scanner-visual">
@@ -119,8 +121,12 @@ import Button from "../components/design-system/atoms/Button.astro";
 
               <div class="scan-status-container">
                 <div class="status-gradient-overlay"></div>
-                <h3 class="status-title">Completando verificación</h3>
-                <p class="status-text">Validando en listas globales...</p>
+                <h3 class="status-title" id="aml-status-title">
+                  Completando verificación
+                </h3>
+                <p class="status-text" id="aml-status-text">
+                  Validando en listas globales...
+                </p>
                 <div class="status-progress-track">
                   <div class="status-progress-bar"></div>
                 </div>
@@ -992,9 +998,11 @@ import Button from "../components/design-system/atoms/Button.astro";
     align-items: center;
     justify-content: center;
     padding: 3rem 2rem 2rem;
+    margin-top: 30px;
   }
 
   .auth-hero {
+    margin-top: 30px;
     max-width: 800px;
     width: 100%;
     text-align: center;
@@ -1121,7 +1129,7 @@ import Button from "../components/design-system/atoms/Button.astro";
   .device-container {
     position: relative;
     width: 100%;
-    max-width: 400px;
+    max-width: 380px;
     margin: 0 auto;
     z-index: 10;
     padding: 1rem 0 2rem;
@@ -3105,6 +3113,13 @@ import Button from "../components/design-system/atoms/Button.astro";
 
   const amlTranslations = {
     es: {
+      device: {
+        back: "Atrás",
+        scanHighlight: "Escaneando",
+        scanSuffix: "tu rostro",
+        statusTitle: "Completando verificación",
+        statusText: "Validando en listas globales...",
+      },
       hero: {
         title: "Cumplimiento AML<br />claro, ágil y efectivo.",
         description:
@@ -3280,6 +3295,13 @@ import Button from "../components/design-system/atoms/Button.astro";
       },
     },
     en: {
+      device: {
+        back: "Back",
+        scanHighlight: "Scanning",
+        scanSuffix: "your face",
+        statusTitle: "Completing verification",
+        statusText: "Validating in global lists...",
+      },
       hero: {
         title: "Clear, agile and effective<br />AML compliance.",
         description:
@@ -3470,6 +3492,21 @@ import Button from "../components/design-system/atoms/Button.astro";
     if (heroDescription) heroDescription.innerHTML = t.hero.description;
     if (emailInput) emailInput.placeholder = t.hero.emailPlaceholder;
     if (cotizarBtn) cotizarBtn.textContent = t.hero.cotizar;
+
+    // Device (mobile app) content
+    const backText = document.getElementById("aml-back-text");
+    const scanHighlight = document.getElementById("aml-scan-highlight");
+    const scanSuffix = document.getElementById("aml-scan-suffix");
+    const statusTitle = document.getElementById("aml-status-title");
+    const statusText = document.getElementById("aml-status-text");
+
+    if (t.device) {
+      if (backText) backText.textContent = t.device.back;
+      if (scanHighlight) scanHighlight.textContent = t.device.scanHighlight;
+      if (scanSuffix) scanSuffix.textContent = t.device.scanSuffix;
+      if (statusTitle) statusTitle.textContent = t.device.statusTitle;
+      if (statusText) statusText.textContent = t.device.statusText;
+    }
 
     // Security section
     const securityTitle = document.querySelector(".security-title");

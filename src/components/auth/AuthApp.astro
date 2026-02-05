@@ -745,7 +745,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
   .device-container {
     position: relative;
     width: 100%;
-    max-width: 400px;
+    max-width: 380px;
     min-height: 80vh; /* Altura mínima para el contenedor */
     margin: 0 auto;
     z-index: 10;
@@ -1488,13 +1488,217 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
 </style>
 
 <script>
-  // Estado del flujo
+  // --- Translation Logic ---
+  const appTranslations = {
+    es: {
+      back: "atrás",
+      deviceBack: "atrás",
+      steps: {
+        1: {
+          title: "Crear Cuenta",
+          desc: "Ingresa tu nombre y correo electrónico para empezar. Te enviaremos un código de verificación.",
+        },
+        2: {
+          title: "Verifica tu Correo",
+          descPrefix: "Hemos enviado un código de 6 dígitos a<br /><strong>",
+        },
+        3: {
+          title: "Agrega tu Teléfono",
+          desc: "Te enviaremos un código de verificación por SMS para confirmar tu número de teléfono.",
+        },
+        4: {
+          title: "Verifica tu Teléfono",
+          descPrefix: "Hemos enviado un código de 6 dígitos a<br /><strong>",
+        },
+        5: {
+          title: "Completa tu Perfil",
+          desc: "Completa la información restante para finalizar la configuración de tu cuenta.",
+        },
+      },
+      labels: {
+        fullName: "Nombre Completo",
+        email: "Correo",
+        phone: "Número de teléfono",
+        country: "País/Región",
+        password: "Crear Contraseña",
+        confirmPassword: "Confirmar Contraseña",
+        continue: "Continuar →",
+        resend: "¿No recibiste el código? ",
+        resendLink: "Reenviar",
+        verifying: "Verificando...",
+        verified: "¡Verificado!",
+        invalidCode: "Código incorrecto",
+      },
+      placeholders: {
+        name: "John Doe",
+        email: "email@example.com",
+        phone: "55 1234 5678",
+      },
+    },
+    en: {
+      back: "back",
+      deviceBack: "back",
+      steps: {
+        1: {
+          title: "Create Account",
+          desc: "Enter your name and email to start. We'll send you a verification code.",
+        },
+        2: {
+          title: "Verify your Email",
+          descPrefix: "We sent a 6-digit code to<br /><strong>",
+        },
+        3: {
+          title: "Add your Phone",
+          desc: "We'll send you a verification code via SMS to confirm your phone number.",
+        },
+        4: {
+          title: "Verify your Phone",
+          descPrefix: "We sent a 6-digit code to<br /><strong>",
+        },
+        5: {
+          title: "Complete Profile",
+          desc: "Complete the remaining information to finish setting up your account.",
+        },
+      },
+      labels: {
+        fullName: "Full Name",
+        email: "Email",
+        phone: "Phone Number",
+        country: "Country/Region",
+        password: "Create Password",
+        confirmPassword: "Confirm Password",
+        continue: "Continue →",
+        resend: "Didn't receive code? ",
+        resendLink: "Resend",
+        verifying: "Verifying...",
+        verified: "Verified!",
+        invalidCode: "Invalid Code",
+      },
+      placeholders: {
+        name: "John Doe",
+        email: "email@example.com",
+        phone: "55 1234 5678",
+      },
+    },
+  };
+
+  // State
   let currentStep = 1;
   let formData: Record<string, any> = {};
   let validationErrors: Record<string, string> = {};
   let emailOTPStatus = "idle";
   let phoneOTPStatus = "idle";
-  let currentLang = localStorage.getItem("ui-language") || "ES";
+
+  // Language State
+  const detectBrowserLanguage = () => {
+    const locale =
+      (navigator.languages && navigator.languages[0]) ||
+      navigator.language ||
+      "";
+    return locale.toLowerCase().startsWith("es") ? "es" : "en";
+  };
+
+  let currentLang = (
+    localStorage.getItem("ui-language") || detectBrowserLanguage()
+  ).toUpperCase();
+
+  function updateAppContent(langRaw: string) {
+    const lang = langRaw.toLowerCase() === "en" ? "en" : "es";
+    currentLang = lang.toUpperCase();
+
+    const t = appTranslations[lang];
+
+    // Update Header
+    const backBtn = document.getElementById("device-back-btn");
+    if (backBtn) backBtn.textContent = "< " + t.deviceBack;
+
+    // Update Form Labels & Placeholders (Step 1)
+    const lblName = document.querySelector(
+      "#form-step-1 .form-field:nth-child(1) label",
+    );
+    if (lblName)
+      lblName.innerHTML = `${t.labels.fullName}<span class="required">*</span>`;
+
+    const lblEmail = document.querySelector(
+      "#form-step-1 .form-field:nth-child(2) label",
+    );
+    if (lblEmail)
+      lblEmail.innerHTML = `${t.labels.email}<span class="required">*</span>`;
+
+    const inputName = document.getElementById("fullName") as HTMLInputElement;
+    if (inputName) inputName.placeholder = t.placeholders.name;
+    const inputEmail = document.getElementById("email") as HTMLInputElement;
+    if (inputEmail) inputEmail.placeholder = t.placeholders.email;
+
+    const btn1 = document.querySelector("#form-step-1 .btn-continuar");
+    if (btn1) btn1.textContent = t.labels.continue;
+
+    // Step 2 (OTP Email)
+    const resendEmail = document.querySelector("#form-step-2 .resend-text");
+    if (resendEmail && resendEmail.childNodes[0]) {
+      resendEmail.childNodes[0].textContent = t.labels.resend;
+      const link = resendEmail.querySelector("a");
+      if (link) link.textContent = t.labels.resendLink;
+    }
+
+    // Step 3 (Phone)
+    const lblCountry = document.querySelector(
+      "#form-step-3 .form-field:nth-child(1) label",
+    );
+    if (lblCountry) lblCountry.innerHTML = `${t.labels.country}`;
+
+    const lblPhone = document.querySelector(
+      "#form-step-3 .form-field:nth-child(2) label",
+    );
+    if (lblPhone)
+      lblPhone.innerHTML = `${t.labels.phone}<span class="required">*</span>`;
+
+    const inputPhone = document.getElementById("phone") as HTMLInputElement;
+    if (inputPhone) inputPhone.placeholder = t.placeholders.phone;
+
+    const btn3 = document.querySelector("#form-step-3 .btn-continuar");
+    if (btn3) btn3.textContent = t.labels.continue;
+
+    // Step 4 (OTP Phone)
+    const resendPhone = document.querySelector("#form-step-4 .resend-text");
+    if (resendPhone && resendPhone.childNodes[0]) {
+      resendPhone.childNodes[0].textContent = t.labels.resend;
+      const link = resendPhone.querySelector("a");
+      if (link) link.textContent = t.labels.resendLink;
+    }
+
+    // Step 5 (Profile)
+    const lblPass = document.querySelector(
+      "#form-step-5 .form-field:nth-child(1) label",
+    );
+    if (lblPass)
+      lblPass.innerHTML = `${t.labels.password}<span class="required">*</span>`;
+
+    const lblConfirm = document.querySelector(
+      "#form-step-5 .form-field:nth-child(2) label",
+    );
+    if (lblConfirm)
+      lblConfirm.innerHTML = `${t.labels.confirmPassword}<span class="required">*</span>`;
+
+    const btn5 = document.querySelector("#form-step-5 .btn-continuar");
+    if (btn5) btn5.textContent = t.labels.continue;
+
+    // Re-render current step instructions
+    showStep(currentStep); // This relies on showStep using currentLang/global translations
+  }
+
+  window.addEventListener("ui:languagechange", (event) => {
+    const customEvent = event as CustomEvent;
+    const lang = customEvent.detail?.language || detectBrowserLanguage();
+    updateAppContent(lang);
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const stored = localStorage.getItem("ui-language");
+    const initialLang =
+      (window as any).__uiLanguage || stored || detectBrowserLanguage();
+    setTimeout(() => updateAppContent(initialLang), 50);
+  });
 
   // Inicializar OTP inputs
   function initOTPInputs(containerId: string) {
@@ -1577,46 +1781,26 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
 
     if (!titleEl || !descEl || !loginLink) return;
 
-    // Aquí se pueden agregar las traducciones dinámicas
-    const steps: Record<
-      number,
-      { title: string; desc?: string; descPrefix?: string }
-    > = {
-      1: {
-        title: "Crear Cuenta",
-        desc: "Ingresa tu nombre y correo electrónico para empezar. Te enviaremos un código de verificación.",
-      },
-      2: {
-        title: "Verifica tu Correo",
-        descPrefix: "Hemos enviado un código de 6 dígitos a<br /><strong>",
-      },
-      3: {
-        title: "Agrega tu Teléfono",
-        desc: "Te enviaremos un código de verificación por SMS para confirmar tu número de teléfono.",
-      },
-      4: {
-        title: "Verifica tu Teléfono",
-        descPrefix: "Hemos enviado un código de 6 dígitos a<br /><strong>",
-      },
-      5: {
-        title: "Completa tu Perfil",
-        desc: "Completa la información restante para finalizar la configuración de tu cuenta.",
-      },
-    };
+    // Use global translations
+    const lang = currentLang.toLowerCase() === "en" ? "en" : "es";
+    const t = appTranslations[lang];
+    const steps = t.steps;
 
-    titleEl.textContent = steps[step].title;
+    if (steps && steps[step]) {
+      titleEl.textContent = steps[step].title;
 
-    if (step === 2 && steps[step].descPrefix) {
-      descEl.innerHTML =
-        steps[step].descPrefix + (formData as any).email + "</strong>";
-      loginLink.style.display = "none";
-    } else if (step === 4 && steps[step].descPrefix) {
-      descEl.innerHTML =
-        steps[step].descPrefix + (formData as any).phone + "</strong>";
-      loginLink.style.display = "none";
-    } else {
-      descEl.innerHTML = steps[step].desc || "";
-      loginLink.style.display = step === 5 ? "block" : "none";
+      if (step === 2 && steps[step].descPrefix) {
+        descEl.innerHTML =
+          steps[step].descPrefix + (formData as any).email + "</strong>";
+        loginLink.style.display = "none";
+      } else if (step === 4 && steps[step].descPrefix) {
+        descEl.innerHTML =
+          steps[step].descPrefix + (formData as any).phone + "</strong>";
+        loginLink.style.display = "none";
+      } else {
+        descEl.innerHTML = steps[step].desc || "";
+        loginLink.style.display = step === 5 ? "block" : "none";
+      }
     }
 
     updateProgressDots(step);

@@ -22,7 +22,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
             stroke-linecap="round"
             stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg
           >
-          Atrás
+          <span id="cards-back-text">Atrás</span>
         </button>
         <!-- Logo centered -->
         <div
@@ -155,7 +155,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                 >
                 <span
                   class="text-[10px] font-bold tracking-wide label-text block"
-                  >Número</span
+                  id="cards-label-number">Número</span
                 >
               </div>
             </div>
@@ -184,7 +184,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                 >
                 <span
                   class="text-[10px] font-bold tracking-wide label-text hidden"
-                  >Billetera</span
+                  id="cards-label-wallet">Billetera</span
                 >
               </div>
             </div>
@@ -213,7 +213,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                 >
                 <span
                   class="text-[10px] font-bold tracking-wide label-text hidden"
-                  >Congelar</span
+                  id="cards-label-freeze">Congelar</span
                 >
               </div>
             </div>
@@ -239,7 +239,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                 >
                 <span
                   class="text-[10px] font-bold tracking-wide label-text hidden"
-                  >Seguridad</span
+                  id="cards-label-security">Seguridad</span
                 >
               </div>
             </div>
@@ -267,7 +267,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                 >
                 <span
                   class="text-[10px] font-bold tracking-wide label-text hidden"
-                  >Más</span
+                  id="cards-label-more">Más</span
                 >
               </div>
             </div>
@@ -293,7 +293,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                 >
                 <span
                   class="text-[10px] font-bold tracking-wide label-text hidden"
-                  >Bloquear</span
+                  id="cards-label-lock">Bloquear</span
                 >
               </div>
             </div>
@@ -303,16 +303,24 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
         <!-- Static Text Info -->
         <div class="px-8 mt-10 space-y-4">
           <div class="flex justify-between items-center">
-            <span class="text-sm font-medium text-gray-500"
-              >Tipo de Tarjeta</span
+            <span
+              class="text-sm font-medium text-gray-500"
+              id="cards-cardtype-label">Tipo de Tarjeta</span
             >
-            <span class="text-base font-semibold text-gray-900"
-              >Crédito Virtual</span
+            <span
+              class="text-base font-semibold text-gray-900"
+              id="cards-cardtype-value">Crédito Virtual</span
             >
           </div>
           <div class="flex justify-between items-center">
-            <span class="text-sm font-medium text-gray-500">Cuenta</span>
-            <span class="text-base font-semibold text-gray-900">Crédito</span>
+            <span
+              class="text-sm font-medium text-gray-500"
+              id="cards-account-label">Cuenta</span
+            >
+            <span
+              class="text-base font-semibold text-gray-900"
+              id="cards-account-value">Crédito</span
+            >
           </div>
         </div>
       </div>
@@ -374,14 +382,19 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
             <div id="content-number" class="w-full space-y-4">
               <div class="space-y-3">
                 <div class="flex justify-between items-center py-2">
-                  <span class="text-xs text-gray-500">Número de tarjeta</span>
+                  <span
+                    class="text-xs text-gray-500"
+                    id="cards-cardnumber-label">Número de tarjeta</span
+                  >
                   <span
                     class="text-sm font-semibold text-gray-900 font-mono tracking-wide"
                     >**** **** **** 1234</span
                   >
                 </div>
                 <div class="flex justify-between items-center py-2">
-                  <span class="text-xs text-gray-500">Fecha de expiración</span>
+                  <span class="text-xs text-gray-500" id="cards-expiry-label"
+                    >Fecha de expiración</span
+                  >
                   <span class="text-sm font-semibold text-gray-900">12/25</span>
                 </div>
 
@@ -422,6 +435,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                     </div>
                     <p
                       class="text-[10px] text-gray-400 text-right max-w-[150px] leading-tight"
+                      id="cards-cvv-note"
                     >
                       Este CVV se actualiza cada 30 segundos
                     </p>
@@ -900,6 +914,131 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
 
     // Initialize
     updateActionUI("number");
+
+    // --- Translation Logic ---
+    const cardsTranslations = {
+      es: {
+        back: "Atrás",
+        labels: {
+          number: "Número",
+          wallet: "Billetera",
+          freeze: "Congelar",
+          security: "Seguridad",
+          more: "Más",
+          lock: "Bloquear",
+        },
+        cardType: {
+          label: "Tipo de Tarjeta",
+          value: "Crédito Virtual",
+        },
+        account: {
+          label: "Cuenta",
+          value: "Crédito",
+        },
+        sheetTitle: "Detalle de tarjeta",
+        cardNumber: "Número de tarjeta",
+        expiry: "Fecha de expiración",
+        cvvNote: "Este CVV se actualiza cada 30 segundos",
+      },
+      en: {
+        back: "Back",
+        labels: {
+          number: "Number",
+          wallet: "Wallet",
+          freeze: "Freeze",
+          security: "Security",
+          more: "More",
+          lock: "Lock",
+        },
+        cardType: {
+          label: "Card Type",
+          value: "Virtual Credit",
+        },
+        account: {
+          label: "Account",
+          value: "Credit",
+        },
+        sheetTitle: "Card Details",
+        cardNumber: "Card Number",
+        expiry: "Expiration Date",
+        cvvNote: "This CVV updates every 30 seconds",
+      },
+    };
+
+    function updateCardsContent(langRaw: string) {
+      const lang = langRaw.toLowerCase() === "en" ? "en" : "es";
+      const t = cardsTranslations[lang];
+
+      // Back button
+      const backText = document.getElementById("cards-back-text");
+      if (backText) backText.textContent = t.back;
+
+      // Action labels
+      const labelNumber = document.getElementById("cards-label-number");
+      if (labelNumber) labelNumber.textContent = t.labels.number;
+
+      const labelWallet = document.getElementById("cards-label-wallet");
+      if (labelWallet) labelWallet.textContent = t.labels.wallet;
+
+      const labelFreeze = document.getElementById("cards-label-freeze");
+      if (labelFreeze) labelFreeze.textContent = t.labels.freeze;
+
+      const labelSecurity = document.getElementById("cards-label-security");
+      if (labelSecurity) labelSecurity.textContent = t.labels.security;
+
+      const labelMore = document.getElementById("cards-label-more");
+      if (labelMore) labelMore.textContent = t.labels.more;
+
+      const labelLock = document.getElementById("cards-label-lock");
+      if (labelLock) labelLock.textContent = t.labels.lock;
+
+      // Card type and account info
+      const cardTypeLabel = document.getElementById("cards-cardtype-label");
+      if (cardTypeLabel) cardTypeLabel.textContent = t.cardType.label;
+
+      const cardTypeValue = document.getElementById("cards-cardtype-value");
+      if (cardTypeValue) cardTypeValue.textContent = t.cardType.value;
+
+      const accountLabel = document.getElementById("cards-account-label");
+      if (accountLabel) accountLabel.textContent = t.account.label;
+
+      const accountValue = document.getElementById("cards-account-value");
+      if (accountValue) accountValue.textContent = t.account.value;
+
+      // Bottom sheet
+      const sheetTitleEl = document.getElementById("sheet-title");
+      if (sheetTitleEl) sheetTitleEl.textContent = t.sheetTitle;
+
+      // Card details
+      const cardNumberLabel = document.getElementById("cards-cardnumber-label");
+      if (cardNumberLabel) cardNumberLabel.textContent = t.cardNumber;
+
+      const expiryLabel = document.getElementById("cards-expiry-label");
+      if (expiryLabel) expiryLabel.textContent = t.expiry;
+
+      const cvvNote = document.getElementById("cards-cvv-note");
+      if (cvvNote) cvvNote.textContent = t.cvvNote;
+    }
+
+    // Listen for language change
+    window.addEventListener("ui:languagechange", (event) => {
+      const customEvent = event as CustomEvent;
+      const lang = customEvent.detail?.language || "es";
+      updateCardsContent(lang);
+    });
+
+    // Initial language setup
+    const storedLang = localStorage.getItem("ui-language");
+    const detectBrowserLang = () => {
+      const locale =
+        (navigator.languages && navigator.languages[0]) ||
+        navigator.language ||
+        "";
+      return locale.toLowerCase().startsWith("es") ? "es" : "en";
+    };
+    const initialLang =
+      (window as any).__uiLanguage || storedLang || detectBrowserLang();
+    setTimeout(() => updateCardsContent(initialLang), 50);
   });
 </script>
 
@@ -913,7 +1052,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
   .device-container {
     position: relative;
     width: 100%;
-    max-width: 400px;
+    max-width: 380px;
     min-height: 80vh; /* Altura mínima para el contenedor */
     margin: 0 auto;
     z-index: 10;
