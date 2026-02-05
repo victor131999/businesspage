@@ -3,6 +3,7 @@ export const AUTH_TRANSLATIONS = {
     en: {
         preview: {
             loginTitle: "Sign In",
+            welcomeBack: "Welcome back",
             providerAction: "Continue with",
             or: "or",
             phoneLabel: "Phone Number",
@@ -43,6 +44,7 @@ export const AUTH_TRANSLATIONS = {
             successAnimation: "Verified successfully!",
             didntReceiveCodeShort: "Didn't receive?",
             resend: "Resend",
+            registrationCompleted: "Registration completed! (Demo)",
         },
         registrationFields: {
             username: "Username",
@@ -53,10 +55,19 @@ export const AUTH_TRANSLATIONS = {
             idNumber: "ID Number",
             birthDate: "Date of Birth",
         },
+        errors: {
+            fullNameMin: "Full name must be at least 2 characters",
+            invalidEmail: "Invalid email",
+            invalidPhone: "Invalid phone number",
+            passwordMin: "Password must be at least 8 characters",
+            invalidIdNumber: "Invalid ID number",
+            birthDateRequired: "Date of birth is required",
+        },
     },
     es: {
         preview: {
             loginTitle: "Iniciar sesión",
+            welcomeBack: "Bienvenido de nuevo",
             providerAction: "Continuar con",
             or: "o",
             phoneLabel: "Número de teléfono",
@@ -97,6 +108,7 @@ export const AUTH_TRANSLATIONS = {
             successAnimation: "¡Verificado exitosamente!",
             didntReceiveCodeShort: "¿No recibiste?",
             resend: "Reenviar",
+            registrationCompleted: "¡Registro completado! (Demo)",
         },
         registrationFields: {
             username: "Nombre de usuario",
@@ -106,6 +118,14 @@ export const AUTH_TRANSLATIONS = {
             email: "Correo electrónico",
             idNumber: "Cédula de ciudadanía",
             birthDate: "Fecha de nacimiento",
+        },
+        errors: {
+            fullNameMin: "El nombre debe tener al menos 2 caracteres",
+            invalidEmail: "Correo electrónico inválido",
+            invalidPhone: "Número de teléfono inválido",
+            passwordMin: "La contraseña debe tener al menos 8 caracteres",
+            invalidIdNumber: "Número de documento inválido",
+            birthDateRequired: "Fecha de nacimiento requerida",
         },
     },
 };

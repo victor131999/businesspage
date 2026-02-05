@@ -4,7 +4,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { useInternationalTransfersTranslations } from "./use-international-transfers-translations";
 import { useCTAButtonAnimations } from "@/hooks/use-cta-button-animations";
 
-import { LanguageProvider } from "@/contexts/language-context";
+import { LanguageProvider, useLanguage } from "@/contexts/language-context";
 
 /* -- SlideToConfirm Component -- */
 interface SlideToConfirmProps {
@@ -157,6 +157,7 @@ function SlideToConfirm({ onConfirm, gradientStyle, label, isComplete = false, o
 function TxCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) {
     // Hooks
     const translations = useInternationalTransfersTranslations();
+    const { language } = useLanguage();
 
     // State
     const [currentScreen, setCurrentScreen] = useState<"amount" | "currency-selector" | "contacts" | "summary" | "processing" | "success">("amount");
@@ -205,7 +206,12 @@ function TxCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) {
         { id: "3", name: "Lucía Gómez", date: "12-10-2025", amount: 1250.00, status: "completed" },
     ];
 
-    const formatAmount = (val: number) => new Intl.NumberFormat('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(val);
+    const numberLocale = language === "en" ? "en-US" : "es-MX";
+    const formatAmount = (val: number) =>
+        new Intl.NumberFormat(numberLocale, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+        }).format(val);
 
     // Helper: Wait
     const wait = (ms: number) => new Promise<void>((resolve, reject) => {
@@ -353,7 +359,7 @@ function TxCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) {
                             <svg className="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                             </svg>
-                            <span>Atrás</span>
+                            <span>{translations.preview.header.back}</span>
                         </button>
                     )}
                 </div>
@@ -380,7 +386,8 @@ function TxCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) {
                             <div className="flex-1 overflow-y-auto px-6 pt-6 pb-4">
                                 <div className="mb-4">
                                     <h1 className="text-lg leading-tight whitespace-nowrap" style={{ color: darkenedTitleColor }}>
-                                        <span className="font-normal">Transferencias</span> <span className="font-bold">Internacionales</span>
+                                        <span className="font-normal">{translations.preview.header.titleRegular}</span>{" "}
+                                        <span className="font-bold">{translations.preview.header.titleBold}</span>
                                     </h1>
                                 </div>
                                 <p className="text-base text-black mb-1">{translations.preview.amount.title}</p>
@@ -502,11 +509,11 @@ function TxCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) {
                             </div>
                             <div className="space-y-4 mb-6">
                                 <div><p className="text-xs text-slate-500 mb-1">{translations.preview.summary.recipientLabel}</p><p className="text-base font-semibold text-slate-900">{selectedContactData?.name || ""}</p></div>
-                                <div><p className="text-xs text-slate-500 mb-1">{translations.preview.summary.amountLabel}</p><p className="text-2xl font-bold text-slate-900">{parseFloat(amount || "0").toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} {currency}</p></div>
+                                <div><p className="text-xs text-slate-500 mb-1">{translations.preview.summary.amountLabel}</p><p className="text-2xl font-bold text-slate-900">{parseFloat(amount || "0").toLocaleString(numberLocale, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} {currency}</p></div>
                                 <div className="space-y-2 pt-4 border-t border-slate-200">
-                                    <div className="flex justify-between items-center"><p className="text-sm text-slate-500">{translations.preview.summary.youSend}</p><p className="text-sm font-semibold text-slate-900">{parseFloat(amount).toLocaleString("es-MX", { minimumFractionDigits: 2 })} {currency}</p></div>
+                                    <div className="flex justify-between items-center"><p className="text-sm text-slate-500">{translations.preview.summary.youSend}</p><p className="text-sm font-semibold text-slate-900">{parseFloat(amount).toLocaleString(numberLocale, { minimumFractionDigits: 2 })} {currency}</p></div>
                                     <div className="flex justify-between items-center"><p className="text-sm text-slate-500">{translations.preview.summary.exchangeRate}</p><p className="text-sm font-semibold text-slate-900">1 {currency} = 0.0580 USD</p></div>
-                                    <div className="flex justify-between items-center pt-2 border-t border-slate-200"><p className="text-sm font-bold text-slate-900">Total</p><p className="text-sm font-bold text-slate-900">${(parseFloat(amount) * 0.0580).toLocaleString("es-MX", { minimumFractionDigits: 2 })} USD</p></div>
+                                    <div className="flex justify-between items-center pt-2 border-t border-slate-200"><p className="text-sm font-bold text-slate-900">{translations.preview.success.total}</p><p className="text-sm font-bold text-slate-900">${(parseFloat(amount) * 0.0580).toLocaleString(numberLocale, { minimumFractionDigits: 2 })} USD</p></div>
                                 </div>
                             </div>
                             <SlideToConfirm
@@ -611,9 +618,9 @@ function TxCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) {
                                             <button onClick={() => setIsTransactionDetailsExpanded(false)} className="w-full flex justify-center mb-4"><svg className="w-6 h-6 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg></button>
                                             <h3 className="text-center font-bold mb-6">{translations.preview.success.transactionDetails}</h3>
                                             <div className="space-y-4 text-sm">
-                                                <div><p className="text-slate-500 text-xs">Destinatorio</p><p className="font-semibold">{selectedContactData?.name}</p></div>
-                                                <div><p className="text-slate-500 text-xs">Monto</p><p className="font-semibold">$100.00 USD</p></div>
-                                                <div><p className="text-slate-500 text-xs">Total</p><p className="font-bold">$110.00 USD</p></div>
+                                                <div><p className="text-slate-500 text-xs">{translations.preview.success.recipient}</p><p className="font-semibold">{selectedContactData?.name}</p></div>
+                                                <div><p className="text-slate-500 text-xs">{translations.preview.success.amount}</p><p className="font-semibold">$100.00 USD</p></div>
+                                                <div><p className="text-slate-500 text-xs">{translations.preview.success.total}</p><p className="font-bold">$110.00 USD</p></div>
                                             </div>
                                         </div>
                                     )}

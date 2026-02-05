@@ -1,10 +1,38 @@
 import { useState, useEffect, useRef } from "react";
+import { AML_TRANSLATIONS } from "./aml-translations";
 
 /* -- Main Component -- */
 export default function AmlCard({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) {
+    const [lang, setLang] = useState<keyof typeof AML_TRANSLATIONS>(() => {
+        if (typeof window === "undefined") return "es";
+        const raw =
+            (window as any).__uiLanguage ||
+            (() => {
+                try {
+                    return localStorage.getItem("ui-language");
+                } catch {
+                    return null;
+                }
+            })() ||
+            "ES";
+        return String(raw).toUpperCase() === "EN" ? "en" : "es";
+    });
+
+    useEffect(() => {
+        const handleLanguageChange = (event: Event) => {
+            const customEvent = event as CustomEvent<{ language?: string }>;
+            const next = customEvent.detail?.language;
+            setLang(next && next.toUpperCase() === "EN" ? "en" : "es");
+        };
+
+        window.addEventListener("ui:languagechange", handleLanguageChange);
+        return () => window.removeEventListener("ui:languagechange", handleLanguageChange);
+    }, []);
+
+    const t = AML_TRANSLATIONS[lang];
+
     // State
     const [progress, setProgress] = useState(0);
-    const [currentVerificationText, setCurrentVerificationText] = useState("Verificando en listas internas");
     const [isRunning, setIsRunning] = useState(false);
 
     // Refs
@@ -35,22 +63,12 @@ export default function AmlCard({ isDemoEnabled = true }: { isDemoEnabled?: bool
     const perimeterCircumference = 2 * Math.PI * perimeterProgressRadius;
     const perimeterOffset = perimeterCircumference * (1 - normalizedProgress / 100);
 
-    // Update verification text based on progress
-    useEffect(() => {
-        if (progress < 33) {
-            setCurrentVerificationText("Verificando en listas internas");
-        } else if (progress < 66) {
-            setCurrentVerificationText("Verificando en listas nacionales");
-        } else {
-            setCurrentVerificationText("Verificando en listas globales");
-        }
-    }, [progress]);
+    const stage = progress < 33 ? "internal" : progress < 66 ? "national" : "global";
 
     // Start progress simulation
     const startProgress = async () => {
         while (isRunningRef.current) {
             setProgress(0);
-            setCurrentVerificationText("Verificando en listas internas");
 
             const duration = 5000;
             const interval = 50;
@@ -149,7 +167,7 @@ export default function AmlCard({ isDemoEnabled = true }: { isDemoEnabled?: bool
                 {/* Título */}
                 <div className="text-center mb-6 mt-0">
                     <h2 className="text-xl font-bold leading-tight" style={{ color: themeColor }}>
-                        Escaneando tu rostro
+                        {t.scanningFace}
                     </h2>
                 </div>
 
@@ -205,8 +223,8 @@ export default function AmlCard({ isDemoEnabled = true }: { isDemoEnabled?: bool
                 {/* Sección Inferior */}
                 <div className="flex flex-col mt-auto" style={{ paddingBottom: '16px' }}>
                     <div className="text-center mb-4">
-                        <p className="text-sm text-white mb-1">Completando verificación</p>
-                        <p className="text-base font-bold text-white">{currentVerificationText}</p>
+                        <p className="text-sm text-white mb-1">{t.progressTitle}</p>
+                        <p className="text-base font-bold text-white">{t.stages[stage]}</p>
                     </div>
 
                     {/* Barra de Progreso Horizontal */}
