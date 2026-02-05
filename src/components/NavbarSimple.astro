@@ -85,7 +85,13 @@ import Button from "./design-system/atoms/Button.astro";
     </div>
 
     <div class="simple-navbar__actions">
-      <Button href={demoHref} variant="secondary" dataI18n="navbar.demo">
+      <Button
+        href={demoHref}
+        variant="secondary"
+        size="md"
+        class="simple-navbar__demo-btn"
+        dataI18n="navbar.demo"
+      >
         Demo
       </Button>
       <button
@@ -257,6 +263,10 @@ import Button from "./design-system/atoms/Button.astro";
     display: flex;
     align-items: center;
     gap: 0.75rem;
+  }
+
+  .simple-navbar__demo-btn {
+    flex-shrink: 0;
   }
 
   .simple-navbar__lang {

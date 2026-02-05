@@ -22,6 +22,7 @@ import LoginFormCard from "../components/design-system/molecules/LoginFormCard.a
 import Modal from "../components/design-system/molecules/Modal.astro";
 import TabList from "../components/design-system/molecules/TabList.astro";
 import UnderlineTabs from "../components/design-system/molecules/UnderlineTabs.astro";
+import HighlightPanel from "../components/design-system/molecules/HighlightPanel.astro";
 import ComponentShowcase from "../components/design-system/molecules/ComponentShowcase.astro";
 
 // Organisms
@@ -31,7 +32,7 @@ import SectionTwoCol from "../components/design-system/organisms/SectionTwoCol.a
 import CardTabs from "../components/design-system/organisms/CardTabs.astro";
 
 const navSections = [
-  { id: "overview", label: "Components overview", active: true },
+  { id: "overview", label: "Resumen", active: true },
   { id: "phone-frame", label: "Marco iPhone", expandable: false },
   { id: "atomic-design", label: "Atomic Design", expandable: false },
   { id: "breakpoints", label: "Breakpoints", expandable: false },
@@ -40,20 +41,28 @@ const navSections = [
     id: "atoms",
     label: "Átomos",
     expandable: true,
-    sub: ["Buttons", "Input", "Text", "Title", "IconButton", "Divider"],
+    sub: ["Buttons", "Input", "Title", "Text", "IconButton", "Divider"],
   },
   {
     id: "molecules",
     label: "Moléculas",
     expandable: true,
-    sub: ["EmailQuoteForm", "CtaGroup", "LoginFormCard", "Modal", "TabList"],
+    sub: [
+      "EmailQuoteForm",
+      "CtaGroup",
+      "LoginFormCard",
+      "Modal",
+      "TabList",
+      "UnderlineTabs",
+    ],
   },
   {
     id: "organisms",
     label: "Organismos",
     expandable: true,
-    sub: ["WelcomeHero", "QuoteModalHubSpot", "SectionTwoCol"],
+    sub: ["WelcomeHero", "QuoteModalHubSpot", "SectionTwoCol", "CardTabs"],
   },
+  { id: "icons", label: "Iconos (SVG)", expandable: false },
   { id: "usage", label: "Uso en home", expandable: false },
 ];
 ---
@@ -98,7 +107,7 @@ const navSections = [
           <h1 class="ds-hero__title">Design System Zelify</h1>
           <p class="ds-hero__lead">
             Atomic Design, tokens, componentes y marco tipo iPhone del product
-            showcase. Documentación e ejemplos visuales.
+            showcase. Cada componente incluye ejemplo de código de uso.
           </p>
         </header>
 
@@ -184,7 +193,7 @@ const navSections = [
             Ubicación: <code>src/components/design-system/atoms/</code>
           </p>
 
-          <div class="ds-section__block">
+          <div id="atoms-buttons" class="ds-section__block">
             <ComponentShowcase
               title="Buttons"
               description="Variantes: primary, secondary, ghost, outline. Tamaños: sm, md, lg."
@@ -211,7 +220,7 @@ const navSections = [
             </ComponentShowcase>
           </div>
 
-          <div class="ds-section__block">
+          <div id="atoms-input" class="ds-section__block">
             <ComponentShowcase
               title="Input"
               description="Campos de texto con diferentes estados."
@@ -238,69 +247,100 @@ const navSections = [
             </ComponentShowcase>
           </div>
 
-          <h3 class="ds-section__subtitle">Title</h3>
-          <p class="ds-section__p">Tipografía para encabezados.</p>
-          <div class="ds-preview">
-            <Title level={1} variant="hero">Hero Title (h1)</Title>
-            <Title level={2} variant="section">Section Title (h2)</Title>
-            <Title level={3} variant="card">Card Title (h3)</Title>
+          <div id="atoms-title" class="ds-section__block">
+            <ComponentShowcase
+              title="Title"
+              description="Encabezados con level (1|2|3) y variant (hero, section, card)."
+              code={`<Title level={1} variant="hero">Hero Title (h1)</Title>
+<Title level={2} variant="section">Section Title (h2)</Title>
+<Title level={3} variant="card">Card Title (h3)</Title>`}
+            >
+              <div class="ds-preview__col">
+                <Title level={1} variant="hero">Hero Title (h1)</Title>
+                <Title level={2} variant="section">Section Title (h2)</Title>
+                <Title level={3} variant="card">Card Title (h3)</Title>
+              </div>
+            </ComponentShowcase>
           </div>
 
-          <h3 class="ds-section__subtitle">Text</h3>
-          <p class="ds-section__p">Tipografía para cuerpo de texto.</p>
-          <div class="ds-preview">
-            <Text variant="body"
-              >Body text: The quick brown fox jumps over the lazy dog.</Text
+          <div id="atoms-text" class="ds-section__block">
+            <ComponentShowcase
+              title="Text"
+              description="Cuerpo de texto: variant body, subtitle, caption, muted."
+              code={`<Text variant="body">Body text.</Text>
+<Text variant="subtitle">Subtitle or lead.</Text>
+<Text variant="caption">Caption or metadata.</Text>
+<Text variant="muted">Muted text.</Text>`}
             >
-            <Text variant="subtitle"
-              >Subtitle: A brief description or lead paragraph.</Text
-            >
-            <Text variant="caption"
-              >Caption: Small text for details or metadata.</Text
-            >
-            <Text variant="muted">Muted: Less prominent text.</Text>
-          </div>
-
-          <h3 class="ds-section__subtitle">IconButton</h3>
-          <div class="ds-preview">
-            <div class="ds-preview__row">
-              <IconButton ariaLabel="Play">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"><path d="M8 5v14l11-7z"></path></svg
+              <div class="ds-preview__col">
+                <Text variant="body"
+                  >Body: The quick brown fox jumps over the lazy dog.</Text
                 >
-              </IconButton>
-              <IconButton ariaLabel="Settings">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  ><path d="M12 15a3 3 0 100-6 3 3 0 000 6z"></path><path
-                    d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"
-                  ></path></svg
+                <Text variant="subtitle"
+                  >Subtitle: A brief description or lead.</Text
                 >
-              </IconButton>
-            </div>
+                <Text variant="caption">Caption: Small text for details.</Text>
+                <Text variant="muted">Muted: Less prominent text.</Text>
+              </div>
+            </ComponentShowcase>
           </div>
 
-          <h3 class="ds-section__subtitle">Divider</h3>
-          <div class="ds-preview" style="padding: 2rem;">
-            <p>Content above</p>
-            <Divider />
-            <p>Content below</p>
-            <br />
-            <div
-              style="display: flex; height: 50px; align-items: center; gap: 1rem;"
+          <div id="atoms-icon-button" class="ds-section__block">
+            <ComponentShowcase
+              title="IconButton"
+              description="Botón circular para iconos. Slot: SVG (recomendado 24×24)."
+              code={`<IconButton ariaLabel="Play">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M8 5v14l11-7z"/>
+  </svg>
+</IconButton>`}
             >
-              <span>Left</span>
-              <Divider vertical={true} />
-              <span>Right</span>
-            </div>
+              <div class="ds-preview__row">
+                <IconButton ariaLabel="Play">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"><path d="M8 5v14l11-7z"></path></svg
+                  >
+                </IconButton>
+                <IconButton ariaLabel="Settings">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    ><path d="M12 15a3 3 0 100-6 3 3 0 000 6z"></path><path
+                      d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"
+                    ></path></svg
+                  >
+                </IconButton>
+              </div>
+            </ComponentShowcase>
+          </div>
+
+          <div id="atoms-divider" class="ds-section__block">
+            <ComponentShowcase
+              title="Divider"
+              description="Línea separadora horizontal o vertical."
+              code={`<Divider />
+<Divider vertical={true} />`}
+            >
+              <div class="ds-preview__col" style="padding: 1rem 0;">
+                <p>Content above</p>
+                <Divider />
+                <p>Content below</p>
+                <div
+                  style="display: flex; height: 50px; align-items: center; gap: 1rem; margin-top: 1rem;"
+                >
+                  <span>Left</span>
+                  <Divider vertical={true} />
+                  <span>Right</span>
+                </div>
+              </div>
+            </ComponentShowcase>
           </div>
         </section>
 
@@ -309,60 +349,85 @@ const navSections = [
           <p class="ds-section__p">
             Ubicación: <code>src/components/design-system/molecules/</code>
           </p>
-          <h3 class="ds-section__subtitle">EmailQuoteForm & CtaGroup</h3>
-          <p class="ds-section__p">
-            Formulario de captura de correo y grupo de llamada a la acción.
-          </p>
-          <div class="ds-preview" style="background: #f8f9fa;">
-            <CtaGroup>
-              <EmailQuoteForm />
-            </CtaGroup>
-          </div>
 
-          <h3 class="ds-section__subtitle">LoginFormCard</h3>
-          <p class="ds-section__p">Tarjeta de inicio de sesión completa.</p>
-          <div
-            class="ds-preview"
-            style="background: #f1f5f9; display: flex; justify-content: center;"
-          >
-            <div style="max-width: 400px; width: 100%;">
-              <LoginFormCard
-                title="Iniciar Sesión"
-                subtitle="Accede a tu cuenta"
-              />
-            </div>
-          </div>
-
-          <h3 class="ds-section__subtitle">Modal</h3>
-          <p class="ds-section__p">
-            Ventana modal con overlay. Interactúa con el botón para verla.
-          </p>
-          <div class="ds-preview">
-            <button id="open-demo-modal" class="ds-button ds-button--primary"
-              >Abrir Modal Demo</button
+          <div id="molecules-email-quote" class="ds-section__block">
+            <ComponentShowcase
+              title="EmailQuoteForm & CtaGroup"
+              description="Formulario de captura de correo dentro de un grupo CTA."
+              code={`<CtaGroup>
+  <EmailQuoteForm />
+</CtaGroup>`}
             >
-            <Modal
-              id="demo-modal"
-              ariaLabel="Demo Modal"
-              closeAriaLabel="Cerrar modal"
-            >
-              <div style="text-align: center;">
-                <Title level={2} variant="card">Hola desde el Modal</Title>
-                <p style="color: var(--ds-color-text-muted); margin: 1rem 0;">
-                  Este es un componente modal reutilizable.
-                </p>
-                <div style="margin-top: 1.5rem;">
-                  <button
-                    class="ds-button ds-button--secondary"
-                    onclick="document.getElementById('close-demo-modal').click()"
-                    >Entendido</button
-                  >
-                </div>
+              <div
+                style="background: #f8f9fa; padding: 1rem; border-radius: 8px;"
+              >
+                <CtaGroup>
+                  <EmailQuoteForm />
+                </CtaGroup>
               </div>
-            </Modal>
+            </ComponentShowcase>
           </div>
 
-          <div class="ds-section__block">
+          <div id="molecules-login-form" class="ds-section__block">
+            <ComponentShowcase
+              title="LoginFormCard"
+              description="Tarjeta con título, subtítulo, campos email/password y botón."
+              code={`<LoginFormCard
+  title="Iniciar Sesión"
+  subtitle="Accede a tu cuenta"
+  submitLabel="Ingresa"
+  createAccountText="O crea una nueva cuenta"
+/>`}
+            >
+              <div style="max-width: 400px; margin: 0 auto;">
+                <LoginFormCard
+                  title="Iniciar Sesión"
+                  subtitle="Accede a tu cuenta"
+                />
+              </div>
+            </ComponentShowcase>
+          </div>
+
+          <div id="molecules-modal" class="ds-section__block">
+            <ComponentShowcase
+              title="Modal"
+              description="Ventana modal con overlay y botón cerrar. Requiere JS para toggle is-active."
+              code={`<button id="open-demo-modal">Abrir</button>
+<Modal id="demo-modal" ariaLabel="Demo" closeAriaLabel="Cerrar">
+  <div>Contenido del modal. Cerrar con X o overlay.</div>
+</Modal>`}
+            >
+              <div>
+                <button
+                  id="open-demo-modal"
+                  class="ds-button ds-button--primary">Abrir Modal Demo</button
+                >
+                <Modal
+                  id="demo-modal"
+                  ariaLabel="Demo Modal"
+                  closeAriaLabel="Cerrar modal"
+                >
+                  <div style="text-align: center;">
+                    <Title level={2} variant="card">Hola desde el Modal</Title>
+                    <p
+                      style="color: var(--ds-color-text-muted); margin: 1rem 0;"
+                    >
+                      Este es un componente modal reutilizable.
+                    </p>
+                    <div style="margin-top: 1.5rem;">
+                      <button
+                        class="ds-button ds-button--secondary"
+                        onclick="document.getElementById('close-demo-modal').click()"
+                        >Entendido</button
+                      >
+                    </div>
+                  </div>
+                </Modal>
+              </div>
+            </ComponentShowcase>
+          </div>
+
+          <div id="molecules-tab-list" class="ds-section__block">
             <ComponentShowcase
               title="TabList"
               description="Lista de pestañas tipo botón (pill)."
@@ -408,9 +473,9 @@ const navSections = [
             </ComponentShowcase>
           </div>
 
-          <div class="ds-section__block">
+          <div id="molecules-underline-tabs" class="ds-section__block">
             <ComponentShowcase
-              title="UnderlineTabs (New)"
+              title="UnderlineTabs"
               description="Pestañas minimalistas con borde inferior."
               code={`<UnderlineTabs
   name="demo-underline"
@@ -466,43 +531,97 @@ const navSections = [
           <p class="ds-section__p">
             Ubicación: <code>src/components/design-system/organisms/</code>
           </p>
-          <h3 class="ds-section__subtitle">WelcomeHero</h3>
-          <p class="ds-section__p">
-            Hero section principal. (Visualización reducida por escala)
-          </p>
-          <div
-            class="ds-preview"
-            style="position: relative; overflow: hidden; height: 600px; border: 1px solid #eee;"
-          >
-            <div
-              style="transform: scale(0.8); transform-origin: top center; width: 100%;"
+
+          <div id="organisms-welcome-hero" class="ds-section__block">
+            <ComponentShowcase
+              title="WelcomeHero"
+              description="Hero section principal del product showcase. (Visual reducido por escala)"
+              code={`<WelcomeHero />`}
             >
-              <WelcomeHero />
-            </div>
+              <div
+                style="position: relative; overflow: hidden; height: 520px; border: 1px solid #eee; border-radius: 8px;"
+              >
+                <div
+                  style="transform: scale(0.75); transform-origin: top center; width: 100%;"
+                >
+                  <WelcomeHero />
+                </div>
+              </div>
+            </ComponentShowcase>
           </div>
 
-          <h3 class="ds-section__subtitle">SectionTwoCol</h3>
-          <p class="ds-section__p">
-            Sección de dos columnas con divider opcional.
-          </p>
-          <div class="ds-preview" style="padding: 0;">
-            <SectionTwoCol divider={true} sectionClass="ds-demo-section">
-              <div slot="left" style="padding: 2rem; text-align: right;">
-                <Title level={2} variant="section">Columna Izquierda</Title>
-                <Text
-                  >Contenido alineado a la derecha en la columna izquierda.</Text
-                >
+          <div id="organisms-section-two-col" class="ds-section__block">
+            <ComponentShowcase
+              title="SectionTwoCol"
+              description="Sección de dos columnas con divider opcional, replicando la sección 'Cómo Funciona'."
+              code={`<SectionTwoCol divider={true} sectionClass="my-section">
+  <div slot="left">
+    <Title level={2} variant="hero">¿Cómo Funciona?</Title>
+    <Text variant="body">Descripción del funcionamiento...</Text>
+    <Button variant="secondary">Demo</Button>
+  </div>
+  <div slot="right">
+    <div class="right-bg-panel-demo">
+       <LoginFormCard ... />
+       <IconButton ... />
+    </div>
+  </div>
+</SectionTwoCol>`}
+            >
+              <div style="padding: 0; border: 1px solid #eee;">
+                <SectionTwoCol divider={true}>
+                  <div
+                    slot="left"
+                    style="display: flex; flex-direction: column; gap: 1rem; align-items: flex-start;"
+                  >
+                    <Title
+                      level={2}
+                      variant="hero"
+                      style="font-size: 3rem; line-height: 1.1;"
+                    >
+                      ¿Cómo <br /> Funciona <br /> Zelify?
+                    </Title>
+                    <Text
+                      variant="body"
+                      style="max-width: 440px; margin-top: 1rem;"
+                    >
+                      Zelify integra en una sola plataforma digital:
+                      autenticación y validación de identidad, cumplimiento AML,
+                      digitalización de cuentas, emisión y procesamiento de
+                      tarjetas.
+                    </Text>
+                    <div style="margin-top: 1rem;">
+                      <Button variant="secondary">Demo</Button>
+                    </div>
+                  </div>
+                  <div
+                    slot="right"
+                    style="display: flex; justify-content: flex-end;"
+                  >
+                    <HighlightPanel>
+                      <LoginFormCard
+                        title="Ingreso"
+                        subtitle="Bienvenido de regreso"
+                        submitLabel="Ingresa"
+                        createAccountText="O crea una nueva cuenta"
+                      />
+                      <IconButton ariaLabel="Reproducir" slot="action">
+                        <img
+                          src="/icons/play.svg"
+                          alt=""
+                          width="32"
+                          height="32"
+                        />
+                      </IconButton>
+                    </HighlightPanel>
+                  </div>
+                </SectionTwoCol>
               </div>
-              <div slot="right" style="padding: 2rem;">
-                <Title level={2} variant="section">Columna Derecha</Title>
-                <Text
-                  >Contenido en la columna derecha. El divider está activo.</Text
-                >
-              </div>
-            </SectionTwoCol>
+            </ComponentShowcase>
+            <!-- Removed inline style block as it is now handled by HighlightPanel -->
           </div>
 
-          <div class="ds-section__block">
+          <div id="organisms-card-tabs" class="ds-section__block">
             <ComponentShowcase
               title="CardTabs"
               description="Organismo que combina TabList con páneles de contenido."
@@ -558,6 +677,168 @@ const navSections = [
               </CardTabs>
             </ComponentShowcase>
           </div>
+
+          <div id="organisms-quote-modal" class="ds-section__block">
+            <ComponentShowcase
+              title="QuoteModalHubSpot"
+              description="Modal de cotización con embed de HubSpot Meetings. Se abre desde un CTA en la home."
+              code={`<QuoteModalHubSpot />
+<!-- En la home, un botón abre el modal con id "quote-modal" -->`}
+            >
+              <p class="ds-section__p" style="margin: 0;">
+                Modal usado en la home para solicitar cotización. No se muestra
+                aquí para evitar cargar el iframe de HubSpot.
+              </p>
+            </ComponentShowcase>
+          </div>
+        </section>
+
+        <section id="icons" class="ds-section">
+          <h2 class="ds-section__title">Iconos (SVG)</h2>
+          <p class="ds-section__p">
+            Todos los iconos están en <code>public/icons/</code> en formato SVG, organizados
+            por categoría. Se referencian por ruta absoluta desde la raíz del sitio.
+          </p>
+          <div class="ds-section__block">
+            <h3 class="ds-section__subtitle">Ejemplo de uso</h3>
+            <pre
+              class="ds-showcase__pre"
+              style="background: #1e293b; color: #e2e8f0; padding: 1rem; border-radius: 8px; margin: 0.5rem 0; font-size: 0.85rem;"><code>&lt;img src="/icons/cards/Issuing.svg" alt="Issuing" width="48" height="48" /&gt;
+&lt;img src="/icons/play.svg" alt="Play" /&gt;</code></pre>
+            <p class="ds-section__p">Vista previa de algunos iconos:</p>
+            <div class="ds-icons-preview">
+              <figure>
+                <img
+                  src="/icons/play.svg"
+                  alt="Play"
+                  width="40"
+                  height="40"
+                /><figcaption>/icons/play.svg</figcaption>
+              </figure>
+              <figure>
+                <img
+                  src="/icons/pause.svg"
+                  alt="Pause"
+                  width="40"
+                  height="40"
+                /><figcaption>/icons/pause.svg</figcaption>
+              </figure>
+              <figure>
+                <img
+                  src="/icons/cards/Issuing.svg"
+                  alt="Issuing"
+                  width="40"
+                  height="40"
+                /><figcaption>/icons/cards/Issuing.svg</figcaption>
+              </figure>
+              <figure>
+                <img
+                  src="/icons/auth/authentication.svg"
+                  alt="Auth"
+                  width="40"
+                  height="40"
+                /><figcaption>/icons/auth/authentication.svg</figcaption>
+              </figure>
+              <figure>
+                <img
+                  src="/icons/transfers/internalTransfers.svg"
+                  alt="Transfers"
+                  width="40"
+                  height="40"
+                /><figcaption>/icons/transfers/...</figcaption>
+              </figure>
+            </div>
+          </div>
+          <div class="ds-section__block">
+            <h3 class="ds-section__subtitle">
+              Categorías en <code>public/icons/</code>
+            </h3>
+            <table class="ds-table">
+              <thead
+                ><tr><th>Carpeta</th><th>Ejemplos de archivos</th></tr></thead
+              >
+              <tbody>
+                <tr
+                  ><td><code>aml/</code></td><td
+                    >amlAdverseMedia.svg, amlGlobalList.svg,
+                    amlInternalList.svg, amlTransactionMonitoring.svg</td
+                  ></tr
+                >
+                <tr
+                  ><td><code>auth/</code></td><td
+                    >authentication.svg, deviceInf.svg, geolocation.svg</td
+                  ></tr
+                >
+                <tr
+                  ><td><code>buttonsIcons/</code></td><td
+                    >Bank.svg, workWithUs.svg</td
+                  ></tr
+                >
+                <tr
+                  ><td><code>cards/</code></td><td
+                    >3ds.svg, Issuing.svg, tokenization.svg, digitalWallets.svg,
+                    corporateCards.svg, …</td
+                  ></tr
+                >
+                <tr
+                  ><td><code>connect/</code></td><td
+                    >accessFinancialData.svg, bankAccount.svg,
+                    digitalAccount.svg, linkingSdk.svg, …</td
+                  ></tr
+                >
+                <tr
+                  ><td><code>discount/</code></td><td
+                    >commercialAnalysis.svg, discountPromotion.svg,
+                    merchantGeo.svg, paymentsCommercial.svg</td
+                  ></tr
+                >
+                <tr
+                  ><td><code>identity/</code></td><td
+                    >biometricVerification.svg, documentExtraction.svg,
+                    videoVerification.svg, integrationLayer.svg</td
+                  ></tr
+                >
+                <tr
+                  ><td><code>insurance/</code></td><td
+                    >claims.svg, digitalSales.svg, products.svg, proposals.svg,
+                    renewals.svg, smartQuoting.svg, webhooks.svg</td
+                  ></tr
+                >
+                <tr
+                  ><td><code>matilda/</code></td><td
+                    >behaviorAnalysis.svg, contentMarketing.svg,
+                    personalFinance.svg, promptBasedReporting.svg,
+                    smartSupportChat.svg</td
+                  ></tr
+                >
+                <tr
+                  ><td><code>payments/</code></td><td
+                    >contactMethods.svg, customKeys.svg, expressCheckout.svg,
+                    multiPlatform.svg, qrSdk.svg, recurringPayments.svg,
+                    sdk.svg, tokenization.svg</td
+                  ></tr
+                >
+                <tr
+                  ><td><code>transfers/</code></td><td
+                    >accountBalanceValidation.svg, internalTransfers.svg,
+                    payIn.svg, cashOut.svg, …</td
+                  ></tr
+                >
+                <tr
+                  ><td><code>tx/</code></td><td
+                    >fxQuote.svg, internationalAccount.svg,
+                    internationalSettlement.svg, trackingConfirmation.svg,
+                    transferInitiation.svg</td
+                  ></tr
+                >
+                <tr
+                  ><td><em>raíz</em></td><td
+                    >acceso.svg, maletin.svg, pause.svg, play.svg, Worldicon.svg</td
+                  ></tr
+                >
+              </tbody>
+            </table>
+          </div>
         </section>
 
         <section id="usage" class="ds-section">
@@ -575,8 +856,9 @@ const navSections = [
     </main>
 
     <aside class="ds-on-this-page" aria-label="En esta página">
-      <h2 class="ds-on-this-page__title">On this page</h2>
+      <h2 class="ds-on-this-page__title">En esta página</h2>
       <nav class="ds-on-this-page__nav">
+        <a href="#overview">Resumen</a>
         <a href="#phone-frame">Marco iPhone</a>
         <a href="#atomic-design">Atomic Design</a>
         <a href="#breakpoints">Breakpoints</a>
@@ -584,6 +866,7 @@ const navSections = [
         <a href="#atoms">Átomos</a>
         <a href="#molecules">Moléculas</a>
         <a href="#organisms">Organismos</a>
+        <a href="#icons">Iconos (SVG)</a>
         <a href="#usage">Uso en home</a>
       </nav>
     </aside>
@@ -896,6 +1179,27 @@ const navSections = [
     border-top: 1px solid #e2e8f0;
     font-size: 0.9rem;
     color: #64748b;
+  }
+
+  .ds-icons-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  .ds-icons-preview figure {
+    margin: 0;
+    padding: 1rem;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    text-align: center;
+  }
+  .ds-icons-preview figcaption {
+    font-size: 0.75rem;
+    color: #64748b;
+    margin-top: 0.5rem;
+    word-break: break-all;
   }
 
   /* On this page (derecha) */

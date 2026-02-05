@@ -1,0 +1,243 @@
+---
+/**
+ * Organism: TokensPanel
+ * Sección de dos columnas: izquierda (título, descripción, CTA) y derecha (área para contenido,
+ * video o loop). Incluye botón play/pause opcional para controlar animación del contenido.
+ * Usa átomos: Title, Text, Button.
+ */
+import Title from "../atoms/Title.astro";
+import Text from "../atoms/Text.astro";
+import Button from "../atoms/Button.astro";
+
+interface Props {
+  /** Título principal (ej. "Tokens") */
+  title: string;
+  /** Párrafo descriptivo */
+  description: string;
+  /** URL del botón CTA (ej. Demo) */
+  ctaHref?: string;
+  /** Texto del botón CTA */
+  ctaLabel?: string;
+  /** Mostrar botón play/pause para controlar contenido/animación */
+  showPlayPause?: boolean;
+  /** id del botón play/pause (para que el script de la página lo encuentre) */
+  playPauseId?: string;
+  /** aria-label del botón play/pause */
+  playPauseAriaLabel?: string;
+  /** Clase adicional en la sección */
+  class?: string;
+  /** Atributos para i18n (data-i18n en título, descripción, CTA) */
+  dataI18nTitle?: string;
+  dataI18nDescription?: string;
+  dataI18nCta?: string;
+}
+
+const {
+  title,
+  description,
+  ctaHref,
+  ctaLabel = "Demo",
+  showPlayPause = true,
+  playPauseId = "tokens-play-pause-btn",
+  playPauseAriaLabel = "Reproducir animación",
+  class: className = "",
+  dataI18nTitle,
+  dataI18nDescription,
+  dataI18nCta,
+} = Astro.props;
+---
+
+<section class:list={["ds-tokens-panel", "section-gap-150", className]}>
+  <div class="ds-tokens-panel__container">
+    <div class="ds-tokens-panel__left">
+      <Title level={2} variant="section" class="ds-tokens-panel__title" dataI18n={dataI18nTitle}>
+        {title}
+      </Title>
+      <Text variant="body" class="ds-tokens-panel__description" dataI18n={dataI18nDescription}>
+        {description}
+      </Text>
+      {ctaHref && (
+        <Button
+          href={ctaHref}
+          variant="secondary"
+          class="ds-tokens-panel__cta"
+          dataI18n={dataI18nCta}
+        >
+          {ctaLabel}
+        </Button>
+      )}
+    </div>
+    <div class="ds-tokens-panel__right">
+      <div class="ds-tokens-panel__placeholder">
+        <slot />
+      </div>
+    </div>
+    {showPlayPause && (
+      <Button
+        type="button"
+        variant="icon"
+        id={playPauseId}
+        class="ds-tokens-panel__play-pause"
+        ariaLabel={playPauseAriaLabel}
+        title="Reproducir / Pausar animación"
+      >
+        <img
+          id="tokens-play-icon"
+          src="/icons/play.svg"
+          alt=""
+          width="28"
+          height="28"
+        />
+        <img
+          id="tokens-pause-icon"
+          src="/icons/pause.svg"
+          alt=""
+          width="28"
+          height="28"
+          style="display: none;"
+        />
+      </Button>
+    )}
+  </div>
+</section>
+
+<style is:global>
+  .ds-tokens-panel {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    padding: 0 clamp(1rem, 5vw, 4rem);
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+  }
+
+  .ds-tokens-panel__container {
+    position: relative;
+    max-width: 1400px;
+    width: 100%;
+    background-color: #f0f3f7;
+    border-radius: 20px;
+    padding: 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .ds-tokens-panel__left {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .ds-tokens-panel__title {
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 600;
+    color: #213f8c;
+    margin: 0;
+    line-height: 1.1;
+  }
+
+  .ds-tokens-panel__description {
+    font-size: clamp(1rem, 1.5vw, 1.15rem);
+    line-height: 1.8;
+    color: #213f8c;
+    margin: 0;
+    opacity: 0.8;
+    width: 65%;
+    text-align: left;
+  }
+
+  .ds-tokens-panel__right {
+    position: relative;
+  }
+
+  .ds-tokens-panel__placeholder {
+    width: 100%;
+    min-height: 450px;
+    max-height: 600px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+    overflow: hidden;
+  }
+
+  .ds-tokens-panel__placeholder :global(video) {
+    width: 100%;
+    height: 100%;
+    min-height: 450px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ds-tokens-panel__play-pause {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 56px;
+    height: 56px;
+    z-index: 10;
+  }
+
+  .ds-tokens-panel__play-pause img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+
+  @media (max-width: 900px) {
+    .ds-tokens-panel__container {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    .ds-tokens-panel__left {
+      align-items: center;
+      text-align: center;
+    }
+
+    .ds-tokens-panel__description {
+      width: 100%;
+      text-align: center;
+    }
+
+    .ds-tokens-panel__cta {
+      align-self: center;
+    }
+
+    .ds-tokens-panel__placeholder {
+      min-height: auto;
+      max-height: none;
+      height: auto;
+      overflow: visible;
+    }
+
+    .ds-tokens-panel__right {
+      margin-right: 0;
+    }
+
+    .ds-tokens-panel__placeholder :global(.tokens-dashboard) {
+      transform: none;
+      transform-origin: top center;
+      height: auto !important;
+      min-height: auto !important;
+      max-height: none !important;
+      overflow: visible !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .ds-tokens-panel {
+      padding: 0 1.5rem;
+    }
+
+    .ds-tokens-panel__container {
+      padding: 1.5rem;
+    }
+  }
+</style>

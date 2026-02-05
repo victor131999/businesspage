@@ -4,16 +4,27 @@
  * Niveles: h1 | h2 | h3. Control de tamaño con level y variant (hero, section, card).
  * Responsive: font-size con clamp en hero/section.
  */
-interface Props {
+interface Props extends astroHTML.JSX.HTMLAttributes {
   level?: 1 | 2 | 3;
   variant?: "hero" | "section" | "card";
   class?: string;
   dataI18n?: string;
 }
-const { level = 1, variant = "section", class: className = "", dataI18n } = Astro.props;
+const {
+  level = 1,
+  variant = "section",
+  class: className = "",
+  dataI18n,
+  ...rest
+} = Astro.props;
 const Tag = `h${level}` as "h1" | "h2" | "h3";
 ---
-<Tag class:list={["ds-title", `ds-title--${variant}`, className]} data-i18n={dataI18n}>
+
+<Tag
+  class:list={["ds-title", `ds-title--${variant}`, className]}
+  data-i18n={dataI18n}
+  {...rest}
+>
   <slot />
 </Tag>
 <style is:global>
