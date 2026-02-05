@@ -1,0 +1,212 @@
+---
+/**
+ * Organism: CardTabs
+ * Título (h3), subtítulo muted, TabList/UnderlineTabs y área de contenido.
+ * Usa átomos: Title, Text, Button. Molécula: UnderlineTabs.
+ * Opción tabsAsButtons: mostrar tabs como botones Secondary (verde).
+ */
+import Title from "../atoms/Title.astro";
+import Text from "../atoms/Text.astro";
+import Button from "../atoms/Button.astro";
+import UnderlineTabs from "../molecules/UnderlineTabs.astro";
+
+interface Props {
+  tabs: { value: string; label: string; active?: boolean }[];
+  id: string;
+  title?: string;
+  subtitle?: string;
+  /** Botón secundario debajo del subtítulo (opcional). Ej: { label: "Cards", href: "/cards" } */
+  cta?: { label: string; href?: string };
+  /** Si true, los tabs se muestran como botones Secondary (verde) en lugar de underline */
+  tabsAsButtons?: boolean;
+  /** Si true, el área de contenido se muestra como tarjeta (fondo, 4 esquinas redondeadas) */
+  card?: boolean;
+  class?: string;
+}
+
+const {
+  tabs,
+  id,
+  title,
+  subtitle,
+  cta,
+  tabsAsButtons = false,
+  card = true,
+  class: className = "",
+} = Astro.props;
+---
+
+<div class:list={["ds-card-tabs", className]}>
+  <!-- 1. Tab list -->
+  <div class="ds-card-tabs__header">
+    {
+      tabsAsButtons ? (
+        <div class="ds-card-tabs__tab-buttons" role="tablist">
+          {tabs.map((tab) => (
+            <Button
+              type="button"
+              variant="secondary"
+              role="tab"
+              aria-selected={tab.active ? "true" : "false"}
+              class:list={["ds-card-tabs__tab-btn", tab.active && "active"]}
+              data-tab-group={id}
+              data-tab-value={tab.value}
+            >
+              {tab.label}
+            </Button>
+          ))}
+        </div>
+      ) : (
+        <UnderlineTabs tabs={tabs} name={id} />
+      )
+    }
+  </div>
+
+  <!-- 2. Content area (tarjeta: 4 esquinas redondeadas cuando card=true) -->
+  <div
+    class:list={[
+      "ds-card-tabs__content-area",
+      card && "ds-card-tabs__content-area--card",
+    ]}
+  >
+    <slot />
+  </div>
+
+  <!-- 3. Abajo: título, texto, botón secondary -->
+  {
+    (title || subtitle || cta?.label) && (
+      <div class="ds-card-tabs__outro">
+        {title && (
+          <Title level={3} variant="section" class="ds-card-tabs__title">
+            {title}
+          </Title>
+        )}
+        {subtitle && (
+          <Text variant="muted" class="ds-card-tabs__subtitle">
+            {subtitle}
+          </Text>
+        )}
+        {cta?.label && (
+          <Button variant="secondary" href={cta.href} class="ds-card-tabs__cta">
+            {cta.label}
+          </Button>
+        )}
+      </div>
+    )
+  }
+</div>
+
+<style is:global>
+  .ds-card-tabs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .ds-card-tabs__outro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    max-width: 720px;
+  }
+
+  .ds-card-tabs__title {
+    margin: 0;
+  }
+
+  .ds-card-tabs__subtitle {
+    margin: 0;
+    text-align: center;
+  }
+
+  .ds-card-tabs__cta {
+    margin-top: 0.25rem;
+  }
+
+  .ds-card-tabs__tab-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .ds-card-tabs__tab-btn.active {
+    /* Refuerza estado activo si el JS añade clase */
+    box-shadow: var(--ds-shadow-cta-hover, 0 4px 14px rgba(0, 0, 0, 0.15));
+  }
+
+  .ds-card-tabs__content-area {
+    width: 100%;
+    border-radius: var(--ds-radius-lg, 20px);
+    overflow: hidden;
+    min-height: 100px;
+    position: relative;
+    text-align: left;
+  }
+
+  /* Tarjeta: 4 esquinas redondeadas y fondo para que se vea consistente */
+  .ds-card-tabs__content-area--card {
+    background: var(--ds-color-bg-subtle, #f8f9fa);
+    border-radius: var(--ds-radius-lg, 20px);
+    overflow: hidden;
+  }
+
+  .ds-card-tabs__content-area--card > * {
+    border-radius: var(--ds-radius-lg, 20px);
+    overflow: hidden;
+  }
+</style>
+
+<script>
+  function setupCardTabs() {
+    const tabGroups = document.querySelectorAll(".ds-card-tabs");
+
+    tabGroups.forEach((group) => {
+      const tabs = group.querySelectorAll('[role="tab"]');
+      const panels = group.querySelectorAll(".bench-content-panel");
+
+      // Helper function to switch tab
+      const activateTab = (activeValue: string) => {
+        // Update tab buttons
+        tabs.forEach((tab) => {
+          const tabValue = tab.getAttribute("data-tab-value");
+          if (tabValue === activeValue) {
+            tab.setAttribute("aria-selected", "true");
+            tab.classList.add("active");
+          } else {
+            tab.setAttribute("aria-selected", "false");
+            tab.classList.remove("active");
+          }
+        });
+
+        // Update content panels
+        panels.forEach((panel) => {
+          const panelValue = panel.getAttribute("data-card-content");
+          if (panelValue === activeValue) {
+            (panel as HTMLElement).style.display = "flex";
+          } else {
+            (panel as HTMLElement).style.display = "none";
+          }
+        });
+      };
+
+      // Add click listeners
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const value = tab.getAttribute("data-tab-value");
+          if (value) activateTab(value);
+        });
+      });
+    });
+  }
+
+  // Run on initial load
+  setupCardTabs();
+
+  // Run on view transitions navigation
+  document.addEventListener("astro:page-load", setupCardTabs);
+</script>

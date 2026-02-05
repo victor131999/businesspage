@@ -11,18 +11,21 @@ interface Props {
 }
 const { tabs, dataAttr = "data-bench", class: className = "" } = Astro.props;
 ---
+
 <div class:list={["ds-tab-list", "bench-tabs", className]} role="tablist">
-  {tabs.map((tab, i) => (
-    <button
-      type="button"
-      class:list={["ds-tab-list__tab", "bench-tab", tab.active && "active"]}
-      role="tab"
-      aria-selected={tab.active ? "true" : "false"}
-      {...{ [dataAttr]: tab.value }
-    >
-      {tab.label}
-    </button>
-  ))}
+  {
+    tabs.map((tab, i) => (
+      <button
+        type="button"
+        class:list={["ds-tab-list__tab", "bench-tab", tab.active && "active"]}
+        role="tab"
+        aria-selected={tab.active ? "true" : "false"}
+        {...{ [dataAttr]: tab.value }}
+      >
+        {tab.label}
+      </button>
+    ))
+  }
 </div>
 <style is:global>
   .ds-tab-list {
@@ -39,7 +42,9 @@ const { tabs, dataAttr = "data-bench", class: className = "" } = Astro.props;
     font-size: var(--ds-font-size-sm, 1rem);
     color: var(--ds-color-text);
     cursor: pointer;
-    transition: background 0.2s ease, border-color 0.2s ease;
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease;
   }
   .ds-tab-list__tab:hover,
   .ds-tab-list__tab.active {

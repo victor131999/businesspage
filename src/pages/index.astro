@@ -6,6 +6,8 @@ import ProductsPanel from "../components/productsPanel.astro";
 import WelcomeHero from "../components/design-system/organisms/WelcomeHero.astro";
 import QuoteModalHubSpot from "../components/design-system/organisms/QuoteModalHubSpot.astro";
 import Button from "../components/design-system/atoms/Button.astro";
+import Title from "../components/design-system/atoms/Title.astro";
+import Text from "../components/design-system/atoms/Text.astro";
 import LoginFormCard from "../components/design-system/molecules/LoginFormCard.astro";
 import AuthProd from "../components/product-cards/auth-prod.astro";
 import IdentityProd from "../components/product-cards/identity-prod.astro";
@@ -19,6 +21,7 @@ import AlaizaProd from "../components/product-cards/alaiza-prod.astro";
 import TokensProd from "../components/tokens/tokens-prod.astro";
 import { AlaizaAssistant } from "../components/AlaizaAssistant";
 import DeviceFrame from "@/components/design-system/organisms/device-frame/DeviceFrame.astro";
+import CardTabs from "../components/design-system/organisms/CardTabs.astro";
 
 // Configuración del navbar con tema claro/blanco
 const navbarColors = {
@@ -790,82 +793,82 @@ const modulesList = [
       </div>
     </section>
 
-    <section class="bench-section section-gap-200">
+   <section class="bench-section section-gap-200">
       <div class="bench-section-2-content">
-        <div class="bench-tabs">
-          <Button
-            type="button"
-            variant="outline"
-            class="bench-tab active"
-            data-bench="1">Borderless</Button
-          >
-          <Button
-            type="button"
-            variant="outline"
-            class="bench-tab"
-            data-bench="2">Bench 2</Button
-          >
-          <Button
-            type="button"
-            variant="outline"
-            class="bench-tab"
-            data-bench="3">Bench 3</Button
-          >
-          <Button
-            type="button"
-            variant="outline"
-            class="bench-tab"
-            data-bench="4">Bench 4</Button
-          >
-        </div>
-
-        <div class="bench-content-area">
-          <div class="bench-content-placeholder" data-bench-content="1">
-            <!-- Contenido para Bench 1 -->
-            <video
-              class="bench-video"
-              autoplay
-              muted
-              loop
-              playsinline
-              preload="metadata"
-            >
-              <source
-                src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/cards_bench_clip.mp4"
-                type="video/mp4"
-              />
-            </video>
-          </div>
+        <CardTabs
+          id="home-bench-tabs"
+          cta={{ label: "Borderless", href: "/cards" }}
+          tabs={[
+            { value: "bench1", label: "Borderless", active: true },
+            { value: "bench2", label: "Plug & Play" },
+            { value: "bench3", label: "Custom Made" },
+            { value: "bench4", label: "On-Demand" },
+          ]}
+          class="bench-section-tabs"
+        >
+          <!-- Borderless: video + título y subtítulo -->
           <div
-            class="bench-content-placeholder"
-            data-bench-content="2"
-            style="display: none;"
+            class="bench-content-placeholder bench-content-panel"
+            data-card-content="bench1"
           >
-            aui nuevo contenido
+            <div class="bench-video-wrapper">
+              <video
+                class="bench-video"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+              >
+                <source
+                  src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/cards_bench_clip.mp4"
+                  type="video/mp4"
+                />
+              </video>
+            </div>
+            <div class="bench-panel-copy">
+              <Title level={3} variant="card" class="bench-panel-title">Tarjetas internacionales al instante</Title>
+              <Text variant="body" class="bench-panel-text">
+                Emite tarjetas y personalízalas de forma inmediata y sin fronteras, listas para usarse en compras y pagos a nivel global.
+              </Text>
+            </div>
           </div>
-        </div>
-
-        <div class="bench-text-content">
-          <h2 class="bench-title" data-i18n="home.bench.title">
-            Paga solo lo que usas
-          </h2>
-          <p class="bench-subtitle" data-i18n="home.bench.subtitle">
-            y escala sin fricción con los precios más bajos del mercado.
-          </p>
-        </div>
-
-        <div class="bench-cta">
-          <Button
-            type="button"
-            variant="secondary"
-            class="bench-cta-button"
-            dataI18n="home.bench.button"
+          <!-- Plug & Play -->
+          <div
+            class="bench-content-placeholder bench-content-panel"
+            data-card-content="bench2"
+            style="display: none; min-height: 320px;"
           >
-            Cards
-          </Button>
-        </div>
+            <Title level={3} variant="card" class="bench-panel-title">Una sola integración</Title>
+            <Text variant="body" class="bench-panel-text">
+              Digitalizamos servicios financieros completos para instituciones con una única línea de código, reduciendo tiempo, costos y complejidad.
+            </Text>
+          </div>
+          <!-- Custom Made -->
+          <div
+            class="bench-content-placeholder bench-content-panel"
+            data-card-content="bench3"
+            style="display: none; min-height: 320px;"
+          >
+            <Title level={3} variant="card" class="bench-panel-title">Sistema modular</Title>
+            <Text variant="body" class="bench-panel-text">
+              Elige y combina solo los productos que tu negocio necesita, con la flexibilidad de escalar o ajustar según tus objetivos.
+            </Text>
+          </div>
+          <!-- On-Demand -->
+          <div
+            class="bench-content-placeholder bench-content-panel"
+            data-card-content="bench4"
+            style="display: none; min-height: 320px;"
+          >
+            <Title level={3} variant="card" class="bench-panel-title">Pay As You Go</Title>
+            <Text variant="body" class="bench-panel-text">
+              Sin paquetes rígidos ni compromisos innecesarios: paga únicamente por los servicios que usas.
+            </Text>
+          </div>
+        </CardTabs>
       </div>
-    </section>
+    </section> 
 
     <section class="tokens-section section-gap-150">
       <div class="tokens-container">
@@ -2126,11 +2129,85 @@ const modulesList = [
 
   .bench-content-placeholder {
     width: 100%;
-    height: 100%;
     min-height: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: var(--ds-radius-lg, 20px);
+    overflow: hidden;
+  }
+
+  .bench-content-placeholder[data-card-content="borderless"],
+  .bench-content-placeholder[data-card-content="bench1"] {
+    position: relative;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* Wrapper solo recorta la parte superior del video; evita recorte feo en esquinas inferiores */
+  .bench-video-wrapper {
+    flex: 0 0 auto;
+    max-height: 380px;
+    border-radius: var(--ds-radius-lg, 20px) var(--ds-radius-lg, 20px) 0 0;
+    overflow: hidden;
+  }
+
+  .bench-content-placeholder[data-card-content="borderless"] .bench-video,
+  .bench-content-placeholder[data-card-content="bench1"] .bench-video {
+    width: 100%;
+    height: 100%;
+    max-height: 380px;
+    object-fit: cover;
+    display: block;
+    vertical-align: top;
+  }
+
+  .bench-panel-copy {
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: center;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .bench-content-placeholder[data-card-content="borderless"] .bench-panel-copy,
+  .bench-content-placeholder[data-card-content="bench1"] .bench-panel-copy {
+    background: var(--ds-color-bg, #fff);
+    border-radius: 0 0 var(--ds-radius-lg, 20px) var(--ds-radius-lg, 20px);
+    /* Evita línea/corte visible: solapa 1px con el video para cerrar la unión */
+    margin-top: -1px;
+    padding-top: calc(1.5rem + 1px);
+  }
+
+  .bench-content-panel:not([data-card-content="borderless"]):not([data-card-content="bench1"]) {
+    padding: 2.5rem 2rem;
+    flex-direction: column;
+    gap: 1.25rem;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: var(--ds-color-bg-subtle, #f8f9fa);
+    border-radius: var(--ds-radius-lg, 20px);
+  }
+
+  .bench-panel-title {
+    margin: 0;
+  }
+
+  .bench-panel-text {
+    margin: 0;
+    max-width: 520px;
+  }
+
+  .bench-panel-cta {
+    margin-top: 0.25rem;
+  }
+
+  .bench-placeholder-text {
+    color: var(--ds-color-text-light, #64748b);
+    font-size: 1rem;
   }
 
   .bench-video {
@@ -2139,33 +2216,6 @@ const modulesList = [
     display: block;
     object-fit: cover;
   }
-
-  .bench-text-content {
-    text-align: center;
-    max-width: 800px;
-  }
-
-  .bench-title {
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 600;
-    color: #00223e;
-    margin: 0 0 1rem 0;
-    line-height: 1.2;
-  }
-
-  .bench-subtitle {
-    font-size: clamp(1rem, 1.5vw, 1.2rem);
-    color: #213f8c;
-    margin: 0;
-    line-height: 1.6;
-  }
-
-  .bench-cta {
-    display: flex;
-    justify-content: center;
-  }
-
-  /* bench-cta-button: átomo Button secondary */
 
   /* Tokens Section */
   .tokens-section {
@@ -3609,7 +3659,8 @@ const modulesList = [
       "[data-close-quote-modal]",
     );
 
-    const MEETINGS_BASE_URL = "https://meetings.hubspot.com/eramos5?embed=true";
+    const MEETINGS_BASE_URL =
+      "https://meetings.hubspot.com/gmantilla?embed=true";
 
     const openQuoteModal = () => {
       if (!quoteModal) return;
@@ -3753,7 +3804,6 @@ const modulesList = [
         updateActionCard(actionId);
       });
     });
-
     // Initialize with first active button
     const firstActive = document.querySelector(".action-nav-button.active");
     if (firstActive) {
@@ -3762,5 +3812,45 @@ const modulesList = [
         updateActionCard(firstActionId);
       }
     }
+  });
+
+  // Home Bench Tabs Logic (CardTabs)
+  document.addEventListener("DOMContentLoaded", () => {
+    const benchTabButtons = document.querySelectorAll(
+      "button[data-tab-group='home-bench-tabs']",
+    );
+    const benchContents = document.querySelectorAll(
+      ".bench-section .bench-content-placeholder",
+    );
+    const benchCardTabs = document.querySelector(
+      ".bench-section-tabs.ds-card-tabs",
+    );
+    const benchCtaBtn = benchCardTabs?.querySelector(".ds-card-tabs__cta");
+
+    benchTabButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const val = btn.getAttribute("data-tab-value");
+
+        // Update active state
+        benchTabButtons.forEach((b) => {
+          const isActive = b.getAttribute("data-tab-value") === val;
+          b.classList.toggle("active", isActive);
+          b.setAttribute("aria-selected", isActive ? "true" : "false");
+        });
+
+        // Update content (flex para centrar placeholders)
+        benchContents.forEach((c) => {
+          if (c instanceof HTMLElement && c.hasAttribute("data-card-content")) {
+            c.style.display =
+              c.getAttribute("data-card-content") === val ? "flex" : "none";
+          }
+        });
+
+        // CTA button muestra el label del tab activo
+        if (benchCtaBtn && btn.textContent) {
+          benchCtaBtn.textContent = btn.textContent.trim();
+        }
+      });
+    });
   });
 </script>
