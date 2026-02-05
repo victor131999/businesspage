@@ -1,11 +1,16 @@
 import { useState, useRef, useEffect } from "react";
+import { LanguageProvider } from "@/contexts/language-context";
+import { useLanguageTranslations } from "@/hooks/use-language-translations";
+import { DISCOUNTS_TRANSLATIONS } from "./discounts-translations";
 
 /* -- Types -- */
 type Step = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
 type PlanType = "free" | "premium";
 
 /* -- Main Component -- */
-export default function DiscountsCard({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) {
+function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) {
+    const t = useLanguageTranslations(DISCOUNTS_TRANSLATIONS);
+
     // State
     const [step, setStep] = useState<Step>(1);
     const [selectedPlan, setSelectedPlan] = useState<PlanType>("free");
@@ -44,20 +49,11 @@ export default function DiscountsCard({ isDemoEnabled = true }: { isDemoEnabled?
     const plans = {
         free: {
             price: "$0",
-            features: [
-                "Hasta 3 promociones activas",
-                "Análisis básico de descuentos",
-                "Soporte por email",
-            ],
+            features: t.plans.free.features,
         },
         premium: {
             price: "$29",
-            features: [
-                "Promociones ilimitadas",
-                "Análisis avanzado",
-                "Soporte prioritario",
-                "API personalizada",
-            ],
+            features: t.plans.premium.features,
         },
     };
 
@@ -143,10 +139,10 @@ export default function DiscountsCard({ isDemoEnabled = true }: { isDemoEnabled?
 
                 // Step 2: Basic Information
                 await wait(1500);
-                for (let i = 0; i <= "Mi Negocio".length; i++) {
+                for (let i = 0; i <= t.step2.demoBusinessName.length; i++) {
                     if (abortDemo.current) break;
                     await wait(50);
-                    setBusinessName("Mi Negocio".slice(0, i));
+                    setBusinessName(t.step2.demoBusinessName.slice(0, i));
                 }
                 await wait(500);
                 for (let i = 0; i <= "1234567890".length; i++) {
@@ -252,7 +248,7 @@ export default function DiscountsCard({ isDemoEnabled = true }: { isDemoEnabled?
                     onClick={() => setStep((prev) => (prev > 1 ? (prev - 1) as Step : 1))}
                     className="absolute left-6 text-xs text-gray-500 hover:text-gray-700 flex items-center"
                 >
-                    ← Atrás
+                    ← {t.common.back}
                 </button>
             )}
             <div className="flex items-center justify-center">
@@ -280,7 +276,7 @@ export default function DiscountsCard({ isDemoEnabled = true }: { isDemoEnabled?
                     boxShadow: `0 4px 14px 0 ${themeColor}40`,
                 }}
             >
-                <span className="relative z-10 mr-0">Continuar</span>
+                <span className="relative z-10 mr-0">{t.common.continue}</span>
                 <span className="absolute right-6 z-10 transition-transform group-hover:translate-x-1">&gt;</span>
             </button>
         );
@@ -308,11 +304,11 @@ export default function DiscountsCard({ isDemoEnabled = true }: { isDemoEnabled?
                     {isActive ? (
                         <div className="w-full flex flex-col items-center px-4">
                             <h3 className="text-xs text-white mb-0">
-                                {planKey === "free" ? "Gratis" : "Premium"}
+                                {t.plans[planKey].name}
                             </h3>
                             <div className="flex items-center justify-center gap-1 mb-5">
                                 <span className="text-xl text-white">{plan.price}</span>
-                                <span className="text-xs text-white/70">/mes</span>
+                                <span className="text-xs text-white/70">{t.common.perMonth}</span>
                             </div>
                             <div className="space-y-1.5 text-center w-full">
                                 {plan.features.slice(0, 4).map((feature, idx) => (
@@ -324,7 +320,7 @@ export default function DiscountsCard({ isDemoEnabled = true }: { isDemoEnabled?
                         </div>
                     ) : (
                         <span className="text-white text-base tracking-wide">
-                            {planKey === "free" ? "Gratis" : "Premium"}
+                            {t.plans[planKey].name}
                         </span>
                     )}
                 </div>
@@ -335,10 +331,10 @@ export default function DiscountsCard({ isDemoEnabled = true }: { isDemoEnabled?
             <div className="flex flex-col h-full bg-white relative overflow-hidden">
                 <div className="absolute top-[165px] z-50 flex flex-col items-center justify-center w-full pointer-events-none">
                     <h2 className="text-2xl font-bold" style={{ color: themeColor }}>
-                        Negocio
+                        {t.step1.title}
                     </h2>
                     <p className="text-gray-500 font-medium tracking-wide text-xs">
-                        Elige un plan
+                        {t.step1.subtitle}
                     </p>
                 </div>
 
@@ -395,10 +391,10 @@ export default function DiscountsCard({ isDemoEnabled = true }: { isDemoEnabled?
                 >
                     <div className="flex flex-col items-center justify-center text-center w-full mb-4">
                         <h2 className="text-2xl font-bold text-black mb-1">
-                            Negocio
+                            {t.step2.title}
                         </h2>
                         <p className="text-gray-400 text-sm mb-4">
-                            Completa los campos para continuar
+                            {t.step2.subtitle}
                         </p>
                     </div>
 
@@ -406,25 +402,25 @@ export default function DiscountsCard({ isDemoEnabled = true }: { isDemoEnabled?
                         <div className="space-y-4">
                             <div className="space-y-2">
                                 <label className="text-[#003366] text-sm font-medium">
-                                    Nombre del negocio
+                                    {t.step2.businessNameLabel}
                                 </label>
                                 <input
                                     type="text"
                                     value={businessName}
                                     onChange={(e) => setBusinessName(e.target.value)}
-                                    placeholder="Ingresa el nombre"
+                                    placeholder={t.step2.businessNamePlaceholder}
                                     className="w-full p-3 rounded-xl bg-gray-200/80 border-none text-sm placeholder:text-gray-400 focus:ring-1 focus:ring-[#003366]"
                                 />
                             </div>
                             <div className="space-y-2">
                                 <label className="text-[#003366] text-sm font-medium">
-                                    ID del negocio
+                                    {t.step2.businessIdLabel}
                                 </label>
                                 <input
                                     type="text"
                                     value={businessId}
                                     onChange={(e) => setBusinessId(e.target.value)}
-                                    placeholder="Ingresa el ID"
+                                    placeholder={t.step2.businessIdPlaceholder}
                                     className="w-full p-3 rounded-xl bg-gray-200/80 border-none text-sm placeholder:text-gray-400 focus:ring-1 focus:ring-[#003366]"
                                 />
                             </div>
@@ -525,13 +521,13 @@ export default function DiscountsCard({ isDemoEnabled = true }: { isDemoEnabled?
 
                     <div className="relative z-10 w-full h-full px-6 flex flex-col text-white pt-14 min-h-0">
                         <h2 className="text-sm font-normal mb-8 text-center text-white shrink-0 tracking-wide">
-                            Detalles de dirección
+                            {t.step4.title}
                         </h2>
 
                         <div className="flex-1 flex flex-col overflow-y-auto min-h-0">
                             <div className="mb-6">
                                 <label className="text-white/70 text-xs block mb-1">
-                                    Teléfono
+                                    {t.step4.phone}
                                 </label>
                                 <div className="w-full bg-transparent border-b border-white/20 py-2 flex justify-between items-center">
                                     <span className="text-sm text-white font-medium">+52</span>
@@ -542,21 +538,21 @@ export default function DiscountsCard({ isDemoEnabled = true }: { isDemoEnabled?
                             <div className="grid grid-cols-2 gap-4 mb-5">
                                 <div>
                                     <label className="text-white/70 text-xs block mb-2">
-                                        Edificio
+                                        {t.step4.building}
                                     </label>
                                     <input
                                         type="text"
-                                        placeholder="Edificio"
+                                        placeholder={t.step4.building}
                                         className="w-full bg-black/20 rounded-lg p-3 text-xs placeholder:text-white/30 text-white focus:ring-0 outline-none backdrop-blur-sm h-10"
                                     />
                                 </div>
                                 <div>
                                     <label className="text-white/70 text-xs block mb-2">
-                                        Piso
+                                        {t.step4.floor}
                                     </label>
                                     <input
                                         type="text"
-                                        placeholder="Piso"
+                                        placeholder={t.step4.floor}
                                         className="w-full bg-black/20 rounded-lg p-3 text-xs placeholder:text-white/30 text-white focus:ring-0 outline-none backdrop-blur-sm h-10"
                                     />
                                 </div>
@@ -571,7 +567,7 @@ export default function DiscountsCard({ isDemoEnabled = true }: { isDemoEnabled?
                                     boxShadow: `0 4px 14px 0 ${themeColor}40`,
                                 }}
                             >
-                                Continuar
+                                {t.common.continue}
                             </button>
                         </div>
                     </div>
@@ -601,17 +597,17 @@ export default function DiscountsCard({ isDemoEnabled = true }: { isDemoEnabled?
 
             <div className="flex-1 flex flex-col items-center px-6 z-20 pt-[220px] min-h-0">
                 <h2 className="text-2xl font-bold text-[#003366] mb-1">
-                    Descripción
+                    {t.step5.title}
                 </h2>
                 <p className="text-gray-400 text-xs text-center max-w-[200px] mb-6">
-                    Describe tu negocio
+                    {t.step5.subtitle}
                 </p>
                 <div className="w-full bg-gray-50 flex-1 p-6 rounded-2xl mb-4 flex flex-col shadow-sm min-h-0">
                     <label className="text-[#003366]/70 text-sm mb-2">
-                        Descripción
+                        {t.step5.descriptionLabel}
                     </label>
                     <textarea
-                        placeholder="Escribe aquí..."
+                        placeholder={t.step5.descriptionPlaceholder}
                         className="flex-1 w-full bg-transparent border-none resize-none text-sm placeholder:text-gray-400 focus:ring-0 p-0 min-h-[100px]"
                     />
                     <div className="text-right text-xs text-[#0066cc]">0/180</div>
@@ -645,10 +641,10 @@ export default function DiscountsCard({ isDemoEnabled = true }: { isDemoEnabled?
 
             <div className="flex-1 flex flex-col items-center justify-center px-6 z-10 pt-[280px] min-h-0">
                 <p className="text-gray-400 text-xs text-center mb-2">
-                    Categoría detectada
+                    {t.step6.subtitle}
                 </p>
                 <h2 className="text-3xl font-bold text-[#003366] mb-10">
-                    Restaurante
+                    {t.step6.category}
                 </h2>
                 <div className="w-full space-y-3 mb-6">
                     <button
@@ -659,7 +655,7 @@ export default function DiscountsCard({ isDemoEnabled = true }: { isDemoEnabled?
                             boxShadow: `0 4px 14px 0 ${themeColor}40`,
                         }}
                     >
-                        <span className="flex-1 text-center">No, intentar de nuevo</span>
+                        <span className="flex-1 text-center">{t.step6.retry}</span>
                         <span>&gt;</span>
                     </button>
                     <button
@@ -670,7 +666,7 @@ export default function DiscountsCard({ isDemoEnabled = true }: { isDemoEnabled?
                             boxShadow: `0 4px 14px 0 ${themeColor}40`,
                         }}
                     >
-                        <span className="flex-1 text-center">Sí, continuar</span>
+                        <span className="flex-1 text-center">{t.step6.confirm}</span>
                         <span>&gt;</span>
                     </button>
                 </div>
@@ -699,26 +695,26 @@ export default function DiscountsCard({ isDemoEnabled = true }: { isDemoEnabled?
 
             <div className="flex-1 flex flex-col items-center px-6 z-20 pt-[220px] min-h-0">
                 <h2 className="text-2xl font-bold text-[#003366] mb-1">
-                    Crear promoción
+                    {t.step7.title}
                 </h2>
                 <p className="text-gray-400 text-xs text-center mb-8">
-                    Completa los campos
+                    {t.step7.subtitle}
                 </p>
 
                 <div className="w-full space-y-4 flex-1 min-h-0 overflow-y-auto">
                     <div className="bg-gray-100 rounded-xl p-4 shadow-sm">
                         <span className="text-[#004492] text-sm font-medium block">
-                            Nombre del producto
+                            {t.step7.productName}
                         </span>
                     </div>
                     <div className="bg-gray-100 rounded-xl p-4 shadow-sm">
                         <span className="text-[#004492] text-sm font-medium block">
-                            Precio
+                            {t.step7.price}
                         </span>
                     </div>
                     <div className="bg-gray-100 rounded-xl p-4 shadow-sm">
                         <span className="text-[#004492] text-sm font-medium block">
-                            Perfil del cliente
+                            {t.step7.customerProfile}
                         </span>
                     </div>
                 </div>
@@ -787,20 +783,20 @@ export default function DiscountsCard({ isDemoEnabled = true }: { isDemoEnabled?
                                 </div>
                                 <div className="flex flex-col text-white">
                                     <span className="text-[9px] font-bold uppercase tracking-widest opacity-70 mb-0.5">
-                                        PROMO {i + 1}
+                                        {t.common.promo} {i + 1}
                                     </span>
                                     <span className="text-[10px] text-blue-200">
-                                        Descuento especial
+                                        {t.step8.specialDiscount}
                                     </span>
                                     <span className="text-sm font-bold leading-tight">
-                                        ¡Aquí vamos!
+                                        {t.common.letsGo}
                                     </span>
                                 </div>
                             </div>
                         ) : (
                             <div className="flex items-center justify-center h-full">
                                 <span className="text-white/60 font-bold text-xs tracking-widest uppercase">
-                                    PROMO {i + 1}
+                                    {t.common.promo} {i + 1}
                                 </span>
                             </div>
                         )}
@@ -833,11 +829,11 @@ export default function DiscountsCard({ isDemoEnabled = true }: { isDemoEnabled?
 
                     <div className="flex-1 w-full flex flex-col items-center justify-center z-20 px-6 pb-4 min-h-0">
                         <h2 className="text-2xl mb-0 text-[#003366] text-center mt-4">
-                            <span className="font-light">Aquí</span>{" "}
-                            <span className="font-bold">vamos</span>
+                            <span className="font-light">{t.step8.titleLight}</span>{" "}
+                            <span className="font-bold">{t.step8.titleBold}</span>
                         </h2>
                         <p className="text-gray-400 text-xs text-center mb-6">
-                            Selecciona una promoción
+                            {t.step8.subtitle}
                         </p>
 
                         <div className="relative w-full flex-1 min-h-[220px] flex items-center justify-center">
@@ -871,11 +867,11 @@ export default function DiscountsCard({ isDemoEnabled = true }: { isDemoEnabled?
                     <div className="flex-1 overflow-y-auto flex flex-col min-h-0">
                         <div className="text-center mb-6 shrink-0">
                             <h2 className="text-xl text-[#003366] mb-1">
-                                Configura{" "}
-                                <span className="font-bold">promo</span>
+                                {t.step9.title}{" "}
+                                <span className="font-bold">{t.step9.titleBold}</span>
                             </h2>
                             <p className="text-gray-400 text-[11px] leading-tight">
-                                Define fechas y horarios
+                                {t.step9.subtitle}
                             </p>
                         </div>
 
@@ -901,19 +897,19 @@ export default function DiscountsCard({ isDemoEnabled = true }: { isDemoEnabled?
                             </div>
                             <div className="flex flex-col text-white">
                                 <span className="text-[9px] font-bold uppercase tracking-widest opacity-70">
-                                    PROMO 1
+                                    {t.common.promo} 1
                                 </span>
-                                <span className="text-sm font-bold">¡Aquí vamos!</span>
+                                <span className="text-sm font-bold">{t.common.letsGo}</span>
                             </div>
                         </div>
 
                         <div className="space-y-4 mb-6">
                             <div>
                                 <label className="text-[#003366] text-xs font-medium block mb-2">
-                                    Fecha de inicio
+                                    {t.step9.startDate}
                                 </label>
                                 <div className="bg-gray-100 rounded-lg px-3 py-2 flex items-center justify-between">
-                                    <span className="text-xs text-gray-500">Seleccionar fecha</span>
+                                    <span className="text-xs text-gray-500">{t.step9.selectDate}</span>
                                     <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="gray" strokeWidth="1.5">
                                         <path d="M1 1L5 5L9 1" />
                                     </svg>
@@ -921,10 +917,10 @@ export default function DiscountsCard({ isDemoEnabled = true }: { isDemoEnabled?
                             </div>
                             <div>
                                 <label className="text-[#003366] text-xs font-medium block mb-2">
-                                    Fecha de fin
+                                    {t.step9.endDate}
                                 </label>
                                 <div className="bg-gray-100 rounded-lg px-3 py-2 flex items-center justify-between">
-                                    <span className="text-xs text-gray-500">Seleccionar fecha</span>
+                                    <span className="text-xs text-gray-500">{t.step9.selectDate}</span>
                                     <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="gray" strokeWidth="1.5">
                                         <path d="M1 1L5 5L9 1" />
                                     </svg>
@@ -942,7 +938,7 @@ export default function DiscountsCard({ isDemoEnabled = true }: { isDemoEnabled?
                                 boxShadow: `0 4px 14px 0 ${themeColor}40`,
                             }}
                         >
-                            Lanzar promoción
+                            {t.step9.launch}
                         </button>
                     </div>
                 </div>
@@ -955,10 +951,10 @@ export default function DiscountsCard({ isDemoEnabled = true }: { isDemoEnabled?
         const renderContent = (isOverlay: boolean) => (
             <div className="flex flex-col items-center justify-center h-full px-6 text-center w-full">
                 <h2 className={`text-2xl font-bold mb-2 ${isOverlay ? "text-white" : "text-[#003366]"}`}>
-                    Lanzando promoción
+                    {t.step10.title}
                 </h2>
                 <p className={`text-xs ${isOverlay ? "text-white/80" : "text-gray-400"}`}>
-                    Esto tomará unos segundos
+                    {t.step10.subtitle}
                 </p>
                 <div className={`w-64 h-2 rounded-full mt-8 overflow-hidden ${isOverlay ? "bg-white/20" : "bg-gray-200"}`}>
                     {isOverlay && <div className="h-full w-full bg-white" />}
@@ -1020,10 +1016,10 @@ export default function DiscountsCard({ isDemoEnabled = true }: { isDemoEnabled?
                         </svg>
                     </div>
                     <h2 className="text-2xl font-bold text-white mb-2">
-                        ¡Promoción creada!
+                        {t.step11.title}
                     </h2>
                     <p className="text-gray-300 text-xs">
-                        Tu promoción está activa
+                        {t.step11.subtitle}
                     </p>
                 </div>
             </div>
@@ -1064,5 +1060,13 @@ export default function DiscountsCard({ isDemoEnabled = true }: { isDemoEnabled?
         <div className="flex h-full flex-col relative overflow-hidden bg-white">
             {renderCurrentStep()}
         </div>
+    );
+}
+
+export default function DiscountsCard(props: { isDemoEnabled?: boolean }) {
+    return (
+        <LanguageProvider>
+            <DiscountsCardContent {...props} />
+        </LanguageProvider>
     );
 }
