@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import { PAYMENTS_TRANSLATIONS } from "./payments-translations";
 
 /* -- Types -- */
 type ModuleType = "qr" | "custom-keys" | "servicios-basicos";
@@ -16,36 +15,6 @@ interface Contact {
 
 /* -- Main Component -- */
 export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) {
-    const [lang, setLang] = useState<keyof typeof PAYMENTS_TRANSLATIONS>(() => {
-        if (typeof window === "undefined") return "es";
-        const raw =
-            (window as any).__uiLanguage ||
-            (() => {
-                try {
-                    return localStorage.getItem("ui-language");
-                } catch {
-                    return null;
-                }
-            })() ||
-            "ES";
-        return String(raw).toUpperCase() === "EN" ? "en" : "es";
-    });
-
-    useEffect(() => {
-        const handleLanguageChange = (event: Event) => {
-            const customEvent = event as CustomEvent<{ language?: string }>;
-            const next = customEvent.detail?.language;
-            setLang(next && next.toUpperCase() === "EN" ? "en" : "es");
-        };
-
-        window.addEventListener("ui:languagechange", handleLanguageChange);
-        return () => window.removeEventListener("ui:languagechange", handleLanguageChange);
-    }, []);
-
-    const t = PAYMENTS_TRANSLATIONS[lang];
-    const format = (template: string, vars: Record<string, string>) =>
-        template.replace(/\{(\w+)\}/g, (_, key) => vars[key] ?? `{${key}}`);
-
     // Module Navigation
     const [currentModule, setCurrentModule] = useState<ModuleType>("qr");
 
@@ -300,7 +269,7 @@ export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?:
                         }}
                         className="px-4 py-2 rounded-full text-xs font-medium text-gray-700 hover:bg-gray-100 transition-colors"
                     >
-                        {t.moduleSelector.keys}
+                        Claves
                     </button>
                     <button
                         onClick={() => {
@@ -309,7 +278,7 @@ export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?:
                         }}
                         className="px-4 py-2 rounded-full text-xs font-medium text-gray-700 hover:bg-gray-100 transition-colors"
                     >
-                        {t.moduleSelector.services}
+                        Servicios
                     </button>
                 </div>
             </div>
@@ -339,8 +308,8 @@ export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?:
                         style={{ backgroundColor: 'rgba(255, 255, 255, 0.35)' }}
                     >
                         <div className="text-center mb-3">
-                            <h1 className="text-lg font-bold" style={{ color: themeColor }}>{t.qr.title}</h1>
-                            <p className="text-[10px] text-gray-500 mt-0.5">{t.qr.chooseOption}</p>
+                            <h1 className="text-lg font-bold" style={{ color: themeColor }}>Pago con QR</h1>
+                            <p className="text-[10px] text-gray-500 mt-0.5">Elige una opción</p>
                         </div>
 
                         <div className="flex flex-col gap-3 flex-1 justify-center">
@@ -353,7 +322,7 @@ export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?:
                                     boxShadow: `0 4px 14px 0 ${themeColor}40`,
                                 }}
                             >
-                                {t.qr.showQr}
+                                Mostrar QR
                             </button>
                             <button
                                 onClick={() => setQrScreen("scan-qr")}
@@ -364,7 +333,7 @@ export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?:
                                     boxShadow: `0 4px 14px 0 ${themeColor}40`,
                                 }}
                             >
-                                {t.qr.scanQr}
+                                Escanear QR
                             </button>
                         </div>
                     </div>
@@ -402,8 +371,8 @@ export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?:
                         style={{ backgroundColor: 'rgba(255, 255, 255, 0.35)' }}
                     >
                         <div className="text-center mb-3">
-                            <h1 className="text-lg font-bold" style={{ color: themeColor }}>{t.qr.showQrTitle}</h1>
-                            <p className="text-[10px] text-gray-500 mt-0.5">{t.qr.showQrSubtitle}</p>
+                            <h1 className="text-lg font-bold" style={{ color: themeColor }}>Mostrar QR</h1>
+                            <p className="text-[10px] text-gray-500 mt-0.5">Comparte tu código QR para recibir pagos</p>
                         </div>
 
                         <div className="flex-1 flex items-center justify-center">
@@ -413,10 +382,10 @@ export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?:
                         </div>
                         <div className="flex gap-2 mt-4">
                             <button className="flex-1 rounded-xl py-2.5 text-xs font-semibold text-white" style={{ background: gradientStyle }}>
-                                {t.qr.shareQr}
+                                Compartir QR
                             </button>
                             <button className="flex-1 rounded-xl py-2.5 text-xs font-semibold text-white" style={{ background: gradientStyle }}>
-                                {t.qr.save}
+                                Guardar
                             </button>
                         </div>
                     </div>
@@ -454,8 +423,8 @@ export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?:
                         style={{ backgroundColor: 'rgba(255, 255, 255, 0.35)' }}
                     >
                         <div className="text-center mb-3">
-                            <h1 className="text-lg font-bold" style={{ color: themeColor }}>{t.qr.scanQrTitle}</h1>
-                            <p className="text-[10px] text-gray-500 mt-0.5">{t.qr.scanQrSubtitle}</p>
+                            <h1 className="text-lg font-bold" style={{ color: themeColor }}>Escanear QR</h1>
+                            <p className="text-[10px] text-gray-500 mt-0.5">Mantén el código QR dentro del marco</p>
                         </div>
 
                         <div className="flex-1 relative overflow-hidden rounded-xl bg-white">
@@ -476,7 +445,7 @@ export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?:
                             className="mt-3 w-full rounded-xl py-2.5 text-xs font-semibold text-white"
                             style={{ background: gradientStyle }}
                         >
-                            {t.qr.simulateScan}
+                            Simular escaneo
                         </button>
                     </div>
                 </div>
@@ -507,7 +476,7 @@ export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?:
 
                     <div className="relative z-10 flex-1 overflow-hidden rounded-2xl p-4 backdrop-blur-sm flex flex-col -mx-5" style={{ backgroundColor: 'rgba(255, 255, 255, 0.35)' }}>
                         <div className="mb-2">
-                            <p className="text-[9px] font-medium text-gray-400 uppercase tracking-wide mb-1.5">{t.common.recipient}</p>
+                            <p className="text-[9px] font-medium text-gray-400 uppercase tracking-wide mb-1.5">Destinatario</p>
                             <div className="rounded-lg p-3" style={{ backgroundColor: '#E8EBF0' }}>
                                 <div className="flex items-center gap-2.5">
                                     <div className="flex h-14 w-14 items-center justify-center rounded-full overflow-hidden bg-primary">
@@ -523,7 +492,7 @@ export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?:
                         </div>
 
                         <div className="mb-2">
-                            <p className="text-[9px] font-medium text-gray-400 uppercase tracking-wide mb-1.5">{t.qr.sourceAccount}</p>
+                            <p className="text-[9px] font-medium text-gray-400 uppercase tracking-wide mb-1.5">Cuenta origen</p>
                             <div className="rounded-lg p-3" style={{ backgroundColor: '#E8EBF0' }}>
                                 <div className="flex items-center justify-between">
                                     <div>
@@ -531,7 +500,7 @@ export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?:
                                         <p className="text-[9px] text-gray-500">****4576</p>
                                     </div>
                                     <div className="text-right">
-                                        <p className="text-[8px] text-gray-400 uppercase">{t.qr.available}</p>
+                                        <p className="text-[8px] text-gray-400 uppercase">Disponible</p>
                                         <p className="text-xs font-bold text-gray-900">$12,500.00</p>
                                     </div>
                                 </div>
@@ -539,7 +508,7 @@ export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?:
                         </div>
 
                         <div className="mb-3">
-                            <p className="text-[9px] font-medium text-gray-400 uppercase tracking-wide mb-1.5">{t.common.amount}</p>
+                            <p className="text-[9px] font-medium text-gray-400 uppercase tracking-wide mb-1.5">Monto</p>
                             <div className="rounded-lg p-3" style={{ backgroundColor: '#E8EBF0' }}>
                                 <div className="flex items-center justify-center py-1">
                                     <p className="text-xl font-bold text-gray-900">10,000.00 MXN</p>
@@ -557,7 +526,7 @@ export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?:
                                 style={{ background: gradientStyle, boxShadow: `0 4px 14px 0 ${themeColor}40` }}
                             >
                                 <div className="absolute inset-0 flex items-center justify-center z-10">
-                                    <span className="text-white/60 text-xs font-medium pl-10">{t.qr.slideToConfirm}</span>
+                                    <span className="text-white/60 text-xs font-medium pl-10">Desliza para confirmar</span>
                                 </div>
                                 <div className="absolute top-1 left-1 h-10 w-10 rounded-full bg-white shadow-lg flex items-center justify-center z-20">
                                     <svg className="h-4 w-4" style={{ color: themeColor }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -600,20 +569,20 @@ export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?:
                                 <svg className="h-24 w-24" style={{ color: 'white' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" style={{ transform: 'rotate(-2deg)' }} />
                                 </svg>
-                                <h2 className="text-3xl font-bold leading-tight text-white">{t.common.paymentSuccess}</h2>
-                                <p className="text-base leading-relaxed text-white/90">{format(t.qr.sentTo, { name: "Banco Nacional" })}</p>
+                                <h2 className="text-3xl font-bold leading-tight text-white">Pago Exitoso</h2>
+                                <p className="text-base leading-relaxed text-white/90">Enviado a Banco Nacional</p>
                             </div>
                         ) : (
                             <div className="flex flex-col items-center justify-center text-center space-y-4 relative z-10">
                                 <h2 className="text-xl font-bold">
-                                    {t.common.processingPayment.split('').map((char, index, array) => {
+                                    {"Procesando pago".split('').map((char, index, array) => {
                                         const charProgress = (index / array.length) * 100;
                                         const isWhite = qrLoadingProgress >= charProgress;
                                         return <span key={index} style={{ color: isWhite ? 'white' : almostBlackColor, transition: 'color 0.2s ease-out' }}>{char === ' ' ? '\u00A0' : char}</span>;
                                     })}
                                 </h2>
                                 <p className="text-sm">
-                                    {t.common.waitPlease.split('').map((char, index, array) => {
+                                    {"Espera por favor".split('').map((char, index, array) => {
                                         const charProgress = (index / array.length) * 100;
                                         const isWhite = qrLoadingProgress >= charProgress;
                                         return <span key={index} style={{ color: isWhite ? 'rgba(255, 255, 255, 0.9)' : '#666', transition: 'color 0.2s ease-out' }}>{char === ' ' ? '\u00A0' : char}</span>;
@@ -640,8 +609,8 @@ export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?:
                             <svg className="h-24 w-24" style={{ color: 'white' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" style={{ transform: 'rotate(-2deg)' }} />
                             </svg>
-                            <h2 className="text-3xl font-bold leading-tight text-white">{t.common.paymentSuccess}</h2>
-                            <p className="text-base leading-relaxed text-white/90">{format(t.qr.sentTo, { name: "Banco Nacional" })}</p>
+                            <h2 className="text-3xl font-bold leading-tight text-white">Pago Exitoso</h2>
+                            <p className="text-base leading-relaxed text-white/90">Enviado a Banco Nacional</p>
                         </div>
                     </div>
                 </div>
@@ -688,8 +657,8 @@ export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?:
 
                     <div className="relative z-10 flex-1 overflow-hidden rounded-2xl p-4 backdrop-blur-sm flex flex-col" style={{ backgroundColor: 'rgba(255, 255, 255, 0.35)' }}>
                         <div className="text-center mb-3">
-                            <h1 className="text-lg font-bold" style={{ color: themeColor }}>{t.customKeys.payWithKey}</h1>
-                            <p className="text-[10px] text-gray-500 mt-0.5">{t.customKeys.selectContact}</p>
+                            <h1 className="text-lg font-bold" style={{ color: themeColor }}>Pagar con Clave</h1>
+                            <p className="text-[10px] text-gray-500 mt-0.5">Selecciona un contacto</p>
                         </div>
 
                         <div className="grid grid-cols-4 gap-3 mb-4">
@@ -718,7 +687,7 @@ export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?:
                             onClick={() => setCkScreen("selection")}
                             className="w-full rounded-xl py-2.5 text-xs font-semibold text-white" style={{ background: gradientStyle }}
                         >
-                            {t.customKeys.payToCustomKey}
+                            Pagar a Clave Personalizada
                         </button>
                     </div>
                 </div>
@@ -743,7 +712,7 @@ export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?:
                             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
                             </svg>
-                            <span className="ml-1">{t.common.back}</span>
+                            <span className="ml-1">Atrás</span>
                         </button>
 
                         {selectedContactData && (
@@ -757,8 +726,8 @@ export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?:
 
                         <div className="space-y-3 flex-1">
                             <div className="rounded-lg bg-gray-100 p-4">
-                                <label className="text-xs font-medium text-gray-700 mb-2 block">{t.customKeys.customKeyLabel}</label>
-                                <input type="text" placeholder={t.customKeys.customKeyPlaceholder} className="w-full rounded-lg bg-white px-3 py-2 text-sm border border-gray-200" />
+                                <label className="text-xs font-medium text-gray-700 mb-2 block">Clave personalizada</label>
+                                <input type="text" placeholder="Ingresa la clave" className="w-full rounded-lg bg-white px-3 py-2 text-sm border border-gray-200" />
                             </div>
                         </div>
 
@@ -766,7 +735,7 @@ export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?:
                             onClick={() => setCkScreen("confirm")}
                             className="mt-auto w-full rounded-xl py-2.5 text-xs font-semibold text-white" style={{ background: gradientStyle }}
                         >
-                            {t.common.continue}
+                            Continuar
                         </button>
                     </div>
                 </div>
@@ -790,21 +759,21 @@ export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?:
                             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
                             </svg>
-                            <span className="ml-1">{t.common.back}</span>
+                            <span className="ml-1">Atrás</span>
                         </button>
 
                         <div className="text-center mb-4">
-                            <h1 className="text-base font-bold" style={{ color: themeColor }}>{t.customKeys.confirmPaymentTitle}</h1>
-                            <p className="text-[9px] text-gray-500 mt-0.5">{t.customKeys.reviewDetails}</p>
+                            <h1 className="text-base font-bold" style={{ color: themeColor }}>Confirmar Pago</h1>
+                            <p className="text-[9px] text-gray-500 mt-0.5">Revisa los detalles</p>
                         </div>
 
                         <div className="space-y-3 flex-1">
                             <div className="rounded-lg bg-gray-100 p-3">
-                                <p className="text-[9px] text-gray-400 uppercase mb-1">{t.common.recipient}</p>
+                                <p className="text-[9px] text-gray-400 uppercase mb-1">Destinatario</p>
                                 <p className="text-xs font-bold text-gray-900">Carlos Santander</p>
                             </div>
                             <div className="rounded-lg bg-gray-100 p-3">
-                                <p className="text-[9px] text-gray-400 uppercase mb-1">{t.common.amount}</p>
+                                <p className="text-[9px] text-gray-400 uppercase mb-1">Monto</p>
                                 <p className="text-xl font-bold text-gray-900">$1,000.00 MXN</p>
                             </div>
                         </div>
@@ -816,7 +785,7 @@ export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?:
                             }}
                             className="mt-auto w-full rounded-xl py-2.5 text-xs font-semibold text-white" style={{ background: gradientStyle }}
                         >
-                            {t.common.confirm}
+                            Confirmar
                         </button>
                     </div>
                 </div>
@@ -848,20 +817,20 @@ export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?:
                                 <svg className="h-24 w-24" style={{ color: 'white' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" style={{ transform: 'rotate(-2deg)' }} />
                                 </svg>
-                                <h2 className="text-3xl font-bold leading-tight text-white">{t.common.paymentSuccess}</h2>
-                                <p className="text-base leading-relaxed text-white/90">{t.customKeys.processedSubtitle}</p>
+                                <h2 className="text-3xl font-bold leading-tight text-white">Pago Exitoso</h2>
+                                <p className="text-base leading-relaxed text-white/90">Tu pago ha sido procesado</p>
                             </div>
                         ) : (
                             <div className="flex flex-col items-center justify-center text-center space-y-4 relative z-10">
                                 <h2 className="text-xl font-bold">
-                                    {t.common.processingPayment.split('').map((char, index, array) => {
+                                    {"Procesando pago".split('').map((char, index, array) => {
                                         const charProgress = (index / array.length) * 100;
                                         const isWhite = ckLoadingProgress >= charProgress;
                                         return <span key={index} style={{ color: isWhite ? 'white' : almostBlackColor, transition: 'color 0.2s ease-out' }}>{char === ' ' ? '\u00A0' : char}</span>;
                                     })}
                                 </h2>
                                 <p className="text-sm">
-                                    {t.common.waitPlease.split('').map((char, index, array) => {
+                                    {"Espera por favor".split('').map((char, index, array) => {
                                         const charProgress = (index / array.length) * 100;
                                         const isWhite = ckLoadingProgress >= charProgress;
                                         return <span key={index} style={{ color: isWhite ? 'rgba(255, 255, 255, 0.9)' : '#666', transition: 'color 0.2s ease-out' }}>{char === ' ' ? '\u00A0' : char}</span>;
@@ -888,8 +857,8 @@ export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?:
                             <svg className="h-24 w-24" style={{ color: 'white' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" style={{ transform: 'rotate(-2deg)' }} />
                             </svg>
-                            <h2 className="text-3xl font-bold leading-tight text-white">{t.common.paymentSuccess}</h2>
-                            <p className="text-base leading-relaxed text-white/90">{t.customKeys.processedSubtitle}</p>
+                            <h2 className="text-3xl font-bold leading-tight text-white">Pago Exitoso</h2>
+                            <p className="text-base leading-relaxed text-white/90">Tu pago ha sido procesado</p>
                         </div>
                     </div>
                 </div>
@@ -934,8 +903,8 @@ export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?:
                                 <div className="flex-1"></div>
                                 <div className="w-8"></div>
                             </div>
-                            <h1 className="text-xl font-bold mb-1 text-center" style={{ color: themeColor }}>{t.services.title}</h1>
-                            <p className="text-xs text-gray-600 text-center mb-3">{t.services.subtitle}</p>
+                            <h1 className="text-xl font-bold mb-1 text-center" style={{ color: themeColor }}>Pago de Servicios</h1>
+                            <p className="text-xs text-gray-600 text-center mb-3">Busca tu proveedor</p>
 
                             <div className="relative mb-3">
                                 <div className="absolute inset-y-0 left-0 flex items-center pl-3">
@@ -945,7 +914,7 @@ export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?:
                                 </div>
                                 <input
                                     type="text"
-                                    placeholder={t.services.searchPlaceholder}
+                                    placeholder="Buscar proveedor..."
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                     className="w-full rounded-lg bg-gray-100 pl-10 pr-4 py-2 text-sm text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2" style={{ '--tw-ring-color': themeColor } as React.CSSProperties}
@@ -965,18 +934,13 @@ export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?:
                                         <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center shadow-md border-2" style={{ borderColor: themeColor + '40' }}>
                                             <span className="text-lg font-bold" style={{ color: themeColor }}>P{i}</span>
                                         </div>
-                                        <span className="text-[10px] font-medium text-gray-700 text-center leading-tight">{format(t.services.providerLabel, { n: String(i) })}</span>
+                                        <span className="text-[10px] font-medium text-gray-700 text-center leading-tight">Proveedor {i}</span>
                                     </button>
                                 ))}
                             </div>
 
                             <div className="mt-4 relative flex flex-col items-center">
-                                {[
-                                    t.services.categories.popular,
-                                    t.services.categories.favorites,
-                                    t.services.categories.telecom,
-                                    t.services.categories.electricity,
-                                ].map((cat, index) => {
+                                {["Popular", "Favoritos", "Telecom", "Electricidad"].map((cat, index) => {
                                     const isActive = index === 0;
                                     return (
                                         <button
@@ -1021,19 +985,19 @@ export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?:
                                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                                 </svg>
-                                <span className="text-sm font-medium">{t.common.back}</span>
+                                <span className="text-sm font-medium">Atrás</span>
                             </button>
 
-                            <h1 className="text-2xl font-bold mb-8 text-center" style={{ color: themeColor }}>{t.services.providerSelected}</h1>
+                            <h1 className="text-2xl font-bold mb-8 text-center" style={{ color: themeColor }}>Proveedor Seleccionado</h1>
 
                             <div className="space-y-3">
                                 <button className="w-full rounded-lg bg-gray-100 p-4 text-left transition hover:bg-gray-200">
-                                    <div className="font-semibold text-gray-900 mb-1">{t.services.myPhoneTitle}</div>
-                                    <div className="text-xs text-gray-600">{t.services.myPhoneSubtitle}</div>
+                                    <div className="font-semibold text-gray-900 mb-1">Mi Número de Teléfono</div>
+                                    <div className="text-xs text-gray-600">Usa tu número registrado</div>
                                 </button>
                                 <button className="w-full rounded-lg bg-gray-100 p-4 text-left transition hover:bg-gray-200">
-                                    <div className="font-semibold text-gray-900 mb-1">{t.services.enterNumberTitle}</div>
-                                    <div className="text-xs text-gray-600">{t.services.enterNumberSubtitle}</div>
+                                    <div className="font-semibold text-gray-900 mb-1">Ingresar Número</div>
+                                    <div className="text-xs text-gray-600">Ingresa el número asociado</div>
                                 </button>
                             </div>
                         </div>
@@ -1046,9 +1010,9 @@ export default function PaymentsCard({ isDemoEnabled = true }: { isDemoEnabled?:
             <div className="flex h-full flex-col relative overflow-hidden bg-white">
                 {sbScreen === "screen1" && renderSBScreen1()}
                 {sbScreen === "screen2" && renderSBScreen2()}
-                {sbScreen === "screen3" && <div className="flex items-center justify-center h-full"><p className="text-gray-500">{format(t.services.screenLabel, { n: "3" })}</p></div>}
-                {sbScreen === "screen4" && <div className="flex items-center justify-center h-full"><p className="text-gray-500">{format(t.services.screenLabel, { n: "4" })}</p></div>}
-                {sbScreen === "screen5" && <div className="flex items-center justify-center h-full"><p className="text-gray-500">{format(t.services.screenLabel, { n: "5" })}</p></div>}
+                {sbScreen === "screen3" && <div className="flex items-center justify-center h-full"><p className="text-gray-500">Screen 3</p></div>}
+                {sbScreen === "screen4" && <div className="flex items-center justify-center h-full"><p className="text-gray-500">Screen 4</p></div>}
+                {sbScreen === "screen5" && <div className="flex items-center justify-center h-full"><p className="text-gray-500">Screen 5</p></div>}
             </div>
         );
     };

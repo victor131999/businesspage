@@ -1,16 +1,11 @@
 import { useState, useRef, useEffect } from "react";
-import { LanguageProvider } from "@/contexts/language-context";
-import { useLanguageTranslations } from "@/hooks/use-language-translations";
-import { DISCOUNTS_TRANSLATIONS } from "./discounts-translations";
 
 /* -- Types -- */
 type Step = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
 type PlanType = "free" | "premium";
 
 /* -- Main Component -- */
-function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) {
-    const t = useLanguageTranslations(DISCOUNTS_TRANSLATIONS);
-
+export default function DiscountsCard({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) {
     // State
     const [step, setStep] = useState<Step>(1);
     const [selectedPlan, setSelectedPlan] = useState<PlanType>("free");
@@ -49,11 +44,20 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
     const plans = {
         free: {
             price: "$0",
-            features: t.plans.free.features,
+            features: [
+                "Hasta 3 promociones activas",
+                "Análisis básico de descuentos",
+                "Soporte por email",
+            ],
         },
         premium: {
             price: "$29",
-            features: t.plans.premium.features,
+            features: [
+                "Promociones ilimitadas",
+                "Análisis avanzado",
+                "Soporte prioritario",
+                "API personalizada",
+            ],
         },
     };
 
@@ -139,10 +143,10 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
 
                 // Step 2: Basic Information
                 await wait(1500);
-                for (let i = 0; i <= t.step2.demoBusinessName.length; i++) {
+                for (let i = 0; i <= "Mi Negocio".length; i++) {
                     if (abortDemo.current) break;
                     await wait(50);
-                    setBusinessName(t.step2.demoBusinessName.slice(0, i));
+                    setBusinessName("Mi Negocio".slice(0, i));
                 }
                 await wait(500);
                 for (let i = 0; i <= "1234567890".length; i++) {
@@ -248,7 +252,7 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
                     onClick={() => setStep((prev) => (prev > 1 ? (prev - 1) as Step : 1))}
                     className="absolute left-6 text-xs text-gray-500 hover:text-gray-700 flex items-center"
                 >
-                    ← {t.common.back}
+                    ← Atrás
                 </button>
             )}
             <div className="flex items-center justify-center">
@@ -276,7 +280,7 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
                     boxShadow: `0 4px 14px 0 ${themeColor}40`,
                 }}
             >
-                <span className="relative z-10 mr-0">{t.common.continue}</span>
+                <span className="relative z-10 mr-0">Continuar</span>
                 <span className="absolute right-6 z-10 transition-transform group-hover:translate-x-1">&gt;</span>
             </button>
         );
@@ -304,11 +308,11 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
                     {isActive ? (
                         <div className="w-full flex flex-col items-center px-4">
                             <h3 className="text-xs text-white mb-0">
-                                {t.plans[planKey].name}
+                                {planKey === "free" ? "Gratis" : "Premium"}
                             </h3>
                             <div className="flex items-center justify-center gap-1 mb-5">
                                 <span className="text-xl text-white">{plan.price}</span>
-                                <span className="text-xs text-white/70">{t.common.perMonth}</span>
+                                <span className="text-xs text-white/70">/mes</span>
                             </div>
                             <div className="space-y-1.5 text-center w-full">
                                 {plan.features.slice(0, 4).map((feature, idx) => (
@@ -320,7 +324,7 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
                         </div>
                     ) : (
                         <span className="text-white text-base tracking-wide">
-                            {t.plans[planKey].name}
+                            {planKey === "free" ? "Gratis" : "Premium"}
                         </span>
                     )}
                 </div>
@@ -331,10 +335,10 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
             <div className="flex flex-col h-full bg-white relative overflow-hidden">
                 <div className="absolute top-[165px] z-50 flex flex-col items-center justify-center w-full pointer-events-none">
                     <h2 className="text-2xl font-bold" style={{ color: themeColor }}>
-                        {t.step1.title}
+                        Negocio
                     </h2>
                     <p className="text-gray-500 font-medium tracking-wide text-xs">
-                        {t.step1.subtitle}
+                        Elige un plan
                     </p>
                 </div>
 
@@ -391,10 +395,10 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
                 >
                     <div className="flex flex-col items-center justify-center text-center w-full mb-4">
                         <h2 className="text-2xl font-bold text-black mb-1">
-                            {t.step2.title}
+                            Negocio
                         </h2>
                         <p className="text-gray-400 text-sm mb-4">
-                            {t.step2.subtitle}
+                            Completa los campos para continuar
                         </p>
                     </div>
 
@@ -402,25 +406,25 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
                         <div className="space-y-4">
                             <div className="space-y-2">
                                 <label className="text-[#003366] text-sm font-medium">
-                                    {t.step2.businessNameLabel}
+                                    Nombre del negocio
                                 </label>
                                 <input
                                     type="text"
                                     value={businessName}
                                     onChange={(e) => setBusinessName(e.target.value)}
-                                    placeholder={t.step2.businessNamePlaceholder}
+                                    placeholder="Ingresa el nombre"
                                     className="w-full p-3 rounded-xl bg-gray-200/80 border-none text-sm placeholder:text-gray-400 focus:ring-1 focus:ring-[#003366]"
                                 />
                             </div>
                             <div className="space-y-2">
                                 <label className="text-[#003366] text-sm font-medium">
-                                    {t.step2.businessIdLabel}
+                                    ID del negocio
                                 </label>
                                 <input
                                     type="text"
                                     value={businessId}
                                     onChange={(e) => setBusinessId(e.target.value)}
-                                    placeholder={t.step2.businessIdPlaceholder}
+                                    placeholder="Ingresa el ID"
                                     className="w-full p-3 rounded-xl bg-gray-200/80 border-none text-sm placeholder:text-gray-400 focus:ring-1 focus:ring-[#003366]"
                                 />
                             </div>
@@ -521,13 +525,13 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
 
                     <div className="relative z-10 w-full h-full px-6 flex flex-col text-white pt-14 min-h-0">
                         <h2 className="text-sm font-normal mb-8 text-center text-white shrink-0 tracking-wide">
-                            {t.step4.title}
+                            Detalles de dirección
                         </h2>
 
                         <div className="flex-1 flex flex-col overflow-y-auto min-h-0">
                             <div className="mb-6">
                                 <label className="text-white/70 text-xs block mb-1">
-                                    {t.step4.phone}
+                                    Teléfono
                                 </label>
                                 <div className="w-full bg-transparent border-b border-white/20 py-2 flex justify-between items-center">
                                     <span className="text-sm text-white font-medium">+52</span>
@@ -538,21 +542,21 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
                             <div className="grid grid-cols-2 gap-4 mb-5">
                                 <div>
                                     <label className="text-white/70 text-xs block mb-2">
-                                        {t.step4.building}
+                                        Edificio
                                     </label>
                                     <input
                                         type="text"
-                                        placeholder={t.step4.building}
+                                        placeholder="Edificio"
                                         className="w-full bg-black/20 rounded-lg p-3 text-xs placeholder:text-white/30 text-white focus:ring-0 outline-none backdrop-blur-sm h-10"
                                     />
                                 </div>
                                 <div>
                                     <label className="text-white/70 text-xs block mb-2">
-                                        {t.step4.floor}
+                                        Piso
                                     </label>
                                     <input
                                         type="text"
-                                        placeholder={t.step4.floor}
+                                        placeholder="Piso"
                                         className="w-full bg-black/20 rounded-lg p-3 text-xs placeholder:text-white/30 text-white focus:ring-0 outline-none backdrop-blur-sm h-10"
                                     />
                                 </div>
@@ -567,7 +571,7 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
                                     boxShadow: `0 4px 14px 0 ${themeColor}40`,
                                 }}
                             >
-                                {t.common.continue}
+                                Continuar
                             </button>
                         </div>
                     </div>
@@ -597,17 +601,17 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
 
             <div className="flex-1 flex flex-col items-center px-6 z-20 pt-[220px] min-h-0">
                 <h2 className="text-2xl font-bold text-[#003366] mb-1">
-                    {t.step5.title}
+                    Descripción
                 </h2>
                 <p className="text-gray-400 text-xs text-center max-w-[200px] mb-6">
-                    {t.step5.subtitle}
+                    Describe tu negocio
                 </p>
                 <div className="w-full bg-gray-50 flex-1 p-6 rounded-2xl mb-4 flex flex-col shadow-sm min-h-0">
                     <label className="text-[#003366]/70 text-sm mb-2">
-                        {t.step5.descriptionLabel}
+                        Descripción
                     </label>
                     <textarea
-                        placeholder={t.step5.descriptionPlaceholder}
+                        placeholder="Escribe aquí..."
                         className="flex-1 w-full bg-transparent border-none resize-none text-sm placeholder:text-gray-400 focus:ring-0 p-0 min-h-[100px]"
                     />
                     <div className="text-right text-xs text-[#0066cc]">0/180</div>
@@ -641,10 +645,10 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
 
             <div className="flex-1 flex flex-col items-center justify-center px-6 z-10 pt-[280px] min-h-0">
                 <p className="text-gray-400 text-xs text-center mb-2">
-                    {t.step6.subtitle}
+                    Categoría detectada
                 </p>
                 <h2 className="text-3xl font-bold text-[#003366] mb-10">
-                    {t.step6.category}
+                    Restaurante
                 </h2>
                 <div className="w-full space-y-3 mb-6">
                     <button
@@ -655,7 +659,7 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
                             boxShadow: `0 4px 14px 0 ${themeColor}40`,
                         }}
                     >
-                        <span className="flex-1 text-center">{t.step6.retry}</span>
+                        <span className="flex-1 text-center">No, intentar de nuevo</span>
                         <span>&gt;</span>
                     </button>
                     <button
@@ -666,7 +670,7 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
                             boxShadow: `0 4px 14px 0 ${themeColor}40`,
                         }}
                     >
-                        <span className="flex-1 text-center">{t.step6.confirm}</span>
+                        <span className="flex-1 text-center">Sí, continuar</span>
                         <span>&gt;</span>
                     </button>
                 </div>
@@ -695,26 +699,26 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
 
             <div className="flex-1 flex flex-col items-center px-6 z-20 pt-[220px] min-h-0">
                 <h2 className="text-2xl font-bold text-[#003366] mb-1">
-                    {t.step7.title}
+                    Crear promoción
                 </h2>
                 <p className="text-gray-400 text-xs text-center mb-8">
-                    {t.step7.subtitle}
+                    Completa los campos
                 </p>
 
                 <div className="w-full space-y-4 flex-1 min-h-0 overflow-y-auto">
                     <div className="bg-gray-100 rounded-xl p-4 shadow-sm">
                         <span className="text-[#004492] text-sm font-medium block">
-                            {t.step7.productName}
+                            Nombre del producto
                         </span>
                     </div>
                     <div className="bg-gray-100 rounded-xl p-4 shadow-sm">
                         <span className="text-[#004492] text-sm font-medium block">
-                            {t.step7.price}
+                            Precio
                         </span>
                     </div>
                     <div className="bg-gray-100 rounded-xl p-4 shadow-sm">
                         <span className="text-[#004492] text-sm font-medium block">
-                            {t.step7.customerProfile}
+                            Perfil del cliente
                         </span>
                     </div>
                 </div>
@@ -783,20 +787,20 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
                                 </div>
                                 <div className="flex flex-col text-white">
                                     <span className="text-[9px] font-bold uppercase tracking-widest opacity-70 mb-0.5">
-                                        {t.common.promo} {i + 1}
+                                        PROMO {i + 1}
                                     </span>
                                     <span className="text-[10px] text-blue-200">
-                                        {t.step8.specialDiscount}
+                                        Descuento especial
                                     </span>
                                     <span className="text-sm font-bold leading-tight">
-                                        {t.common.letsGo}
+                                        ¡Aquí vamos!
                                     </span>
                                 </div>
                             </div>
                         ) : (
                             <div className="flex items-center justify-center h-full">
                                 <span className="text-white/60 font-bold text-xs tracking-widest uppercase">
-                                    {t.common.promo} {i + 1}
+                                    PROMO {i + 1}
                                 </span>
                             </div>
                         )}
@@ -829,11 +833,11 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
 
                     <div className="flex-1 w-full flex flex-col items-center justify-center z-20 px-6 pb-4 min-h-0">
                         <h2 className="text-2xl mb-0 text-[#003366] text-center mt-4">
-                            <span className="font-light">{t.step8.titleLight}</span>{" "}
-                            <span className="font-bold">{t.step8.titleBold}</span>
+                            <span className="font-light">Aquí</span>{" "}
+                            <span className="font-bold">vamos</span>
                         </h2>
                         <p className="text-gray-400 text-xs text-center mb-6">
-                            {t.step8.subtitle}
+                            Selecciona una promoción
                         </p>
 
                         <div className="relative w-full flex-1 min-h-[220px] flex items-center justify-center">
@@ -867,11 +871,11 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
                     <div className="flex-1 overflow-y-auto flex flex-col min-h-0">
                         <div className="text-center mb-6 shrink-0">
                             <h2 className="text-xl text-[#003366] mb-1">
-                                {t.step9.title}{" "}
-                                <span className="font-bold">{t.step9.titleBold}</span>
+                                Configura{" "}
+                                <span className="font-bold">promo</span>
                             </h2>
                             <p className="text-gray-400 text-[11px] leading-tight">
-                                {t.step9.subtitle}
+                                Define fechas y horarios
                             </p>
                         </div>
 
@@ -897,19 +901,19 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
                             </div>
                             <div className="flex flex-col text-white">
                                 <span className="text-[9px] font-bold uppercase tracking-widest opacity-70">
-                                    {t.common.promo} 1
+                                    PROMO 1
                                 </span>
-                                <span className="text-sm font-bold">{t.common.letsGo}</span>
+                                <span className="text-sm font-bold">¡Aquí vamos!</span>
                             </div>
                         </div>
 
                         <div className="space-y-4 mb-6">
                             <div>
                                 <label className="text-[#003366] text-xs font-medium block mb-2">
-                                    {t.step9.startDate}
+                                    Fecha de inicio
                                 </label>
                                 <div className="bg-gray-100 rounded-lg px-3 py-2 flex items-center justify-between">
-                                    <span className="text-xs text-gray-500">{t.step9.selectDate}</span>
+                                    <span className="text-xs text-gray-500">Seleccionar fecha</span>
                                     <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="gray" strokeWidth="1.5">
                                         <path d="M1 1L5 5L9 1" />
                                     </svg>
@@ -917,10 +921,10 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
                             </div>
                             <div>
                                 <label className="text-[#003366] text-xs font-medium block mb-2">
-                                    {t.step9.endDate}
+                                    Fecha de fin
                                 </label>
                                 <div className="bg-gray-100 rounded-lg px-3 py-2 flex items-center justify-between">
-                                    <span className="text-xs text-gray-500">{t.step9.selectDate}</span>
+                                    <span className="text-xs text-gray-500">Seleccionar fecha</span>
                                     <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="gray" strokeWidth="1.5">
                                         <path d="M1 1L5 5L9 1" />
                                     </svg>
@@ -938,7 +942,7 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
                                 boxShadow: `0 4px 14px 0 ${themeColor}40`,
                             }}
                         >
-                            {t.step9.launch}
+                            Lanzar promoción
                         </button>
                     </div>
                 </div>
@@ -951,10 +955,10 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
         const renderContent = (isOverlay: boolean) => (
             <div className="flex flex-col items-center justify-center h-full px-6 text-center w-full">
                 <h2 className={`text-2xl font-bold mb-2 ${isOverlay ? "text-white" : "text-[#003366]"}`}>
-                    {t.step10.title}
+                    Lanzando promoción
                 </h2>
                 <p className={`text-xs ${isOverlay ? "text-white/80" : "text-gray-400"}`}>
-                    {t.step10.subtitle}
+                    Esto tomará unos segundos
                 </p>
                 <div className={`w-64 h-2 rounded-full mt-8 overflow-hidden ${isOverlay ? "bg-white/20" : "bg-gray-200"}`}>
                     {isOverlay && <div className="h-full w-full bg-white" />}
@@ -1016,10 +1020,10 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
                         </svg>
                     </div>
                     <h2 className="text-2xl font-bold text-white mb-2">
-                        {t.step11.title}
+                        ¡Promoción creada!
                     </h2>
                     <p className="text-gray-300 text-xs">
-                        {t.step11.subtitle}
+                        Tu promoción está activa
                     </p>
                 </div>
             </div>
@@ -1060,13 +1064,5 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
         <div className="flex h-full flex-col relative overflow-hidden bg-white">
             {renderCurrentStep()}
         </div>
-    );
-}
-
-export default function DiscountsCard(props: { isDemoEnabled?: boolean }) {
-    return (
-        <LanguageProvider>
-            <DiscountsCardContent {...props} />
-        </LanguageProvider>
     );
 }

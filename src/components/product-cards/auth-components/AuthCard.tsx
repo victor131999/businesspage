@@ -41,32 +41,8 @@ export function AuthCard({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) 
     const almostBlackColor = "#001126"; // Almost black version
     const blackColor = "#000000";
 
-    const [lang, setLang] = useState<keyof typeof AUTH_TRANSLATIONS>(() => {
-        if (typeof window === "undefined") return "es";
-        const raw =
-            (window as any).__uiLanguage ||
-            (() => {
-                try {
-                    return localStorage.getItem("ui-language");
-                } catch {
-                    return null;
-                }
-            })() ||
-            "ES";
-        return String(raw).toUpperCase() === "EN" ? "en" : "es";
-    });
-
-    useEffect(() => {
-        const handleLanguageChange = (event: Event) => {
-            const customEvent = event as CustomEvent<{ language?: string }>;
-            const next = customEvent.detail?.language;
-            setLang(next && next.toUpperCase() === "EN" ? "en" : "es");
-        };
-
-        window.addEventListener("ui:languagechange", handleLanguageChange);
-        return () => window.removeEventListener("ui:languagechange", handleLanguageChange);
-    }, []);
-
+    // Language state (default to Spanish as per user context, could be dynamic)
+    const lang = 'es';
     const t = AUTH_TRANSLATIONS[lang];
 
     const [formData, setFormData] = useState({
@@ -241,10 +217,10 @@ export function AuthCard({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) 
     const handleStep1Continue = () => {
         const errors: Record<string, string> = {};
         if (!validateFullName(formData.fullName)) {
-            errors.fullName = t.errors.fullNameMin;
+            errors.fullName = "El nombre debe tener al menos 2 caracteres";
         }
         if (!validateEmail(formData.email)) {
-            errors.email = t.errors.invalidEmail;
+            errors.email = "Correo electrónico inválido";
         }
 
         if (Object.keys(errors).length === 0) {
@@ -284,7 +260,7 @@ export function AuthCard({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) 
     const handleStep3Continue = () => {
         const errors: Record<string, string> = {};
         if (!validatePhone(formData.phoneNumber)) {
-            errors.phoneNumber = t.errors.invalidPhone;
+            errors.phoneNumber = "Número de teléfono inválido";
         }
 
         if (Object.keys(errors).length === 0) {
@@ -323,19 +299,19 @@ export function AuthCard({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) 
     const handleStep5CreateAccount = () => {
         const errors: Record<string, string> = {};
         if (!validatePassword(formData.password)) {
-            errors.password = t.errors.passwordMin;
+            errors.password = "La contraseña debe tener al menos 8 caracteres";
         }
         if (formData.idNumber.trim().length < 5) {
-            errors.idNumber = t.errors.invalidIdNumber;
+            errors.idNumber = "Número de documento inválido";
         }
         if (!formData.birthDate) {
-            errors.birthDate = t.errors.birthDateRequired;
+            errors.birthDate = "Fecha de nacimiento requerida";
         }
 
         if (Object.keys(errors).length === 0) {
             console.log("Registry complete", formData);
             // Reset flow for demo purposes
-            alert(t.preview.registrationCompleted);
+            alert("¡Registro completado! (Demo)");
             setIsRegistering(false);
             setRegisterStep(1);
             setFormData({
@@ -383,7 +359,7 @@ export function AuthCard({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) 
                     {t.preview.loginTitle}
                 </h3>
                 <p className="mb-4 text-sm text-gray-600">
-                    {t.preview.welcomeBack}
+                    Welcome back
                 </p>
 
                 <div className="space-y-3">
