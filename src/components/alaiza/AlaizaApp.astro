@@ -2,763 +2,833 @@
 import StreakScreen from "./steps/StreakScreen.astro";
 import GraphScreen from "./steps/GraphScreen.astro";
 import LearnScreen from "./steps/LearnScreen.astro";
+import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.astro";
 ---
 
-<div
-  class="alaiza-app overflow-hidden bg-white w-full h-full relative flex flex-col font-sans text-gray-900"
->
-  <!-- Home View Container -->
-  <div id="home-view" class="w-full h-full flex flex-col relative z-0">
-    <!-- Main Content Area -->
-    <div class="flex-1 flex flex-col px-6 py-2 overflow-hidden relative">
-      <!-- Score Ring Component -->
-      <div class="flex justify-center pt-8 pb-2 shrink-0">
-        <div
-          class="score-ring-container relative flex items-center justify-center"
-        >
-          <!-- Resized to 210 from 240 to save space -->
-          <svg width="210" height="210" class="transform -rotate-90">
-            <defs>
-              <linearGradient
-                id="score-gradient"
-                x1="0%"
-                y1="0%"
-                x2="100%"
-                y2="0%"
-              >
-                <stop offset="0%" stop-color="#213f8c"></stop>
-                <stop offset="100%" stop-color="#3B82F6"></stop>
-              </linearGradient>
-            </defs>
-            <!-- Background Circle -->
-            <circle
-              cx="105"
-              cy="105"
-              r="92"
-              fill="none"
-              stroke="#E5E7EB"
-              stroke-width="12"></circle>
-            <!-- Progress Circle -->
-            <circle
-              id="score-progress"
-              cx="105"
-              cy="105"
-              r="92"
-              fill="none"
-              stroke="url(#score-gradient)"
-              stroke-width="12"
-              stroke-dasharray="0"
-              stroke-dashoffset="0"
-              stroke-linecap="round"
-              class="transition-all duration-1000 ease-out"></circle>
-          </svg>
-
-          <!-- Central Content -->
-          <div
-            class="absolute inset-0 flex flex-col items-center justify-center px-6 -translate-y-4"
-          >
-            <!-- Logo - Moved up slightly via translate-y on container -->
-            <div
-              class="mb-1 h-7 w-20 relative flex items-center justify-center"
-            >
-              <img
-                src="/images/zelify_logo.png"
-                alt="Zelify"
-                class="max-h-full max-w-full object-contain filter"
-                id="zelify-logo"
-              />
-            </div>
-
-            <!-- Score Number -->
-            <div class="mb-0.5 flex items-baseline justify-center">
-              <span
-                class="text-6xl font-bold leading-none tracking-tight text-[#213f8c]"
-                id="score-value">0</span
-              >
-              <span class="text-3xl font-bold leading-none text-[#213f8c]"
-                >%</span
-              >
-            </div>
-
-            <!-- Label -->
-            <div
-              class="mb-2 text-xs font-light tracking-wide text-[#213f8c] opacity-80 pl-2"
-            >
-              Tu Puntuación Zelify
-            </div>
-
-            <!-- Secondary Progress Bar -->
-            <div class="h-1 w-20 overflow-hidden rounded-full bg-gray-200">
+<div class="device-container">
+  <DeviceFrame>
+    <div class="device-content">
+      <div
+        class="alaiza-app overflow-hidden bg-white w-full h-full relative flex flex-col font-sans text-gray-900"
+      >
+        <!-- Home View Container -->
+        <div id="home-view" class="w-full h-full flex flex-col relative z-0">
+          <!-- Main Content Area -->
+          <div class="flex-1 flex flex-col px-6 py-2 overflow-hidden relative">
+            <!-- Score Ring Component -->
+            <div class="flex justify-center pt-8 pb-2 shrink-0">
               <div
-                id="secondary-progress"
-                class="h-full rounded-full bg-[#10B981] w-0 transition-all duration-1000 ease-out"
+                class="score-ring-container relative flex items-center justify-center"
               >
+                <!-- Resized to 210 from 240 to save space -->
+                <svg width="210" height="210" class="transform -rotate-90">
+                  <defs>
+                    <linearGradient
+                      id="score-gradient"
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="0%"
+                    >
+                      <stop offset="0%" stop-color="#213f8c"></stop>
+                      <stop offset="100%" stop-color="#3B82F6"></stop>
+                    </linearGradient>
+                  </defs>
+                  <!-- Background Circle -->
+                  <circle
+                    cx="105"
+                    cy="105"
+                    r="92"
+                    fill="none"
+                    stroke="#E5E7EB"
+                    stroke-width="12"></circle>
+                  <!-- Progress Circle -->
+                  <circle
+                    id="score-progress"
+                    cx="105"
+                    cy="105"
+                    r="92"
+                    fill="none"
+                    stroke="url(#score-gradient)"
+                    stroke-width="12"
+                    stroke-dasharray="0"
+                    stroke-dashoffset="0"
+                    stroke-linecap="round"
+                    class="transition-all duration-1000 ease-out"></circle>
+                </svg>
+
+                <!-- Central Content -->
+                <div
+                  class="absolute inset-0 flex flex-col items-center justify-center px-6 -translate-y-4"
+                >
+                  <!-- Logo - Moved up slightly via translate-y on container -->
+                  <div
+                    class="mb-1 h-7 w-20 relative flex items-center justify-center"
+                  >
+                    <img
+                      src="/images/zelify_logo.png"
+                      alt="Zelify"
+                      class="max-h-full max-w-full object-contain filter"
+                      id="zelify-logo"
+                    />
+                  </div>
+
+                  <!-- Score Number -->
+                  <div class="mb-0.5 flex items-baseline justify-center">
+                    <span
+                      class="text-6xl font-bold leading-none tracking-tight text-[#213f8c]"
+                      id="score-value">0</span
+                    >
+                    <span class="text-3xl font-bold leading-none text-[#213f8c]"
+                      >%</span
+                    >
+                  </div>
+
+                  <!-- Label -->
+                  <div
+                    class="mb-2 text-xs font-light tracking-wide text-[#213f8c] opacity-80 pl-2"
+                  >
+                    Tu Puntuación Zelify
+                  </div>
+
+                  <!-- Secondary Progress Bar -->
+                  <div
+                    class="h-1 w-20 overflow-hidden rounded-full bg-gray-200"
+                  >
+                    <div
+                      id="secondary-progress"
+                      class="h-full rounded-full bg-[#10B981] w-0 transition-all duration-1000 ease-out"
+                    >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pyramid Carousel Container -->
+            <div class="relative w-full flex-1 mt-2" id="carousel-root">
+              <!-- Card 0: Stability -->
+              <div
+                id="card-0"
+                class="pyramid-card absolute left-0 right-0 flex cursor-pointer items-start gap-2.5 overflow-hidden transition-all duration-300 ease-in-out"
+                data-index="0"
+              >
+                <div
+                  class="card-icon-container flex shrink-0 items-start justify-center transition-colors"
+                >
+                  <svg
+                    class="card-icon"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                    <path d="M2 17l10 5 10-5"></path>
+                    <path d="M2 12l10 5 10-5"></path>
+                  </svg>
+                </div>
+                <div class="card-content flex-1 overflow-hidden">
+                  <div class="active-content hidden">
+                    <div class="mb-1 flex items-baseline gap-1.5">
+                      <h3
+                        class="text-[11px] font-semibold leading-tight text-gray-900"
+                      >
+                        Estabilidad
+                      </h3>
+                      <span class="text-xs font-bold text-gray-900">85%</span>
+                    </div>
+                    <div
+                      class="mb-1.5 h-1 w-full overflow-hidden rounded-full bg-gray-200"
+                    >
+                      <div class="h-full bg-[#10B981] w-[85%] rounded-full">
+                      </div>
+                    </div>
+                    <p class="text-[9px] leading-snug text-gray-700">
+                      Transformando tus datos de gastos en ideas claras,
+                      permitiendo decisiones más inteligentes y mejores
+                      resultados.
+                    </p>
+                  </div>
+                  <div class="inactive-content block">
+                    <p class="text-xs font-medium leading-tight text-gray-700">
+                      Estabilidad
+                    </p>
+                    <p class="mt-0.5 text-[10px] text-gray-500">
+                      Confianza 85%
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 1: Intelligence -->
+              <div
+                id="card-1"
+                class="pyramid-card absolute left-0 right-0 flex cursor-pointer items-start gap-2.5 overflow-hidden transition-all duration-300 ease-in-out"
+                data-index="1"
+              >
+                <div
+                  class="card-icon-container flex shrink-0 items-start justify-center transition-colors"
+                >
+                  <svg
+                    class="card-icon"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M12 2C8.13 2 5 5.13 5 9c0 1.74.69 3.32 1.81 4.48C5.5 14.5 4 16.14 4 18.22V20c0 .55.45 1 1 1h14c.55 0 1-.45 1-1v-1.78c0-2.08-1.5-3.72-3.81-4.74C18.31 12.32 19 10.74 19 9c0-3.87-3.13-7-7-7z"
+                    ></path>
+                    <circle cx="9" cy="9" r="1.5"></circle>
+                    <circle cx="15" cy="9" r="1.5"></circle>
+                    <path
+                      d="M12 13.5c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+                    ></path>
+                  </svg>
+                </div>
+                <div class="card-content flex-1 overflow-hidden">
+                  <div class="active-content hidden">
+                    <div class="mb-1 flex items-baseline gap-1.5">
+                      <h3
+                        class="text-[11px] font-semibold leading-tight text-gray-900"
+                      >
+                        Inteligencia
+                      </h3>
+                      <span class="text-xs font-bold text-gray-900">85%</span>
+                    </div>
+                    <div
+                      class="mb-1.5 h-1 w-full overflow-hidden rounded-full bg-gray-200"
+                    >
+                      <div class="h-full bg-[#10B981] w-[85%] rounded-full">
+                      </div>
+                    </div>
+                    <p class="text-[9px] leading-snug text-gray-700">
+                      Transforma tus datos en insights claros para optimizar tu
+                      consumo.
+                    </p>
+                  </div>
+                  <div class="inactive-content block">
+                    <p class="text-xs font-medium leading-tight text-gray-700">
+                      Inteligencia
+                    </p>
+                    <p class="mt-0.5 text-[10px] text-gray-500">
+                      Inteligencia 85%
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 2: Discipline -->
+              <div
+                id="card-2"
+                class="pyramid-card absolute left-0 right-0 flex cursor-pointer items-start gap-2.5 overflow-hidden transition-all duration-300 ease-in-out"
+                data-index="2"
+              >
+                <div
+                  class="card-icon-container flex shrink-0 items-start justify-center transition-colors"
+                >
+                  <svg
+                    class="card-icon"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                  </svg>
+                </div>
+                <div class="card-content flex-1 overflow-hidden">
+                  <div class="active-content hidden">
+                    <div class="mb-1 flex items-baseline gap-1.5">
+                      <h3
+                        class="text-[11px] font-semibold leading-tight text-gray-900"
+                      >
+                        Disciplina
+                      </h3>
+                      <span class="text-xs font-bold text-gray-900">75%</span>
+                    </div>
+                    <div
+                      class="mb-1.5 h-1 w-full overflow-hidden rounded-full bg-gray-200"
+                    >
+                      <div class="h-full bg-[#10B981] w-[75%] rounded-full">
+                      </div>
+                    </div>
+                    <p class="text-[9px] leading-snug text-gray-700">
+                      Evalúa tu consistencia en el manejo de finanzas y el
+                      cumplimiento de tus metas financieras.
+                    </p>
+                  </div>
+                  <div class="inactive-content block">
+                    <p class="text-xs font-medium leading-tight text-gray-700">
+                      Disciplina
+                    </p>
+                    <p class="mt-0.5 text-[10px] text-gray-500">Hábito 75%</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <!-- Pyramid Carousel Container -->
-      <div class="relative w-full flex-1 mt-2" id="carousel-root">
-        <!-- Card 0: Stability -->
+          <!-- Bottom Navigation Section -->
+          <div
+            class="flex-shrink-0 bg-white border-t border-gray-200 px-6 py-3 space-y-2.5"
+          >
+            <!-- Action Pills -->
+            <div
+              class="flex justify-between gap-2 overflow-x-auto pb-1 scrollbar-hide"
+            >
+              <button class="nav-pill" data-screen="streak">Racha</button>
+              <button class="nav-pill" data-screen="graph">Gráfico</button>
+              <button class="nav-pill" data-screen="rewards">Descuentos</button>
+              <button class="nav-pill" data-screen="learn">Aprender</button>
+            </div>
+
+            <!-- Score System Button -->
+            <button
+              id="open-score-system"
+              class="w-full h-12 text-white rounded-t-2xl flex flex-col items-center justify-center transition-all active:scale-[0.98] shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] relative overflow-hidden group pb-1"
+              style="background: linear-gradient(to right, #000b1e, #044a95);"
+            >
+              <!-- Top Highlight Line -->
+              <div class="absolute top-0 left-0 right-0 h-[1px] bg-white/20">
+              </div>
+
+              <div class="flex flex-col items-center gap-0.5 relative z-10">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="text-white/70 group-hover:text-white group-hover:-translate-y-0.5 transition-all duration-300"
+                >
+                  <path d="M18 15L12 9L6 15"></path>
+                </svg>
+                <span class="text-[13px] font-semibold tracking-wide"
+                  >Sistema de Puntuación</span
+                >
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Other Screens (Siblings to home-view) -->
+        <StreakScreen />
+        <GraphScreen />
+        <LearnScreen />
+
+        <!-- Score System Modal -->
         <div
-          id="card-0"
-          class="pyramid-card absolute left-0 right-0 flex cursor-pointer items-start gap-2.5 overflow-hidden transition-all duration-300 ease-in-out"
-          data-index="0"
+          id="score-modal"
+          class="hidden absolute inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 opacity-0 transition-opacity duration-300"
         >
           <div
-            class="card-icon-container flex shrink-0 items-start justify-center transition-colors"
+            class="relative w-full max-w-[340px] m-4 mb-8 sm:mb-4 rounded-3xl bg-white p-6 shadow-2xl transform translate-y-10 transition-transform duration-300 scale-95"
+            id="score-modal-content"
           >
-            <svg
-              class="card-icon"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
+            <!-- Close Button X -->
+            <button
+              id="close-modal-x"
+              class="absolute right-4 top-4 rounded-full p-2 text-gray-400 hover:bg-gray-100 transition-colors"
             >
-              <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-              <path d="M2 17l10 5 10-5"></path>
-              <path d="M2 12l10 5 10-5"></path>
-            </svg>
-          </div>
-          <div class="card-content flex-1 overflow-hidden">
-            <div class="active-content hidden">
-              <div class="mb-1 flex items-baseline gap-1.5">
-                <h3
-                  class="text-[11px] font-semibold leading-tight text-gray-900"
-                >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M18 6L6 18M6 6l12 12"></path>
+              </svg>
+            </button>
+
+            <h2 class="text-xl font-bold text-gray-900 mb-2">
+              Zelify Score Criteria
+            </h2>
+            <p class="text-xs text-gray-500 mb-6 leading-relaxed">
+              Criterios de Puntuación Zelify
+            </p>
+            <p class="text-xs text-gray-500 mb-6 leading-relaxed">
+              Tu puntuación Zelify se calcula con base en los siguientes
+              criterios:
+            </p>
+
+            <div class="space-y-3">
+              <!-- Item 1 -->
+              <div class="rounded-xl border border-gray-100 bg-gray-50 p-4">
+                <h3 class="text-sm font-semibold text-gray-900 mb-1">
                   Estabilidad
                 </h3>
-                <span class="text-xs font-bold text-gray-900">85%</span>
+                <p class="text-[11px] text-gray-500 leading-relaxed">
+                  Mide qué tan consistentemente manejas tus finanzas y tomas
+                  decisiones informadas basadas en tus patrones de gasto.
+                </p>
               </div>
-              <div
-                class="mb-1.5 h-1 w-full overflow-hidden rounded-full bg-gray-200"
-              >
-                <div class="h-full bg-[#10B981] w-[85%] rounded-full"></div>
-              </div>
-              <p class="text-[9px] leading-snug text-gray-700">
-                Transformando tus datos de gastos en ideas claras, permitiendo
-                decisiones más inteligentes y mejores resultados.
-              </p>
-            </div>
-            <div class="inactive-content block">
-              <p class="text-xs font-medium leading-tight text-gray-700">
-                Estabilidad
-              </p>
-              <p class="mt-0.5 text-[10px] text-gray-500">Confianza 85%</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 1: Intelligence -->
-        <div
-          id="card-1"
-          class="pyramid-card absolute left-0 right-0 flex cursor-pointer items-start gap-2.5 overflow-hidden transition-all duration-300 ease-in-out"
-          data-index="1"
-        >
-          <div
-            class="card-icon-container flex shrink-0 items-start justify-center transition-colors"
-          >
-            <svg
-              class="card-icon"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-              <path
-                d="M12 2C8.13 2 5 5.13 5 9c0 1.74.69 3.32 1.81 4.48C5.5 14.5 4 16.14 4 18.22V20c0 .55.45 1 1 1h14c.55 0 1-.45 1-1v-1.78c0-2.08-1.5-3.72-3.81-4.74C18.31 12.32 19 10.74 19 9c0-3.87-3.13-7-7-7z"
-              ></path>
-              <circle cx="9" cy="9" r="1.5"></circle>
-              <circle cx="15" cy="9" r="1.5"></circle>
-              <path d="M12 13.5c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
-              ></path>
-            </svg>
-          </div>
-          <div class="card-content flex-1 overflow-hidden">
-            <div class="active-content hidden">
-              <div class="mb-1 flex items-baseline gap-1.5">
-                <h3
-                  class="text-[11px] font-semibold leading-tight text-gray-900"
-                >
+              <!-- Item 2 -->
+              <div class="rounded-xl border border-gray-100 bg-gray-50 p-4">
+                <h3 class="text-sm font-semibold text-gray-900 mb-1">
                   Inteligencia
                 </h3>
-                <span class="text-xs font-bold text-gray-900">85%</span>
+                <p class="text-[11px] text-gray-500 leading-relaxed">
+                  Evalúa tu capacidad de analizar datos financieros y tomar
+                  decisiones inteligentes que llevan a mejores resultados.
+                </p>
               </div>
-              <div
-                class="mb-1.5 h-1 w-full overflow-hidden rounded-full bg-gray-200"
-              >
-                <div class="h-full bg-[#10B981] w-[85%] rounded-full"></div>
-              </div>
-              <p class="text-[9px] leading-snug text-gray-700">
-                Transforma tus datos en insights claros para optimizar tu
-                consumo.
-              </p>
-            </div>
-            <div class="inactive-content block">
-              <p class="text-xs font-medium leading-tight text-gray-700">
-                Inteligencia
-              </p>
-              <p class="mt-0.5 text-[10px] text-gray-500">Inteligencia 85%</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 2: Discipline -->
-        <div
-          id="card-2"
-          class="pyramid-card absolute left-0 right-0 flex cursor-pointer items-start gap-2.5 overflow-hidden transition-all duration-300 ease-in-out"
-          data-index="2"
-        >
-          <div
-            class="card-icon-container flex shrink-0 items-start justify-center transition-colors"
-          >
-            <svg
-              class="card-icon"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-              <polyline points="22 4 12 14.01 9 11.01"></polyline>
-            </svg>
-          </div>
-          <div class="card-content flex-1 overflow-hidden">
-            <div class="active-content hidden">
-              <div class="mb-1 flex items-baseline gap-1.5">
-                <h3
-                  class="text-[11px] font-semibold leading-tight text-gray-900"
-                >
+              <!-- Item 3 -->
+              <div class="rounded-xl border border-gray-100 bg-gray-50 p-4">
+                <h3 class="text-sm font-semibold text-gray-900 mb-1">
                   Disciplina
                 </h3>
-                <span class="text-xs font-bold text-gray-900">75%</span>
+                <p class="text-[11px] text-gray-500 leading-relaxed">
+                  Evalúa tu consistencia en el manejo de finanzas y el
+                  cumplimiento de tus metas financieras.
+                </p>
               </div>
-              <div
-                class="mb-1.5 h-1 w-full overflow-hidden rounded-full bg-gray-200"
-              >
-                <div class="h-full bg-[#10B981] w-[75%] rounded-full"></div>
-              </div>
-              <p class="text-[9px] leading-snug text-gray-700">
-                Evalúa tu consistencia en el manejo de finanzas y el
-                cumplimiento de tus metas financieras.
-              </p>
             </div>
-            <div class="inactive-content block">
-              <p class="text-xs font-medium leading-tight text-gray-700">
-                Disciplina
-              </p>
-              <p class="mt-0.5 text-[10px] text-gray-500">Hábito 75%</p>
-            </div>
+
+            <button
+              id="close-modal-btn"
+              class="mt-6 w-full rounded-xl bg-[#213f8c] py-3 text-sm font-bold text-white shadow-lg shadow-blue-900/20 active:scale-[0.98] transition-transform"
+            >
+              Cerrar
+            </button>
           </div>
         </div>
       </div>
+
+      <style>
+        /* Custom Scrollbar hide */
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+
+        .nav-pill {
+          flex: 1;
+          min-width: 70px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 9999px;
+          font-size: 11px;
+          font-weight: 600;
+          color: white;
+          background: linear-gradient(to right, #000b1e, #044a95);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+          transition:
+            opacity 0.2s,
+            transform 0.1s;
+          white-space: nowrap;
+          position: relative;
+          overflow: hidden;
+        }
+
+        /* Shared Shimmer Effect */
+        .btn-shimmer {
+          position: relative;
+          overflow: hidden;
+        }
+
+        .nav-pill::after,
+        .btn-shimmer::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -150%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.4) 50%,
+            rgba(255, 255, 255, 0) 100%
+          );
+          transform: skewX(-25deg);
+          animation: shimmer 3s infinite;
+          pointer-events: none;
+          z-index: 20;
+        }
+
+        @keyframes shimmer {
+          0% {
+            left: -150%;
+          }
+          50% {
+            left: 150%;
+          }
+          100% {
+            left: 150%;
+          }
+        }
+        .nav-pill:active {
+          opacity: 0.8;
+          transform: scale(0.98);
+        }
+
+        /* Modal Animations */
+        .modal-visible {
+          opacity: 1 !important;
+        }
+        .modal-content-visible {
+          transform: translateY(0) scale(1) !important;
+        }
+      </style>
+
+      <script>
+        // DOM Elements
+        const scoreValueEl = document.getElementById("score-value");
+        const scoreCircle = document.getElementById("score-progress");
+        const secProgress = document.getElementById("secondary-progress");
+        const carouselRoot = document.getElementById("carousel-root");
+
+        const openModalBtn = document.getElementById("open-score-system");
+        const closeModalBtn = document.getElementById("close-modal-btn");
+        const closeModalX = document.getElementById("close-modal-x");
+        const modal = document.getElementById("score-modal");
+        const modalContent = document.getElementById("score-modal-content");
+
+        // Constants
+        const TARGET_SCORE = 91;
+        const CIRCLE_RADIUS = 92;
+        const CIRCUMFERENCE = 2 * Math.PI * CIRCLE_RADIUS;
+
+        // --- Animation Logic ---
+        function animateScore() {
+          // 1. Animate Number
+          let start = 0;
+          const duration = 1500;
+          const startTime = performance.now();
+
+          function update(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const ease = 1 - Math.pow(1 - progress, 3);
+            const currentVal = Math.floor(ease * TARGET_SCORE);
+            if (scoreValueEl) scoreValueEl.textContent = currentVal;
+            if (progress < 1) requestAnimationFrame(update);
+          }
+          requestAnimationFrame(update);
+
+          // 2. Animate Circle Ring
+          if (scoreCircle) {
+            scoreCircle.style.strokeDasharray = `${CIRCUMFERENCE}`;
+            scoreCircle.style.strokeDashoffset = `${CIRCUMFERENCE}`;
+            setTimeout(() => {
+              const offset =
+                CIRCUMFERENCE - (TARGET_SCORE / 100) * CIRCUMFERENCE;
+              scoreCircle.style.strokeDashoffset = `${offset}`;
+            }, 100);
+          }
+
+          // 3. Animate Secondary Pill
+          if (secProgress) {
+            setTimeout(() => {
+              secProgress.style.width = "75%";
+            }, 300);
+          }
+        }
+
+        // --- Modal Logic ---
+        function openModal() {
+          if (!modal || !modalContent) return;
+          modal.classList.remove("hidden");
+          requestAnimationFrame(() => {
+            modal.classList.add("modal-visible");
+            modalContent.classList.add("modal-content-visible");
+          });
+        }
+
+        function closeModal() {
+          if (!modal || !modalContent) return;
+          modal.classList.remove("modal-visible");
+          modalContent.classList.remove("modal-content-visible");
+          setTimeout(() => {
+            modal.classList.add("hidden");
+          }, 300);
+        }
+
+        // --- Pyramid Carousel Logic ---
+        let activeIndex = 0; // Start with Stability (0)
+        const itemsCount = 3;
+        const activeCardHeight = 88;
+        const inactiveCardHeight = 55;
+        const overlapPercentage = 0.3;
+        const visiblePart = Math.round(
+          inactiveCardHeight * (1 - overlapPercentage),
+        );
+        const overlapAmount = inactiveCardHeight - visiblePart;
+
+        const VERTICAL_CARDS_BORDER_RADIUS = {
+          active: 18,
+          inactive: 12,
+        };
+
+        function updateCarousel(index) {
+          activeIndex = index;
+          const containerHeight = itemsCount * 75;
+
+          // Adjust container height to be precise
+          if (carouselRoot) carouselRoot.style.height = `${containerHeight}px`;
+
+          for (let i = 0; i < itemsCount; i++) {
+            const card = document.getElementById(`card-${i}`);
+            if (!card) continue;
+
+            const isActive = activeIndex === i;
+            const currentActive = activeIndex;
+
+            let topOffset = 0;
+            let centerY = (containerHeight - activeCardHeight) / 2;
+
+            // Custom adjustment for index 0 to match React logic
+            if (currentActive === 0) {
+              centerY = (containerHeight - activeCardHeight) / 2 - 20;
+            }
+
+            if (isActive) {
+              topOffset = centerY;
+            } else if (i < currentActive) {
+              const cardsAbove = currentActive - i;
+              topOffset = centerY - visiblePart * cardsAbove;
+            } else {
+              const cardsBelow = i - currentActive;
+              if (currentActive === 0) {
+                if (cardsBelow === 1) {
+                  const visiblePart1to2 = Math.round(
+                    inactiveCardHeight * (1 - overlapPercentage),
+                  );
+                  const overlapAmount1to2 =
+                    inactiveCardHeight - visiblePart1to2;
+                  topOffset = centerY + activeCardHeight - overlapAmount1to2;
+                } else if (cardsBelow === 2) {
+                  const visiblePart1to2 = Math.round(
+                    inactiveCardHeight * (1 - overlapPercentage),
+                  );
+                  const overlapAmount1to2 =
+                    inactiveCardHeight - visiblePart1to2;
+                  const secondTop =
+                    centerY + activeCardHeight - overlapAmount1to2;
+                  const visiblePart2to3 = Math.round(
+                    inactiveCardHeight * (1 - overlapPercentage),
+                  );
+                  const overlapAmount2to3 =
+                    inactiveCardHeight - visiblePart2to3;
+                  topOffset =
+                    secondTop + inactiveCardHeight - overlapAmount2to3;
+                }
+              } else {
+                topOffset =
+                  centerY + activeCardHeight - overlapAmount * cardsBelow;
+              }
+            }
+
+            // Z-Index Logic
+            let zIndex = 10;
+            if (isActive) {
+              zIndex = 30;
+            } else {
+              if (currentActive === 0) {
+                zIndex = 20 - i;
+              } else if (currentActive === 1) {
+                zIndex = i === 0 || i === 2 ? 15 : 30;
+              } else if (currentActive === 2) {
+                zIndex = 20 + i;
+              }
+            }
+
+            // Apply Styles
+            card.style.top = `${topOffset}px`;
+            card.style.height = isActive
+              ? `${activeCardHeight}px`
+              : `${inactiveCardHeight}px`;
+            card.style.zIndex = zIndex;
+            card.style.borderRadius = isActive
+              ? `${VERTICAL_CARDS_BORDER_RADIUS.active}px`
+              : `${VERTICAL_CARDS_BORDER_RADIUS.inactive}px`;
+
+            // Padding
+            card.style.paddingLeft = isActive ? "11px" : "8px";
+            card.style.paddingRight = isActive ? "11px" : "8px";
+            card.style.paddingTop = isActive ? "11px" : "5px";
+            card.style.paddingBottom = isActive ? "11px" : "5px";
+
+            // Colors & Borders
+            if (isActive) {
+              card.style.backgroundColor = "#FFFFFF";
+              card.style.border = "1px solid #E5E7EB";
+              card.classList.add("shadow-lg");
+            } else {
+              card.style.backgroundColor = "#F3F4F6";
+              card.style.border = "1px solid #E5E7EB";
+              card.classList.remove("shadow-lg");
+            }
+
+            // Icon Container Logic
+            const iconContainer = card.querySelector(".card-icon-container");
+            const iconSvg = card.querySelector(".card-icon");
+            if (iconContainer) {
+              iconContainer.style.width = isActive ? "36px" : "28px";
+              iconContainer.style.height = isActive ? "36px" : "28px";
+              // Color
+              iconContainer.style.color = isActive ? "#213f8c" : "#6B7280";
+              iconContainer.style.paddingTop = isActive ? "1px" : "0px";
+            }
+            if (iconSvg) {
+              iconSvg.style.transform = isActive ? "scale(0.8)" : "scale(0.7)";
+            }
+
+            // Toggle Content
+            const activeContent = card.querySelector(".active-content");
+            const inactiveContent = card.querySelector(".inactive-content");
+
+            if (isActive) {
+              if (activeContent) activeContent.classList.remove("hidden");
+              if (inactiveContent) inactiveContent.classList.add("hidden");
+            } else {
+              if (activeContent) activeContent.classList.add("hidden");
+              if (inactiveContent) inactiveContent.classList.remove("hidden");
+            }
+          }
+        }
+
+        // Event Listeners for Cards
+        [0, 1, 2].forEach((i) => {
+          const card = document.getElementById(`card-${i}`);
+          if (card) {
+            card.addEventListener("click", () => updateCarousel(i));
+          }
+        });
+
+        // General Listeners
+        if (openModalBtn) openModalBtn.addEventListener("click", openModal);
+        if (closeModalBtn) closeModalBtn.addEventListener("click", closeModal);
+        if (closeModalX) closeModalX.addEventListener("click", closeModal);
+        if (modal) {
+          modal.addEventListener("click", (e) => {
+            if (e.target === modal) closeModal();
+          });
+        }
+
+        // Initialize
+        document.addEventListener("DOMContentLoaded", () => {
+          animateScore();
+          updateCarousel(0); // Start with Stability active
+        });
+
+        // Run immediately
+        animateScore();
+        updateCarousel(0);
+
+        // --- View Switching Logic ---
+        const homeView = document.getElementById("home-view");
+        const streakScreen = document.getElementById("streak-screen-content");
+        const graphScreen = document.getElementById("graph-screen-content");
+        const learnScreen = document.getElementById("learn-screen-content");
+
+        const streakBtn = document.querySelector('[data-screen="streak"]');
+        const graphBtn = document.querySelector('[data-screen="graph"]');
+        const learnBtn = document.querySelector('[data-screen="learn"]');
+
+        const backToHomeBtn = document.getElementById("back-to-home-btn");
+        const backToHomeFromGraphBtn = document.getElementById(
+          "back-to-home-from-graph-btn",
+        );
+        const backToHomeFromLearnBtn = document.getElementById(
+          "back-to-home-from-learn-btn",
+        );
+
+        function showScreen(screenName) {
+          // Hide all
+          if (homeView) homeView.classList.add("hidden");
+          if (streakScreen) streakScreen.classList.add("hidden");
+          if (graphScreen) graphScreen.classList.add("hidden");
+          if (learnScreen) learnScreen.classList.add("hidden");
+
+          // Show requested
+          if (screenName === "home" && homeView)
+            homeView.classList.remove("hidden");
+          if (screenName === "streak" && streakScreen)
+            streakScreen.classList.remove("hidden");
+          if (screenName === "graph" && graphScreen)
+            graphScreen.classList.remove("hidden");
+          if (screenName === "learn" && learnScreen)
+            learnScreen.classList.remove("hidden");
+        }
+
+        if (streakBtn) {
+          streakBtn.addEventListener("click", () => showScreen("streak"));
+        }
+
+        if (graphBtn) {
+          graphBtn.addEventListener("click", () => showScreen("graph"));
+        }
+
+        if (learnBtn) {
+          learnBtn.addEventListener("click", () => showScreen("learn"));
+        }
+
+        if (backToHomeBtn) {
+          backToHomeBtn.addEventListener("click", () => showScreen("home"));
+        }
+
+        if (backToHomeFromGraphBtn) {
+          backToHomeFromGraphBtn.addEventListener("click", () =>
+            showScreen("home"),
+          );
+        }
+
+        if (backToHomeFromLearnBtn) {
+          backToHomeFromLearnBtn.addEventListener("click", () =>
+            showScreen("home"),
+          );
+        }
+      </script>
     </div>
-
-    <!-- Bottom Navigation Section -->
-    <div
-      class="flex-shrink-0 bg-white border-t border-gray-200 px-6 py-3 space-y-2.5"
-    >
-      <!-- Action Pills -->
-      <div
-        class="flex justify-between gap-2 overflow-x-auto pb-1 scrollbar-hide"
-      >
-        <button class="nav-pill" data-screen="streak">Racha</button>
-        <button class="nav-pill" data-screen="graph">Gráfico</button>
-        <button class="nav-pill" data-screen="rewards">Descuentos</button>
-        <button class="nav-pill" data-screen="learn">Aprender</button>
-      </div>
-
-      <!-- Score System Button -->
-      <button
-        id="open-score-system"
-        class="w-full h-12 text-white rounded-t-2xl flex flex-col items-center justify-center transition-all active:scale-[0.98] shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] relative overflow-hidden group pb-1"
-        style="background: linear-gradient(to right, #000b1e, #044a95);"
-      >
-        <!-- Top Highlight Line -->
-        <div class="absolute top-0 left-0 right-0 h-[1px] bg-white/20"></div>
-
-        <div class="flex flex-col items-center gap-0.5 relative z-10">
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="3"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="text-white/70 group-hover:text-white group-hover:-translate-y-0.5 transition-all duration-300"
-          >
-            <path d="M18 15L12 9L6 15"></path>
-          </svg>
-          <span class="text-[13px] font-semibold tracking-wide"
-            >Sistema de Puntuación</span
-          >
-        </div>
-      </button>
-    </div>
-  </div>
-
-  <!-- Other Screens (Siblings to home-view) -->
-  <StreakScreen />
-  <GraphScreen />
-  <LearnScreen />
-
-  <!-- Score System Modal -->
-  <div
-    id="score-modal"
-    class="hidden absolute inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 opacity-0 transition-opacity duration-300"
-  >
-    <div
-      class="relative w-full max-w-[340px] m-4 mb-8 sm:mb-4 rounded-3xl bg-white p-6 shadow-2xl transform translate-y-10 transition-transform duration-300 scale-95"
-      id="score-modal-content"
-    >
-      <!-- Close Button X -->
-      <button
-        id="close-modal-x"
-        class="absolute right-4 top-4 rounded-full p-2 text-gray-400 hover:bg-gray-100 transition-colors"
-      >
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="M18 6L6 18M6 6l12 12"></path>
-        </svg>
-      </button>
-
-      <h2 class="text-xl font-bold text-gray-900 mb-2">
-        Zelify Score Criteria
-      </h2>
-      <p class="text-xs text-gray-500 mb-6 leading-relaxed">
-        Criterios de Puntuación Zelify
-      </p>
-      <p class="text-xs text-gray-500 mb-6 leading-relaxed">
-        Tu puntuación Zelify se calcula con base en los siguientes criterios:
-      </p>
-
-      <div class="space-y-3">
-        <!-- Item 1 -->
-        <div class="rounded-xl border border-gray-100 bg-gray-50 p-4">
-          <h3 class="text-sm font-semibold text-gray-900 mb-1">Estabilidad</h3>
-          <p class="text-[11px] text-gray-500 leading-relaxed">
-            Mide qué tan consistentemente manejas tus finanzas y tomas
-            decisiones informadas basadas en tus patrones de gasto.
-          </p>
-        </div>
-        <!-- Item 2 -->
-        <div class="rounded-xl border border-gray-100 bg-gray-50 p-4">
-          <h3 class="text-sm font-semibold text-gray-900 mb-1">Inteligencia</h3>
-          <p class="text-[11px] text-gray-500 leading-relaxed">
-            Evalúa tu capacidad de analizar datos financieros y tomar decisiones
-            inteligentes que llevan a mejores resultados.
-          </p>
-        </div>
-        <!-- Item 3 -->
-        <div class="rounded-xl border border-gray-100 bg-gray-50 p-4">
-          <h3 class="text-sm font-semibold text-gray-900 mb-1">Disciplina</h3>
-          <p class="text-[11px] text-gray-500 leading-relaxed">
-            Evalúa tu consistencia en el manejo de finanzas y el cumplimiento de
-            tus metas financieras.
-          </p>
-        </div>
-      </div>
-
-      <button
-        id="close-modal-btn"
-        class="mt-6 w-full rounded-xl bg-[#213f8c] py-3 text-sm font-bold text-white shadow-lg shadow-blue-900/20 active:scale-[0.98] transition-transform"
-      >
-        Cerrar
-      </button>
-    </div>
-  </div>
+  </DeviceFrame>
 </div>
 
 <style>
-  /* Custom Scrollbar hide */
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
+  /* Device Frame Layout */
+  .device-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    z-index: 10;
+    padding: 1rem 0 2rem;
   }
-  .scrollbar-hide {
+
+  .device-content {
+    flex: 1;
+    min-height: 0;
+    background: #ffffff;
+    padding: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
     -ms-overflow-style: none;
     scrollbar-width: none;
-  }
-
-  .nav-pill {
-    flex: 1;
-    min-width: 70px;
-    height: 40px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 9999px;
-    font-size: 11px;
-    font-weight: 600;
-    color: white;
-    background: linear-gradient(to right, #000b1e, #044a95);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-    transition:
-      opacity 0.2s,
-      transform 0.1s;
-    white-space: nowrap;
+    flex-direction: column;
     position: relative;
-    overflow: hidden;
   }
 
-  /* Shared Shimmer Effect */
-  .btn-shimmer {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .nav-pill::after,
-  .btn-shimmer::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -150%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      to right,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.4) 50%,
-      rgba(255, 255, 255, 0) 100%
-    );
-    transform: skewX(-25deg);
-    animation: shimmer 3s infinite;
-    pointer-events: none;
-    z-index: 20;
-  }
-
-  @keyframes shimmer {
-    0% {
-      left: -150%;
-    }
-    50% {
-      left: 150%;
-    }
-    100% {
-      left: 150%;
-    }
-  }
-  .nav-pill:active {
-    opacity: 0.8;
-    transform: scale(0.98);
-  }
-
-  /* Modal Animations */
-  .modal-visible {
-    opacity: 1 !important;
-  }
-  .modal-content-visible {
-    transform: translateY(0) scale(1) !important;
+  .device-content::-webkit-scrollbar {
+    display: none;
   }
 </style>
-
-<script>
-  // DOM Elements
-  const scoreValueEl = document.getElementById("score-value");
-  const scoreCircle = document.getElementById("score-progress");
-  const secProgress = document.getElementById("secondary-progress");
-  const carouselRoot = document.getElementById("carousel-root");
-
-  const openModalBtn = document.getElementById("open-score-system");
-  const closeModalBtn = document.getElementById("close-modal-btn");
-  const closeModalX = document.getElementById("close-modal-x");
-  const modal = document.getElementById("score-modal");
-  const modalContent = document.getElementById("score-modal-content");
-
-  // Constants
-  const TARGET_SCORE = 91;
-  const CIRCLE_RADIUS = 92;
-  const CIRCUMFERENCE = 2 * Math.PI * CIRCLE_RADIUS;
-
-  // --- Animation Logic ---
-  function animateScore() {
-    // 1. Animate Number
-    let start = 0;
-    const duration = 1500;
-    const startTime = performance.now();
-
-    function update(currentTime) {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const ease = 1 - Math.pow(1 - progress, 3);
-      const currentVal = Math.floor(ease * TARGET_SCORE);
-      if (scoreValueEl) scoreValueEl.textContent = currentVal;
-      if (progress < 1) requestAnimationFrame(update);
-    }
-    requestAnimationFrame(update);
-
-    // 2. Animate Circle Ring
-    if (scoreCircle) {
-      scoreCircle.style.strokeDasharray = `${CIRCUMFERENCE}`;
-      scoreCircle.style.strokeDashoffset = `${CIRCUMFERENCE}`;
-      setTimeout(() => {
-        const offset = CIRCUMFERENCE - (TARGET_SCORE / 100) * CIRCUMFERENCE;
-        scoreCircle.style.strokeDashoffset = `${offset}`;
-      }, 100);
-    }
-
-    // 3. Animate Secondary Pill
-    if (secProgress) {
-      setTimeout(() => {
-        secProgress.style.width = "75%";
-      }, 300);
-    }
-  }
-
-  // --- Modal Logic ---
-  function openModal() {
-    if (!modal || !modalContent) return;
-    modal.classList.remove("hidden");
-    requestAnimationFrame(() => {
-      modal.classList.add("modal-visible");
-      modalContent.classList.add("modal-content-visible");
-    });
-  }
-
-  function closeModal() {
-    if (!modal || !modalContent) return;
-    modal.classList.remove("modal-visible");
-    modalContent.classList.remove("modal-content-visible");
-    setTimeout(() => {
-      modal.classList.add("hidden");
-    }, 300);
-  }
-
-  // --- Pyramid Carousel Logic ---
-  let activeIndex = 0; // Start with Stability (0)
-  const itemsCount = 3;
-  const activeCardHeight = 88;
-  const inactiveCardHeight = 55;
-  const overlapPercentage = 0.3;
-  const visiblePart = Math.round(inactiveCardHeight * (1 - overlapPercentage));
-  const overlapAmount = inactiveCardHeight - visiblePart;
-
-  const VERTICAL_CARDS_BORDER_RADIUS = {
-    active: 18,
-    inactive: 12,
-  };
-
-  function updateCarousel(index) {
-    activeIndex = index;
-    const containerHeight = itemsCount * 75;
-
-    // Adjust container height to be precise
-    if (carouselRoot) carouselRoot.style.height = `${containerHeight}px`;
-
-    for (let i = 0; i < itemsCount; i++) {
-      const card = document.getElementById(`card-${i}`);
-      if (!card) continue;
-
-      const isActive = activeIndex === i;
-      const currentActive = activeIndex;
-
-      let topOffset = 0;
-      let centerY = (containerHeight - activeCardHeight) / 2;
-
-      // Custom adjustment for index 0 to match React logic
-      if (currentActive === 0) {
-        centerY = (containerHeight - activeCardHeight) / 2 - 20;
-      }
-
-      if (isActive) {
-        topOffset = centerY;
-      } else if (i < currentActive) {
-        const cardsAbove = currentActive - i;
-        topOffset = centerY - visiblePart * cardsAbove;
-      } else {
-        const cardsBelow = i - currentActive;
-        if (currentActive === 0) {
-          if (cardsBelow === 1) {
-            const visiblePart1to2 = Math.round(
-              inactiveCardHeight * (1 - overlapPercentage),
-            );
-            const overlapAmount1to2 = inactiveCardHeight - visiblePart1to2;
-            topOffset = centerY + activeCardHeight - overlapAmount1to2;
-          } else if (cardsBelow === 2) {
-            const visiblePart1to2 = Math.round(
-              inactiveCardHeight * (1 - overlapPercentage),
-            );
-            const overlapAmount1to2 = inactiveCardHeight - visiblePart1to2;
-            const secondTop = centerY + activeCardHeight - overlapAmount1to2;
-            const visiblePart2to3 = Math.round(
-              inactiveCardHeight * (1 - overlapPercentage),
-            );
-            const overlapAmount2to3 = inactiveCardHeight - visiblePart2to3;
-            topOffset = secondTop + inactiveCardHeight - overlapAmount2to3;
-          }
-        } else {
-          topOffset = centerY + activeCardHeight - overlapAmount * cardsBelow;
-        }
-      }
-
-      // Z-Index Logic
-      let zIndex = 10;
-      if (isActive) {
-        zIndex = 30;
-      } else {
-        if (currentActive === 0) {
-          zIndex = 20 - i;
-        } else if (currentActive === 1) {
-          zIndex = i === 0 || i === 2 ? 15 : 30;
-        } else if (currentActive === 2) {
-          zIndex = 20 + i;
-        }
-      }
-
-      // Apply Styles
-      card.style.top = `${topOffset}px`;
-      card.style.height = isActive
-        ? `${activeCardHeight}px`
-        : `${inactiveCardHeight}px`;
-      card.style.zIndex = zIndex;
-      card.style.borderRadius = isActive
-        ? `${VERTICAL_CARDS_BORDER_RADIUS.active}px`
-        : `${VERTICAL_CARDS_BORDER_RADIUS.inactive}px`;
-
-      // Padding
-      card.style.paddingLeft = isActive ? "11px" : "8px";
-      card.style.paddingRight = isActive ? "11px" : "8px";
-      card.style.paddingTop = isActive ? "11px" : "5px";
-      card.style.paddingBottom = isActive ? "11px" : "5px";
-
-      // Colors & Borders
-      if (isActive) {
-        card.style.backgroundColor = "#FFFFFF";
-        card.style.border = "1px solid #E5E7EB";
-        card.classList.add("shadow-lg");
-      } else {
-        card.style.backgroundColor = "#F3F4F6";
-        card.style.border = "1px solid #E5E7EB";
-        card.classList.remove("shadow-lg");
-      }
-
-      // Icon Container Logic
-      const iconContainer = card.querySelector(".card-icon-container");
-      const iconSvg = card.querySelector(".card-icon");
-      if (iconContainer) {
-        iconContainer.style.width = isActive ? "36px" : "28px";
-        iconContainer.style.height = isActive ? "36px" : "28px";
-        // Color
-        iconContainer.style.color = isActive ? "#213f8c" : "#6B7280";
-        iconContainer.style.paddingTop = isActive ? "1px" : "0px";
-      }
-      if (iconSvg) {
-        iconSvg.style.transform = isActive ? "scale(0.8)" : "scale(0.7)";
-      }
-
-      // Toggle Content
-      const activeContent = card.querySelector(".active-content");
-      const inactiveContent = card.querySelector(".inactive-content");
-
-      if (isActive) {
-        if (activeContent) activeContent.classList.remove("hidden");
-        if (inactiveContent) inactiveContent.classList.add("hidden");
-      } else {
-        if (activeContent) activeContent.classList.add("hidden");
-        if (inactiveContent) inactiveContent.classList.remove("hidden");
-      }
-    }
-  }
-
-  // Event Listeners for Cards
-  [0, 1, 2].forEach((i) => {
-    const card = document.getElementById(`card-${i}`);
-    if (card) {
-      card.addEventListener("click", () => updateCarousel(i));
-    }
-  });
-
-  // General Listeners
-  if (openModalBtn) openModalBtn.addEventListener("click", openModal);
-  if (closeModalBtn) closeModalBtn.addEventListener("click", closeModal);
-  if (closeModalX) closeModalX.addEventListener("click", closeModal);
-  if (modal) {
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) closeModal();
-    });
-  }
-
-  // Initialize
-  document.addEventListener("DOMContentLoaded", () => {
-    animateScore();
-    updateCarousel(0); // Start with Stability active
-  });
-
-  // Run immediately
-  animateScore();
-  updateCarousel(0);
-
-  // --- View Switching Logic ---
-  const homeView = document.getElementById("home-view");
-  const streakScreen = document.getElementById("streak-screen-content");
-  const graphScreen = document.getElementById("graph-screen-content");
-  const learnScreen = document.getElementById("learn-screen-content");
-
-  const streakBtn = document.querySelector('[data-screen="streak"]');
-  const graphBtn = document.querySelector('[data-screen="graph"]');
-  const learnBtn = document.querySelector('[data-screen="learn"]');
-
-  const backToHomeBtn = document.getElementById("back-to-home-btn");
-  const backToHomeFromGraphBtn = document.getElementById(
-    "back-to-home-from-graph-btn",
-  );
-  const backToHomeFromLearnBtn = document.getElementById(
-    "back-to-home-from-learn-btn",
-  );
-
-  function showScreen(screenName) {
-    // Hide all
-    if (homeView) homeView.classList.add("hidden");
-    if (streakScreen) streakScreen.classList.add("hidden");
-    if (graphScreen) graphScreen.classList.add("hidden");
-    if (learnScreen) learnScreen.classList.add("hidden");
-
-    // Show requested
-    if (screenName === "home" && homeView) homeView.classList.remove("hidden");
-    if (screenName === "streak" && streakScreen)
-      streakScreen.classList.remove("hidden");
-    if (screenName === "graph" && graphScreen)
-      graphScreen.classList.remove("hidden");
-    if (screenName === "learn" && learnScreen)
-      learnScreen.classList.remove("hidden");
-  }
-
-  if (streakBtn) {
-    streakBtn.addEventListener("click", () => showScreen("streak"));
-  }
-
-  if (graphBtn) {
-    graphBtn.addEventListener("click", () => showScreen("graph"));
-  }
-
-  if (learnBtn) {
-    learnBtn.addEventListener("click", () => showScreen("learn"));
-  }
-
-  if (backToHomeBtn) {
-    backToHomeBtn.addEventListener("click", () => showScreen("home"));
-  }
-
-  if (backToHomeFromGraphBtn) {
-    backToHomeFromGraphBtn.addEventListener("click", () => showScreen("home"));
-  }
-
-  if (backToHomeFromLearnBtn) {
-    backToHomeFromLearnBtn.addEventListener("click", () => showScreen("home"));
-  }
-</script>

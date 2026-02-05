@@ -1,0 +1,74 @@
+/**
+ * Design System — Design Tokens
+ * Uso: @import en componentes o en global.css
+ * Responsive: breakpoints documentados en system/design
+ */
+
+:root {
+  /* Colors — Brand */
+  --ds-color-primary: #213f8c;
+  --ds-color-primary-dark: #152a5e;
+  --ds-color-primary-light: #2a4fa8;
+  --ds-color-accent: #93fb4d;
+  --ds-color-accent-hover: #7fe000;
+  --ds-color-text: #00223e;
+  --ds-color-text-muted: #213f8c;
+  --ds-color-text-light: #64748b;
+  --ds-color-bg: #ffffff;
+  --ds-color-bg-subtle: #f8f9fa;
+  --ds-color-bg-panel: #f3f4f6;
+  --ds-color-border: #00223e;
+  --ds-color-border-light: rgba(0, 0, 0, 0.05);
+  --ds-color-error: #d92d20;
+  --ds-color-success: #15803d;
+  --ds-color-overlay: rgba(0, 34, 62, 0.4);
+
+  /* Typography */
+  --ds-font-family: "NataSans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --ds-font-size-xs: 0.95rem;
+  --ds-font-size-sm: 1rem;
+  --ds-font-size-md: 1.05rem;
+  --ds-font-size-lg: 1.1rem;
+  --ds-font-size-xl: 1.25rem;
+  --ds-font-size-2xl: 1.45rem;
+  --ds-font-size-3xl: 2rem;
+  --ds-font-size-hero: clamp(2rem, 5vw, 4.4rem);
+  --ds-font-weight-light: 300;
+  --ds-font-weight-normal: 400;
+  --ds-font-weight-medium: 500;
+  --ds-font-weight-semibold: 600;
+  --ds-font-weight-bold: 700;
+  --ds-line-height-tight: 1.1;
+  --ds-line-height-normal: 1.6;
+
+  /* Spacing */
+  --ds-space-1: 0.25rem;
+  --ds-space-2: 0.5rem;
+  --ds-space-3: 0.75rem;
+  --ds-space-4: 1rem;
+  --ds-space-5: 1.25rem;
+  --ds-space-6: 1.5rem;
+  --ds-space-8: 2rem;
+  --ds-space-10: 2.5rem;
+  --ds-space-12: 3rem;
+  --ds-space-16: 4rem;
+  --ds-section-gap-sm: 80px;
+  --ds-section-gap-md: 150px;
+  --ds-section-gap-lg: 200px;
+
+  /* Radii */
+  --ds-radius-sm: 10px;
+  --ds-radius-md: 12px;
+  --ds-radius-lg: 14px;
+  --ds-radius-xl: 20px;
+  --ds-radius-2xl: 24px;
+  --ds-radius-full: 50%;
+
+  /* Shadows */
+  --ds-shadow-modal: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --ds-shadow-cta: 0 10px 22px rgba(147, 251, 77, 0.35);
+  --ds-shadow-cta-hover: 0 14px 26px rgba(147, 251, 77, 0.4);
+
+  /* Breakpoints (usar en @media) — documentados en /system/design */
+  /* xs: 0–479px, sm: 480–639px, md: 640–767px, lg: 768–1023px, xl: 1024–1199px, 2xl: 1200px+ */
+}

@@ -1,0 +1,65 @@
+---
+/**
+ * Molecule: TabList
+ * Lista de tabs (botones). Slot para cada tab; data-bench o data-* para JS.
+ * Responsive: scroll horizontal en móvil si hay muchos tabs.
+ */
+interface Props {
+  tabs: { value: string; label: string; active?: boolean }[];
+  dataAttr?: string;
+  class?: string;
+}
+const { tabs, dataAttr = "data-bench", class: className = "" } = Astro.props;
+---
+
+<div class:list={["ds-tab-list", "bench-tabs", className]} role="tablist">
+  {
+    tabs.map((tab, i) => (
+      <button
+        type="button"
+        class:list={["ds-tab-list__tab", "bench-tab", tab.active && "active"]}
+        role="tab"
+        aria-selected={tab.active ? "true" : "false"}
+        {...{ [dataAttr]: tab.value }}
+      >
+        {tab.label}
+      </button>
+    ))
+  }
+</div>
+<style is:global>
+  .ds-tab-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .ds-tab-list__tab {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--ds-color-border-light);
+    border-radius: var(--ds-radius-md, 12px);
+    background: var(--ds-color-bg);
+    font-family: var(--ds-font-family);
+    font-size: var(--ds-font-size-sm, 1rem);
+    color: var(--ds-color-text);
+    cursor: pointer;
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease;
+  }
+  .ds-tab-list__tab:hover,
+  .ds-tab-list__tab.active {
+    background: var(--ds-color-bg-subtle);
+    border-color: var(--ds-color-primary);
+  }
+  @media (max-width: 639px) {
+    .ds-tab-list {
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      padding-bottom: 0.25rem;
+      -webkit-overflow-scrolling: touch;
+    }
+    .ds-tab-list__tab {
+      flex-shrink: 0;
+    }
+  }
+</style>

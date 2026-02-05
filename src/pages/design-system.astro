@@ -1,0 +1,1285 @@
+---
+/**
+ * Documentación del Sistema de Diseño
+ * Ruta: /design-system
+ * Layout: sidebar izquierdo (nav) + contenido central + "On this page" derecho
+ */
+import Layout from "../layouts/Layout.astro";
+import Button from "../components/design-system/atoms/Button.astro";
+import "../components/design-system/tokens.css";
+
+// Atoms
+import Input from "../components/design-system/atoms/Input.astro";
+import Title from "../components/design-system/atoms/Title.astro";
+import Text from "../components/design-system/atoms/Text.astro";
+import IconButton from "../components/design-system/atoms/IconButton.astro";
+import Divider from "../components/design-system/atoms/Divider.astro";
+
+// Molecules
+import EmailQuoteForm from "../components/design-system/molecules/EmailQuoteForm.astro";
+import CtaGroup from "../components/design-system/molecules/CtaGroup.astro";
+import LoginFormCard from "../components/design-system/molecules/LoginFormCard.astro";
+import Modal from "../components/design-system/molecules/Modal.astro";
+import TabList from "../components/design-system/molecules/TabList.astro";
+import UnderlineTabs from "../components/design-system/molecules/UnderlineTabs.astro";
+import HighlightPanel from "../components/design-system/molecules/HighlightPanel.astro";
+import ComponentShowcase from "../components/design-system/molecules/ComponentShowcase.astro";
+
+// Organisms
+import WelcomeHero from "../components/design-system/organisms/WelcomeHero.astro";
+import QuoteModalHubSpot from "../components/design-system/organisms/QuoteModalHubSpot.astro";
+import SectionTwoCol from "../components/design-system/organisms/SectionTwoCol.astro";
+import CardTabs from "../components/design-system/organisms/CardTabs.astro";
+
+const navSections = [
+  { id: "overview", label: "Resumen", active: true },
+  { id: "phone-frame", label: "Marco iPhone", expandable: false },
+  { id: "atomic-design", label: "Atomic Design", expandable: false },
+  { id: "breakpoints", label: "Breakpoints", expandable: false },
+  { id: "tokens", label: "Design tokens", expandable: false },
+  {
+    id: "atoms",
+    label: "Átomos",
+    expandable: true,
+    sub: ["Buttons", "Input", "Title", "Text", "IconButton", "Divider"],
+  },
+  {
+    id: "molecules",
+    label: "Moléculas",
+    expandable: true,
+    sub: [
+      "EmailQuoteForm",
+      "CtaGroup",
+      "LoginFormCard",
+      "Modal",
+      "TabList",
+      "UnderlineTabs",
+    ],
+  },
+  {
+    id: "organisms",
+    label: "Organismos",
+    expandable: true,
+    sub: ["WelcomeHero", "QuoteModalHubSpot", "SectionTwoCol", "CardTabs"],
+  },
+  { id: "icons", label: "Iconos (SVG)", expandable: false },
+  { id: "usage", label: "Uso en home", expandable: false },
+];
+---
+
+<Layout
+  title="Design System — Zelify"
+  description="Documentación del design system: Atomic Design, tokens y marco iPhone"
+>
+  <div class="ds-page">
+    <aside class="ds-sidebar" aria-label="Navegación del design system">
+      <div class="ds-sidebar__header">
+        <span class="ds-sidebar__title">Design System</span>
+      </div>
+      <nav class="ds-sidebar__nav">
+        {
+          navSections.map((item) => (
+            <div class="ds-sidebar__group">
+              <a
+                href={`#${item.id}`}
+                class:list={[
+                  "ds-sidebar__link",
+                  item.active && "ds-sidebar__link--active",
+                ]}
+                data-section={item.id}
+              >
+                {item.label}
+              </a>
+              {item.expandable && (
+                <span class="ds-sidebar__chevron" aria-hidden="true">
+                  ▼
+                </span>
+              )}
+            </div>
+          ))
+        }
+      </nav>
+    </aside>
+
+    <main class="ds-main">
+      <div class="ds-main__inner">
+        <header id="overview" class="ds-hero">
+          <h1 class="ds-hero__title">Design System Zelify</h1>
+          <p class="ds-hero__lead">
+            Atomic Design, tokens, componentes y marco tipo iPhone del product
+            showcase. Cada componente incluye ejemplo de código de uso.
+          </p>
+        </header>
+
+        <section id="phone-frame" class="ds-section">
+          <h2 class="ds-section__title">Marco iPhone (Product Showcase)</h2>
+          <p class="ds-section__p">
+            En la home, la demo del producto (Auth, Identity, AML, etc.) está
+            dentro de un <strong>marco tipo iPhone</strong>: bezel oscuro,
+            pantalla blanca, Dynamic Island, barra de estado (hora, señal,
+            batería) y home indicator. El botón play/pause queda <strong
+              >fuera del dispositivo</strong
+            >, esquina inferior derecha.
+          </p>
+          <p class="ds-section__p">
+            <strong>Ubicación:</strong>
+            <code>src/pages/index.astro</code> — <code
+              >.product-showcase__phone-frame</code
+            >, <code>.phone-frame__screen</code>, <code
+              >.phone-frame__status-bar</code
+            >, <code>.phone-frame__dynamic-island</code>, <code
+              >.phone-frame__home-indicator</code
+            >.
+          </p>
+          <div class="ds-section__block">
+            <h3 class="ds-section__subtitle">
+              Dimensiones (ajustables en código)
+            </h3>
+            <table class="ds-table">
+              <thead>
+                <tr><th>Qué</th><th>Valor actual</th></tr>
+              </thead>
+              <tbody>
+                <tr
+                  ><td>Ancho</td><td><code>clamp(260px, 25vw, 350px)</code></td
+                  ></tr
+                >
+                <tr><td>Alto</td><td><code>680px</code></td></tr>
+                <tr><td>Grosor bezel</td><td><code>padding: 5px</code></td></tr>
+                <tr><td>Dynamic Island</td><td>126px × 28px</td></tr>
+                <tr
+                  ><td>Botón play</td><td
+                    ><code>bottom: -20px; right: -20px</code></td
+                  ></tr
+                >
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="atomic-design" class="ds-section">
+          <h2 class="ds-section__title">Atomic Design</h2>
+          <p class="ds-section__p">
+            Tres niveles en <code>src/components/design-system/</code>: <strong
+              >Átomos</strong
+            > (botones, inputs, texto, iconos), <strong>Moléculas</strong> (formularios,
+            CTA group, modal, tabs), <strong>Organismos</strong> (WelcomeHero, QuoteModalHubSpot,
+            SectionTwoCol).
+          </p>
+        </section>
+
+        <section id="breakpoints" class="ds-section">
+          <h2 class="ds-section__title">Breakpoints</h2>
+          <p class="ds-section__p">
+            xs 0–479px · sm 480–639px · md 640–767px · lg 768–1023px · xl
+            1024–1199px · 2xl 1200px+
+          </p>
+        </section>
+
+        <section id="tokens" class="ds-section">
+          <h2 class="ds-section__title">Design tokens</h2>
+          <p class="ds-section__p">
+            <code>src/components/design-system/tokens.css</code>: colores
+            (--ds-color-primary, --ds-color-accent), tipografía, espaciado,
+            radios, sombras. Uso: <code>var(--ds-color-primary)</code>, <code
+              >var(--ds-radius-md)</code
+            >.
+          </p>
+        </section>
+
+        <section id="atoms" class="ds-section">
+          <h2 class="ds-section__title">Átomos</h2>
+          <p class="ds-section__p">
+            Ubicación: <code>src/components/design-system/atoms/</code>
+          </p>
+
+          <div id="atoms-buttons" class="ds-section__block">
+            <ComponentShowcase
+              title="Buttons"
+              description="Variantes: primary, secondary, ghost, outline. Tamaños: sm, md, lg."
+              code={`<Button variant="primary">Primary</Button>
+<Button variant="secondary">Secondary</Button>
+<Button variant="outline">Outline</Button>
+<Button variant="ghost">Ghost</Button>
+<Button variant="primary" size="sm">Small</Button>`}
+            >
+              <div class="ds-preview__col">
+                <div class="ds-preview__row">
+                  <Button variant="primary">Primary</Button>
+                  <Button variant="secondary">Secondary</Button>
+                  <Button variant="outline">Outline</Button>
+                  <Button variant="ghost">Ghost</Button>
+                </div>
+                <br />
+                <div class="ds-preview__row">
+                  <Button variant="primary" size="sm">Small</Button>
+                  <Button variant="primary" size="md">Medium</Button>
+                  <Button variant="primary" size="lg">Large</Button>
+                </div>
+              </div>
+            </ComponentShowcase>
+          </div>
+
+          <div id="atoms-input" class="ds-section__block">
+            <ComponentShowcase
+              title="Input"
+              description="Campos de texto con diferentes estados."
+              code={`<Input name="demo-text" placeholder="Text input" />
+<Input name="demo-email" type="email" value="user@example.com" />
+<Input name="demo-error" placeholder="Error" invalid={true} />`}
+            >
+              <div class="ds-preview__col">
+                <Input name="demo-text" placeholder="Text input placeholder" />
+                <div style="height: 1rem;"></div>
+                <Input
+                  name="demo-email"
+                  type="email"
+                  placeholder="Email input"
+                  value="user@example.com"
+                />
+                <div style="height: 1rem;"></div>
+                <Input
+                  name="demo-error"
+                  placeholder="Error state"
+                  invalid={true}
+                />
+              </div>
+            </ComponentShowcase>
+          </div>
+
+          <div id="atoms-title" class="ds-section__block">
+            <ComponentShowcase
+              title="Title"
+              description="Encabezados con level (1|2|3) y variant (hero, section, card)."
+              code={`<Title level={1} variant="hero">Hero Title (h1)</Title>
+<Title level={2} variant="section">Section Title (h2)</Title>
+<Title level={3} variant="card">Card Title (h3)</Title>`}
+            >
+              <div class="ds-preview__col">
+                <Title level={1} variant="hero">Hero Title (h1)</Title>
+                <Title level={2} variant="section">Section Title (h2)</Title>
+                <Title level={3} variant="card">Card Title (h3)</Title>
+              </div>
+            </ComponentShowcase>
+          </div>
+
+          <div id="atoms-text" class="ds-section__block">
+            <ComponentShowcase
+              title="Text"
+              description="Cuerpo de texto: variant body, subtitle, caption, muted."
+              code={`<Text variant="body">Body text.</Text>
+<Text variant="subtitle">Subtitle or lead.</Text>
+<Text variant="caption">Caption or metadata.</Text>
+<Text variant="muted">Muted text.</Text>`}
+            >
+              <div class="ds-preview__col">
+                <Text variant="body"
+                  >Body: The quick brown fox jumps over the lazy dog.</Text
+                >
+                <Text variant="subtitle"
+                  >Subtitle: A brief description or lead.</Text
+                >
+                <Text variant="caption">Caption: Small text for details.</Text>
+                <Text variant="muted">Muted: Less prominent text.</Text>
+              </div>
+            </ComponentShowcase>
+          </div>
+
+          <div id="atoms-icon-button" class="ds-section__block">
+            <ComponentShowcase
+              title="IconButton"
+              description="Botón circular para iconos. Slot: SVG (recomendado 24×24)."
+              code={`<IconButton ariaLabel="Play">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M8 5v14l11-7z"/>
+  </svg>
+</IconButton>`}
+            >
+              <div class="ds-preview__row">
+                <IconButton ariaLabel="Play">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"><path d="M8 5v14l11-7z"></path></svg
+                  >
+                </IconButton>
+                <IconButton ariaLabel="Settings">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    ><path d="M12 15a3 3 0 100-6 3 3 0 000 6z"></path><path
+                      d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"
+                    ></path></svg
+                  >
+                </IconButton>
+              </div>
+            </ComponentShowcase>
+          </div>
+
+          <div id="atoms-divider" class="ds-section__block">
+            <ComponentShowcase
+              title="Divider"
+              description="Línea separadora horizontal o vertical."
+              code={`<Divider />
+<Divider vertical={true} />`}
+            >
+              <div class="ds-preview__col" style="padding: 1rem 0;">
+                <p>Content above</p>
+                <Divider />
+                <p>Content below</p>
+                <div
+                  style="display: flex; height: 50px; align-items: center; gap: 1rem; margin-top: 1rem;"
+                >
+                  <span>Left</span>
+                  <Divider vertical={true} />
+                  <span>Right</span>
+                </div>
+              </div>
+            </ComponentShowcase>
+          </div>
+        </section>
+
+        <section id="molecules" class="ds-section">
+          <h2 class="ds-section__title">Moléculas</h2>
+          <p class="ds-section__p">
+            Ubicación: <code>src/components/design-system/molecules/</code>
+          </p>
+          <h3 class="ds-section__subtitle">EmailQuoteForm & CtaGroup</h3>
+          <p class="ds-section__p">
+            Formulario de captura de correo y grupo de llamada a la acción.
+          </p>
+          <div class="ds-preview" style="background: #f8f9fa;">
+            <CtaGroup>
+              <EmailQuoteForm buttonLabel="Let's talk" />
+            </CtaGroup>
+
+            <div id="molecules-email-quote" class="ds-section__block">
+              <ComponentShowcase
+                title="EmailQuoteForm & CtaGroup"
+                description="Formulario de captura de correo dentro de un grupo CTA."
+                code={`<CtaGroup>
+  <EmailQuoteForm />
+</CtaGroup>`}
+              >
+                <div
+                  style="background: #f8f9fa; padding: 1rem; border-radius: 8px;"
+                >
+                  <CtaGroup>
+                    <EmailQuoteForm />
+                  </CtaGroup>
+                </div>
+              </ComponentShowcase>
+            </div>
+
+            <div id="molecules-login-form" class="ds-section__block">
+              <ComponentShowcase
+                title="LoginFormCard"
+                description="Tarjeta con título, subtítulo, campos email/password y botón."
+                code={`<LoginFormCard
+  title="Iniciar Sesión"
+  subtitle="Accede a tu cuenta"
+  submitLabel="Ingresa"
+  createAccountText="O crea una nueva cuenta"
+/>`}
+              >
+                <div style="max-width: 400px; margin: 0 auto;">
+                  <LoginFormCard
+                    title="Iniciar Sesión"
+                    subtitle="Accede a tu cuenta"
+                  />
+                </div>
+              </ComponentShowcase>
+            </div>
+
+            <div id="molecules-modal" class="ds-section__block">
+              <ComponentShowcase
+                title="Modal"
+                description="Ventana modal con overlay y botón cerrar. Requiere JS para toggle is-active."
+                code={`<button id="open-demo-modal">Abrir</button>
+<Modal id="demo-modal" ariaLabel="Demo" closeAriaLabel="Cerrar">
+  <div>Contenido del modal. Cerrar con X o overlay.</div>
+</Modal>`}
+              >
+                <div>
+                  <button
+                    id="open-demo-modal"
+                    class="ds-button ds-button--primary"
+                    >Abrir Modal Demo</button
+                  >
+                  <Modal
+                    id="demo-modal"
+                    ariaLabel="Demo Modal"
+                    closeAriaLabel="Cerrar modal"
+                  >
+                    <div style="text-align: center;">
+                      <Title level={2} variant="card">Hola desde el Modal</Title
+                      >
+                      <p
+                        style="color: var(--ds-color-text-muted); margin: 1rem 0;"
+                      >
+                        Este es un componente modal reutilizable.
+                      </p>
+                      <div style="margin-top: 1.5rem;">
+                        <button
+                          class="ds-button ds-button--secondary"
+                          onclick="document.getElementById('close-demo-modal').click()"
+                          >Entendido</button
+                        >
+                      </div>
+                    </div>
+                  </Modal>
+                </div>
+              </ComponentShowcase>
+            </div>
+
+            <div id="molecules-tab-list" class="ds-section__block">
+              <ComponentShowcase
+                title="TabList"
+                description="Lista de pestañas tipo botón (pill)."
+                code={`<TabList
+  tabs={[
+    { value: "tab1", label: "Pestaña 1", active: true },
+    { value: "tab2", label: "Pestaña 2" }
+  ]}
+  dataAttr="data-demo-tab"
+/>`}
+              >
+                <div>
+                  <TabList
+                    tabs={[
+                      { value: "tab1", label: "Pestaña 1", active: true },
+                      { value: "tab2", label: "Pestaña 2" },
+                      { value: "tab3", label: "Pestaña 3" },
+                    ]}
+                    dataAttr="data-demo-tab"
+                  />
+                  <div
+                    style="margin-top: 1rem; padding: 1rem; border: 1px dashed #ccc; border-radius: 8px;"
+                  >
+                    <div class="demo-tab-content" data-tab="tab1">
+                      Contenido de Pestaña 1
+                    </div>
+                    <div
+                      class="demo-tab-content"
+                      data-tab="tab2"
+                      style="display: none;"
+                    >
+                      Contenido de Pestaña 2
+                    </div>
+                    <div
+                      class="demo-tab-content"
+                      data-tab="tab3"
+                      style="display: none;"
+                    >
+                      Contenido de Pestaña 3
+                    </div>
+                  </div>
+                </div>
+              </ComponentShowcase>
+            </div>
+
+            <div id="molecules-underline-tabs" class="ds-section__block">
+              <ComponentShowcase
+                title="UnderlineTabs"
+                description="Pestañas minimalistas con borde inferior."
+                code={`<UnderlineTabs
+  name="demo-underline"
+  tabs={[
+    { value: "u1", label: "Bench 1", active: true },
+    { value: "u2", label: "Bench 2" }
+  ]}
+/>`}
+              >
+                <div>
+                  <UnderlineTabs
+                    name="demo-underline"
+                    tabs={[
+                      { value: "u1", label: "Bench 1", active: true },
+                      { value: "u2", label: "Bench 2" },
+                      { value: "u3", label: "Bench 3" },
+                      { value: "u4", label: "Bench 4" },
+                    ]}
+                  />
+                  <div style="margin-top: 1rem; padding: 1rem;">
+                    <div class="demo-underline-content" data-content="u1">
+                      Panel 1
+                    </div>
+                    <div
+                      class="demo-underline-content"
+                      data-content="u2"
+                      style="display: none;"
+                    >
+                      Panel 2
+                    </div>
+                    <div
+                      class="demo-underline-content"
+                      data-content="u3"
+                      style="display: none;"
+                    >
+                      Panel 3
+                    </div>
+                    <div
+                      class="demo-underline-content"
+                      data-content="u4"
+                      style="display: none;"
+                    >
+                      Panel 4
+                    </div>
+                  </div>
+                </div>
+              </ComponentShowcase>
+            </div>
+          </div>
+
+          <section id="organisms" class="ds-section">
+            <h2 class="ds-section__title">Organismos</h2>
+            <p class="ds-section__p">
+              Ubicación: <code>src/components/design-system/organisms/</code>
+            </p>
+
+            <div id="organisms-welcome-hero" class="ds-section__block">
+              <ComponentShowcase
+                title="WelcomeHero"
+                description="Hero section principal del product showcase. (Visual reducido por escala)"
+                code={`<WelcomeHero />`}
+              >
+                <div
+                  style="position: relative; overflow: hidden; height: 520px; border: 1px solid #eee; border-radius: 8px;"
+                >
+                  <div
+                    style="transform: scale(0.75); transform-origin: top center; width: 100%;"
+                  >
+                    <WelcomeHero />
+                  </div>
+                </div>
+              </ComponentShowcase>
+            </div>
+
+            <div id="organisms-section-two-col" class="ds-section__block">
+              <ComponentShowcase
+                title="SectionTwoCol"
+                description="Sección de dos columnas con divider opcional, replicando la sección 'Cómo Funciona'."
+                code={`<SectionTwoCol divider={true} sectionClass="my-section">
+  <div slot="left">
+    <Title level={2} variant="hero">¿Cómo Funciona?</Title>
+    <Text variant="body">Descripción del funcionamiento...</Text>
+    <Button variant="secondary">Demo</Button>
+  </div>
+  <div slot="right">
+    <div class="right-bg-panel-demo">
+       <LoginFormCard ... />
+       <IconButton ... />
+    </div>
+  </div>
+</SectionTwoCol>`}
+              >
+                <div style="padding: 0; border: 1px solid #eee;">
+                  <SectionTwoCol divider={true}>
+                    <div
+                      slot="left"
+                      style="display: flex; flex-direction: column; gap: 1rem; align-items: flex-start;"
+                    >
+                      <Title
+                        level={2}
+                        variant="hero"
+                        style="font-size: 3rem; line-height: 1.1;"
+                      >
+                        ¿Cómo <br /> Funciona <br /> Zelify?
+                      </Title>
+                      <Text
+                        variant="body"
+                        style="max-width: 440px; margin-top: 1rem;"
+                      >
+                        Zelify integra en una sola plataforma digital:
+                        autenticación y validación de identidad, cumplimiento
+                        AML, digitalización de cuentas, emisión y procesamiento
+                        de tarjetas.
+                      </Text>
+                      <div style="margin-top: 1rem;">
+                        <Button variant="secondary">Demo</Button>
+                      </div>
+                    </div>
+                    <div
+                      slot="right"
+                      style="display: flex; justify-content: flex-end;"
+                    >
+                      <HighlightPanel>
+                        <LoginFormCard
+                          title="Ingreso"
+                          subtitle="Bienvenido de regreso"
+                          submitLabel="Ingresa"
+                          createAccountText="O crea una nueva cuenta"
+                        />
+                        <IconButton ariaLabel="Reproducir" slot="action">
+                          <img
+                            src="/icons/play.svg"
+                            alt=""
+                            width="32"
+                            height="32"
+                          />
+                        </IconButton>
+                      </HighlightPanel>
+                    </div>
+                  </SectionTwoCol>
+                </div>
+              </ComponentShowcase>
+              <!-- Removed inline style block as it is now handled by HighlightPanel -->
+            </div>
+
+            <div id="organisms-card-tabs" class="ds-section__block">
+              <ComponentShowcase
+                title="CardTabs"
+                description="Organismo que combina TabList con páneles de contenido."
+                code={`<CardTabs
+  id="demo-card-tabs"
+  tabs={[
+    { value: "c1", label: "Borderless", active: true },
+    { value: "c2", label: "Bench 2" }
+  ]}
+>
+  <div class="demo-card-content" data-card-content="c1">
+     <!-- Contenido 1 -->
+  </div>
+  <div class="demo-card-content" data-card-content="c2" style="display:none">
+     <!-- Contenido 2 -->
+  </div>
+</CardTabs>`}
+              >
+                <CardTabs
+                  id="demo-card-tabs"
+                  tabs={[
+                    { value: "c1", label: "Borderless", active: true },
+                    { value: "c2", label: "Bench 2" },
+                    { value: "c3", label: "Bench 3" },
+                  ]}
+                >
+                  <div
+                    class="demo-card-content"
+                    data-card-content="c1"
+                    style="padding: 2rem;"
+                  >
+                    <Title level={3} variant="section"
+                      >Contenido 1: Borderless</Title
+                    >
+                    <Text>Este es el panel activo inicial.</Text>
+                  </div>
+                  <div
+                    class="demo-card-content"
+                    data-card-content="c2"
+                    style="display: none; padding: 2rem;"
+                  >
+                    <Title level={3} variant="section">Contenido 2: Bench</Title
+                    >
+                    <Text>Segundo panel de contenido.</Text>
+                  </div>
+                  <div
+                    class="demo-card-content"
+                    data-card-content="c3"
+                    style="display: none; padding: 2rem;"
+                  >
+                    <Title level={3} variant="section">Contenido 3: Info</Title>
+                    <Text>Tercer panel con más información.</Text>
+                  </div>
+                </CardTabs>
+              </ComponentShowcase>
+            </div>
+
+            <div id="organisms-quote-modal" class="ds-section__block">
+              <ComponentShowcase
+                title="QuoteModalHubSpot"
+                description="Modal de cotización con embed de HubSpot Meetings. Se abre desde un CTA en la home."
+                code={`<QuoteModalHubSpot />
+<!-- En la home, un botón abre el modal con id "quote-modal" -->`}
+              >
+                <p class="ds-section__p" style="margin: 0;">
+                  Modal usado en la home para solicitar cotización. No se
+                  muestra aquí para evitar cargar el iframe de HubSpot.
+                </p>
+              </ComponentShowcase>
+            </div>
+          </section>
+
+          <section id="icons" class="ds-section">
+            <h2 class="ds-section__title">Iconos (SVG)</h2>
+            <p class="ds-section__p">
+              Todos los iconos están en <code>public/icons/</code> en formato SVG,
+              organizados por categoría. Se referencian por ruta absoluta desde la
+              raíz del sitio.
+            </p>
+            <div class="ds-section__block">
+              <h3 class="ds-section__subtitle">Ejemplo de uso</h3>
+              <pre
+                class="ds-showcase__pre"
+                style="background: #1e293b; color: #e2e8f0; padding: 1rem; border-radius: 8px; margin: 0.5rem 0; font-size: 0.85rem;"><code>&lt;img src="/icons/cards/Issuing.svg" alt="Issuing" width="48" height="48" /&gt;
+&lt;img src="/icons/play.svg" alt="Play" /&gt;</code></pre>
+              <p class="ds-section__p">Vista previa de algunos iconos:</p>
+              <div class="ds-icons-preview">
+                <figure>
+                  <img
+                    src="/icons/play.svg"
+                    alt="Play"
+                    width="40"
+                    height="40"
+                  /><figcaption>/icons/play.svg</figcaption>
+                </figure>
+                <figure>
+                  <img
+                    src="/icons/pause.svg"
+                    alt="Pause"
+                    width="40"
+                    height="40"
+                  /><figcaption>/icons/pause.svg</figcaption>
+                </figure>
+                <figure>
+                  <img
+                    src="/icons/cards/Issuing.svg"
+                    alt="Issuing"
+                    width="40"
+                    height="40"
+                  /><figcaption>/icons/cards/Issuing.svg</figcaption>
+                </figure>
+                <figure>
+                  <img
+                    src="/icons/auth/authentication.svg"
+                    alt="Auth"
+                    width="40"
+                    height="40"
+                  /><figcaption>/icons/auth/authentication.svg</figcaption>
+                </figure>
+                <figure>
+                  <img
+                    src="/icons/transfers/internalTransfers.svg"
+                    alt="Transfers"
+                    width="40"
+                    height="40"
+                  /><figcaption>/icons/transfers/...</figcaption>
+                </figure>
+              </div>
+            </div>
+            <div class="ds-section__block">
+              <h3 class="ds-section__subtitle">
+                Categorías en <code>public/icons/</code>
+              </h3>
+              <table class="ds-table">
+                <thead
+                  ><tr><th>Carpeta</th><th>Ejemplos de archivos</th></tr></thead
+                >
+                <tbody>
+                  <tr
+                    ><td><code>aml/</code></td><td
+                      >amlAdverseMedia.svg, amlGlobalList.svg,
+                      amlInternalList.svg, amlTransactionMonitoring.svg</td
+                    ></tr
+                  >
+                  <tr
+                    ><td><code>auth/</code></td><td
+                      >authentication.svg, deviceInf.svg, geolocation.svg</td
+                    ></tr
+                  >
+                  <tr
+                    ><td><code>buttonsIcons/</code></td><td
+                      >Bank.svg, workWithUs.svg</td
+                    ></tr
+                  >
+                  <tr
+                    ><td><code>cards/</code></td><td
+                      >3ds.svg, Issuing.svg, tokenization.svg,
+                      digitalWallets.svg, corporateCards.svg, …</td
+                    ></tr
+                  >
+                  <tr
+                    ><td><code>connect/</code></td><td
+                      >accessFinancialData.svg, bankAccount.svg,
+                      digitalAccount.svg, linkingSdk.svg, …</td
+                    ></tr
+                  >
+                  <tr
+                    ><td><code>discount/</code></td><td
+                      >commercialAnalysis.svg, discountPromotion.svg,
+                      merchantGeo.svg, paymentsCommercial.svg</td
+                    ></tr
+                  >
+                  <tr
+                    ><td><code>identity/</code></td><td
+                      >biometricVerification.svg, documentExtraction.svg,
+                      videoVerification.svg, integrationLayer.svg</td
+                    ></tr
+                  >
+                  <tr
+                    ><td><code>insurance/</code></td><td
+                      >claims.svg, digitalSales.svg, products.svg,
+                      proposals.svg, renewals.svg, smartQuoting.svg,
+                      webhooks.svg</td
+                    ></tr
+                  >
+                  <tr
+                    ><td><code>matilda/</code></td><td
+                      >behaviorAnalysis.svg, contentMarketing.svg,
+                      personalFinance.svg, promptBasedReporting.svg,
+                      smartSupportChat.svg</td
+                    ></tr
+                  >
+                  <tr
+                    ><td><code>payments/</code></td><td
+                      >contactMethods.svg, customKeys.svg, expressCheckout.svg,
+                      multiPlatform.svg, qrSdk.svg, recurringPayments.svg,
+                      sdk.svg, tokenization.svg</td
+                    ></tr
+                  >
+                  <tr
+                    ><td><code>transfers/</code></td><td
+                      >accountBalanceValidation.svg, internalTransfers.svg,
+                      payIn.svg, cashOut.svg, …</td
+                    ></tr
+                  >
+                  <tr
+                    ><td><code>tx/</code></td><td
+                      >fxQuote.svg, internationalAccount.svg,
+                      internationalSettlement.svg, trackingConfirmation.svg,
+                      transferInitiation.svg</td
+                    ></tr
+                  >
+                  <tr
+                    ><td><em>raíz</em></td><td
+                      >acceso.svg, maletin.svg, pause.svg, play.svg,
+                      Worldicon.svg</td
+                    ></tr
+                  >
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="usage" class="ds-section">
+            <h2 class="ds-section__title">Uso en home</h2>
+            <p class="ds-section__p">
+              En <code>src/pages/index.astro</code> se usan los componentes del design
+              system y el marco iPhone del product showcase.
+            </p>
+          </section>
+
+          <footer class="ds-footer">
+            Zelify — Design system: Atomic Design, tokens y marco iPhone.
+          </footer>
+        </section>
+      </div>
+
+      <aside class="ds-on-this-page" aria-label="En esta página">
+        <h2 class="ds-on-this-page__title">En esta página</h2>
+        <nav class="ds-on-this-page__nav">
+          <a href="#overview">Resumen</a>
+          <a href="#phone-frame">Marco iPhone</a>
+          <a href="#atomic-design">Atomic Design</a>
+          <a href="#breakpoints">Breakpoints</a>
+          <a href="#tokens">Design tokens</a>
+          <a href="#atoms">Átomos</a>
+          <a href="#molecules">Moléculas</a>
+          <a href="#organisms">Organismos</a>
+          <a href="#icons">Iconos (SVG)</a>
+          <a href="#usage">Uso en home</a>
+        </nav>
+      </aside>
+    </main>
+  </div>
+
+  <script>
+    function setActiveNav() {
+      const hash = window.location.hash.slice(1) || "overview";
+      document.querySelectorAll(".ds-sidebar__link").forEach((a) => {
+        a.classList.toggle(
+          "ds-sidebar__link--active",
+          a.getAttribute("data-section") === hash ||
+            (hash === "" && a.getAttribute("data-section") === "overview"),
+        );
+      });
+    }
+    setActiveNav();
+    window.addEventListener("hashchange", setActiveNav);
+
+    // --- Logic for Design System Demos ---
+
+    // Modal Demo
+    const openModalBtn = document.getElementById("open-demo-modal");
+    const modal = document.getElementById("demo-modal");
+    const closeModalBtn = document.getElementById("close-demo-modal"); // button inside 'Entendido'
+    const modalOverlay = modal?.querySelector(".ds-modal__overlay");
+    const closeX = modal?.querySelector(".ds-modal__close");
+
+    function toggleModal(show: boolean) {
+      if (!modal) return;
+      if (show) modal.classList.add("is-active");
+      else modal.classList.remove("is-active");
+    }
+
+    openModalBtn?.addEventListener("click", () => toggleModal(true));
+    closeModalBtn?.addEventListener("click", () => toggleModal(false));
+    modalOverlay?.addEventListener("click", () => toggleModal(false));
+    closeX?.addEventListener("click", () => toggleModal(false));
+
+    // Tabs Demo
+    const tabButtons = document.querySelectorAll("button[data-demo-tab]");
+    const tabContents = document.querySelectorAll(".demo-tab-content");
+
+    tabButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const targetVal = btn.getAttribute("data-demo-tab");
+
+        // Update buttons state
+        tabButtons.forEach((b) => {
+          const isActive = b.getAttribute("data-demo-tab") === targetVal;
+          b.classList.toggle("active", isActive);
+          b.setAttribute("aria-selected", isActive ? "true" : "false");
+        });
+
+        // Update content visibility
+        tabContents.forEach((content) => {
+          if (content instanceof HTMLElement) {
+            content.style.display =
+              content.getAttribute("data-tab") === targetVal ? "block" : "none";
+          }
+        });
+      });
+    });
+
+    // Underline Tabs Demo
+    // We attach logic to all buttons inside [data-tab-group="demo-underline"]
+    const underlineTabs = document.querySelectorAll(
+      "button[data-tab-group='demo-underline']",
+    );
+    const underlineContents = document.querySelectorAll(
+      ".demo-underline-content",
+    );
+
+    underlineTabs.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const val = btn.getAttribute("data-tab-value");
+
+        // Update active state
+        underlineTabs.forEach((t) => {
+          const isActive = t.getAttribute("data-tab-value") === val;
+          t.classList.toggle("active", isActive);
+          t.setAttribute("aria-selected", isActive ? "true" : "false");
+
+          // Toggle helper indicator if necessary?
+          // CSS handles ::after opacity/display based on .active class usually.
+          // In our implementation, we rendered the indicator span manually.
+          const indicator = t.querySelector(".ds-underline-tabs__indicator");
+          if (isActive) {
+            if (!indicator) {
+              const span = document.createElement("span");
+              span.className = "ds-underline-tabs__indicator";
+              t.appendChild(span);
+            }
+          } else {
+            if (indicator) indicator.remove();
+          }
+        });
+
+        // Update content
+        underlineContents.forEach((c) => {
+          if (c instanceof HTMLElement) {
+            c.style.display =
+              c.getAttribute("data-content") === val ? "block" : "none";
+          }
+        });
+      });
+    });
+
+    // CardTabs Demo
+    // We attach logic to all buttons inside [data-tab-group="demo-card-tabs"]
+    // Since CardTabs uses UnderlineTabs internally, it outputs buttons with that group name.
+    const cardTabButtons = document.querySelectorAll(
+      "button[data-tab-group='demo-card-tabs']",
+    );
+    const cardContents = document.querySelectorAll(".demo-card-content");
+
+    cardTabButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const val = btn.getAttribute("data-tab-value");
+
+        // Update active state across all buttons in this group
+        cardTabButtons.forEach((t) => {
+          const isActive = t.getAttribute("data-tab-value") === val;
+          t.classList.toggle("active", isActive);
+          t.setAttribute("aria-selected", isActive ? "true" : "false");
+        });
+
+        // Update content
+        cardContents.forEach((c) => {
+          if (c instanceof HTMLElement) {
+            c.style.display =
+              c.getAttribute("data-card-content") === val ? "block" : "none";
+          }
+        });
+      });
+    });
+  </script>
+
+  <style>
+    .ds-page {
+      display: grid;
+      grid-template-columns: 260px 1fr 200px;
+      min-height: 100vh;
+      font-family: var(--ds-font-family, system-ui, sans-serif);
+      color: #333;
+    }
+
+    /* Sidebar izquierdo */
+    .ds-sidebar {
+      background: #252526;
+      color: #ccc;
+      padding: 1.25rem 0;
+      overflow-y: auto;
+      position: sticky;
+      top: 0;
+      max-height: 100vh;
+    }
+    .ds-sidebar__header {
+      padding: 0 1.25rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .ds-sidebar__title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #e0e0e0;
+    }
+    .ds-sidebar__nav {
+      padding: 0.75rem 0;
+    }
+    .ds-sidebar__group {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1rem 0 1.25rem;
+    }
+    .ds-sidebar__link {
+      display: block;
+      padding: 0.5rem 0.65rem;
+      margin: 0.1rem 0;
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.9rem;
+      border-radius: 999px;
+      transition:
+        background 0.15s,
+        color 0.15s;
+      flex: 1;
+    }
+    .ds-sidebar__link:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .ds-sidebar__link--active {
+      background: #e8eaf6;
+      color: #213f8c;
+    }
+    .ds-sidebar__chevron {
+      font-size: 0.6rem;
+      color: #888;
+      margin-left: 0.25rem;
+    }
+    .ds-sidebar__group:has(.ds-sidebar__link--active) .ds-sidebar__chevron {
+      color: #213f8c;
+    }
+
+    /* Contenido central */
+    .ds-main {
+      background: #f8f8fa;
+      overflow-y: auto;
+      padding: 2rem 2.5rem 3rem;
+    }
+    .ds-main__inner {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+    .ds-hero {
+      margin-bottom: 2.5rem;
+    }
+    .ds-hero__title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0 0 0.5rem 0;
+      color: #0f172a;
+    }
+    .ds-hero__lead {
+      margin: 0;
+      font-size: 1.05rem;
+      color: #475569;
+      line-height: 1.6;
+    }
+    .ds-section {
+      margin-bottom: 2.5rem;
+      scroll-margin-top: 1rem;
+    }
+    .ds-section__title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 0 0.75rem 0;
+      color: #0f172a;
+    }
+    .ds-section__subtitle {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin: 1.25rem 0 0.5rem 0;
+      color: #334155;
+    }
+    .ds-section__p {
+      margin: 0 0 0.5rem 0;
+      line-height: 1.6;
+      color: #475569;
+    }
+    .ds-section__p code {
+      background: #e8eaf6;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.88em;
+      color: #213f8c;
+    }
+    .ds-section__block {
+      margin-top: 1rem;
+    }
+    .ds-preview {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+    .ds-preview__row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .ds-preview__row:last-child {
+      margin-bottom: 0;
+    }
+    .ds-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+      margin: 1rem 0;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+    .ds-table th,
+    .ds-table td {
+      border: 1px solid #e2e8f0;
+      padding: 0.6rem 0.9rem;
+      text-align: left;
+    }
+    .ds-table th {
+      background: #f1f5f9;
+      font-weight: 600;
+      color: #334155;
+    }
+    .ds-table code {
+      font-size: 0.85em;
+      background: #f1f5f9;
+      padding: 0.1rem 0.35rem;
+      border-radius: 4px;
+    }
+    .ds-footer {
+      padding-top: 2rem;
+      border-top: 1px solid #e2e8f0;
+      font-size: 0.9rem;
+      color: #64748b;
+    }
+
+    .ds-icons-preview {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    .ds-icons-preview figure {
+      margin: 0;
+      padding: 1rem;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .ds-icons-preview figcaption {
+      font-size: 0.75rem;
+      color: #64748b;
+      margin-top: 0.5rem;
+      word-break: break-all;
+    }
+
+    /* On this page (derecha) */
+    .ds-on-this-page {
+      background: #fff;
+      padding: 1.5rem 1.25rem;
+      border-left: 1px solid #e2e8f0;
+      position: sticky;
+      top: 0;
+      max-height: 100vh;
+      overflow-y: auto;
+    }
+    .ds-on-this-page__title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #64748b;
+      margin: 0 0 0.75rem 0;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .ds-on-this-page__nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .ds-on-this-page__nav a {
+      font-size: 0.9rem;
+      color: #475569;
+      text-decoration: none;
+      padding: 0.25rem 0;
+      border-left: 2px solid transparent;
+      padding-left: 0.5rem;
+      margin-left: -2px;
+      transition:
+        color 0.15s,
+        border-color 0.15s;
+    }
+    .ds-on-this-page__nav a:hover {
+      color: #213f8c;
+      border-left-color: #213f8c;
+    }
+
+    @media (max-width: 1023px) {
+      .ds-page {
+        grid-template-columns: 1fr;
+      }
+      .ds-sidebar {
+        position: relative;
+        max-height: none;
+        padding: 1rem 1.25rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .ds-sidebar__nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .ds-sidebar__group {
+        padding: 0;
+      }
+      .ds-on-this-page {
+        display: none;
+      }
+      .ds-main {
+        padding: 1.5rem 1.25rem;
+      }
+    }
+  </style>
+</Layout>

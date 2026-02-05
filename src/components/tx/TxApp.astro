@@ -4,132 +4,182 @@ import StepContacts from "./steps/StepContacts.astro";
 import StepConfirm from "./steps/StepConfirm.astro";
 import StepSuccess from "./steps/StepSuccess.astro";
 import StepProcessing from "./steps/StepProcessing.astro";
+import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.astro";
 ---
 
-<!-- App Header -->
-<div class="app-header">
-  <div class="back-btn" id="app-back-btn">
-    <button class="device-back-btn">&lt; Atrás</button>
-  </div>
-  <div class="device-header">
-    <div class="device-logo">
-      <img src="/images/zelify_logo.png" alt="Zelify" />
-    </div>
-  </div>
-</div>
-
-<!-- Scroll Content -->
-<div class="app-content">
-  <div id="shared-top-section">
-    <!-- Graphic -->
-    <div class="graphic-container">
-      <svg width="240" height="140" viewBox="0 0 200 120" fill="none">
-        <path
-          d="M10,120 Q50,20 100,20 Q150,20 190,120"
-          stroke="#004195"
-          stroke-width="1"
-          opacity="0.5"
-          fill="none"></path>
-        <path
-          d="M20,120 Q55,30 100,30 Q145,30 180,120"
-          stroke="#004195"
-          stroke-width="1"
-          opacity="0.6"
-          fill="none"></path>
-        <path
-          d="M30,120 Q60,40 100,40 Q140,40 170,120"
-          stroke="#004195"
-          stroke-width="1"
-          opacity="0.7"
-          fill="none"></path>
-        <path
-          d="M40,120 Q65,50 100,50 Q135,50 160,120"
-          stroke="#004195"
-          stroke-width="1"
-          opacity="0.8"
-          fill="none"></path>
-        <path
-          d="M50,120 Q70,60 100,60 Q130,60 150,120"
-          stroke="#004195"
-          stroke-width="1"
-          opacity="0.9"
-          fill="none"></path>
-        <path
-          d="M20,120 L30,40"
-          stroke="#004195"
-          stroke-width="0.5"
-          opacity="0.3"></path>
-        <path
-          d="M180,120 L170,40"
-          stroke="#004195"
-          stroke-width="0.5"
-          opacity="0.3"></path>
-        <path
-          d="M50,80 L150,80"
-          stroke="#004195"
-          stroke-width="0.5"
-          opacity="0.3"></path>
-      </svg>
-    </div>
-
-    <!-- Titles -->
-    <h2 class="app-title">
-      Transferencias <span class="light">Internacionales</span>
-    </h2>
-    <p class="app-subtitle">¿Cuánto deseas transferir?</p>
-    <p class="app-caption">Selecciona la moneda según el país</p>
-
-    <!-- Amount Input -->
-    <div class="amount-group">
-      <div class="amount-label">Monto</div>
-      <div class="amount-input-container">
-        <span class="currency-symbol">$</span>
-        <input
-          type="text"
-          class="amount-value-input"
-          id="amount-input-field"
-          value="0,00"
-          placeholder="0,00"
-          inputmode="decimal"
-        />
-        <div class="controls-wrapper">
-          <div class="currency-pill">MXN</div>
-          <button class="nav-arrow-btn" id="amount-next-btn">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              class="nav-icon"
-            >
-              <path
-                d="M9 18L15 12L9 6"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"></path>
-            </svg>
-          </button>
+<div class="device-container">
+  <div class="device-frame-wrapper">
+    <DeviceFrame>
+      <div class="device-content">
+        <!-- App Header -->
+        <div class="device-header">
+          <div class="back-btn" id="app-back-btn">
+            <button class="device-back-btn">&lt; Atrás</button>
+          </div>
+          <div class="device-logo">
+            <img src="/images/zelify_logo.png" alt="Zelify" />
+          </div>
+          <div style="width: 48px;"></div>
+          <!-- Spacer for centering logo -->
         </div>
-      </div>
-    </div>
-  </div>
 
-  <StepAmount />
-  <StepContacts />
-  <StepConfirm />
-  <StepProcessing />
-  <StepSuccess />
+        <div id="shared-top-section">
+          <!-- Graphic -->
+          <div class="graphic-container">
+            <svg width="240" height="140" viewBox="0 0 200 120" fill="none">
+              <path
+                d="M10,120 Q50,20 100,20 Q150,20 190,120"
+                stroke="#004195"
+                stroke-width="1"
+                opacity="0.5"
+                fill="none"></path>
+              <path
+                d="M20,120 Q55,30 100,30 Q145,30 180,120"
+                stroke="#004195"
+                stroke-width="1"
+                opacity="0.6"
+                fill="none"></path>
+              <path
+                d="M30,120 Q60,40 100,40 Q140,40 170,120"
+                stroke="#004195"
+                stroke-width="1"
+                opacity="0.7"
+                fill="none"></path>
+              <path
+                d="M40,120 Q65,50 100,50 Q135,50 160,120"
+                stroke="#004195"
+                stroke-width="1"
+                opacity="0.8"
+                fill="none"></path>
+              <path
+                d="M50,120 Q70,60 100,60 Q130,60 150,120"
+                stroke="#004195"
+                stroke-width="1"
+                opacity="0.9"
+                fill="none"></path>
+              <path
+                d="M20,120 L30,40"
+                stroke="#004195"
+                stroke-width="0.5"
+                opacity="0.3"></path>
+              <path
+                d="M180,120 L170,40"
+                stroke="#004195"
+                stroke-width="0.5"
+                opacity="0.3"></path>
+              <path
+                d="M50,80 L150,80"
+                stroke="#004195"
+                stroke-width="0.5"
+                opacity="0.3"></path>
+            </svg>
+          </div>
+
+          <!-- Titles -->
+          <h2 class="app-title">
+            Transferencias <span class="light">Internacionales</span>
+          </h2>
+          <p class="app-subtitle">¿Cuánto deseas transferir?</p>
+          <p class="app-caption">Selecciona la moneda según el país</p>
+
+          <!-- Amount Input -->
+          <div class="amount-group">
+            <div class="amount-label">Monto</div>
+            <div class="amount-input-container">
+              <span class="currency-symbol">$</span>
+              <input
+                type="text"
+                class="amount-value-input"
+                id="amount-input-field"
+                value="0,00"
+                placeholder="0,00"
+                inputmode="decimal"
+              />
+              <div class="controls-wrapper">
+                <div class="currency-pill">MXN</div>
+                <button class="nav-arrow-btn" id="amount-next-btn">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    class="nav-icon"
+                  >
+                    <path
+                      d="M9 18L15 12L9 6"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <StepAmount />
+        <StepContacts />
+        <StepConfirm />
+        <StepProcessing />
+        <StepSuccess />
+      </div>
+    </DeviceFrame>
+  </div>
 </div>
 
 <style>
-  .app-header {
+  /* Contenedor del dispositivo */
+  .device-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    min-height: 80vh; /* Altura mínima para el contenedor */
+    margin: 0 auto;
+    z-index: 10;
+    padding: 1rem 0 2rem;
+  }
+
+  /* Frame del iPhone wrapper */
+  div:global(.auth-background-section) .device-frame-wrapper {
+    position: relative !important;
+    z-index: 10 !important;
+    transform: scale(1) !important;
+    padding: 2.5rem 2rem !important;
+    background-color: #f3f4f6 !important;
+    border-radius: 2rem !important;
+    margin: 3rem auto !important;
+    height: 850px !important; /* Altura fija para que phone-frame__bezel pueda usar height: 100% */
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  /* Frame del iPhone wrapper removed */
+
+  .device-content {
+    flex: 1;
+    min-height: 0;
+    background: #ffffff;
+    padding: 1rem 1.25rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .device-content::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+
+  .device-header {
     position: relative;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 15px 20px 10px 20px;
-    margin-top: 0;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    flex-shrink: 0;
   }
 
   .device-logo {
@@ -142,7 +192,8 @@ import StepProcessing from "./steps/StepProcessing.astro";
     height: 32px;
     width: auto;
   }
-  .back-btn {
+
+  .device-back-btn {
     display: flex;
     align-items: center;
     gap: 4px;
@@ -161,26 +212,6 @@ import StepProcessing from "./steps/StepProcessing.astro";
     font: inherit;
     cursor: pointer;
     padding: 0;
-  }
-
-  .app-content {
-    flex: 1;
-    padding: 0 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 1rem;
-    overflow-y: auto;
-    overflow-x: hidden;
-    position: relative;
-    width: 100%;
-    box-sizing: border-box;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE/Edge */
-  }
-
-  .app-content::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
   }
 
   /* Shared Top Section Styles */
@@ -624,7 +655,9 @@ import StepProcessing from "./steps/StepProcessing.astro";
     }
 
     sliderThumb.addEventListener("mousedown", startDrag);
-    sliderThumb.addEventListener("touchstart", startDrag, { passive: false });
+    sliderThumb.addEventListener("touchstart", startDrag, {
+      passive: false,
+    });
 
     document.addEventListener("mousemove", onDrag);
     document.addEventListener("touchmove", onDrag, { passive: false });

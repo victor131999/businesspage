@@ -1,0 +1,247 @@
+---
+import Button from "../../atoms/Button.astro";
+
+interface Props {
+  showPlayButton?: boolean;
+}
+
+const { showPlayButton = false } = Astro.props;
+---
+
+<!-- DeviceFrame with bezel (dark iPhone frame) -->
+<div class="phone-frame__bezel">
+  <div class="phone-frame__screen">
+    <div class="phone-frame__status-bar">
+      <span class="phone-frame__time" aria-hidden="true">9:41</span>
+      <div class="phone-frame__dynamic-island" aria-hidden="true"></div>
+      <div class="phone-frame__status-icons" aria-hidden="true">
+        <span class="phone-frame__signal" aria-hidden="true">
+          <svg
+            width="18"
+            height="12"
+            viewBox="0 0 18 12"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              x="0"
+              y="8"
+              width="2.5"
+              height="4"
+              rx="0.5"
+              fill="currentColor"></rect>
+            <rect
+              x="4"
+              y="5"
+              width="2.5"
+              height="7"
+              rx="0.5"
+              fill="currentColor"></rect>
+            <rect
+              x="8"
+              y="2"
+              width="2.5"
+              height="10"
+              rx="0.5"
+              fill="currentColor"></rect>
+            <rect
+              x="12"
+              y="0"
+              width="2.5"
+              height="12"
+              rx="0.5"
+              fill="currentColor"></rect>
+          </svg>
+        </span>
+        <span class="phone-frame__battery" aria-hidden="true">
+          <svg
+            width="26"
+            height="12"
+            viewBox="0 0 26 12"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              x="0.5"
+              y="0.5"
+              width="20"
+              height="11"
+              rx="2.5"
+              stroke="currentColor"
+              stroke-width="1"
+              fill="none"></rect>
+            <rect x="2" y="2" width="16" height="8" rx="1" fill="currentColor"
+            ></rect>
+            <rect x="21" y="3" width="2" height="6" rx="0.5" fill="currentColor"
+            ></rect>
+          </svg>
+        </span>
+      </div>
+    </div>
+
+    <!-- Slot for dynamic content (product cards, etc.) -->
+    <slot />
+
+    <div class="phone-frame__home-indicator" aria-hidden="true"></div>
+  </div>
+</div>
+
+{
+  showPlayButton && (
+    <Button
+      id="demo-play-button"
+      variant="icon"
+      class="product-showcase__play-button"
+      type="button"
+      ariaLabel="Reproducir Demo"
+    >
+      <img
+        id="demo-play-icon"
+        src="/icons/play.svg"
+        alt=""
+        width="44"
+        height="44"
+      />
+      <img
+        id="demo-pause-icon"
+        src="/icons/pause.svg"
+        alt=""
+        width="44"
+        height="44"
+        style="display: none;"
+      />
+    </Button>
+  )
+}
+
+<style>
+  /* Marco tipo iPhone: bezel oscuro con valores de index.astro */
+  .phone-frame__bezel {
+    position: relative;
+    width: 100%;
+    height: 800px; /* Altura fija del dispositivo iPhone */
+    background: linear-gradient(145deg, #2c2c2e 0%, #1c1c1e 100%);
+    border-radius: 53px;
+    /* Grosor del marco (bezel): 5px como en index.astro */
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    /* Borde externo del marco (contorno del iPhone) */
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    box-shadow:
+      0 25px 50px -12px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    overflow: visible;
+  }
+
+  /* Pantalla blanca dentro del bezel */
+  .phone-frame__screen {
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    background-color: #ffffff;
+    border-radius: 50px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  }
+
+  .phone-frame__status-bar {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    padding: 0 1rem;
+    position: relative;
+    background: #ffffff;
+    z-index: 20;
+  }
+
+  .phone-frame__time {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #000000;
+    z-index: 6;
+  }
+
+  .phone-frame__dynamic-island {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 126px;
+    height: 28px;
+    background: #000000;
+    border-radius: 999px;
+    z-index: 5;
+    pointer-events: none;
+  }
+
+  .phone-frame__status-icons {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #000000;
+    z-index: 6;
+  }
+
+  .phone-frame__signal,
+  .phone-frame__battery {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .phone-frame__content {
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    background-color: #ffffff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .phone-frame__home-indicator {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 134px;
+    height: 5px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 999px;
+    z-index: 20;
+    pointer-events: none;
+  }
+
+  /* Botón play/pause fuera del celular, esquina inferior derecha del marco */
+  /* Using :global because Button is an astro component */
+  :global(.product-showcase__play-button) {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    /* background: #ffffff00;  Let button variant handle bg, or override here */
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 30;
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    .product-showcase__overlay-card.product-showcase__phone-frame {
+      /* Adjust for mobile if needed, but typically frameworks hide this or resize */
+      /* Keeping basic styling */
+    }
+  }
+</style>

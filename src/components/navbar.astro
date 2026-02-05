@@ -36,91 +36,57 @@ const cssVars = `
 
 <header class="navbar-shell">
   <nav style={cssVars}>
-  <div class="logo-container">
-    <a href="/">
-      <img src={logoSrc} alt={logoAlt} class="logo-image" />
-    </a>
-  </div>
+    <div class="logo-container">
+      <a href="/">
+        <img src={logoSrc} alt={logoAlt} class="logo-image" />
+      </a>
+    </div>
 
-  <button class="mobile-menu-toggle" aria-label="Toggle menu" type="button">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-
-  <ul class="nav-links">
-    <li class="dropdown-container">
-      <button id="products-trigger" class="dropdown-trigger" type="button"
-        ><span data-i18n="nav.products">Products</span></button
-      >
-    </li>
-    <li class="dropdown-container">
-      <button id="resources-trigger" class="dropdown-trigger" type="button">
-        <span data-i18n="nav.resources">Resources</span>
-      </button>
-      <!-- Aquí empieza el dropdown -->
-      <ul class="dropdown-menu" id="resources-panel">
-        <li><a href="/blog" data-i18n="nav.businessBlog">Business Blog</a></li>
-      </ul>
-    </li>
-    <li><a href="https://docs.zelify.com/" data-i18n="nav.developers">Developers</a></li>
-  </ul>
-
-  <div class="action-links">
-    <a href={buttons.first?.href ?? "/jobs"} class="btn btn-light">
-      <img src="/icons/maletin.svg" alt="Work with us" class="btn-icon" />
-      <span data-i18n="nav.workWithUs">{buttons.first?.label ?? "Work with us"}</span>
-    </a>
-
-    <a href={buttons.second?.href ?? "https://www.zelify.io/"} class="btn btn-light">
-      <img src="/icons/acceso.svg" alt="Business access" class="btn-icon" />
-      <span data-i18n="nav.bankAccess">{buttons.second?.label ?? "Business access"}</span>
-    </a>
-
-    <button
-      type="button"
-      class="lang-toggle"
-      aria-label="Switch language to Spanish"
-      aria-pressed="false"
-      data-language={(buttons.third?.label ?? "EN").toUpperCase()}
-    >
-      <span class="lang-toggle__thumb">
-        <span class="lang-label">{(buttons.third?.label ?? "EN").toUpperCase()}</span>
-      </span>
-      <span class="lang-toggle__option lang-toggle__option--left">ES</span>
-      <span class="lang-toggle__option lang-toggle__option--right">EN</span>
+    <button class="mobile-menu-toggle" aria-label="Toggle menu" type="button">
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
-  </div>
 
-  <!-- Mobile menu wrapper -->
-  <div class="nav-wrapper">
-    <ul class="nav-links-mobile">
+    <ul class="nav-links">
       <li class="dropdown-container">
-        <button id="products-trigger-mobile" class="dropdown-trigger" type="button"
+        <button id="products-trigger" class="dropdown-trigger" type="button"
           ><span data-i18n="nav.products">Products</span></button
         >
       </li>
-      <!-- Dropdown para Resources en móvil -->
       <li class="dropdown-container">
-        <button id="resources-trigger-mobile" class="dropdown-trigger" type="button">
+        <button id="resources-trigger" class="dropdown-trigger" type="button">
           <span data-i18n="nav.resources">Resources</span>
         </button>
-        <!-- Dropdown de Resources -->
-        <ul class="dropdown-menu" id="resources-panel-mobile">
-          <li><a href="/blog" data-i18n="nav.businessBlog">Business Blog</a></li>
+        <!-- Aquí empieza el dropdown -->
+        <ul class="dropdown-menu" id="resources-panel">
+          <li>
+            <a href="/blog" data-i18n="nav.businessBlog">Business Blog</a>
+          </li>
         </ul>
       </li>
-      <li><a href="https://docs.zelify.com/" data-i18n="nav.developers">Developers</a></li>
+      <li>
+        <a href="https://docs.zelify.com/" data-i18n="nav.developers"
+          >Developers</a>
+      </li>
     </ul>
-    <div class="action-links-mobile">
+
+    <div class="action-links">
       <a href={buttons.first?.href ?? "/jobs"} class="btn btn-light">
         <img src="/icons/maletin.svg" alt="Work with us" class="btn-icon" />
-        <span data-i18n="nav.workWithUs">{buttons.first?.label ?? "Work with us"}</span>
+        <span data-i18n="nav.workWithUs"
+          >{buttons.first?.label ?? "Work with us"}</span
+        >
       </a>
 
-      <a href={buttons.second?.href ?? "https://www.zelify.io/"} class="btn btn-light">
+      <a
+        href={buttons.second?.href ?? "https://www.zelify.io/"}
+        class="btn btn-light"
+      >
         <img src="/icons/acceso.svg" alt="Business access" class="btn-icon" />
-        <span data-i18n="nav.bankAccess">{buttons.second?.label ?? "Business access"}</span>
+        <span data-i18n="nav.bankAccess"
+          >{buttons.second?.label ?? "Business access"}</span
+        >
       </a>
 
       <button
@@ -131,13 +97,81 @@ const cssVars = `
         data-language={(buttons.third?.label ?? "EN").toUpperCase()}
       >
         <span class="lang-toggle__thumb">
-          <span class="lang-label">{(buttons.third?.label ?? "EN").toUpperCase()}</span>
+          <span class="lang-label"
+            >{(buttons.third?.label ?? "EN").toUpperCase()}</span
+          >
         </span>
         <span class="lang-toggle__option lang-toggle__option--left">ES</span>
         <span class="lang-toggle__option lang-toggle__option--right">EN</span>
       </button>
     </div>
-  </div>
+
+    <!-- Mobile menu wrapper -->
+    <div class="nav-wrapper">
+      <ul class="nav-links-mobile">
+        <li class="dropdown-container">
+          <button
+            id="products-trigger-mobile"
+            class="dropdown-trigger"
+            type="button"><span data-i18n="nav.products">Products</span></button
+          >
+        </li>
+        <!-- Dropdown para Resources en móvil -->
+        <li class="dropdown-container">
+          <button
+            id="resources-trigger-mobile"
+            class="dropdown-trigger"
+            type="button"
+          >
+            <span data-i18n="nav.resources">Resources</span>
+          </button>
+          <!-- Dropdown de Resources -->
+          <ul class="dropdown-menu" id="resources-panel-mobile">
+            <li>
+              <a href="/blog" data-i18n="nav.businessBlog">Business Blog</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="https://docs.zelify.com/" data-i18n="nav.developers"
+            >Developers</a>
+        </li>
+      </ul>
+      <div class="action-links-mobile">
+        <a href={buttons.first?.href ?? "/jobs"} class="btn btn-light">
+          <img src="/icons/maletin.svg" alt="Work with us" class="btn-icon" />
+          <span data-i18n="nav.workWithUs"
+            >{buttons.first?.label ?? "Work with us"}</span
+          >
+        </a>
+
+        <a
+          href={buttons.second?.href ?? "https://www.zelify.io/"}
+          class="btn btn-light"
+        >
+          <img src="/icons/acceso.svg" alt="Business access" class="btn-icon" />
+          <span data-i18n="nav.bankAccess"
+            >{buttons.second?.label ?? "Business access"}</span
+          >
+        </a>
+
+        <button
+          type="button"
+          class="lang-toggle"
+          aria-label="Switch language to Spanish"
+          aria-pressed="false"
+          data-language={(buttons.third?.label ?? "EN").toUpperCase()}
+        >
+          <span class="lang-toggle__thumb">
+            <span class="lang-label"
+              >{(buttons.third?.label ?? "EN").toUpperCase()}</span
+            >
+          </span>
+          <span class="lang-toggle__option lang-toggle__option--left">ES</span>
+          <span class="lang-toggle__option lang-toggle__option--right">EN</span>
+        </button>
+      </div>
+    </div>
   </nav>
 </header>
 <style>
@@ -153,6 +187,8 @@ const cssVars = `
     justify-content: center;
     box-sizing: border-box;
     padding-top: 1.5rem;
+    position: relative;
+    z-index: 100;
   }
 
   /* Limita el ancho del navbar y céntralo */
@@ -218,7 +254,7 @@ const cssVars = `
     display: flex;
     align-items: center;
   }
-  
+
   /* Agrupar logo y nav-links juntos */
   .nav-links {
     display: flex;
@@ -232,7 +268,9 @@ const cssVars = `
 
   .logo-container a {
     cursor: pointer;
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease;
     display: inline-block;
     flex-shrink: 0;
     min-width: 0;
@@ -257,7 +295,6 @@ const cssVars = `
     position: relative;
     z-index: 10;
   }
-
 
   .nav-links a,
   .nav-links button {
@@ -286,7 +323,11 @@ const cssVars = `
   }
 
   .nav-links .highlight:hover {
-    background: linear-gradient(145deg, rgba(128, 255, 0, 0.95), rgba(88, 220, 0, 0.88));
+    background: linear-gradient(
+      145deg,
+      rgba(128, 255, 0, 0.95),
+      rgba(88, 220, 0, 0.88)
+    );
     color: #10220a;
     transform: translateY(-1px);
     box-shadow: 0 16px 32px rgba(80, 220, 0, 0.38);
@@ -377,7 +418,9 @@ const cssVars = `
     font-size: 0.94rem;
     text-decoration: none;
     border-radius: 6px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
     white-space: nowrap;
     flex-shrink: 0;
   }
@@ -427,7 +470,9 @@ const cssVars = `
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
-    transition: box-shadow 0.25s ease, transform 0.2s ease;
+    transition:
+      box-shadow 0.25s ease,
+      transform 0.2s ease;
     color: #14253d;
     flex-shrink: 0;
     margin-left: 0;
@@ -531,10 +576,9 @@ const cssVars = `
     min-width: 18px;
   }
 
-
-
   .btn-light .btn-icon {
-    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2)) var(--btn-light-icon-filter, none);
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2))
+      var(--btn-light-icon-filter, none);
   }
 
   /* Desktop: nav-wrapper visible siempre */
@@ -751,7 +795,7 @@ const cssVars = `
     const trigger = document.getElementById("products-trigger");
     const triggerMobile = document.getElementById("products-trigger-mobile");
     const panel = document.getElementById("products-panel");
-    
+
     // Desktop trigger
     if (trigger && panel) {
       trigger.addEventListener("click", (e) => {
@@ -778,7 +822,11 @@ const cssVars = `
       });
 
       document.addEventListener("click", (e) => {
-        if (!panel.contains(e.target) && !triggerMobile.contains(e.target) && !trigger?.contains(e.target)) {
+        if (
+          !panel.contains(e.target) &&
+          !triggerMobile.contains(e.target) &&
+          !trigger?.contains(e.target)
+        ) {
           triggerMobile.classList.remove("active");
           panel.classList.add("hidden");
         }
@@ -788,7 +836,7 @@ const cssVars = `
     // Mobile menu toggle
     const menuToggle = document.querySelector(".mobile-menu-toggle");
     const navWrapper = document.querySelector(".nav-wrapper");
-    
+
     if (menuToggle && navWrapper) {
       menuToggle.addEventListener("click", () => {
         menuToggle.classList.toggle("active");
@@ -798,15 +846,26 @@ const cssVars = `
       // Close menu when clicking outside
       document.addEventListener("click", (e) => {
         const target = e.target;
-        const resourcesPanel = document.getElementById("resources-panel-mobile");
-        const resourcesTrigger = document.getElementById("resources-trigger-mobile");
-        
+        const resourcesPanel = document.getElementById(
+          "resources-panel-mobile",
+        );
+        const resourcesTrigger = document.getElementById(
+          "resources-trigger-mobile",
+        );
+
         // No cerrar si el click es en el trigger o panel de Resources
-        if (resourcesTrigger?.contains(target) || resourcesPanel?.contains(target)) {
+        if (
+          resourcesTrigger?.contains(target) ||
+          resourcesPanel?.contains(target)
+        ) {
           return;
         }
-        
-        if (!navWrapper.contains(target) && !menuToggle.contains(target) && !panel?.contains(target)) {
+
+        if (
+          !navWrapper.contains(target) &&
+          !menuToggle.contains(target) &&
+          !panel?.contains(target)
+        ) {
           menuToggle.classList.remove("active");
           navWrapper.classList.remove("active");
         }
@@ -814,9 +873,12 @@ const cssVars = `
 
       // Close menu when clicking on a link (but not on Products or Resources dropdown buttons)
       const navLinks = navWrapper.querySelectorAll("a, button");
-      navLinks.forEach(link => {
+      navLinks.forEach((link) => {
         // No cerrar el menú si es un botón de dropdown (Products o Resources)
-        if (link.id !== "products-trigger-mobile" && link.id !== "resources-trigger-mobile") {
+        if (
+          link.id !== "products-trigger-mobile" &&
+          link.id !== "resources-trigger-mobile"
+        ) {
           link.addEventListener("click", () => {
             menuToggle.classList.remove("active");
             navWrapper.classList.remove("active");
@@ -846,9 +908,9 @@ const cssVars = `
 
     const applyNavTranslations = (lang) => {
       const dictionary = navTranslations[lang] ?? navTranslations.EN;
-      document.querySelectorAll('[data-i18n]').forEach((node) => {
+      document.querySelectorAll("[data-i18n]").forEach((node) => {
         const key = node.dataset.i18n;
-        if (!key || !key.startsWith('nav.')) return;
+        if (!key || !key.startsWith("nav.")) return;
         const value = dictionary[key];
         if (!value) return;
         node.textContent = value;
@@ -858,7 +920,9 @@ const cssVars = `
     if (languageButtons.length) {
       const detectBrowserLanguage = () => {
         const locale =
-          (navigator.languages && navigator.languages[0]) || navigator.language || "";
+          (navigator.languages && navigator.languages[0]) ||
+          navigator.language ||
+          "";
         return locale.toLowerCase().startsWith("es") ? "ES" : "EN";
       };
 
@@ -883,7 +947,9 @@ const cssVars = `
           if (label) label.textContent = lang;
           btn.setAttribute(
             "aria-label",
-            lang === "EN" ? "Switch language to Spanish" : "Cambiar idioma a inglés",
+            lang === "EN"
+              ? "Switch language to Spanish"
+              : "Cambiar idioma a inglés",
           );
           btn.setAttribute("aria-pressed", lang === "ES" ? "true" : "false");
         });
@@ -951,10 +1017,10 @@ const cssVars = `
         trigger.addEventListener("click", (e) => {
           e.preventDefault();
           e.stopPropagation();
-          
+
           // Marcar que estamos procesando el click
           isProcessingClick = true;
-          
+
           if (isOpen) {
             closeDropdown();
             isProcessingClick = false;
@@ -963,12 +1029,14 @@ const cssVars = `
             document.querySelectorAll(".dropdown-menu.show").forEach((menu) => {
               if (menu !== panel) {
                 menu.classList.remove("show");
-                const otherTrigger = menu.closest(".dropdown-container")?.querySelector(".dropdown-trigger");
+                const otherTrigger = menu
+                  .closest(".dropdown-container")
+                  ?.querySelector(".dropdown-trigger");
                 if (otherTrigger) otherTrigger.classList.remove("active");
               }
             });
             openDropdown();
-            
+
             // En móviles, esperar más tiempo antes de permitir que el click fuera funcione
             if (isMobile) {
               // Delay más largo en móviles para evitar cierre prematuro
@@ -988,17 +1056,17 @@ const cssVars = `
           trigger.addEventListener("touchend", (e) => {
             e.stopPropagation();
           });
-          
+
           // Prevenir que el panel se cierre cuando se toca
           panel.addEventListener("touchstart", (e) => {
             e.stopPropagation();
             isProcessingClick = false; // Permitir interacción con el panel
           });
-          
+
           panel.addEventListener("touchend", (e) => {
             e.stopPropagation();
           });
-          
+
           // Prevenir clicks en el panel que puedan cerrarlo (excepto en enlaces)
           panel.addEventListener("click", (e) => {
             // Solo prevenir si no es un enlace
@@ -1012,16 +1080,20 @@ const cssVars = `
         document.addEventListener("click", (e) => {
           // Capturar el target inmediatamente
           const target = e.target;
-          
+
           // Ejecutar en el siguiente tick para que el evento del trigger se procese primero
           setTimeout(() => {
             // No hacer nada si estamos procesando un click en el trigger
             if (isProcessingClick) {
               return;
             }
-            
+
             // Verificar que el click no sea en el trigger o panel
-            if (isOpen && !panel.contains(target) && !trigger.contains(target)) {
+            if (
+              isOpen &&
+              !panel.contains(target) &&
+              !trigger.contains(target)
+            ) {
               closeDropdown();
             }
           }, 0);
@@ -1035,7 +1107,9 @@ const cssVars = `
               closeDropdown();
               // Si es móvil, también cerrar el menú móvil completo
               if (isMobile) {
-                const menuToggle = document.querySelector(".mobile-menu-toggle");
+                const menuToggle = document.querySelector(
+                  ".mobile-menu-toggle",
+                );
                 const navWrapper = document.querySelector(".nav-wrapper");
                 if (menuToggle && navWrapper) {
                   menuToggle.classList.remove("active");

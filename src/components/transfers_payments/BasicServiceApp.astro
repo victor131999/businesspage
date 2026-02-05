@@ -2,166 +2,234 @@
 // src/components/transfers_payments/BasicServiceApp.astro
 // Recreating the Basic Services Payment screen with pixel-perfect attention to detail
 // Using the same layout/structure as CustomKeys.astro
+import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.astro";
 ---
 
-<div class="bs-app-container">
-  <!-- Screen: Dashboard -->
-  <div id="bs-screen-dashboard" class="bs-screen active">
-    <div class="bs-scroll-content">
-      <!-- App Header -->
-      <div class="bs-header">
-        <img src="/images/zelify_logo.png" alt="Zelify" class="bs-logo" />
-      </div>
+<div class="device-container">
+  <div class="device-frame-wrapper">
+    <DeviceFrame>
+      <div class="device-content">
+        <div class="bs-app-container">
+          <!-- Screen: Dashboard -->
+          <div id="bs-screen-dashboard" class="bs-screen active">
+            <div class="bs-scroll-content">
+              <!-- App Header -->
+              <div class="bs-header">
+                <img
+                  src="/images/zelify_logo.png"
+                  alt="Zelify"
+                  class="bs-logo"
+                />
+              </div>
 
-      <!-- Hero Animation -->
-      <div class="bs-hero-container">
-        <img
-          src="/gift/ANIMACION%201.gif"
-          alt="Animation"
-          class="bs-hero-gif"
-        />
-      </div>
+              <!-- Hero Animation -->
+              <div class="bs-hero-container">
+                <img
+                  src="/gift/ANIMACION%201.gif"
+                  alt="Animation"
+                  class="bs-hero-gif"
+                />
+              </div>
 
-      <!-- Main Glass Card -->
-      <div class="bs-main-card">
-        <div class="bs-title-section">
-          <h1 class="bs-title">Pago de Servicios</h1>
-          <p class="bs-subtitle">¿Qué servicio te gustaría pagar?</p>
-        </div>
+              <!-- Main Glass Card -->
+              <div class="bs-main-card">
+                <div class="bs-title-section">
+                  <h1 class="bs-title">Pago de Servicios</h1>
+                  <p class="bs-subtitle">¿Qué servicio te gustaría pagar?</p>
+                </div>
 
-        <!-- Search Bar -->
-        <div class="bs-search-container">
-          <svg
-            class="bs-search-icon"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          <input
-            type="text"
-            class="bs-search-input"
-            placeholder="Buscar bancos..."
-          />
-        </div>
+                <!-- Search Bar -->
+                <div class="bs-search-container">
+                  <svg
+                    class="bs-search-icon"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  </svg>
+                  <input
+                    type="text"
+                    class="bs-search-input"
+                    placeholder="Buscar bancos..."
+                  />
+                </div>
 
-        <!-- Providers Grid -->
-        <div class="bs-providers-grid">
-          <!-- CFE -->
-          <div
-            class="bs-provider-item"
-            data-id="cfe"
-            onclick="window.bsNavigate('cfe', 'CFE')"
-          >
-            <div class="bs-provider-icon-wrapper">
-              <img
-                src="/images/business/CFE-PNG-500x500.png"
-                alt="CFE"
-                class="bs-provider-logo"
-              />
-            </div>
-            <span class="bs-provider-name">CFE</span>
-          </div>
-          <!-- Telmex -->
-          <div
-            class="bs-provider-item"
-            data-id="telmex"
-            onclick="window.bsNavigate('telmex', 'Telmex')"
-          >
-            <div class="bs-provider-icon-wrapper">
-              <img
-                src="/images/business/telmex_1.png"
-                alt="Telmex"
-                class="bs-provider-logo"
-              />
-            </div>
-            <span class="bs-provider-name">Telmex</span>
-          </div>
-        </div>
+                <!-- Providers Grid -->
+                <div class="bs-providers-grid">
+                  <!-- CFE -->
+                  <div
+                    class="bs-provider-item"
+                    data-id="cfe"
+                    onclick="window.bsNavigate('cfe', 'CFE')"
+                  >
+                    <div class="bs-provider-icon-wrapper">
+                      <img
+                        src="/images/business/CFE-PNG-500x500.png"
+                        alt="CFE"
+                        class="bs-provider-logo"
+                      />
+                    </div>
+                    <span class="bs-provider-name">CFE</span>
+                  </div>
+                  <!-- Telmex -->
+                  <div
+                    class="bs-provider-item"
+                    data-id="telmex"
+                    onclick="window.bsNavigate('telmex', 'Telmex')"
+                  >
+                    <div class="bs-provider-icon-wrapper">
+                      <img
+                        src="/images/business/telmex_1.png"
+                        alt="Telmex"
+                        class="bs-provider-logo"
+                      />
+                    </div>
+                    <span class="bs-provider-name">Telmex</span>
+                  </div>
+                </div>
 
-        <!-- Spacer -->
-        <div class="flex-grow"></div>
+                <!-- Spacer -->
+                <div class="flex-grow"></div>
 
-        <!-- Bottom Sheet Menu (Stacked Cards) -->
-        <div class="bs-bottom-sheet-container">
-          <!-- Most Popular (Active) -->
-          <div class="bs-sheet-item active">Más populares</div>
+                <!-- Bottom Sheet Menu (Stacked Cards) -->
+                <div
+                  class="bs-bottom-sheet-container"
+                  onclick="window.bsRotateSheet()"
+                >
+                  <!-- Telecom (Active) -->
+                  <div class="bs-sheet-item active">Telecom & Internet</div>
 
-          <!-- Favorites (Behind) -->
-          <div class="bs-sheet-item stacked stacked-1">Favoritos</div>
+                  <!-- Electricity (Behind) -->
+                  <div class="bs-sheet-item stacked stacked-1">Electricity</div>
 
-          <!-- Electricity (Behind) -->
-          <div class="bs-sheet-item stacked stacked-2">Electricidad</div>
-        </div>
-      </div>
-    </div>
-  </div>
+                  <!-- Favorites (Behind) -->
+                  <div class="bs-sheet-item stacked stacked-2">Favorites</div>
 
-  <!-- Screen: Provider Details -->
-  <div id="bs-screen-provider" class="bs-screen hidden-screen">
-    <div class="bs-scroll-content">
-      <div class="bs-header">
-        <img src="/images/zelify_logo.png" alt="Zelify" class="bs-logo" />
-      </div>
-
-      <div class="bs-hero-container">
-        <img
-          src="/gift/ANIMACION%201.gif"
-          alt="Animation"
-          class="bs-hero-gif"
-        />
-      </div>
-
-      <div class="bs-main-card">
-        <!-- Back Button -->
-        <button class="bs-back-btn" onclick="window.bsBack()">
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M15 18l-6-6 6-6"></path>
-          </svg>
-          Atrás
-        </button>
-
-        <!-- Provider Title -->
-        <div class="bs-title-section compact">
-          <h1 class="bs-title-sm" id="bs-provider-title">Proveedor</h1>
-          <p class="bs-subtitle-sm">Ingresa los detalles de pago</p>
-        </div>
-
-        <div class="bs-options-list">
-          <!-- Option 1 -->
-          <div class="bs-option-card">
-            <div class="bs-option-title">Mi Número de Teléfono</div>
-            <div class="bs-option-desc">Usa tu número registrado</div>
-          </div>
-
-          <!-- Option 2 -->
-          <div class="bs-option-card">
-            <div class="bs-option-title">Ingresar Número de Teléfono</div>
-            <div class="bs-option-desc">
-              Ingresa el número asociado a la cuenta
+                  <!-- Most Popular (Hidden) -->
+                  <div class="bs-sheet-item hidden-sheet">Most popular</div>
+                </div>
+              </div>
             </div>
           </div>
+
+          <!-- Screen: Provider Details -->
+          <div id="bs-screen-provider" class="bs-screen hidden-screen">
+            <div class="bs-scroll-content">
+              <div class="bs-header">
+                <img
+                  src="/images/zelify_logo.png"
+                  alt="Zelify"
+                  class="bs-logo"
+                />
+              </div>
+
+              <div class="bs-hero-container">
+                <img
+                  src="/gift/ANIMACION%201.gif"
+                  alt="Animation"
+                  class="bs-hero-gif"
+                />
+              </div>
+
+              <div class="bs-main-card">
+                <!-- Back Button -->
+                <button class="bs-back-btn" onclick="window.bsBack()">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M15 18l-6-6 6-6"></path>
+                  </svg>
+                  Atrás
+                </button>
+
+                <!-- Provider Title -->
+                <div class="bs-title-section compact">
+                  <h1 class="bs-title-sm" id="bs-provider-title">Proveedor</h1>
+                  <p class="bs-subtitle-sm">Ingresa los detalles de pago</p>
+                </div>
+
+                <div class="bs-options-list">
+                  <!-- Option 1 -->
+                  <div class="bs-option-card">
+                    <div class="bs-option-title">Mi Número de Teléfono</div>
+                    <div class="bs-option-desc">Usa tu número registrado</div>
+                  </div>
+
+                  <!-- Option 2 -->
+                  <div class="bs-option-card">
+                    <div class="bs-option-title">
+                      Ingresar Número de Teléfono
+                    </div>
+                    <div class="bs-option-desc">
+                      Ingresa el número asociado a la cuenta
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </DeviceFrame>
   </div>
 </div>
 
 <style>
+  /* Device Frame Layout */
+  .device-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    min-height: 80vh; /* Altura mínima para el contenedor */
+    margin: 0 auto;
+    z-index: 10;
+    padding: 1rem 0 2rem;
+  }
+
+  /* Frame del iPhone */
+  div:global(.auth-background-section) .device-frame-wrapper {
+    position: relative !important;
+    z-index: 10 !important;
+    transform: scale(1) !important;
+    padding: 2.5rem 2rem !important;
+    background-color: #f3f4f6 !important;
+    border-radius: 2rem !important;
+    margin: 3rem auto !important;
+    height: 850px !important; /* Altura fija para que phone-frame__bezel pueda usar height: 100% */
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .device-content {
+    flex: 1;
+    min-height: 0;
+    background: #ffffff;
+    padding: 1rem 1.25rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .device-content::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+
   /* Base Layout - Copied from CustomKeys */
   .bs-app-container {
     width: 100%;
@@ -370,11 +438,12 @@
 
   /* Bottom Sheet Stacking */
   .bs-bottom-sheet-container {
-    height: 80px; /* Reduced from original since it is inside a card now */
+    height: 144px; /* Significantly increased to match fan effect */
     position: relative;
     width: 100%;
     margin-top: auto;
     margin-bottom: 0px;
+    cursor: pointer;
   }
 
   .bs-sheet-item {
@@ -387,7 +456,7 @@
     justify-content: center;
     font-size: 15px;
     border: 4px solid white;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     cursor: pointer;
   }
@@ -400,24 +469,39 @@
     background: linear-gradient(90deg, #001e45 0%, #004492 100%);
     color: white;
     font-weight: 600;
+    opacity: 1;
   }
 
   .bs-sheet-item.stacked-1 {
-    bottom: 12px;
+    bottom: 30px; /* Stronger offset */
     width: 90%;
     height: 56px;
     z-index: 20;
     background: #e2e8f0;
     color: #475569;
+    opacity: 1;
   }
 
   .bs-sheet-item.stacked-2 {
-    bottom: 24px;
+    bottom: 60px; /* Stronger offset */
     width: 82%;
     height: 56px;
     z-index: 10;
     background: #f1f5f9;
     color: #94a3b8;
+    opacity: 1;
+  }
+
+  .bs-sheet-item.hidden-sheet {
+    bottom: 60px;
+    width: 80%;
+    height: 56px;
+    z-index: 0;
+    background: #f1f5f9;
+    color: transparent;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%) scale(0.9);
   }
 
   /* Screen 2 Styles */
@@ -512,5 +596,51 @@
       screen1.classList.remove("hidden-screen");
       screen1.classList.add("active");
     }
+  };
+
+  // Carousel Logic
+  window.bsRotateSheet = () => {
+    const items = Array.from(document.querySelectorAll(".bs-sheet-item"));
+    // We expect 4 items. We want to rotate them.
+    // Positions: active (0), stacked-1 (1), stacked-2 (2), hidden (3)
+    const classes = ["active", "stacked-1", "stacked-2", "hidden-sheet"];
+
+    // Basic rotation:
+    // We need to know which item is currently at which position.
+    // However, since we simply want to "cycle" the view:
+    // The visual effect is typically: User clicks top (active) item -> it moves to Back. Next item becomes active.
+    // Or user clicks container -> same effect.
+    //
+    // Let's deduce current index from classes.
+    const getClassIndex = (el) => {
+      if (el.classList.contains("active")) return 0;
+      if (el.classList.contains("stacked-1")) return 1;
+      if (el.classList.contains("stacked-2")) return 2;
+      return 3;
+    };
+
+    const currentIndices = items.map((item) => getClassIndex(item));
+
+    items.forEach((item, i) => {
+      // Remove all position classes
+      item.classList.remove("active", "stacked-1", "stacked-2", "hidden-sheet");
+      item.classList.remove("stacked");
+
+      // Calculate new index
+      // If we want [0] to become [3], [1] -> [0], [2] -> [1], [3] -> [2]
+      // This is effectively `index - 1` (allowing for wrap around)
+      let newIndex = currentIndices[i] - 1;
+      if (newIndex < 0) newIndex = classes.length - 1;
+
+      // Apply new class
+      const newClass = classes[newIndex];
+      item.classList.add(newClass);
+
+      // Add "stacked" class if it's not active or hidden
+      // The original CSS used .stacked for the ones behind.
+      if (newClass === "stacked-1" || newClass === "stacked-2") {
+        item.classList.add("stacked");
+      }
+    });
   };
 </script>

@@ -1,1570 +1,1416 @@
 ---
 // TransfersViewApp.astro
+import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.astro";
 ---
 
-<div class="tv-app-container">
-  <!-- Screen 1: Amount (Home) -->
-  <div id="tv-screen-amount" class="tv-screen active">
-    <!-- Top Graphic -->
-    <!-- Top Graphic (Backdrop) -->
-    <!-- GIF Animado (Background Layer) -->
-    <div
-      class="absolute top-12 left-0 right-0 flex justify-center z-0 pointer-events-none"
-    >
-      <img
-        src="/gift/ANIMACION%201.gif"
-        alt="Connecting Animation"
-        class="h-48 w-48 object-contain opacity-90 mix-blend-multiply"
-      />
-    </div>
-
-    <!-- Main Content Area -->
-    <div
-      class="relative z-10 flex-1 flex flex-col overflow-hidden rounded-t-2xl backdrop-blur-sm mt-40 mb-0"
-      style="background-color: rgba(255, 255, 255, 0.35);"
-    >
-      <!-- Title Section -->
-      <h1 class="tv-title mt-6">Transferencias</h1>
-
-      <div class="tv-instructions">
-        <p class="tv-subtitle">¿Cuánto quieres transferir?</p>
-        <p class="tv-caption">Selecciona la moneda según el país de destino.</p>
-      </div>
-
-      <!-- Amount Input Card -->
-      <div class="tv-input-section">
-        <label class="tv-input-label">Monto</label>
-        <div class="tv-input-card">
-          <input
-            type="text"
-            class="tv-amount-input"
-            value="0.00"
-            id="tv-amount-field"
-            readonly
-          />
-          <button class="tv-currency-pill" id="tv-btn-currency">
-            <span class="tv-currency-text">MXN</span>
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M9 18l6-6-6-6"></path>
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      <!-- Spacer -->
-      <div class="flex-grow"></div>
-    </div>
-
-    <!-- Spacer -->
-    <div class="flex-grow"></div>
-
-    <!-- Bottom Sheet: Latest Transfers -->
-    <div
-      class="tv-bottom-sheet"
-      id="tv-latest-transfers"
-      onclick="window.tvToggleHistory(true)"
-    >
-      <!-- Compact View Content -->
-      <div
-        class="tv-sheet-header-compact"
-        onclick="window.tvToggleHistory(true)"
-      >
-        <div class="tv-sheet-handle-icon">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M18 15l-6-6-6 6"></path>
-          </svg>
-        </div>
-        <span class="tv-sheet-title-text">Transferencias recientes</span>
-      </div>
-
-      <!-- Expanded View Content -->
-      <div class="tv-sheet-content-expanded">
-        <div
-          class="tv-sheet-header-expanded"
-          onclick="event.stopPropagation(); window.tvToggleHistory(false)"
-        >
-          <div class="tv-sheet-handle-icon down">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M6 9l6 6 6-6"></path>
-            </svg>
-          </div>
-          <span class="tv-sheet-subtitle">Historial</span>
-          <h2 class="tv-sheet-main-title">Transferencias recientes</h2>
-        </div>
-
-        <div class="tv-history-list">
-          <!-- Item 1 -->
-          <div class="tv-history-item">
-            <div class="tv-history-left">
-              <span class="tv-history-name">Lucía Gómez</span>
-              <span class="tv-history-date">12-10-2025</span>
-            </div>
-            <div class="tv-history-right">
-              <span class="tv-history-amount">-1,250.00</span>
-              <span class="tv-history-status">Completado</span>
+<div class="device-container">
+  <div class="device-frame-wrapper">
+    <DeviceFrame>
+      <div class="device-content">
+        <!-- Screen 1: Amount (Home) -->
+        <div id="tv-screen-amount" class="tv-screen active">
+          <!-- App Header (Top) -->
+          <div class="device-header">
+            <div class="device-logo">
+              <img src="/images/zelify_logo.png" alt="Zelify" />
             </div>
           </div>
-          <!-- Item 2 -->
-          <div class="tv-history-item">
-            <div class="tv-history-left">
-              <span class="tv-history-name">Lucía Gómez</span>
-              <span class="tv-history-date">12-10-2025</span>
-            </div>
-            <div class="tv-history-right">
-              <span class="tv-history-amount">-1,250.00</span>
-              <span class="tv-history-status">Completado</span>
-            </div>
-          </div>
-          <!-- Item 3 -->
-          <div class="tv-history-item">
-            <div class="tv-history-left">
-              <span class="tv-history-name">Lucía Gómez</span>
-              <span class="tv-history-date">12-10-2025</span>
-            </div>
-            <div class="tv-history-right">
-              <span class="tv-history-amount">-1,250.00</span>
-              <span class="tv-history-status">Completado</span>
-            </div>
-          </div>
-          <!-- Item 4 -->
-          <div class="tv-history-item">
-            <div class="tv-history-left">
-              <span class="tv-history-name">Lucía Gómez</span>
-              <span class="tv-history-date">12-10-2025</span>
-            </div>
-            <div class="tv-history-right">
-              <span class="tv-history-amount">-1,250.00</span>
-              <span class="tv-history-status">Completado</span>
-            </div>
-          </div>
-          <!-- Item 5 -->
-          <div class="tv-history-item">
-            <div class="tv-history-left">
-              <span class="tv-history-name">Lucía Gómez</span>
-              <span class="tv-history-date">12-10-2025</span>
-            </div>
-            <div class="tv-history-right">
-              <span class="tv-history-amount">-1,250.00</span>
-              <span class="tv-history-status">Completado</span>
-            </div>
-          </div>
-          <!-- Item 6 -->
-          <div class="tv-history-item">
-            <div class="tv-history-left">
-              <span class="tv-history-name">Lucía Gómez</span>
-              <span class="tv-history-date">12-10-2025</span>
-            </div>
-            <div class="tv-history-right">
-              <span class="tv-history-amount">-1,250.00</span>
-              <span class="tv-history-status">Completado</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Screen 2: Contacts (Blur Overlay) -->
-  <div id="tv-screen-contacts" class="tv-screen hidden-screen">
-    <!-- Back Button -->
-    <button class="tv-back-btn" onclick="window.tvNavigate('amount')">
-      <svg
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path d="M15 18l-6-6 6-6"></path>
-      </svg>
-      Atrás
-    </button>
-
-    <!-- GIF Animation Background -->
-    <div class="px-6 pt-2 absolute inset-0 z-0 pointer-events-none">
-      <img
-        src="/gift/ANIMACION%201.gif"
-        alt="Animation"
-        class="w-full h-auto max-w-full object-contain mix-blend-multiply opacity-90"
-      />
-    </div>
-
-    <div class="tv-blur-content flex-1 flex flex-col pt-16 pb-6 relative z-10">
-      <div class="tv-section-header text-center mb-4">
-        <h2 class="tv-section-title text-2xl font-bold text-[#004492] mb-2">
-          Contactos
-        </h2>
-        <p class="tv-section-desc text-sm text-slate-600">
-          Selecciona al destinatario
-        </p>
-      </div>
-
-      <div
-        class="tv-contacts-list w-full flex-1 overflow-y-auto px-1 space-y-2"
-      >
-        <!-- Contact 1 -->
-        <div
-          class="tv-contact-item group"
-          onclick="window.tvSelectContact('Valentina Duarte', 'VD', '@JP - Chase - USA')"
-        >
+          <!-- Top Graphic -->
+          <!-- Top Graphic (Backdrop) -->
+          <!-- GIF Animado (Background Layer) -->
           <div
-            class="tv-avatar bg-[#004492] group-hover:bg-white group-hover:text-slate-900 transition-colors"
+            class="absolute top-12 left-0 right-0 flex justify-center z-0 pointer-events-none"
           >
-            VD
+            <img
+              src="/gift/ANIMACION%201.gif"
+              alt="Connecting Animation"
+              class="h-48 w-48 object-contain opacity-90 mix-blend-multiply"
+            />
           </div>
-          <div class="tv-contact-info">
-            <div
-              class="tv-contact-name text-slate-900 group-hover:text-white transition-colors"
-            >
-              Valentina Duarte
-            </div>
-            <div
-              class="tv-contact-bank text-slate-600 group-hover:text-white/90 transition-colors"
-            >
-              @JP - Chase - USA
-            </div>
-          </div>
-          <svg
-            class="tv-chevron text-[#004492] group-hover:text-white transition-colors"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg
-          >
-        </div>
-        <!-- Contact 2 -->
-        <div
-          class="tv-contact-item group"
-          onclick="window.tvSelectContact('Carlos Mendoza', 'CM', '@CM - BBVA - México')"
-        >
+
           <div
-            class="tv-avatar bg-[#004492] group-hover:bg-white group-hover:text-slate-900 transition-colors"
+            class="relative z-10 flex-1 flex flex-col overflow-hidden rounded-t-2xl backdrop-blur-sm mt-40 mb-0"
+            style="background-color: rgba(255, 255, 255, 0.35);"
           >
-            CM
-          </div>
-          <div class="tv-contact-info">
-            <div
-              class="tv-contact-name text-slate-900 group-hover:text-white transition-colors"
-            >
-              Carlos Mendoza
-            </div>
-            <div
-              class="tv-contact-bank text-slate-600 group-hover:text-white/90 transition-colors"
-            >
-              @CM - BBVA - México
-            </div>
-          </div>
-          <svg
-            class="tv-chevron text-[#004492] group-hover:text-white transition-colors"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg
-          >
-        </div>
-        <!-- Contact 3 -->
-        <div
-          class="tv-contact-item group"
-          onclick="window.tvSelectContact('Sofia Rodriguez', 'SR', '@SR - Santander - España')"
-        >
-          <div
-            class="tv-avatar bg-[#004492] group-hover:bg-white group-hover:text-slate-900 transition-colors"
-          >
-            SR
-          </div>
-          <div class="tv-contact-info">
-            <div
-              class="tv-contact-name text-slate-900 group-hover:text-white transition-colors"
-            >
-              Sofia Rodriguez
-            </div>
-            <div
-              class="tv-contact-bank text-slate-600 group-hover:text-white/90 transition-colors"
-            >
-              @SR - Santander - España
-            </div>
-          </div>
-          <svg
-            class="tv-chevron text-[#004492] group-hover:text-white transition-colors"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg
-          >
-        </div>
-        <!-- Contact 4 -->
-        <div
-          class="tv-contact-item group"
-          onclick="window.tvSelectContact('Luis Hernandez', 'LH', '@LH - Bank of America')"
-        >
-          <div
-            class="tv-avatar bg-[#004492] group-hover:bg-white group-hover:text-slate-900 transition-colors"
-          >
-            LH
-          </div>
-          <div class="tv-contact-info">
-            <div
-              class="tv-contact-name text-slate-900 group-hover:text-white transition-colors"
-            >
-              Luis Hernandez
-            </div>
-            <div
-              class="tv-contact-bank text-slate-600 group-hover:text-white/90 transition-colors"
-            >
-              @LH - Bank of America
-            </div>
-          </div>
-          <svg
-            class="tv-chevron text-[#004492] group-hover:text-white transition-colors"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg
-          >
-        </div>
-        <!-- Contact 5 -->
-        <div
-          class="tv-contact-item group"
-          onclick="window.tvSelectContact('Ana Martinez', 'AM', '@AM - HSBC - UK')"
-        >
-          <div
-            class="tv-avatar bg-[#004492] group-hover:bg-white group-hover:text-slate-900 transition-colors"
-          >
-            AM
-          </div>
-          <div class="tv-contact-info">
-            <div
-              class="tv-contact-name text-slate-900 group-hover:text-white transition-colors"
-            >
-              Ana Martinez
-            </div>
-            <div
-              class="tv-contact-bank text-slate-600 group-hover:text-white/90 transition-colors"
-            >
-              @AM - HSBC - UK
-            </div>
-          </div>
-          <svg
-            class="tv-chevron text-[#004492] group-hover:text-white transition-colors"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg
-          >
-        </div>
-        <!-- Contact 6 -->
-        <div
-          class="tv-contact-item group"
-          onclick="window.tvSelectContact('Diego Fernandez', 'DF', '@DF - Banco de Chile')"
-        >
-          <div
-            class="tv-avatar bg-[#004492] group-hover:bg-white group-hover:text-slate-900 transition-colors"
-          >
-            DF
-          </div>
-          <div class="tv-contact-info">
-            <div
-              class="tv-contact-name text-slate-900 group-hover:text-white transition-colors"
-            >
-              Diego Fernandez
-            </div>
-            <div
-              class="tv-contact-bank text-slate-600 group-hover:text-white/90 transition-colors"
-            >
-              @DF - Banco de Chile
-            </div>
-          </div>
-          <svg
-            class="tv-chevron text-[#004492] group-hover:text-white transition-colors"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg
-          >
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Screen 3: Summary -->
-  <div id="tv-screen-summary" class="tv-screen hidden-screen">
-    <div class="h-full w-full relative flex flex-col">
-      <!-- Back Button (Re-positioned relative) -->
-      <button
-        onclick="window.tvNavigate('contacts')"
-        class="absolute top-4 left-0 flex items-center text-sm font-medium text-[#000b1e] hover:text-[#004492] transition-colors z-50 ml-0 pl-0"
-        style="font-weight: 600;"
-      >
-        <svg
-          class="h-5 w-5 mr-1"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2.5"
-            d="M15 19l-7-7 7-7"></path>
-        </svg>
-        <span>Atrás</span>
-      </button>
-
-      <!-- GIF Background (Absolute) -->
-      <div
-        class="absolute top-12 left-0 right-0 flex justify-center z-0 pointer-events-none"
-      >
-        <img
-          src="/gift/ANIMACION%201.gif"
-          alt="Connecting Animation"
-          class="h-48 w-48 object-contain opacity-90 mix-blend-multiply"
-        />
-      </div>
-
-      <!-- Glassmorphic Card -->
-      <div
-        class="relative z-10 flex-1 flex flex-col overflow-hidden rounded-t-[32px] backdrop-blur-sm mt-40 mb-0 px-6 pt-6 pb-8 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] border-t border-white/40"
-        style="background-color: rgba(255, 255, 255, 0.35);"
-      >
-        <!-- Title Section (Centered) -->
-        <div class="text-center mb-6">
-          <h2 class="text-[22px] font-bold text-[#2b5bf7] mb-1 leading-tight">
-            Confirmar la transferencia
-          </h2>
-          <p class="text-[13px] text-[#64748b] font-normal">
-            Revisa los detalles antes de enviar.
-          </p>
-        </div>
-
-        <!-- Recipient -->
-        <div class="mb-5">
-          <p class="text-[13px] font-medium text-[#94a3b8] mb-1">
-            Destinatario
-          </p>
-          <p
-            class="text-[17px] font-bold text-[#0f172a]"
-            id="tv-summary-recipient"
-          >
-            Carlos Mendoza
-          </p>
-        </div>
-
-        <!-- Amount -->
-        <div class="mb-6">
-          <p class="text-[13px] font-medium text-[#94a3b8] mb-1">Monto</p>
-          <p class="text-[28px] font-bold text-[#0f172a] tracking-tight">
-            1,250.00 MXN
-          </p>
-        </div>
-
-        <!-- Divider -->
-        <div class="h-px bg-slate-200 w-full mb-4"></div>
-
-        <!-- Summary Details -->
-        <div class="space-y-3 mb-4">
-          <div class="flex justify-between items-center text-[14px]">
-            <span class="text-[#64748b]">Tú envías</span>
-            <span class="font-medium text-[#0f172a]">1,250.00 MXN</span>
-          </div>
-          <div class="flex justify-between items-center text-[14px]">
-            <span class="text-[#64748b]">Tasa de cambio</span>
-            <span class="font-medium text-[#0f172a]">1 MXN = 0.0580 USD</span>
-          </div>
-        </div>
-
-        <!-- Divider -->
-        <div class="h-px bg-slate-200 w-full mb-4"></div>
-
-        <!-- Total -->
-        <div class="flex justify-between items-center text-[16px] mb-auto">
-          <span class="font-bold text-[#0f172a] text-lg">Total</span>
-          <span class="font-bold text-[#0f172a] text-lg">$72.50 USD</span>
-        </div>
-
-        <!-- Slider Button -->
-        <div class="w-full mt-6 mb-4" id="tv-slider">
-          <div
-            class="relative w-full h-[56px] rounded-[28px] flex items-center justify-center overflow-hidden cursor-pointer shadow-lg active:scale-[0.99] transition-transform tv-slider-track"
-            style="background: linear-gradient(90deg, #1e3a8a 0%, #000080 100%);"
-          >
-            <span
-              class="text-white font-semibold text-[15px] pointer-events-none z-0 tracking-wide"
-            >
-              Desliza para confirmar
-            </span>
-
-            <div
-              class="absolute left-1 w-[48px] h-[48px] bg-white rounded-full flex items-center justify-center cursor-grab active:cursor-grabbing z-10 shadow-md transition-transform tv-slider-thumb"
-              id="tv-slider-thumb"
-            >
-              <!-- Blue Arrow Icon -->
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                class="text-[#1e3a8a]"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M9 18l6-6-6-6"></path>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Screen 4: Processing & Success -->
-  <div
-    id="tv-screen-processing"
-    class="tv-screen hidden-screen bg-white h-full relative overflow-hidden font-sans"
-  >
-    <!-- Processing View (Card Animation) -->
-    <div
-      class="flex-1 px-2 pb-24 pt-10 flex flex-col items-center justify-center min-h-0 h-full"
-      id="tv-processing-view"
-    >
-      <!-- Card Container -->
-      <div
-        class="relative w-full h-full rounded-[2.5rem] overflow-hidden shadow-xl bg-[#001a33]"
-      >
-        <!-- Base Layer -->
-        <div
-          class="absolute inset-0 z-10 flex flex-col items-center justify-center h-full px-6 text-center w-full"
-        >
-          <h2 class="text-2xl font-bold mb-2 text-[#003366]">
-            Procesando tu transacción
-          </h2>
-          <p class="text-[13px] text-gray-400">
-            Esto puede tardar unos segundos
-          </p>
-          <!-- Empty Bar -->
-          <div
-            class="w-64 h-2 rounded-full mt-8 overflow-hidden bg-gray-200/10"
-          >
-          </div>
-        </div>
-
-        <!-- Overlay Layer (Clipped) -->
-        <div
-          id="tv-processing-overlay"
-          class="absolute inset-0 z-20 overflow-hidden"
-          style="clip-path: inset(0 100% 0 0); transition: clip-path 3s cubic-bezier(0.22, 1, 0.36, 1);"
-        >
-          <div
-            class="w-full h-full flex flex-col items-center justify-center px-6 text-center"
-            style="background: linear-gradient(to right, #004492 0%, #000b1e 100%);"
-          >
-            <!-- Content on top of gradient -->
-            <div class="relative z-10 flex flex-col items-center">
-              <h2 class="text-2xl font-bold mb-2 text-white">
-                Procesando tu transacción
-              </h2>
-              <p class="text-[13px] text-white/80">
-                Esto puede tardar unos segundos
+            <div class="tv-instructions">
+              <p class="tv-subtitle">¿Cuánto quieres transferir?</p>
+              <p class="tv-caption">
+                Selecciona la moneda según el país de destino.
               </p>
-              <!-- Filled Bar -->
-              <div
-                class="w-64 h-2 rounded-full mt-8 overflow-hidden bg-white/20"
-              >
-                <div
-                  class="h-full w-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.8)]"
+            </div>
+
+            <!-- Amount Input Card -->
+            <div class="tv-input-section">
+              <label class="tv-input-label">Monto</label>
+              <div class="tv-input-card">
+                <input
+                  type="text"
+                  class="tv-amount-input"
+                  value="0.00"
+                  id="tv-amount-field"
+                  readonly
+                />
+                <button class="tv-currency-pill" id="tv-btn-currency">
+                  <span class="tv-currency-text">MXN</span>
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M9 18l6-6-6-6"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Spacer -->
+            <div class="flex-grow"></div>
+          </div>
+
+          <!-- Spacer -->
+          <div class="flex-grow"></div>
+
+          <!-- Bottom Sheet: Latest Transfers -->
+          <div
+            class="tv-bottom-sheet"
+            id="tv-latest-transfers"
+            onclick="window.tvToggleHistory(true)"
+          >
+            <!-- Compact View Content -->
+            <div
+              class="tv-sheet-header-compact"
+              onclick="window.tvToggleHistory(true)"
+            >
+              <div class="tv-sheet-handle-icon">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
                 >
+                  <path d="M18 15l-6-6-6 6"></path>
+                </svg>
+              </div>
+              <span class="tv-sheet-title-text">Transferencias recientes</span>
+            </div>
+
+            <!-- Expanded View Content -->
+            <div class="tv-sheet-content-expanded">
+              <div
+                class="tv-sheet-header-expanded"
+                onclick="event.stopPropagation(); window.tvToggleHistory(false)"
+              >
+                <div class="tv-sheet-handle-icon down">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M6 9l6 6 6-6"></path>
+                  </svg>
+                </div>
+                <span class="tv-sheet-subtitle">Historial</span>
+                <h2 class="tv-sheet-main-title">Transferencias recientes</h2>
+              </div>
+
+              <div class="tv-history-list">
+                <!-- Item 1 -->
+                <div class="tv-history-item">
+                  <div class="tv-history-left">
+                    <span class="tv-history-name">Lucía Gómez</span>
+                    <span class="tv-history-date">12-10-2025</span>
+                  </div>
+                  <div class="tv-history-right">
+                    <span class="tv-history-amount">-1,250.00</span>
+                    <span class="tv-history-status">Completado</span>
+                  </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="tv-history-item">
+                  <div class="tv-history-left">
+                    <span class="tv-history-name">Lucía Gómez</span>
+                    <span class="tv-history-date">12-10-2025</span>
+                  </div>
+                  <div class="tv-history-right">
+                    <span class="tv-history-amount">-1,250.00</span>
+                    <span class="tv-history-status">Completado</span>
+                  </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="tv-history-item">
+                  <div class="tv-history-left">
+                    <span class="tv-history-name">Lucía Gómez</span>
+                    <span class="tv-history-date">12-10-2025</span>
+                  </div>
+                  <div class="tv-history-right">
+                    <span class="tv-history-amount">-1,250.00</span>
+                    <span class="tv-history-status">Completado</span>
+                  </div>
+                </div>
+                <!-- Item 4 -->
+                <div class="tv-history-item">
+                  <div class="tv-history-left">
+                    <span class="tv-history-name">Lucía Gómez</span>
+                    <span class="tv-history-date">12-10-2025</span>
+                  </div>
+                  <div class="tv-history-right">
+                    <span class="tv-history-amount">-1,250.00</span>
+                    <span class="tv-history-status">Completado</span>
+                  </div>
+                </div>
+                <!-- Item 5 -->
+                <div class="tv-history-item">
+                  <div class="tv-history-left">
+                    <span class="tv-history-name">Lucía Gómez</span>
+                    <span class="tv-history-date">12-10-2025</span>
+                  </div>
+                  <div class="tv-history-right">
+                    <span class="tv-history-amount">-1,250.00</span>
+                    <span class="tv-history-status">Completado</span>
+                  </div>
+                </div>
+                <!-- Item 6 -->
+                <div class="tv-history-item">
+                  <div class="tv-history-left">
+                    <span class="tv-history-name">Lucía Gómez</span>
+                    <span class="tv-history-date">12-10-2025</span>
+                  </div>
+                  <div class="tv-history-right">
+                    <span class="tv-history-amount">-1,250.00</span>
+                    <span class="tv-history-status">Completado</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Flush Edge Effect -->
-        <div
-          id="tv-processing-glint"
-          class="absolute top-0 bottom-0 w-20 z-30 pointer-events-none flush-effect"
-          style="left: 0%; background: linear-gradient(to right, transparent, rgba(255,255,255,0.5), transparent); transform: translateX(-50%); transition: left 3s linear;"
-        >
-        </div>
-      </div>
-    </div>
-
-    <!-- Success View -->
-    <div
-      class="tv-success-content hidden h-full w-full relative"
-      id="tv-success-view"
-    >
-      <!-- Layer 1: Blue "Transfer Sent" Card (Separate) -->
-      <div
-        class="absolute top-6 bottom-24 left-2 right-2 rounded-[2.5rem] overflow-hidden shadow-2xl z-10 bg-[#004492]"
-      >
-        <div
-          class="absolute inset-0 w-full h-full"
-          style="background: linear-gradient(to right, #004492 0%, #000b1e 100%);"
-        >
-        </div>
-
-        <div
-          class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-6"
-        >
-          <svg
-            width="64"
-            height="64"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="3"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="mb-4"
-          >
-            <path d="M20 6L9 17l-5-5"></path>
-          </svg>
-          <h2 class="text-3xl font-bold mb-2">Transferencia enviada</h2>
-          <p class="text-sm opacity-90 font-medium">
-            Zelify notificó al destinatario
-          </p>
-        </div>
-      </div>
-
-      <!-- Layer 2: Transaction Details Bottom Sheet (Separate, Overlay) -->
-      <div
-        id="tv-details-sheet"
-        class="absolute inset-x-0 bottom-0 rounded-t-[2rem] shadow-[0_-5px_30px_rgba(0,0,0,0.15)] z-20 transition-all duration-500 cubic-bezier(0.32, 0.725, 0.25, 1) flex flex-col overflow-hidden"
-        style="height: 70px; background-color: rgba(255, 255, 255, 0.5); backdrop-filter: blur(4px);"
-      >
-        <!-- Handle Area -->
-        <div
-          class="w-full flex items-center justify-center h-[70px] shrink-0 cursor-pointer hover:bg-white/50 transition-colors"
-          onclick="toggleSuccessDetails()"
-        >
-          <svg
-            id="tv-details-chevron"
-            class="w-6 h-6 text-slate-500 transition-transform duration-500"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
+        <!-- Screen 2: Contacts (Blur Overlay) -->
+        <div id="tv-screen-contacts" class="tv-screen hidden-screen">
+          <!-- Back Button -->
+          <button class="tv-back-btn" onclick="window.tvNavigate('amount')">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              stroke-width="2"
-              d="M5 15l7-7 7 7"></path>
-          </svg>
+            >
+              <path d="M15 18l-6-6 6-6"></path>
+            </svg>
+            Atrás
+          </button>
+
+          <!-- GIF Animation Background -->
+          <div class="px-6 pt-2 absolute inset-0 z-0 pointer-events-none">
+            <img
+              src="/gift/ANIMACION%201.gif"
+              alt="Animation"
+              class="w-full h-auto max-w-full object-contain mix-blend-multiply opacity-90"
+            />
+          </div>
+
+          <div
+            class="tv-blur-content flex-1 flex flex-col pt-16 pb-6 relative z-10"
+          >
+            <div class="tv-section-header text-center mb-4">
+              <h2
+                class="tv-section-title text-2xl font-bold text-[#004492] mb-2"
+              >
+                Contactos
+              </h2>
+              <p class="tv-section-desc text-sm text-slate-600">
+                Selecciona al destinatario
+              </p>
+            </div>
+
+            <div
+              class="tv-contacts-list w-full flex-1 overflow-y-auto px-1 space-y-2"
+            >
+              <!-- Contact 1 -->
+              <div
+                class="tv-contact-item group"
+                onclick="window.tvSelectContact('Valentina Duarte', 'VD', '@JP - Chase - USA')"
+              >
+                <div
+                  class="tv-avatar bg-[#004492] group-hover:bg-white group-hover:text-slate-900 transition-colors"
+                >
+                  VD
+                </div>
+                <div class="tv-contact-info">
+                  <div
+                    class="tv-contact-name text-slate-900 group-hover:text-white transition-colors"
+                  >
+                    Valentina Duarte
+                  </div>
+                  <div
+                    class="tv-contact-bank text-slate-600 group-hover:text-white/90 transition-colors"
+                  >
+                    @JP - Chase - USA
+                  </div>
+                </div>
+                <svg
+                  class="tv-chevron text-[#004492] group-hover:text-white transition-colors"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg
+                >
+              </div>
+              <!-- Contact 2 -->
+              <div
+                class="tv-contact-item group"
+                onclick="window.tvSelectContact('Carlos Mendoza', 'CM', '@CM - BBVA - México')"
+              >
+                <div
+                  class="tv-avatar bg-[#004492] group-hover:bg-white group-hover:text-slate-900 transition-colors"
+                >
+                  CM
+                </div>
+                <div class="tv-contact-info">
+                  <div
+                    class="tv-contact-name text-slate-900 group-hover:text-white transition-colors"
+                  >
+                    Carlos Mendoza
+                  </div>
+                  <div
+                    class="tv-contact-bank text-slate-600 group-hover:text-white/90 transition-colors"
+                  >
+                    @CM - BBVA - México
+                  </div>
+                </div>
+                <svg
+                  class="tv-chevron text-[#004492] group-hover:text-white transition-colors"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg
+                >
+              </div>
+              <!-- Contact 3 -->
+              <div
+                class="tv-contact-item group"
+                onclick="window.tvSelectContact('Sofia Rodriguez', 'SR', '@SR - Santander - España')"
+              >
+                <div
+                  class="tv-avatar bg-[#004492] group-hover:bg-white group-hover:text-slate-900 transition-colors"
+                >
+                  SR
+                </div>
+                <div class="tv-contact-info">
+                  <div
+                    class="tv-contact-name text-slate-900 group-hover:text-white transition-colors"
+                  >
+                    Sofia Rodriguez
+                  </div>
+                  <div
+                    class="tv-contact-bank text-slate-600 group-hover:text-white/90 transition-colors"
+                  >
+                    @SR - Santander - España
+                  </div>
+                </div>
+                <svg
+                  class="tv-chevron text-[#004492] group-hover:text-white transition-colors"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg
+                >
+              </div>
+              <!-- Contact 4 -->
+              <div
+                class="tv-contact-item group"
+                onclick="window.tvSelectContact('Luis Hernandez', 'LH', '@LH - Bank of America')"
+              >
+                <div
+                  class="tv-avatar bg-[#004492] group-hover:bg-white group-hover:text-slate-900 transition-colors"
+                >
+                  LH
+                </div>
+                <div class="tv-contact-info">
+                  <div
+                    class="tv-contact-name text-slate-900 group-hover:text-white transition-colors"
+                  >
+                    Luis Hernandez
+                  </div>
+                  <div
+                    class="tv-contact-bank text-slate-600 group-hover:text-white/90 transition-colors"
+                  >
+                    @LH - Bank of America
+                  </div>
+                </div>
+                <svg
+                  class="tv-chevron text-[#004492] group-hover:text-white transition-colors"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg
+                >
+              </div>
+              <!-- Contact 5 -->
+              <div
+                class="tv-contact-item group"
+                onclick="window.tvSelectContact('Ana Martinez', 'AM', '@AM - HSBC - UK')"
+              >
+                <div
+                  class="tv-avatar bg-[#004492] group-hover:bg-white group-hover:text-slate-900 transition-colors"
+                >
+                  AM
+                </div>
+                <div class="tv-contact-info">
+                  <div
+                    class="tv-contact-name text-slate-900 group-hover:text-white transition-colors"
+                  >
+                    Ana Martinez
+                  </div>
+                  <div
+                    class="tv-contact-bank text-slate-600 group-hover:text-white/90 transition-colors"
+                  >
+                    @AM - HSBC - UK
+                  </div>
+                </div>
+                <svg
+                  class="tv-chevron text-[#004492] group-hover:text-white transition-colors"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg
+                >
+              </div>
+              <!-- Contact 6 -->
+              <div
+                class="tv-contact-item group"
+                onclick="window.tvSelectContact('Diego Fernandez', 'DF', '@DF - Banco de Chile')"
+              >
+                <div
+                  class="tv-avatar bg-[#004492] group-hover:bg-white group-hover:text-slate-900 transition-colors"
+                >
+                  DF
+                </div>
+                <div class="tv-contact-info">
+                  <div
+                    class="tv-contact-name text-slate-900 group-hover:text-white transition-colors"
+                  >
+                    Diego Fernandez
+                  </div>
+                  <div
+                    class="tv-contact-bank text-slate-600 group-hover:text-white/90 transition-colors"
+                  >
+                    @DF - Banco de Chile
+                  </div>
+                </div>
+                <svg
+                  class="tv-chevron text-[#004492] group-hover:text-white transition-colors"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg
+                >
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- Expanded Content -->
-        <div class="flex-1 px-8 pb-8 overflow-y-auto no-scrollbar pt-2">
-          <h2 class="text-center text-[17px] font-bold text-[#1e293b] mb-6">
-            Detalles de la transacción
-          </h2>
+        <!-- Screen 3: Summary -->
+        <div id="tv-screen-summary" class="tv-screen hidden-screen">
+          <div class="h-full w-full relative flex flex-col">
+            <!-- Back Button (Re-positioned relative) -->
+            <button
+              onclick="window.tvNavigate('contacts')"
+              class="absolute top-4 left-0 flex items-center text-sm font-medium text-[#000b1e] hover:text-[#004492] transition-colors z-50 ml-0 pl-0"
+              style="font-weight: 600;"
+            >
+              <svg
+                class="h-5 w-5 mr-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2.5"
+                  d="M15 19l-7-7 7-7"></path>
+              </svg>
+              <span>Atrás</span>
+            </button>
 
-          <div class="space-y-5 relative">
-            <!-- Date/Hour -->
-            <div>
-              <p class="text-[13px] text-slate-500 mb-0.5">Fecha/Hora</p>
-              <p class="text-[15px] font-semibold text-[#1e293b]">
-                10/10/2025 / 12:26:04 PM
-              </p>
+            <!-- GIF Background (Absolute) -->
+            <div
+              class="absolute top-12 left-0 right-0 flex justify-center z-0 pointer-events-none"
+            >
+              <img
+                src="/gift/ANIMACION%201.gif"
+                alt="Connecting Animation"
+                class="h-48 w-48 object-contain opacity-90 mix-blend-multiply"
+              />
             </div>
 
-            <!-- Recipient -->
-            <div>
-              <p class="text-[13px] text-slate-500 mb-0.5">Destinatario</p>
-              <p class="text-[15px] font-bold text-[#1e293b]">Carlos Mendoza</p>
-            </div>
+            <!-- Glassmorphic Card -->
+            <div
+              class="relative z-10 flex-1 flex flex-col overflow-hidden rounded-t-[32px] backdrop-blur-sm mt-40 mb-0 px-6 pt-6 pb-8 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] border-t border-white/40"
+              style="background-color: rgba(255, 255, 255, 0.35);"
+            >
+              <!-- Title Section (Centered) -->
+              <div class="text-center mb-6">
+                <h2
+                  class="text-[22px] font-bold text-[#2b5bf7] mb-1 leading-tight"
+                >
+                  Confirmar la transferencia
+                </h2>
+                <p class="text-[13px] text-[#64748b] font-normal">
+                  Revisa los detalles antes de enviar.
+                </p>
+              </div>
 
-            <!-- Transaction number -->
-            <div>
-              <p class="text-[13px] text-slate-500 mb-0.5">
-                Número de transacción
-              </p>
-              <p class="text-[15px] font-bold text-[#1e293b]">871607050</p>
-            </div>
+              <!-- Recipient -->
+              <div class="mb-5">
+                <p class="text-[13px] font-medium text-[#94a3b8] mb-1">
+                  Destinatario
+                </p>
+                <p
+                  class="text-[17px] font-bold text-[#0f172a]"
+                  id="tv-summary-recipient"
+                >
+                  Carlos Mendoza
+                </p>
+              </div>
 
-            <!-- Payment method -->
-            <div>
-              <p class="text-[13px] text-slate-500 mb-0.5">Método de pago</p>
-              <p class="text-[15px] font-bold text-[#1e293b]">TRANSFERENCIA</p>
-            </div>
+              <!-- Amount -->
+              <div class="mb-6">
+                <p class="text-[13px] font-medium text-[#94a3b8] mb-1">Monto</p>
+                <p class="text-[28px] font-bold text-[#0f172a] tracking-tight">
+                  1,250.00 MXN
+                </p>
+              </div>
 
-            <!-- Amount -->
-            <div>
-              <p class="text-[13px] text-slate-500 mb-0.5">Monto</p>
-              <p class="text-[15px] font-bold text-[#1e293b]">$100.00 USD</p>
-            </div>
+              <!-- Divider -->
+              <div class="h-px bg-slate-200 w-full mb-4"></div>
 
-            <!-- Fee -->
-            <div>
-              <p class="text-[13px] text-slate-500 mb-0.5">Comisión</p>
-              <p class="text-[15px] font-bold text-[#1e293b]">$10.00 USD</p>
-            </div>
+              <!-- Summary Details -->
+              <div class="space-y-3 mb-4">
+                <div class="flex justify-between items-center text-[14px]">
+                  <span class="text-[#64748b]">Tú envías</span>
+                  <span class="font-medium text-[#0f172a]">1,250.00 MXN</span>
+                </div>
+                <div class="flex justify-between items-center text-[14px]">
+                  <span class="text-[#64748b]">Tasa de cambio</span>
+                  <span class="font-medium text-[#0f172a]"
+                    >1 MXN = 0.0580 USD</span
+                  >
+                </div>
+              </div>
 
-            <!-- Total -->
-            <div class="pt-2">
-              <p class="text-[13px] text-slate-500 mb-0.5">Total</p>
-              <p class="text-[20px] font-bold text-[#0f172a]">$110.00 USD</p>
+              <!-- Divider -->
+              <div class="h-px bg-slate-200 w-full mb-4"></div>
+
+              <!-- Total -->
+              <div
+                class="flex justify-between items-center text-[16px] mb-auto"
+              >
+                <span class="font-bold text-[#0f172a] text-lg">Total</span>
+                <span class="font-bold text-[#0f172a] text-lg">$72.50 USD</span>
+              </div>
+
+              <!-- Slider Button -->
+              <div class="w-full mt-6 mb-4" id="tv-slider">
+                <div
+                  class="relative w-full h-[56px] rounded-[28px] flex items-center justify-center overflow-hidden cursor-pointer shadow-lg active:scale-[0.99] transition-transform tv-slider-track"
+                  style="background: linear-gradient(90deg, #1e3a8a 0%, #000080 100%);"
+                >
+                  <span
+                    class="text-white font-semibold text-[15px] pointer-events-none z-0 tracking-wide"
+                  >
+                    Desliza para confirmar
+                  </span>
+
+                  <div
+                    class="absolute left-1 w-[48px] h-[48px] bg-white rounded-full flex items-center justify-center cursor-grab active:cursor-grabbing z-10 shadow-md transition-transform tv-slider-thumb"
+                    id="tv-slider-thumb"
+                  >
+                    <!-- Blue Arrow Icon -->
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      class="text-[#1e3a8a]"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M9 18l6-6-6-6"></path>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Screen 4: Processing & Success -->
+        <div
+          id="tv-screen-processing"
+          class="tv-screen hidden-screen bg-white h-full relative overflow-hidden font-sans"
+        >
+          <!-- Processing View (Card Animation) -->
+          <div
+            class="flex-1 px-2 pb-24 pt-10 flex flex-col items-center justify-center min-h-0 h-full"
+            id="tv-processing-view"
+          >
+            <!-- Card Container -->
+            <div
+              class="relative w-full h-full rounded-[2.5rem] overflow-hidden shadow-xl bg-[#001a33]"
+            >
+              <!-- Base Layer -->
+              <div
+                class="absolute inset-0 z-10 flex flex-col items-center justify-center h-full px-6 text-center w-full"
+              >
+                <h2 class="text-2xl font-bold mb-2 text-[#003366]">
+                  Procesando tu transacción
+                </h2>
+                <p class="text-[13px] text-gray-400">
+                  Esto puede tardar unos segundos
+                </p>
+                <!-- Empty Bar -->
+                <div
+                  class="w-64 h-2 rounded-full mt-8 overflow-hidden bg-gray-200/10"
+                >
+                </div>
+              </div>
+
+              <!-- Overlay Layer (Clipped) -->
+              <div
+                id="tv-processing-overlay"
+                class="absolute inset-0 z-20 overflow-hidden"
+                style="clip-path: inset(0 100% 0 0); transition: clip-path 3s cubic-bezier(0.22, 1, 0.36, 1);"
+              >
+                <div
+                  class="w-full h-full flex flex-col items-center justify-center px-6 text-center"
+                  style="background: linear-gradient(to right, #004492 0%, #000b1e 100%);"
+                >
+                  <!-- Content on top of gradient -->
+                  <div class="relative z-10 flex flex-col items-center">
+                    <h2 class="text-2xl font-bold mb-2 text-white">
+                      Procesando tu transacción
+                    </h2>
+                    <p class="text-[13px] text-white/80">
+                      Esto puede tardar unos segundos
+                    </p>
+                    <!-- Filled Bar -->
+                    <div
+                      class="w-64 h-2 rounded-full mt-8 overflow-hidden bg-white/20"
+                    >
+                      <div
+                        class="h-full w-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.8)]"
+                      >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Flush Edge Effect -->
+              <div
+                id="tv-processing-glint"
+                class="absolute top-0 bottom-0 w-20 z-30 pointer-events-none flush-effect"
+                style="left: 0%; background: linear-gradient(to right, transparent, rgba(255,255,255,0.5), transparent); transform: translateX(-50%); transition: left 3s linear;"
+              >
+              </div>
             </div>
           </div>
 
-          <!-- Buttons -->
-          <div class="flex gap-4 mt-8 pb-6">
-            <button
-              class="flex-1 bg-[#1e3a8a] text-white py-3 rounded-xl font-semibold shadow-lg active:scale-95 transition-transform text-sm"
+          <!-- Success View -->
+          <div
+            class="tv-success-content hidden h-full w-full relative"
+            id="tv-success-view"
+          >
+            <!-- Layer 1: Blue "Transfer Sent" Card (Separate) -->
+            <div
+              class="absolute top-6 bottom-24 left-2 right-2 rounded-[2.5rem] overflow-hidden shadow-2xl z-10 bg-[#004492]"
             >
-              Compartir
-            </button>
-            <button
-              class="flex-1 bg-[#1e3a8a] text-white py-3 rounded-xl font-semibold shadow-lg active:scale-95 transition-transform text-sm"
-              onclick="window.tvReset()"
+              <div
+                class="absolute inset-0 w-full h-full"
+                style="background: linear-gradient(to right, #004492 0%, #000b1e 100%);"
+              >
+              </div>
+
+              <div
+                class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-6"
+              >
+                <svg
+                  width="64"
+                  height="64"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="mb-4"
+                >
+                  <path d="M20 6L9 17l-5-5"></path>
+                </svg>
+                <h2 class="text-3xl font-bold mb-2">Transferencia enviada</h2>
+                <p class="text-sm opacity-90 font-medium">
+                  Zelify notificó al destinatario
+                </p>
+              </div>
+            </div>
+
+            <!-- Layer 2: Transaction Details Bottom Sheet (Separate, Overlay) -->
+            <div
+              id="tv-details-sheet"
+              class="absolute inset-x-0 bottom-0 rounded-t-[2rem] shadow-[0_-5px_30px_rgba(0,0,0,0.15)] z-20 transition-all duration-500 cubic-bezier(0.32, 0.725, 0.25, 1) flex flex-col overflow-hidden"
+              style="height: 70px; background-color: rgba(255, 255, 255, 0.5); backdrop-filter: blur(4px);"
             >
-              Descargar
-            </button>
+              <!-- Handle Area -->
+              <div
+                class="w-full flex items-center justify-center h-[70px] shrink-0 cursor-pointer hover:bg-white/50 transition-colors"
+                onclick="toggleSuccessDetails()"
+              >
+                <svg
+                  id="tv-details-chevron"
+                  class="w-6 h-6 text-slate-500 transition-transform duration-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 15l7-7 7 7"></path>
+                </svg>
+              </div>
+
+              <!-- Expanded Content -->
+              <div class="flex-1 px-8 pb-8 overflow-y-auto no-scrollbar pt-2">
+                <h2
+                  class="text-center text-[17px] font-bold text-[#1e293b] mb-6"
+                >
+                  Detalles de la transacción
+                </h2>
+
+                <div class="space-y-5 relative">
+                  <!-- Date/Hour -->
+                  <div>
+                    <p class="text-[13px] text-slate-500 mb-0.5">Fecha/Hora</p>
+                    <p class="text-[15px] font-semibold text-[#1e293b]">
+                      10/10/2025 / 12:26:04 PM
+                    </p>
+                  </div>
+
+                  <!-- Recipient -->
+                  <div>
+                    <p class="text-[13px] text-slate-500 mb-0.5">
+                      Destinatario
+                    </p>
+                    <p class="text-[15px] font-bold text-[#1e293b]">
+                      Carlos Mendoza
+                    </p>
+                  </div>
+
+                  <!-- Transaction number -->
+                  <div>
+                    <p class="text-[13px] text-slate-500 mb-0.5">
+                      Número de transacción
+                    </p>
+                    <p class="text-[15px] font-bold text-[#1e293b]">
+                      871607050
+                    </p>
+                  </div>
+
+                  <!-- Payment method -->
+                  <div>
+                    <p class="text-[13px] text-slate-500 mb-0.5">
+                      Método de pago
+                    </p>
+                    <p class="text-[15px] font-bold text-[#1e293b]">
+                      TRANSFERENCIA
+                    </p>
+                  </div>
+
+                  <!-- Amount -->
+                  <div>
+                    <p class="text-[13px] text-slate-500 mb-0.5">Monto</p>
+                    <p class="text-[15px] font-bold text-[#1e293b]">
+                      $100.00 USD
+                    </p>
+                  </div>
+
+                  <!-- Fee -->
+                  <div>
+                    <p class="text-[13px] text-slate-500 mb-0.5">Comisión</p>
+                    <p class="text-[15px] font-bold text-[#1e293b]">
+                      $10.00 USD
+                    </p>
+                  </div>
+
+                  <!-- Total -->
+                  <div class="pt-2">
+                    <p class="text-[13px] text-slate-500 mb-0.5">Total</p>
+                    <p class="text-[20px] font-bold text-[#0f172a]">
+                      $110.00 USD
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex gap-4 mt-8 pb-6">
+              <button
+                class="flex-1 bg-[#1e3a8a] text-white py-3 rounded-xl font-semibold shadow-lg active:scale-95 transition-transform text-sm"
+              >
+                Compartir
+              </button>
+              <button
+                class="flex-1 bg-[#1e3a8a] text-white py-3 rounded-xl font-semibold shadow-lg active:scale-95 transition-transform text-sm"
+                onclick="window.tvReset()"
+              >
+                Descargar
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </DeviceFrame>
   </div>
 </div>
 
 <style>
-  /* Global Layout */
-  .tv-app-container {
-    width: 100%;
-    height: 100%;
+  /* Device Frame Layout (Copied from AuthApp) */
+  /* Contenedor del dispositivo */
+  .device-container {
     position: relative;
-    overflow: hidden;
-    font-family:
-      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
-      sans-serif;
-    background: #ffffff;
-  }
-
-  .tv-screen {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    padding: 0 24px;
-    padding-top: 10px; /* Safe area top */
-    transition:
-      opacity 0.3s ease,
-      transform 0.3s ease;
-    background: white;
-  }
-
-  .tv-screen.hidden-screen {
-    opacity: 0;
-    pointer-events: none;
-    transform: scale(0.98);
-    z-index: 0;
-  }
-
-  .tv-screen.active {
-    opacity: 1;
-    pointer-events: auto;
-    transform: scale(1);
-    z-index: 10;
-  }
-
-  /* Screen Amount Styles */
-  .tv-graphic-container-fixed {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
-    height: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding-top: 20px;
-    z-index: 1;
-    pointer-events: none;
-  }
-
-  .tv-graphic-gif {
-    width: 180%;
     max-width: 400px;
-    object-fit: contain;
-    mix-blend-mode: multiply;
-    transform: translateY(-20px);
-  }
-
-  .tv-main-glass-card {
-    position: relative;
-    z-index: 10;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    margin-top: 220px;
-    margin-left: -24px;
-    margin-right: -24px;
-    background: rgba(255, 255, 255, 0.35);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 24px 24px 0 0;
-    padding: 24px;
-    padding-bottom: 90px;
-    border-top: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.05);
-  }
-
-  .tv-title {
-    font-size: 24px;
-    font-weight: 700;
-    color: #004492;
-    margin: 0;
-    text-align: center;
-  }
-
-  .tv-instructions {
-    text-align: center;
-    margin-top: 12px;
-    margin-bottom: 32px;
-  }
-
-  .tv-subtitle {
-    font-size: 15px;
-    color: #1e293b;
-    font-weight: 500;
-    margin: 0 0 4px 0;
-  }
-
-  .tv-caption {
-    font-size: 13px;
-    color: #64748b;
-    margin: 0;
-    line-height: 1.4;
-    padding: 0 20px;
-  }
-
-  /* Input Card */
-  .tv-input-section {
-    width: 100%;
-    max-width: 320px;
+    min-height: 80vh; /* Altura mínima para el contenedor */
     margin: 0 auto;
+    z-index: 10;
+    padding: 1rem 0 2rem;
   }
 
-  .tv-input-label {
-    font-size: 13px;
-    font-weight: 600;
-    color: #1e293b;
-    margin-bottom: 8px;
-    display: block;
-    text-align: center;
+  /* Frame del iPhone wrapper */
+  div:global(.auth-background-section) .device-frame-wrapper {
+    position: relative !important;
+    z-index: 10 !important;
+    transform: scale(1) !important;
+    padding: 2.5rem 2rem !important;
+    background-color: #f3f4f6 !important;
+    border-radius: 2rem !important;
+    margin: 3rem auto !important;
+    height: 850px !important; /* Altura fija para que phone-frame__bezel pueda usar height: 100% */
+    display: flex !important;
+    flex-direction: column !important;
   }
 
-  .tv-input-card {
-    background: #ebeff5;
-    border-radius: 16px; /* Rounded corners like image */
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 64px;
-    box-sizing: border-box;
-    transition: box-shadow 0.2s;
-  }
-
-  .tv-input-card:focus-within {
-    box-shadow: 0 0 0 2px #004492;
-  }
-
-  .tv-amount-input {
-    background: transparent;
-    border: none;
-    font-size: 28px;
-    font-weight: 500;
-    color: #0f172a;
-    width: 100%;
-    outline: none;
-  }
-
-  .tv-currency-pill {
-    background: linear-gradient(to bottom, #000b1e, #044a95);
-    color: white;
-    border: none;
-    border-radius: 99px;
-    padding: 8px 16px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  }
-
-  /* Bottom Sheet (Expandable) */
-  /* Bottom Sheet (Expandable) */
-  .tv-bottom-sheet {
-    background: linear-gradient(to bottom, #000b1e, #044a95);
-    width: 85%; /* Reduced width */
-    max-width: 400px;
-    height: 70px; /* Initial compact height */
-    border-radius: 40px; /* Pill shape */
-    margin: 0 auto; /* Center horizontally */
-    position: absolute; /* Fixed at bottom of screen container */
-    bottom: 24px; /* Floating from bottom */
-    left: 0;
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    transition: all 0.5s cubic-bezier(0.32, 0.725, 0.25, 1); /* Smooth spring-like expansion */
-    color: white;
-    overflow: hidden;
-    z-index: 50;
-  }
-
-  /* Active/Expanded State via class */
-  .tv-bottom-sheet.expanded {
-    height: 94%; /* Covers most of screen as requested */
-    width: 100%; /* Full width when expanded */
-    max-width: 100%;
-    bottom: 0; /* Attached to bottom */
-    background: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    color: #0f172a; /* Dark text */
-    border-radius: 32px 32px 0 0;
-    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.1);
-  }
-
-  /* Compact Content */
-  .tv-sheet-header-compact {
-    height: 70px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    padding-bottom: 10px;
-    opacity: 1;
-    transition: opacity 0.2s;
-  }
-
-  .tv-bottom-sheet.expanded .tv-sheet-header-compact {
-    opacity: 0;
-    pointer-events: none;
-    height: 0;
-    overflow: hidden;
-  }
-
-  .tv-sheet-handle-icon {
-    margin-bottom: 2px;
-  }
-
-  .tv-sheet-handle-icon.down {
-    color: #94a3b8;
-    margin-bottom: 8px;
-  }
-
-  .tv-sheet-title-text {
-    font-size: 14px;
-    font-weight: 600;
-  }
-
-  /* Expanded Content */
-  .tv-sheet-content-expanded {
-    opacity: 0;
-    transition: opacity 0.3s ease 0.1s;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    width: 100%; /* Ensure content takes full width */
-    box-sizing: border-box; /* Include padding in width */
-  }
-
-  .tv-bottom-sheet.expanded .tv-sheet-content-expanded {
-    opacity: 1;
-  }
-
-  .tv-sheet-header-expanded {
-    padding: 16px 24px 24px 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(4px);
-    flex-shrink: 0;
-    cursor: pointer;
-    box-shadow: none;
-  }
-
-  .tv-sheet-subtitle {
-    font-size: 13px;
-    color: #64748b;
-    margin-bottom: 2px;
-  }
-
-  .tv-sheet-main-title {
-    font-size: 20px;
-    font-weight: 700;
-    color: #2b5bf7;
-    margin: 0;
-  }
-
-  .tv-history-list {
-    flex: 1;
-    overflow-y: auto;
-    padding: 0 16px 24px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    background-color: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(4px);
-  }
-
-  .tv-history-item {
-    background: white;
-    border-radius: 16px;
-    padding: 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
-  }
-
-  .tv-history-left {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .tv-history-name {
-    font-size: 15px;
-    font-weight: 600;
-    color: #0f172a;
-  }
-
-  .tv-history-date {
-    font-size: 12px;
-    color: #94a3b8;
-  }
-
-  .tv-history-right {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 2px;
-  }
-
-  .tv-history-amount {
-    font-size: 15px;
-    font-weight: 600;
-    color: #0f172a;
-  }
-
-  .tv-history-status {
-    font-size: 12px;
-    color: #64748b;
-  }
-
-  /* Contacts & Summary Screens (Shared Blur Look) */
-  .tv-back-btn {
-    align-self: flex-start;
-    background: none;
-    border: none;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    color: #64748b;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    margin-bottom: 16px;
-    position: relative;
-    z-index: 20;
-  }
-
-  .tv-blur-content {
-    flex: 1;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(20px);
-    border-radius: 24px 24px 0 0;
-    margin: 0 -24px;
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    border-top: 1px solid rgba(255, 255, 255, 0.5);
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
-  }
-
-  .tv-blur-content.center-content {
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Contacts List */
-  .tv-section-title {
-    font-size: 20px;
-    font-weight: 700;
-    color: #004492;
-    margin: 0 0 4px 0;
-  }
-
-  .tv-section-desc {
-    font-size: 13px;
-    color: #64748b;
-    margin-bottom: 24px;
-  }
-
-  .tv-contacts-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    width: 100%;
-  }
-
-  .tv-contact-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
-    cursor: pointer;
-    transition:
-      transform 0.1s,
-      background 0.1s;
-  }
-
-  .tv-contact-item:active {
-    transform: scale(0.98);
-    background: #f1f5f9;
-  }
-
-  .tv-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #004492;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    font-weight: 600;
-  }
-
-  .tv-avatar.alt {
-    background: #0ea5e9;
-  }
-  .tv-avatar.alt-2 {
-    background: #6366f1;
-  }
-
-  .tv-contact-info {
-    flex: 1;
-  }
-
-  .tv-contact-name {
-    font-size: 14px;
-    font-weight: 600;
-    color: #0f172a;
-  }
-
-  .tv-contact-bank {
-    font-size: 12px;
-    color: #64748b;
-  }
-
-  .tv-chevron {
-    color: #cbd5e1;
-  }
-
-  /* Summary */
-  .tv-summary-title {
-    font-size: 20px;
-    font-weight: 700;
-    color: #004492;
-    margin-bottom: 4px;
-  }
-
-  .tv-summary-desc {
-    font-size: 13px;
-    color: #64748b;
-    margin-bottom: 32px;
-  }
-
-  .tv-summary-details {
-    width: 100%;
-    background: white;
-    border-radius: 20px;
-    padding: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-    margin-bottom: 32px;
-  }
-
-  .tv-detail-row {
-    margin-bottom: 16px;
-  }
-
-  .tv-detail-row .label {
-    display: block;
-    font-size: 12px;
-    color: #64748b;
-    margin-bottom: 2px;
-  }
-
-  .tv-detail-row .value {
-    font-size: 15px;
-    font-weight: 600;
-    color: #0f172a;
-  }
-
-  .tv-detail-row .value.big {
-    font-size: 24px;
-    color: #004492;
-  }
-
-  .tv-note-input-wrapper label {
-    display: block;
-    font-size: 12px;
-    color: #64748b;
-    margin-bottom: 6px;
-  }
-
-  .tv-note-input-wrapper textarea {
-    width: 100%;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 10px;
-    font-size: 13px;
-    outline: none;
-    resize: none;
-    box-sizing: border-box;
-  }
-
-  /* Slider */
-  .tv-slider-container {
-    width: 100%;
-    height: 56px;
-    background: linear-gradient(90deg, #004492 0%, #1e293b 100%);
-    border-radius: 99px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: auto;
-  }
-
-  .tv-slider-text {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 14px;
-    font-weight: 500;
-    pointer-events: none;
-  }
-
-  .tv-slider-thumb {
-    width: 48px;
-    height: 48px;
-    background: white;
-    border-radius: 50%;
-    position: absolute;
-    left: 4px;
-    top: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #004492;
-    cursor: grab;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
-
-  /* Processing */
-  .processing-bg {
-    background: #001530;
-    color: white;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .tv-processing-content,
-  .tv-success-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .tv-status-title {
-    font-size: 24px;
-    font-weight: 700;
-  }
-
-  .tv-status-desc {
-    opacity: 0.8;
-    font-size: 14px;
-  }
-
-  .tv-success-icon {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: #22c55e;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    margin-bottom: 8px;
-    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-
-  .tv-finish-btn {
-    margin-top: 24px;
-    background: white;
-    color: #001530;
-    border: none;
-    padding: 12px 32px;
-    border-radius: 99px;
-    font-weight: 600;
-    cursor: pointer;
-  }
-
-  @keyframes popIn {
-    from {
-      transform: scale(0);
+  .device-content {
+      flex: 1;
+      min-height: 0;
+      background: #ffffff;
+      padding: 1rem 1.25rem;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+      display: flex;
+      flex-direction: column;
+      position: relative;
     }
-    to {
+
+    .device-content::-webkit-scrollbar {
+      display: none; /* Chrome, Safari and Opera */
+    }
+
+    .device-header {
+      position: absolute;
+      top: 1rem;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 20;
+    }
+
+    .device-logo {
+      display: flex;
+      justify-content: center;
+    }
+
+    .device-logo img {
+      height: 32px;
+      width: auto;
+    }
+
+    /* Global Layout */
+    .tv-app-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      font-family:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+        sans-serif;
+      background: #ffffff;
+    }
+
+    .tv-screen {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 0 24px;
+      padding-top: 10px; /* Safe area top */
+      transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+      background: white;
+    }
+
+    .tv-screen.hidden-screen {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.98);
+      z-index: 0;
+    }
+
+    .tv-screen.active {
+      opacity: 1;
+      pointer-events: auto;
       transform: scale(1);
+      z-index: 10;
     }
-  }
 
-  .hidden {
-    display: none !important;
-  }
-</style>
-
-<script is:inline>
-  // Bottom Sheet Toggle
-  window.tvToggleHistory = (shouldExpand) => {
-    const sheet = document.getElementById("tv-latest-transfers");
-    if (!sheet) return;
-
-    if (shouldExpand) {
-      sheet.classList.add("expanded");
-    } else {
-      sheet.classList.remove("expanded");
+    /* Screen Amount Styles */
+    .tv-graphic-container-fixed {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 20px;
+      z-index: 1;
+      pointer-events: none;
     }
-  };
 
-  // Simple State Management
-  window.tvNavigate = (screenId) => {
-    document.querySelectorAll(".tv-screen").forEach((el) => {
-      el.classList.remove("active");
-      el.classList.add("hidden-screen");
-    });
-
-    const target = document.getElementById(`tv-screen-${screenId}`);
-    if (target) {
-      target.classList.remove("hidden-screen");
-      target.classList.add("active");
+    .tv-graphic-gif {
+      width: 180%;
+      max-width: 400px;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+      transform: translateY(-20px);
     }
-  };
 
-  // Interactions
-  // 1. Amount -> Contacts (Click on pill or input)
-  const amountInput = document.getElementById("tv-amount-field");
-  const currencyBtn = document.getElementById("tv-btn-currency");
+    .tv-main-glass-card {
+      position: relative;
+      z-index: 10;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      margin-top: 220px;
+      margin-left: -24px;
+      margin-right: -24px;
+      background: rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 24px 24px 0 0;
+      padding: 24px;
+      padding-bottom: 90px;
+      border-top: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.05);
+    }
 
-  const goToContacts = () => window.tvNavigate("contacts");
+    .tv-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #004492;
+      margin: 0;
+      text-align: center;
+    }
 
-  if (amountInput) amountInput.addEventListener("click", goToContacts);
-  if (currencyBtn) currencyBtn.addEventListener("click", goToContacts);
+    .tv-instructions {
+      text-align: center;
+      margin-top: 12px;
+      margin-bottom: 32px;
+    }
 
-  // 2. Contacts -> Summary
-  window.tvSelectContact = (name, initials) => {
-    // Update summary
-    const recEl = document.getElementById("tv-summary-recipient");
-    if (recEl) recEl.textContent = name;
+    .tv-subtitle {
+      font-size: 15px;
+      color: #1e293b;
+      font-weight: 500;
+    }
 
-    window.tvNavigate("summary");
-  };
+    .tv-caption {
+      font-size: 11px;
+      color: #64748b;
+    }
 
-  // 3. Slider Logic
-  const sliderThumb = document.getElementById("tv-slider-thumb");
-  const sliderContainer = document.getElementById("tv-slider");
+    .tv-input-section {
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 20;
+    }
 
-  if (sliderThumb && sliderContainer) {
+    .tv-input-label {
+      display: block;
+      font-size: 13px;
+      color: #1e293b;
+      font-weight: 600;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .tv-input-card {
+      background: #f1f5f9;
+      border-radius: 16px;
+      padding: 8px 12px 8px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03);
+    }
+
+    .tv-amount-input {
+      background: transparent;
+      border: none;
+      font-size: 28px;
+      font-weight: 400;
+      color: #0f172a;
+      width: 100%;
+      outline: none;
+    }
+
+    .tv-currency-pill {
+      background: #001e45;
+      color: #ffffff;
+      border: none;
+      border-radius: 99px;
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 30, 69, 0.2);
+      transition: transform 0.2s;
+    }
+
+    .tv-currency-pill:active {
+      transform: scale(0.95);
+    }
+
+    /* Bottom Sheet (History) */
+    .tv-bottom-sheet {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: white;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+      border-radius: 28px 28px 0 0;
+      z-index: 50;
+      transition: height 0.4s cubic-bezier(0.32, 0.725, 0.25, 1);
+      height: 80px; /* Compact height */
+      overflow: hidden;
+    }
+
+    /* Compact View */
+    .tv-sheet-header-compact {
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .tv-sheet-handle-icon {
+      position: absolute;
+      top: 12px;
+      color: #94a3b8;
+    }
+    .tv-sheet-handle-icon.down {
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .tv-sheet-title-text {
+      font-size: 15px;
+      font-weight: 600;
+      color: #64748b;
+      margin-top: 10px;
+    }
+
+    /* Expanded View */
+    .tv-sheet-content-expanded {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .tv-bottom-sheet.expanded .tv-sheet-header-compact {
+      display: none;
+    }
+
+    .tv-sheet-header-expanded {
+      padding: 24px;
+      padding-bottom: 12px;
+      cursor: pointer;
+      position: relative;
+      background: white;
+      z-index: 10;
+    }
+
+    .tv-sheet-subtitle {
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      color: #94a3b8;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+      margin-top: 12px;
+    }
+
+    .tv-sheet-main-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 0;
+    }
+
+    .tv-history-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0 24px 30px;
+      /* Hide scrollbar */
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      margin-top: 8px;
+    }
+    .tv-history-list::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tv-history-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .tv-history-left {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tv-history-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 2px;
+    }
+
+    .tv-history-date {
+      font-size: 11px;
+      color: #94a3b8;
+    }
+
+    .tv-history-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .tv-history-amount {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .tv-history-status {
+      font-size: 10px;
+      color: #10b981; /* Green */
+      font-weight: 500;
+    }
+
+    /* Contacts Screen */
+    .tv-section-header {
+      /* No sticky, simple layout */
+    }
+
+    .tv-back-btn {
+      position: absolute;
+      top: 1rem;
+      left: 1.25rem;
+      display: flex;
+      align-items: center;
+      color: #475569;
+      font-size: 0.875rem;
+      font-weight: 500;
+      z-index: 20;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .tv-contacts-list {
+      scrollbar-width: none; /* Auto behavior */
+    }
+    .tv-contacts-list::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tv-contact-item {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .tv-contact-item:hover {
+      background-color: #004492;
+    }
+
+    .tv-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 14px;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+
+    .tv-contact-info {
+      flex: 1;
+    }
+
+    .tv-contact-name {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .tv-contact-bank {
+      font-size: 11px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Utilities */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+
+  <script is:inline>
+    // Navigation State
+    window.tvNavigate = (screenId) => {
+      // Hide all
+      document.querySelectorAll(".tv-screen").forEach((el) => {
+        el.classList.remove("active");
+        el.classList.add("hidden-screen");
+      });
+
+      // Show target
+      const target = document.getElementById("tv-screen-" + screenId);
+      if (target) {
+        target.classList.remove("hidden-screen");
+        target.classList.add("active");
+      }
+    };
+
+    // Contacts
+    window.tvSelectContact = (name, initials, bank) => {
+      // Populate summary
+      const recEl = document.getElementById("tv-summary-recipient");
+      if (recEl) recEl.textContent = name;
+
+      window.tvNavigate("summary");
+    };
+
+    // Bottom Sheet Logic for Latest Transfers
+    window.tvToggleHistory = (expand) => {
+      const sheet = document.getElementById("tv-latest-transfers");
+      if (!sheet) return;
+
+      if (expand) {
+        sheet.classList.add("expanded");
+        sheet.style.height = "85%";
+        sheet.style.borderRadius = "28px 28px 0 0";
+      } else {
+        sheet.classList.remove("expanded");
+        sheet.style.height = "80px";
+      }
+    };
+
+    // Slider Logic
+    const slider = document.getElementById("tv-slider-thumb");
+    const track = document.getElementById("tv-slider");
     let isDragging = false;
     let startX = 0;
 
-    const onDragStart = (e) => {
-      isDragging = true;
-      startX =
-        (e.touches ? e.touches[0].clientX : e.clientX) - sliderThumb.offsetLeft;
-    };
+    if (slider && track) {
+      slider.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        startX = e.clientX;
+        slider.style.transition = "none";
+      });
 
-    const onDragMove = (e) => {
-      if (!isDragging) return;
-      const cx = e.touches ? e.touches[0].clientX : e.clientX;
-      let newLeft = cx - startX;
+      window.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+        // Calculate position
+        const trackRect = track.getBoundingClientRect();
+        let newLeft = e.clientX - trackRect.left - 24; // offset center
 
-      const maxLeft = sliderContainer.offsetWidth - sliderThumb.offsetWidth - 8;
+        // Constraints
+        if (newLeft < 4) newLeft = 4;
+        if (newLeft > trackRect.width - 52) newLeft = trackRect.width - 52; // roughly width - thumb width
 
-      if (newLeft < 4) newLeft = 4;
-      if (newLeft > maxLeft) newLeft = maxLeft;
+        slider.style.left = newLeft + "px";
 
-      sliderThumb.style.left = newLeft + "px";
+        // Check unlock
+        if (newLeft >= trackRect.width - 60) {
+          completeSlide();
+        }
+      });
 
-      if (newLeft >= maxLeft - 5) {
-        completeTransaction();
+      window.addEventListener("mouseup", () => {
+        if (!isDragging) return;
         isDragging = false;
-      }
-    };
+        // Reset if not completed
+        if (
+          parseInt(slider.style.left || "0") <
+          track.getBoundingClientRect().width - 60
+        ) {
+          slider.style.transition = "left 0.3s ease";
+          slider.style.left = "4px";
+        }
+      });
+    }
 
-    const onDragEnd = () => {
-      if (!isDragging) return;
+    function completeSlide() {
       isDragging = false;
-      // Reset if not complete
-      sliderThumb.style.transition = "left 0.3s";
-      sliderThumb.style.left = "4px";
-      setTimeout(() => {
-        sliderThumb.style.transition = "";
-      }, 300);
+      window.tvNavigate("processing");
+
+      // Start Animation Sequence
+      const overlay = document.getElementById("tv-processing-overlay");
+      const glint = document.getElementById("tv-processing-glint");
+
+      if (overlay && glint) {
+        // Reset styles first to ensure replayability
+        overlay.style.transition = "none";
+        overlay.style.clipPath = "inset(0 100% 0 0)";
+        glint.style.transition = "none";
+        glint.style.left = "0%";
+
+        // Force Reflow
+        void overlay.offsetWidth;
+
+        // Start
+        setTimeout(() => {
+          overlay.style.transition =
+            "clip-path 3s cubic-bezier(0.22, 1, 0.36, 1)";
+          overlay.style.clipPath = "inset(0 0% 0 0)";
+
+          glint.style.transition = "left 3s linear";
+          glint.style.left = "100%";
+
+          // Show success
+          setTimeout(() => {
+            const procView = document.getElementById("tv-processing-view");
+            const successView = document.getElementById("tv-success-view");
+            if (procView) procView.classList.add("hidden");
+            if (successView) successView.classList.remove("hidden");
+
+            // Open detailed sheet
+            setTimeout(() => {
+              const sheet = document.getElementById("tv-details-sheet");
+              if (sheet) sheet.style.height = "calc(100% - 200px)";
+            }, 300);
+          }, 3050);
+        }, 100);
+      }
+    }
+
+    window.tvReset = () => {
+      // Reset Views
+      document.getElementById("tv-processing-view").classList.remove("hidden");
+      document.getElementById("tv-success-view").classList.add("hidden");
+      const slider = document.getElementById("tv-slider-thumb");
+      if (slider) slider.style.left = "4px";
+
+      const sheet = document.getElementById("tv-details-sheet");
+      if (sheet) sheet.style.height = "70px";
+
+      window.tvNavigate("amount");
     };
 
-    sliderThumb.addEventListener("mousedown", onDragStart);
-    sliderThumb.addEventListener("touchstart", onDragStart);
-
-    window.addEventListener("mousemove", onDragMove);
-    window.addEventListener("touchmove", onDragMove);
-
-    window.addEventListener("mouseup", onDragEnd);
-    window.addEventListener("touchend", onDragEnd);
-  }
-
-  function completeTransaction() {
-    window.tvNavigate("processing");
-
-    // Get Elements
-    const overlay = document.getElementById("tv-processing-overlay");
-    const glint = document.getElementById("tv-processing-glint");
-
-    // Reset first
-    if (overlay) overlay.style.clipPath = "inset(0 100% 0 0)";
-    if (glint) {
-      glint.style.transition = "none";
-      glint.style.left = "0%";
-      glint.style.transform = "skewX(-20deg) translateX(-150%)";
-    }
-
-    // Force Reflow
-    if (overlay) void overlay.offsetWidth;
-
-    // Trigger Animation
-    setTimeout(() => {
-      if (overlay) overlay.style.clipPath = "inset(0 0 0 0)";
-      if (glint) {
-        glint.style.transition = "left 3s ease-out";
-        glint.style.left = "200%";
+    window.toggleSuccessDetails = () => {
+      const sheet = document.getElementById("tv-details-sheet");
+      const chevron = document.getElementById("tv-details-chevron");
+      if (sheet) {
+        if (sheet.clientHeight > 100) {
+          sheet.style.height = "70px";
+          if (chevron) chevron.style.transform = "rotate(0deg)";
+        } else {
+          sheet.style.height = "calc(100% - 200px)";
+          if (chevron) chevron.style.transform = "rotate(180deg)";
+        }
       }
-    }, 100);
-
-    // After animation finishes (3s), show success
-    setTimeout(() => {
-      const procView = document.getElementById("tv-processing-view");
-      const succView = document.getElementById("tv-success-view");
-      if (procView) procView.classList.add("hidden");
-      if (succView) succView.classList.remove("hidden");
-    }, 3200);
-  }
-
-  // 4. Success Details Toggle
-  window.toggleSuccessDetails = () => {
-    const card = document.getElementById("tv-details-sheet");
-    if (!card) return;
-
-    // Check if expanded based on height style or class
-    // We'll use a data-attribute or simple class toggle
-    const isExpanded = card.classList.contains("expanded");
-
-    if (isExpanded) {
-      card.classList.remove("expanded");
-      card.style.height = "70px";
-      // Rotate chevron back
-      const svg = document.getElementById("tv-details-chevron");
-      if (svg) svg.style.transform = "rotate(0deg)";
-    } else {
-      card.classList.add("expanded");
-      card.style.height = "90%"; // Expand to almost full height
-      // Rotate chevron
-      const svg = document.getElementById("tv-details-chevron");
-      if (svg) svg.style.transform = "rotate(180deg)";
-    }
-  };
-
-  window.tvReset = () => {
-    // Reset views
-    const procView = document.getElementById("tv-processing-view");
-    const succView = document.getElementById("tv-success-view");
-    if (procView) procView.classList.remove("hidden");
-    if (succView) succView.classList.add("hidden");
-
-    // Reset Animation State
-    const overlay = document.getElementById("tv-processing-overlay");
-    if (overlay) overlay.style.clipPath = "inset(0 100% 0 0)";
-
-    // Reset Details Card
-    const detailsCard = document.getElementById("tv-details-card");
-    if (detailsCard) {
-      detailsCard.classList.remove("expanded");
-      detailsCard.style.height = "280px";
-      const svg = detailsCard.querySelector("svg");
-      if (svg) svg.style.transform = "rotate(0deg)";
-    }
-
-    // Reset Slider
-    const sliderThumb = document.getElementById("tv-slider-thumb");
-    if (sliderThumb) sliderThumb.style.left = "4px";
-
-    window.tvNavigate("amount");
-  };
-</script>
+    };
+  </script>
+</div>

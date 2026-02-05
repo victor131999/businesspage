@@ -1,0 +1,64 @@
+---
+/**
+ * Atom: Input
+ * Uso: type="email" | "password" | "text", con o sin label.
+ * Responsive: padding y font-size reducen en móvil.
+ */
+interface Props {
+  type?: "email" | "password" | "text";
+  name: string;
+  id?: string;
+  placeholder?: string;
+  value?: string;
+  required?: boolean;
+  class?: string;
+  ariaLabel?: string;
+  dataI18nPlaceholder?: string;
+  invalid?: boolean;
+}
+const { type = "text", name, id, placeholder, value, required, class: className = "", ariaLabel, dataI18nPlaceholder, invalid = false } = Astro.props;
+const inputId = id || name;
+---
+<input
+  id={inputId}
+  type={type}
+  name={name}
+  placeholder={placeholder}
+  value={value}
+  required={required}
+  class:list={["ds-input", invalid && "ds-input--error", className]}
+  aria-label={ariaLabel}
+  data-i18n-placeholder={dataI18nPlaceholder}
+/>
+<style is:global>
+  .ds-input {
+    width: 100%;
+    padding: 0.75rem 1.25rem;
+    font-family: var(--ds-font-family);
+    font-size: var(--ds-font-size-md, 1.05rem);
+    color: var(--ds-color-text);
+    background: var(--ds-color-bg);
+    border: 1px solid var(--ds-color-border-light);
+    border-radius: var(--ds-radius-md, 12px);
+    outline: none;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .ds-input::placeholder {
+    color: var(--ds-color-text-muted);
+    opacity: 0.9;
+  }
+  .ds-input:focus {
+    border-color: var(--ds-color-primary);
+    background: var(--ds-color-bg);
+  }
+  .ds-input--error {
+    border-color: var(--ds-color-error);
+    box-shadow: 0 0 0 3px rgba(217, 45, 32, 0.12);
+  }
+  @media (max-width: 639px) {
+    .ds-input {
+      padding: 0.65rem 1rem;
+      font-size: 1rem;
+    }
+  }
+</style>

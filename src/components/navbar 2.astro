@@ -35,74 +35,44 @@ const cssVars = `
 
 <header class="navbar-shell">
   <nav style={cssVars}>
-  <div class="logo-container">
-    <a href="/">
-      <img src={logoSrc} alt={logoAlt} class="logo-image" />
-    </a>
-  </div>
+    <div class="logo-container">
+      <a href="/">
+        <img src={logoSrc} alt={logoAlt} class="logo-image" />
+      </a>
+    </div>
 
-  <button class="mobile-menu-toggle" aria-label="Toggle menu" type="button">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-
-  <ul class="nav-links">
-    <li class="dropdown-container">
-      <button id="products-trigger" class="dropdown-trigger" type="button"
-        ><span data-i18n="nav.products">Products</span></button
-      >
-    </li>
-    <li><a href="/" data-i18n="nav.resources">Resources</a></li>
-    <li><a href="/" data-i18n="nav.developers">Developers</a></li>
-  </ul>
-
-  <div class="action-links">
-    <a href={buttons.first?.href ?? "/jobs"} class="btn btn-light">
-      <img src="/icons/maletin.svg" alt="Work with us" class="btn-icon" />
-      <span data-i18n="nav.workWithUs">{buttons.first?.label ?? "Work with us"}</span>
-    </a>
-
-    <a href={buttons.second?.href ?? "https://www.zelify.io/"} class="btn btn-light">
-      <img src="/icons/acceso.svg" alt="Business access" class="btn-icon" />
-      <span data-i18n="nav.bankAccess">{buttons.second?.label ?? "Business access"}</span>
-    </a>
-
-    <button
-      type="button"
-      class="lang-toggle"
-      aria-label="Switch language to Spanish"
-      aria-pressed="false"
-      data-language={(buttons.third?.label ?? "EN").toUpperCase()}
-    >
-      <span class="lang-toggle__thumb">
-        <span class="lang-label">{(buttons.third?.label ?? "EN").toUpperCase()}</span>
-      </span>
-      <span class="lang-toggle__flag" aria-hidden="true">🇪🇸</span>
+    <button class="mobile-menu-toggle" aria-label="Toggle menu" type="button">
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
-  </div>
 
-  <!-- Mobile menu wrapper -->
-  <div class="nav-wrapper">
-    <ul class="nav-links-mobile">
+    <ul class="nav-links">
       <li class="dropdown-container">
-        <button id="products-trigger-mobile" class="dropdown-trigger" type="button"
+        <button id="products-trigger" class="dropdown-trigger" type="button"
           ><span data-i18n="nav.products">Products</span></button
         >
       </li>
       <li><a href="/" data-i18n="nav.resources">Resources</a></li>
       <li><a href="/" data-i18n="nav.developers">Developers</a></li>
-      <li><a href="https://www.zelify.com" data-i18n="nav.personal">Natalia</a></li>
     </ul>
-    <div class="action-links-mobile">
+
+    <div class="action-links">
       <a href={buttons.first?.href ?? "/jobs"} class="btn btn-light">
         <img src="/icons/maletin.svg" alt="Work with us" class="btn-icon" />
-        <span data-i18n="nav.workWithUs">{buttons.first?.label ?? "Work with us"}</span>
+        <span data-i18n="nav.workWithUs"
+          >{buttons.first?.label ?? "Work with us"}</span
+        >
       </a>
 
-      <a href={buttons.second?.href ?? "https://www.zelify.io/"} class="btn btn-light">
+      <a
+        href={buttons.second?.href ?? "https://www.zelify.io/"}
+        class="btn btn-light"
+      >
         <img src="/icons/acceso.svg" alt="Business access" class="btn-icon" />
-        <span data-i18n="nav.bankAccess">{buttons.second?.label ?? "Business access"}</span>
+        <span data-i18n="nav.bankAccess"
+          >{buttons.second?.label ?? "Business access"}</span
+        >
       </a>
 
       <button
@@ -113,12 +83,64 @@ const cssVars = `
         data-language={(buttons.third?.label ?? "EN").toUpperCase()}
       >
         <span class="lang-toggle__thumb">
-          <span class="lang-label">{(buttons.third?.label ?? "EN").toUpperCase()}</span>
+          <span class="lang-label"
+            >{(buttons.third?.label ?? "EN").toUpperCase()}</span
+          >
         </span>
         <span class="lang-toggle__flag" aria-hidden="true">🇪🇸</span>
       </button>
     </div>
-  </div>
+
+    <!-- Mobile menu wrapper -->
+    <div class="nav-wrapper">
+      <ul class="nav-links-mobile">
+        <li class="dropdown-container">
+          <button
+            id="products-trigger-mobile"
+            class="dropdown-trigger"
+            type="button"><span data-i18n="nav.products">Products</span></button
+          >
+        </li>
+        <li><a href="/" data-i18n="nav.resources">Resources</a></li>
+        <li><a href="/" data-i18n="nav.developers">Developers</a></li>
+        <li>
+          <a href="https://www.zelify.com" data-i18n="nav.personal">Natalia</a>
+        </li>
+      </ul>
+      <div class="action-links-mobile">
+        <a href={buttons.first?.href ?? "/jobs"} class="btn btn-light">
+          <img src="/icons/maletin.svg" alt="Work with us" class="btn-icon" />
+          <span data-i18n="nav.workWithUs"
+            >{buttons.first?.label ?? "Work with us"}</span
+          >
+        </a>
+
+        <a
+          href={buttons.second?.href ?? "https://www.zelify.io/"}
+          class="btn btn-light"
+        >
+          <img src="/icons/acceso.svg" alt="Business access" class="btn-icon" />
+          <span data-i18n="nav.bankAccess"
+            >{buttons.second?.label ?? "Business access"}</span
+          >
+        </a>
+
+        <button
+          type="button"
+          class="lang-toggle"
+          aria-label="Switch language to Spanish"
+          aria-pressed="false"
+          data-language={(buttons.third?.label ?? "EN").toUpperCase()}
+        >
+          <span class="lang-toggle__thumb">
+            <span class="lang-label"
+              >{(buttons.third?.label ?? "EN").toUpperCase()}</span
+            >
+          </span>
+          <span class="lang-toggle__flag" aria-hidden="true">🇪🇸</span>
+        </button>
+      </div>
+    </div>
   </nav>
 </header>
 <style>
@@ -134,6 +156,8 @@ const cssVars = `
     justify-content: center;
     box-sizing: border-box;
     padding-top: 1.5rem;
+    position: relative;
+    z-index: 100;
   }
 
   /* Limita el ancho del navbar y céntralo */
@@ -199,7 +223,7 @@ const cssVars = `
     display: flex;
     align-items: center;
   }
-  
+
   /* Agrupar logo y nav-links juntos */
   .nav-links {
     display: flex;
@@ -213,7 +237,9 @@ const cssVars = `
 
   .logo-container a {
     cursor: pointer;
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease;
     display: inline-block;
     flex-shrink: 0;
     min-width: 0;
@@ -238,7 +264,6 @@ const cssVars = `
     position: relative;
     z-index: 10;
   }
-
 
   .nav-links a,
   .nav-links button {
@@ -267,7 +292,11 @@ const cssVars = `
   }
 
   .nav-links .highlight:hover {
-    background: linear-gradient(145deg, rgba(128, 255, 0, 0.95), rgba(88, 220, 0, 0.88));
+    background: linear-gradient(
+      145deg,
+      rgba(128, 255, 0, 0.95),
+      rgba(88, 220, 0, 0.88)
+    );
     color: #10220a;
     transform: translateY(-1px);
     box-shadow: 0 16px 32px rgba(80, 220, 0, 0.38);
@@ -353,13 +382,19 @@ const cssVars = `
     font-size: 0.94rem;
     text-decoration: none;
     border-radius: 16px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
     white-space: nowrap;
     flex-shrink: 0;
   }
 
   .btn-light {
-    background: linear-gradient(145deg, rgba(128, 255, 0, 0.95), rgba(88, 220, 0, 0.88));
+    background: linear-gradient(
+      145deg,
+      rgba(128, 255, 0, 0.95),
+      rgba(88, 220, 0, 0.88)
+    );
     color: #10220a;
     border: none;
     box-shadow: 0 10px 20px rgba(80, 220, 0, 0.32);
@@ -402,7 +437,9 @@ const cssVars = `
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
-    transition: box-shadow 0.25s ease, transform 0.2s ease;
+    transition:
+      box-shadow 0.25s ease,
+      transform 0.2s ease;
     color: #14253d;
     flex-shrink: 0;
     margin-left: 0;
@@ -462,7 +499,9 @@ const cssVars = `
     font-size: 0.8rem;
     filter: saturate(1.1) drop-shadow(0 3px 5px rgba(16, 33, 51, 0.15));
     pointer-events: none;
-    transition: left 0.25s cubic-bezier(0.4, 0, 0.2, 1), right 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    transition:
+      left 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+      right 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .lang-toggle[data-language="EN"] .lang-toggle__flag {
@@ -483,8 +522,6 @@ const cssVars = `
     flex-shrink: 0;
     min-width: 18px;
   }
-
-
 
   .btn-light .btn-icon {
     filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
@@ -701,7 +738,7 @@ const cssVars = `
     // Mobile menu toggle
     const menuToggle = document.querySelector(".mobile-menu-toggle");
     const navWrapper = document.querySelector(".nav-wrapper");
-    
+
     if (menuToggle && navWrapper) {
       menuToggle.addEventListener("click", () => {
         menuToggle.classList.toggle("active");
@@ -718,7 +755,7 @@ const cssVars = `
 
       // Close menu when clicking on a link
       const navLinks = navWrapper.querySelectorAll("a, button");
-      navLinks.forEach(link => {
+      navLinks.forEach((link) => {
         link.addEventListener("click", () => {
           menuToggle.classList.remove("active");
           navWrapper.classList.remove("active");
@@ -747,9 +784,9 @@ const cssVars = `
 
     const applyNavTranslations = (lang) => {
       const dictionary = navTranslations[lang] ?? navTranslations.EN;
-      document.querySelectorAll('[data-i18n]').forEach((node) => {
+      document.querySelectorAll("[data-i18n]").forEach((node) => {
         const key = node.dataset.i18n;
-        if (!key || !key.startsWith('nav.')) return;
+        if (!key || !key.startsWith("nav.")) return;
         const value = dictionary[key];
         if (!value) return;
         node.textContent = value;
@@ -759,7 +796,9 @@ const cssVars = `
     if (languageButtons.length) {
       const detectBrowserLanguage = () => {
         const locale =
-          (navigator.languages && navigator.languages[0]) || navigator.language || "";
+          (navigator.languages && navigator.languages[0]) ||
+          navigator.language ||
+          "";
         return locale.toLowerCase().startsWith("es") ? "ES" : "EN";
       };
 
@@ -786,7 +825,9 @@ const cssVars = `
           if (flag) flag.textContent = lang === "EN" ? "🇲🇽" : "🇺🇸";
           btn.setAttribute(
             "aria-label",
-            lang === "EN" ? "Switch language to Spanish" : "Cambiar idioma a inglés",
+            lang === "EN"
+              ? "Switch language to Spanish"
+              : "Cambiar idioma a inglés",
           );
           btn.setAttribute("aria-pressed", lang === "ES" ? "true" : "false");
         });

@@ -1,0 +1,161 @@
+---
+/**
+ * Molecule: LoginFormCard
+ * Tarjeta con título, subtítulo, campos email/password y botón. Reutilizable en How it works / Why Zelify.
+ * Responsive: padding y font-size se adaptan; en móvil la tarjeta ocupa el ancho disponible.
+ */
+interface Props {
+  title: string;
+  subtitle?: string;
+  submitLabel?: string;
+  createAccountText?: string;
+  dataI18nTitle?: string;
+  dataI18nSubtitle?: string;
+  dataI18nEmailLabel?: string;
+  dataI18nEmailPlaceholder?: string;
+  dataI18nPasswordLabel?: string;
+  dataI18nPasswordPlaceholder?: string;
+  dataI18nButton?: string;
+  dataI18nCreate?: string;
+}
+const {
+  title = "Ingreso",
+  subtitle = "Bienvenido de regreso",
+  submitLabel = "Ingresa",
+  createAccountText = "O crea una nueva cuenta",
+  dataI18nTitle,
+  dataI18nSubtitle,
+  dataI18nEmailLabel,
+  dataI18nEmailPlaceholder,
+  dataI18nPasswordLabel,
+  dataI18nPasswordPlaceholder,
+  dataI18nButton,
+  dataI18nCreate,
+} = Astro.props;
+---
+<div class="ds-login-card login-card">
+  <h3 class="ds-login-card__title login-card-title" data-i18n={dataI18nTitle}>{title}</h3>
+  <p class="ds-login-card__subtitle login-card-subtitle" data-i18n={dataI18nSubtitle}>{subtitle}</p>
+  <form class="ds-login-card__form login-form">
+    <div class="ds-login-card__field login-field">
+      <label for="login-email" data-i18n={dataI18nEmailLabel}>Correo</label>
+      <input
+        type="email"
+        id="login-email"
+        name="email"
+        placeholder="email@example.com"
+        data-i18n-placeholder={dataI18nEmailPlaceholder}
+      />
+    </div>
+    <div class="ds-login-card__field login-field">
+      <label for="login-password" data-i18n={dataI18nPasswordLabel}>Contraseña</label>
+      <input
+        type="password"
+        id="login-password"
+        name="password"
+        placeholder="••••••••"
+        data-i18n-placeholder={dataI18nPasswordPlaceholder}
+      />
+    </div>
+    <button type="submit" class="ds-login-card__button login-button" data-i18n={dataI18nButton}>
+      {submitLabel}
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M6 12L10 8L6 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+  </form>
+  <p class="ds-login-card__create login-create-account" data-i18n={dataI18nCreate}>{createAccountText}</p>
+</div>
+<style is:global>
+  .ds-login-card {
+    background-color: var(--ds-color-bg);
+    border-radius: var(--ds-radius-xl, 20px);
+    padding: var(--ds-space-10, 2.5rem);
+    width: 100%;
+    position: relative;
+    z-index: 4;
+  }
+  .ds-login-card__title {
+    font-size: var(--ds-font-size-3xl, 2rem);
+    font-weight: 700;
+    color: var(--ds-color-text);
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -0.02em;
+  }
+  .ds-login-card__subtitle {
+    font-size: var(--ds-font-size-md, 1.05rem);
+    color: var(--ds-color-text-muted);
+    margin: 0 0 1.25rem 0;
+    opacity: 0.8;
+  }
+  .ds-login-card__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .ds-login-card__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .ds-login-card__field label {
+    font-size: var(--ds-font-size-xs, 0.95rem);
+    color: var(--ds-color-text);
+    font-weight: 600;
+    margin-left: 0.2rem;
+  }
+  .ds-login-card__field input {
+    padding: 1rem 1.2rem;
+    border: 1px solid var(--ds-color-border-light);
+    border-radius: var(--ds-radius-md, 12px);
+    font-size: var(--ds-font-size-sm, 1rem);
+    color: var(--ds-color-text);
+    background-color: var(--ds-color-bg-subtle, #f8f9fa);
+    outline: none;
+    transition: all 0.2s ease;
+    width: 100%;
+  }
+  .ds-login-card__field input:focus {
+    border-color: var(--ds-color-primary);
+    background-color: var(--ds-color-bg);
+  }
+  .ds-login-card__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    background: linear-gradient(135deg, var(--ds-color-primary) 0%, var(--ds-color-primary-dark) 100%);
+    color: #ffffff;
+    border: none;
+    padding: 1rem 1.5rem;
+    border-radius: var(--ds-radius-md, 12px);
+    font-size: var(--ds-font-size-lg, 1.1rem);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+  }
+  .ds-login-card__button:hover {
+    transform: translateY(-2px);
+  }
+  .ds-login-card__create {
+    text-align: center;
+    font-size: var(--ds-font-size-xs, 0.95rem);
+    color: var(--ds-color-text-muted);
+    margin: 2rem 0 0 0;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  .ds-login-card__create:hover {
+    color: var(--ds-color-text);
+    text-decoration: underline;
+  }
+  @media (max-width: 639px) {
+    .ds-login-card {
+      padding: 1.5rem 1.25rem;
+    }
+    .ds-login-card__title {
+      font-size: 1.5rem;
+    }
+  }
+</style>

@@ -1,260 +1,275 @@
 ---
-
+import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.astro";
 ---
 
-<div class="flex h-full flex-col overflow-hidden bg-white w-full relative">
-  <!-- App Header -->
-  <div
-    class="relative mb-3 mt-4 flex flex-shrink-0 items-center justify-between px-5 z-20"
-  >
-    <button class="text-sm font-medium text-gray-500 hover:text-gray-700">
-      &lt; Atrás
-    </button>
-    <div class="absolute left-1/2 -translate-x-1/2">
-      <img
-        src="/images/zelify_logo.png"
-        alt="Zelify"
-        class="h-8 max-w-full object-contain filter"
-      />
-    </div>
-    <div class="w-12"></div>
-    <!-- Spacer -->
-  </div>
-
-  <!-- GIF Animado (Background Layer) -->
-  <div
-    class="absolute top-12 left-0 right-0 flex justify-center z-0 pointer-events-none"
-  >
-    <img
-      src="/gift/ANIMACION%201.gif"
-      alt="Connecting Animation"
-      class="h-48 w-48 object-contain opacity-90 mix-blend-multiply"
-    />
-  </div>
-
-  <!-- Main Content Area -->
-  <div
-    class="relative z-10 flex-1 flex flex-col overflow-hidden rounded-t-2xl backdrop-blur-sm mt-40 mb-0"
-    style="background-color: rgba(255, 255, 255, 0.35);"
-  >
-    <!-- Alaiza Intro Header -->
-    <div id="alaiza-intro" class="mb-4 flex-shrink-0 px-5 pt-12">
-      <div class="flex items-start gap-3">
+<!-- Contenedor del dispositivo móvil -->
+<div class="device-container">
+  <DeviceFrame>
+    <!-- Contenido del dispositivo -->
+    <div class="device-content">
+      <div class="alaiza-chat-app">
+        <!-- App Header -->
         <div
-          class="flex-shrink-0 h-8 w-8 rounded-full bg-white flex items-center justify-center p-1.5 shadow-sm"
+          class="relative mb-3 mt-4 flex flex-shrink-0 items-center justify-between px-5 z-20"
         >
-          <img
-            src="/images/iconAlaiza.svg"
-            alt="Alaiza"
-            class="h-full w-full object-contain"
-          />
-        </div>
-        <div class="flex-1">
-          <h2 class="text-lg font-bold text-gray-900">Alaiza</h2>
-          <p class="text-sm text-[#8B5CF6]">AI Financial Assistant</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Chat Messages Scroll Area -->
-    <div class="flex-1 overflow-y-auto px-5 pb-4 min-h-0" id="chat-messages">
-      <div class="space-y-4" id="messages-container">
-        <!-- Initial Bot Message -->
-        <div class="flex items-start gap-3 fade-in-up">
-          <div
-            class="flex-shrink-0 h-6 w-6 rounded-full bg-white flex items-center justify-center p-1 shadow-sm mt-1"
-          >
+          <button class="text-sm font-medium text-gray-500 hover:text-gray-700">
+            &lt; Atrás
+          </button>
+          <div class="absolute left-1/2 -translate-x-1/2">
             <img
-              src="/images/iconAlaiza.svg"
-              alt="Alaiza"
-              class="h-full w-full object-contain"
+              src="/images/zelify_logo.png"
+              alt="Zelify"
+              class="h-8 max-w-full object-contain filter"
             />
           </div>
+          <div class="w-12"></div>
+          <!-- Spacer -->
+        </div>
+
+        <!-- GIF Animado (Background Layer) -->
+        <div
+          class="absolute top-12 left-0 right-0 flex justify-center z-0 pointer-events-none"
+        >
+          <img
+            src="/gift/ANIMACION%201.gif"
+            alt="Connecting Animation"
+            class="h-48 w-48 object-contain opacity-90 mix-blend-multiply"
+          />
+        </div>
+
+        <!-- Main Content Area -->
+        <div
+          class="relative z-10 flex-1 flex flex-col overflow-hidden rounded-t-2xl backdrop-blur-sm mt-40 mb-0"
+          style="background-color: rgba(255, 255, 255, 0.35);"
+        >
+          <!-- Alaiza Intro Header -->
+          <div id="alaiza-intro" class="mb-4 flex-shrink-0 px-5 pt-12">
+            <div class="flex items-start gap-3">
+              <div
+                class="flex-shrink-0 h-8 w-8 rounded-full bg-white flex items-center justify-center p-1.5 shadow-sm"
+              >
+                <img
+                  src="/images/iconAlaiza.svg"
+                  alt="Alaiza"
+                  class="h-full w-full object-contain"
+                />
+              </div>
+              <div class="flex-1">
+                <h2 class="text-lg font-bold text-gray-900">Alaiza</h2>
+                <p class="text-sm text-[#8B5CF6]">AI Financial Assistant</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chat Messages Scroll Area -->
           <div
-            class="flex-1 max-w-[85%] rounded-2xl rounded-tl-sm bg-gray-100 px-4 py-3 shadow-sm"
+            class="flex-1 overflow-y-auto px-5 pb-4 min-h-0"
+            id="chat-messages"
           >
-            <p class="text-sm leading-relaxed text-gray-900">
-              ¡Hola! Soy Alaiza, tu asistente financiero IA. ¿En qué puedo ayudarte hoy?
-            </p>
+            <div class="space-y-4" id="messages-container">
+              <!-- Initial Bot Message -->
+              <div class="flex items-start gap-3 fade-in-up">
+                <div
+                  class="flex-shrink-0 h-6 w-6 rounded-full bg-white flex items-center justify-center p-1 shadow-sm mt-1"
+                >
+                  <img
+                    src="/images/iconAlaiza.svg"
+                    alt="Alaiza"
+                    class="h-full w-full object-contain"
+                  />
+                </div>
+                <div
+                  class="flex-1 max-w-[85%] rounded-2xl rounded-tl-sm bg-gray-100 px-4 py-3 shadow-sm"
+                >
+                  <p class="text-sm leading-relaxed text-gray-900">
+                    ¡Hola! Soy Alaiza, tu asistente financiero IA. ¿En qué puedo
+                    ayudarte hoy?
+                  </p>
+                </div>
+              </div>
+              <!-- More messages will be injected here via JS -->
+            </div>
           </div>
         </div>
-        <!-- More messages will be injected here via JS -->
+
+        <!-- Chat Input Footer -->
+        <div class="relative bg-[#113256] px-4 py-3 pb-6 flex-shrink-0 z-20">
+          <div class="flex items-center gap-2">
+            <!-- Smiley Button -->
+            <button
+              class="flex h-8 w-8 shrink-0 items-center justify-center text-white opacity-80 hover:opacity-100 transition"
+            >
+              <svg
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+            </button>
+
+            <!-- Input Field -->
+            <div class="flex-1 relative h-10 flex items-center">
+              <input
+                type="text"
+                id="chat-input"
+                placeholder="Escribe tu mensaje..."
+                class="h-full w-full rounded-lg bg-white px-4 text-sm text-gray-900 placeholder-gray-400 focus:outline-none"
+                autocomplete="off"
+              />
+            </div>
+
+            <!-- Send Button -->
+            <button
+              id="send-btn"
+              class="flex h-8 w-8 shrink-0 items-center justify-center text-white opacity-80 hover:opacity-100 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <svg
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Home indicator line -->
+          <div
+            class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-white/20 rounded-full"
+          >
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <!-- Chat Input Footer -->
-  <div class="relative bg-[#113256] px-4 py-3 pb-6 flex-shrink-0 z-20">
-    <div class="flex items-center gap-2">
-      <!-- Smiley Button -->
-      <button
-        class="flex h-8 w-8 shrink-0 items-center justify-center text-white opacity-80 hover:opacity-100 transition"
-      >
-        <svg
-          class="h-5 w-5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-          ></path>
-        </svg>
-      </button>
+      <style>
+        .fade-in-up {
+          animation: fadeInUp 0.3s ease-out forwards;
+        }
 
-      <!-- Input Field -->
-      <div class="flex-1 relative h-10 flex items-center">
-        <input
-          type="text"
-          id="chat-input"
-          placeholder="Escribe tu mensaje..."
-          class="h-full w-full rounded-lg bg-white px-4 text-sm text-gray-900 placeholder-gray-400 focus:outline-none"
-          autocomplete="off"
-        />
-      </div>
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
 
-      <!-- Send Button -->
-      <button
-        id="send-btn"
-        class="flex h-8 w-8 shrink-0 items-center justify-center text-white opacity-80 hover:opacity-100 transition disabled:opacity-50 disabled:cursor-not-allowed"
-      >
-        <svg
-          class="h-5 w-5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
-        </svg>
-      </button>
-    </div>
+        /* Scrollbar styling for chat */
+        #chat-messages::-webkit-scrollbar {
+          width: 4px;
+        }
+        #chat-messages::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        #chat-messages::-webkit-scrollbar-thumb {
+          background: rgba(0, 0, 0, 0.1);
+          border-radius: 4px;
+        }
+      </style>
 
-    <!-- Home indicator line -->
-    <div
-      class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-white/20 rounded-full"
-    >
-    </div>
-  </div>
-</div>
+      <script lang="ts">
+        // Chat Logic
+        const chatInput = document.getElementById(
+          "chat-input",
+        ) as HTMLInputElement | null;
+        const sendBtn = document.getElementById("send-btn");
+        const messagesContainer = document.getElementById("messages-container");
+        const endRef = document.getElementById("messages-end");
+        const introHeader = document.getElementById("alaiza-intro");
 
-<style>
-  .fade-in-up {
-    animation: fadeInUp 0.3s ease-out forwards;
-  }
+        // Responses Database (Keyword based)
+        const RESPONSES: {
+          greeting: string;
+          default: string;
+          keywords: Record<string, string>;
+        } = {
+          greeting:
+            "¡Hola! Soy Alaiza, tu asistente financiero IA. ¿En qué puedo ayudarte hoy?",
+          default:
+            "Disculpa, no entendí tu mensaje. ¿Podrías reformularlo de otra manera?",
+          keywords: {
+            hola: "¡Hola! Soy Alaiza, tu asistente financiero. ¿En qué puedo ayudarte hoy?",
+            "buenos dias": "¡Buenos días! ¿En qué puedo ayudarte hoy?",
+            "buenas tardes": "¡Buenas tardes! ¿En qué puedo ayudarte hoy?",
+            saldo:
+              "Para consultar tu saldo, ve a la sección de Cuentas. Tu saldo actual se mostrará allí. ¿Necesitas ayuda para acceder?",
+            balance:
+              "Puedo ayudarte a revisar tu saldo. ¿Quieres ver el saldo actual o el historial de movimientos?",
+            transferencia:
+              "Para hacer una transferencia, ve a Pagos > Transferencias. Necesitarás el número de cuenta destino y el monto. ¿Quieres que te guíe paso a paso?",
+            transferir:
+              "Para realizar una transferencia, ve a la sección de Pagos. ¿Es una transferencia a otra cuenta tuya o a un tercero?",
+            pagar:
+              "Para realizar un pago, ve a la sección de Pagos. ¿Es un pago de servicios, tarjeta o factura?",
+            pago: "Para realizar un pago, ve a la sección de Pagos. ¿Es un pago de servicios, tarjeta o factura?",
+            tarjeta:
+              "Para gestionar tu tarjeta, ve a Tarjetas en el menú principal. ¿Qué necesitas hacer con tu tarjeta?",
+            bloquear:
+              "Para bloquear tu tarjeta, ve a Tarjetas > Gestionar tarjeta > Bloquear. También puedes llamar al servicio al cliente. ¿Tu tarjeta fue perdida o robada?",
+            activar:
+              "Para activar una nueva tarjeta, ve a Tarjetas > Activar tarjeta. Ingresa los datos de la tarjeta cuando la recibas. ¿Ya la recibiste?",
+            limite:
+              "Para consultar el límite de tu tarjeta, ve a Tarjetas > Detalles. Allí verás tu límite disponible y utilizado. ¿Quieres aumentar tu límite?",
+            movimientos:
+              "Para ver tus movimientos, ve a Cuentas > Historial de transacciones. Puedes filtrar por fecha, tipo o monto. ¿Qué período quieres revisar?",
+            transacciones:
+              "Para ver tus movimientos, ve a Cuentas > Historial de transacciones. Puedes filtrar por fecha, tipo o monto. ¿Qué período quieres revisar?",
+            configuracion:
+              "Puedo ayudarte con la configuración. ¿Qué quieres configurar? Notificaciones, seguridad, límites de transacción, u otra cosa?",
+            seguridad:
+              "Para cambiar tu contraseña o PIN, ve a Configuración > Seguridad. También puedes activar la autenticación de dos factores allí. ¿Qué aspecto de seguridad necesitas?",
+            ayuda:
+              "Claro, estoy aquí para ayudarte. Puedo ayudarte con transacciones, consultas de saldo, tarjetas, configuración y más. ¿Con qué necesitas asistencia?",
+            problema:
+              "Lamento escuchar que tienes un problema. ¿Podrías contarme más detalles? ¿Es con una transacción, acceso a la cuenta, o algo más?",
+            adios:
+              "¡De nada! Si necesitas algo más, estaré aquí para ayudarte. ¡Que tengas un buen día!",
+          },
+        };
 
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+        // Helper to get response
+        function getBotResponse(text: string) {
+          const lowerText = text.toLowerCase();
 
-  /* Scrollbar styling for chat */
-  #chat-messages::-webkit-scrollbar {
-    width: 4px;
-  }
-  #chat-messages::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  #chat-messages::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-  }
-</style>
+          // Check for keywords
+          for (const [key, response] of Object.entries(RESPONSES.keywords)) {
+            if (lowerText.includes(key)) {
+              return response;
+            }
+          }
 
-<script>
-  // Chat Logic
-  const chatInput = document.getElementById("chat-input");
-  const sendBtn = document.getElementById("send-btn");
-  const messagesContainer = document.getElementById("messages-container");
-  const endRef = document.getElementById("messages-end");
-  const introHeader = document.getElementById("alaiza-intro");
+          return RESPONSES.default;
+        }
 
-  // Responses Database (Keyword based)
-  const RESPONSES = {
-    greeting:
-      "¡Hola! Soy Alaiza, tu asistente financiero IA. ¿En qué puedo ayudarte hoy?",
-    default:
-      "Disculpa, no entendí tu mensaje. ¿Podrías reformularlo de otra manera?",
-    keywords: {
-      hola: "¡Hola! Soy Alaiza, tu asistente financiero. ¿En qué puedo ayudarte hoy?",
-      "buenos dias": "¡Buenos días! ¿En qué puedo ayudarte hoy?",
-      "buenas tardes": "¡Buenas tardes! ¿En qué puedo ayudarte hoy?",
-      saldo:
-        "Para consultar tu saldo, ve a la sección de Cuentas. Tu saldo actual se mostrará allí. ¿Necesitas ayuda para acceder?",
-      balance:
-        "Puedo ayudarte a revisar tu saldo. ¿Quieres ver el saldo actual o el historial de movimientos?",
-      transferencia:
-        "Para hacer una transferencia, ve a Pagos > Transferencias. Necesitarás el número de cuenta destino y el monto. ¿Quieres que te guíe paso a paso?",
-      transferir:
-        "Para realizar una transferencia, ve a la sección de Pagos. ¿Es una transferencia a otra cuenta tuya o a un tercero?",
-      pagar:
-        "Para realizar un pago, ve a la sección de Pagos. ¿Es un pago de servicios, tarjeta o factura?",
-      pago: "Para realizar un pago, ve a la sección de Pagos. ¿Es un pago de servicios, tarjeta o factura?",
-      tarjeta:
-        "Para gestionar tu tarjeta, ve a Tarjetas en el menú principal. ¿Qué necesitas hacer con tu tarjeta?",
-      bloquear:
-        "Para bloquear tu tarjeta, ve a Tarjetas > Gestionar tarjeta > Bloquear. También puedes llamar al servicio al cliente. ¿Tu tarjeta fue perdida o robada?",
-      activar:
-        "Para activar una nueva tarjeta, ve a Tarjetas > Activar tarjeta. Ingresa los datos de la tarjeta cuando la recibas. ¿Ya la recibiste?",
-      limite:
-        "Para consultar el límite de tu tarjeta, ve a Tarjetas > Detalles. Allí verás tu límite disponible y utilizado. ¿Quieres aumentar tu límite?",
-      movimientos:
-        "Para ver tus movimientos, ve a Cuentas > Historial de transacciones. Puedes filtrar por fecha, tipo o monto. ¿Qué período quieres revisar?",
-      transacciones:
-        "Para ver tus movimientos, ve a Cuentas > Historial de transacciones. Puedes filtrar por fecha, tipo o monto. ¿Qué período quieres revisar?",
-      configuracion:
-        "Puedo ayudarte con la configuración. ¿Qué quieres configurar? Notificaciones, seguridad, límites de transacción, u otra cosa?",
-      seguridad:
-        "Para cambiar tu contraseña o PIN, ve a Configuración > Seguridad. También puedes activar la autenticación de dos factores allí. ¿Qué aspecto de seguridad necesitas?",
-      ayuda:
-        "Claro, estoy aquí para ayudarte. Puedo ayudarte con transacciones, consultas de saldo, tarjetas, configuración y más. ¿Con qué necesitas asistencia?",
-      problema:
-        "Lamento escuchar que tienes un problema. ¿Podrías contarme más detalles? ¿Es con una transacción, acceso a la cuenta, o algo más?",
-      adios:
-        "¡De nada! Si necesitas algo más, estaré aquí para ayudarte. ¡Que tengas un buen día!",
-    },
-  };
+        // Helper to create message element
+        function createMessageElement(text: string, sender: string) {
+          const wrapper = document.createElement("div");
+          wrapper.className = `flex items-start gap-2.5 fade-in-up ${sender === "user" ? "justify-end" : ""}`;
 
-  // Helper to get response
-  function getBotResponse(text) {
-    const lowerText = text.toLowerCase();
+          let content = "";
+          const now = new Date();
+          const timeString = now.toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          });
 
-    // Check for keywords
-    for (const [key, response] of Object.entries(RESPONSES.keywords)) {
-      if (lowerText.includes(key)) {
-        return response;
-      }
-    }
-
-    return RESPONSES.default;
-  }
-
-  // Helper to create message element
-  function createMessageElement(text, sender) {
-    const wrapper = document.createElement("div");
-    wrapper.className = `flex items-start gap-2.5 fade-in-up ${sender === "user" ? "justify-end" : ""}`;
-
-    let content = "";
-    const now = new Date();
-    const timeString = now.toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-
-    if (sender === "bot") {
-      content = `
+          if (sender === "bot") {
+            content = `
             <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full overflow-hidden bg-primary/10 ring-2 ring-white">
                 <img src="/images/iconAlaiza.svg" alt="Alaiza" class="h-full w-full object-cover">
             </div>
@@ -263,8 +278,8 @@
                 <p class="mt-1 text-[10px] font-semibold text-gray-500">${timeString}</p>
             </div>
         `;
-    } else {
-      content = `
+          } else {
+            content = `
             <div class="flex-1 max-w-[75%] rounded-2xl rounded-tr-sm bg-[#004492] text-right px-3 py-2 shadow-sm">
                  <p class="text-sm leading-relaxed text-white">${text}</p>
                  <p class="mt-1 text-[10px] font-semibold text-white/90">${timeString}</p>
@@ -276,75 +291,126 @@
                 <div class="absolute -bottom-0.5 -left-0.5 h-3.5 w-3.5 rounded-full bg-green-500 border-2 border-white z-10"></div>
             </div>
         `;
-    }
+          }
 
-    wrapper.innerHTML = content;
-    return wrapper;
+          wrapper.innerHTML = content;
+          return wrapper;
+        }
+
+        function scrollToBottom() {
+          const container = document.getElementById("chat-messages");
+          if (container) {
+            container.scrollTop = container.scrollHeight;
+          }
+        }
+
+        // Helper for typewriter effect
+        function typeWriter(text: string, element: HTMLElement) {
+          let i = 0;
+          const speed = 20;
+
+          function type() {
+            if (i < text.length) {
+              element.textContent += text.charAt(i);
+              i++;
+              scrollToBottom();
+              setTimeout(type, speed);
+            }
+          }
+          type();
+        }
+
+        function handleSend() {
+          if (!chatInput) return;
+          const text = chatInput.value.trim();
+          if (!text) return;
+
+          // Hide intro header on first user message
+          if (introHeader && !introHeader.classList.contains("hidden")) {
+            introHeader.classList.add("hidden");
+          }
+
+          // 1. Add User Message
+          const userMsg = createMessageElement(text, "user");
+          if (messagesContainer) {
+            messagesContainer.appendChild(userMsg);
+          }
+          chatInput.value = "";
+          scrollToBottom();
+
+          // 2. Simulate Bot Typing/Reply
+          setTimeout(() => {
+            const responseText = getBotResponse(text);
+
+            // Create message with empty text first
+            const botMsg = createMessageElement("", "bot");
+            if (messagesContainer) {
+              messagesContainer.appendChild(botMsg);
+            }
+
+            // Find the text element to type into
+            const textElement = botMsg.querySelector(
+              ".text-gray-900",
+            ) as HTMLElement;
+            if (textElement) {
+              typeWriter(responseText, textElement);
+            }
+
+            scrollToBottom();
+          }, 1000);
+        }
+
+        if (sendBtn && chatInput) {
+          sendBtn.addEventListener("click", handleSend);
+
+          chatInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+              handleSend();
+            }
+          });
+        }
+      </script>
+    </div>
+  </DeviceFrame>
+</div>
+
+<style>
+  /* Device Frame Layout */
+  .device-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    z-index: 10;
+    padding: 1rem 0 2rem;
   }
 
-  function scrollToBottom() {
-    const container = document.getElementById("chat-messages");
-    if (container) {
-      container.scrollTop = container.scrollHeight;
-    }
+  .device-content {
+    flex: 1;
+    min-height: 0;
+    background: #ffffff;
+    padding: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    display: flex;
+    flex-direction: column;
+    position: relative;
   }
 
-  // Helper for typewriter effect
-  function typeWriter(text, element) {
-    let i = 0;
-    const speed = 20;
-
-    function type() {
-      if (i < text.length) {
-        element.textContent += text.charAt(i);
-        i++;
-        scrollToBottom();
-        setTimeout(type, speed);
-      }
-    }
-    type();
+  .device-content::-webkit-scrollbar {
+    display: none;
   }
 
-  function handleSend() {
-    const text = chatInput.value.trim();
-    if (!text) return;
-
-    // Hide intro header on first user message
-    if (introHeader && !introHeader.classList.contains("hidden")) {
-      introHeader.classList.add("hidden");
-    }
-
-    // 1. Add User Message
-    const userMsg = createMessageElement(text, "user");
-    messagesContainer.appendChild(userMsg);
-    chatInput.value = "";
-    scrollToBottom();
-
-    // 2. Simulate Bot Typing/Reply
-    setTimeout(() => {
-      const responseText = getBotResponse(text);
-
-      // Create message with empty text first
-      const botMsg = createMessageElement("", "bot");
-      messagesContainer.appendChild(botMsg);
-
-      // Find the text element to type into
-      const textElement = botMsg.querySelector(".text-gray-900");
-      if (textElement) {
-        typeWriter(responseText, textElement);
-      }
-
-      scrollToBottom();
-    }, 1000);
+  /* Alaiza Chat App Specific Styles */
+  .alaiza-chat-app {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: white;
+    position: relative;
   }
-
-  if (sendBtn && chatInput) {
-    sendBtn.addEventListener("click", handleSend);
-
-    chatInput.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") {
-        handleSend();
-      }
-    });
-  }
-</script>
+</style>

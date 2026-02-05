@@ -25,6 +25,8 @@ const {
   demoHref?: string;
   initialLang?: string;
 };
+
+import Button from "./design-system/atoms/Button.astro";
 ---
 
 <header class="simple-navbar">
@@ -83,9 +85,15 @@ const {
     </div>
 
     <div class="simple-navbar__actions">
-      <a class="simple-navbar__demo" href={demoHref} data-i18n="navbar.demo"
-        >Demo</a
+      <Button
+        href={demoHref}
+        variant="secondary"
+        size="md"
+        class="simple-navbar__demo-btn"
+        dataI18n="navbar.demo"
       >
+        Demo
+      </Button>
       <button
         class="simple-navbar__lang"
         type="button"
@@ -192,7 +200,7 @@ const {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 100;
+    z-index: 10000;
     background: rgba(
       255,
       255,
@@ -257,25 +265,8 @@ const {
     gap: 0.75rem;
   }
 
-  .simple-navbar__demo {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: #93fb4d;
-    color: #184090;
-    padding: 0.45rem 1.6rem;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: 600;
-    box-shadow: 0 8px 20px rgba(147, 251, 77, 0.35);
-    transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
-  }
-
-  .simple-navbar__demo:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 12px 28px rgba(147, 251, 77, 0.4);
+  .simple-navbar__demo-btn {
+    flex-shrink: 0;
   }
 
   .simple-navbar__lang {
