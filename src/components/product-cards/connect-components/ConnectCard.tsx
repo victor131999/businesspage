@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { CONNECT_TRANSLATIONS } from "./connect-translations";
 
 /* -- Types -- */
 type Screen = "banks" | "credentials" | "loading" | "success" | "wallet" | "deposit";
@@ -12,13 +13,41 @@ interface Bank {
 
 interface BankAccount {
     id: string;
-    name: string;
+    nameKey: "clabe" | "checking";
     accountNumber: string;
     balance: number;
 }
 
 /* -- Main Component -- */
 export default function ConnectCard({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) {
+    const [lang, setLang] = useState<keyof typeof CONNECT_TRANSLATIONS>(() => {
+        if (typeof window === "undefined") return "es";
+        const raw =
+            (window as any).__uiLanguage ||
+            (() => {
+                try {
+                    return localStorage.getItem("ui-language");
+                } catch {
+                    return null;
+                }
+            })() ||
+            "ES";
+        return String(raw).toUpperCase() === "EN" ? "en" : "es";
+    });
+
+    useEffect(() => {
+        const handleLanguageChange = (event: Event) => {
+            const customEvent = event as CustomEvent<{ language?: string }>;
+            const next = customEvent.detail?.language;
+            setLang(next && next.toUpperCase() === "EN" ? "en" : "es");
+        };
+
+        window.addEventListener("ui:languagechange", handleLanguageChange);
+        return () => window.removeEventListener("ui:languagechange", handleLanguageChange);
+    }, []);
+
+    const t = CONNECT_TRANSLATIONS[lang];
+
     // State
     const [currentScreen, setCurrentScreen] = useState<Screen>("banks");
     const [selectedBank, setSelectedBank] = useState<Bank | null>(null);
@@ -77,13 +106,13 @@ export default function ConnectCard({ isDemoEnabled = true }: { isDemoEnabled?: 
     const depositAccounts: BankAccount[] = [
         {
             id: "1",
-            name: "Cuenta CLABE",
+            nameKey: "clabe",
             accountNumber: "012345678901234567",
             balance: 12345.67,
         },
         {
             id: "2",
-            name: "Chequera",
+            nameKey: "checking",
             accountNumber: "",
             balance: 145.67,
         },
@@ -302,10 +331,10 @@ export default function ConnectCard({ isDemoEnabled = true }: { isDemoEnabled?: 
                 {/* Title */}
                 <div className="mb-2 text-center">
                     <h2 className="mb-1 text-sm font-bold" style={{ color: themeColor }}>
-                        Vinculación de cuenta bancaria
+                        {t.banks.title}
                     </h2>
                     <p className="text-sm text-gray-600">
-                        Vamos a vincular tu cuenta
+                        {t.banks.subtitle}
                     </p>
                 </div>
 
@@ -329,7 +358,7 @@ export default function ConnectCard({ isDemoEnabled = true }: { isDemoEnabled?: 
                         </div>
                         <input
                             type="text"
-                            placeholder="Buscar bancos..."
+                            placeholder={t.banks.searchPlaceholder}
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             className="block w-full rounded-lg border border-gray-300 bg-white py-3 pl-10 pr-4 text-sm text-gray-900 placeholder-gray-400 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
@@ -425,7 +454,7 @@ export default function ConnectCard({ isDemoEnabled = true }: { isDemoEnabled?: 
                         }}
                     >
                         <span className="relative z-10 flex items-center justify-center gap-2">
-                            Continuar
+                            {t.banks.continue}
                             <svg
                                 className="h-4 w-4"
                                 fill="none"
@@ -472,36 +501,36 @@ export default function ConnectCard({ isDemoEnabled = true }: { isDemoEnabled?: 
                 >
                     <div className="text-center mb-6">
                         <h2 className="text-xl font-bold" style={{ color: themeColor }}>
-                            Ingresa tus credenciales
+                            {t.credentials.title}
                         </h2>
                         <p className="text-xs text-gray-600 mt-1">
-                            Por favor ingrese sus credenciales para conectar su cuenta bancaria
+                            {t.credentials.subtitle}
                         </p>
                     </div>
 
                     <div className="flex flex-col space-y-4 flex-1">
                         <div>
                             <label className="block text-xs font-medium text-gray-700 mb-1.5" style={{ color: themeColor }}>
-                                Usuario
+                                {t.credentials.usernameLabel}
                             </label>
                             <input
                                 type="text"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
-                                placeholder="Ingrese su usuario"
+                                placeholder={t.credentials.usernamePlaceholder}
                                 className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary shadow-sm"
                             />
                         </div>
 
                         <div>
                             <label className="block text-xs font-medium text-gray-700 mb-1.5" style={{ color: themeColor }}>
-                                Contraseña
+                                {t.credentials.passwordLabel}
                             </label>
                             <input
                                 type="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                placeholder="Ingrese su contraseña"
+                                placeholder={t.credentials.passwordPlaceholder}
                                 className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary shadow-sm"
                             />
                         </div>
@@ -523,7 +552,7 @@ export default function ConnectCard({ isDemoEnabled = true }: { isDemoEnabled?: 
                                     boxShadow: (!username || !password) ? 'none' : `0 4px 14px 0 ${themeColor}40`,
                                 }}
                             >
-                                Ingresar
+                                {t.credentials.submit}
                             </button>
                         </div>
                     </div>
@@ -618,12 +647,12 @@ export default function ConnectCard({ isDemoEnabled = true }: { isDemoEnabled?: 
                                 />
                             </svg>
                             <h2 className="text-3xl font-bold leading-tight" style={{ color: "white" }}>
-                                {isTransferring ? "Transferencia Completa" : "Vinculación Completa"}
+                                {isTransferring ? t.loading.complete.transferTitle : t.loading.complete.linkingTitle}
                             </h2>
                             <p className="text-base leading-relaxed" style={{ color: "white", opacity: 0.9 }}>
                                 {isTransferring
-                                    ? "Los fondos han sido transferidos exitosamente"
-                                    : "La cuenta bancaria ha sido vinculada exitosamente"}
+                                    ? t.loading.complete.transferSubtitle
+                                    : t.loading.complete.linkingSubtitle}
                             </p>
                         </div>
                     )}
@@ -632,7 +661,7 @@ export default function ConnectCard({ isDemoEnabled = true }: { isDemoEnabled?: 
                     {!isComplete && (
                         <div className="flex flex-col items-center justify-center text-center space-y-4 relative z-10">
                             <h2 className="text-xl font-bold">
-                                {(isTransferring ? "Transfiriendo fondos" : "Conectando tu cuenta")
+                                {(isTransferring ? t.loading.inProgress.transferTitle : t.loading.inProgress.linkingTitle)
                                     .split("")
                                     .map((char, index, array) => {
                                         const charProgress = (index / array.length) * 100;
@@ -651,7 +680,7 @@ export default function ConnectCard({ isDemoEnabled = true }: { isDemoEnabled?: 
                                     })}
                             </h2>
                             <p className="text-sm">
-                                {"Espera por favor"
+                                {t.loading.inProgress.subtitle
                                     .split("")
                                     .map((char, index, array) => {
                                         const charProgress = (index / array.length) * 100;
@@ -722,10 +751,10 @@ export default function ConnectCard({ isDemoEnabled = true }: { isDemoEnabled?: 
                             />
                         </svg>
                         <h2 className="text-3xl font-bold leading-tight" style={{ color: "white" }}>
-                            Vinculación Exitosa
+                            {t.success.title}
                         </h2>
                         <p className="text-base leading-relaxed" style={{ color: "white", opacity: 0.9 }}>
-                            Tu cuenta bancaria ha sido vinculada exitosamente
+                            {t.success.subtitle}
                         </p>
                     </div>
                 </div>
@@ -753,17 +782,17 @@ export default function ConnectCard({ isDemoEnabled = true }: { isDemoEnabled?: 
                     {/* Title Section - Reduced margins */}
                     <div className="text-center mb-4 shrink-0">
                         <h2 className="text-xl font-bold" style={{ color: almostBlackColor }}>
-                            Billetera
+                            {t.wallet.title}
                         </h2>
                         <p className="text-xs text-gray-500 mt-0.5">
-                            Administra tus fondos
+                            {t.wallet.subtitle}
                         </p>
                     </div>
 
                     {/* Balance Section - Compact */}
                     <div className="mb-4 shrink-0">
                         <label className="text-xs font-medium mb-2 block" style={{ color: almostBlackColor }}>
-                            Balance total
+                            {t.wallet.totalBalance}
                         </label>
 
                         <div
@@ -799,7 +828,7 @@ export default function ConnectCard({ isDemoEnabled = true }: { isDemoEnabled?: 
                             boxShadow: `0 4px 14px 0 ${themeColor}40`,
                         }}
                     >
-                        <span>Depositar fondos</span>
+                        <span>{t.wallet.depositFunds}</span>
                         <svg
                             className="h-4 w-4"
                             fill="none"
@@ -843,7 +872,7 @@ export default function ConnectCard({ isDemoEnabled = true }: { isDemoEnabled?: 
                                 {selectedBank?.name || "BBVA MÉXICO"}
                             </h3>
                             <p className="text-xs font-medium" style={{ color: "white", opacity: 0.8 }}>
-                                Banco conectado
+                                {t.wallet.bankConnected}
                             </p>
                         </div>
                     </div>
@@ -913,15 +942,15 @@ export default function ConnectCard({ isDemoEnabled = true }: { isDemoEnabled?: 
                     <div className="flex flex-col flex-1 space-y-2">
                         <div className="text-center">
                             <h2 className="text-lg font-bold" style={{ color: almostBlackColor }}>
-                                Depositar fondos
+                                {t.deposit.title}
                             </h2>
                             <p className="text-xs text-gray-600 mt-0.5">
-                                Seleccione una cuenta e ingrese el monto
+                                {t.deposit.subtitle}
                             </p>
                         </div>
 
                         <label className="text-sm font-medium" style={{ color: almostBlackColor, textAlign: "left" }}>
-                            Seleccionar cuenta
+                            {t.deposit.selectAccount}
                         </label>
 
                         <div
@@ -984,7 +1013,7 @@ export default function ConnectCard({ isDemoEnabled = true }: { isDemoEnabled?: 
                                                         textAlign: "center",
                                                     }}
                                                 >
-                                                    {account.name}
+                                                    {t.deposit.accountNames[account.nameKey]}
                                                 </span>
                                                 {isActive && account.accountNumber && (
                                                     <span
@@ -1019,13 +1048,13 @@ export default function ConnectCard({ isDemoEnabled = true }: { isDemoEnabled?: 
 
                         <div className="mt-4">
                             <label className="block text-sm font-medium mb-2" style={{ color: almostBlackColor }}>
-                                Monto
+                                {t.deposit.amount}
                             </label>
                             <input
                                 type="text"
                                 value={depositAmount}
                                 onChange={(e) => setDepositAmount(e.target.value)}
-                                placeholder="0.00"
+                                placeholder={t.deposit.amountPlaceholder}
                                 className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                             />
                         </div>
@@ -1101,7 +1130,7 @@ export default function ConnectCard({ isDemoEnabled = true }: { isDemoEnabled?: 
                                             transition: "color 0.2s",
                                         }}
                                     >
-                                        {slideProgress >= 90 ? "Confirmando..." : "Desliza para confirmar"}
+                                        {slideProgress >= 90 ? t.deposit.confirming : t.deposit.slideToConfirm}
                                     </span>
                                 </div>
                             </div>

@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useLanguageTranslations } from "@/hooks/use-language-translations";
+import { ALAIZA_TRANSLATIONS } from "../alaiza-translations";
 
 /* -- Types -- */
 interface Message {
@@ -17,11 +19,13 @@ interface AlaizaChatProps {
 }
 
 export default function AlaizaChat() {
+    const t = useLanguageTranslations(ALAIZA_TRANSLATIONS);
+
     // Chat State
     const [messages, setMessages] = useState<Message[]>([
         {
             id: "1",
-            text: "¡Hola! Soy Alaiza, tu asistente financiero inteligente. ¿En qué puedo ayudarte hoy?",
+            text: t.chat.initialBotMessage,
             sender: "bot",
             timestamp: formatTime(),
         },
@@ -96,40 +100,101 @@ export default function AlaizaChat() {
 
     const generateResponse = (userMessage: string): string => {
         const message = normalize(userMessage);
-        if (message.includes('hola') || message.includes('buenos') || message.includes('buenas')) {
-            return "¡Hola! Me alegra saludarte. ¿Cómo puedo ayudarte con tus finanzas hoy?";
-        }
-        if (message.includes('como puedes ayudarme') || message.includes('en que puedes ayudarme')) {
-            return "Puedo ayudarte con saldos, transferencias, pagos, tarjetas, movimientos y seguridad. ¿Qué necesitas hacer ahora?";
-        }
-        if (message.includes('donde reviso mis fondos') || message.includes('revisar mis fondos')) {
-            return "Puedes revisar tus fondos en la sección 'Cuentas' o 'Saldo'. ¿Quieres que te muestre los movimientos también?";
-        }
-        if (message.includes('saldo') || message.includes('fondos') || (message.includes('dinero') && message.includes('tengo'))) {
-            return "Tu saldo actual es de $1,250.00 MXN. ¿Te gustaría ver tus movimientos recientes?";
-        }
-        if (message.includes('como se hace una transferencia') || message.includes('hacer una transferencia') || message.includes('transferir') || message.includes('transferencia')) {
-            return "Para hacer una transferencia ve a 'Transferencias', elige destinatario, monto y confirma. ¿Quieres que te guíe paso a paso?";
-        }
-        if (message.includes('pagar') || message.includes('pago')) {
-            return "Puedes realizar pagos desde la sección 'Pagos' de la app. ¿Quieres pagar con tarjeta o transferencia?";
-        }
-        if (message.includes('tarjeta')) {
-            if (message.includes('bloquear')) {
-                return "Para bloquear tu tarjeta, ve a 'Tarjetas' > 'Gestionar' > 'Bloquear tarjeta'. ¿Quieres que te guíe paso a paso?";
-            }
-            return "Puedo ayudarte a gestionar tus tarjetas. ¿Qué necesitas hacer? (activar, bloquear, consultar límite, etc.)";
-        }
-        if (message.includes('movimiento') || message.includes('historial')) {
-            return "Puedes ver tus movimientos en la sección 'Actividad' de la app. ¿Quieres filtrar por fecha o tipo de transacción?";
-        }
-        if (message.includes('ayuda') || message.includes('ayudar')) {
-            return "Estoy aquí para ayudarte. Puedo ayudarte con consultas de saldo, transferencias, pagos, gestión de tarjetas y más. ¿Qué necesitas?";
-        }
-        if (message.includes('gracias') || message.includes('chao') || message.includes('adiós')) {
-            return "¡De nada! Estoy aquí cuando me necesites. ¡Que tengas un excelente día!";
-        }
-        return "Entiendo tu consulta. ¿Podrías ser más específico? Puedo ayudarte con saldos, transferencias, pagos, tarjetas y más.";
+        if (
+            message.includes("hola") ||
+            message.includes("buenos") ||
+            message.includes("buenas") ||
+            message.includes("hello") ||
+            message.includes("hi")
+        )
+            return t.chat.responses.greeting;
+
+        if (
+            message.includes("como puedes ayudarme") ||
+            message.includes("en que puedes ayudarme") ||
+            message.includes("how can you help") ||
+            message.includes("what can you do")
+        )
+            return t.chat.responses.capabilities;
+
+        if (
+            message.includes("donde reviso mis fondos") ||
+            message.includes("revisar mis fondos") ||
+            message.includes("check my funds") ||
+            message.includes("where can i check")
+        )
+            return t.chat.responses.fundsWhere;
+
+        if (
+            message.includes("saldo") ||
+            message.includes("fondos") ||
+            (message.includes("dinero") && message.includes("tengo")) ||
+            message.includes("balance") ||
+            message.includes("funds")
+        )
+            return t.chat.responses.balance;
+
+        if (
+            message.includes("como se hace una transferencia") ||
+            message.includes("hacer una transferencia") ||
+            message.includes("transferir") ||
+            message.includes("transferencia") ||
+            message.includes("make a transfer") ||
+            message.includes("transfer")
+        )
+            return t.chat.responses.transferHow;
+
+        if (
+            message.includes("pagar") ||
+            message.includes("pago") ||
+            message.includes("pay") ||
+            message.includes("payment")
+        )
+            return t.chat.responses.pay;
+
+        if (
+            message.includes("tarjeta") ||
+            message.includes("tarjetas") ||
+            message.includes("card") ||
+            message.includes("cards")
+        )
+            return t.chat.responses.cards;
+
+        if (
+            message.includes("seguridad") ||
+            message.includes("seguro") ||
+            message.includes("bloquear") ||
+            message.includes("security") ||
+            message.includes("block")
+        )
+            return t.chat.responses.security;
+
+        if (
+            message.includes("movimiento") ||
+            message.includes("movimientos") ||
+            message.includes("historial") ||
+            message.includes("transaccion") ||
+            message.includes("transacciones") ||
+            message.includes("actividad") ||
+            message.includes("history") ||
+            message.includes("transactions") ||
+            message.includes("activity")
+        )
+            return t.chat.responses.history;
+
+        if (message.includes("ayuda") || message.includes("ayudar") || message.includes("help"))
+            return t.chat.responses.help;
+
+        if (
+            message.includes("gracias") ||
+            message.includes("chao") ||
+            message.includes("adios") ||
+            message.includes("thanks") ||
+            message.includes("bye")
+        )
+            return t.chat.responses.bye;
+
+        return t.chat.responses.fallback;
     };
 
     const stopDemo = () => {
@@ -203,7 +268,7 @@ export default function AlaizaChat() {
                 setIsTransferred(true);
                 const transferMessage: Message = {
                     id: (Date.now() + 1).toString(),
-                    text: "Tu conversación ha sido transferida a un agente humano. Pronto te atenderá.",
+                    text: t.chat.transferSystemMessage,
                     sender: "system",
                     timestamp: formatTime(),
                 };
@@ -262,9 +327,7 @@ export default function AlaizaChat() {
             demoRunningRef.current = true;
 
             const script = [
-                "¿Cómo puedes ayudarme?",
-                "¿Cómo se hace una transferencia?",
-                "¿Dónde reviso mis fondos?",
+                ...t.chat.quickPrompts,
             ];
 
             for (const line of script) {
@@ -293,7 +356,7 @@ export default function AlaizaChat() {
             {/* Header */}
             <div className="relative mb-3 mt-8 flex flex-shrink-0 items-center justify-between px-5 z-10">
                 <button className="text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors">
-                    ← Atrás
+                    ← {t.chat.back}
                 </button>
                 {/* <div className="absolute left-1/2 -translate-x-1/2">
                     <img
@@ -334,15 +397,11 @@ export default function AlaizaChat() {
                             </div>
                             <div className="flex-1">
                                 <h2 className="text-lg font-bold text-gray-900">Alaiza</h2>
-                                <p className="text-sm text-[#8B5CF6] font-medium">AI Financial Assistant</p>
+                                <p className="text-sm text-[#8B5CF6] font-medium">{t.chat.assistantRole}</p>
                             </div>
                         </div>
                         <div className="mt-4 flex flex-wrap gap-2">
-                            {[
-                                "¿Cómo puedes ayudarme?",
-                                "¿Cómo se hace una transferencia?",
-                                "¿Dónde reviso mis fondos?"
-                            ].map((q) => (
+                            {t.chat.quickPrompts.map((q) => (
                                 <button
                                     key={q}
                                     onClick={() => sendQuickPrompt(q)}
@@ -479,7 +538,7 @@ export default function AlaizaChat() {
                         <textarea
                             ref={textareaRef}
                             rows={1}
-                            placeholder={isTransferred ? "Tu conversación ha sido transferida..." : "Escribe tu mensaje..."}
+                            placeholder={isTransferred ? t.chat.placeholders.transferred : t.chat.placeholders.default}
                             value={inputText}
                             onChange={(e) => {
                                 setInputText(e.target.value);
