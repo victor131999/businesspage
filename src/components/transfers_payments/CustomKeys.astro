@@ -4,177 +4,218 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
 ---
 
 <div class="device-container">
-  <div class="device-frame-wrapper">
-    <DeviceFrame>
-      <div class="device-content">
-        <div class="ck-app-container">
-          <!-- Screen: Dashboard -->
-          <div id="ck-screen-dashboard" class="ck-screen active">
-            <div class="ck-scroll-content">
-              <!-- App Header -->
-              <div class="ck-header">
-                <img
-                  src="/images/zelify_logo.png"
-                  alt="Zelify"
-                  class="ck-logo"
-                />
+  <DeviceFrame>
+    <div class="device-content">
+      <div class="ck-app-container">
+        <!-- Screen: Dashboard -->
+        <div id="ck-screen-dashboard" class="ck-screen active">
+          <div class="ck-scroll-content">
+            <!-- App Header -->
+            <div class="ck-header">
+              <img src="/images/zelify_logo.png" alt="Zelify" class="ck-logo" />
+            </div>
+
+            <!-- Hero Animation -->
+            <div class="ck-hero-container">
+              <img
+                src="/gift/ANIMACION%201.gif"
+                alt="Payment animation"
+                class="ck-hero-gif"
+              />
+            </div>
+
+            <!-- Main Glass Card -->
+            <div class="ck-main-card">
+              <div class="ck-title-section">
+                <h1 class="ck-title">Payments</h1>
+                <p class="ck-subtitle">Make fast and secure payments</p>
               </div>
 
-              <!-- Hero Animation -->
-              <div class="ck-hero-container">
-                <img
-                  src="/gift/ANIMACION%201.gif"
-                  alt="Payment animation"
-                  class="ck-hero-gif"
-                />
-              </div>
-
-              <!-- Main Glass Card -->
-              <div class="ck-main-card">
-                <div class="ck-title-section">
-                  <h1 class="ck-title">Payments</h1>
-                  <p class="ck-subtitle">Make fast and secure payments</p>
-                </div>
-
-                <!-- Custom Key Card -->
-                <div class="ck-key-card">
-                  <div class="ck-key-content">
-                    <div class="ck-key-info">
-                      <p class="ck-key-label">CUSTOM KEY CONFIGURED</p>
-                      <p class="ck-key-value">1234567890</p>
-                      <p class="ck-key-type">ID Number</p>
-                    </div>
-                    <div class="ck-key-icon">
-                      <!-- Edit Icon -->
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-3.5 w-3.5 text-white"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-                        ></path>
-                      </svg>
-                    </div>
+              <!-- Custom Key Card -->
+              <div class="ck-key-card">
+                <div class="ck-key-content">
+                  <div class="ck-key-info">
+                    <p class="ck-key-label">CUSTOM KEY CONFIGURED</p>
+                    <p class="ck-key-value">1234567890</p>
+                    <p class="ck-key-type">ID Number</p>
                   </div>
-                </div>
-
-                <!-- Suggested Contacts -->
-                <div class="ck-contacts-section">
-                  <p class="ck-section-title">Suggested Contacts</p>
-                  <div class="ck-contacts-list">
-                    <!-- Rendered via JS loop or hardcoded for now -->
-                    <button
-                      class="ck-contact-item"
-                      data-id="cs"
-                      data-name="Carlos Santander"
-                      data-initials="CS"
-                      data-image="/images/team/team-02.png"
-                    >
-                      <div class="ck-avatar-wrapper">
-                        <div class="ck-avatar">
-                          <img src="/images/team/team-02.png" alt="Carlos" />
-                        </div>
-                      </div>
-                      <span class="ck-contact-name">Carlos</span>
-                    </button>
-                    <button
-                      class="ck-contact-item"
-                      data-id="ar"
-                      data-name="Ana Ruiz"
-                      data-initials="AR"
-                      data-image="/images/team/team-08.png"
-                    >
-                      <div class="ck-avatar-wrapper">
-                        <div class="ck-avatar">
-                          <img src="/images/team/team-08.png" alt="Ana" />
-                        </div>
-                      </div>
-                      <span class="ck-contact-name">Ana</span>
-                    </button>
-                    <button
-                      class="ck-contact-item"
-                      data-id="sv"
-                      data-name="Sofia Vargas"
-                      data-initials="SV"
-                      data-image="/images/team/user-02.png"
-                    >
-                      <div class="ck-avatar-wrapper">
-                        <div class="ck-avatar">
-                          <img src="/images/team/user-02.png" alt="Sofia" />
-                        </div>
-                      </div>
-                      <span class="ck-contact-name">Sofia</span>
-                    </button>
-                    <button
-                      class="ck-contact-item"
-                      data-id="mc"
-                      data-name="Miguel Castro"
-                      data-initials="MC"
-                      data-image="/images/team/team-06.png"
-                    >
-                      <div class="ck-avatar-wrapper">
-                        <div class="ck-avatar">
-                          <img src="/images/team/team-06.png" alt="Miguel" />
-                        </div>
-                      </div>
-                      <span class="ck-contact-name">Miguel</span>
-                    </button>
-                  </div>
-                </div>
-
-                <!-- Spacer -->
-                <div class="flex-grow"></div>
-
-                <!-- Action Button -->
-                <div class="ck-actions">
-                  <button id="ck-pay-btn" class="ck-btn-primary group">
-                    <span class="ck-btn-text">Pay to Custom Key</span>
+                  <div class="ck-key-icon">
+                    <!-- Edit Icon -->
                     <svg
-                      class="h-4 w-4 transition-transform group-hover:translate-x-1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-3.5 w-3.5 text-white"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
+                      stroke-width="2"
                     >
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M9 5l7 7-7 7"></path>
+                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                      ></path>
                     </svg>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Suggested Contacts -->
+              <div class="ck-contacts-section">
+                <p class="ck-section-title">Suggested Contacts</p>
+                <div class="ck-contacts-list">
+                  <!-- Rendered via JS loop or hardcoded for now -->
+                  <button
+                    class="ck-contact-item"
+                    data-id="cs"
+                    data-name="Carlos Santander"
+                    data-initials="CS"
+                    data-image="/images/team/team-02.png"
+                  >
+                    <div class="ck-avatar-wrapper">
+                      <div class="ck-avatar">
+                        <img src="/images/team/team-02.png" alt="Carlos" />
+                      </div>
+                    </div>
+                    <span class="ck-contact-name">Carlos</span>
+                  </button>
+                  <button
+                    class="ck-contact-item"
+                    data-id="ar"
+                    data-name="Ana Ruiz"
+                    data-initials="AR"
+                    data-image="/images/team/team-08.png"
+                  >
+                    <div class="ck-avatar-wrapper">
+                      <div class="ck-avatar">
+                        <img src="/images/team/team-08.png" alt="Ana" />
+                      </div>
+                    </div>
+                    <span class="ck-contact-name">Ana</span>
+                  </button>
+                  <button
+                    class="ck-contact-item"
+                    data-id="sv"
+                    data-name="Sofia Vargas"
+                    data-initials="SV"
+                    data-image="/images/team/user-02.png"
+                  >
+                    <div class="ck-avatar-wrapper">
+                      <div class="ck-avatar">
+                        <img src="/images/team/user-02.png" alt="Sofia" />
+                      </div>
+                    </div>
+                    <span class="ck-contact-name">Sofia</span>
+                  </button>
+                  <button
+                    class="ck-contact-item"
+                    data-id="mc"
+                    data-name="Miguel Castro"
+                    data-initials="MC"
+                    data-image="/images/team/team-06.png"
+                  >
+                    <div class="ck-avatar-wrapper">
+                      <div class="ck-avatar">
+                        <img src="/images/team/team-06.png" alt="Miguel" />
+                      </div>
+                    </div>
+                    <span class="ck-contact-name">Miguel</span>
                   </button>
                 </div>
               </div>
+
+              <!-- Spacer -->
+              <div class="flex-grow"></div>
+
+              <!-- Action Button -->
+              <div class="ck-actions">
+                <button id="ck-pay-btn" class="ck-btn-primary group">
+                  <span class="ck-btn-text">Pay to Custom Key</span>
+                  <svg
+                    class="h-4 w-4 transition-transform group-hover:translate-x-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
+        </div>
 
-          <!-- Screen: Confirm -->
-          <div id="ck-screen-confirm" class="ck-screen hidden-screen">
-            <div class="ck-scroll-content">
-              <div class="ck-header">
-                <img
-                  src="/images/zelify_logo.png"
-                  alt="Zelify"
-                  class="ck-logo"
-                />
+        <!-- Screen: Confirm -->
+        <div id="ck-screen-confirm" class="ck-screen hidden-screen">
+          <div class="ck-scroll-content">
+            <div class="ck-header">
+              <img src="/images/zelify_logo.png" alt="Zelify" class="ck-logo" />
+            </div>
+
+            <div class="ck-hero-container">
+              <img
+                src="/gift/ANIMACION%201.gif"
+                alt="Payment animation"
+                class="ck-hero-gif"
+              />
+            </div>
+
+            <div class="ck-main-card">
+              <!-- Back Button -->
+              <button id="ck-back-btn" class="ck-back-btn">
+                <svg
+                  class="h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15 19l-7-7 7-7"></path>
+                </svg>
+                <span class="ml-1">Back</span>
+              </button>
+
+              <div class="ck-title-section compact">
+                <h1 class="ck-title-sm">Confirm Payment</h1>
+                <p class="ck-subtitle-sm">Review the details before sending</p>
               </div>
 
-              <div class="ck-hero-container">
-                <img
-                  src="/gift/ANIMACION%201.gif"
-                  alt="Payment animation"
-                  class="ck-hero-gif"
-                />
+              <!-- Review Details -->
+              <div class="ck-review-card">
+                <p class="ck-label-xs">RECIPIENT</p>
+                <div class="ck-recipient-row">
+                  <div id="ck-confirm-avatar" class="ck-confirm-avatar">
+                    <!-- Content injected by JS -->
+                    CS
+                  </div>
+                  <div class="ck-recipient-info">
+                    <p id="ck-confirm-name" class="ck-recipient-name">
+                      Carlos Santander
+                    </p>
+                    <p class="ck-recipient-sub">091 2345 678</p>
+                  </div>
+                </div>
               </div>
 
-              <div class="ck-main-card">
-                <!-- Back Button -->
-                <button id="ck-back-btn" class="ck-back-btn">
+              <div class="ck-review-card">
+                <p class="ck-label-xs">AMOUNT</p>
+                <div class="ck-amount-row">
+                  <p class="ck-amount-text">10,000.00 MXN</p>
+                </div>
+              </div>
+
+              <div class="flex-grow"></div>
+
+              <!-- Slide to Confirm -->
+              <div class="ck-slider-container" id="ck-slider">
+                <div class="ck-slider-text">Slide to confirm</div>
+                <div class="ck-slider-thumb" id="ck-slider-thumb">
                   <svg
                     class="h-4 w-4"
                     fill="none"
@@ -185,869 +226,815 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
-                      d="M15 19l-7-7 7-7"></path>
+                      d="M9 5l7 7-7 7"></path>
                   </svg>
-                  <span class="ml-1">Back</span>
-                </button>
-
-                <div class="ck-title-section compact">
-                  <h1 class="ck-title-sm">Confirm Payment</h1>
-                  <p class="ck-subtitle-sm">
-                    Review the details before sending
-                  </p>
-                </div>
-
-                <!-- Review Details -->
-                <div class="ck-review-card">
-                  <p class="ck-label-xs">RECIPIENT</p>
-                  <div class="ck-recipient-row">
-                    <div id="ck-confirm-avatar" class="ck-confirm-avatar">
-                      <!-- Content injected by JS -->
-                      CS
-                    </div>
-                    <div class="ck-recipient-info">
-                      <p id="ck-confirm-name" class="ck-recipient-name">
-                        Carlos Santander
-                      </p>
-                      <p class="ck-recipient-sub">091 2345 678</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="ck-review-card">
-                  <p class="ck-label-xs">AMOUNT</p>
-                  <div class="ck-amount-row">
-                    <p class="ck-amount-text">10,000.00 MXN</p>
-                  </div>
-                </div>
-
-                <div class="flex-grow"></div>
-
-                <!-- Slide to Confirm -->
-                <div class="ck-slider-container" id="ck-slider">
-                  <div class="ck-slider-text">Slide to confirm</div>
-                  <div class="ck-slider-thumb" id="ck-slider-thumb">
-                    <svg
-                      class="h-4 w-4"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M9 5l7 7-7 7"></path>
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Screen: Processing / Success -->
-          <div id="ck-screen-process" class="ck-screen hidden-screen">
-            <div id="ck-process-card" class="ck-process-card">
-              <!-- The gradient background and clip-path will be handled by JS/CSS -->
-              <div id="ck-process-bg" class="ck-process-bg"></div>
-
-              <div class="ck-process-content">
-                <!-- Loading State -->
-                <div
-                  id="ck-state-loading"
-                  class="flex flex-col items-center justify-center text-center space-y-4"
-                >
-                  <h2
-                    id="ck-loading-text"
-                    class="text-xl font-bold text-gray-900 transition-colors duration-200"
-                  >
-                    Processing payment...
-                  </h2>
-                  <p
-                    id="ck-loading-sub"
-                    class="text-sm text-gray-500 transition-colors duration-200"
-                  >
-                    Please wait
-                  </p>
-                  <div
-                    class="w-full max-w-xs mt-2 bg-gray-300 rounded-full h-2 overflow-hidden"
-                  >
-                    <div
-                      id="ck-progress-bar"
-                      class="h-full bg-white rounded-full transition-all duration-300 ease-out"
-                      style="width: 0%"
-                    >
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Success State -->
-                <div
-                  id="ck-state-success"
-                  class="flex flex-col items-center justify-center text-center space-y-6 hidden"
-                >
-                  <svg
-                    class="h-24 w-24 text-white"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    stroke-width="3"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M5 13l4 4L19 7"
-                      style="transform: rotate(-2deg); transform-origin: center;"
-                    ></path>
-                  </svg>
-                  <h2 class="text-3xl font-bold leading-tight text-white">
-                    Successful payment
-                  </h2>
-                  <p class="text-base leading-relaxed text-white/90">
-                    Your payment has been successfully completed
-                  </p>
-
-                  <button onclick="window.ckReset()" class="ck-finish-btn"
-                    >Done</button
-                  >
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <style>
-          /* Base Layout */
-          .ck-app-container {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            overflow: hidden;
-            background: white;
-            font-family:
-              -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-              Arial, sans-serif;
-          }
-
-          .ck-screen {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            transition:
-              opacity 0.3s ease,
-              transform 0.3s ease;
-            background: transparent;
-            z-index: 1;
-          }
-
-          .ck-screen.hidden-screen {
-            opacity: 0;
-            pointer-events: none;
-            transform: scale(0.98);
-            z-index: 0;
-          }
-
-          .ck-screen.active {
-            opacity: 1;
-            pointer-events: auto;
-            transform: scale(1);
-            z-index: 10;
-          }
-
-          /* Dashboard Styles */
-          .ck-scroll-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            padding: 24px;
-            padding-top: 10px;
-            overflow-y: auto;
-            height: 100%;
-            box-sizing: border-box;
-          }
-
-          .ck-header {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 12px;
-            z-index: 20;
-            position: relative;
-          }
-
-          .ck-logo {
-            height: 32px;
-            object-fit: contain;
-          }
-
-          .ck-hero-container {
-            position: relative;
-            margin-bottom: -64px;
-            z-index: 0;
-            display: flex;
-            justify-content: center;
-          }
-
-          .ck-hero-gif {
-            height: 192px; /* h-48 */
-            width: 192px;
-            object-fit: contain;
-            opacity: 0.9;
-            mix-blend-mode: multiply;
-          }
-
-          .ck-main-card {
-            position: relative;
-            z-index: 10;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            background: rgba(255, 255, 255, 0.35);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border-radius: 24px;
-            padding: 16px;
-            padding-bottom: 32px; /* Add more bottom padding */
-            overflow: hidden;
-            min-height: 480px; /* Force minimum height to push content down */
-          }
-
-          .ck-title-section {
-            text-align: center;
-            margin-bottom: 12px;
-          }
-
-          .ck-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #004492;
-            margin: 0;
-          }
-
-          .ck-subtitle {
-            font-size: 10px;
-            color: #64748b;
-            margin: 2px 0 0 0;
-          }
-
-          /* Custom Key Card */
-          .ck-key-card {
-            background-color: #e8ebf0;
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 12px;
-          }
-
-          .ck-key-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-          }
-
-          .ck-key-label {
-            font-size: 9px;
-            font-weight: 600;
-            text-transform: uppercase;
-            color: #004492; /* themeColor */
-            margin: 0;
-            letter-spacing: 0.025em;
-          }
-
-          .ck-key-value {
-            font-size: 15px; /* text-md/sm equivalent */
-            font-weight: 700;
-            color: #0f172a;
-            margin: 2px 0;
-          }
-
-          .ck-key-type {
-            font-size: 10px;
-            color: #64748b;
-            margin: 0;
-          }
-
-          .ck-key-icon {
-            height: 32px;
-            width: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background-color: #001530; /* darkThemeColor */
-            cursor: pointer;
-          }
-
-          /* Suggested Contacts */
-          .ck-contacts-section {
-            margin-bottom: 12px;
-          }
-
-          .ck-section-title {
-            font-size: 10px;
-            font-weight: 600;
-            color: #334155;
-            margin: 0 0 8px 4px;
-          }
-
-          .ck-contacts-list {
-            display: flex;
-            justify-content: space-between;
-            padding: 0 4px;
-          }
-
-          .ck-contact-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            transition: transform 0.2s;
-          }
-
-          .ck-contact-item:hover {
-            transform: scale(1.05);
-          }
-
-          .ck-avatar-wrapper {
-            position: relative;
-            height: 44px; /* h-11 */
-            width: 44px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: white;
-            border: 1px solid #d1d5db; /* gray-300 */
-            transition: all 0.2s;
-            overflow: hidden;
-          }
-
-          .ck-contact-item.selected .ck-avatar-wrapper {
-            box-shadow:
-              0 0 0 2px white,
-              0 0 0 4px #004492,
-              0 10px 15px -3px rgba(0, 68, 146, 0.3);
-            border-color: transparent;
-          }
-
-          .ck-avatar img {
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-          }
-
-          .ck-avatar {
-            width: 100%;
-            height: 100%;
-          }
-
-          .ck-contact-name {
-            font-size: 9px;
-            color: #64748b;
-            text-align: center;
-            max-width: 45px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-          }
-
-          /* Buttons */
-          .ck-btn-primary {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-            border-radius: 12px;
-            padding: 10px 16px;
-            font-size: 12px;
-            font-weight: 600;
-            color: white;
-            background: linear-gradient(
-              to right,
-              #004492 0%,
-              #001530 40%,
-              #080b19 70%,
-              #000000 100%
-            );
-            border: 1px solid #004492;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: opacity 0.2s;
-          }
-
-          .ck-btn-primary:hover {
-            opacity: 0.9;
-          }
-
-          .ck-btn-primary.outline {
-            background: white;
-            color: #004492;
-            border: 2px solid #004492;
-          }
-
-          .ck-actions {
-            margin-top: auto;
-            padding-top: 24px; /* Ensure separation from contacts */
-          }
-
-          /* Confirm Screen */
-          .ck-back-btn {
-            align-self: flex-start;
-            display: flex;
-            align-items: center;
-            color: #9ca3af; /* gray-400 */
-            font-size: 12px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            margin-bottom: 12px;
-            transition: color 0.2s;
-          }
-
-          .ck-back-btn:hover {
-            color: #4b5563;
-          }
-
-          .ck-title-section.compact .ck-title-sm {
-            font-size: 16px;
-            font-weight: 700;
-            color: #004492;
-            margin: 0;
-          }
-
-          .ck-title-section.compact .ck-subtitle-sm {
-            font-size: 10px;
-            color: #64748b;
-            margin-top: 2px;
-          }
-
-          .ck-review-card {
-            margin-bottom: 8px;
-          }
-
-          .ck-label-xs {
-            font-size: 9px;
-            font-weight: 500;
-            color: #9ca3af;
-            margin: 0 0 6px 0;
-            letter-spacing: 0.05em;
-          }
-
-          .ck-recipient-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background-color: #f5f7fa;
-            padding: 12px;
-            border-radius: 8px;
-          }
-
-          .ck-confirm-avatar {
-            height: 32px;
-            width: 32px;
-            border-radius: 50%;
-            overflow: hidden;
-            background-color: #004492;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
-            font-weight: 700;
-          }
-
-          .ck-confirm-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-          }
-
-          .ck-recipient-name {
-            font-size: 12px;
-            font-weight: 700;
-            color: #111827;
-            margin: 0;
-          }
-
-          .ck-recipient-sub {
-            font-size: 9px;
-            color: #9ca3af;
-            margin: 0;
-          }
-
-          .ck-amount-row {
-            background-color: #e8ebf0;
-            padding: 12px;
-            border-radius: 8px;
-          }
-
-          .ck-amount-text {
-            font-size: 18px;
-            font-weight: 700;
-            color: #004492;
-            margin: 0;
-          }
-
-          /* Slider */
-          .ck-slider-container {
-            width: 100%;
-            height: 48px;
-            background: linear-gradient(
-              to right,
-              #004492 0%,
-              #001530 40%,
-              #080b19 70%,
-              #000000 100%
-            );
-            border-radius: 99px;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 16px;
-            overflow: hidden;
-          }
-
-          .ck-slider-text {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 12px;
-            font-weight: 500;
-            pointer-events: none;
-            padding-left: 20px;
-          }
-
-          .ck-slider-thumb {
-            position: absolute;
-            left: 4px;
-            top: 4px;
-            width: 40px; /* h-10 */
-            height: 40px;
-            background: white;
-            border-radius: 50%;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #004492;
-            cursor: grab;
-            z-index: 10;
-          }
-
-          /* Process Screen */
-          .ck-process-card {
-            position: absolute;
-            inset: 20px 10px 80px 10px;
-            border-radius: 24px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background-color: #f3f4f6;
-            box-sizing: border-box;
-            overflow: hidden;
-          }
-
-          .ck-process-bg {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-              to right,
-              #004492 0%,
-              #001530 40%,
-              #080b19 70%,
-              #000000 100%
-            );
-            clip-path: polygon(0 0, 0 0, 0 100%, 0 100%); /* Initial state */
-            transition: clip-path 0.05s linear;
-          }
-
-          .ck-process-content {
-            position: relative;
-            z-index: 10;
-            padding: 40px 20px;
-            width: 100%;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-          }
-
-          .ck-finish-btn {
-            background: white;
-            color: #004492;
-            border: none;
-            padding: 8px 24px;
-            border-radius: 99px;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            margin-top: 16px;
-          }
-
-          .hidden {
-            display: none !important;
-          }
-        </style>
-
-        <script is:inline>
-          (function () {
-            // Prevent re-declaration errors during HMR by scoping variables
-            let ckSelectedContact = null;
-            const ckContactsData = {
-              cs: {
-                name: "Carlos Santander",
-                initials: "CS",
-                image: "/images/team/team-02.png",
-              },
-              ar: {
-                name: "Ana Ruiz",
-                initials: "AR",
-                image: "/images/team/team-08.png",
-              },
-              sv: {
-                name: "Sofia Vargas",
-                initials: "SV",
-                image: "/images/team/user-02.png",
-              },
-              mc: {
-                name: "Miguel Castro",
-                initials: "MC",
-                image: "/images/team/team-06.png",
-              },
-            };
-
-            // DOM Elements - Select within the specific container class to be safer, or verify existence
-            const ckPayBtn = document.getElementById("ck-pay-btn");
-
-            // Safety check: if elements aren't found, stop execution (prevents errors on partial renders)
-            if (!ckPayBtn) return;
-
-            const ckPayBtnText = ckPayBtn.querySelector(".ck-btn-text");
-
-            // Navigation Helper
-            window.ckNavigate = (screenId) => {
-              document.querySelectorAll(".ck-screen").forEach((el) => {
-                el.classList.remove("active");
-                el.classList.add("hidden-screen");
-              });
-              const target = document.getElementById(`ck-screen-${screenId}`);
-              if (target) {
-                target.classList.remove("hidden-screen");
-                target.classList.add("active");
-              }
-            };
-
-            // Contact Selection Logic
-            const contactButtons =
-              document.querySelectorAll(".ck-contact-item");
-            contactButtons.forEach((btn) => {
-              // Remove old listeners if any (though cloning is better, this is simple)
-              // actually in an IIFE on re-run, the DOM is fresh usually in Astro HMR or we are just re-attaching
-              btn.onclick = () => {
-                // Use onclick property to avoid duplicate event listeners on re-runs
-                const id = btn.getAttribute("data-id");
-
-                if (ckSelectedContact === id) {
-                  // Deselect
-                  ckSelectedContact = null;
-                  btn.classList.remove("selected");
-                  if (ckPayBtnText)
-                    ckPayBtnText.textContent = "Pay to Custom Key";
-                  ckPayBtn.classList.remove("outline");
-                } else {
-                  // Select
-                  contactButtons.forEach((b) => b.classList.remove("selected"));
-                  ckSelectedContact = id;
-                  btn.classList.add("selected");
-                  const name = btn.getAttribute("data-name");
-                  if (ckPayBtnText) ckPayBtnText.textContent = `Pay to ${name}`;
-                  ckPayBtn.classList.add("outline");
-                }
-              };
-            });
-
-            // Pay Button Logic
-            ckPayBtn.onclick = () => {
-              // Setup Confirm Screen
-              const avatarEl = document.getElementById("ck-confirm-avatar");
-              const nameEl = document.getElementById("ck-confirm-name");
-
-              if (avatarEl && nameEl) {
-                if (ckSelectedContact && ckContactsData[ckSelectedContact]) {
-                  const data = ckContactsData[ckSelectedContact];
-                  nameEl.textContent = data.name;
-                  if (data.image) {
-                    avatarEl.innerHTML = `<img src="${data.image}" alt="${data.name}"/>`;
-                  } else {
-                    avatarEl.textContent = data.initials;
-                    avatarEl.innerHTML = data.initials;
-                  }
-                } else {
-                  // Default / Custom Key (Mock Data matching React preview)
-                  nameEl.textContent = "Carlos Santander";
-                  avatarEl.innerHTML = "CS";
-                }
-              }
-
-              window.ckNavigate("confirm");
-            };
-
-            const backBtn = document.getElementById("ck-back-btn");
-            if (backBtn) {
-              backBtn.onclick = () => {
-                window.ckNavigate("dashboard");
-              };
-            }
-
-            // Slider Logic
-            const sliderThumb = document.getElementById("ck-slider-thumb");
-            const sliderContainer = document.getElementById("ck-slider");
-
-            if (sliderThumb && sliderContainer) {
-              let isDragging = false;
-              let startX = 0;
-
-              const onDragStart = (e) => {
-                isDragging = true;
-                startX =
-                  (e.touches ? e.touches[0].clientX : e.clientX) -
-                  sliderThumb.offsetLeft;
-              };
-
-              const onDragMove = (e) => {
-                if (!isDragging) return;
-                const cx = e.touches ? e.touches[0].clientX : e.clientX;
-                let newLeft = cx - startX;
-                const maxLeft =
-                  sliderContainer.offsetWidth - sliderThumb.offsetWidth - 8;
-
-                if (newLeft < 4) newLeft = 4;
-                if (newLeft > maxLeft) newLeft = maxLeft;
-
-                sliderThumb.style.left = newLeft + "px";
-
-                if (newLeft >= maxLeft - 5) {
-                  isDragging = false;
-                  startProcessing();
-                }
-              };
-
-              const onDragEnd = () => {
-                if (!isDragging) return;
-                isDragging = false;
-                sliderThumb.style.transition = "left 0.3s";
-                sliderThumb.style.left = "4px";
-                setTimeout(() => {
-                  sliderThumb.style.transition = "";
-                }, 300);
-              };
-
-              sliderThumb.onmousedown = onDragStart;
-              sliderThumb.ontouchstart = onDragStart;
-
-              // Window events for drag need to be careful not to pile up
-              // With IIFE they might pile up on HMR.
-              // Ideally we remove them first, but window doesn't persist consistently in simple script logic.
-              // A cleaner way for HMR is to check a flag or just accept it's a dev glitch.
-              // For now, simpler is better.
-              window.removeEventListener("mousemove", onDragMove);
-              window.removeEventListener("touchmove", onDragMove);
-              window.removeEventListener("mouseup", onDragEnd);
-              window.removeEventListener("touchend", onDragEnd);
-
-              window.addEventListener("mousemove", onDragMove);
-              window.addEventListener("touchmove", onDragMove);
-              window.addEventListener("mouseup", onDragEnd);
-              window.addEventListener("touchend", onDragEnd);
-            }
-
-            function startProcessing() {
-              window.ckNavigate("process");
-              const bg = document.getElementById("ck-process-bg");
-              const progressBar = document.getElementById("ck-progress-bar");
-              const textMain = document.getElementById("ck-loading-text");
-              const textSub = document.getElementById("ck-loading-sub");
-
-              const loadingState = document.getElementById("ck-state-loading");
-              const successState = document.getElementById("ck-state-success");
-
-              if (
-                !bg ||
-                !progressBar ||
-                !textMain ||
-                !textSub ||
-                !loadingState ||
-                !successState
-              )
-                return;
-
-              // Reset
-              loadingState.classList.remove("hidden");
-              successState.classList.add("hidden");
-              bg.style.clipPath = `polygon(0 0, 0 0, 0 100%, 0 100%)`;
-              progressBar.style.width = "0%";
-              textMain.style.color = "#111827";
-              textSub.style.color = "#6b7280";
-
-              let progress = 0;
-              const interval = setInterval(() => {
-                progress += 1;
-
-                // Complex Wave Logic
-                const waveProgress = progress + 20;
-                let points = "0% 0%, ";
-
-                for (let i = 0; i <= 50; i++) {
-                  const y = (i / 50) * 100;
-                  const distanceFromCenter = Math.abs(y - 50) / 50;
-                  const delay = distanceFromCenter * 15;
-                  const adjustedProgress = Math.max(0, waveProgress - delay);
-                  const wave =
-                    Math.sin(
-                      (adjustedProgress / 100) * Math.PI * 5 +
-                        (y / 100) * Math.PI * 3,
-                    ) * 10;
-                  const x = adjustedProgress + (wave / 100) * 12;
-                  points += `${x}% ${y}%, `;
-                }
-                points += "0% 100%";
-
-                bg.style.clipPath = `polygon(${points})`;
-
-                // Update ProgressBar
-                progressBar.style.width = `${progress}%`;
-
-                // Update text color
-                if (progress > 40) {
-                  textMain.style.color = "white";
-                  textSub.style.color = "rgba(255,255,255,0.9)";
-                }
-
-                if (progress >= 100) {
-                  clearInterval(interval);
-                  setTimeout(() => {
-                    loadingState.classList.add("hidden");
-                    successState.classList.remove("hidden");
-                  }, 500);
-                }
-              }, 30);
-            }
-
-            window.ckReset = () => {
-              window.ckNavigate("dashboard");
-              const sliderThumb = document.getElementById("ck-slider-thumb");
-              if (sliderThumb) sliderThumb.style.left = "4px";
-            };
-          })();
-        </script>
+        <!-- Screen: Processing / Success -->
+        <div id="ck-screen-process" class="ck-screen hidden-screen">
+          <div id="ck-process-card" class="ck-process-card">
+            <!-- The gradient background and clip-path will be handled by JS/CSS -->
+            <div id="ck-process-bg" class="ck-process-bg"></div>
+
+            <div class="ck-process-content">
+              <!-- Loading State -->
+              <div
+                id="ck-state-loading"
+                class="flex flex-col items-center justify-center text-center space-y-4"
+              >
+                <h2
+                  id="ck-loading-text"
+                  class="text-xl font-bold text-gray-900 transition-colors duration-200"
+                >
+                  Processing payment...
+                </h2>
+                <p
+                  id="ck-loading-sub"
+                  class="text-sm text-gray-500 transition-colors duration-200"
+                >
+                  Please wait
+                </p>
+                <div
+                  class="w-full max-w-xs mt-2 bg-gray-300 rounded-full h-2 overflow-hidden"
+                >
+                  <div
+                    id="ck-progress-bar"
+                    class="h-full bg-white rounded-full transition-all duration-300 ease-out"
+                    style="width: 0%"
+                  >
+                  </div>
+                </div>
+              </div>
+
+              <!-- Success State -->
+              <div
+                id="ck-state-success"
+                class="flex flex-col items-center justify-center text-center space-y-6 hidden"
+              >
+                <svg
+                  class="h-24 w-24 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="3"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M5 13l4 4L19 7"
+                    style="transform: rotate(-2deg); transform-origin: center;"
+                  ></path>
+                </svg>
+                <h2 class="text-3xl font-bold leading-tight text-white">
+                  Successful payment
+                </h2>
+                <p class="text-base leading-relaxed text-white/90">
+                  Your payment has been successfully completed
+                </p>
+
+                <button onclick="window.ckReset()" class="ck-finish-btn"
+                  >Done</button
+                >
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </DeviceFrame>
-  </div>
+
+      <style>
+        /* Base Layout */
+        .ck-app-container {
+          width: 100%;
+          height: 100%;
+          position: relative;
+          overflow: hidden;
+          background: white;
+          font-family:
+            -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+            Arial, sans-serif;
+        }
+
+        .ck-screen {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          flex-direction: column;
+          transition:
+            opacity 0.3s ease,
+            transform 0.3s ease;
+          background: transparent;
+          z-index: 1;
+        }
+
+        .ck-screen.hidden-screen {
+          opacity: 0;
+          pointer-events: none;
+          transform: scale(0.98);
+          z-index: 0;
+        }
+
+        .ck-screen.active {
+          opacity: 1;
+          pointer-events: auto;
+          transform: scale(1);
+          z-index: 10;
+        }
+
+        /* Dashboard Styles */
+        .ck-scroll-content {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          padding: 24px;
+          padding-top: 10px;
+          overflow-y: auto;
+          height: 100%;
+          box-sizing: border-box;
+        }
+
+        .ck-header {
+          display: flex;
+          justify-content: center;
+          margin-bottom: 12px;
+          z-index: 20;
+          position: relative;
+        }
+
+        .ck-logo {
+          height: 32px;
+          object-fit: contain;
+        }
+
+        .ck-hero-container {
+          position: relative;
+          margin-bottom: -64px;
+          z-index: 0;
+          display: flex;
+          justify-content: center;
+        }
+
+        .ck-hero-gif {
+          height: 192px; /* h-48 */
+          width: 192px;
+          object-fit: contain;
+          opacity: 0.9;
+          mix-blend-mode: multiply;
+        }
+
+        .ck-main-card {
+          position: relative;
+          z-index: 10;
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          background: rgba(255, 255, 255, 0.35);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          border-radius: 24px;
+          padding: 16px;
+          padding-bottom: 32px; /* Add more bottom padding */
+          overflow: hidden;
+          min-height: 480px; /* Force minimum height to push content down */
+        }
+
+        .ck-title-section {
+          text-align: center;
+          margin-bottom: 12px;
+        }
+
+        .ck-title {
+          font-size: 18px;
+          font-weight: 700;
+          color: #004492;
+          margin: 0;
+        }
+
+        .ck-subtitle {
+          font-size: 10px;
+          color: #64748b;
+          margin: 2px 0 0 0;
+        }
+
+        /* Custom Key Card */
+        .ck-key-card {
+          background-color: #e8ebf0;
+          border-radius: 12px;
+          padding: 12px;
+          margin-bottom: 12px;
+        }
+
+        .ck-key-content {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .ck-key-label {
+          font-size: 9px;
+          font-weight: 600;
+          text-transform: uppercase;
+          color: #004492; /* themeColor */
+          margin: 0;
+          letter-spacing: 0.025em;
+        }
+
+        .ck-key-value {
+          font-size: 15px; /* text-md/sm equivalent */
+          font-weight: 700;
+          color: #0f172a;
+          margin: 2px 0;
+        }
+
+        .ck-key-type {
+          font-size: 10px;
+          color: #64748b;
+          margin: 0;
+        }
+
+        .ck-key-icon {
+          height: 32px;
+          width: 32px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          background-color: #001530; /* darkThemeColor */
+          cursor: pointer;
+        }
+
+        /* Suggested Contacts */
+        .ck-contacts-section {
+          margin-bottom: 12px;
+        }
+
+        .ck-section-title {
+          font-size: 10px;
+          font-weight: 600;
+          color: #334155;
+          margin: 0 0 8px 4px;
+        }
+
+        .ck-contacts-list {
+          display: flex;
+          justify-content: space-between;
+          padding: 0 4px;
+        }
+
+        .ck-contact-item {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 6px;
+          background: none;
+          border: none;
+          cursor: pointer;
+          transition: transform 0.2s;
+        }
+
+        .ck-contact-item:hover {
+          transform: scale(1.05);
+        }
+
+        .ck-avatar-wrapper {
+          position: relative;
+          height: 44px; /* h-11 */
+          width: 44px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: white;
+          border: 1px solid #d1d5db; /* gray-300 */
+          transition: all 0.2s;
+          overflow: hidden;
+        }
+
+        .ck-contact-item.selected .ck-avatar-wrapper {
+          box-shadow:
+            0 0 0 2px white,
+            0 0 0 4px #004492,
+            0 10px 15px -3px rgba(0, 68, 146, 0.3);
+          border-color: transparent;
+        }
+
+        .ck-avatar img {
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+        }
+
+        .ck-avatar {
+          width: 100%;
+          height: 100%;
+        }
+
+        .ck-contact-name {
+          font-size: 9px;
+          color: #64748b;
+          text-align: center;
+          max-width: 45px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        /* Buttons */
+        .ck-btn-primary {
+          position: relative;
+          width: 100%;
+          overflow: hidden;
+          border-radius: 12px;
+          padding: 10px 16px;
+          font-size: 12px;
+          font-weight: 600;
+          color: white;
+          background: linear-gradient(
+            to right,
+            #004492 0%,
+            #001530 40%,
+            #080b19 70%,
+            #000000 100%
+          );
+          border: 1px solid #004492;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          transition: opacity 0.2s;
+        }
+
+        .ck-btn-primary:hover {
+          opacity: 0.9;
+        }
+
+        .ck-btn-primary.outline {
+          background: white;
+          color: #004492;
+          border: 2px solid #004492;
+        }
+
+        .ck-actions {
+          margin-top: auto;
+          padding-top: 24px; /* Ensure separation from contacts */
+        }
+
+        /* Confirm Screen */
+        .ck-back-btn {
+          align-self: flex-start;
+          display: flex;
+          align-items: center;
+          color: #9ca3af; /* gray-400 */
+          font-size: 12px;
+          background: none;
+          border: none;
+          cursor: pointer;
+          margin-bottom: 12px;
+          transition: color 0.2s;
+        }
+
+        .ck-back-btn:hover {
+          color: #4b5563;
+        }
+
+        .ck-title-section.compact .ck-title-sm {
+          font-size: 16px;
+          font-weight: 700;
+          color: #004492;
+          margin: 0;
+        }
+
+        .ck-title-section.compact .ck-subtitle-sm {
+          font-size: 10px;
+          color: #64748b;
+          margin-top: 2px;
+        }
+
+        .ck-review-card {
+          margin-bottom: 8px;
+        }
+
+        .ck-label-xs {
+          font-size: 9px;
+          font-weight: 500;
+          color: #9ca3af;
+          margin: 0 0 6px 0;
+          letter-spacing: 0.05em;
+        }
+
+        .ck-recipient-row {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          background-color: #f5f7fa;
+          padding: 12px;
+          border-radius: 8px;
+        }
+
+        .ck-confirm-avatar {
+          height: 32px;
+          width: 32px;
+          border-radius: 50%;
+          overflow: hidden;
+          background-color: #004492;
+          color: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 11px;
+          font-weight: 700;
+        }
+
+        .ck-confirm-avatar img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .ck-recipient-name {
+          font-size: 12px;
+          font-weight: 700;
+          color: #111827;
+          margin: 0;
+        }
+
+        .ck-recipient-sub {
+          font-size: 9px;
+          color: #9ca3af;
+          margin: 0;
+        }
+
+        .ck-amount-row {
+          background-color: #e8ebf0;
+          padding: 12px;
+          border-radius: 8px;
+        }
+
+        .ck-amount-text {
+          font-size: 18px;
+          font-weight: 700;
+          color: #004492;
+          margin: 0;
+        }
+
+        /* Slider */
+        .ck-slider-container {
+          width: 100%;
+          height: 48px;
+          background: linear-gradient(
+            to right,
+            #004492 0%,
+            #001530 40%,
+            #080b19 70%,
+            #000000 100%
+          );
+          border-radius: 99px;
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-top: 16px;
+          overflow: hidden;
+        }
+
+        .ck-slider-text {
+          color: rgba(255, 255, 255, 0.6);
+          font-size: 12px;
+          font-weight: 500;
+          pointer-events: none;
+          padding-left: 20px;
+        }
+
+        .ck-slider-thumb {
+          position: absolute;
+          left: 4px;
+          top: 4px;
+          width: 40px; /* h-10 */
+          height: 40px;
+          background: white;
+          border-radius: 50%;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #004492;
+          cursor: grab;
+          z-index: 10;
+        }
+
+        /* Process Screen */
+        .ck-process-card {
+          position: absolute;
+          inset: 20px 10px 80px 10px;
+          border-radius: 24px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          background-color: #f3f4f6;
+          box-sizing: border-box;
+          overflow: hidden;
+        }
+
+        .ck-process-bg {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            to right,
+            #004492 0%,
+            #001530 40%,
+            #080b19 70%,
+            #000000 100%
+          );
+          clip-path: polygon(0 0, 0 0, 0 100%, 0 100%); /* Initial state */
+          transition: clip-path 0.05s linear;
+        }
+
+        .ck-process-content {
+          position: relative;
+          z-index: 10;
+          padding: 40px 20px;
+          width: 100%;
+          box-sizing: border-box;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .ck-finish-btn {
+          background: white;
+          color: #004492;
+          border: none;
+          padding: 8px 24px;
+          border-radius: 99px;
+          font-weight: 600;
+          font-size: 14px;
+          cursor: pointer;
+          margin-top: 16px;
+        }
+
+        .hidden {
+          display: none !important;
+        }
+      </style>
+
+      <script is:inline>
+        (function () {
+          // Prevent re-declaration errors during HMR by scoping variables
+          let ckSelectedContact = null;
+          const ckContactsData = {
+            cs: {
+              name: "Carlos Santander",
+              initials: "CS",
+              image: "/images/team/team-02.png",
+            },
+            ar: {
+              name: "Ana Ruiz",
+              initials: "AR",
+              image: "/images/team/team-08.png",
+            },
+            sv: {
+              name: "Sofia Vargas",
+              initials: "SV",
+              image: "/images/team/user-02.png",
+            },
+            mc: {
+              name: "Miguel Castro",
+              initials: "MC",
+              image: "/images/team/team-06.png",
+            },
+          };
+
+          // DOM Elements - Select within the specific container class to be safer, or verify existence
+          const ckPayBtn = document.getElementById("ck-pay-btn");
+
+          // Safety check: if elements aren't found, stop execution (prevents errors on partial renders)
+          if (!ckPayBtn) return;
+
+          const ckPayBtnText = ckPayBtn.querySelector(".ck-btn-text");
+
+          // Navigation Helper
+          window.ckNavigate = (screenId) => {
+            document.querySelectorAll(".ck-screen").forEach((el) => {
+              el.classList.remove("active");
+              el.classList.add("hidden-screen");
+            });
+            const target = document.getElementById(`ck-screen-${screenId}`);
+            if (target) {
+              target.classList.remove("hidden-screen");
+              target.classList.add("active");
+            }
+          };
+
+          // Contact Selection Logic
+          const contactButtons = document.querySelectorAll(".ck-contact-item");
+          contactButtons.forEach((btn) => {
+            // Remove old listeners if any (though cloning is better, this is simple)
+            // actually in an IIFE on re-run, the DOM is fresh usually in Astro HMR or we are just re-attaching
+            btn.onclick = () => {
+              // Use onclick property to avoid duplicate event listeners on re-runs
+              const id = btn.getAttribute("data-id");
+
+              if (ckSelectedContact === id) {
+                // Deselect
+                ckSelectedContact = null;
+                btn.classList.remove("selected");
+                if (ckPayBtnText)
+                  ckPayBtnText.textContent = "Pay to Custom Key";
+                ckPayBtn.classList.remove("outline");
+              } else {
+                // Select
+                contactButtons.forEach((b) => b.classList.remove("selected"));
+                ckSelectedContact = id;
+                btn.classList.add("selected");
+                const name = btn.getAttribute("data-name");
+                if (ckPayBtnText) ckPayBtnText.textContent = `Pay to ${name}`;
+                ckPayBtn.classList.add("outline");
+              }
+            };
+          });
+
+          // Pay Button Logic
+          ckPayBtn.onclick = () => {
+            // Setup Confirm Screen
+            const avatarEl = document.getElementById("ck-confirm-avatar");
+            const nameEl = document.getElementById("ck-confirm-name");
+
+            if (avatarEl && nameEl) {
+              if (ckSelectedContact && ckContactsData[ckSelectedContact]) {
+                const data = ckContactsData[ckSelectedContact];
+                nameEl.textContent = data.name;
+                if (data.image) {
+                  avatarEl.innerHTML = `<img src="${data.image}" alt="${data.name}"/>`;
+                } else {
+                  avatarEl.textContent = data.initials;
+                  avatarEl.innerHTML = data.initials;
+                }
+              } else {
+                // Default / Custom Key (Mock Data matching React preview)
+                nameEl.textContent = "Carlos Santander";
+                avatarEl.innerHTML = "CS";
+              }
+            }
+
+            window.ckNavigate("confirm");
+          };
+
+          const backBtn = document.getElementById("ck-back-btn");
+          if (backBtn) {
+            backBtn.onclick = () => {
+              window.ckNavigate("dashboard");
+            };
+          }
+
+          // Slider Logic
+          const sliderThumb = document.getElementById("ck-slider-thumb");
+          const sliderContainer = document.getElementById("ck-slider");
+
+          if (sliderThumb && sliderContainer) {
+            let isDragging = false;
+            let startX = 0;
+
+            const onDragStart = (e) => {
+              isDragging = true;
+              startX =
+                (e.touches ? e.touches[0].clientX : e.clientX) -
+                sliderThumb.offsetLeft;
+            };
+
+            const onDragMove = (e) => {
+              if (!isDragging) return;
+              const cx = e.touches ? e.touches[0].clientX : e.clientX;
+              let newLeft = cx - startX;
+              const maxLeft =
+                sliderContainer.offsetWidth - sliderThumb.offsetWidth - 8;
+
+              if (newLeft < 4) newLeft = 4;
+              if (newLeft > maxLeft) newLeft = maxLeft;
+
+              sliderThumb.style.left = newLeft + "px";
+
+              if (newLeft >= maxLeft - 5) {
+                isDragging = false;
+                startProcessing();
+              }
+            };
+
+            const onDragEnd = () => {
+              if (!isDragging) return;
+              isDragging = false;
+              sliderThumb.style.transition = "left 0.3s";
+              sliderThumb.style.left = "4px";
+              setTimeout(() => {
+                sliderThumb.style.transition = "";
+              }, 300);
+            };
+
+            sliderThumb.onmousedown = onDragStart;
+            sliderThumb.ontouchstart = onDragStart;
+
+            // Window events for drag need to be careful not to pile up
+            // With IIFE they might pile up on HMR.
+            // Ideally we remove them first, but window doesn't persist consistently in simple script logic.
+            // A cleaner way for HMR is to check a flag or just accept it's a dev glitch.
+            // For now, simpler is better.
+            window.removeEventListener("mousemove", onDragMove);
+            window.removeEventListener("touchmove", onDragMove);
+            window.removeEventListener("mouseup", onDragEnd);
+            window.removeEventListener("touchend", onDragEnd);
+
+            window.addEventListener("mousemove", onDragMove);
+            window.addEventListener("touchmove", onDragMove);
+            window.addEventListener("mouseup", onDragEnd);
+            window.addEventListener("touchend", onDragEnd);
+          }
+
+          function startProcessing() {
+            window.ckNavigate("process");
+            const bg = document.getElementById("ck-process-bg");
+            const progressBar = document.getElementById("ck-progress-bar");
+            const textMain = document.getElementById("ck-loading-text");
+            const textSub = document.getElementById("ck-loading-sub");
+
+            const loadingState = document.getElementById("ck-state-loading");
+            const successState = document.getElementById("ck-state-success");
+
+            if (
+              !bg ||
+              !progressBar ||
+              !textMain ||
+              !textSub ||
+              !loadingState ||
+              !successState
+            )
+              return;
+
+            // Reset
+            loadingState.classList.remove("hidden");
+            successState.classList.add("hidden");
+            bg.style.clipPath = `polygon(0 0, 0 0, 0 100%, 0 100%)`;
+            progressBar.style.width = "0%";
+            textMain.style.color = "#111827";
+            textSub.style.color = "#6b7280";
+
+            let progress = 0;
+            const interval = setInterval(() => {
+              progress += 1;
+
+              // Complex Wave Logic
+              const waveProgress = progress + 20;
+              let points = "0% 0%, ";
+
+              for (let i = 0; i <= 50; i++) {
+                const y = (i / 50) * 100;
+                const distanceFromCenter = Math.abs(y - 50) / 50;
+                const delay = distanceFromCenter * 15;
+                const adjustedProgress = Math.max(0, waveProgress - delay);
+                const wave =
+                  Math.sin(
+                    (adjustedProgress / 100) * Math.PI * 5 +
+                      (y / 100) * Math.PI * 3,
+                  ) * 10;
+                const x = adjustedProgress + (wave / 100) * 12;
+                points += `${x}% ${y}%, `;
+              }
+              points += "0% 100%";
+
+              bg.style.clipPath = `polygon(${points})`;
+
+              // Update ProgressBar
+              progressBar.style.width = `${progress}%`;
+
+              // Update text color
+              if (progress > 40) {
+                textMain.style.color = "white";
+                textSub.style.color = "rgba(255,255,255,0.9)";
+              }
+
+              if (progress >= 100) {
+                clearInterval(interval);
+                setTimeout(() => {
+                  loadingState.classList.add("hidden");
+                  successState.classList.remove("hidden");
+                }, 500);
+              }
+            }, 30);
+          }
+
+          window.ckReset = () => {
+            window.ckNavigate("dashboard");
+            const sliderThumb = document.getElementById("ck-slider-thumb");
+            if (sliderThumb) sliderThumb.style.left = "4px";
+          };
+        })();
+      </script>
+    </div>
+  </DeviceFrame>
 </div>
 
 <style>
@@ -1059,19 +1046,6 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
     margin: 0 auto;
     z-index: 10;
     padding: 1rem 0 2rem;
-  }
-
-  .device-frame-wrapper {
-    position: relative;
-    z-index: 10;
-    transform: scale(1);
-    padding: 2.5rem 2rem;
-    background-color: #f3f4f6;
-    border-radius: 2rem;
-    margin: 3rem auto;
-    height: 850px !important;
-    display: flex;
-    flex-direction: column;
   }
 
   .device-content {

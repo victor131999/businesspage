@@ -3,225 +3,214 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
 ---
 
 <div class="device-container">
-  <div class="device-frame-wrapper">
-    <DeviceFrame>
-      <div class="device-content">
-        <div class="bs-app-container">
-          <!-- Screen: Dashboard -->
-          <div id="bs-screen-dashboard" class="bs-screen active">
-            <div class="bs-scroll-content">
-              <!-- Header -->
-              <div class="bs-header">
-                <img
-                  src="/images/zelify_logo.png"
-                  alt="Zelify"
-                  class="bs-logo"
-                />
-              </div>
+  <DeviceFrame>
+    <div class="device-content">
+      <div class="bs-app-container">
+        <!-- Screen: Dashboard -->
+        <div id="bs-screen-dashboard" class="bs-screen active">
+          <div class="bs-scroll-content">
+            <!-- Header -->
+            <div class="bs-header">
+              <img src="/images/zelify_logo.png" alt="Zelify" class="bs-logo" />
+            </div>
 
-              <!-- Hero Card -->
-              <div class="bs-hero-container">
-                <div class="bs-main-card">
-                  <div class="bs-card-content">
-                    <div class="bs-avatar-wrapper">
-                      <img
-                        src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop"
-                        alt="User"
-                        class="bs-user-avatar"
-                      />
-                    </div>
-                    <h2 class="bs-user-name">Hola, Annie</h2>
-                    <p class="bs-total-label">Total a Pagar</p>
-                    <div class="bs-amount-wrapper">
-                      <span class="bs-currency">$</span>
-                      <span class="bs-amount">245.00</span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Floating Search Bar -->
-                <div class="bs-search-container">
-                  <div class="bs-search-bar">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="bs-search-icon"
-                    >
-                      <circle cx="11" cy="11" r="8"></circle>
-                      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                    <input
-                      type="text"
-                      placeholder="Buscar servicios..."
-                      class="bs-search-input"
+            <!-- Hero Card -->
+            <div class="bs-hero-container">
+              <div class="bs-main-card">
+                <div class="bs-card-content">
+                  <div class="bs-avatar-wrapper">
+                    <img
+                      src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop"
+                      alt="User"
+                      class="bs-user-avatar"
                     />
                   </div>
-                </div>
-              </div>
-
-              <!-- Quick Access Grid -->
-              <div class="bs-grid-section">
-                <h3 class="bs-section-title">Servicios Básicos</h3>
-                <div class="bs-services-grid">
-                  <!-- Item 1 -->
-                  <div
-                    class="bs-service-item"
-                    onclick="bsNavigate('electricidad', 'Electricidad')"
-                  >
-                    <div class="bs-icon-box orange">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"
-                        ></polygon>
-                      </svg>
-                    </div>
-                    <span class="bs-service-name">Luz</span>
-                  </div>
-                  <!-- Item 2 -->
-                  <div
-                    class="bs-service-item"
-                    onclick="bsNavigate('agua', 'Agua')"
-                  >
-                    <div class="bs-icon-box blue">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
-                      </svg>
-                    </div>
-                    <span class="bs-service-name">Agua</span>
-                  </div>
-                  <!-- Item 3 -->
-                  <div
-                    class="bs-service-item"
-                    onclick="bsNavigate('internet', 'Internet')"
-                  >
-                    <div class="bs-icon-box purple">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
-                        <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
-                        <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
-                        <line x1="12" y1="20" x2="12.01" y2="20"></line>
-                      </svg>
-                    </div>
-                    <span class="bs-service-name">Internet</span>
-                  </div>
-                  <!-- Item 4 -->
-                  <div
-                    class="bs-service-item"
-                    onclick="bsNavigate('gas', 'Gas')"
-                  >
-                    <div class="bs-icon-box red">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path d="M18 20V6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v14"
-                        ></path>
-                        <path d="M2 20h20"></path>
-                        <path d="M14 12v.01"></path>
-                      </svg>
-                    </div>
-                    <span class="bs-service-name">Gas</span>
+                  <h2 class="bs-user-name">Hola, Annie</h2>
+                  <p class="bs-total-label">Total a Pagar</p>
+                  <div class="bs-amount-wrapper">
+                    <span class="bs-currency">$</span>
+                    <span class="bs-amount">245.00</span>
                   </div>
                 </div>
               </div>
 
-              <!-- Stacked Bottom Sheet Visualization -->
-              <div class="bs-bottom-sheet-container">
-                <div class="bs-sheet-item stacked-2"></div>
-                <div class="bs-sheet-item stacked-1"></div>
-                <div class="bs-sheet-item active">
-                  <span>Seleccionar Servicio</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Screen: Provider Selection (Hidden by default) -->
-          <div id="bs-screen-provider" class="bs-screen hidden-screen">
-            <div class="bs-scroll-content">
-              <div class="bs-header-detail">
-                <button class="bs-back-btn" onclick="bsBack()">
+              <!-- Floating Search Bar -->
+              <div class="bs-search-container">
+                <div class="bs-search-bar">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
+                    width="16"
+                    height="16"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
                     stroke-width="2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    style="margin-right: 4px;"
+                    class="bs-search-icon"
                   >
-                    <polyline points="15 18 9 12 15 6"></polyline>
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                   </svg>
-                  Atrás
-                </button>
+                  <input
+                    type="text"
+                    placeholder="Buscar servicios..."
+                    class="bs-search-input"
+                  />
+                </div>
+              </div>
+            </div>
 
-                <!-- Provider Title -->
-                <div class="bs-title-section compact">
-                  <h1 class="bs-title-sm" id="bs-provider-title">Proveedor</h1>
-                  <p class="bs-subtitle-sm">Ingresa los detalles de pago</p>
+            <!-- Quick Access Grid -->
+            <div class="bs-grid-section">
+              <h3 class="bs-section-title">Servicios Básicos</h3>
+              <div class="bs-services-grid">
+                <!-- Item 1 -->
+                <div
+                  class="bs-service-item"
+                  onclick="bsNavigate('electricidad', 'Electricidad')"
+                >
+                  <div class="bs-icon-box orange">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"
+                      ></polygon>
+                    </svg>
+                  </div>
+                  <span class="bs-service-name">Luz</span>
+                </div>
+                <!-- Item 2 -->
+                <div
+                  class="bs-service-item"
+                  onclick="bsNavigate('agua', 'Agua')"
+                >
+                  <div class="bs-icon-box blue">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                    </svg>
+                  </div>
+                  <span class="bs-service-name">Agua</span>
+                </div>
+                <!-- Item 3 -->
+                <div
+                  class="bs-service-item"
+                  onclick="bsNavigate('internet', 'Internet')"
+                >
+                  <div class="bs-icon-box purple">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+                      <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+                      <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                      <line x1="12" y1="20" x2="12.01" y2="20"></line>
+                    </svg>
+                  </div>
+                  <span class="bs-service-name">Internet</span>
+                </div>
+                <!-- Item 4 -->
+                <div class="bs-service-item" onclick="bsNavigate('gas', 'Gas')">
+                  <div class="bs-icon-box red">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M18 20V6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v14"
+                      ></path>
+                      <path d="M2 20h20"></path>
+                      <path d="M14 12v.01"></path>
+                    </svg>
+                  </div>
+                  <span class="bs-service-name">Gas</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stacked Bottom Sheet Visualization -->
+            <div class="bs-bottom-sheet-container">
+              <div class="bs-sheet-item stacked-2"></div>
+              <div class="bs-sheet-item stacked-1"></div>
+              <div class="bs-sheet-item active">
+                <span>Seleccionar Servicio</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Screen: Provider Selection (Hidden by default) -->
+        <div id="bs-screen-provider" class="bs-screen hidden-screen">
+          <div class="bs-scroll-content">
+            <div class="bs-header-detail">
+              <button class="bs-back-btn" onclick="bsBack()">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  style="margin-right: 4px;"
+                >
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+                Atrás
+              </button>
+
+              <!-- Provider Title -->
+              <div class="bs-title-section compact">
+                <h1 class="bs-title-sm" id="bs-provider-title">Proveedor</h1>
+                <p class="bs-subtitle-sm">Ingresa los detalles de pago</p>
+              </div>
+
+              <div class="bs-options-list">
+                <!-- Option 1 -->
+                <div class="bs-option-card">
+                  <div class="bs-option-title">Mi Número de Teléfono</div>
+                  <div class="bs-option-desc">Usa tu número registrado</div>
                 </div>
 
-                <div class="bs-options-list">
-                  <!-- Option 1 -->
-                  <div class="bs-option-card">
-                    <div class="bs-option-title">Mi Número de Teléfono</div>
-                    <div class="bs-option-desc">Usa tu número registrado</div>
-                  </div>
-
-                  <!-- Option 2 -->
-                  <div class="bs-option-card">
-                    <div class="bs-option-title">
-                      Ingresar Número de Teléfono
-                    </div>
-                    <div class="bs-option-desc">
-                      Ingresa el número asociado a la cuenta
-                    </div>
+                <!-- Option 2 -->
+                <div class="bs-option-card">
+                  <div class="bs-option-title">Ingresar Número de Teléfono</div>
+                  <div class="bs-option-desc">
+                    Ingresa el número asociado a la cuenta
                   </div>
                 </div>
               </div>
@@ -229,8 +218,8 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
           </div>
         </div>
       </div>
-    </DeviceFrame>
-  </div>
+    </div>
+  </DeviceFrame>
 </div>
 
 <style>
@@ -242,19 +231,6 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
     margin: 0 auto;
     z-index: 10;
     padding: 1rem 0 2rem;
-  }
-
-  .device-frame-wrapper {
-    position: relative;
-    z-index: 10;
-    transform: scale(1);
-    padding: 2.5rem 2rem;
-    background-color: #f3f4f6;
-    border-radius: 2rem;
-    margin: 3rem auto;
-    height: 850px !important;
-    display: flex;
-    flex-direction: column;
   }
 
   .device-content {
