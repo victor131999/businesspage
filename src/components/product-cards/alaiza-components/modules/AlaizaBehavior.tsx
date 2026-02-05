@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useLanguage } from "@/contexts/language-context";
+import { useLanguageTranslations } from "@/hooks/use-language-translations";
+import { ALAIZA_TRANSLATIONS } from "../alaiza-translations";
 
 /* -- Types -- */
 interface Notification {
@@ -18,35 +21,10 @@ const baConfig = {
     stackVisibleCount: 3,
 };
 
-const sampleNotifications = [
-    {
-        title: "Unusual spending",
-        message: "$250 at restaurants this week, 60% more than your average.",
-        color: "#10B981",
-    },
-    {
-        title: "Subscription detected",
-        message: "New recurring charge of $14.99 identified for 'Streaming Plus'.",
-        color: "#10B981",
-    },
-    {
-        title: "Income received",
-        message: "Your salary of $3,200 has been deposited successfully.",
-        color: "#3B82F6",
-    },
-    {
-        title: "Goal reached!",
-        message: "You've hit 50% of your 'Vacation' savings goal. Keep it up!",
-        color: "#8B5CF6",
-    },
-    {
-        title: "Budget alert",
-        message: "You've used 85% of your Shopping budget for this month.",
-        color: "#F59E0B",
-    }
-];
-
 export default function AlaizaBehavior({ onBack }: { onBack: () => void }) {
+    const t = useLanguageTranslations(ALAIZA_TRANSLATIONS);
+    const { language } = useLanguage();
+
     const [notifications, setNotifications] = useState<Notification[]>([]);
     const [isExpanded, setIsExpanded] = useState(false);
     const [currentTime, setCurrentTime] = useState(new Date());
@@ -69,7 +47,10 @@ export default function AlaizaBehavior({ onBack }: { onBack: () => void }) {
     // Auto-add notifications
     useEffect(() => {
         const addNotification = () => {
-            const randomNotif = sampleNotifications[Math.floor(Math.random() * sampleNotifications.length)];
+            const randomNotif =
+                t.behavior.notifications[
+                    Math.floor(Math.random() * t.behavior.notifications.length)
+                ];
             const hours = new Date().getHours();
             const mins = new Date().getMinutes().toString().padStart(2, "0");
             const nowLabel = `${hours}:${mins}`;
@@ -255,7 +236,7 @@ export default function AlaizaBehavior({ onBack }: { onBack: () => void }) {
             <div className="relative z-10 mt-12 text-center text-white transition-opacity duration-300" style={{ opacity: isExpanded ? 0.3 : 1, filter: isExpanded ? 'blur(4px)' : 'none' }}>
                 <div className="text-7xl font-thin drop-shadow-md tracking-tighter">{formatTime24(currentTime)}</div>
                 <div className="mt-1 text-lg font-medium drop-shadow-md opacity-90">
-                    {currentTime.toLocaleDateString("en-US", { weekday: 'long', month: 'long', day: 'numeric' })}
+                    {currentTime.toLocaleDateString(language === "en" ? "en-US" : "es-ES", { weekday: 'long', month: 'long', day: 'numeric' })}
                 </div>
             </div>
 

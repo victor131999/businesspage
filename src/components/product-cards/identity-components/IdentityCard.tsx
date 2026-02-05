@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { FaIdCard, FaPassport, FaCar, FaCamera, FaCheck, FaImage, FaVideo } from "react-icons/fa";
 import { MdDriveEta } from "react-icons/md";
+import { IDENTITY_TRANSLATIONS } from "./identity-translations";
 
 /* -- Types -- */
 type Country = "ecuador" | "mexico" | "colombia";
@@ -17,56 +18,36 @@ function ChevronDownIcon(props: React.SVGProps<SVGSVGElement>) {
     );
 }
 
-/* -- Translations / Constants -- */
-const PREVIEW_TEXTS = {
-    welcome: {
-        subtitle: "Verificación rápida y segura",
-        startButton: "Comenzar verificación",
-        checklist: [
-            { title: "Prepara tu documento", description: "Cédula, pasaporte o licencia" },
-            { title: "Busca buena luz", description: "Evita sombras y reflejos" },
-            { title: "Selfie simple", description: "Sigue las instrucciones" },
-        ],
-    },
-    documentSelection: {
-        title: "Selecciona tu documento",
-        subtitle: "Elige el tipo de documento que deseas usar para la verificación",
-        descriptions: {
-            drivers_license: "Licencia de conducir",
-            id_card: "Cédula de identidad",
-            passport: "Pasaporte vigente",
-        },
-    },
-    documentCapture: {
-        titlePrefix: "Captura tu",
-        fallbackTitle: "documento",
-        instructions: {
-            front: "Coloca la parte frontal de tu documento en el marco",
-            back: "Gira tu documento y captura la parte posterior",
-        },
-        overlayTitle: {
-            front: "Frente del documento",
-            back: "Reverso del documento",
-        },
-        overlayHint: "Asegúrate de que el documento esté bien iluminado y completo en la imagen",
-    },
-    liveness: {
-        title: "Prueba de vida",
-        subtitle: "Validaremos que eres una persona real",
-        scanning: {
-            startingCamera: "Rostro ",
-        },
-    },
-};
-
-const DOCUMENT_NAMES: Record<Country, Record<DocumentType, string>> = {
-    ecuador: { drivers_license: "Licencia de conducir", id_card: "Cédula de identidad", passport: "Pasaporte" },
-    mexico: { drivers_license: "Licencia", id_card: "INE / IFE", passport: "Pasaporte" },
-    colombia: { drivers_license: "Licencia", id_card: "Cédula", passport: "Pasaporte" },
-};
-
 /* -- Main Component -- */
 export default function IdentityCard({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) {
+    const [lang, setLang] = useState<keyof typeof IDENTITY_TRANSLATIONS>(() => {
+        if (typeof window === "undefined") return "es";
+        const raw =
+            (window as any).__uiLanguage ||
+            (() => {
+                try {
+                    return localStorage.getItem("ui-language");
+                } catch {
+                    return null;
+                }
+            })() ||
+            "ES";
+        return String(raw).toUpperCase() === "EN" ? "en" : "es";
+    });
+
+    useEffect(() => {
+        const handleLanguageChange = (event: Event) => {
+            const customEvent = event as CustomEvent<{ language?: string }>;
+            const next = customEvent.detail?.language;
+            setLang(next && next.toUpperCase() === "EN" ? "en" : "es");
+        };
+
+        window.addEventListener("ui:languagechange", handleLanguageChange);
+        return () => window.removeEventListener("ui:languagechange", handleLanguageChange);
+    }, []);
+
+    const t = IDENTITY_TRANSLATIONS[lang];
+
     // State
     const [currentScreen, setCurrentScreen] = useState<ScreenStep>("welcome");
     const [activeWelcomeCard, setActiveWelcomeCard] = useState(0);
@@ -256,21 +237,17 @@ export default function IdentityCard({ isDemoEnabled = true }: { isDemoEnabled?:
             <div className="relative z-10 flex-1 flex flex-col items-center">
                 <div className="text-center mb-6 px-6 pt-4">
                     <h2 className="text-2xl font-bold leading-tight" style={{ color: themeColor }}>
-                        Verificación <span className="font-normal">de identidad</span>
+                        {t.welcome.titleStrong} <span className="font-normal">{t.welcome.titleLight}</span>
                     </h2>
                     <p className="text-[11px] text-gray-500 mt-1 max-w-[200px] mx-auto">
-                        Verificaremos tu identidad de forma segura y rápida
+                        {t.welcome.subtitle}
                     </p>
                 </div>
 
                 <div className="w-full mt-auto bg-[#EBECEF] rounded-t-[35px] pt-8 px-5 pb-10 shadow-[0_-5px_20px_rgba(0,0,0,0.03)] flex flex-col justify-between min-h-[340px]">
                     {/* Horizontal Stacked Cards (Accordion-like) */}
                     <div className="relative w-full h-[80px] mb-6 flex items-center justify-center">
-                        {[
-                            { title: "Proceso rápido y seguro", subtitle: "Finaliza en menos de 2 minutos", icon: "lock" },
-                            { title: "Datos protegidos", subtitle: "Cifrado de extremo a extremo", icon: "shield" },
-                            { title: "Verificación instantánea", subtitle: "Resultados en tiempo real", icon: "clock" }
-                        ].map((card, index) => {
+                        {t.welcome.cards.map((card, index) => {
                             const isActive = index === activeWelcomeCard;
 
                             // Logic: Active is centered. 
@@ -343,14 +320,17 @@ export default function IdentityCard({ isDemoEnabled = true }: { isDemoEnabled?:
                             }}
                         >
                             <span className="relative z-10 flex items-center justify-center gap-2">
-                                Iniciar verificación
+                                {t.welcome.startButton}
                                 <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                 </svg>
                             </span>
                         </button>
                         <p className="text-[9px] text-gray-400 text-center mt-3 px-4">
-                            Al iniciar la verificación aceptas las <span className="font-bold text-gray-500">políticas de privacidad</span> y <span className="font-bold text-gray-500">términos de servicio</span>
+                            {t.welcome.terms.prefix}{" "}
+                            <span className="font-bold text-gray-500">{t.welcome.terms.privacy}</span>{" "}
+                            {t.welcome.terms.and}{" "}
+                            <span className="font-bold text-gray-500">{t.welcome.terms.terms}</span>
                         </p>
                     </div>
                 </div>
@@ -369,7 +349,7 @@ export default function IdentityCard({ isDemoEnabled = true }: { isDemoEnabled?:
                     <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
                     </svg>
-                    <span>back</span>
+                    <span>{t.common.back}</span>
                 </button>
 
                 {/* <div className="absolute left-1/2 top-4 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center p-1">
@@ -402,10 +382,10 @@ export default function IdentityCard({ isDemoEnabled = true }: { isDemoEnabled?:
                     {/* Title Section */}
                     <div className="text-center mb-4 px-6 pt-4 flex-shrink-0">
                         <h2 className="text-xl font-bold leading-tight" style={{ color: themeColor }}>
-                            {PREVIEW_TEXTS.documentSelection.title}
+                            {t.documentSelection.title}
                         </h2>
                         <p className="text-[11px] text-gray-500 mt-1 max-w-[220px] mx-auto">
-                            {PREVIEW_TEXTS.documentSelection.subtitle}
+                            {t.documentSelection.subtitle}
                         </p>
                     </div>
 
@@ -479,10 +459,10 @@ export default function IdentityCard({ isDemoEnabled = true }: { isDemoEnabled?:
                                         </div>
                                         <div className="flex-1 min-w-0">
                                             <h3 className={`text-xs font-bold leading-tight ${isActive ? 'text-white' : 'text-white'}`}>
-                                                {DOCUMENT_NAMES[country][type]}
+                                                {t.documentNames[country][type]}
                                             </h3>
                                             <p className={`text-[10px] leading-tight mt-0.5 ${isActive ? 'text-white/80' : 'hidden'}`}>
-                                                {PREVIEW_TEXTS.documentSelection.descriptions[type]}
+                                                {t.documentSelection.descriptions[type]}
                                             </p>
                                         </div>
                                     </div>
@@ -500,7 +480,7 @@ export default function IdentityCard({ isDemoEnabled = true }: { isDemoEnabled?:
                                 background: `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
                             }}
                         >
-                            <span className="font-bold">Siguiente</span>
+                            <span className="font-bold">{t.common.next}</span>
                             <span className="font-mono text-lg leading-none">{'>'}</span>
                         </button>
                     </div>
@@ -510,7 +490,7 @@ export default function IdentityCard({ isDemoEnabled = true }: { isDemoEnabled?:
     );
 
     const renderCapture = () => {
-        const documentName = DOCUMENT_NAMES[country][selectedDocumentType];
+        const documentName = t.documentNames[country][selectedDocumentType];
         const isFront = captureStep === 'front';
         const isBack = captureStep === 'back';
 
@@ -531,7 +511,7 @@ export default function IdentityCard({ isDemoEnabled = true }: { isDemoEnabled?:
                         onClick={() => setCurrentScreen("document_selection")}
                         className="text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors"
                     >
-                        <span>&lt; back</span>
+                        <span>&lt; {t.common.back}</span>
                     </button>
                     {/* <img
                         src="/images/zelify_logo.png"
@@ -548,7 +528,7 @@ export default function IdentityCard({ isDemoEnabled = true }: { isDemoEnabled?:
                         <div className="mb-4 flex justify-center z-20">
                             <div className="relative flex items-center gap-2 rounded-full bg-gray-100 px-3 py-1.5">
                                 <FaIdCard className="h-4 w-4 text-gray-600" />
-                                <span className="text-xs font-medium text-gray-700">Frente del documento</span>
+                                <span className="text-xs font-medium text-gray-700">{t.documentCapture.frontCaptured}</span>
                                 <div className="absolute -right-1 -top-1 h-5 w-5 rounded-full flex items-center justify-center" style={{ backgroundColor: themeColor }}>
                                     <FaCheck className="h-3 w-3 text-white" />
                                 </div>
@@ -574,13 +554,10 @@ export default function IdentityCard({ isDemoEnabled = true }: { isDemoEnabled?:
                         {/* Title Section */}
                         <div className="mb-8 text-center z-20 relative">
                             <h2 className="mb-2 text-2xl font-bold leading-tight" style={{ color: themeColor }}>
-                                Captura {documentName}
+                                {t.documentCapture.titlePrefix} {documentName}
                             </h2>
                             <p className="text-sm text-gray-600 leading-tight">
-                                {isFront
-                                    ? "Alinea el documento dentro del marco y asegúrate de que sea legible"
-                                    : "Gira el documento y alinea la parte posterior dentro del marco"
-                                }
+                                {isFront ? t.documentCapture.instructionFront : t.documentCapture.instructionBack}
                             </p>
                         </div>
 
@@ -618,10 +595,10 @@ export default function IdentityCard({ isDemoEnabled = true }: { isDemoEnabled?:
                         {/* Instructions */}
                         <div className="text-center z-20 relative">
                             <h3 className="text-base font-bold text-white mb-1">
-                                {isFront ? PREVIEW_TEXTS.documentCapture.overlayTitle.front : PREVIEW_TEXTS.documentCapture.overlayTitle.back}
+                                {isFront ? t.documentCapture.overlayTitle.front : t.documentCapture.overlayTitle.back}
                             </h3>
                             <p className="text-xs text-white/90 leading-tight">
-                                {PREVIEW_TEXTS.documentCapture.overlayHint}
+                                {t.documentCapture.overlayHint}
                             </p>
                         </div>
                     </div>
@@ -680,18 +657,25 @@ export default function IdentityCard({ isDemoEnabled = true }: { isDemoEnabled?:
         const darkThemeRgb = hexToRgb(darkThemeColor) || "0, 42, 92";
         const almostBlackRgb = hexToRgb(almostBlackColor) || "0, 17, 38";
 
-        // Liveness options
+        const getLivenessCopy = (type: LivenessType) => {
+            return (
+                t.liveness.options.find((opt) => opt.type === type) ?? {
+                    type,
+                    title: type,
+                    description: "",
+                }
+            );
+        };
+
         const livenessOptions: Array<{ type: LivenessType; title: string; description: string; icon: React.ReactNode }> = [
             {
                 type: "selfie_photo",
-                title: "Selfie con foto",
-                description: "Toma una foto de tu rostro",
+                ...getLivenessCopy("selfie_photo"),
                 icon: <FaImage className="w-6 h-6 text-white" />
             },
             {
                 type: "selfie_video",
-                title: "Selfie con video",
-                description: "Graba un video corto de tu rostro",
+                ...getLivenessCopy("selfie_video"),
                 icon: <FaVideo className="w-6 h-6 text-white" />
             },
         ];
@@ -714,7 +698,7 @@ export default function IdentityCard({ isDemoEnabled = true }: { isDemoEnabled?:
                             onClick={() => setCurrentScreen("document_capture")}
                             className="text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors"
                         >
-                            <span>&lt; back</span>
+                            <span>&lt; {t.common.back}</span>
                         </button>
                         {/* <img
                             src="/images/zelify_logo.png"
@@ -741,10 +725,10 @@ export default function IdentityCard({ isDemoEnabled = true }: { isDemoEnabled?:
                         {/* Título y Subtítulo */}
                         <div className="text-center mb-1 flex-shrink-0">
                             <h2 className="text-xl font-bold" style={{ color: themeColor }}>
-                                {PREVIEW_TEXTS.liveness.title}
+                                {t.liveness.title}
                             </h2>
                             <p className="text-xs text-gray-600 mt-1">
-                                {PREVIEW_TEXTS.liveness.subtitle}
+                                {t.liveness.subtitle}
                             </p>
                         </div>
 
@@ -859,7 +843,7 @@ export default function IdentityCard({ isDemoEnabled = true }: { isDemoEnabled?:
                                         background: `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
                                     }}
                                 >
-                                    <span className="font-bold">Iniciar verificación</span>
+                                    <span className="font-bold">{t.liveness.startButton}</span>
                                     <span className="font-mono text-lg leading-none">{'>'}</span>
                                 </button>
                             </div>
@@ -901,7 +885,7 @@ export default function IdentityCard({ isDemoEnabled = true }: { isDemoEnabled?:
                     {/* Título */}
                     <div className="text-center mb-6 mt-0">
                         <h2 className="text-xl font-bold leading-tight" style={{ color: themeColor }}>
-                            Escaneando tu rostro
+                            {t.liveness.scanningFace}
                         </h2>
                     </div>
 
@@ -957,8 +941,8 @@ export default function IdentityCard({ isDemoEnabled = true }: { isDemoEnabled?:
                     {/* Sección Inferior */}
                     <div className="flex flex-col mt-auto" style={{ paddingBottom: '16px' }}>
                         <div className="text-center mb-4">
-                            <p className="text-sm text-white mb-1">Completando verificación</p>
-                            <p className="text-base font-bold text-white">Verificando identidad</p>
+                            <p className="text-sm text-white mb-1">{t.liveness.scanningProgressTitle}</p>
+                            <p className="text-base font-bold text-white">{t.liveness.scanningProgressLabel}</p>
                         </div>
 
                         {/* Barra de Progreso Horizontal */}
@@ -1068,19 +1052,19 @@ export default function IdentityCard({ isDemoEnabled = true }: { isDemoEnabled?:
 
                         {/* Título Principal */}
                         <h2 className="text-3xl font-bold leading-tight" style={{ color: 'white' }}>
-                            {isApproved ? 'Verificación Aprobada' : 'Verificación Rechazada'}
+                            {isApproved ? t.result.approvedTitle : t.result.rejectedTitle}
                         </h2>
 
                         {/* Subtítulo */}
                         <div className="flex flex-col items-center space-y-2">
                             <p className="text-base leading-relaxed" style={{ color: 'white', opacity: 0.9 }}>
                                 {isApproved
-                                    ? 'Tu identidad ha sido verificada exitosamente'
-                                    : 'No pudimos verificar tu identidad'}
+                                    ? t.result.approvedSubtitle
+                                    : t.result.rejectedSubtitle}
                             </p>
                             {!isApproved && (
                                 <p className="text-base leading-relaxed" style={{ color: 'white', opacity: 0.9 }}>
-                                    Intenta de nuevo
+                                    {t.result.tryAgain}
                                 </p>
                             )}
                         </div>

@@ -1,74 +1,48 @@
 import React, { useState, useEffect } from "react";
+import { useLanguageTranslations } from "@/hooks/use-language-translations";
+import { ALAIZA_TRANSLATIONS } from "../alaiza-translations";
 
 /* -- Types -- */
 type EducationScreen = "summary" | "streak" | "graph" | "learn" | "learn-content";
 
 /* -- Configuration -- */
-const feConfig = {
+const FE_BASE_CONFIG = {
     zelifyScore: 91,
     stabilityIntelligence: 85,
     discipline: 75,
     streakDays: 14,
-    streakStartDate: "02 Ene, 2026",
     maxStreak: 15,
     weeklyProgress: [true, true, true, true, true, false, false],
     goalProgress: { current: 14, target: 23 },
-    activeRewards: [
-        "Only & Sons 20% off",
-        "Juan Valdez 2 in coffee",
-        "Multicines Free Combo",
-        "BK"
-    ],
     increasingPercent: 90,
     spendingPercent: 75,
     savingsPercent: 39,
-    weeklySummary: "Tu gasto está aumentando esta semana, lo que no te permite aumentar tus ahorros. Las categorías en las que estás gastando de más son comida y entretenimiento.",
-    tips: [
-        {
-            id: "tip-1",
-            title: "Cómo controlar el gasto excesivo en artículos no básicos",
-            image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400"
-        },
-        {
-            id: "tip-2",
-            title: "Cómo aumentar tus ingresos",
-            image: "https://images.unsplash.com/photo-1579621970588-a35d0e7ab9b6?w=400"
-        }
-    ]
 };
 
-// Pyramid Carousel Data
-const pyramidItems = [
+const PYRAMID_ITEMS_BASE = [
     {
         id: 0,
-        title: "Stability",
-        subtitle: "Intelligence",
         score: 85,
-        description: "Turning your spending data into clear consumer insights, enabling smarter decisions and more intelligent outcomes.",
         iconPath1: "M12 2L2 7l10 5 10-5-10-5z",
         iconPath2: "M2 17l10 5 10-5",
         iconPath3: "M2 12l10 5 10-5"
     },
     {
         id: 1,
-        title: "Intelligence",
-        subtitle: "Intelligence",
         score: 85,
-        description: "Turning your spending data into clear consumer insights, enabling smarter decisions and more intelligent outcomes.",
         isBrainIcon: true
     },
     {
         id: 2,
-        title: "Discipline",
-        subtitle: "Discipline",
         score: 75,
-        description: "Assesses your consistency in managing finances and following through with your financial goals.",
         iconPath1: "M22 11.08V12a10 10 0 1 1-5.93-9.14",
         iconPath2: "M22 4L12 14.01l-3-3" // approximated polyline
     }
 ];
 
 export default function AlaizaEducation() {
+    const t = useLanguageTranslations(ALAIZA_TRANSLATIONS);
+
     const [screen, setScreen] = useState<EducationScreen>("summary");
     const [activeCarouselIndex, setActiveCarouselIndex] = useState(0);
     const [selectedTip, setSelectedTip] = useState<string | null>(null);
@@ -78,6 +52,25 @@ export default function AlaizaEducation() {
     const [ringOffset, setRingOffset] = useState(0);
 
     const themeColor = "#004492";
+    const feConfig = {
+        ...FE_BASE_CONFIG,
+        streakStartDate: t.education.streak.streakStartDate,
+        weeklySummary: t.education.weeklySummary,
+        tips: t.education.tips,
+    };
+    const pyramidItems = PYRAMID_ITEMS_BASE.map((item) => {
+        const translated = t.education.pyramidItems.find((x) => x.id === item.id);
+        return {
+            ...item,
+            title: translated?.title ?? String(item.id),
+            subtitle: translated?.subtitle ?? "",
+            description: translated?.description ?? "",
+            isBrainIcon: translated?.isBrainIcon ?? item.isBrainIcon,
+        };
+    });
+
+    const format = (template: string, vars: Record<string, string | number>) =>
+        template.replace(/\{(\w+)\}/g, (_, key) => String(vars[key] ?? `{${key}}`));
 
     useEffect(() => {
         // Trigger ring animation on mount
@@ -245,7 +238,7 @@ export default function AlaizaEducation() {
                         ) : (
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ transform: isActive ? 'scale(0.8)' : 'scale(0.7)' }}>
                                 {item.iconPath1 && <path d={item.iconPath1}></path>}
-                                {item.iconPath2 && item.title === "Stability" ? (
+                                {item.iconPath2 && item.id === 0 ? (
                                     <>
                                         <path d="M2 17l10 5 10-5"></path>
                                         <path d="M2 12l10 5 10-5"></path>
@@ -298,7 +291,12 @@ export default function AlaizaEducation() {
             {/* Action Pills */}
             <div className="flex-shrink-0 w-full border-t border-gray-200 bg-white px-6 py-4 space-y-4 mt-auto">
                 <div className="flex justify-between gap-2 overflow-x-auto pb-1 no-scrollbar">
-                    {[{ key: "streak", label: "Streak" }, { key: "graph", label: "Graph" }, { key: "rewards", label: "Rewards" }, { key: "learn", label: "Learn" }].map((btn) => (
+                    {[
+                        { key: "streak", label: t.education.pills.streak },
+                        { key: "graph", label: t.education.pills.graph },
+                        { key: "rewards", label: t.education.pills.rewards },
+                        { key: "learn", label: t.education.pills.learn },
+                    ].map((btn) => (
                         <button key={btn.key} onClick={() => setScreen(btn.key as EducationScreen)}
                             className="flex-1 min-w-[70px] h-10 flex items-center justify-center rounded-full text-[11px] font-semibold text-white transition-all active:scale-95 whitespace-nowrap px-3 shadow-sm hover:opacity-90"
                             style={{ background: `linear-gradient(to bottom, rgba(0, 68, 146, 0.95) 0%, #004492 50%, rgba(0, 51, 102, 0.95) 100%)` }}>
@@ -312,7 +310,7 @@ export default function AlaizaEducation() {
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="mb-1 opacity-50">
                         <path d="M18 15L12 9L6 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
                     </svg>
-                    <span className="text-sm">Score System</span>
+                    <span className="text-sm">{t.education.scoreSystem}</span>
                 </button>
             </div>
         </div>
@@ -321,20 +319,20 @@ export default function AlaizaEducation() {
     const renderStreak = () => {
         const progressPercent = (feConfig.goalProgress.current / feConfig.goalProgress.target) * 100;
         const remainingDays = feConfig.goalProgress.target - feConfig.goalProgress.current;
-        const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+        const days = t.education.streak.daysShort;
 
         return (
             <div className="flex h-full flex-col bg-white overflow-y-auto min-h-0">
                 <div className="flex-shrink-0 px-6 pt-4">
-                    <button onClick={() => setScreen("summary")} className="mb-4 text-sm font-medium text-gray-400 hover:text-gray-600 transition-colors">← back</button>
+                    <button onClick={() => setScreen("summary")} className="mb-4 text-sm font-medium text-gray-400 hover:text-gray-600 transition-colors">← {t.education.back}</button>
                     <div className="text-center mb-6">
-                        <h1 className="text-3xl font-bold text-gray-900 mb-2">{feConfig.streakDays} <span className="text-lg text-gray-600">days streak</span></h1>
-                        <p className="text-sm text-gray-400">Streak Started: {feConfig.streakStartDate}</p>
+                        <h1 className="text-3xl font-bold text-gray-900 mb-2">{feConfig.streakDays} <span className="text-lg text-gray-600">{t.education.streak.daysSuffix}</span></h1>
+                        <p className="text-sm text-gray-400">{t.education.streak.startedLabel} {feConfig.streakStartDate}</p>
                     </div>
                 </div>
                 <div className="flex-1 px-6 space-y-8 min-h-0 pb-6">
                     <div>
-                        <h3 className="text-sm font-semibold text-gray-700 mb-3 ml-1">This Week</h3>
+                        <h3 className="text-sm font-semibold text-gray-700 mb-3 ml-1">{t.education.streak.thisWeek}</h3>
                         <div className="flex gap-2">
                             {days.map((day, index) => (
                                 <div key={day} className="flex-1 flex flex-col gap-1 items-center">
@@ -347,8 +345,8 @@ export default function AlaizaEducation() {
                     </div>
                     <div>
                         <div className="flex justify-between text-sm mb-3 px-1">
-                            <span className="text-gray-700 font-medium">{remainingDays} days left</span>
-                            <span className="text-gray-400 text-xs mt-0.5">To unlock reward</span>
+                            <span className="text-gray-700 font-medium">{format(t.education.streak.daysLeft, { n: remainingDays })}</span>
+                            <span className="text-gray-400 text-xs mt-0.5">{t.education.streak.toUnlockReward}</span>
                         </div>
                         <div className="h-4 bg-gray-100 rounded-full overflow-hidden shadow-inner">
                             <div className="h-full rounded-full transition-all duration-1000 ease-out" style={{ width: `${progressPercent}%`, background: `linear-gradient(90deg, ${themeColor}, #10B981)` }} />
@@ -362,11 +360,11 @@ export default function AlaizaEducation() {
     const renderGraph = () => (
         <div className="flex h-full flex-col bg-white overflow-y-auto min-h-0">
             <div className="flex-shrink-0 px-6 pt-4">
-                <button onClick={() => setScreen("summary")} className="mb-4 text-sm font-medium text-gray-400 hover:text-gray-600 transition-colors">← back</button>
+                <button onClick={() => setScreen("summary")} className="mb-4 text-sm font-medium text-gray-400 hover:text-gray-600 transition-colors">← {t.education.back}</button>
                 <div className="flex justify-between items-end mb-6">
-                    <h1 className="text-3xl font-bold text-gray-900">Today</h1>
+                    <h1 className="text-3xl font-bold text-gray-900">{t.education.graph.today}</h1>
                     <div className="text-right">
-                        <p className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Total Spent</p>
+                        <p className="text-xs text-gray-400 uppercase tracking-wider font-semibold">{t.education.graph.totalSpent}</p>
                         <p className="text-xl font-bold text-gray-900">$142.50</p>
                     </div>
                 </div>
@@ -395,21 +393,21 @@ export default function AlaizaEducation() {
                     </div>
 
                     <div className="absolute top-4 right-4 bg-white/80 backdrop-blur-sm px-3 py-1 rounded-lg text-[10px] font-bold text-blue-800 shadow-sm border border-blue-100">
-                        +12% vs last week
+                        {t.education.graph.deltaLabel}
                     </div>
                 </div>
 
                 <div className="original-stats grid grid-cols-3 gap-4">
                     <div className="bg-blue-50 p-4 rounded-2xl text-center border border-blue-100">
-                        <div className="text-[10px] uppercase text-blue-400 font-bold mb-1">Increasing</div>
+                        <div className="text-[10px] uppercase text-blue-400 font-bold mb-1">{t.education.graph.stats.increasing}</div>
                         <div className="text-xl font-bold text-blue-900">{feConfig.increasingPercent}%</div>
                     </div>
                     <div className="bg-red-50 p-4 rounded-2xl text-center border border-red-100">
-                        <div className="text-[10px] uppercase text-red-400 font-bold mb-1">Spending</div>
+                        <div className="text-[10px] uppercase text-red-400 font-bold mb-1">{t.education.graph.stats.spending}</div>
                         <div className="text-xl font-bold text-red-900">{feConfig.spendingPercent}%</div>
                     </div>
                     <div className="bg-green-50 p-4 rounded-2xl text-center border border-green-100">
-                        <div className="text-[10px] uppercase text-green-400 font-bold mb-1">Savings</div>
+                        <div className="text-[10px] uppercase text-green-400 font-bold mb-1">{t.education.graph.stats.savings}</div>
                         <div className="text-xl font-bold text-green-900">{feConfig.savingsPercent}%</div>
                     </div>
                 </div>
@@ -421,8 +419,8 @@ export default function AlaizaEducation() {
     const renderLearn = () => (
         <div className="flex h-full flex-col bg-white">
             <div className="flex-shrink-0 px-6 pt-4">
-                <button onClick={() => setScreen("summary")} className="mb-4 text-sm font-medium text-gray-400 hover:text-gray-600 transition-colors">← back</button>
-                <h1 className="text-2xl font-bold text-gray-900 mb-6">Learn center</h1>
+                <button onClick={() => setScreen("summary")} className="mb-4 text-sm font-medium text-gray-400 hover:text-gray-600 transition-colors">← {t.education.back}</button>
+                <h1 className="text-2xl font-bold text-gray-900 mb-6">{t.education.learn.title}</h1>
             </div>
             <div className="flex-1 px-6 space-y-4 overflow-y-auto pb-6">
                 {feConfig.tips.map(tip => (
