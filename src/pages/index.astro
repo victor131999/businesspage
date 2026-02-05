@@ -23,6 +23,7 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
 import DeviceFrame from "@/components/design-system/organisms/device-frame/DeviceFrame.astro";
 import CardTabs from "../components/design-system/organisms/CardTabs.astro";
 import TokensPanel from "../components/design-system/organisms/TokensPanel.astro";
+import SideBySidePanel from "../components/design-system/organisms/SideBySidePanel.astro";
 
 // Configuración del navbar con tema claro/blanco
 const navbarColors = {
@@ -694,105 +695,39 @@ const modulesList = [
       </div>
     </section>
 
-    <section class="how-it-works-section section-gap-150">
-      <div class="how-it-works-divider"></div>
-      <div class="how-it-works-content">
-        <div class="how-it-works-left">
-          <h2 class="how-it-works-title" data-i18n="home.how.title">
-            ¿Cómo <br /> Funciona <br /> Zelify?
-          </h2>
-          <p class="how-it-works-description" data-i18n="home.how.description">
-            Zelify integra en una sola plataforma digital: autenticación y
-            validación de identidad, cumplimiento AML, digitalización de
-            cuentas, emisión y procesamiento de tarjetas, transferencias locales
-            e internacionales, pagos múltiples, programas de descuentos y
-            cupones.
-          </p>
-          <Button
-            href="https://www.zelify.com/clips/"
-            variant="secondary"
-            dataI18n="welcome-demo-button"
-          >
-            Demo
-          </Button>
-        </div>
-        <div class="how-it-works-right">
-          <div class="right-bg-panel">
-            <LoginFormCard
-              title="Ingreso"
-              subtitle="Bienvenido de regreso"
-              submitLabel="Ingresa"
-              createAccountText="O crea una nueva cuenta"
-              dataI18nTitle="home.how.login.title"
-              dataI18nSubtitle="home.how.login.subtitle"
-              dataI18nEmailLabel="home.how.login.email.label"
-              dataI18nEmailPlaceholder="home.how.login.email.placeholder"
-              dataI18nPasswordLabel="home.how.login.password.label"
-              dataI18nPasswordPlaceholder="home.how.login.password.placeholder"
-              dataI18nButton="home.how.login.button"
-              dataI18nCreate="home.how.login.create"
-            />
-            <Button
-              variant="icon"
-              class="how-it-works-play-button"
-              type="button"
-              ariaLabel="Reproducir"
-            >
-              <img src="/icons/play.svg" alt="" width="32" height="32" />
-            </Button>
-          </div>
-        </div>
-      </div>
-    </section>
+    <SideBySidePanel
+      title="¿Cómo <br /> Funciona <br /> Zelify?"
+      description="Zelify integra en una sola plataforma digital: autenticación y validación de identidad, cumplimiento AML, digitalización de cuentas, emisión y procesamiento de tarjetas, transferencias locales e internacionales, pagos múltiples, programas de descuentos y cupones."
+      ctaHref="https://www.zelify.com/clips/"
+      ctaLabel="Demo"
+      mediaOnLeft={false}
+      showPlayPause={true}
+      playPauseId="how-it-works-play-btn"
+      sectionGap="section-gap-150"
+      class="how-it-works-section"
+      dataI18nTitle="home.how.title"
+      dataI18nDescription="home.how.description"
+      dataI18nCta="home.how.demo"
+    >
+      <!-- Contenido dentro de la tarjeta blanca: video, formulario, imagen, etc. -->
+    </SideBySidePanel>
 
-    <section class="why-zelify-section section-gap-200">
-      <div class="why-zelify-divider"></div>
-      <div class="why-zelify-content">
-        <div class="why-zelify-left">
-          <LoginFormCard
-            title="Ingreso"
-            subtitle="Bienvenido de regreso"
-            submitLabel="Ingresa"
-            createAccountText="O crea una nueva cuenta"
-            dataI18nTitle="home.how.login.title"
-            dataI18nSubtitle="home.how.login.subtitle"
-            dataI18nEmailLabel="home.how.login.email.label"
-            dataI18nEmailPlaceholder="home.how.login.email.placeholder"
-            dataI18nPasswordLabel="home.how.login.password.label"
-            dataI18nPasswordPlaceholder="home.how.login.password.placeholder"
-            dataI18nButton="home.how.login.button"
-            dataI18nCreate="home.how.login.create"
-          />
-          <Button
-            variant="icon"
-            class="how-it-works-play-button"
-            type="button"
-            ariaLabel="Reproducir"
-          >
-            <img src="/icons/play.svg" alt="" width="32" height="32" />
-          </Button>
-        </div>
-        <div class="why-zelify-right">
-          <h2 class="why-zelify-title" data-i18n="home.why.title">
-            Cada producto, potenciado por IA.
-          </h2>
-          <p class="why-zelify-description" data-i18n="home.why.description">
-            Zelify integra en una sola plataforma digital: autenticación y
-            validación de identidad, cumplimiento AML, digitalización de
-            cuentas, emisión y procesamiento de tarjetas, transferencias locales
-            e internacionales, pagos múltiples, programas de descuentos y
-            cupones.
-          </p>
-          <Button
-            href="https://www.zelify.com/clips/"
-            variant="secondary"
-            dataI18n="home.why.demo"
-          >
-            Demo
-          </Button>
-        </div>
-      </div>
-    </section>
+    <SideBySidePanel
+      title="Cada producto,<br />potenciado<br />por IA."
+      description="Operamos como un stack tecnológico neobancario con modelos entrenados para el sector financiero. Desde el monitoreo continuo hasta la optimización operativa, la IA es el núcleo con el cual revolucionamos los servicios financieros."
+      ctaHref="https://www.zelify.com/clips/"
+      ctaLabel="Demo"
+      mediaOnLeft={true}
+      showPlayPause={true}
+      playPauseId="why-zelify-play-btn"
+      sectionGap="section-gap-200"
+      class="why-zelify-section"
+      dataI18nTitle="home.why.title"
+      dataI18nDescription="home.why.description"
+      dataI18nCta="home.why.demo"
+    >
+      <!-- Contenido dentro de la tarjeta blanca: video, formulario, imagen, etc. -->
+    </SideBySidePanel>
 
     <section class="bench-section section-gap-200">
       <div class="bench-section-2-content">
@@ -2139,8 +2074,8 @@ const modulesList = [
   .bench-video-wrapper {
     flex: 0 0 auto;
     width: 100%;
-    height: 320px;
-    max-height: 320px;
+    height: 520px;
+    max-height: 520px;
     min-height: 320px;
     border-radius: var(--ds-radius-lg, 20px);
     overflow: hidden;

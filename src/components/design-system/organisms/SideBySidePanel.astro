@@ -1,0 +1,316 @@
+---
+/**
+ * Organism: SideBySidePanel
+ * Sección de dos columnas: una de copy (título, divisor, descripción, CTA) y otra de media
+ * (área con slot para video, login card, etc.). Se puede intercambiar el lado con mediaOnLeft.
+ * Usa átomos: Title, Text, Button. Incluye divisor decorativo y botón play opcional en el área media.
+ */
+import Title from "../atoms/Title.astro";
+import Text from "../atoms/Text.astro";
+import Button from "../atoms/Button.astro";
+
+interface Props {
+  /** Título principal (puede incluir <br />) */
+  title: string;
+  /** Párrafo descriptivo */
+  description: string;
+  /** URL del botón CTA */
+  ctaHref?: string;
+  /** Texto del botón CTA */
+  ctaLabel?: string;
+  /** true = media a la izquierda, copy a la derecha. false = copy izquierda, media derecha */
+  mediaOnLeft?: boolean;
+  /** Mostrar botón play/pause en el área media */
+  showPlayPause?: boolean;
+  /** id del botón play/pause */
+  playPauseId?: string;
+  /** Clase adicional en la sección */
+  class?: string;
+  /** Gap de sección: section-gap-150, section-gap-200, etc. */
+  sectionGap?: string;
+  /** i18n */
+  dataI18nTitle?: string;
+  dataI18nDescription?: string;
+  dataI18nCta?: string;
+}
+
+const {
+  title,
+  description,
+  ctaHref,
+  ctaLabel = "Demo",
+  mediaOnLeft = false,
+  showPlayPause = true,
+  playPauseId = "side-by-side-play-pause",
+  class: className = "",
+  sectionGap = "section-gap-150",
+  dataI18nTitle,
+  dataI18nDescription,
+  dataI18nCta,
+} = Astro.props;
+---
+
+<section class:list={["ds-side-by-side-panel", sectionGap, className, mediaOnLeft && "ds-side-by-side-panel--media-left"]}>
+  <div class="ds-side-by-side-panel__divider" aria-hidden="true" />
+  <div class="ds-side-by-side-panel__grid">
+    <div class="ds-side-by-side-panel__copy">
+      <Title level={2} variant="section" class="ds-side-by-side-panel__title" dataI18n={dataI18nTitle}>
+        <span set:html={title} />
+      </Title>
+      <div class="ds-side-by-side-panel__line" aria-hidden="true" />
+      <Text variant="body" class="ds-side-by-side-panel__description" dataI18n={dataI18nDescription}>
+        {description}
+      </Text>
+      {ctaHref && (
+        <Button
+          href={ctaHref}
+          variant="secondary"
+          class="ds-side-by-side-panel__cta"
+          dataI18n={dataI18nCta}
+        >
+          {ctaLabel}
+        </Button>
+      )}
+    </div>
+    <div class="ds-side-by-side-panel__media">
+      <div class="ds-side-by-side-panel__placeholder">
+        <div class="ds-side-by-side-panel__card">
+          <slot />
+        </div>
+        {showPlayPause && (
+          <Button
+            type="button"
+            variant="icon"
+            id={playPauseId}
+            class="ds-side-by-side-panel__play"
+            ariaLabel="Reproducir"
+            title="Reproducir / Pausar"
+          >
+            <img src="/icons/play.svg" alt="" width="32" height="32" />
+          </Button>
+        )}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .ds-side-by-side-panel {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    padding: 0 2rem;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ds-side-by-side-panel__divider {
+    position: absolute;
+    top: 46.5%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #154091;
+    z-index: 1;
+    transform: translateY(-50%);
+    margin-left: 140px;
+    margin-right: 140px;
+  }
+
+  .ds-side-by-side-panel__grid {
+    max-width: 1300px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .ds-side-by-side-panel--media-left .ds-side-by-side-panel__grid {
+    direction: rtl;
+  }
+
+  .ds-side-by-side-panel--media-left .ds-side-by-side-panel__grid > * {
+    direction: ltr;
+  }
+
+  .ds-side-by-side-panel--media-left .ds-side-by-side-panel__copy {
+    text-align: right;
+    align-items: flex-end;
+  }
+
+  .ds-side-by-side-panel--media-left .ds-side-by-side-panel__description {
+    text-align: right;
+  }
+
+  .ds-side-by-side-panel__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  .ds-side-by-side-panel__title {
+    font-size: clamp(2.5rem, 4vw, 4.4rem);
+    font-weight: 500;
+    color: #09213c;
+    margin: 0;
+    line-height: 1.1;
+    width: 90%;
+    max-width: 520px;
+  }
+
+
+  .ds-side-by-side-panel__description {
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
+    line-height: 1.6;
+    color: #213f8c;
+    margin: 0;
+    max-width: 440px;
+    font-weight: 300;
+    opacity: 0.9;
+    margin-top: 1rem;
+  }
+
+  .ds-side-by-side-panel__media {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 0;
+  }
+
+  .ds-side-by-side-panel__placeholder {
+    background-color: #f3f4f6;
+    border-radius: 32px;
+    padding: 2.5rem 3.5rem;
+    width: 100%;
+    max-width: 520px;
+    min-height: 400px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ds-side-by-side-panel__placeholder :global(.ds-login-card),
+  .ds-side-by-side-panel__placeholder :global(.login-card) {
+    width: 100%;
+  }
+
+  .ds-side-by-side-panel__placeholder :global(video) {
+    width: 100%;
+    height: 100%;
+    min-height: 320px;
+    object-fit: cover;
+    border-radius: 20px;
+    display: block;
+  }
+
+  /* Tarjeta blanca dentro del panel gris: aquí se carga cualquier contenido (slot) */
+  .ds-side-by-side-panel__placeholder .ds-side-by-side-panel__card {
+    background-color: #ffffff;
+    border-radius: 20px;
+    width: 100%;
+    min-height: 360px;
+    padding: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    box-sizing: border-box;
+  }
+
+  .ds-side-by-side-panel__play {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    width: 56px;
+    height: 56px;
+    z-index: 10;
+    flex-shrink: 0;
+  }
+
+  .ds-side-by-side-panel__play img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+  }
+
+  @media (max-width: 900px) {
+    .ds-side-by-side-panel__divider {
+      margin-left: 2rem;
+      margin-right: 2rem;
+    }
+
+    .ds-side-by-side-panel__grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      direction: ltr;
+    }
+
+    .ds-side-by-side-panel--media-left .ds-side-by-side-panel__grid {
+      direction: ltr;
+    }
+
+    .ds-side-by-side-panel__copy {
+      order: 1;
+      align-items: center;
+      text-align: center;
+    }
+
+    .ds-side-by-side-panel__title {
+      width: 100%;
+      max-width: 100%;
+      text-align: center;
+    }
+
+    .ds-side-by-side-panel__line {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .ds-side-by-side-panel__description {
+      text-align: center;
+      max-width: 100%;
+    }
+
+    .ds-side-by-side-panel__cta {
+      align-self: center;
+    }
+
+    .ds-side-by-side-panel__media {
+      order: 2;
+    }
+
+    .ds-side-by-side-panel--media-left .ds-side-by-side-panel__copy {
+      text-align: center;
+      align-items: center;
+    }
+
+    .ds-side-by-side-panel--media-left .ds-side-by-side-panel__description {
+      text-align: center;
+    }
+
+    .ds-side-by-side-panel__placeholder {
+      min-height: 320px;
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .ds-side-by-side-panel {
+      padding: 0 1.25rem;
+    }
+
+    .ds-side-by-side-panel__title {
+      font-size: 2.25rem;
+    }
+  }
+</style>
