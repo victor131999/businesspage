@@ -17,30 +17,23 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
 
 <!-- App Content Area --><!-- App Content Area -->
 <div class="device-container">
-  <div class="device-frame-wrapper">
-    <DeviceFrame>
-      <div class="device-header">
-        <div class="device-logo">
-          <img src="/images/zelify_logo.png" alt="Zelify" />
-        </div>
+  <DeviceFrame>
+    <div class="device-content">
+      <div class="app-content-inner">
+        <Step01PlanSelection />
+        <Step02BasicInfo />
+        <Step03LocationMap />
+        <Step04AddressDetails />
+        <Step05Description />
+        <Step06Category />
+        <Step07CreatePromo />
+        <Step08PromoStack />
+        <Step09ConfigurePromo />
+        <Step10Launching />
+        <Step11Success />
       </div>
-      <div class="device-content">
-        <div class="app-content-inner">
-          <Step01PlanSelection />
-          <Step02BasicInfo />
-          <Step03LocationMap />
-          <Step04AddressDetails />
-          <Step05Description />
-          <Step06Category />
-          <Step07CreatePromo />
-          <Step08PromoStack />
-          <Step09ConfigurePromo />
-          <Step10Launching />
-          <Step11Success />
-        </div>
-      </div>
-    </DeviceFrame>
-  </div>
+    </div>
+  </DeviceFrame>
 </div>
 
 <style>
@@ -52,19 +45,6 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
     margin: 0 auto;
     z-index: 10;
     padding: 1rem 0 2rem;
-  }
-
-  .device-frame-wrapper {
-    position: relative;
-    z-index: 10;
-    transform: scale(1);
-    padding: 2.5rem 2rem;
-    background-color: #f3f4f6;
-    border-radius: 2rem;
-    margin: 3rem auto;
-    height: 850px !important;
-    display: flex;
-    flex-direction: column;
   }
 
   .device-content {
