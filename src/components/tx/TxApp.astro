@@ -8,122 +8,124 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
 ---
 
 <div class="device-container">
-  <DeviceFrame>
-    <div class="device-content">
-      <!-- App Header -->
-      <div class="device-header">
-        <div class="back-btn" id="app-back-btn">
-          <button class="device-back-btn">&lt; Atrás</button>
-        </div>
-        <div class="device-logo">
-          <img src="/images/zelify_logo.png" alt="Zelify" />
-        </div>
-        <div style="width: 48px;"></div>
-        <!-- Spacer for centering logo -->
-      </div>
-
-      <div id="shared-top-section">
-        <!-- Graphic -->
-        <div class="graphic-container">
-          <svg width="240" height="140" viewBox="0 0 200 120" fill="none">
-            <path
-              d="M10,120 Q50,20 100,20 Q150,20 190,120"
-              stroke="#004195"
-              stroke-width="1"
-              opacity="0.5"
-              fill="none"></path>
-            <path
-              d="M20,120 Q55,30 100,30 Q145,30 180,120"
-              stroke="#004195"
-              stroke-width="1"
-              opacity="0.6"
-              fill="none"></path>
-            <path
-              d="M30,120 Q60,40 100,40 Q140,40 170,120"
-              stroke="#004195"
-              stroke-width="1"
-              opacity="0.7"
-              fill="none"></path>
-            <path
-              d="M40,120 Q65,50 100,50 Q135,50 160,120"
-              stroke="#004195"
-              stroke-width="1"
-              opacity="0.8"
-              fill="none"></path>
-            <path
-              d="M50,120 Q70,60 100,60 Q130,60 150,120"
-              stroke="#004195"
-              stroke-width="1"
-              opacity="0.9"
-              fill="none"></path>
-            <path
-              d="M20,120 L30,40"
-              stroke="#004195"
-              stroke-width="0.5"
-              opacity="0.3"></path>
-            <path
-              d="M180,120 L170,40"
-              stroke="#004195"
-              stroke-width="0.5"
-              opacity="0.3"></path>
-            <path
-              d="M50,80 L150,80"
-              stroke="#004195"
-              stroke-width="0.5"
-              opacity="0.3"></path>
-          </svg>
+  <div class="device-frame-wrapper">
+    <DeviceFrame>
+      <div class="device-content">
+        <!-- App Header -->
+        <div class="device-header">
+          <div class="back-btn" id="app-back-btn">
+            <button class="device-back-btn">&lt; Atrás</button>
+          </div>
+          <div class="device-logo">
+            <img src="/images/zelify_logo.png" alt="Zelify" />
+          </div>
+          <div style="width: 48px;"></div>
+          <!-- Spacer for centering logo -->
         </div>
 
-        <!-- Titles -->
-        <h2 class="app-title">
-          Transferencias <span class="light">Internacionales</span>
-        </h2>
-        <p class="app-subtitle">¿Cuánto deseas transferir?</p>
-        <p class="app-caption">Selecciona la moneda según el país</p>
+        <div id="shared-top-section">
+          <!-- Graphic -->
+          <div class="graphic-container">
+            <svg width="240" height="140" viewBox="0 0 200 120" fill="none">
+              <path
+                d="M10,120 Q50,20 100,20 Q150,20 190,120"
+                stroke="#004195"
+                stroke-width="1"
+                opacity="0.5"
+                fill="none"></path>
+              <path
+                d="M20,120 Q55,30 100,30 Q145,30 180,120"
+                stroke="#004195"
+                stroke-width="1"
+                opacity="0.6"
+                fill="none"></path>
+              <path
+                d="M30,120 Q60,40 100,40 Q140,40 170,120"
+                stroke="#004195"
+                stroke-width="1"
+                opacity="0.7"
+                fill="none"></path>
+              <path
+                d="M40,120 Q65,50 100,50 Q135,50 160,120"
+                stroke="#004195"
+                stroke-width="1"
+                opacity="0.8"
+                fill="none"></path>
+              <path
+                d="M50,120 Q70,60 100,60 Q130,60 150,120"
+                stroke="#004195"
+                stroke-width="1"
+                opacity="0.9"
+                fill="none"></path>
+              <path
+                d="M20,120 L30,40"
+                stroke="#004195"
+                stroke-width="0.5"
+                opacity="0.3"></path>
+              <path
+                d="M180,120 L170,40"
+                stroke="#004195"
+                stroke-width="0.5"
+                opacity="0.3"></path>
+              <path
+                d="M50,80 L150,80"
+                stroke="#004195"
+                stroke-width="0.5"
+                opacity="0.3"></path>
+            </svg>
+          </div>
 
-        <!-- Amount Input -->
-        <div class="amount-group">
-          <div class="amount-label">Monto</div>
-          <div class="amount-input-container">
-            <span class="currency-symbol">$</span>
-            <input
-              type="text"
-              class="amount-value-input"
-              id="amount-input-field"
-              value="0,00"
-              placeholder="0,00"
-              inputmode="decimal"
-            />
-            <div class="controls-wrapper">
-              <div class="currency-pill">MXN</div>
-              <button class="nav-arrow-btn" id="amount-next-btn">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  class="nav-icon"
-                >
-                  <path
-                    d="M9 18L15 12L9 6"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"></path>
-                </svg>
-              </button>
+          <!-- Titles -->
+          <h2 class="app-title">
+            Transferencias <span class="light">Internacionales</span>
+          </h2>
+          <p class="app-subtitle">¿Cuánto deseas transferir?</p>
+          <p class="app-caption">Selecciona la moneda según el país</p>
+
+          <!-- Amount Input -->
+          <div class="amount-group">
+            <div class="amount-label">Monto</div>
+            <div class="amount-input-container">
+              <span class="currency-symbol">$</span>
+              <input
+                type="text"
+                class="amount-value-input"
+                id="amount-input-field"
+                value="0,00"
+                placeholder="0,00"
+                inputmode="decimal"
+              />
+              <div class="controls-wrapper">
+                <div class="currency-pill">MXN</div>
+                <button class="nav-arrow-btn" id="amount-next-btn">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    class="nav-icon"
+                  >
+                    <path
+                      d="M9 18L15 12L9 6"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"></path>
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <StepAmount />
-      <StepContacts />
-      <StepConfirm />
-      <StepProcessing />
-      <StepSuccess />
-    </div>
-  </DeviceFrame>
+        <StepAmount />
+        <StepContacts />
+        <StepConfirm />
+        <StepProcessing />
+        <StepSuccess />
+      </div>
+    </DeviceFrame>
+  </div>
 </div>
 
 <style>
@@ -132,9 +134,24 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
     position: relative;
     width: 100%;
     max-width: 400px;
+    min-height: 80vh; /* Altura mínima para el contenedor */
     margin: 0 auto;
     z-index: 10;
     padding: 1rem 0 2rem;
+  }
+
+  /* Frame del iPhone wrapper */
+  div:global(.auth-background-section) .device-frame-wrapper {
+    position: relative !important;
+    z-index: 10 !important;
+    transform: scale(1) !important;
+    padding: 2.5rem 2rem !important;
+    background-color: #f3f4f6 !important;
+    border-radius: 2rem !important;
+    margin: 3rem auto !important;
+    height: 850px !important; /* Altura fija para que phone-frame__bezel pueda usar height: 100% */
+    display: flex !important;
+    flex-direction: column !important;
   }
 
   /* Frame del iPhone wrapper removed */

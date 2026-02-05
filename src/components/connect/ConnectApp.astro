@@ -4,415 +4,514 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
 ---
 
 <div class="device-container">
-  <DeviceFrame>
-    <div class="device-content">
-      <div class="connect-app-container">
-        <!-- HEADER -->
-        <div class="connect-header" id="connect-header">
-          <button class="connect-back-btn" id="btn-back">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-            <span class="ml-1">back</span>
-          </button>
-        </div>
-
-        <!-- SCREEN 1: BANKS LIST -->
-        <div id="screen-banks" class="connect-screen active">
-          <div class="screen-content">
-            <h2 class="screen-title text-center text-[#004492]">
-              Bank Account Linking
-            </h2>
-            <p class="screen-subtitle text-center mb-6">
-              Let's link your account
-            </p>
-
-            <div class="search-box">
+  <div class="device-frame-wrapper">
+    <DeviceFrame>
+      <div class="device-content">
+        <div class="connect-app-container">
+          <!-- HEADER -->
+          <div class="connect-header" id="connect-header">
+            <button class="connect-back-btn" id="btn-back">
               <svg
-                class="search-icon"
                 width="20"
                 height="20"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
               >
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <polyline points="15 18 9 12 15 6"></polyline>
               </svg>
-              <input
-                type="text"
-                placeholder="Search banks..."
-                class="search-input"
-              />
-            </div>
-
-            <div class="banks-list">
-              <!-- BBVA -->
-              <div
-                class="bank-card"
-                onclick="window.connectNavigate('credentials', 'BBVA México', 'https://cdn.worldvectorlogo.com/logos/bbva-2.svg')"
-              >
-                <div class="bank-name">BBVA México</div>
-              </div>
-              <!-- Santander -->
-              <div
-                class="bank-card"
-                onclick="window.connectNavigate('credentials', 'Banco Santander', 'https://cdn.worldvectorlogo.com/logos/banco-santander-logo.svg')"
-              >
-                <div class="bank-name">Banco Santander</div>
-              </div>
-              <!-- Banamex -->
-              <div
-                class="bank-card"
-                onclick="window.connectNavigate('credentials', 'Banamex', 'https://cdn.worldvectorlogo.com/logos/banamex-1.svg')"
-              >
-                <div class="bank-name">Banamex</div>
-              </div>
-              <!-- HSBC -->
-              <div
-                class="bank-card"
-                onclick="window.connectNavigate('credentials', 'HSBC México', 'https://cdn.worldvectorlogo.com/logos/hsbc-logo-2018-.svg')"
-              >
-                <div class="bank-name">HSBC México</div>
-              </div>
-              <!-- Banco Azteca (Selected Appearance) -->
-              <div
-                class="bank-card active-demo"
-                onclick="window.connectNavigate('credentials', 'Banco Azteca', 'https://i.pinimg.com/1200x/31/7e/06/317e06872fa113652429b22ee1702a24.jpg')"
-              >
-                <div class="bank-logo-circle">
-                  <img
-                    src="https://i.pinimg.com/1200x/31/7e/06/317e06872fa113652429b22ee1702a24.jpg"
-                    alt="Azteca"
-                  />
-                </div>
-                <div class="bank-name text-white font-bold ml-3">
-                  Banco Azteca
-                </div>
-              </div>
-              <!-- Scotiabank -->
-              <div
-                class="bank-card"
-                onclick="window.connectNavigate('credentials', 'Scotiabank México', 'https://cdn.worldvectorlogo.com/logos/scotiabank-4.svg')"
-              >
-                <div class="bank-name">Scotiabank México</div>
-              </div>
-            </div>
-
-            <!-- Spacer to push button down if needed, but UI shows button is scroll independent? 
-                 Actually images show button at bottom. -->
-            <div class="flex-grow"></div>
-
-            <div class="bottom-controls">
-              <!-- Simple pager indicator -->
-              <div class="slider-pager">
-                <span class="pager-arrow">&lt;</span>
-                <div class="pager-track"></div>
-                <span class="pager-arrow">&gt;</span>
-              </div>
-
-              <button class="btn-continue" disabled>
-                Continue
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  class="ml-1"
-                >
-                  <path d="M9 18l6-6-6-6"></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- SCREEN 2: CREDENTIALS -->
-        <div id="screen-credentials" class="connect-screen hidden-screen">
-          <div class="screen-content flex flex-col items-center">
-            <div class="logo-placeholder-large mt-8 mb-6">
-              <!-- Dynamic Logo -->
-              <img
-                id="cred-bank-logo"
-                src=""
-                alt="Bank Logo"
-                class="w-full h-full object-contain p-4"
-              />
-            </div>
-
-            <h2
-              class="text-xl font-bold text-[#004492] mb-2 text-center"
-              id="cred-bank-name"
-            >
-              Scotiabank México
-            </h2>
-            <p class="text-[13px] text-gray-500 text-center mb-8 px-4">
-              Please provide your credentials to connect your bank account
-            </p>
-
-            <div class="w-full space-y-5">
-              <div class="input-group">
-                <label class="block text-[#000b1e] font-bold text-sm mb-2"
-                  >Username</label
-                >
-                <input
-                  type="text"
-                  class="w-full bg-[#dbeafe] rounded-xl px-4 py-3 text-sm outline-none border-none text-slate-700 placeholder-slate-400"
-                  placeholder="Enter your username"
-                />
-              </div>
-
-              <div class="input-group">
-                <label class="block text-[#000b1e] font-bold text-sm mb-2"
-                  >Password</label
-                >
-                <input
-                  type="password"
-                  class="w-full bg-[#dbeafe] rounded-xl px-4 py-3 text-sm outline-none border-none text-slate-700 placeholder-slate-400"
-                  placeholder="Enter your password"
-                />
-              </div>
-
-              <button
-                class="w-full bg-[#dbeafe] text-white font-bold py-3 rounded-xl mt-4 flex items-center justify-center gap-2 transition-colors"
-                id="btn-login"
-                onclick="window.connectLogin()"
-              >
-                Login
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path d="M9 18l6-6-6-6"></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- SCREEN 3: CONNECTING (LOADING) -->
-        <div id="screen-loading" class="connect-screen hidden-screen">
-          <!-- Full Gradient Background -->
-          <div
-            class="absolute inset-0 bg-gradient-to-b from-[#5c8fd6] to-[#ffffff] opacity-90 z-0"
-          >
+              <span class="ml-1">back</span>
+            </button>
           </div>
 
-          <div
-            class="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center"
-          >
-            <h2 class="text-2xl font-bold text-[#000b1e] mb-1">
-              <span class="text-white/70">Conne</span>cting your account
-            </h2>
-            <p class="text-sm text-gray-500 mb-8">Please wait</p>
-
-            <!-- Loading Bar -->
-            <div class="w-full h-2 bg-gray-200/50 rounded-full overflow-hidden">
-              <div
-                id="loading-bar"
-                class="h-full bg-white w-0 transition-all duration-[3000ms] ease-out"
-              >
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- SCREEN 4: WALLET -->
-        <div id="screen-wallet" class="connect-screen hidden-screen">
-          <div class="screen-content pt-4">
-            <div class="h-[120px] w-full flex justify-center items-center mb-0">
-              <!-- Abstract lines logic placeholder (image) -->
-              <img
-                src="/images/wireframe-lines.png"
-                class="opacity-10 h-full w-auto"
-                style="display:none;"
-                onerror="this.style.display='none'"
-              />
-              <svg
-                width="120"
-                height="80"
-                viewBox="0 0 120 80"
-                class="text-slate-200"
-                fill="none"
-                stroke="currentColor"
-              >
-                <path d="M10 40 Q 60 10 110 40" stroke-width="1"></path>
-                <path d="M10 50 Q 60 20 110 50" stroke-width="1"></path>
-                <path d="M10 60 Q 60 30 110 60" stroke-width="1"></path>
-              </svg>
-            </div>
-
-            <h2 class="text-center text-[#000b1e] text-2xl font-bold mb-1">
-              Wallet
-            </h2>
-            <p class="text-center text-gray-400 text-xs mb-8">
-              Manage your funds
-            </p>
-
-            <div class="px-2">
-              <p class="text-[#000b1e] font-semibold text-sm mb-2">
-                Total Balance
+          <!-- SCREEN 1: BANKS LIST -->
+          <div id="screen-banks" class="connect-screen active">
+            <div class="screen-content">
+              <h2 class="screen-title text-center text-[#004492]">
+                Bank Account Linking
+              </h2>
+              <p class="screen-subtitle text-center mb-6">
+                Let's link your account
               </p>
-              <div
-                class="bg-[#e2e8f0] rounded-xl px-4 py-3 flex justify-between items-center mb-6"
-              >
-                <span class="text-2xl font-normal text-slate-800">$0.00</span>
-                <span
-                  class="bg-[#000b1e] text-white text-xs font-bold px-3 py-1 rounded-full"
-                  >MXN</span
-                >
-              </div>
 
-              <!-- Deposit Button (Blue Gradient) -->
-              <button
-                class="w-full bg-gradient-to-r from-[#5c8fd6] to-[#001e45] text-white py-4 rounded-xl flex items-center justify-between px-6 shadow-lg shadow-blue-900/20 mb-6"
-                onclick="window.connectNavigate('deposit')"
-              >
-                <span class="font-bold">Deposit Funds</span>
+              <div class="search-box">
                 <svg
+                  class="search-icon"
                   width="20"
                   height="20"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg
+                  stroke-width="2"
                 >
-              </button>
-
-              <!-- Connected Bank Card -->
-              <div
-                class="bg-[#000b1e] rounded-xl p-6 text-center text-white relative overflow-hidden"
-              >
-                <div class="absolute top-2 left-1/2 -translate-x-1/2">
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="white"
-                    stroke-width="2"><path d="M18 15l-6-6-6 6"></path></svg
-                  >
-                </div>
-                <h3 class="font-bold text-lg mt-4 mb-1">SCOTIABANK MÉXICO</h3>
-                <p class="text-xs text-slate-400">Connected Bank</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- SCREEN 5: DEPOSIT FUNDS -->
-        <div id="screen-deposit" class="connect-screen hidden-screen">
-          <div class="screen-content px-4">
-            <div class="h-[100px] w-full flex justify-center items-center">
-              <!-- Lines placeholder -->
-              <svg
-                width="100"
-                height="60"
-                viewBox="0 0 120 80"
-                class="text-slate-200"
-                fill="none"
-                stroke="currentColor"
-              >
-                <path d="M20 40 Q 60 10 100 40" stroke-width="1"></path>
-                <path d="M20 50 Q 60 20 100 50" stroke-width="1"></path>
-              </svg>
-            </div>
-
-            <h2 class="text-center text-[#000b1e] text-xl font-bold mb-1">
-              Deposit Funds
-            </h2>
-            <p class="text-center text-gray-500 text-xs mb-6">
-              Select an account and enter amount
-            </p>
-
-            <p class="text-[#000b1e] text-sm font-semibold mb-3">
-              Select Account
-            </p>
-
-            <!-- Account Card -->
-            <div
-              class="bg-[#000b1e] rounded-2xl p-4 text-white flex justify-between items-center mb-2 shadow-lg relative overflow-hidden"
-            >
-              <!-- Selection indicator strip -->
-              <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-blue-500">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input
+                  type="text"
+                  placeholder="Search banks..."
+                  class="search-input"
+                />
               </div>
 
-              <div>
-                <p class="font-bold text-lg">Cuenta CLABE</p>
-                <p class="text-slate-400 text-xs">012345678901234567</p>
-              </div>
-              <div class="text-right">
-                <p class="font-bold text-lg">$12,345.67</p>
-                <p class="text-slate-400 text-xs">MXN</p>
-              </div>
-            </div>
-            <!-- Other Account -->
-            <div
-              class="bg-[#e2e8f0] rounded-2xl p-4 text-[#000b1e] flex justify-between items-center mb-6 opacity-60"
-            >
-              <div>
-                <p class="font-semibold">Chequera</p>
-              </div>
-            </div>
-
-            <p class="text-[#000b1e] text-sm font-semibold mb-2">Amount</p>
-            <div class="bg-[#e2e8f0] rounded-xl px-4 py-4 mb-8 text-center">
-              <span class="text-slate-400 text-2xl font-normal">0.00</span>
-            </div>
-
-            <!-- Slider Button -->
-            <div class="w-full" id="connect-slider">
-              <div
-                class="relative w-full h-[56px] rounded-[28px] flex items-center justify-center overflow-hidden cursor-pointer shadow-lg active:scale-[0.99] transition-transform"
-                style="background: linear-gradient(90deg, #1e3a8a 0%, #000080 100%);"
-              >
-                <span
-                  class="text-white font-semibold text-[15px] pointer-events-none z-0 tracking-wide"
-                >
-                  Slide to confirm
-                </span>
-
+              <div class="banks-list">
+                <!-- BBVA -->
                 <div
-                  class="absolute left-1 w-[48px] h-[48px] bg-white rounded-full flex items-center justify-center cursor-grab active:cursor-grabbing z-10 shadow-md transition-transform"
-                  id="connect-slider-thumb"
+                  class="bank-card"
+                  onclick="window.connectNavigate('credentials', 'BBVA México', 'https://cdn.worldvectorlogo.com/logos/bbva-2.svg')"
                 >
+                  <div class="bank-name">BBVA México</div>
+                </div>
+                <!-- Santander -->
+                <div
+                  class="bank-card"
+                  onclick="window.connectNavigate('credentials', 'Banco Santander', 'https://cdn.worldvectorlogo.com/logos/banco-santander-logo.svg')"
+                >
+                  <div class="bank-name">Banco Santander</div>
+                </div>
+                <!-- Banamex -->
+                <div
+                  class="bank-card"
+                  onclick="window.connectNavigate('credentials', 'Banamex', 'https://cdn.worldvectorlogo.com/logos/banamex-1.svg')"
+                >
+                  <div class="bank-name">Banamex</div>
+                </div>
+                <!-- HSBC -->
+                <div
+                  class="bank-card"
+                  onclick="window.connectNavigate('credentials', 'HSBC México', 'https://cdn.worldvectorlogo.com/logos/hsbc-logo-2018-.svg')"
+                >
+                  <div class="bank-name">HSBC México</div>
+                </div>
+                <!-- Banco Azteca (Selected Appearance) -->
+                <div
+                  class="bank-card active-demo"
+                  onclick="window.connectNavigate('credentials', 'Banco Azteca', 'https://i.pinimg.com/1200x/31/7e/06/317e06872fa113652429b22ee1702a24.jpg')"
+                >
+                  <div class="bank-logo-circle">
+                    <img
+                      src="https://i.pinimg.com/1200x/31/7e/06/317e06872fa113652429b22ee1702a24.jpg"
+                      alt="Azteca"
+                    />
+                  </div>
+                  <div class="bank-name text-white font-bold ml-3">
+                    Banco Azteca
+                  </div>
+                </div>
+                <!-- Scotiabank -->
+                <div
+                  class="bank-card"
+                  onclick="window.connectNavigate('credentials', 'Scotiabank México', 'https://cdn.worldvectorlogo.com/logos/scotiabank-4.svg')"
+                >
+                  <div class="bank-name">Scotiabank México</div>
+                </div>
+              </div>
+
+              <!-- Spacer -->
+              <div class="flex-grow"></div>
+
+              <div class="bottom-controls">
+                <!-- Simple pager indicator -->
+                <div class="slider-pager">
+                  <span class="pager-arrow">&lt;</span>
+                  <div class="pager-track"></div>
+                  <span class="pager-arrow">&gt;</span>
+                </div>
+
+                <!-- Updated Button Style -->
+                <button class="btn-gradient" disabled>
+                  Continue
                   <svg
-                    width="20"
-                    height="20"
+                    width="16"
+                    height="16"
                     viewBox="0 0 24 24"
                     fill="none"
-                    class="text-[#1e3a8a]"
                     stroke="currentColor"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    stroke-width="2"
+                    class="ml-1"
                   >
                     <path d="M9 18l6-6-6-6"></path>
                   </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- SCREEN 2: CREDENTIALS -->
+          <div id="screen-credentials" class="connect-screen hidden-screen">
+            <div class="screen-content flex flex-col h-full pt-4">
+              <!-- Animation Container (Centered, Natural Flow) -->
+              <div
+                class="flex-shrink-0 flex justify-center items-center mb-4 mt-2"
+              >
+                <img
+                  src="/gift/ANIMACION%201.gif"
+                  alt="Connecting Animation"
+                  class="h-32 w-32 object-contain mix-blend-multiply opacity-80"
+                />
+              </div>
+
+              <!-- Header Text -->
+              <div class="text-center mb-6">
+                <h2
+                  class="text-xl font-bold text-[#004492] mb-2"
+                  id="cred-bank-name"
+                >
+                  Scotiabank México
+                </h2>
+                <p class="text-[13px] text-gray-400 px-8 leading-snug">
+                  Please provide your credentials to connect your bank account
+                </p>
+              </div>
+
+              <!-- Form Fields -->
+              <div class="w-full space-y-5 flex-grow">
+                <div class="input-group">
+                  <label
+                    class="block text-[#000b1e] font-bold text-sm mb-2 pl-1"
+                    >Username</label
+                  >
+                  <input
+                    type="text"
+                    class="w-full bg-[#dce5f2] rounded-xl px-4 py-3.5 text-sm outline-none border-none text-slate-700 placeholder-slate-400 transition-shadow focus:ring-2 focus:ring-blue-100"
+                    placeholder="Enter your username"
+                  />
                 </div>
+
+                <div class="input-group">
+                  <label
+                    class="block text-[#000b1e] font-bold text-sm mb-2 pl-1"
+                    >Password</label
+                  >
+                  <input
+                    type="password"
+                    class="w-full bg-[#dce5f2] rounded-xl px-4 py-3.5 text-sm outline-none border-none text-slate-700 placeholder-slate-400 transition-shadow focus:ring-2 focus:ring-blue-100"
+                    placeholder="Enter your password"
+                  />
+                </div>
+
+                <!-- Login Button -->
+                <div class="pt-2">
+                  <button
+                    class="w-full text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-transform active:scale-95 btn-gradient shadow-lg shadow-blue-900/10"
+                    id="btn-login"
+                    onclick="window.connectLogin()"
+                  >
+                    <span>Login</span>
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                    >
+                      <path d="M9 18l6-6-6-6"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- SCREEN 3: CONNECTING (LOADING) -->
+          <div id="screen-loading" class="connect-screen hidden-screen">
+            <!-- White background for screen -->
+            <div class="absolute inset-0 bg-white z-0"></div>
+
+            <div
+              class="relative z-10 flex flex-col items-center justify-center h-full px-4"
+            >
+              <!-- Card Container with Gradient -->
+              <div
+                class="w-full rounded-[32px] overflow-hidden shadow-2xl relative"
+                style="height: 80%; background: linear-gradient(to right, #004492, #000b1e);"
+              >
+                <!-- Optional: Gradient overlay matching reference image style -->
+                <div
+                  class="absolute inset-0"
+                  style="background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);"
+                >
+                </div>
+
+                <div
+                  class="absolute inset-0 flex flex-col items-center justify-center px-6 text-center"
+                >
+                  <h2 class="text-2xl font-bold text-white mb-2">
+                    Connecting<span class="opacity-90"> your account</span>
+                  </h2>
+                  <p class="text-sm text-white/70 mb-10">Please wait</p>
+
+                  <!-- Loading Bar -->
+                  <div
+                    class="w-full max-w-[240px] h-1.5 bg-white/20 rounded-full overflow-hidden"
+                  >
+                    <div
+                      id="loading-bar"
+                      class="h-full bg-white w-0 transition-all duration-[3000ms] ease-out"
+                    >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SCREEN 4: WALLET -->
+          <div id="screen-wallet" class="connect-screen hidden-screen">
+            <div class="screen-content pt-4">
+              <div
+                class="h-[120px] w-full flex justify-center items-center mb-0"
+              >
+                <img
+                  src="/gift/ANIMACION%201.gif"
+                  alt="Animation"
+                  class="h-full w-auto object-contain mix-blend-multiply opacity-60"
+                />
+              </div>
+
+              <h2 class="text-center text-[#000b1e] text-2xl font-bold mb-1">
+                Wallet
+              </h2>
+              <p class="text-center text-gray-400 text-xs mb-8">
+                Manage your funds
+              </p>
+
+              <div class="px-2">
+                <p class="text-[#000b1e] font-semibold text-sm mb-2">
+                  Total Balance
+                </p>
+                <div
+                  class="bg-[#e2e8f0] rounded-xl px-4 py-3 flex justify-between items-center mb-6"
+                >
+                  <span class="text-2xl font-normal text-slate-800">$0.00</span>
+                  <span
+                    class="bg-[#000b1e] text-white text-xs font-bold px-3 py-1 rounded-full"
+                    >MXN</span
+                  >
+                </div>
+
+                <!-- Deposit Button (Connected Gradient) -->
+                <button
+                  class="w-full text-white py-4 rounded-xl flex items-center justify-between px-6 shadow-lg shadow-blue-900/20 mb-6 btn-gradient text-left"
+                  onclick="window.connectNavigate('deposit')"
+                >
+                  <span class="font-bold">Deposit Funds</span>
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg
+                  >
+                </button>
+
+                <!-- Connected Bank Card -->
+                <div
+                  class="bg-[#000b1e] rounded-xl p-6 text-center text-white relative overflow-hidden"
+                >
+                  <div class="absolute top-2 left-1/2 -translate-x-1/2">
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="white"
+                      stroke-width="2"><path d="M18 15l-6-6-6 6"></path></svg
+                    >
+                  </div>
+                  <h3 class="font-bold text-lg mt-4 mb-1">SCOTIABANK MÉXICO</h3>
+                  <p class="text-xs text-slate-400">Connected Bank</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SCREEN 5: DEPOSIT FUNDS -->
+          <div id="screen-deposit" class="connect-screen hidden-screen">
+            <div class="screen-content px-4">
+              <div
+                class="h-[100px] w-full flex justify-center items-center mb-4"
+              >
+                <img
+                  src="/gift/ANIMACION%201.gif"
+                  alt="Deposit Animation"
+                  class="h-full w-auto object-contain mix-blend-multiply opacity-80"
+                />
+              </div>
+
+              <h2 class="text-center text-[#000b1e] text-xl font-bold mb-1">
+                Deposit Funds
+              </h2>
+              <p class="text-center text-gray-500 text-xs mb-6">
+                Select an account and enter amount
+              </p>
+
+              <p class="text-[#000b1e] text-sm font-semibold mb-3">
+                Select Account
+              </p>
+
+              <!-- Account Card -->
+              <div
+                class="bg-[#000b1e] rounded-2xl p-4 text-white flex justify-between items-center mb-2 shadow-lg relative overflow-hidden"
+              >
+                <!-- Selection indicator strip -->
+                <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-blue-500">
+                </div>
+
+                <div>
+                  <p class="font-bold text-lg">Cuenta CLABE</p>
+                  <p class="text-slate-400 text-xs">012345678901234567</p>
+                </div>
+                <div class="text-right">
+                  <p class="font-bold text-lg">$12,345.67</p>
+                  <p class="text-slate-400 text-xs">MXN</p>
+                </div>
+              </div>
+              <!-- Other Account -->
+              <div
+                class="bg-[#e2e8f0] rounded-2xl p-4 text-[#000b1e] flex justify-between items-center mb-6 opacity-60"
+              >
+                <div>
+                  <p class="font-semibold">Chequera</p>
+                </div>
+              </div>
+
+              <p class="text-[#000b1e] text-sm font-semibold mb-2">Amount</p>
+              <div class="bg-[#e2e8f0] rounded-xl px-4 py-4 mb-8 text-center">
+                <span class="text-slate-400 text-2xl font-normal">0.00</span>
+              </div>
+
+              <!-- Slider Button -->
+              <div class="w-full" id="connect-slider">
+                <div
+                  class="relative w-full h-[56px] rounded-[28px] flex items-center justify-center overflow-hidden cursor-pointer shadow-lg active:scale-[0.99] transition-transform"
+                  style="background: linear-gradient(90deg, #1e3a8a 0%, #000080 100%);"
+                >
+                  <span
+                    class="text-white font-semibold text-[15px] pointer-events-none z-0 tracking-wide"
+                  >
+                    Slide to confirm
+                  </span>
+
+                  <div
+                    class="absolute left-1 w-[48px] h-[48px] bg-white rounded-full flex items-center justify-center cursor-grab active:cursor-grabbing z-10 shadow-md transition-transform"
+                    id="connect-slider-thumb"
+                  >
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      class="text-[#1e3a8a]"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M9 18l6-6-6-6"></path>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SCREEN 6: TRANSFER LOADING -->
+          <div
+            id="screen-transfer-loading"
+            class="connect-screen hidden-screen"
+          >
+            <div
+              class="relative z-10 flex flex-col items-center justify-center h-full px-4"
+            >
+              <div
+                class="w-full rounded-[32px] overflow-hidden shadow-2xl relative bg-white flex flex-col"
+                style="height: 80%;"
+              >
+                <!-- Gradient background similar to reference: Blue on left fading to white -->
+                <div
+                  class="absolute inset-0"
+                  style="background: linear-gradient(90deg, #2563eb 0%, #ffffff 60%); opacity: 0.1;"
+                >
+                </div>
+
+                <!-- Stronger blue gradient on left edge explicitly -->
+                <div
+                  class="absolute left-0 top-0 bottom-0 w-1/3 bg-gradient-to-r from-[#1e40af] to-transparent opacity-90"
+                >
+                </div>
+
+                <div
+                  class="relative z-20 flex flex-col items-center justify-center h-full px-6 text-center flex-grow"
+                >
+                  <h2
+                    class="text-xl font-bold text-[#000b1e] mb-2 drop-shadow-sm"
+                  >
+                    Transferring funds
+                  </h2>
+                  <p class="text-sm text-gray-500 mb-8 font-medium">
+                    Please wait
+                  </p>
+
+                  <!-- Loading Bar (Gray track, White/Blue indicator) -->
+                  <div
+                    class="w-32 h-1.5 bg-gray-200 rounded-full overflow-hidden"
+                  >
+                    <div
+                      id="transfer-loading-bar"
+                      class="h-full bg-[#000b1e] w-0 transition-all duration-[3000ms] ease-out"
+                    >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SCREEN 7: SUCCESS -->
+          <div id="screen-success" class="connect-screen hidden-screen">
+            <div
+              class="relative z-10 flex flex-col items-center justify-center h-full px-4"
+            >
+              <!-- Dark Blue Card -->
+              <div
+                class="w-full rounded-[32px] overflow-hidden shadow-2xl relative flex flex-col items-center justify-center text-center p-6"
+                style="height: 80%; background: #000b1e;"
+              >
+                <div
+                  class="w-16 h-16 rounded-full border-4 border-white flex items-center justify-center mb-6"
+                >
+                  <svg
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </div>
+
+                <h2 class="text-2xl font-bold text-white mb-2">
+                  Successful<br />Linking
+                </h2>
+                <p class="text-white/60 text-sm mt-2 px-8">
+                  Your bank account has been successfully linked
+                </p>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </DeviceFrame>
+    </DeviceFrame>
+  </div>
 </div>
 
 <style>
@@ -420,9 +519,24 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
     position: relative;
     width: 100%;
     max-width: 400px;
+    min-height: 80vh; /* Altura mínima para el contenedor */
     margin: 0 auto;
     z-index: 10;
     padding: 1rem 0 2rem;
+  }
+
+  /* Frame del iPhone */
+  div:global(.auth-background-section) .device-frame-wrapper {
+    position: relative !important;
+    z-index: 10 !important;
+    transform: scale(1) !important;
+    padding: 2.5rem 2rem !important;
+    background-color: #f3f4f6 !important;
+    border-radius: 2rem !important;
+    margin: 3rem auto !important;
+    height: 850px !important; /* Altura fija para que phone-frame__bezel pueda usar height: 100% */
+    display: flex !important;
+    flex-direction: column !important;
   }
 
   .device-content {
@@ -583,8 +697,9 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
     gap: 16px;
     margin-top: 20px;
   }
-  .btn-continue {
-    background: #cbd5e1;
+
+  .btn-gradient {
+    background: linear-gradient(to right, #000b1e, #044a95);
     color: white;
     font-weight: 600;
     width: 200px;
@@ -594,8 +709,10 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: not-allowed;
+    cursor: pointer;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   }
+
   .slider-pager {
     width: 100%;
     height: 8px;
@@ -634,12 +751,10 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
 <script is:inline>
   // Navigation
   window.connectNavigate = (screenId, bankName = null, bankLogo = null) => {
-    // Logic for moving between screens
     const screens = document.querySelectorAll(".connect-screen");
     screens.forEach((s) => {
       s.classList.remove("active");
-      s.classList.add("hidden-screen"); // for pointer events
-      // reset opacity/transform via class
+      s.classList.add("hidden-screen");
     });
 
     const target = document.getElementById("screen-" + screenId);
@@ -648,23 +763,20 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
       target.classList.remove("hidden-screen");
     }
 
-    // Handle specifics
     if (screenId === "credentials" && bankName) {
       document.getElementById("cred-bank-name").innerText = bankName;
-      const logoEl = document.getElementById("cred-bank-logo");
-      if (logoEl && bankLogo) logoEl.src = bankLogo;
     }
 
     const backBtn = document.getElementById("btn-back");
     if (screenId === "banks") {
       backBtn.style.opacity = "1";
       backBtn.onclick = () => {
-        /* Handle App Exit or nothing */
+        /* Exit */
       };
     } else if (screenId === "credentials") {
       backBtn.onclick = () => window.connectNavigate("banks");
     } else if (screenId === "wallet") {
-      backBtn.onclick = () => window.connectNavigate("banks"); // or logout
+      backBtn.onclick = () => window.connectNavigate("banks");
     } else if (screenId === "deposit") {
       backBtn.onclick = () => window.connectNavigate("wallet");
     }
@@ -673,27 +785,31 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
   // Login Flow
   window.connectLogin = () => {
     const btn = document.getElementById("btn-login");
-    // visual feedback
+    const originalText = btn.innerHTML;
     btn.innerHTML = "Loading...";
 
     setTimeout(() => {
       window.connectNavigate("loading");
 
-      // Start loading bar
       const bar = document.getElementById("loading-bar");
       if (bar) {
-        // Reset
         bar.style.width = "0%";
         bar.style.transition = "none";
-        void bar.offsetHeight; // trigger reflow
+        void bar.offsetHeight;
 
-        // Animate
         bar.style.transition = "width 3s ease-out";
         bar.style.width = "100%";
 
         setTimeout(() => {
+          // Instead of going straight to wallet, maybe show success linking?
+          // Re-reading user request: "realices la pantalla de carga de la segunda imagen... successful linking"
+          // The image 3 says "Successful Linking". Login flow -> Successful Linking -> Wallet is logical.
+          // Let's verify if user meant Transfer or Login.
+          // User said: "despues de Slide to Confirm realices la pantalla de carga... mira como esta en la segunda y tercera imagen"
+          // So the SLIDER triggers the Transferring (Image 2) and Successful (Image 3).
+          // Login flow stays as before (Loading -> Wallet).
           window.connectNavigate("wallet");
-          btn.innerHTML = `Login <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg>`; // reset btn
+          btn.innerHTML = originalText;
         }, 3000);
       }
     }, 500);
@@ -721,12 +837,35 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
       slider.style.left = newLeft + "px";
 
       if (newLeft >= trackRect.width - 60) {
-        // Success
         isDragging = false;
-        // Could show success screen here
-        alert("Funds Deposited!");
+
+        // Success Action -> Transfer Loading
+        window.connectNavigate("transfer-loading");
+
+        // Reset slider visually
         slider.style.left = "4px";
-        window.connectNavigate("wallet");
+
+        // Start bar animation
+        setTimeout(() => {
+          const tBar = document.getElementById("transfer-loading-bar");
+          if (tBar) {
+            tBar.style.width = "0%";
+            tBar.style.transition = "none";
+            void tBar.offsetHeight;
+            tBar.style.transition = "width 3s ease-out";
+            tBar.style.width = "100%";
+          }
+
+          // After loading -> Success Screen
+          setTimeout(() => {
+            window.connectNavigate("success");
+
+            // After Success -> Wallet
+            setTimeout(() => {
+              window.connectNavigate("wallet");
+            }, 2500);
+          }, 3000);
+        }, 100);
       }
     });
 
@@ -734,11 +873,64 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
       if (!isDragging) return;
       isDragging = false;
       const trackRect = track.getBoundingClientRect();
-      const currentLeft = parseInt(slider.style.left || "0");
-      if (currentLeft < trackRect.width - 60) {
+      if (parseInt(slider.style.left || "0") < trackRect.width - 60) {
         slider.style.transition = "left 0.3s ease";
         slider.style.left = "4px";
       }
+    });
+
+    // Touch events for mobile support
+    slider.addEventListener(
+      "touchstart",
+      (e) => {
+        isDragging = true;
+        slider.style.transition = "none";
+      },
+      { passive: false },
+    );
+
+    window.addEventListener(
+      "touchmove",
+      (e) => {
+        if (!isDragging) return;
+        const touch = e.touches[0];
+        const trackRect = track.getBoundingClientRect();
+        let newLeft = touch.clientX - trackRect.left - 24;
+
+        if (newLeft < 4) newLeft = 4;
+        if (newLeft > trackRect.width - 52) newLeft = trackRect.width - 52;
+        slider.style.left = newLeft + "px";
+
+        if (newLeft >= trackRect.width - 60) {
+          isDragging = false;
+          window.connectNavigate("transfer-loading");
+          slider.style.left = "4px";
+          setTimeout(() => {
+            const tBar = document.getElementById("transfer-loading-bar");
+            if (tBar) {
+              tBar.style.width = "0%";
+              tBar.style.transition = "none";
+              void tBar.offsetHeight;
+              tBar.style.transition = "width 3s ease-out";
+              tBar.style.width = "100%";
+            }
+            setTimeout(() => {
+              window.connectNavigate("success");
+              setTimeout(() => {
+                window.connectNavigate("wallet");
+              }, 2500);
+            }, 3000);
+          }, 100);
+        }
+      },
+      { passive: false },
+    );
+
+    window.addEventListener("touchend", () => {
+      if (!isDragging) return;
+      isDragging = false;
+      slider.style.transition = "left 0.3s ease";
+      slider.style.left = "4px";
     });
   }
 </script>
