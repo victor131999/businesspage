@@ -25,11 +25,11 @@
 /* Contenedor */
 .products-panel {
   position: fixed;
-  top: 57px; /* debajo del navbar */
+  top: 70px; /* debajo del navbar con margen adicional */
   left: 50%;
   transform: translateX(-50%) translateY(0);
   transform-origin: top center;
-  width: min(1120px, 92vw);
+  width: min(840px, 92vw); /* Limita el ancho máximo del panel */
   max-height: min(560px, calc(100vh - 80px));
   height: min(560px, calc(100vh - 80px));
   display: grid;
@@ -40,11 +40,12 @@
   border-radius: 22px;
   background: #fff;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
-  z-index: 1001;
-  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-              max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-              padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 11001; /* Mayor que el navbar simple (10000) */
+  transition:
+    opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
 }
 
@@ -86,7 +87,7 @@
 
 .pp-item {
   appearance: none;
-  border: 0;    
+  border: 0;
   border-radius: 12px;
   padding: 10px 14px;
 
@@ -97,7 +98,10 @@
   text-align: left;
   cursor: pointer;
   position: relative;
-  transition: background-color 0.2s ease, color 0.2s ease, transform 0.12s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.12s ease;
 }
 
 .pp-item:hover {
@@ -119,7 +123,7 @@
   width: 1px;
   height: 100%;
   border-radius: 0 6px 6px 0;
-  background: #95FF0B;
+  background: #95ff0b;
 }
 
 /* ===============================
@@ -176,7 +180,7 @@
 }
 
 .pp-title-link:hover {
-  color: #002B62;
+  color: #002b62;
   border-bottom-color: #004195;
 }
 
@@ -230,7 +234,9 @@
 a.pp-feature {
   text-decoration: none;
   cursor: pointer;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
   border-radius: 8px;
   padding: 4px;
   margin: -4px;
@@ -249,7 +255,7 @@ a.pp-feature:hover {
   place-items: center;
 
   border-radius: 14px;
-  background: #95FF0B;
+  background: #95ff0b;
   color: #0b132b;
   box-shadow: 0 10px 18px rgba(149, 255, 11, 0.25);
 }
@@ -282,7 +288,6 @@ a.pp-feature:hover {
    =============================== */
 
 #products-trigger {
-  
   border: none;
   border-radius: 10px;
   padding: 0.6rem 1.2rem;
@@ -307,8 +312,13 @@ a.pp-feature:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   cursor: pointer;
 }
-.pp-content { opacity: 1; transition: opacity .18s; }
-.pp-content.is-fading { opacity: .45; }   /* solo cuando queramos atenuar */
+.pp-content {
+  opacity: 1;
+  transition: opacity 0.18s;
+}
+.pp-content.is-fading {
+  opacity: 0.45;
+} /* solo cuando queramos atenuar */
 
 /* ===============================
    Media Queries - Mobile
@@ -320,11 +330,11 @@ a.pp-feature:hover {
     width: min(95vw, 100%);
     max-width: 100vw;
     height: auto;
-    max-height: 90vh;
+    max-height: calc(100vh - 80px);
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
     border-radius: 16px;
-    top: 57px;
+    top: 65px;
     left: 50%;
     transform: translateX(-50%) translateY(0);
   }
@@ -378,7 +388,7 @@ a.pp-feature:hover {
 
   /* Indicador inferior para item activo */
   .pp-item.is-active {
-    border-bottom: 3px solid #95FF0B;
+    border-bottom: 3px solid #95ff0b;
     margin-bottom: -1px;
   }
 
