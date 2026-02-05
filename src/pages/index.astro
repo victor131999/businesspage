@@ -19,6 +19,7 @@ import AlaizaProd from "../components/product-cards/alaiza-prod.astro";
 import TokensProd from "../components/tokens/tokens-prod.astro";
 import { AlaizaAssistant } from "../components/AlaizaAssistant";
 import DeviceFrame from "@/components/design-system/organisms/device-frame/DeviceFrame.astro";
+import CardTabs from "../components/design-system/organisms/CardTabs.astro";
 
 // Configuración del navbar con tema claro/blanco
 const navbarColors = {
@@ -792,36 +793,21 @@ const modulesList = [
 
     <section class="bench-section section-gap-200">
       <div class="bench-section-2-content">
-        <div class="bench-tabs">
-          <Button
-            type="button"
-            variant="outline"
-            class="bench-tab active"
-            data-bench="1">Borderless</Button
+        <CardTabs
+          id="home-bench-tabs"
+          tabs={[
+            { value: "borderless", label: "Borderless", active: true },
+            { value: "Plug & Play", label: "Plug & Play" },
+            { value: "Custom Made", label: "Custom Made" },
+            { value: "On-Demand", label: "On-Demand" },
+          ]}
+          class="bench-section-tabs"
+        >
+          <div
+            class="bench-content-placeholder"
+            data-card-content="borderless"
+            style="width: 100%; height: 100%; max-height: 500px;"
           >
-          <Button
-            type="button"
-            variant="outline"
-            class="bench-tab"
-            data-bench="2">Bench 2</Button
-          >
-          <Button
-            type="button"
-            variant="outline"
-            class="bench-tab"
-            data-bench="3">Bench 3</Button
-          >
-          <Button
-            type="button"
-            variant="outline"
-            class="bench-tab"
-            data-bench="4">Bench 4</Button
-          >
-        </div>
-
-        <div class="bench-content-area">
-          <div class="bench-content-placeholder" data-bench-content="1">
-            <!-- Contenido para Bench 1 -->
             <video
               class="bench-video"
               autoplay
@@ -829,6 +815,7 @@ const modulesList = [
               loop
               playsinline
               preload="metadata"
+              style="width: 100%; height: 100%; object-fit: cover; border-radius: var(--ds-radius-lg, 20px);"
             >
               <source
                 src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/cards_bench_clip.mp4"
@@ -838,12 +825,35 @@ const modulesList = [
           </div>
           <div
             class="bench-content-placeholder"
-            data-bench-content="2"
-            style="display: none;"
+            data-card-content="bench2"
+            style="display: none; padding: 4rem; text-align: center; color: #fff;"
           >
-            aui nuevo contenido
+            <h3 style="font-size: 2rem; margin-bottom: 1rem;">
+              Bench 2 Content
+            </h3>
+            <p>Contenido para la pestaña Bench 2</p>
           </div>
-        </div>
+          <div
+            class="bench-content-placeholder"
+            data-card-content="bench3"
+            style="display: none; padding: 4rem; text-align: center; color: #fff;"
+          >
+            <h3 style="font-size: 2rem; margin-bottom: 1rem;">
+              Bench 3 Content
+            </h3>
+            <p>Contenido para la pestaña Bench 3</p>
+          </div>
+          <div
+            class="bench-content-placeholder"
+            data-card-content="bench4"
+            style="display: none; padding: 4rem; text-align: center; color: #fff;"
+          >
+            <h3 style="font-size: 2rem; margin-bottom: 1rem;">
+              Bench 4 Content
+            </h3>
+            <p>Contenido para la pestaña Bench 4</p>
+          </div>
+        </CardTabs>
 
         <div class="bench-text-content">
           <h2 class="bench-title" data-i18n="home.bench.title">
@@ -3609,7 +3619,8 @@ const modulesList = [
       "[data-close-quote-modal]",
     );
 
-    const MEETINGS_BASE_URL = "https://meetings.hubspot.com/gmantilla?embed=true";
+    const MEETINGS_BASE_URL =
+      "https://meetings.hubspot.com/gmantilla?embed=true";
 
     const openQuoteModal = () => {
       if (!quoteModal) return;
@@ -3753,7 +3764,6 @@ const modulesList = [
         updateActionCard(actionId);
       });
     });
-
     // Initialize with first active button
     const firstActive = document.querySelector(".action-nav-button.active");
     if (firstActive) {
@@ -3762,5 +3772,36 @@ const modulesList = [
         updateActionCard(firstActionId);
       }
     }
+  });
+
+  // Home Bench Tabs Logic (CardTabs)
+  document.addEventListener("DOMContentLoaded", () => {
+    const benchTabButtons = document.querySelectorAll(
+      "button[data-tab-group='home-bench-tabs']",
+    );
+    const benchContents = document.querySelectorAll(
+      ".bench-content-placeholder",
+    );
+
+    benchTabButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const val = btn.getAttribute("data-tab-value");
+
+        // Update active state
+        benchTabButtons.forEach((b) => {
+          const isActive = b.getAttribute("data-tab-value") === val;
+          b.classList.toggle("active", isActive);
+          b.setAttribute("aria-selected", isActive ? "true" : "false");
+        });
+
+        // Update content
+        benchContents.forEach((c) => {
+          if (c instanceof HTMLElement && c.hasAttribute("data-card-content")) {
+            c.style.display =
+              c.getAttribute("data-card-content") === val ? "block" : "none";
+          }
+        });
+      });
+    });
   });
 </script>

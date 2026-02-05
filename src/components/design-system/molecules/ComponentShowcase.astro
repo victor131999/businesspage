@@ -1,0 +1,109 @@
+---
+/**
+ * Layout Molecule: ComponentShowcase
+ * Muestra una visualización ("Preview") del componente y su código ("Code") en un bloque desplegable o estático.
+ */
+import Title from "../atoms/Title.astro";
+import Text from "../atoms/Text.astro";
+
+interface Props {
+    title: string;
+    description?: string;
+    code: string;
+    class?: string;
+}
+
+const { title, description, code, class: className = "" } = Astro.props;
+---
+
+<div class:list={["ds-showcase", className]}>
+    <div class="ds-showcase__header">
+        <Title level={3} variant="card">{title}</Title>
+        {
+            description && (
+                <Text variant="body" class="ds-showcase__desc">
+                    {description}
+                </Text>
+            )
+        }
+    </div>
+
+    <div class="ds-showcase__preview">
+        <div class="ds-showcase__label">Preview</div>
+        <div class="ds-showcase__stage">
+            <slot />
+        </div>
+    </div>
+
+    <div class="ds-showcase__code">
+        <div class="ds-showcase__label">Code</div>
+        <pre class="ds-showcase__pre"><code>{code}</code></pre>
+    </div>
+</div>
+
+<style is:global>
+    .ds-showcase {
+        margin-bottom: 3rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        background: #fff;
+        overflow: hidden;
+    }
+    .ds-showcase__header {
+        padding: 1.5rem 1.5rem 1rem;
+        border-bottom: 1px solid #f1f5f9;
+    }
+    .ds-showcase__desc {
+        margin-top: 0.5rem;
+        color: var(--ds-color-text-muted);
+    }
+
+    .ds-showcase__preview {
+        background: #fff;
+        position: relative;
+    }
+    .ds-showcase__stage {
+        padding: 2rem;
+        display: flex;
+        justify-content: center;
+        background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+        background-size: 20px 20px;
+    }
+
+    .ds-showcase__code {
+        background: #1e293b;
+        padding: 0;
+        position: relative;
+    }
+    .ds-showcase__pre {
+        margin: 0;
+        padding: 1.5rem;
+        overflow-x: auto;
+        color: #e2e8f0;
+        font-family:
+            ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 0.85rem;
+        line-height: 1.6;
+    }
+    .ds-showcase__label {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-weight: 600;
+        padding: 0.25rem 0.5rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 10;
+    }
+    .ds-showcase__preview .ds-showcase__label {
+        background: #f1f5f9;
+        color: #64748b;
+        border-bottom-right-radius: 4px;
+    }
+    .ds-showcase__code .ds-showcase__label {
+        background: rgba(255, 255, 255, 0.1);
+        color: #94a3b8;
+        border-bottom-right-radius: 4px;
+    }
+</style>

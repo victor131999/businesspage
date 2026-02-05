@@ -8,40 +8,87 @@ import Layout from "../layouts/Layout.astro";
 import Button from "../components/design-system/atoms/Button.astro";
 import "../components/design-system/tokens.css";
 
+// Atoms
+import Input from "../components/design-system/atoms/Input.astro";
+import Title from "../components/design-system/atoms/Title.astro";
+import Text from "../components/design-system/atoms/Text.astro";
+import IconButton from "../components/design-system/atoms/IconButton.astro";
+import Divider from "../components/design-system/atoms/Divider.astro";
+
+// Molecules
+import EmailQuoteForm from "../components/design-system/molecules/EmailQuoteForm.astro";
+import CtaGroup from "../components/design-system/molecules/CtaGroup.astro";
+import LoginFormCard from "../components/design-system/molecules/LoginFormCard.astro";
+import Modal from "../components/design-system/molecules/Modal.astro";
+import TabList from "../components/design-system/molecules/TabList.astro";
+import UnderlineTabs from "../components/design-system/molecules/UnderlineTabs.astro";
+import ComponentShowcase from "../components/design-system/molecules/ComponentShowcase.astro";
+
+// Organisms
+import WelcomeHero from "../components/design-system/organisms/WelcomeHero.astro";
+import QuoteModalHubSpot from "../components/design-system/organisms/QuoteModalHubSpot.astro";
+import SectionTwoCol from "../components/design-system/organisms/SectionTwoCol.astro";
+import CardTabs from "../components/design-system/organisms/CardTabs.astro";
+
 const navSections = [
   { id: "overview", label: "Components overview", active: true },
   { id: "phone-frame", label: "Marco iPhone", expandable: false },
   { id: "atomic-design", label: "Atomic Design", expandable: false },
   { id: "breakpoints", label: "Breakpoints", expandable: false },
   { id: "tokens", label: "Design tokens", expandable: false },
-  { id: "atoms", label: "Átomos", expandable: true, sub: ["Buttons", "Input", "Text", "Title", "IconButton", "Divider"] },
-  { id: "molecules", label: "Moléculas", expandable: true, sub: ["EmailQuoteForm", "CtaGroup", "LoginFormCard", "Modal", "TabList"] },
-  { id: "organisms", label: "Organismos", expandable: true, sub: ["WelcomeHero", "QuoteModalHubSpot", "SectionTwoCol"] },
+  {
+    id: "atoms",
+    label: "Átomos",
+    expandable: true,
+    sub: ["Buttons", "Input", "Text", "Title", "IconButton", "Divider"],
+  },
+  {
+    id: "molecules",
+    label: "Moléculas",
+    expandable: true,
+    sub: ["EmailQuoteForm", "CtaGroup", "LoginFormCard", "Modal", "TabList"],
+  },
+  {
+    id: "organisms",
+    label: "Organismos",
+    expandable: true,
+    sub: ["WelcomeHero", "QuoteModalHubSpot", "SectionTwoCol"],
+  },
   { id: "usage", label: "Uso en home", expandable: false },
 ];
 ---
 
-<Layout title="Design System — Zelify" description="Documentación del design system: Atomic Design, tokens y marco iPhone">
+<Layout
+  title="Design System — Zelify"
+  description="Documentación del design system: Atomic Design, tokens y marco iPhone"
+>
   <div class="ds-page">
     <aside class="ds-sidebar" aria-label="Navegación del design system">
       <div class="ds-sidebar__header">
         <span class="ds-sidebar__title">Design System</span>
       </div>
       <nav class="ds-sidebar__nav">
-        {navSections.map((item) => (
-          <div class="ds-sidebar__group">
-            <a
-              href={`#${item.id}`}
-              class:list={["ds-sidebar__link", item.active && "ds-sidebar__link--active"]}
-              data-section={item.id}
-            >
-              {item.label}
-            </a>
-            {item.expandable && (
-              <span class="ds-sidebar__chevron" aria-hidden="true">▼</span>
-            )}
-          </div>
-        ))}
+        {
+          navSections.map((item) => (
+            <div class="ds-sidebar__group">
+              <a
+                href={`#${item.id}`}
+                class:list={[
+                  "ds-sidebar__link",
+                  item.active && "ds-sidebar__link--active",
+                ]}
+                data-section={item.id}
+              >
+                {item.label}
+              </a>
+              {item.expandable && (
+                <span class="ds-sidebar__chevron" aria-hidden="true">
+                  ▼
+                </span>
+              )}
+            </div>
+          ))
+        }
       </nav>
     </aside>
 
@@ -50,28 +97,52 @@ const navSections = [
         <header id="overview" class="ds-hero">
           <h1 class="ds-hero__title">Design System Zelify</h1>
           <p class="ds-hero__lead">
-            Atomic Design, tokens, componentes y marco tipo iPhone del product showcase. Documentación e ejemplos visuales.
+            Atomic Design, tokens, componentes y marco tipo iPhone del product
+            showcase. Documentación e ejemplos visuales.
           </p>
         </header>
 
         <section id="phone-frame" class="ds-section">
           <h2 class="ds-section__title">Marco iPhone (Product Showcase)</h2>
           <p class="ds-section__p">
-            En la home, la demo del producto (Auth, Identity, AML, etc.) está dentro de un <strong>marco tipo iPhone</strong>: bezel oscuro, pantalla blanca, Dynamic Island, barra de estado (hora, señal, batería) y home indicator. El botón play/pause queda <strong>fuera del dispositivo</strong>, esquina inferior derecha.
+            En la home, la demo del producto (Auth, Identity, AML, etc.) está
+            dentro de un <strong>marco tipo iPhone</strong>: bezel oscuro,
+            pantalla blanca, Dynamic Island, barra de estado (hora, señal,
+            batería) y home indicator. El botón play/pause queda <strong
+              >fuera del dispositivo</strong
+            >, esquina inferior derecha.
           </p>
-          <p class="ds-section__p"><strong>Ubicación:</strong> <code>src/pages/index.astro</code> — <code>.product-showcase__phone-frame</code>, <code>.phone-frame__screen</code>, <code>.phone-frame__status-bar</code>, <code>.phone-frame__dynamic-island</code>, <code>.phone-frame__home-indicator</code>.</p>
+          <p class="ds-section__p">
+            <strong>Ubicación:</strong>
+            <code>src/pages/index.astro</code> — <code
+              >.product-showcase__phone-frame</code
+            >, <code>.phone-frame__screen</code>, <code
+              >.phone-frame__status-bar</code
+            >, <code>.phone-frame__dynamic-island</code>, <code
+              >.phone-frame__home-indicator</code
+            >.
+          </p>
           <div class="ds-section__block">
-            <h3 class="ds-section__subtitle">Dimensiones (ajustables en código)</h3>
+            <h3 class="ds-section__subtitle">
+              Dimensiones (ajustables en código)
+            </h3>
             <table class="ds-table">
               <thead>
                 <tr><th>Qué</th><th>Valor actual</th></tr>
               </thead>
               <tbody>
-                <tr><td>Ancho</td><td><code>clamp(260px, 25vw, 350px)</code></td></tr>
+                <tr
+                  ><td>Ancho</td><td><code>clamp(260px, 25vw, 350px)</code></td
+                  ></tr
+                >
                 <tr><td>Alto</td><td><code>680px</code></td></tr>
                 <tr><td>Grosor bezel</td><td><code>padding: 5px</code></td></tr>
                 <tr><td>Dynamic Island</td><td>126px × 28px</td></tr>
-                <tr><td>Botón play</td><td><code>bottom: -20px; right: -20px</code></td></tr>
+                <tr
+                  ><td>Botón play</td><td
+                    ><code>bottom: -20px; right: -20px</code></td
+                  ></tr
+                >
               </tbody>
             </table>
           </div>
@@ -80,93 +151,420 @@ const navSections = [
         <section id="atomic-design" class="ds-section">
           <h2 class="ds-section__title">Atomic Design</h2>
           <p class="ds-section__p">
-            Tres niveles en <code>src/components/design-system/</code>: <strong>Átomos</strong> (botones, inputs, texto, iconos), <strong>Moléculas</strong> (formularios, CTA group, modal, tabs), <strong>Organismos</strong> (WelcomeHero, QuoteModalHubSpot, SectionTwoCol).
+            Tres niveles en <code>src/components/design-system/</code>: <strong
+              >Átomos</strong
+            > (botones, inputs, texto, iconos), <strong>Moléculas</strong> (formularios,
+            CTA group, modal, tabs), <strong>Organismos</strong> (WelcomeHero, QuoteModalHubSpot,
+            SectionTwoCol).
           </p>
         </section>
 
         <section id="breakpoints" class="ds-section">
           <h2 class="ds-section__title">Breakpoints</h2>
-          <p class="ds-section__p">xs 0–479px · sm 480–639px · md 640–767px · lg 768–1023px · xl 1024–1199px · 2xl 1200px+</p>
+          <p class="ds-section__p">
+            xs 0–479px · sm 480–639px · md 640–767px · lg 768–1023px · xl
+            1024–1199px · 2xl 1200px+
+          </p>
         </section>
 
         <section id="tokens" class="ds-section">
           <h2 class="ds-section__title">Design tokens</h2>
           <p class="ds-section__p">
-            <code>src/components/design-system/tokens.css</code>: colores (--ds-color-primary, --ds-color-accent), tipografía, espaciado, radios, sombras. Uso: <code>var(--ds-color-primary)</code>, <code>var(--ds-radius-md)</code>.
+            <code>src/components/design-system/tokens.css</code>: colores
+            (--ds-color-primary, --ds-color-accent), tipografía, espaciado,
+            radios, sombras. Uso: <code>var(--ds-color-primary)</code>, <code
+              >var(--ds-radius-md)</code
+            >.
           </p>
         </section>
 
         <section id="atoms" class="ds-section">
           <h2 class="ds-section__title">Átomos</h2>
-          <p class="ds-section__p">Ubicación: <code>src/components/design-system/atoms/</code></p>
+          <p class="ds-section__p">
+            Ubicación: <code>src/components/design-system/atoms/</code>
+          </p>
 
-          <h3 class="ds-section__subtitle">Buttons</h3>
-          <p class="ds-section__p">Variantes: <code>primary</code> | <code>secondary</code> | <code>ghost</code> | <code>outline</code>. Tamaños: <code>sm</code> | <code>md</code> | <code>lg</code>.</p>
+          <div class="ds-section__block">
+            <ComponentShowcase
+              title="Buttons"
+              description="Variantes: primary, secondary, ghost, outline. Tamaños: sm, md, lg."
+              code={`<Button variant="primary">Primary</Button>
+<Button variant="secondary">Secondary</Button>
+<Button variant="outline">Outline</Button>
+<Button variant="ghost">Ghost</Button>
+<Button variant="primary" size="sm">Small</Button>`}
+            >
+              <div class="ds-preview__col">
+                <div class="ds-preview__row">
+                  <Button variant="primary">Primary</Button>
+                  <Button variant="secondary">Secondary</Button>
+                  <Button variant="outline">Outline</Button>
+                  <Button variant="ghost">Ghost</Button>
+                </div>
+                <br />
+                <div class="ds-preview__row">
+                  <Button variant="primary" size="sm">Small</Button>
+                  <Button variant="primary" size="md">Medium</Button>
+                  <Button variant="primary" size="lg">Large</Button>
+                </div>
+              </div>
+            </ComponentShowcase>
+          </div>
+
+          <div class="ds-section__block">
+            <ComponentShowcase
+              title="Input"
+              description="Campos de texto con diferentes estados."
+              code={`<Input name="demo-text" placeholder="Text input" />
+<Input name="demo-email" type="email" value="user@example.com" />
+<Input name="demo-error" placeholder="Error" invalid={true} />`}
+            >
+              <div class="ds-preview__col">
+                <Input name="demo-text" placeholder="Text input placeholder" />
+                <div style="height: 1rem;"></div>
+                <Input
+                  name="demo-email"
+                  type="email"
+                  placeholder="Email input"
+                  value="user@example.com"
+                />
+                <div style="height: 1rem;"></div>
+                <Input
+                  name="demo-error"
+                  placeholder="Error state"
+                  invalid={true}
+                />
+              </div>
+            </ComponentShowcase>
+          </div>
+
+          <h3 class="ds-section__subtitle">Title</h3>
+          <p class="ds-section__p">Tipografía para encabezados.</p>
+          <div class="ds-preview">
+            <Title level={1} variant="hero">Hero Title (h1)</Title>
+            <Title level={2} variant="section">Section Title (h2)</Title>
+            <Title level={3} variant="card">Card Title (h3)</Title>
+          </div>
+
+          <h3 class="ds-section__subtitle">Text</h3>
+          <p class="ds-section__p">Tipografía para cuerpo de texto.</p>
+          <div class="ds-preview">
+            <Text variant="body"
+              >Body text: The quick brown fox jumps over the lazy dog.</Text
+            >
+            <Text variant="subtitle"
+              >Subtitle: A brief description or lead paragraph.</Text
+            >
+            <Text variant="caption"
+              >Caption: Small text for details or metadata.</Text
+            >
+            <Text variant="muted">Muted: Less prominent text.</Text>
+          </div>
+
+          <h3 class="ds-section__subtitle">IconButton</h3>
           <div class="ds-preview">
             <div class="ds-preview__row">
-              <Button variant="primary">Primary</Button>
-              <Button variant="secondary">Secondary</Button>
-              <Button variant="outline">Outline</Button>
-              <Button variant="ghost">Ghost</Button>
-            </div>
-            <div class="ds-preview__row">
-              <Button variant="primary" size="sm">Small</Button>
-              <Button variant="primary" size="md">Medium</Button>
-              <Button variant="primary" size="lg">Large</Button>
+              <IconButton ariaLabel="Play">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"><path d="M8 5v14l11-7z"></path></svg
+                >
+              </IconButton>
+              <IconButton ariaLabel="Settings">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  ><path d="M12 15a3 3 0 100-6 3 3 0 000 6z"></path><path
+                    d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"
+                  ></path></svg
+                >
+              </IconButton>
             </div>
           </div>
 
-          <h3 class="ds-section__subtitle">Resto de átomos</h3>
-          <table class="ds-table">
-            <thead>
-              <tr><th>Componente</th><th>Props principales</th></tr>
-            </thead>
-            <tbody>
-              <tr><td><code>Input.astro</code></td><td>type, name, placeholder, required, invalid</td></tr>
-              <tr><td><code>Title.astro</code></td><td>level (1|2|3), variant (hero | section | card)</td></tr>
-              <tr><td><code>Text.astro</code></td><td>variant (body | subtitle | caption | muted)</td></tr>
-              <tr><td><code>IconButton.astro</code></td><td>ariaLabel, slot para icono</td></tr>
-              <tr><td><code>Divider.astro</code></td><td>vertical (boolean)</td></tr>
-            </tbody>
-          </table>
+          <h3 class="ds-section__subtitle">Divider</h3>
+          <div class="ds-preview" style="padding: 2rem;">
+            <p>Content above</p>
+            <Divider />
+            <p>Content below</p>
+            <br />
+            <div
+              style="display: flex; height: 50px; align-items: center; gap: 1rem;"
+            >
+              <span>Left</span>
+              <Divider vertical={true} />
+              <span>Right</span>
+            </div>
+          </div>
         </section>
 
         <section id="molecules" class="ds-section">
           <h2 class="ds-section__title">Moléculas</h2>
-          <p class="ds-section__p">Ubicación: <code>src/components/design-system/molecules/</code></p>
-          <table class="ds-table">
-            <thead>
-              <tr><th>Componente</th><th>Uso</th></tr>
-            </thead>
-            <tbody>
-              <tr><td><code>EmailQuoteForm.astro</code></td><td>Input email + botón Cotizar (welcome CTA)</td></tr>
-              <tr><td><code>CtaGroup.astro</code></td><td>Contenedor form + Demo + mensaje</td></tr>
-              <tr><td><code>LoginFormCard.astro</code></td><td>Tarjeta login: campos, botón, “crear cuenta”</td></tr>
-              <tr><td><code>Modal.astro</code></td><td>Overlay + contenido + botón cerrar (X)</td></tr>
-              <tr><td><code>TabList.astro</code></td><td>Tabs (ej. Bench). Props: tabs[], dataAttr</td></tr>
-            </tbody>
-          </table>
+          <p class="ds-section__p">
+            Ubicación: <code>src/components/design-system/molecules/</code>
+          </p>
+          <h3 class="ds-section__subtitle">EmailQuoteForm & CtaGroup</h3>
+          <p class="ds-section__p">
+            Formulario de captura de correo y grupo de llamada a la acción.
+          </p>
+          <div class="ds-preview" style="background: #f8f9fa;">
+            <CtaGroup>
+              <EmailQuoteForm />
+            </CtaGroup>
+          </div>
+
+          <h3 class="ds-section__subtitle">LoginFormCard</h3>
+          <p class="ds-section__p">Tarjeta de inicio de sesión completa.</p>
+          <div
+            class="ds-preview"
+            style="background: #f1f5f9; display: flex; justify-content: center;"
+          >
+            <div style="max-width: 400px; width: 100%;">
+              <LoginFormCard
+                title="Iniciar Sesión"
+                subtitle="Accede a tu cuenta"
+              />
+            </div>
+          </div>
+
+          <h3 class="ds-section__subtitle">Modal</h3>
+          <p class="ds-section__p">
+            Ventana modal con overlay. Interactúa con el botón para verla.
+          </p>
+          <div class="ds-preview">
+            <button id="open-demo-modal" class="ds-button ds-button--primary"
+              >Abrir Modal Demo</button
+            >
+            <Modal
+              id="demo-modal"
+              ariaLabel="Demo Modal"
+              closeAriaLabel="Cerrar modal"
+            >
+              <div style="text-align: center;">
+                <Title level={2} variant="card">Hola desde el Modal</Title>
+                <p style="color: var(--ds-color-text-muted); margin: 1rem 0;">
+                  Este es un componente modal reutilizable.
+                </p>
+                <div style="margin-top: 1.5rem;">
+                  <button
+                    class="ds-button ds-button--secondary"
+                    onclick="document.getElementById('close-demo-modal').click()"
+                    >Entendido</button
+                  >
+                </div>
+              </div>
+            </Modal>
+          </div>
+
+          <div class="ds-section__block">
+            <ComponentShowcase
+              title="TabList"
+              description="Lista de pestañas tipo botón (pill)."
+              code={`<TabList
+  tabs={[
+    { value: "tab1", label: "Pestaña 1", active: true },
+    { value: "tab2", label: "Pestaña 2" }
+  ]}
+  dataAttr="data-demo-tab"
+/>`}
+            >
+              <div>
+                <TabList
+                  tabs={[
+                    { value: "tab1", label: "Pestaña 1", active: true },
+                    { value: "tab2", label: "Pestaña 2" },
+                    { value: "tab3", label: "Pestaña 3" },
+                  ]}
+                  dataAttr="data-demo-tab"
+                />
+                <div
+                  style="margin-top: 1rem; padding: 1rem; border: 1px dashed #ccc; border-radius: 8px;"
+                >
+                  <div class="demo-tab-content" data-tab="tab1">
+                    Contenido de Pestaña 1
+                  </div>
+                  <div
+                    class="demo-tab-content"
+                    data-tab="tab2"
+                    style="display: none;"
+                  >
+                    Contenido de Pestaña 2
+                  </div>
+                  <div
+                    class="demo-tab-content"
+                    data-tab="tab3"
+                    style="display: none;"
+                  >
+                    Contenido de Pestaña 3
+                  </div>
+                </div>
+              </div>
+            </ComponentShowcase>
+          </div>
+
+          <div class="ds-section__block">
+            <ComponentShowcase
+              title="UnderlineTabs (New)"
+              description="Pestañas minimalistas con borde inferior."
+              code={`<UnderlineTabs
+  name="demo-underline"
+  tabs={[
+    { value: "u1", label: "Bench 1", active: true },
+    { value: "u2", label: "Bench 2" }
+  ]}
+/>`}
+            >
+              <div>
+                <UnderlineTabs
+                  name="demo-underline"
+                  tabs={[
+                    { value: "u1", label: "Bench 1", active: true },
+                    { value: "u2", label: "Bench 2" },
+                    { value: "u3", label: "Bench 3" },
+                    { value: "u4", label: "Bench 4" },
+                  ]}
+                />
+                <div style="margin-top: 1rem; padding: 1rem;">
+                  <div class="demo-underline-content" data-content="u1">
+                    Panel 1
+                  </div>
+                  <div
+                    class="demo-underline-content"
+                    data-content="u2"
+                    style="display: none;"
+                  >
+                    Panel 2
+                  </div>
+                  <div
+                    class="demo-underline-content"
+                    data-content="u3"
+                    style="display: none;"
+                  >
+                    Panel 3
+                  </div>
+                  <div
+                    class="demo-underline-content"
+                    data-content="u4"
+                    style="display: none;"
+                  >
+                    Panel 4
+                  </div>
+                </div>
+              </div>
+            </ComponentShowcase>
+          </div>
         </section>
 
         <section id="organisms" class="ds-section">
           <h2 class="ds-section__title">Organismos</h2>
-          <p class="ds-section__p">Ubicación: <code>src/components/design-system/organisms/</code></p>
-          <table class="ds-table">
-            <thead>
-              <tr><th>Componente</th><th>Uso</th></tr>
-            </thead>
-            <tbody>
-              <tr><td><code>WelcomeHero.astro</code></td><td>Hero: título, CtaGroup (form + Demo)</td></tr>
-              <tr><td><code>QuoteModalHubSpot.astro</code></td><td>Modal cotización + embed HubSpot Meetings</td></tr>
-              <tr><td><code>SectionTwoCol.astro</code></td><td>Dos columnas, slots left/right, reverseOnMobile</td></tr>
-            </tbody>
-          </table>
+          <p class="ds-section__p">
+            Ubicación: <code>src/components/design-system/organisms/</code>
+          </p>
+          <h3 class="ds-section__subtitle">WelcomeHero</h3>
+          <p class="ds-section__p">
+            Hero section principal. (Visualización reducida por escala)
+          </p>
+          <div
+            class="ds-preview"
+            style="position: relative; overflow: hidden; height: 600px; border: 1px solid #eee;"
+          >
+            <div
+              style="transform: scale(0.8); transform-origin: top center; width: 100%;"
+            >
+              <WelcomeHero />
+            </div>
+          </div>
+
+          <h3 class="ds-section__subtitle">SectionTwoCol</h3>
+          <p class="ds-section__p">
+            Sección de dos columnas con divider opcional.
+          </p>
+          <div class="ds-preview" style="padding: 0;">
+            <SectionTwoCol divider={true} sectionClass="ds-demo-section">
+              <div slot="left" style="padding: 2rem; text-align: right;">
+                <Title level={2} variant="section">Columna Izquierda</Title>
+                <Text
+                  >Contenido alineado a la derecha en la columna izquierda.</Text
+                >
+              </div>
+              <div slot="right" style="padding: 2rem;">
+                <Title level={2} variant="section">Columna Derecha</Title>
+                <Text
+                  >Contenido en la columna derecha. El divider está activo.</Text
+                >
+              </div>
+            </SectionTwoCol>
+          </div>
+
+          <div class="ds-section__block">
+            <ComponentShowcase
+              title="CardTabs"
+              description="Organismo que combina TabList con páneles de contenido."
+              code={`<CardTabs
+  id="demo-card-tabs"
+  tabs={[
+    { value: "c1", label: "Borderless", active: true },
+    { value: "c2", label: "Bench 2" }
+  ]}
+>
+  <div class="demo-card-content" data-card-content="c1">
+     <!-- Contenido 1 -->
+  </div>
+  <div class="demo-card-content" data-card-content="c2" style="display:none">
+     <!-- Contenido 2 -->
+  </div>
+</CardTabs>`}
+            >
+              <CardTabs
+                id="demo-card-tabs"
+                tabs={[
+                  { value: "c1", label: "Borderless", active: true },
+                  { value: "c2", label: "Bench 2" },
+                  { value: "c3", label: "Bench 3" },
+                ]}
+              >
+                <div
+                  class="demo-card-content"
+                  data-card-content="c1"
+                  style="padding: 2rem;"
+                >
+                  <Title level={3} variant="section"
+                    >Contenido 1: Borderless</Title
+                  >
+                  <Text>Este es el panel activo inicial.</Text>
+                </div>
+                <div
+                  class="demo-card-content"
+                  data-card-content="c2"
+                  style="display: none; padding: 2rem;"
+                >
+                  <Title level={3} variant="section">Contenido 2: Bench</Title>
+                  <Text>Segundo panel de contenido.</Text>
+                </div>
+                <div
+                  class="demo-card-content"
+                  data-card-content="c3"
+                  style="display: none; padding: 2rem;"
+                >
+                  <Title level={3} variant="section">Contenido 3: Info</Title>
+                  <Text>Tercer panel con más información.</Text>
+                </div>
+              </CardTabs>
+            </ComponentShowcase>
+          </div>
         </section>
 
         <section id="usage" class="ds-section">
           <h2 class="ds-section__title">Uso en home</h2>
           <p class="ds-section__p">
-            En <code>src/pages/index.astro</code> se usan los componentes del design system y el marco iPhone del product showcase.
+            En <code>src/pages/index.astro</code> se usan los componentes del design
+            system y el marco iPhone del product showcase.
           </p>
         </section>
 
@@ -196,11 +594,133 @@ const navSections = [
   function setActiveNav() {
     const hash = window.location.hash.slice(1) || "overview";
     document.querySelectorAll(".ds-sidebar__link").forEach((a) => {
-      a.classList.toggle("ds-sidebar__link--active", a.getAttribute("data-section") === hash || (hash === "" && a.getAttribute("data-section") === "overview"));
+      a.classList.toggle(
+        "ds-sidebar__link--active",
+        a.getAttribute("data-section") === hash ||
+          (hash === "" && a.getAttribute("data-section") === "overview"),
+      );
     });
   }
   setActiveNav();
   window.addEventListener("hashchange", setActiveNav);
+
+  // --- Logic for Design System Demos ---
+
+  // Modal Demo
+  const openModalBtn = document.getElementById("open-demo-modal");
+  const modal = document.getElementById("demo-modal");
+  const closeModalBtn = document.getElementById("close-demo-modal"); // button inside 'Entendido'
+  const modalOverlay = modal?.querySelector(".ds-modal__overlay");
+  const closeX = modal?.querySelector(".ds-modal__close");
+
+  function toggleModal(show: boolean) {
+    if (!modal) return;
+    if (show) modal.classList.add("is-active");
+    else modal.classList.remove("is-active");
+  }
+
+  openModalBtn?.addEventListener("click", () => toggleModal(true));
+  closeModalBtn?.addEventListener("click", () => toggleModal(false));
+  modalOverlay?.addEventListener("click", () => toggleModal(false));
+  closeX?.addEventListener("click", () => toggleModal(false));
+
+  // Tabs Demo
+  const tabButtons = document.querySelectorAll("button[data-demo-tab]");
+  const tabContents = document.querySelectorAll(".demo-tab-content");
+
+  tabButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const targetVal = btn.getAttribute("data-demo-tab");
+
+      // Update buttons state
+      tabButtons.forEach((b) => {
+        const isActive = b.getAttribute("data-demo-tab") === targetVal;
+        b.classList.toggle("active", isActive);
+        b.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+
+      // Update content visibility
+      tabContents.forEach((content) => {
+        if (content instanceof HTMLElement) {
+          content.style.display =
+            content.getAttribute("data-tab") === targetVal ? "block" : "none";
+        }
+      });
+    });
+  });
+
+  // Underline Tabs Demo
+  // We attach logic to all buttons inside [data-tab-group="demo-underline"]
+  const underlineTabs = document.querySelectorAll(
+    "button[data-tab-group='demo-underline']",
+  );
+  const underlineContents = document.querySelectorAll(
+    ".demo-underline-content",
+  );
+
+  underlineTabs.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const val = btn.getAttribute("data-tab-value");
+
+      // Update active state
+      underlineTabs.forEach((t) => {
+        const isActive = t.getAttribute("data-tab-value") === val;
+        t.classList.toggle("active", isActive);
+        t.setAttribute("aria-selected", isActive ? "true" : "false");
+
+        // Toggle helper indicator if necessary?
+        // CSS handles ::after opacity/display based on .active class usually.
+        // In our implementation, we rendered the indicator span manually.
+        const indicator = t.querySelector(".ds-underline-tabs__indicator");
+        if (isActive) {
+          if (!indicator) {
+            const span = document.createElement("span");
+            span.className = "ds-underline-tabs__indicator";
+            t.appendChild(span);
+          }
+        } else {
+          if (indicator) indicator.remove();
+        }
+      });
+
+      // Update content
+      underlineContents.forEach((c) => {
+        if (c instanceof HTMLElement) {
+          c.style.display =
+            c.getAttribute("data-content") === val ? "block" : "none";
+        }
+      });
+    });
+  });
+
+  // CardTabs Demo
+  // We attach logic to all buttons inside [data-tab-group="demo-card-tabs"]
+  // Since CardTabs uses UnderlineTabs internally, it outputs buttons with that group name.
+  const cardTabButtons = document.querySelectorAll(
+    "button[data-tab-group='demo-card-tabs']",
+  );
+  const cardContents = document.querySelectorAll(".demo-card-content");
+
+  cardTabButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const val = btn.getAttribute("data-tab-value");
+
+      // Update active state across all buttons in this group
+      cardTabButtons.forEach((t) => {
+        const isActive = t.getAttribute("data-tab-value") === val;
+        t.classList.toggle("active", isActive);
+        t.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+
+      // Update content
+      cardContents.forEach((c) => {
+        if (c instanceof HTMLElement) {
+          c.style.display =
+            c.getAttribute("data-card-content") === val ? "block" : "none";
+        }
+      });
+    });
+  });
 </script>
 
 <style>
@@ -224,7 +744,7 @@ const navSections = [
   }
   .ds-sidebar__header {
     padding: 0 1.25rem 1rem;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
   .ds-sidebar__title {
     font-size: 0.9rem;
@@ -248,12 +768,14 @@ const navSections = [
     text-decoration: none;
     font-size: 0.9rem;
     border-radius: 999px;
-    transition: background 0.15s, color 0.15s;
+    transition:
+      background 0.15s,
+      color 0.15s;
     flex: 1;
   }
   .ds-sidebar__link:hover {
     color: #fff;
-    background: rgba(255,255,255,0.06);
+    background: rgba(255, 255, 255, 0.06);
   }
   .ds-sidebar__link--active {
     background: #e8eaf6;
@@ -330,7 +852,7 @@ const navSections = [
     border-radius: 12px;
     padding: 1.5rem;
     margin: 1rem 0;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   }
   .ds-preview__row {
     display: flex;
@@ -350,7 +872,7 @@ const navSections = [
     background: #fff;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   }
   .ds-table th,
   .ds-table td {
@@ -407,7 +929,9 @@ const navSections = [
     border-left: 2px solid transparent;
     padding-left: 0.5rem;
     margin-left: -2px;
-    transition: color 0.15s, border-color 0.15s;
+    transition:
+      color 0.15s,
+      border-color 0.15s;
   }
   .ds-on-this-page__nav a:hover {
     color: #213f8c;
@@ -422,7 +946,7 @@ const navSections = [
       position: relative;
       max-height: none;
       padding: 1rem 1.25rem;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
     .ds-sidebar__nav {
       display: flex;

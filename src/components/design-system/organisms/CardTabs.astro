@@ -1,0 +1,46 @@
+---
+/**
+ * Organism: CardTabs
+ * Combina la molécula TabList con un área de contenido tipo "tarjeta".
+ * Uso: Secciones donde hay múltiples paneles de información conmutables.
+ */
+import UnderlineTabs from "../molecules/UnderlineTabs.astro";
+
+interface Props {
+    tabs: { value: string; label: string; active?: boolean }[];
+    id: string; // Identificador único para el grupo
+    class?: string;
+}
+
+const { tabs, id, class: className = "" } = Astro.props;
+---
+
+<div class:list={["ds-card-tabs", className]}>
+    <div class="ds-card-tabs__header">
+        <UnderlineTabs tabs={tabs} name={id} />
+    </div>
+
+    <div class="ds-card-tabs__content-area">
+        <slot />
+    </div>
+</div>
+
+<style is:global>
+    .ds-card-tabs {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        width: 100%;
+    }
+
+    .ds-card-tabs__content-area {
+        width: 100%;
+        /* Estilo base neutro - el contenido define su propio fondo si es necesario */
+        border-radius: var(--ds-radius-lg, 20px);
+        overflow: hidden;
+        min-height: 100px; /* Altura mínima para demo */
+        position: relative;
+        /* Removed default dark background and shadow */
+    }
+</style>
