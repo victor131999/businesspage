@@ -1,8 +1,14 @@
 ---
+import "../styles/navbar.css";
+import "../components/design-system/tokens.css";
 import Navbar3 from "../components/NavbarSimple.astro";
+import DeviceFrame from "../components/design-system/organisms/device-frame/DeviceFrame.astro";
 import ProductsPanel from "../components/productsPanel.astro";
 import { AlaizaAssistant } from "../components/AlaizaAssistant";
 import AuthApp from "../components/auth/AuthApp.astro";
+import EmailQuoteForm from "../components/design-system/molecules/EmailQuoteForm.astro";
+import CtaGroup from "../components/design-system/molecules/CtaGroup.astro";
+import Button from "../components/design-system/atoms/Button.astro";
 ---
 
 <html lang="es">
@@ -18,7 +24,7 @@ import AuthApp from "../components/auth/AuthApp.astro";
     <script src="https://js.hsforms.net/forms/embed/50894304.js" defer></script>
   </head>
 
-  <body>
+  <body class="demo-page">
     <header class="auth-header">
       <Navbar3 />
       <ProductsPanel />
@@ -36,31 +42,22 @@ import AuthApp from "../components/auth/AuthApp.astro";
           temprana de tráfico inusual para prevenir fraudes<br />
           y garantizar usuarios confiables.
         </p>
-        <div class="auth-cta">
-          <form
-            class="welcome-input-group"
-            action="#"
-            aria-label="Solicitar cotización"
-            novalidate
-          >
-            <input
-              class="welcome-input"
-              type="email"
-              name="email"
-              placeholder="Ingresa tu correo"
-              aria-label="Ingresa tu correo"
-              data-i18n-placeholder="home.welcome.email.placeholder"
-              data-i18n-aria="home.welcome.email.aria"
-            />
-            <button class="welcome-quote-button" type="submit">Cotizar</button>
-          </form>
-          <a
+        <CtaGroup class="auth-cta">
+          <EmailQuoteForm
+            dataI18nPlaceholder="home.welcome.email.placeholder"
+            dataI18nAria="home.welcome.email.aria"
+            buttonLabel="Let's talk"
+          />
+          <Button
             href="https://www.zelify.com/clips"
+            variant="secondary"
             class="welcome-demo-button"
             target="_blank"
-            rel="noopener noreferrer">Demo</a
+            rel="noopener noreferrer"
           >
-        </div>
+            Demo
+          </Button>
+        </CtaGroup>
       </section>
     </main>
 
@@ -510,7 +507,8 @@ import AuthApp from "../components/auth/AuthApp.astro";
               data-region="na1"
               data-form-id="c2a86711-5b88-4cf7-9fbf-0d5c25a73d96"
               data-portal-id="50894304"
-            ></div>
+            >
+            </div>
           </div>
         </div>
       </div>
@@ -735,42 +733,49 @@ import AuthApp from "../components/auth/AuthApp.astro";
           href="https://alaiza.zelify.com"
           class="cta-button"
           target="_blank"
-          rel="noopener noreferrer">Cotizar</a
+          rel="noopener noreferrer">Let's talk</a
         >
       </div>
     </section>
 
     <!-- Footer -->
-    <footer class="auth-footer">
+    <!-- Footer -->
+    <footer class="footer-section">
       <div class="footer-container">
-        <div class="footer-content">
+        <div class="footer-top">
           <!-- Logo -->
           <div class="footer-logo">
-            <img src="/images/zelify_logo2.png" alt="Zelify" />
+            <img
+              src="/images/zelify_logo2.png"
+              alt="Zelify"
+              style="height: 40px;"
+            />
           </div>
 
           <!-- Quick Links -->
-          <div class="footer-links">
-            <h3 class="footer-links-title">Quick links</h3>
-            <nav class="footer-nav">
-              <a href="/products">Products</a>
-              <a href="/nosotros">About us</a>
-              <a href="/desarrollo">Developers</a>
-              <a href="/otros">Others</a>
-            </nav>
+          <div class="footer-quick-links">
+            <h3 class="quick-links-title">Quick links</h3>
+            <ul class="quick-links-list">
+              <li><a href="/products">Products</a></li>
+              <li><a href="/nosotros">About us</a></li>
+              <li><a href="/desarrollo">Developers</a></li>
+              <li><a href="/otros">Others</a></li>
+            </ul>
           </div>
         </div>
 
-        <!-- Disclaimer -->
-        <p class="footer-disclaimer">
-          Zelify is a technology platform currently in a development phase, not
-          yet deployed or operational, and does not provide or process financial
-          services directly; all financial operations are conducted exclusively
-          through regulated third-party partners.
-        </p>
+        <div class="footer-bottom">
+          <!-- Disclaimer -->
+          <p class="footer-legal">
+            Zelify is a technology platform currently in a development phase,
+            not yet deployed or operational, and does not provide or process
+            financial services directly; all financial operations are conducted
+            exclusively through regulated third-party partners.
+          </p>
 
-        <!-- Copyright -->
-        <p class="footer-copyright">© 2025 Zelify. All rights reserved.</p>
+          <!-- Copyright -->
+          <p class="footer-copyright">© 2025 Zelify. All rights reserved.</p>
+        </div>
       </div>
     </footer>
   </body>
@@ -790,6 +795,7 @@ import AuthApp from "../components/auth/AuthApp.astro";
     padding: 0;
     height: 100%;
     width: 100%;
+    overflow-x: hidden;
   }
 
   body {
@@ -811,80 +817,10 @@ import AuthApp from "../components/auth/AuthApp.astro";
     padding: 0.75rem 3rem;
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 1000;
     max-width: 1400px;
     margin: 0 auto;
     box-sizing: border-box;
-  }
-
-  .welcome-input-group {
-    display: flex;
-    align-items: center;
-    border: 2px solid #00223e;
-    border-radius: 10px;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    padding-left: 1px;
-    padding-right: 3px;
-    background: #ffffff;
-    width: auto;
-    max-width: auto;
-  }
-
-  .welcome-input {
-    flex: 1;
-    border: none;
-    outline: none;
-    font-size: 1.05rem;
-    padding: 0.75rem 1.25rem;
-    color: #00223e;
-    background: transparent;
-  }
-
-  .welcome-input::placeholder {
-    color: #213f8c;
-    opacity: 0.9;
-  }
-
-  .welcome-quote-button {
-    border: none;
-    background: #213f8c;
-    color: #ffffff;
-    padding: 0.7rem 2.9rem;
-    border-radius: 9px;
-    font-size: 1.1rem;
-    font-weight: 400;
-    cursor: pointer;
-    width: auto;
-    height: auto;
-    transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
-  }
-
-  .welcome-demo-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: #93fb4d;
-    color: #00223e;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-radius: 9px;
-    width: 20%;
-    text-decoration: none;
-    font-weight: 400;
-    font-size: 1.1rem;
-    box-shadow: 0 10px 22px rgba(147, 251, 77, 0.35);
-    margin-left: 1rem;
-    transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
-  }
-
-  .welcome-demo-button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 14px 26px rgba(147, 251, 77, 0.4);
   }
 
   .auth-main {
@@ -1017,237 +953,145 @@ import AuthApp from "../components/auth/AuthApp.astro";
     object-fit: cover;
   }
 
-  /* Contenedor del dispositivo */
-  .device-container {
-    position: relative;
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-    z-index: 10;
-    padding: 1rem 0 2rem;
-  }
-
-  /* Frame del iPhone */
-  .auth-background-section .device-frame-wrapper {
-    position: relative !important;
-    z-index: 10 !important;
-    transform: scale(1) !important;
-    padding: 2.5rem 2rem !important;
-    background-color: #f3f4f6 !important;
-    border-radius: 2rem !important;
-    margin: 3rem auto !important;
-  }
-
-  .device-frame {
-    position: relative;
-    overflow: hidden;
-    border-radius: 3rem;
-    border: none;
-    background: transparent;
-    box-shadow: none;
-  }
-
-  /* Pantalla del dispositivo */
-  .device-screen {
-    position: relative;
-    height: 750px;
-    overflow: hidden;
-    border-radius: 2.5rem;
-    background: #ffffff;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    box-shadow:
-      0 0 0 1px rgba(0, 0, 0, 0.05),
-      0 20px 60px rgba(0, 0, 0, 0.15);
-  }
-
-  /* Status Bar */
-  .device-status-bar {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #ffffff;
-    padding: 2.5rem 1.5rem 0.5rem;
-    flex-shrink: 0;
-  }
-
-  .status-time {
-    position: absolute;
-    left: 1.5rem;
-    top: 1rem;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #000000;
-  }
-
-  .dynamic-island {
-    position: absolute;
-    left: 50%;
-    top: 0.75rem;
-    transform: translateX(-50%);
-  }
-
-  .island-shape {
-    width: 96px;
-    height: 20px;
-    border-radius: 999px;
-    background: #000000;
-  }
-
-  .island-speaker {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 48px;
-    height: 2px;
-    border-radius: 999px;
-    background: rgba(31, 41, 55, 0.3);
-  }
-
-  .status-icons {
-    position: absolute;
-    right: 1.5rem;
-    top: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.375rem;
-  }
-
-  .signal-icon {
-    width: 20px;
-    height: 12px;
-    color: #000000;
-  }
-
-  .battery-icon {
-    width: 24px;
-    height: 10px;
-    border: 1px solid #000000;
-    border-radius: 2px;
-    padding: 1px;
-  }
-
-  .battery-level {
-    width: 80%;
-    height: 100%;
-    background: #000000;
-    border-radius: 1px;
-  }
-
-  /* Contenido del dispositivo */
-  .device-content {
-    flex: 1;
-    min-height: 0;
-    background: #ffffff;
-    padding: 1rem 1.25rem;
-    overflow-y: auto;
-    overflow-x: hidden;
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-  }
-
-  .device-content::-webkit-scrollbar {
-    display: none; /* Chrome, Safari and Opera */
-  }
-
-  /* Header del dispositivo */
-  .device-header {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 0.5rem;
-    flex-shrink: 0;
-  }
-
-  .device-back-btn {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: #6b7280;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-  }
-
-  .device-logo {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .device-logo img {
-    height: 32px;
-    width: auto;
-  }
-
-  .device-header-spacer {
-    width: 48px;
-  }
-
-  /* Animación GIF */
-  .device-animation {
-    position: relative;
-    margin-bottom: -3.5rem;
-    z-index: 0;
-    display: flex;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .device-animation img {
-    width: 180px;
-    height: 180px;
-    object-fit: contain;
-    opacity: 0.9;
-  }
-
-  /* Tarjeta translúcida */
-  .device-card {
-    position: relative;
-    z-index: 10;
-    flex: 1;
-    overflow-y: auto;
-    overflow-x: hidden;
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-    border-radius: 1rem;
-    padding: 1rem 1.25rem;
-    backdrop-filter: blur(4px);
-    background: rgba(255, 255, 255, 0.35);
-    min-height: 0;
-  }
-
-  .device-card::-webkit-scrollbar {
-    display: none; /* Chrome, Safari and Opera */
-  }
-
-  .auth-phone-card {
-    width: 100%;
-    background: transparent;
-    border-radius: 0;
-    padding: 0;
-    box-shadow: none;
-    position: relative;
-  }
-
-  /* Home Indicator */
-  .device-home-indicator {
-    position: absolute;
-    bottom: 0.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 128px;
-    height: 4px;
-    border-radius: 999px;
-    background: rgba(0, 0, 0, 0.3);
-    flex-shrink: 0;
-  }
-
-  .phone-card-dots {
+  <!--
+    Contenedor
+    del
+    dispositivo
+    --
+    > <div
+    class="device-container"
+    > <DeviceFrame
+    class="auth-device-frame"
+    style="height: 750px; min-height: 750px; background: #fff;"
+    > <div
+    class="device-content"
+    > <!--
+    Header
+    del
+    dispositivo
+    (Back button & Logo)
+    --
+    > <div
+    class="device-header"
+    > <button
+    class="device-back-btn"
+    > <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    > <path
+    d="M15 18l-6-6 6-6"
+    > </path
+    > </svg
+    > </button
+    > <div
+    class="device-logo"
+    > <img
+    src="/images/zelify_logo_dark.png"
+    alt="Zelify"
+    /
+    > </div
+    > <div
+    class="device-header-spacer"
+    > </div
+    > </div
+    > <div
+    class="device-animation"
+    > <img
+    src="/images/zelify_intro.gif"
+    alt="Zelify Intro"
+    /
+    > </div
+    > <div
+    class="device-card"
+    > <div
+    class="auth-phone-card"
+    > <h3
+    class="phone-card-title"
+    > Create
+    Account</h3
+    > <p
+    class="phone-card-description"
+    > Enter
+    your
+    name
+    and
+    email
+    to
+    start<br
+    /
+    > send
+    you
+    a
+    verification
+    code.
+    </p
+    > <div
+    class="phone-card-dots"
+    > <span
+    class="dot active"
+    > </span
+    > <span
+    class="dot"
+    > </span
+    > <span
+    class="dot"
+    > </span
+    > <span
+    class="dot"
+    > </span
+    > <span
+    class="dot"
+    > </span
+    > </div
+    > <div
+    class="phone-card-form"
+    > <div
+    class="form-field"
+    > <label
+    > Full
+    Name
+    <span
+    class="required"
+    > *</span
+    > </label
+    > <input
+    type="text"
+    placeholder="John Doe"
+    /
+    > </div
+    > </div
+    > <button
+    class="btn-continuar"
+    > Continue
+    <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    > <path
+    d="M5 12h14"
+    > </path
+    > <path
+    d="M12 5l7 7-7 7"
+    > </path
+    > </svg
+    > </button
+    > </div
+    > </div
+    > </div
+    > </DeviceFrame
+    > </div
+    > .phone-card-dots {
     display: flex;
     justify-content: center;
     gap: 0.5rem;
@@ -2025,7 +1869,9 @@ import AuthApp from "../components/auth/AuthApp.astro";
     color: #0a203f;
     font-family: inherit;
     outline: none;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
   }
 
   .contact-form-card .hs-form input:focus,
@@ -2044,7 +1890,9 @@ import AuthApp from "../components/auth/AuthApp.astro";
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s ease, transform 0.2s ease;
+    transition:
+      background 0.2s ease,
+      transform 0.2s ease;
     margin-top: 1rem;
   }
 
@@ -2410,6 +2258,121 @@ import AuthApp from "../components/auth/AuthApp.astro";
     .footer-copyright {
       font-size: 0.8rem;
       text-align: left;
+    }
+  }
+  /* Footer Styles - Index Match */
+  .footer-section {
+    background-color: #0a203f;
+    padding: 4rem 2rem;
+    color: #ffffff;
+    margin-top: auto;
+  }
+
+  .footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .footer-quick-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+  }
+
+  .quick-links-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+  }
+
+  .quick-links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+  }
+
+  .quick-links-list li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.2s ease;
+  }
+
+  .quick-links-list li a:hover {
+    color: #93fb4d;
+  }
+
+  .footer-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .footer-legal {
+    font-size: 0.85rem;
+    color: #ffffff;
+    line-height: 1.6;
+    margin: 0;
+    max-width: 900px;
+  }
+
+  .footer-copyright {
+    font-size: 0.85rem;
+    color: #ffffff;
+    margin: 0;
+  }
+
+  /* Footer Responsive */
+  @media (max-width: 768px) {
+    .footer-section {
+      padding: 3rem 1rem;
+    }
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .footer-quick-links {
+      text-align: right;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer-top {
+      flex-direction: row; /* Mantener row para logo izq y links der si se desea, o cambiar */
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .footer-quick-links {
+      text-align: right;
     }
   }
 </style>

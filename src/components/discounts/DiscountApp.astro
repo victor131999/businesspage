@@ -10,24 +10,111 @@ import Step08PromoStack from "./steps/Step08PromoStack.astro";
 import Step09ConfigurePromo from "./steps/Step09ConfigurePromo.astro";
 import Step10Launching from "./steps/Step10Launching.astro";
 import Step11Success from "./steps/Step11Success.astro";
+import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.astro";
 
 // Replicate the Frame Design
 ---
 
-<!-- App Content Area -->
-<div class="h-full w-full overflow-hidden bg-white relative rounded-[2.5rem]">
-  <Step01PlanSelection />
-  <Step02BasicInfo />
-  <Step03LocationMap />
-  <Step04AddressDetails />
-  <Step05Description />
-  <Step06Category />
-  <Step07CreatePromo />
-  <Step08PromoStack />
-  <Step09ConfigurePromo />
-  <Step10Launching />
-  <Step11Success />
+<!-- App Content Area --><!-- App Content Area -->
+<div class="device-container">
+  <div class="device-frame-wrapper">
+    <DeviceFrame>
+      <div class="device-header">
+        <div class="device-logo">
+          <img src="/images/zelify_logo.png" alt="Zelify" />
+        </div>
+      </div>
+      <div class="device-content">
+        <div class="app-content-inner">
+          <Step01PlanSelection />
+          <Step02BasicInfo />
+          <Step03LocationMap />
+          <Step04AddressDetails />
+          <Step05Description />
+          <Step06Category />
+          <Step07CreatePromo />
+          <Step08PromoStack />
+          <Step09ConfigurePromo />
+          <Step10Launching />
+          <Step11Success />
+        </div>
+      </div>
+    </DeviceFrame>
+  </div>
 </div>
+
+<style>
+  /* Device Frame Layout */
+  .device-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    z-index: 10;
+    padding: 1rem 0 2rem;
+  }
+
+  .device-frame-wrapper {
+    position: relative;
+    z-index: 10;
+    transform: scale(1);
+    padding: 2.5rem 2rem;
+    background-color: #f3f4f6;
+    border-radius: 2rem;
+    margin: 3rem auto;
+    height: 850px !important;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .device-content {
+    flex: 1;
+    min-height: 0;
+    background: #ffffff;
+    padding: 1rem 1.25rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .device-content::-webkit-scrollbar {
+    display: none;
+  }
+
+  .device-header {
+    position: absolute;
+    top: 1rem;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+  }
+
+  .device-logo {
+    display: flex;
+    justify-content: center;
+  }
+
+  .device-logo img {
+    height: 32px;
+    width: auto;
+  }
+
+  .app-content-inner {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background: white;
+    position: relative;
+    /* Removed rounded-[38px] as it might conflict with device-content clipping, relying on device-content overflow hidden */
+  }
+</style>
 
 <script>
   // State Management using closure patterns to avoid global pollution if possible,
