@@ -6,11 +6,6 @@ import { useLanguageTranslations } from "@/hooks/use-language-translations";
 type InternationalTransfersTranslations = {
   breadcrumb: string;
   preview: {
-    header: {
-      back: string;
-      titleRegular: string;
-      titleBold: string;
-    };
     title: string;
     amount: {
       tag: string;
@@ -96,11 +91,6 @@ const INTERNATIONAL_TRANSFERS_TRANSLATIONS: Record<Language, InternationalTransf
   en: {
     breadcrumb: "Tx / International transfers",
     preview: {
-      header: {
-        back: "Back",
-        titleRegular: "International",
-        titleBold: "Transfers",
-      },
       title: "Mobile Preview",
       amount: {
         tag: "Transfers",
@@ -148,7 +138,7 @@ const INTERNATIONAL_TRANSFERS_TRANSLATIONS: Record<Language, InternationalTransf
         receives: "Receives",
         exchangeRateLabel: "Exchange rate:",
         recipientLabel: "Recipient",
-        reference: "Reference",
+        reference: "Referencia",
         purpose: "Purpose",
         fee: "Fee",
         share: "Share",
@@ -184,11 +174,6 @@ const INTERNATIONAL_TRANSFERS_TRANSLATIONS: Record<Language, InternationalTransf
   es: {
     breadcrumb: "Tx / Transferencias internacionales",
     preview: {
-      header: {
-        back: "Atrás",
-        titleRegular: "Transferencias",
-        titleBold: "Internacionales",
-      },
       title: "Vista previa móvil",
       amount: {
         tag: "Transferencias",
@@ -274,3 +259,4 @@ const INTERNATIONAL_TRANSFERS_TRANSLATIONS: Record<Language, InternationalTransf
 export function useInternationalTransfersTranslations() {
   return useLanguageTranslations(INTERNATIONAL_TRANSFERS_TRANSLATIONS);
 }
+

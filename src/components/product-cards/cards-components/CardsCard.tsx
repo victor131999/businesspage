@@ -1,39 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
-import { CARDS_TRANSLATIONS } from "./cards-translations";
 
 /* -- Types -- */
 type ActionId = "number" | "wallet" | "freeze" | "security" | "more" | "lock";
 
 /* -- Main Component -- */
 export default function CardsCard({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) {
-    const [lang, setLang] = useState<keyof typeof CARDS_TRANSLATIONS>(() => {
-        if (typeof window === "undefined") return "es";
-        const raw =
-            (window as any).__uiLanguage ||
-            (() => {
-                try {
-                    return localStorage.getItem("ui-language");
-                } catch {
-                    return null;
-                }
-            })() ||
-            "ES";
-        return String(raw).toUpperCase() === "EN" ? "en" : "es";
-    });
-
-    useEffect(() => {
-        const handleLanguageChange = (event: Event) => {
-            const customEvent = event as CustomEvent<{ language?: string }>;
-            const next = customEvent.detail?.language;
-            setLang(next && next.toUpperCase() === "EN" ? "en" : "es");
-        };
-
-        window.addEventListener("ui:languagechange", handleLanguageChange);
-        return () => window.removeEventListener("ui:languagechange", handleLanguageChange);
-    }, []);
-
-    const t = CARDS_TRANSLATIONS[lang];
-
     // State
     const [activeAction, setActiveAction] = useState<ActionId>("number");
     const [isExpanded, setIsExpanded] = useState(false);
@@ -56,7 +27,7 @@ export default function CardsCard({ isDemoEnabled = true }: { isDemoEnabled?: bo
     const actions: Array<{ id: ActionId; label: string; icon: React.ReactElement }> = [
         {
             id: "number",
-            label: t.actions.number,
+            label: "Número",
             icon: (
                 <svg width={15} height={15} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="2" y="5" width="20" height="14" rx="2" />
@@ -66,7 +37,7 @@ export default function CardsCard({ isDemoEnabled = true }: { isDemoEnabled?: bo
         },
         {
             id: "wallet",
-            label: t.actions.wallet,
+            label: "Billetera",
             icon: (
                 <svg width={15} height={15} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4" />
@@ -77,7 +48,7 @@ export default function CardsCard({ isDemoEnabled = true }: { isDemoEnabled?: bo
         },
         {
             id: "freeze",
-            label: t.actions.freeze,
+            label: "Congelar",
             icon: (
                 <svg width={15} height={15} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M12 3v18" />
@@ -87,7 +58,7 @@ export default function CardsCard({ isDemoEnabled = true }: { isDemoEnabled?: bo
         },
         {
             id: "security",
-            label: t.actions.security,
+            label: "Seguridad",
             icon: (
                 <svg width={15} height={15} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -96,7 +67,7 @@ export default function CardsCard({ isDemoEnabled = true }: { isDemoEnabled?: bo
         },
         {
             id: "more",
-            label: t.actions.more,
+            label: "Más",
             icon: (
                 <svg width={15} height={15} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <circle cx="12" cy="12" r="1" />
@@ -107,7 +78,7 @@ export default function CardsCard({ isDemoEnabled = true }: { isDemoEnabled?: bo
         },
         {
             id: "lock",
-            label: t.actions.lock,
+            label: "Bloquear",
             icon: (
                 <svg width={15} height={15} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
@@ -321,15 +292,15 @@ export default function CardsCard({ isDemoEnabled = true }: { isDemoEnabled?: bo
                     <div className="w-full space-y-4">
                         <div className="space-y-3">
                             <div className="flex justify-between items-center">
-                                <span className="text-xs text-gray-500">{t.number.cardNumber}</span>
+                                <span className="text-xs text-gray-500">Número de tarjeta</span>
                                 <span className="text-sm font-semibold text-gray-900">**** **** **** 1234</span>
                             </div>
                             <div className="flex justify-between items-center">
-                                <span className="text-xs text-gray-500">{t.number.expiryDate}</span>
+                                <span className="text-xs text-gray-500">Fecha de expiración</span>
                                 <span className="text-sm font-semibold text-gray-900">12/25</span>
                             </div>
                             <div className="flex justify-between items-start">
-                                <span className="text-xs text-gray-500 pt-2">{t.number.cvv}</span>
+                                <span className="text-xs text-gray-500 pt-2">CVV</span>
                                 <div className="flex flex-col items-end gap-2">
                                     <div className="relative flex items-center justify-center">
                                         <svg className="transform -rotate-90" width="60" height="60">
@@ -364,7 +335,7 @@ export default function CardsCard({ isDemoEnabled = true }: { isDemoEnabled?: bo
                                         </div>
                                     </div>
                                     <p className="text-xs text-gray-500 text-right max-w-[200px]">
-                                        {t.number.cvvNote}
+                                        Este CVV se actualiza cada 30 segundos
                                     </p>
                                 </div>
                             </div>
@@ -377,15 +348,15 @@ export default function CardsCard({ isDemoEnabled = true }: { isDemoEnabled?: bo
                     <div className="w-full space-y-4">
                         <div className="space-y-3">
                             <div className="flex justify-between items-center">
-                                <span className="text-xs text-gray-500">{t.wallet.spentToday}</span>
+                                <span className="text-xs text-gray-500">Gastado hoy</span>
                                 <span className="text-sm font-semibold text-gray-900">$450.00</span>
                             </div>
                             <div className="flex justify-between items-center">
-                                <span className="text-xs text-gray-500">{t.wallet.dailyLimit}</span>
+                                <span className="text-xs text-gray-500">Límite diario</span>
                                 <span className="text-sm font-semibold text-gray-900">$1,000.00</span>
                             </div>
                             <div className="flex justify-between items-center">
-                                <span className="text-xs text-gray-500">{t.wallet.available}</span>
+                                <span className="text-xs text-gray-500">Disponible</span>
                                 <span className="text-sm font-semibold text-gray-900">$550.00</span>
                             </div>
                         </div>
@@ -397,16 +368,16 @@ export default function CardsCard({ isDemoEnabled = true }: { isDemoEnabled?: bo
                     <div className="w-full space-y-4">
                         <div className="space-y-3">
                             <div className="flex justify-between items-center">
-                                <span className="text-xs text-gray-500">{t.freeze.status}</span>
-                                <span className="text-sm font-semibold text-gray-900">{t.freeze.active}</span>
+                                <span className="text-xs text-gray-500">Estado</span>
+                                <span className="text-sm font-semibold text-gray-900">Activa</span>
                             </div>
                             <div className="flex justify-between items-center">
-                                <span className="text-xs text-gray-500">{t.freeze.lastFreeze}</span>
-                                <span className="text-sm font-semibold text-gray-900">{t.freeze.never}</span>
+                                <span className="text-xs text-gray-500">Última congelación</span>
+                                <span className="text-sm font-semibold text-gray-900">Nunca</span>
                             </div>
                             <div className="flex justify-between items-center">
-                                <span className="text-xs text-gray-500">{t.freeze.canFreeze}</span>
-                                <span className="text-sm font-semibold text-gray-900">{t.freeze.yes}</span>
+                                <span className="text-xs text-gray-500">Puede congelar</span>
+                                <span className="text-sm font-semibold text-gray-900">Sí</span>
                             </div>
                         </div>
                     </div>
@@ -417,16 +388,16 @@ export default function CardsCard({ isDemoEnabled = true }: { isDemoEnabled?: bo
                     <div className="w-full space-y-4">
                         <div className="space-y-3">
                             <div className="flex justify-between items-center">
-                                <span className="text-xs text-gray-500">{t.security.twoFa}</span>
-                                <span className="text-sm font-semibold text-gray-900">{t.security.enabledSingle}</span>
+                                <span className="text-xs text-gray-500">Verificación 2FA</span>
+                                <span className="text-sm font-semibold text-gray-900">Activada</span>
                             </div>
                             <div className="flex justify-between items-center">
-                                <span className="text-xs text-gray-500">{t.security.notifications}</span>
-                                <span className="text-sm font-semibold text-gray-900">{t.security.enabledPlural}</span>
+                                <span className="text-xs text-gray-500">Notificaciones</span>
+                                <span className="text-sm font-semibold text-gray-900">Activadas</span>
                             </div>
                             <div className="flex justify-between items-center">
-                                <span className="text-xs text-gray-500">{t.security.lastAccess}</span>
-                                <span className="text-sm font-semibold text-gray-900">{t.security.twoHoursAgo}</span>
+                                <span className="text-xs text-gray-500">Último acceso</span>
+                                <span className="text-sm font-semibold text-gray-900">Hace 2 horas</span>
                             </div>
                         </div>
                     </div>
@@ -437,16 +408,16 @@ export default function CardsCard({ isDemoEnabled = true }: { isDemoEnabled?: bo
                     <div className="w-full space-y-4">
                         <div className="space-y-3">
                             <div className="flex justify-between items-center">
-                                <span className="text-xs text-gray-500">{t.more.settings}</span>
-                                <span className="text-sm font-semibold text-gray-900">{t.more.available}</span>
+                                <span className="text-xs text-gray-500">Configuración</span>
+                                <span className="text-sm font-semibold text-gray-900">Disponible</span>
                             </div>
                             <div className="flex justify-between items-center">
-                                <span className="text-xs text-gray-500">{t.more.history}</span>
-                                <span className="text-sm font-semibold text-gray-900">{t.more.viewAll}</span>
+                                <span className="text-xs text-gray-500">Historial</span>
+                                <span className="text-sm font-semibold text-gray-900">Ver todo</span>
                             </div>
                             <div className="flex justify-between items-center">
-                                <span className="text-xs text-gray-500">{t.more.support}</span>
-                                <span className="text-sm font-semibold text-gray-900">{t.more.contact}</span>
+                                <span className="text-xs text-gray-500">Soporte</span>
+                                <span className="text-sm font-semibold text-gray-900">Contactar</span>
                             </div>
                         </div>
                     </div>
@@ -457,11 +428,11 @@ export default function CardsCard({ isDemoEnabled = true }: { isDemoEnabled?: bo
                     <div className="w-full space-y-4">
                         <div className="space-y-3">
                             <div className="flex justify-between items-center">
-                                <span className="text-xs text-gray-500">{t.lock.currentStatus}</span>
-                                <span className="text-sm font-semibold text-gray-900">{t.lock.unlocked}</span>
+                                <span className="text-xs text-gray-500">Estado actual</span>
+                                <span className="text-sm font-semibold text-gray-900">Desbloqueada</span>
                             </div>
                             <p className="text-xs text-gray-500">
-                                {t.lock.description}
+                                Al bloquear tu tarjeta, se desactivarán todas las transacciones hasta que la desbloquees nuevamente.
                             </p>
                         </div>
                     </div>
@@ -505,12 +476,12 @@ export default function CardsCard({ isDemoEnabled = true }: { isDemoEnabled?: bo
                 {/* Card Info */}
                 <div className="flex-shrink-0 px-6 py-4 space-y-3">
                     <div className="flex justify-between items-center">
-                        <span className="text-xs text-gray-500">{t.cardInfo.cardType}</span>
-                        <span className="text-sm font-medium text-gray-900">{t.cardInfo.virtualCredit}</span>
+                        <span className="text-xs text-gray-500">Tipo de tarjeta</span>
+                        <span className="text-sm font-medium text-gray-900">Crédito virtual</span>
                     </div>
                     <div className="flex justify-between items-center">
-                        <span className="text-xs text-gray-500">{t.cardInfo.account}</span>
-                        <span className="text-sm font-medium text-gray-900">{t.cardInfo.credit}</span>
+                        <span className="text-xs text-gray-500">Cuenta</span>
+                        <span className="text-sm font-medium text-gray-900">Crédito</span>
                     </div>
                 </div>
 
@@ -533,7 +504,12 @@ export default function CardsCard({ isDemoEnabled = true }: { isDemoEnabled?: bo
                         onClick={() => setIsExpanded(!isExpanded)}
                     >
                         <h3 className="text-lg font-bold text-gray-900">
-                            {t.headers[activeAction]}
+                            {activeAction === "number" && "Detalle de tarjeta"}
+                            {activeAction === "wallet" && "Detalle de consumo diario"}
+                            {activeAction === "freeze" && "Estado de congelación"}
+                            {activeAction === "security" && "Configuración de seguridad"}
+                            {activeAction === "more" && "Más opciones"}
+                            {activeAction === "lock" && "Bloquear tarjeta"}
                         </h3>
                         <svg
                             className={`w-6 h-6 text-gray-500 transition-transform duration-300 ${isExpanded ? "rotate-180" : ""}`}

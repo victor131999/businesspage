@@ -2,17 +2,12 @@ import { useState, useRef, useEffect } from "react";
 import AlaizaChat from "./modules/AlaizaChat";
 import AlaizaEducation from "./modules/AlaizaEducation";
 import AlaizaBehavior from "./modules/AlaizaBehavior";
-import { LanguageProvider } from "@/contexts/language-context";
-import { useLanguageTranslations } from "@/hooks/use-language-translations";
-import { ALAIZA_TRANSLATIONS } from "./alaiza-translations";
 
 /* -- Types -- */
 type ModuleType = "chat" | "financial-education" | "behavior-analysis";
 
 /* -- Main Component -- */
-function AlaizaCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) {
-    const t = useLanguageTranslations(ALAIZA_TRANSLATIONS);
-
+export default function AlaizaCard({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) {
     // Module Navigation
     const [currentModule, setCurrentModule] = useState<ModuleType>("chat");
     const [moduleKey, setModuleKey] = useState(0);
@@ -102,19 +97,19 @@ function AlaizaCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolean }
                         onClick={() => switchModule("chat")}
                         className={`px-3 py-1.5 rounded-full text-[10px] font-bold transition-all ${currentModule === "chat" ? "bg-[#004492] text-white shadow-sm" : "text-gray-500 hover:bg-gray-200"}`}
                     >
-                        {t.card.selector.chat}
+                        Chat
                     </button>
                     <button
                         onClick={() => switchModule("financial-education")}
                         className={`px-3 py-1.5 rounded-full text-[10px] font-bold transition-all ${currentModule === "financial-education" ? "bg-[#004492] text-white shadow-sm" : "text-gray-500 hover:bg-gray-200"}`}
                     >
-                        {t.card.selector.education}
+                        Educación
                     </button>
                     <button
                         onClick={() => switchModule("behavior-analysis")}
                         className={`px-3 py-1.5 rounded-full text-[10px] font-bold transition-all ${currentModule === "behavior-analysis" ? "bg-[#004492] text-white shadow-sm" : "text-gray-500 hover:bg-gray-200"}`}
                     >
-                        {t.card.selector.analysis}
+                        Análisis
                     </button>
                 </div>
             </div>
@@ -152,13 +147,5 @@ function AlaizaCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolean }
                 }
             `}</style>
         </div>
-    );
-}
-
-export default function AlaizaCard(props: { isDemoEnabled?: boolean }) {
-    return (
-        <LanguageProvider>
-            <AlaizaCardContent {...props} />
-        </LanguageProvider>
     );
 }
