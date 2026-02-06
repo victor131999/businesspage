@@ -31,12 +31,12 @@ import "../components/design-system/tokens.css";
 
     <main class="auth-main">
       <section class="auth-hero">
-        <h1 class="auth-title">Alaiza AI Core for Fintech</h1>
+        <h1 class="auth-title">Todos los productos<br />con IA</h1>
         <p class="auth-description">
           Plataforma de inteligencia artificial enfocada en finanzas que analiza<br/>
           el comportamiento de los usuarios para identificar hábitos y anticiparse<br/>
           a sus necesidades, ofrenciendo herramientas de eduación financiera<br/>
-          Todo orientado a brindar un soporte continua del cliente<br/>
+          Todo orientado a brindar un soporte continuo del cliente.<br/>
         </p>
         <CtaGroup class="auth-cta">
           <EmailQuoteForm
@@ -240,7 +240,7 @@ import "../components/design-system/tokens.css";
             </div>
             <h3 class="feature-title">Scoring de Salud</h3>
             <p class="feature-description">
-              Evaluación continua del bienestar financiero y progreso de metas.
+              Evaluación continua del bienestar financiero y progreso de metas a través del Zelify Score.
             </p>
           </div>
         </div>
@@ -3095,9 +3095,9 @@ import "../components/design-system/tokens.css";
   const alaizaTranslations = {
     es: {
       hero: {
-        title: "Alaiza AI Core for Fintech",
+        title: "Todos los productos<br />con IA",
         description:  
-        "Plataforma de inteligencia artificial enfocada en finanzas que analiza\nel comportamiento de los usuarios para identificar hábitos y anticiparse\na sus necesidades, ofrenciendo herramientas de eduación financiera.\n Todo orientado a brindar un soporte continuo del cliente",        
+        "Plataforma de inteligencia artificial enfocada en finanzas que analiza\nel comportamiento de los usuarios para identificar hábitos y anticiparse\na sus necesidades, ofrenciendo herramientas de eduación financiera.\n Todo orientado a brindar un soporte continuo del cliente.",        
         inputPlaceholder: "Ingresa tu correo",
         quoteButton: "Hablemos",
         demoButton: "Demo",
@@ -3128,7 +3128,7 @@ import "../components/design-system/tokens.css";
           {
             title: "Gestión de Conocimiento",
             description:
-              "Acceso dinámico a base de FAQs y artículos de soporte actualizados.",
+              "Acceso dinámico a base de preguntas frecuentes.",
           },
           {
             title: "Presupuestos Inteligentes",
@@ -3138,7 +3138,7 @@ import "../components/design-system/tokens.css";
           {
             title: "Scoring de Salud",
             description:
-              "Evaluación continua del bienestar financiero y progreso de metas.",
+              "Evaluación continua del bienestar financiero y progreso de metas a través del Zelify Score.",
           },
         ],
       },
@@ -3434,7 +3434,7 @@ import "../components/design-system/tokens.css";
 
     // Hero section
     const heroTitle = document.querySelector(".auth-title");
-    if (heroTitle) heroTitle.textContent = t.hero.title;
+    if (heroTitle) heroTitle.innerHTML = t.hero.title;
 
     const heroDesc = document.querySelector(".auth-description");
     if (heroDesc) heroDesc.textContent = t.hero.description;

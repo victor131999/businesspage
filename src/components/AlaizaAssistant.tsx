@@ -231,7 +231,7 @@ export const AlaizaAssistant = () => {
     function showTourOptions() {
         const t = ALAIZA_TRANSLATIONS[currentLang];
         addOptionsMessage([
-            { label: t.options['OAuth'], labelKey: 'OAuth', id: 'oauth', action: () => handleOAuthClick() },
+            { label: t.options['Auth'], labelKey: 'Auth', id: 'auth', action: () => handleAuthClick() },
             { label: t.options['Identity'], labelKey: 'Identity', id: 'identity', action: () => handleIdentityClick() },
             { label: t.options['AML'], labelKey: 'AML', id: 'aml', action: () => handleAMLClick() },
             { label: t.options['Connect'], labelKey: 'Connect', id: 'connect', action: () => handleConnectClick() },
@@ -243,23 +243,23 @@ export const AlaizaAssistant = () => {
         ]);
     }
 
-    function showOAuthOptions() {
+    function showAuthOptions() {
         const t = ALAIZA_TRANSLATIONS[currentLang];
         addOptionsMessage([
-            { label: t.options['Qué es OAuth'], labelKey: 'Qué es OAuth', id: 'que-es-oauth', action: () => handleOptionClick('Qué es OAuth', '/audios/07-OauthQuees.wav', showOAuthDeepOptions) },
+            { label: t.options['Qué es Auth'], labelKey: 'Qué es Auth', id: 'que-es-auth', action: () => handleOptionClick('Qué es Auth', '/audios/07-OauthQuees.wav', showAuthDeepOptions) },
         ]);
     }
 
-    function showOAuthDeepOptions() {
+    function showAuthDeepOptions() {
         const t = ALAIZA_TRANSLATIONS[currentLang];
         addOptionsMessage([
-            { label: t.options['Quiero más información de OAuth'], labelKey: 'Quiero más información de OAuth', id: 'oauth-deep', action: () => handleOauthDeepExplanationClick() },
+            { label: t.options['Quiero más información de Auth'], labelKey: 'Quiero más información de Auth', id: 'auth-deep', action: () => handleAuthDeepExplanationClick() },
             { label: t.options['Quiero ver el resto de productos'], labelKey: 'Quiero ver el resto de productos', id: 'back-products', action: () => handleBackToProducts() },
         ]);
     }
 
-    function handleOauthDeepExplanationClick(): void {
-        addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['Quiero más información de OAuth']);
+    function handleAuthDeepExplanationClick(): void {
+        addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['Quiero más información de Auth']);
 
         const audioPlaylist = [
             '/audios/22-comenzarauth.wav',
@@ -272,7 +272,7 @@ export const AlaizaAssistant = () => {
         ];
 
         playAudio(audioPlaylist, () => {
-            showOAuthDeepOptions();
+            showAuthDeepOptions();
         });
     }
 
@@ -288,12 +288,12 @@ export const AlaizaAssistant = () => {
         });
     }
 
-    function handleOAuthClick() {
-        addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['OAuth']);
+    function handleAuthClick() {
+        addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['Auth']);
         // Chain 06 then 07 directly
         playAudio('/audios/06-AuthOauth.wav', () => {
             playAudio('/audios/07-OauthQuees.wav', () => {
-                showOAuthDeepOptions();
+                showAuthDeepOptions();
             });
         });
     }
