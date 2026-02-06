@@ -712,7 +712,6 @@ const modulesList = [
       <div class="how-it-works-video-wrap">
         <video
           id="how-it-works-video"
-          autoplay
           muted
           loop
           playsinline
@@ -740,7 +739,14 @@ const modulesList = [
       dataI18nDescription="home.why.description"
       dataI18nCta="home.why.demo"
     >
-      <!-- Contenido dentro de la tarjeta blanca: video, formulario, imagen, etc. -->
+      <div class="how-it-works-video-wrap">
+        <video id="why-zelify-video" muted loop playsinline preload="metadata">
+          <source
+            src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/AIPoweredProductsv2.mp4"
+            type="video/mp4"
+          />
+        </video>
+      </div>
     </SideBySidePanel>
 
     <section class="bench-section section-gap-200">
@@ -3221,7 +3227,7 @@ const modulesList = [
         // How it works section
         "home.how.title": "¿Cómo Funciona<br />Zelify?",
         "home.how.description":
-          "Zelify integra en una plataforma financiera todo-en-uno: Identidad digital, cumplimiento normativo, cuentas, tarjetas, transferencias locales e internacionales y pagos. Además incorpora un asistente de IA que impulsa la educación financiera y el análisis inteligente de datos para una mejor toma de decisiones.",
+          "Zelify integra en una plataforma financiera todo-en-uno: Identidad digital, cumplimiento normativo, cuentas, tarjetas, transferencias locales e internacionales y pagos. Además incorpora un asistente de IA que impulsa la educación financiera y el análisis inteligente de datos para una mejor toma de decisiones",
         "home.how.demo": "Demo",
         "home.how.login.title": "Ingreso",
         "home.how.login.subtitle": "Bienvenido de regreso",
@@ -3662,5 +3668,45 @@ const modulesList = [
         }
       });
     });
+  });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const setupVideoControl = (btnId: string, videoId: string) => {
+      const btn = document.getElementById(btnId);
+      const video = document.getElementById(videoId);
+      if (!btn || !video) return;
+
+      const icon = btn.querySelector("img");
+
+      const updateState = () => {
+        if (video.paused) {
+          if (icon) icon.src = "/icons/play.svg";
+          btn.setAttribute("aria-label", "Reproducir");
+        } else {
+          if (icon) icon.src = "/icons/pause.svg";
+          btn.setAttribute("aria-label", "Pausar");
+        }
+      };
+
+      btn.addEventListener("click", () => {
+        if (video.muted) video.muted = false;
+        if (video.paused) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      });
+
+      video.addEventListener("play", updateState);
+      video.addEventListener("pause", updateState);
+
+      // Initialize state
+      updateState();
+    };
+
+    setupVideoControl("how-it-works-play-btn", "how-it-works-video");
+    setupVideoControl("why-zelify-play-btn", "why-zelify-video");
   });
 </script>

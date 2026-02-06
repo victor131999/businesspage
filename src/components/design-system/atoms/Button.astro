@@ -1,16 +1,28 @@
 ---
 /**
  * Atom: Button
- * Variantes: primary | secondary | ghost | outline | icon
+ * Variantes: primary | secondary | ghost | outline | icon | destructive
  * Tamaños: sm | md | lg
+ * Estados: loading, disabled, fullWidth
  */
+import Spinner from "./Spinner.astro";
+
 interface Props {
-  variant?: "primary" | "secondary" | "ghost" | "outline" | "icon";
+  variant?:
+    | "primary"
+    | "secondary"
+    | "ghost"
+    | "outline"
+    | "icon"
+    | "destructive"
+    | "tab";
   size?: "sm" | "md" | "lg";
   type?: "button" | "submit" | "reset";
   href?: string;
   class?: string;
   disabled?: boolean;
+  loading?: boolean;
+  fullWidth?: boolean;
   ariaLabel?: string;
   dataI18n?: string;
   [key: string]: unknown;
@@ -23,6 +35,8 @@ const {
   href,
   class: className = "",
   disabled = false,
+  loading = false,
+  fullWidth = false,
   ariaLabel,
   dataI18n,
   ...rest
@@ -33,20 +47,39 @@ const Tag = isLink ? "a" : "button";
 ---
 
 <Tag
-  href={href}
+  href={!disabled && !loading ? href : undefined}
   type={!isLink ? type : undefined}
   class:list={[
     "ds-button",
     `ds-button--${variant}`,
     `ds-button--${size}`,
+    { "ds-button--loading": loading },
+    { "ds-button--full-width": fullWidth },
     className,
   ]}
-  disabled={disabled}
+  disabled={disabled || loading}
   aria-label={ariaLabel}
   data-i18n={dataI18n}
   {...rest}
 >
-  <slot />
+  {
+    loading && (
+      <span class="ds-button__spinner">
+        <Spinner size="sm" color="current" />
+      </span>
+    )
+  }
+
+  <span
+    class:list={[
+      "ds-button__content",
+      { "ds-button__content--hidden": loading },
+    ]}
+  >
+    <slot name="icon-left" />
+    <slot />
+    <slot name="icon-right" />
+  </span>
 </Tag>
 
 <style is:global>
@@ -63,6 +96,13 @@ const Tag = isLink ? "a" : "button";
     transition: all 0.2s ease;
     white-space: nowrap;
     border-radius: var(--ds-radius-lg, 14px);
+    position: relative;
+  }
+
+  /* Full Width */
+  .ds-button--full-width {
+    width: 100%;
+    display: flex;
   }
 
   /* Sizes */
@@ -91,7 +131,7 @@ const Tag = isLink ? "a" : "button";
     background: var(--ds-color-primary-light, #2a4fa8);
   }
 
-  /* Variant: Secondary (Neon Green) */
+  /* Variant: Secondary (Neon Green) - NO CHANGES */
   .ds-button--secondary {
     background: var(--ds-color-accent, #93fb4d);
     color: var(--ds-color-text, #00223e);
@@ -100,6 +140,16 @@ const Tag = isLink ? "a" : "button";
   .ds-button--secondary:hover:not(:disabled) {
     transform: translateY(-1px);
     box-shadow: var(--ds-shadow-cta-hover);
+  }
+
+  /* Variant: Destructive (New) */
+  .ds-button--destructive {
+    background: var(--ds-color-error, #d92d20);
+    color: #ffffff;
+  }
+  .ds-button--destructive:hover:not(:disabled) {
+    background: #b91c1c; /* Darker red */
+    box-shadow: 0 4px 12px rgba(217, 45, 32, 0.3);
   }
 
   /* Variant: Outline */
@@ -135,20 +185,74 @@ const Tag = isLink ? "a" : "button";
     height: 52px;
     border-radius: 50%;
     flex-shrink: 0;
-    background: transparent; 
-   /* Default transparent, can be overridden or specific styles added if needed */
+    background: transparent;
   }
-  .ds-button--icon img, .ds-button--icon svg {
-      width: 28px;
-      height: 28px;
-      object-fit: contain;
+  .ds-button--icon img,
+  .ds-button--icon svg {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+
+  /* Loading State */
+  .ds-button--loading {
+    cursor: wait;
+    opacity: 0.8;
+  }
+
+  .ds-button__spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ds-button__content {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .ds-button__content--hidden {
+    opacity: 0;
+    visibility: hidden;
   }
 
   /* Disabled state */
-  .ds-button:disabled {
+  .ds-button:disabled:not(.ds-button--loading) {
     opacity: 0.6;
     cursor: not-allowed;
     pointer-events: none;
+    filter: grayscale(0.5); /* Additional visual cue */
+  }
+
+  /* Variant: Tab */
+  .ds-button--tab {
+    background: transparent;
+    color: var(--ds-color-text-muted, #64748b);
+    border-radius: 0;
+    padding: 0.75rem 0;
+    min-height: auto;
+    font-weight: 400;
+  }
+  .ds-button--tab:hover:not(:disabled) {
+    color: var(--ds-color-primary, #213f8c);
+  }
+  .ds-button--tab.active {
+    color: var(--ds-color-primary, #213f8c);
+    font-weight: 500;
+  }
+  .ds-button--tab.active::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: -10%;
+    width: 120%;
+    height: 2px;
+    background-color: var(--ds-color-primary, #213f8c);
   }
 
   @media (max-width: 639px) {
@@ -158,6 +262,10 @@ const Tag = isLink ? "a" : "button";
     }
     .ds-button-full-mobile {
       width: 100%;
+    }
+
+    .ds-button--tab {
+      flex-shrink: 0;
     }
   }
 </style>

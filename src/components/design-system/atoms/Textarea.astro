@@ -1,0 +1,85 @@
+---
+/**
+ * Atom: Textarea
+ * Campo de texto multilínea estándar.
+ */
+interface Props {
+    name: string;
+    placeholder?: string;
+    value?: string;
+    rows?: number;
+    invalid?: boolean;
+    disabled?: boolean;
+    required?: boolean;
+    class?: string;
+    [key: string]: unknown;
+}
+
+const {
+    name,
+    placeholder,
+    value,
+    rows = 4,
+    invalid = false,
+    disabled = false,
+    required = false,
+    class: className = "",
+    ...rest
+} = Astro.props;
+---
+
+<textarea
+    name={name}
+    placeholder={placeholder}
+    rows={rows}
+    disabled={disabled}
+    required={required}
+    class:list={["ds-textarea", invalid && "ds-textarea--invalid", className]}
+    {...rest}>{value}</textarea
+>
+
+<style is:global>
+    .ds-textarea {
+        width: 100%;
+        padding: 0.875rem 1rem;
+        font-family: var(--ds-font-family);
+        font-size: var(--ds-font-size-sm, 1rem);
+        color: var(--ds-color-text, #00223e);
+        background-color: #ffffff;
+        border: 1px solid var(--ds-color-border-light, rgba(0, 0, 0, 0.1));
+        border-radius: var(--ds-radius-lg, 14px);
+        outline: none;
+        transition: all 0.2s ease;
+        resize: vertical;
+        min-height: 100px;
+    }
+
+    .ds-textarea::placeholder {
+        color: var(--ds-color-text-light, #64748b);
+        opacity: 0.8;
+    }
+
+    .ds-textarea:hover:not(:disabled) {
+        border-color: rgba(0, 34, 62, 0.3);
+    }
+
+    .ds-textarea:focus:not(:disabled) {
+        border-color: var(--ds-color-primary, #213f8c);
+        box-shadow: 0 0 0 3px rgba(33, 63, 140, 0.1);
+    }
+
+    .ds-textarea--invalid {
+        border-color: var(--ds-color-error, #d92d20);
+    }
+
+    .ds-textarea--invalid:focus {
+        border-color: var(--ds-color-error, #d92d20);
+        box-shadow: 0 0 0 3px rgba(217, 45, 32, 0.1);
+    }
+
+    .ds-textarea:disabled {
+        background-color: var(--ds-color-bg-subtle, #f8f9fa);
+        cursor: not-allowed;
+        opacity: 0.7;
+    }
+</style>

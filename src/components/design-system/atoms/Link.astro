@@ -1,0 +1,78 @@
+---
+interface Props {
+    href: string;
+    variant?: "primary" | "muted" | "underline" | "clean";
+    external?: boolean;
+    class?: string;
+    [x: string]: any;
+}
+
+const {
+    href,
+    variant = "primary",
+    external = false,
+    class: className,
+    ...rest
+} = Astro.props;
+
+const isExternal = external || href.startsWith("http");
+const rel = isExternal ? "noopener noreferrer" : undefined;
+const target = isExternal ? "_blank" : undefined;
+---
+
+<a
+    href={href}
+    class:list={["ds-link", `ds-link--${variant}`, className]}
+    target={target}
+    rel={rel}
+    {...rest}
+>
+    <slot />
+</a>
+
+<style>
+    .ds-link {
+        font-family: var(--font-primary, sans-serif);
+        text-decoration: none;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+
+    /* Variants */
+    .ds-link--primary {
+        color: var(--ds-color-primary, #102137);
+        font-weight: 500;
+    }
+    .ds-link--primary:hover {
+        color: var(--ds-color-accent, #93fb4d);
+    }
+
+    .ds-link--muted {
+        color: #64748b;
+    }
+    .ds-link--muted:hover {
+        color: #334155;
+    }
+
+    .ds-link--underline {
+        color: var(--ds-color-primary, #102137);
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 4px;
+    }
+    .ds-link--underline:hover {
+        color: var(--ds-color-accent, #93fb4d);
+        text-decoration-color: var(--ds-color-accent, #93fb4d);
+    }
+
+    .ds-link--clean {
+        color: inherit;
+        text-decoration: none;
+    }
+    .ds-link--clean:hover {
+        opacity: 0.8;
+    }
+</style>

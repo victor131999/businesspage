@@ -5,10 +5,20 @@ import ComponentPreview from "../../components/design-system/structure/Component
 // Atoms
 import Button from "../../components/design-system/atoms/Button.astro";
 import Input from "../../components/design-system/atoms/Input.astro";
+import Textarea from "../../components/design-system/atoms/Textarea.astro";
+import Select from "../../components/design-system/atoms/Select.astro";
 import Title from "../../components/design-system/atoms/Title.astro";
 import Text from "../../components/design-system/atoms/Text.astro";
 import IconButton from "../../components/design-system/atoms/IconButton.astro";
 import Divider from "../../components/design-system/atoms/Divider.astro";
+import Badge from "../../components/design-system/atoms/Badge.astro";
+import Spinner from "../../components/design-system/atoms/Spinner.astro";
+import Skeleton from "../../components/design-system/atoms/Skeleton.astro";
+import Link from "../../components/design-system/atoms/Link.astro";
+import Avatar from "../../components/design-system/atoms/Avatar.astro";
+import Checkbox from "../../components/design-system/atoms/Checkbox.astro";
+import Radio from "../../components/design-system/atoms/Radio.astro";
+import Switch from "../../components/design-system/atoms/Switch.astro";
 ---
 
 <DSLayout
@@ -49,16 +59,139 @@ import Divider from "../../components/design-system/atoms/Divider.astro";
                 <Button variant="primary" size="lg">Large</Button>
             </div>
         </ComponentPreview>
+
+        <br />
+
+        <ComponentPreview
+            title="Button States & Variants"
+            description="Extended functionality including destructive actions, loading states, and icon support."
+            code={`<!-- Destructive & Loading -->
+<Button variant="destructive">Delete Account</Button>
+<Button loading>Loading...</Button>
+<Button variant="outline" loading>Processing</Button>
+<Button disabled>Disabled</Button>
+
+<!-- Icons -->
+<Button>
+  <svg slot="icon-left" ...>...</svg>
+  Next Step
+</Button>
+<Button variant="secondary">
+  Download
+  <svg slot="icon-right" ...>...</svg>
+</Button>
+
+<!-- Full Width -->
+<Button fullWidth>Full Width Button</Button>
+
+<!-- Tabs -->
+<Button variant="tab" class="active">Active Tab</Button>
+<Button variant="tab">Inactive Tab</Button>`}
+        >
+            <div
+                style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-bottom: 1rem;"
+            >
+                <Button variant="destructive">Delete Account</Button>
+                <Button loading>Loading...</Button>
+                <Button variant="outline" loading>Processing</Button>
+                <Button disabled>Disabled</Button>
+            </div>
+
+            <div
+                style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-bottom: 1rem;"
+            >
+                <Button>
+                    <svg
+                        slot="icon-left"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                    </svg>
+                    Next Step
+                </Button>
+                <Button variant="secondary">
+                    Download
+                    <svg
+                        slot="icon-right"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <path
+                            d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"
+                        ></path>
+                    </svg>
+                </Button>
+            </div>
+
+            <div
+                style="width: 100%; max-width: 320px; display: flex; flex-direction: column; gap: 1rem;"
+            >
+                <Button fullWidth>Full Width Button</Button>
+                <!-- Tab variant example -->
+                <div
+                    style="border-bottom: 1px solid #e2e8f0; display: flex; gap: 1rem;"
+                >
+                    <Button variant="tab" class="active">Active Tab</Button>
+                    <Button variant="tab">Inactive Tab</Button>
+                </div>
+            </div>
+        </ComponentPreview>
     </section>
 
-    <section id="inputs">
-        <h2>Inputs</h2>
+    <section id="links">
+        <h2>Links</h2>
         <ComponentPreview
-            title="Text Input"
-            description="Standard text fields for user input."
-            code={`<Input name="demo-text" placeholder="Text input" />
-<Input name="demo-email" type="email" value="user@example.com" />
-<Input name="demo-error" placeholder="Error" invalid={true} />`}
+            title="Link"
+            description="Hyperlinks with standardized styling."
+            code={`<Link href="#">Primary Link</Link>
+<Link href="#" variant="muted">Muted Link</Link>
+<Link href="#" variant="underline">Underline Link</Link>
+<Link href="https://example.com" external={true}>External Link</Link>`}
+        >
+            <div
+                style="display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center;"
+            >
+                <Link href="#">Primary Link</Link>
+                <Link href="#" variant="muted">Muted Link</Link>
+                <Link href="#" variant="underline">Underline Link</Link>
+                <Link href="https://google.com" external={true}
+                    >External Link</Link
+                >
+            </div>
+        </ComponentPreview>
+    </section>
+
+    <section id="form-controls">
+        <h2>Form Controls</h2>
+
+        <ComponentPreview
+            title="Input Fields"
+            description="Text inputs, textareas, and selects."
+            code={`<Input name="demo-text" placeholder="Text input placeholder" />
+<Input name="demo-email" type="email" placeholder="Email input" value="user@example.com" />
+<Input name="demo-error" placeholder="Error state" invalid={true} />
+
+<Textarea name="demo-textarea" placeholder="Textarea for longer comments..." />
+
+<Select 
+  name="demo-select" 
+  value=""
+  options={[
+    { value: "", label: "Select an option", disabled: true },
+    { value: "opt1", label: "Option 1" },
+    { value: "opt2", label: "Option 2" },
+    { value: "opt3", label: "Option 3" },
+  ]} 
+/>`}
         >
             <div
                 style="display: flex; flex-direction: column; gap: 1rem; width: 100%; max-width: 400px;"
@@ -75,6 +208,79 @@ import Divider from "../../components/design-system/atoms/Divider.astro";
                     placeholder="Error state"
                     invalid={true}
                 />
+                <Textarea
+                    name="demo-textarea"
+                    placeholder="Textarea for longer comments..."
+                />
+                <Select
+                    name="demo-select"
+                    options={[
+                        {
+                            value: "",
+                            label: "Select an option",
+                            disabled: true,
+                        },
+                        { value: "opt1", label: "Option 1" },
+                        { value: "opt2", label: "Option 2" },
+                        { value: "opt3", label: "Option 3" },
+                    ]}
+                    value=""
+                />
+            </div>
+        </ComponentPreview>
+
+        <br />
+
+        <ComponentPreview
+            title="Selection Controls"
+            description="Checkboxes, Radio buttons, and Switches."
+            code={`<!-- Checkbox -->
+<Checkbox label="Remember me" name="demo-c1" />
+<Checkbox label="Checked state" name="demo-c2" checked={true} />
+
+<!-- Radio -->
+<Radio label="Option 1" name="demo-r1" value="1" />
+<Radio label="Option 2" name="demo-r1" value="2" checked={true} />
+
+<!-- Switch -->
+<Switch label="Enable Notifications" name="demo-s1" />
+<Switch label="Dark Mode" name="demo-s2" checked={true} />`}
+        >
+            <div
+                style="display: flex; flex-direction: column; gap: 1.5rem; max-width: 400px;"
+            >
+                <div
+                    style="display: flex; flex-direction: column; gap: 0.75rem;"
+                >
+                    <strong>Checkbox</strong>
+                    <Checkbox label="Remember me" name="demo-c1" />
+                    <Checkbox
+                        label="Checked state"
+                        name="demo-c2"
+                        checked={true}
+                    />
+                </div>
+
+                <div
+                    style="display: flex; flex-direction: column; gap: 0.75rem;"
+                >
+                    <strong>Radio</strong>
+                    <Radio label="Option 1" name="demo-r1" value="1" />
+                    <Radio
+                        label="Option 2"
+                        name="demo-r1"
+                        value="2"
+                        checked={true}
+                    />
+                </div>
+
+                <div
+                    style="display: flex; flex-direction: column; gap: 0.75rem;"
+                >
+                    <strong>Switch</strong>
+                    <Switch label="Enable Notifications" name="demo-s1" />
+                    <Switch label="Dark Mode" name="demo-s2" checked={true} />
+                </div>
             </div>
         </ComponentPreview>
     </section>
@@ -114,6 +320,94 @@ import Divider from "../../components/design-system/atoms/Divider.astro";
                 >
                 <Text variant="caption">Caption: Small text for details.</Text>
                 <Text variant="muted">Muted: Less prominent text.</Text>
+            </div>
+        </ComponentPreview>
+    </section>
+
+    <section id="data-display">
+        <h2>Data Display</h2>
+        <ComponentPreview
+            title="Avatar"
+            description="User profile image with fallback initials."
+            code={`<Avatar src="..." alt="User" />
+<Avatar initials="JD" />
+<Avatar initials="AB" size="sm" />`}
+        >
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <Avatar src="https://i.pravatar.cc/150?img=32" alt="User 1" />
+                <Avatar initials="JD" />
+                <Avatar initials="AB" size="sm" />
+                <Avatar initials="XY" size="lg" />
+            </div>
+        </ComponentPreview>
+    </section>
+
+    <section id="status-feedback">
+        <h2>Status & Feedback</h2>
+        <ComponentPreview
+            title="Badge"
+            description="Status indicators for labels or states."
+            code={`<Badge variant="success">Success</Badge>
+<Badge variant="warning">Warning</Badge>
+<Badge variant="error" size="sm">Error</Badge>`}
+        >
+            <div
+                style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;"
+            >
+                <Badge variant="neutral">Neutral</Badge>
+                <Badge variant="success">Success</Badge>
+                <Badge variant="warning">Warning</Badge>
+                <Badge variant="error">Error</Badge>
+                <Badge variant="info">Info</Badge>
+                <Badge variant="success" size="sm">Small</Badge>
+            </div>
+        </ComponentPreview>
+
+        <br />
+
+        <ComponentPreview
+            title="Spinner"
+            description="Loading indicator state."
+            code={`<Spinner />
+<Spinner size="lg" color="accent" />`}
+        >
+            <div
+                style="display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center;"
+            >
+                <Spinner size="sm" />
+                <Spinner size="md" />
+                <Spinner size="lg" />
+                <Spinner size="md" color="accent" />
+            </div>
+        </ComponentPreview>
+
+        <br />
+
+        <ComponentPreview
+            title="Skeleton"
+            description="Loading placeholders for content."
+            code={`<div style="display: flex; gap: 1rem; align-items: center;">
+  <Skeleton width="48px" height="48px" circle={true} />
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 0.5rem;">
+    <Skeleton width="100%" height="16px" />
+    <Skeleton width="60%" height="16px" />
+  </div>
+</div>
+<Skeleton width="100%" height="100px" />`}
+        >
+            <div
+                style="display: flex; flex-direction: column; gap: 1rem; width: 100%; max-width: 400px;"
+            >
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                    <Skeleton width="48px" height="48px" circle={true} />
+                    <div
+                        style="flex: 1; display: flex; flex-direction: column; gap: 0.5rem;"
+                    >
+                        <Skeleton width="100%" height="16px" />
+                        <Skeleton width="60%" height="16px" />
+                    </div>
+                </div>
+                <Skeleton width="100%" height="100px" />
             </div>
         </ComponentPreview>
     </section>

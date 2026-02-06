@@ -4,6 +4,8 @@
  * Lista de tabs minimalista con indicador de borde inferior.
  * Uso: Navegación interna de contenido.
  */
+import Button from "../atoms/Button.astro";
+
 interface Props {
     tabs: { value: string; label: string; active?: boolean }[];
     name: string; // Para identificar el grupo
@@ -16,17 +18,18 @@ const { tabs, name, class: className = "" } = Astro.props;
 <div class:list={["ds-underline-tabs", className]} role="tablist">
     {
         tabs.map((tab, index) => (
-            <button
+            <Button
+                variant="tab"
                 type="button"
                 role="tab"
                 aria-selected={tab.active ? "true" : "false"}
-                class:list={["ds-underline-tabs__tab", tab.active && "active"]}
+                class:list={[tab.active && "active"]}
                 data-tab-group={name}
                 data-tab-value={tab.value}
             >
                 {tab.label}
                 {tab.active && <span class="ds-underline-tabs__indicator" />}
-            </button>
+            </Button>
         ))
     }
 </div>
@@ -39,43 +42,12 @@ const { tabs, name, class: className = "" } = Astro.props;
         position: relative;
         padding-bottom: 1px;
     }
-    .ds-underline-tabs__tab {
-        background: transparent;
-        border: none;
-        padding: 0.75rem 0;
-        font-family: var(--ds-font-family);
-        font-size: 0.95rem;
-        color: var(--ds-color-text-muted, #64748b);
-        cursor: pointer;
-        position: relative;
-        transition: color 0.2s ease;
-    }
-    .ds-underline-tabs__tab:hover {
-        color: var(--ds-color-primary, #0f172a);
-    }
-    .ds-underline-tabs__tab.active {
-        color: var(--ds-color-primary, #0f172a);
-        font-weight: 500;
-    }
-    /* Indicador visual (la línea azul) */
-    .ds-underline-tabs__tab.active::after {
-        content: "";
-        position: absolute;
-        bottom: -2px; /* Un poco más abajo para solapar bien */
-        left: -10%; /* Desplazamos a la izquierda */
-        width: 120%; /* Hacemos la línea más ancha que el texto (120%) */
-        height: 2px;
-        background-color: var(--ds-color-primary, #0f172a);
-    }
 
     @media (max-width: 639px) {
         .ds-underline-tabs {
             gap: 1.5rem;
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
-        }
-        .ds-underline-tabs__tab {
-            flex-shrink: 0;
         }
     }
 </style>
