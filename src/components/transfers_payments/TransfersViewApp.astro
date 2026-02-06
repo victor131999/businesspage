@@ -838,579 +838,578 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
   }
 
   .device-content {
-      flex: 1;
-      min-height: 0;
-      background: #ffffff;
-      padding: 1rem 1.25rem;
-      overflow-y: auto;
-      overflow-x: hidden;
-      -ms-overflow-style: none; /* IE and Edge */
-      scrollbar-width: none; /* Firefox */
-      display: flex;
-      flex-direction: column;
-      position: relative;
-    }
+    flex: 1;
+    min-height: 0;
+    background: #ffffff;
+    padding: 1rem 1.25rem;
+    overflow-y: hidden; /* Changed from auto to hidden */
+    overflow-x: hidden;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
 
-    .device-content::-webkit-scrollbar {
-      display: none; /* Chrome, Safari and Opera */
-    }
+  .device-content::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
 
-    .device-header {
-      position: absolute;
-      top: 1rem;
-      left: 0;
-      right: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 20;
-    }
+  .device-header {
+    position: absolute;
+    top: 1rem;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+  }
 
-    .device-logo {
-      display: flex;
-      justify-content: center;
-    }
+  .device-logo {
+    display: flex;
+    justify-content: center;
+  }
 
-    .device-logo img {
-      height: 32px;
-      width: auto;
-    }
+  .device-logo img {
+    height: 32px;
+    width: auto;
+  }
 
-    /* Global Layout */
-    .tv-app-container {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      overflow: hidden;
-      font-family:
-        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
-        sans-serif;
-      background: #ffffff;
-    }
+  /* Global Layout */
+  .tv-app-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+      sans-serif;
+    background: #ffffff;
+  }
 
-    .tv-screen {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      padding: 0 24px;
-      padding-top: 10px; /* Safe area top */
-      transition:
-        opacity 0.3s ease,
-        transform 0.3s ease;
-      background: white;
-    }
+  .tv-screen {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 0 24px;
+    padding-top: 10px; /* Safe area top */
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+    background: white;
+  }
 
-    .tv-screen.hidden-screen {
-      opacity: 0;
-      pointer-events: none;
-      transform: scale(0.98);
-      z-index: 0;
-    }
+  .tv-screen.hidden-screen {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.98);
+    z-index: 0;
+  }
 
-    .tv-screen.active {
-      opacity: 1;
-      pointer-events: auto;
-      transform: scale(1);
-      z-index: 10;
-    }
+  .tv-screen.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+    z-index: 10;
+  }
 
-    /* Screen Amount Styles */
-    .tv-graphic-container-fixed {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 300px;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding-top: 20px;
-      z-index: 1;
-      pointer-events: none;
-    }
+  /* Screen Amount Styles */
+  .tv-graphic-container-fixed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 20px;
+    z-index: 1;
+    pointer-events: none;
+  }
 
-    .tv-graphic-gif {
-      width: 180%;
-      max-width: 400px;
-      object-fit: contain;
-      mix-blend-mode: multiply;
-      transform: translateY(-20px);
-    }
+  .tv-graphic-gif {
+    width: 180%;
+    max-width: 400px;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+    transform: translateY(-20px);
+  }
 
-    .tv-main-glass-card {
-      position: relative;
-      z-index: 10;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      margin-top: 220px;
-      margin-left: -24px;
-      margin-right: -24px;
-      background: rgba(255, 255, 255, 0.35);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-radius: 24px 24px 0 0;
-      padding: 24px;
-      padding-bottom: 90px;
-      border-top: 1px solid rgba(255, 255, 255, 0.4);
-      box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.05);
-    }
+  .tv-main-glass-card {
+    position: relative;
+    z-index: 10;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-top: 220px;
+    margin-left: -24px;
+    margin-right: -24px;
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 24px 24px 0 0;
+    padding: 24px;
+    padding-bottom: 90px;
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.05);
+  }
 
-    .tv-title {
-      font-size: 24px;
-      font-weight: 700;
-      color: #004492;
-      margin: 0;
-      text-align: center;
-    }
+  .tv-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #004492;
+    margin: 0;
+    text-align: center;
+  }
 
-    .tv-instructions {
-      text-align: center;
-      margin-top: 12px;
-      margin-bottom: 32px;
-    }
+  .tv-instructions {
+    text-align: center;
+    margin-top: 12px;
+    margin-bottom: 32px;
+  }
 
-    .tv-subtitle {
-      font-size: 15px;
-      color: #1e293b;
-      font-weight: 500;
-    }
+  .tv-subtitle {
+    font-size: 15px;
+    color: #1e293b;
+    font-weight: 500;
+  }
 
-    .tv-caption {
-      font-size: 11px;
-      color: #64748b;
-    }
+  .tv-caption {
+    font-size: 11px;
+    color: #64748b;
+  }
 
-    .tv-input-section {
-      width: 100%;
-      max-width: 320px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 20;
-    }
+  .tv-input-section {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 20;
+  }
 
-    .tv-input-label {
-      display: block;
-      font-size: 13px;
-      color: #1e293b;
-      font-weight: 600;
-      margin-bottom: 8px;
-      text-align: center;
-    }
+  .tv-input-label {
+    display: block;
+    font-size: 13px;
+    color: #1e293b;
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-align: center;
+  }
 
-    .tv-input-card {
-      background: #f1f5f9;
-      border-radius: 16px;
-      padding: 8px 12px 8px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 64px;
-      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03);
-    }
+  .tv-input-card {
+    background: #f1f5f9;
+    border-radius: 16px;
+    padding: 8px 12px 8px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03);
+  }
 
-    .tv-amount-input {
-      background: transparent;
-      border: none;
-      font-size: 28px;
-      font-weight: 400;
-      color: #0f172a;
-      width: 100%;
-      outline: none;
-    }
+  .tv-amount-input {
+    background: transparent;
+    border: none;
+    font-size: 28px;
+    font-weight: 400;
+    color: #0f172a;
+    width: 100%;
+    outline: none;
+  }
 
-    .tv-currency-pill {
-      background: #001e45;
-      color: #ffffff;
-      border: none;
-      border-radius: 99px;
-      padding: 8px 16px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0, 30, 69, 0.2);
-      transition: transform 0.2s;
-    }
+  .tv-currency-pill {
+    background: #001e45;
+    color: #ffffff;
+    border: none;
+    border-radius: 99px;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 30, 69, 0.2);
+    transition: transform 0.2s;
+  }
 
-    .tv-currency-pill:active {
-      transform: scale(0.95);
-    }
+  .tv-currency-pill:active {
+    transform: scale(0.95);
+  }
 
-    /* Bottom Sheet (History) */
-    .tv-bottom-sheet {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: white;
-      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
-      border-radius: 28px 28px 0 0;
-      z-index: 50;
-      transition: height 0.4s cubic-bezier(0.32, 0.725, 0.25, 1);
-      height: 80px; /* Compact height */
-      overflow: hidden;
-    }
+  /* Bottom Sheet (History) */
+  .tv-bottom-sheet {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: white;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+    border-radius: 28px 28px 0 0;
+    z-index: 50;
+    transition: height 0.4s cubic-bezier(0.32, 0.725, 0.25, 1);
+    height: 70px; /* Reduced from 80px to prevent scrollbar */
+    overflow: hidden;
+  }
 
-    /* Compact View */
-    .tv-sheet-header-compact {
-      height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      position: relative;
-    }
+  /* Compact View */
+  .tv-sheet-header-compact {
+    height: 70px; /* Reduced from 80px to match bottom-sheet height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+  }
 
-    .tv-sheet-handle-icon {
-      position: absolute;
-      top: 12px;
-      color: #94a3b8;
-    }
-    .tv-sheet-handle-icon.down {
-      top: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
+  .tv-sheet-handle-icon {
+    position: absolute;
+    top: 12px;
+    color: #94a3b8;
+  }
+  .tv-sheet-handle-icon.down {
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 
-    .tv-sheet-title-text {
-      font-size: 15px;
-      font-weight: 600;
-      color: #64748b;
-      margin-top: 10px;
-    }
+  .tv-sheet-title-text {
+    font-size: 15px;
+    font-weight: 600;
+    color: #64748b;
+    margin-top: 10px;
+  }
 
-    /* Expanded View */
-    .tv-sheet-content-expanded {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
+  /* Expanded View */
+  .tv-sheet-content-expanded {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
 
-    .tv-bottom-sheet.expanded .tv-sheet-header-compact {
-      display: none;
-    }
+  .tv-bottom-sheet.expanded .tv-sheet-header-compact {
+    display: none;
+  }
 
-    .tv-sheet-header-expanded {
-      padding: 24px;
-      padding-bottom: 12px;
-      cursor: pointer;
-      position: relative;
-      background: white;
-      z-index: 10;
-    }
+  .tv-sheet-header-expanded {
+    padding: 24px;
+    padding-bottom: 12px;
+    cursor: pointer;
+    position: relative;
+    background: white;
+    z-index: 10;
+  }
 
-    .tv-sheet-subtitle {
-      display: block;
-      font-size: 11px;
-      text-transform: uppercase;
-      color: #94a3b8;
-      letter-spacing: 0.5px;
-      margin-bottom: 4px;
-      margin-top: 12px;
-    }
+  .tv-sheet-subtitle {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #94a3b8;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+    margin-top: 12px;
+  }
 
-    .tv-sheet-main-title {
-      font-size: 20px;
-      font-weight: 800;
-      color: #0f172a;
-      margin: 0;
-    }
+  .tv-sheet-main-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
+  }
 
-    .tv-history-list {
-      flex: 1;
-      overflow-y: auto;
-      padding: 0 24px 30px;
-      /* Hide scrollbar */
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      margin-top: 8px;
-    }
-    .tv-history-list::-webkit-scrollbar {
-      display: none;
-    }
+  .tv-history-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 24px 30px;
+    /* Hide scrollbar */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    margin-top: 8px;
+  }
+  .tv-history-list::-webkit-scrollbar {
+    display: none;
+  }
 
-    .tv-history-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 0;
-      border-bottom: 1px solid #f1f5f9;
-    }
+  .tv-history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid #f1f5f9;
+  }
 
-    .tv-history-left {
-      display: flex;
-      flex-direction: column;
-    }
+  .tv-history-left {
+    display: flex;
+    flex-direction: column;
+  }
 
-    .tv-history-name {
-      font-size: 14px;
-      font-weight: 600;
-      color: #1e293b;
-      margin-bottom: 2px;
-    }
+  .tv-history-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 2px;
+  }
 
-    .tv-history-date {
-      font-size: 11px;
-      color: #94a3b8;
-    }
+  .tv-history-date {
+    font-size: 11px;
+    color: #94a3b8;
+  }
 
-    .tv-history-right {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-    }
+  .tv-history-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
 
-    .tv-history-amount {
-      font-size: 14px;
-      font-weight: 700;
-      color: #1e293b;
-    }
+  .tv-history-amount {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1e293b;
+  }
 
-    .tv-history-status {
-      font-size: 10px;
-      color: #10b981; /* Green */
-      font-weight: 500;
-    }
+  .tv-history-status {
+    font-size: 10px;
+    color: #10b981; /* Green */
+    font-weight: 500;
+  }
 
-    /* Contacts Screen */
-    .tv-section-header {
-      /* No sticky, simple layout */
-    }
+  /* Contacts Screen */
+  .tv-section-header {
+    /* No sticky, simple layout */
+  }
 
-    .tv-back-btn {
-      position: absolute;
-      top: 1rem;
-      left: 1.25rem;
-      display: flex;
-      align-items: center;
-      color: #475569;
-      font-size: 0.875rem;
-      font-weight: 500;
-      z-index: 20;
-      background: none;
-      border: none;
-      cursor: pointer;
-    }
+  .tv-back-btn {
+    position: absolute;
+    top: 1rem;
+    left: 1.25rem;
+    display: flex;
+    align-items: center;
+    color: #475569;
+    font-size: 0.875rem;
+    font-weight: 500;
+    z-index: 20;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
 
-    .tv-contacts-list {
-      scrollbar-width: none; /* Auto behavior */
-    }
-    .tv-contacts-list::-webkit-scrollbar {
-      display: none;
-    }
+  .tv-contacts-list {
+    scrollbar-width: none; /* Auto behavior */
+  }
+  .tv-contacts-list::-webkit-scrollbar {
+    display: none;
+  }
 
-    .tv-contact-item {
-      display: flex;
-      align-items: center;
-      padding: 12px;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .tv-contact-item:hover {
-      background-color: #004492;
-    }
+  .tv-contact-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .tv-contact-item:hover {
+    background-color: #004492;
+  }
 
-    .tv-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: 600;
-      font-size: 14px;
-      margin-right: 12px;
-      flex-shrink: 0;
-    }
+  .tv-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    margin-right: 12px;
+    flex-shrink: 0;
+  }
 
-    .tv-contact-info {
-      flex: 1;
-    }
+  .tv-contact-info {
+    flex: 1;
+  }
 
-    .tv-contact-name {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
+  .tv-contact-name {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
 
-    .tv-contact-bank {
-      font-size: 11px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+  .tv-contact-bank {
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
-    /* Utilities */
-    .no-scrollbar::-webkit-scrollbar {
-      display: none;
-    }
-    .no-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-  </style>
+  /* Utilities */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
 
-  <script is:inline>
-    // Navigation State
-    window.tvNavigate = (screenId) => {
-      // Hide all
-      document.querySelectorAll(".tv-screen").forEach((el) => {
-        el.classList.remove("active");
-        el.classList.add("hidden-screen");
-      });
+<script is:inline>
+  // Navigation State
+  window.tvNavigate = (screenId) => {
+    // Hide all
+    document.querySelectorAll(".tv-screen").forEach((el) => {
+      el.classList.remove("active");
+      el.classList.add("hidden-screen");
+    });
 
-      // Show target
-      const target = document.getElementById("tv-screen-" + screenId);
-      if (target) {
-        target.classList.remove("hidden-screen");
-        target.classList.add("active");
+    // Show target
+    const target = document.getElementById("tv-screen-" + screenId);
+    if (target) {
+      target.classList.remove("hidden-screen");
+      target.classList.add("active");
+    }
+  };
+
+  // Contacts
+  window.tvSelectContact = (name, initials, bank) => {
+    // Populate summary
+    const recEl = document.getElementById("tv-summary-recipient");
+    if (recEl) recEl.textContent = name;
+
+    window.tvNavigate("summary");
+  };
+
+  // Bottom Sheet Logic for Latest Transfers
+  window.tvToggleHistory = (expand) => {
+    const sheet = document.getElementById("tv-latest-transfers");
+    if (!sheet) return;
+
+    if (expand) {
+      sheet.classList.add("expanded");
+      sheet.style.height = "85%";
+      sheet.style.borderRadius = "28px 28px 0 0";
+    } else {
+      sheet.classList.remove("expanded");
+      sheet.style.height = "70px"; // Updated from 80px to match CSS
+    }
+  };
+
+  // Slider Logic
+  const slider = document.getElementById("tv-slider-thumb");
+  const track = document.getElementById("tv-slider");
+  let isDragging = false;
+  let startX = 0;
+
+  if (slider && track) {
+    slider.addEventListener("mousedown", (e) => {
+      isDragging = true;
+      startX = e.clientX;
+      slider.style.transition = "none";
+    });
+
+    window.addEventListener("mousemove", (e) => {
+      if (!isDragging) return;
+      // Calculate position
+      const trackRect = track.getBoundingClientRect();
+      let newLeft = e.clientX - trackRect.left - 24; // offset center
+
+      // Constraints
+      if (newLeft < 4) newLeft = 4;
+      if (newLeft > trackRect.width - 52) newLeft = trackRect.width - 52; // roughly width - thumb width
+
+      slider.style.left = newLeft + "px";
+
+      // Check unlock
+      if (newLeft >= trackRect.width - 60) {
+        completeSlide();
       }
-    };
+    });
 
-    // Contacts
-    window.tvSelectContact = (name, initials, bank) => {
-      // Populate summary
-      const recEl = document.getElementById("tv-summary-recipient");
-      if (recEl) recEl.textContent = name;
-
-      window.tvNavigate("summary");
-    };
-
-    // Bottom Sheet Logic for Latest Transfers
-    window.tvToggleHistory = (expand) => {
-      const sheet = document.getElementById("tv-latest-transfers");
-      if (!sheet) return;
-
-      if (expand) {
-        sheet.classList.add("expanded");
-        sheet.style.height = "85%";
-        sheet.style.borderRadius = "28px 28px 0 0";
-      } else {
-        sheet.classList.remove("expanded");
-        sheet.style.height = "80px";
-      }
-    };
-
-    // Slider Logic
-    const slider = document.getElementById("tv-slider-thumb");
-    const track = document.getElementById("tv-slider");
-    let isDragging = false;
-    let startX = 0;
-
-    if (slider && track) {
-      slider.addEventListener("mousedown", (e) => {
-        isDragging = true;
-        startX = e.clientX;
-        slider.style.transition = "none";
-      });
-
-      window.addEventListener("mousemove", (e) => {
-        if (!isDragging) return;
-        // Calculate position
-        const trackRect = track.getBoundingClientRect();
-        let newLeft = e.clientX - trackRect.left - 24; // offset center
-
-        // Constraints
-        if (newLeft < 4) newLeft = 4;
-        if (newLeft > trackRect.width - 52) newLeft = trackRect.width - 52; // roughly width - thumb width
-
-        slider.style.left = newLeft + "px";
-
-        // Check unlock
-        if (newLeft >= trackRect.width - 60) {
-          completeSlide();
-        }
-      });
-
-      window.addEventListener("mouseup", () => {
-        if (!isDragging) return;
-        isDragging = false;
-        // Reset if not completed
-        if (
-          parseInt(slider.style.left || "0") <
-          track.getBoundingClientRect().width - 60
-        ) {
-          slider.style.transition = "left 0.3s ease";
-          slider.style.left = "4px";
-        }
-      });
-    }
-
-    function completeSlide() {
+    window.addEventListener("mouseup", () => {
+      if (!isDragging) return;
       isDragging = false;
-      window.tvNavigate("processing");
+      // Reset if not completed
+      if (
+        parseInt(slider.style.left || "0") <
+        track.getBoundingClientRect().width - 60
+      ) {
+        slider.style.transition = "left 0.3s ease";
+        slider.style.left = "4px";
+      }
+    });
+  }
 
-      // Start Animation Sequence
-      const overlay = document.getElementById("tv-processing-overlay");
-      const glint = document.getElementById("tv-processing-glint");
+  function completeSlide() {
+    isDragging = false;
+    window.tvNavigate("processing");
 
-      if (overlay && glint) {
-        // Reset styles first to ensure replayability
-        overlay.style.transition = "none";
-        overlay.style.clipPath = "inset(0 100% 0 0)";
-        glint.style.transition = "none";
-        glint.style.left = "0%";
+    // Start Animation Sequence
+    const overlay = document.getElementById("tv-processing-overlay");
+    const glint = document.getElementById("tv-processing-glint");
 
-        // Force Reflow
-        void overlay.offsetWidth;
+    if (overlay && glint) {
+      // Reset styles first to ensure replayability
+      overlay.style.transition = "none";
+      overlay.style.clipPath = "inset(0 100% 0 0)";
+      glint.style.transition = "none";
+      glint.style.left = "0%";
 
-        // Start
+      // Force Reflow
+      void overlay.offsetWidth;
+
+      // Start
+      setTimeout(() => {
+        overlay.style.transition =
+          "clip-path 3s cubic-bezier(0.22, 1, 0.36, 1)";
+        overlay.style.clipPath = "inset(0 0% 0 0)";
+
+        glint.style.transition = "left 3s linear";
+        glint.style.left = "100%";
+
+        // Show success
         setTimeout(() => {
-          overlay.style.transition =
-            "clip-path 3s cubic-bezier(0.22, 1, 0.36, 1)";
-          overlay.style.clipPath = "inset(0 0% 0 0)";
+          const procView = document.getElementById("tv-processing-view");
+          const successView = document.getElementById("tv-success-view");
+          if (procView) procView.classList.add("hidden");
+          if (successView) successView.classList.remove("hidden");
 
-          glint.style.transition = "left 3s linear";
-          glint.style.left = "100%";
-
-          // Show success
+          // Open detailed sheet
           setTimeout(() => {
-            const procView = document.getElementById("tv-processing-view");
-            const successView = document.getElementById("tv-success-view");
-            if (procView) procView.classList.add("hidden");
-            if (successView) successView.classList.remove("hidden");
+            const sheet = document.getElementById("tv-details-sheet");
+            if (sheet) sheet.style.height = "calc(100% - 200px)";
+          }, 300);
+        }, 3050);
+      }, 100);
+    }
+  }
 
-            // Open detailed sheet
-            setTimeout(() => {
-              const sheet = document.getElementById("tv-details-sheet");
-              if (sheet) sheet.style.height = "calc(100% - 200px)";
-            }, 300);
-          }, 3050);
-        }, 100);
+  window.tvReset = () => {
+    // Reset Views
+    document.getElementById("tv-processing-view").classList.remove("hidden");
+    document.getElementById("tv-success-view").classList.add("hidden");
+    const slider = document.getElementById("tv-slider-thumb");
+    if (slider) slider.style.left = "4px";
+
+    const sheet = document.getElementById("tv-details-sheet");
+    if (sheet) sheet.style.height = "70px";
+
+    window.tvNavigate("amount");
+  };
+
+  window.toggleSuccessDetails = () => {
+    const sheet = document.getElementById("tv-details-sheet");
+    const chevron = document.getElementById("tv-details-chevron");
+    if (sheet) {
+      if (sheet.clientHeight > 100) {
+        sheet.style.height = "70px";
+        if (chevron) chevron.style.transform = "rotate(0deg)";
+      } else {
+        sheet.style.height = "calc(100% - 200px)";
+        if (chevron) chevron.style.transform = "rotate(180deg)";
       }
     }
-
-    window.tvReset = () => {
-      // Reset Views
-      document.getElementById("tv-processing-view").classList.remove("hidden");
-      document.getElementById("tv-success-view").classList.add("hidden");
-      const slider = document.getElementById("tv-slider-thumb");
-      if (slider) slider.style.left = "4px";
-
-      const sheet = document.getElementById("tv-details-sheet");
-      if (sheet) sheet.style.height = "70px";
-
-      window.tvNavigate("amount");
-    };
-
-    window.toggleSuccessDetails = () => {
-      const sheet = document.getElementById("tv-details-sheet");
-      const chevron = document.getElementById("tv-details-chevron");
-      if (sheet) {
-        if (sheet.clientHeight > 100) {
-          sheet.style.height = "70px";
-          if (chevron) chevron.style.transform = "rotate(0deg)";
-        } else {
-          sheet.style.height = "calc(100% - 200px)";
-          if (chevron) chevron.style.transform = "rotate(180deg)";
-        }
-      }
-    };
-  </script>
-</div>
+  };
+</script>
