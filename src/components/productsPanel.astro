@@ -2,17 +2,28 @@
 import "../styles/navbar.css";
 ---
 
-<div id="products-panel" class="products-panel products-panel--modules hidden">
-  <aside class="pp-sidebar" aria-label="Products">
-    <a class="pp-item" href="/auth">Auth</a>
-    <a class="pp-item" href="/identity">Identity</a>
-    <a class="pp-item" href="/aml">AML</a>
-    <a class="pp-item" href="/connect">Connect</a>
-    <a class="pp-item" href="/cards">Cards</a>
-    <a class="pp-item" href="/tx">TX</a>
-    <a class="pp-item" href="/transfers">Payments and Transfers</a>
-    <a class="pp-item" href="/discounts">Discounts & Coupons</a>
-    <a class="pp-item" href="/alaiza">Alaiza AI Fintech Core</a>
+<div id="products-panel" class="products-panel hidden">
+  <aside class="pp-sidebar" role="tablist" aria-label="Products">
+    <button role="tab" class="pp-item is-active" data-key="register"
+      >Auth</button
+    >
+    <button role="tab" class="pp-item" data-key="identity">Identity</button>
+    <button role="tab" class="pp-item" data-key="aml">AML</button>
+    <button role="tab" class="pp-item" data-key="linking">Connect</button>
+    <button role="tab" class="pp-item" data-key="cards">Cards</button>
+    <button role="tab" class="pp-item" data-key="international">TX</button>
+    <button role="tab" class="pp-item" data-key="paymentsTransfers"
+      >Payments and Transfers</button
+    >
+    <button role="tab" class="pp-item" data-key="biz"
+      >Discounts & Coupons</button
+    >
+    <button role="tab" class="pp-item" data-key="matilda"
+      >Alaiza AI Fintech Core</button
+    >
+    <!-- Insurance comentado - ya no se ofrece este servicio
+    <button role="tab" class="pp-item" data-key="insurance">Insurance</button>
+    -->
   </aside>
 </div>
 
