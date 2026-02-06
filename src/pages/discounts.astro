@@ -3078,6 +3078,7 @@ import "../components/design-system/tokens.css";
   document.querySelectorAll(".faq-question").forEach((question) => {
     question.addEventListener("click", () => {
       const faqItem = question.closest(".faq-item");
+      if (!faqItem) return;
       const isActive = faqItem.classList.contains("active");
 
       // Cerrar todos los demás items
@@ -3098,7 +3099,7 @@ import "../components/design-system/tokens.css";
       hero: {
         title: "Gestión integral de<br />descuentos y beneficios",
         description:
-          "Centraliza la relación con comercios para crear y difundir beneficios. Permite registrar negocios con su información operativa, diseñar y publicar descuentos o campañas, geolocalizar establecimientos en un mapa interactivo y habilitar pagos con posterior liquidación dentro de la red Zelify. Incluye reportes comerciales para seguimiento de ventas, redenciones y conciliación.",
+          "Centraliza la gestión de comercios y beneficios en una sola plataforma. Zelify permite crear descuentos y campañas, mostrar establecimientos en un mapa interactivo y gestionar pagos con liquidación posterior, con reportes claros de ventas y redenciones.",
         inputPlaceholder: "Ingresa tu correo",
         inputAria: "Ingresa tu correo",
         quoteButton: "Cotizar",
@@ -3251,7 +3252,7 @@ import "../components/design-system/tokens.css";
       hero: {
         title: "Comprehensive management of<br />discounts and benefits",
         description:
-          "Centralize your relationship with merchants to create and distribute benefits. Register businesses with their operational information, design and publish discounts or campaigns, geolocate establishments on the map, and enable payments with subsequent settlement within the Zelify network. Includes commercial reports for tracking sales, redemptions, and reconciliation.",
+          "Centralize merchant and benefits management in a single platform. Zelify enables the creation of discounts and campaigns, interactive merchant mapping, post-settlement payments, and clear reporting on sales and redemptions.",
         inputPlaceholder: "enter your email",
         inputAria: "Enter your email",
         quoteButton: "Quote",
@@ -3568,7 +3569,7 @@ import "../components/design-system/tokens.css";
   document.addEventListener("DOMContentLoaded", () => {
     const stored = localStorage.getItem("ui-language");
     const initialLang =
-      window.__uiLanguage || stored || detectBrowserLanguage();
+      (window as any).__uiLanguage || stored || detectBrowserLanguage();
     updateDiscountsContent(initialLang);
   });
 </script>

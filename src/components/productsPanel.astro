@@ -2,105 +2,25 @@
 import "../styles/navbar.css";
 ---
 
-<div id="products-panel" class="products-panel hidden">
-  <aside class="pp-sidebar" role="tablist" aria-label="Products">
-    <button role="tab" class="pp-item is-active" data-key="register"
-      >Auth</button
-    >
-    <button role="tab" class="pp-item" data-key="identity">Identity</button>
-    <button role="tab" class="pp-item" data-key="aml">AML</button>
-    <button role="tab" class="pp-item" data-key="linking">Connect</button>
-    <button role="tab" class="pp-item" data-key="cards">Cards</button>
-    <button role="tab" class="pp-item" data-key="international">TX</button>
-    <button role="tab" class="pp-item" data-key="paymentsTransfers"
-      >Payments and Transfers</button
-    >
-    <button role="tab" class="pp-item" data-key="biz"
-      >Discounts & Coupons</button
-    >
-    <button role="tab" class="pp-item" data-key="matilda"
-      >Alaiza AI Fintech Core</button
-    >
-    <!-- Insurance comentado - ya no se ofrece este servicio
-    <button role="tab" class="pp-item" data-key="insurance">Insurance</button>
-    -->
+<div id="products-panel" class="products-panel products-panel--modules hidden">
+  <aside class="pp-sidebar" aria-label="Products">
+    <a class="pp-item" href="/auth">Auth</a>
+    <a class="pp-item" href="/identity">Identity</a>
+    <a class="pp-item" href="/aml">AML</a>
+    <a class="pp-item" href="/connect">Connect</a>
+    <a class="pp-item" href="/cards">Cards</a>
+    <a class="pp-item" href="/tx">TX</a>
+    <a class="pp-item" href="/transfers">Payments and Transfers</a>
+    <a class="pp-item" href="/discounts">Discounts & Coupons</a>
+    <a class="pp-item" href="/alaiza">Alaiza AI Fintech Core</a>
   </aside>
-
-  <section class="pp-content" aria-live="polite">
-    <header class="pp-head">
-      <h3 class="pp-title">Overview</h3>
-      <p class="pp-sub">
-        A product that enables initial registration through email and password,
-        ensuring access security, traceability, and device data capture to
-        prevent fraud and connect the user to a trusted environment.
-      </p>
-      <hr class="pp-rule" />
-    </header>
-
-    <ul id="pp-features" class="pp-features">
-      <li class="pp-feature">
-        <span class="pp-icon">
-          <!-- icono placeholder -->
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            ><path d="M9 11l3 3L22 4" stroke-width="2"></path></svg
-          >
-        </span>
-        <div>
-          <h4 class="pp-ft-title">Authentication</h4>
-          <p class="pp-ft-desc">
-            Allows register, authenticate, and authorize users.
-          </p>
-        </div>
-      </li>
-      <li class="pp-feature">
-        <span class="pp-icon">
-          <img src="/icons/Worldicon.svg" alt="World icon" />
-        </span>
-        <div>
-          <h4 class="pp-ft-title">Geolocation</h4>
-          <p class="pp-ft-desc">
-            Locate, map, or analyze locations with precision.
-          </p>
-        </div>
-      </li>
-      <li class="pp-feature">
-        <span class="pp-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            ><rect x="3" y="4" width="18" height="14" rx="2" stroke-width="2"
-            ></rect><path d="M7 8h10" stroke-width="2"></path></svg
-          >
-        </span>
-        <div>
-          <h4 class="pp-ft-title">Device information</h4>
-          <p class="pp-ft-desc">
-            Collects device information for security and analytics.
-          </p>
-        </div>
-      </li>
-    </ul>
-  </section>
 </div>
 
 <script type="module">
-  // Referencias dentro del panel
   const panel = document.getElementById("products-panel");
-  const sidebar = panel.querySelector(".pp-sidebar");
-  const titleEl = panel.querySelector(".pp-title");
-  const subEl = panel.querySelector(".pp-sub");
-  const listEl = panel.querySelector("#pp-features");
+  const links = Array.from(panel.querySelectorAll(".pp-item"));
 
-  // 1) Ruta destino por sección (para el título principal)
-  const KEY_TO_ROUTE = {
-    register: "/auth",
-    identity: "/identity",
-    aml: "/aml",
-    linking: "/connect",
-    cards: "/cards",
-    international: "/tx",
-    paymentsTransfers: "/transfers",
-    biz: "/discounts",
-    matilda: "/alaiza",
-  };
+  const normalizePath = (path) => (path || "/").replace(/\\/+$/, "") || "/";
 
   // Catálogo de contenidos por pestaña - Versión en Español
   const DATA_ES = {
@@ -852,259 +772,29 @@ import "../styles/navbar.css";
     DATA = currentLanguage === "ES" ? DATA_ES : DATA_EN;
 
     // Re-renderizar el contenido actual con el nuevo idioma
-    const activeBtn = sidebar.querySelector(".pp-item.is-active");
+    const activeBtn = panel.querySelector(".pp-item.is-active");
     if (activeBtn) {
       render(activeBtn.dataset.key);
     }
-  }
-
-  // Escuchar cambios de idioma desde el navbar
-  window.addEventListener("ui:languagechange", (event) => {
-    const customEvent = event;
-    if (customEvent.detail?.language) {
-      updateLanguage(customEvent.detail.language);
-    }
-  });
-
-  const detectBrowserLanguage = () => {
-    const locale =
-      (navigator.languages && navigator.languages[0]) ||
-      navigator.language ||
-      "";
-    return locale.toLowerCase().startsWith("es") ? "ES" : "EN";
   };
 
-  // Inicializar con el idioma guardado
-  document.addEventListener("DOMContentLoaded", () => {
-    const stored = localStorage.getItem("ui-language");
-    const source = localStorage.getItem("ui-language-source");
-    const initialLang =
-      window.__uiLanguage ||
-      (source === "user" ? stored : null) ||
-      detectBrowserLanguage();
-    updateLanguage(initialLang);
+  const updateActive = () => {
+    const current = normalizePath(window.location.pathname);
+    for (const link of links) {
+      const href = link.getAttribute("href") || "/";
+      const hrefPath = normalizePath(
+        new URL(href, window.location.origin).pathname,
+      );
+      link.classList.toggle("is-active", hrefPath === current);
+    }
+  };
+
+  updateActive();
+  window.addEventListener("popstate", updateActive);
+
+  panel.addEventListener("click", (e) => {
+    const link = e.target.closest("a.pp-item");
+    if (!link) return;
+    panel.classList.add("hidden");
   });
-
-  // Iconos inline (ligeros). Para "globe" usamos tu SVG como <img>.
-  function iconSVG(name) {
-    switch (name) {
-      case "globe":
-        return `<img src="/icons/auth/geolocation.svg" alt="Geolocation icon" />`;
-      case "auth":
-        return `<img src="/icons/auth/authentication.svg" alt="Authentication icon" />`;
-      case "check":
-        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/></svg>`;
-      case "device":
-        return `<img src="/icons/auth/deviceInf.svg" alt="Device information icon" />`;
-      case "documentExtraction":
-        return `<img src="/icons/identity/documentExtraction.svg" alt="Document extraction icon" />`;
-      case "biometricVerification":
-        return `<img src="/icons/identity/biometricVerification.svg" alt="Biometric verification icon" />`;
-      case "videoVerification":
-        return `<img src="/icons/identity/videoVerification.svg" alt="Video verification icon" />`;
-      case "integrationLayer":
-        return `<img src="/icons/identity/integrationLayer.svg" alt="Integration Layer icon" />`;
-      case "amlGlobalList":
-        return `<img src="/icons/aml/amlGlobalList.svg" alt="Global list screening icon" />`;
-      case "amlInternalList":
-        return `<img src="/icons/aml/amlInternalList.svg" alt="Internal list screening icon" />`;
-      case "amlTransactionMonitoring":
-        return `<img src="/icons/aml/amlTransactionMonitoring.svg" alt="Transaction monitoring icon" />`;
-      case "amlAdverseMedia":
-        return `<img src="/icons/aml/amlAdverseMedia.svg" alt="Adverse Media and Risk Intelligence icon" />`;
-      case "bankAccount":
-        return `<img src="/icons/connect/bankAccount.svg" alt="Bank Account Linking icon" />`;
-      case "linkingSdk":
-      case "sdkTransfers":
-      case "sdkTx":
-      case "sdkPayments":
-      case "sdkDiscount":
-      case "sdkAlaiza":
-      case "amlSdk":
-        return `<img src="/icons/connect/linkingSdk.svg" alt="SDK icon" />`;
-      case "accountOwnerVerify":
-        return `<img src="/icons/connect/accountOwnerVerify.svg" alt="Account and Ownership Verification icon" />`;
-      case "accessFinancialData":
-        return `<img src="/icons/connect/accessFinancialData.svg" alt="Access to Financial Data icon" />`;
-      case "digitalAccount":
-        return `<img src="/icons/connect/digitalAccount.svg" alt="Digital Accounts icon" />`;
-      case "creationClabeAc":
-        return `<img src="/icons/connect/creationClabeAc.svg" alt="Creation of CLABE Accounts icon" />`;
-      // Cards icons used for multiple purposes
-      case "issuing":
-      case "binSponsorship":
-        return `<img src="/icons/cards/Issuing.svg" alt="Issuing/BIN Sponsorship icon" />`;
-      case "processingPlatform":
-      case "processing":
-      case "cardProcessing":
-        return `<img src="/icons/cards/processingPlatform.svg" alt="Processing icon" />`;
-      case "tokenization":
-        return `<img src="/icons/cards/tokenization.svg" alt="Tokenization icon" />`;
-      case "3ds":
-        return `<img src="/icons/cards/3ds.svg" alt="3DS icon" />`;
-      case "disputesChargebacks":
-        return `<img src="/icons/cards/disputesChargebacks.svg" alt="Disputes icon" />`;
-      case "accountAggregation":
-        return `<img src="/icons/cards/accountAggregation.svg" alt="Account Aggregation icon" />`;
-      case "digitalWallets":
-        return `<img src="/icons/cards/digitalWallets.svg" alt="Digital Wallets icon" />`;
-      case "corporateCards":
-      case "corporateProcessing":
-        return `<img src="/icons/cards/corporateCards.svg" alt="Corporate Cards icon" />`;
-      case "cashbackService":
-        return `<img src="/icons/cards/cashbackService.svg" alt="Cashback icon" />`;
-      case "subscriptionManagement":
-        return `<img src="/icons/cards/subscriptionManagement.svg" alt="Subscription icon" />`;
-      case "riskControlDynamic":
-        return `<img src="/icons/cards/riskControlDynamic.svg" alt="Risk Control icon" />`;
-      case "reportingAuditAnalytics":
-        return `<img src="/icons/cards/reportingAuditAnalytics.svg" alt="Reporting icon" />`;
-      case "additionalModules":
-        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`; // Shield-like / Lock
-      case "collaterals":
-        return `<img src="/icons/insurance/proposals.svg" alt="Collaterals icon" />`;
-
-      // Transfers reused icons
-      case "transferQuoteValidation":
-        return `<img src="/icons/transfers/transferQuoteValidation.svg" alt="Transfer Quote icon" />`;
-      case "internalTransfers":
-        return `<img src="/icons/transfers/internalTransfers.svg" alt="Internal Transfers icon" />`;
-      case "interbankLocaltransfer":
-        return `<img src="/icons/transfers/interbankLocaltransfer.svg" alt="Interbank Transfers icon" />`;
-      case "accountBalanceValidation":
-        return `<img src="/icons/transfers/accountBalanceValidation.svg" alt="Account Balance icon" />`;
-      case "processingReconciliation":
-        return `<img src="/icons/transfers/processingReconciliation.svg" alt="Processing Reconciliation icon" />`;
-      case "transactionalNotification":
-        return `<img src="/icons/transfers/transactionalNotification.svg" alt="Transactional Notification icon" />`;
-      case "transactionLimits":
-        return `<img src="/icons/transfers/transactionLimits.svg" alt="Transaction Limits icon" />`;
-      case "payIn":
-        return `<img src="/icons/transfers/payIn.svg" alt="Pay-in icon" />`;
-      case "cashOut":
-        return `<img src="/icons/transfers/cashOut.svg" alt="Cash-out icon" />`;
-      case "serviceProvideListing":
-        return `<img src="/icons/transfers/serviceProvideListing.svg" alt="Service Provider icon" />`;
-      case "basicServicePayments":
-        return `<img src="/icons/transfers/basicServicePayments.svg" alt="Basic Service Payments icon" />`;
-      case "favoriteServicePaymentSetup":
-        return `<img src="/icons/transfers/favoriteServicePaymentSetup.svg" alt="Favorites Setup icon" />`;
-      case "accountStatements":
-        return `<img src="/icons/transfers/accountStatements.svg" alt="Account Statements icon" />`;
-      case "giftcards":
-        return `<img src="/icons/cards/tokenization.svg" alt="Giftcards icon" />`; // Reusing tokenization which looks like a chip/card
-
-      // Tx reused icons
-      case "fxQuote":
-        return `<img src="/icons/tx/fxQuote.svg" alt="FX Quote icon" />`;
-      case "internationalAccount":
-        return `<img src="/icons/tx/internationalAccount.svg" alt="International Account icon" />`;
-      case "transferInitiation":
-        return `<img src="/icons/tx/transferInitiation.svg" alt="Transfer Initiation icon" />`;
-      case "trackingConfirmation":
-        return `<img src="/icons/tx/trackingConfirmation.svg" alt="Tracking icon" />`;
-      case "internationalSettlement":
-        return `<img src="/icons/tx/internationalSettlement.svg" alt="International Settlement icon" />`;
-
-      // Payments reused icons
-      case "multiPlatform":
-        return `<img src="/icons/payments/multiPlatform.svg" alt="Multi-Platform icon" />`;
-      case "qrSdk":
-        return `<img src="/icons/payments/qrSdk.svg" alt="QR SDK icon" />`;
-      case "tokenizationPayments":
-        return `<img src="/icons/payments/tokenization.svg" alt="Tokenization icon" />`;
-      case "recurringPayments":
-        return `<img src="/icons/payments/recurringPayments.svg" alt="Recurring Payments icon" />`;
-      case "expressCheckout":
-        return `<img src="/icons/payments/expressCheckout.svg" alt="Express Checkout icon" />`;
-      case "customKeys":
-        return `<img src="/icons/payments/customKeys.svg" alt="Custom Keys icon" />`;
-      case "contactMethods":
-        return `<img src="/icons/payments/contactMethods.svg" alt="Contact Methods icon" />`;
-
-      // Discounts / Biz icons
-      case "merchantRegistration":
-        return `<img src="/icons/discount/merchantGeo.svg" alt="Merchant Registration icon" />`;
-      case "discountPromotion":
-        return `<img src="/icons/discount/discountPromotion.svg" alt="Discount Management icon" />`;
-      case "merchantGeolocation":
-        return `<img src="/icons/discount/merchantGeolocation.svg" alt="Merchant Geolocation icon" />`;
-      case "paymentsCommercial":
-        return `<img src="/icons/discount/paymentsCommercial.svg" alt="Payments Commercial icon" />`;
-      case "commercialAnalysis":
-        return `<img src="/icons/discount/commercialAnalysis.svg" alt="Commercial Analysis icon" />`;
-      case "categoryManagement":
-        return `<img src="/icons/insurance/products.svg" alt="Category Management icon" />`; // Reuse products icon
-      case "productManagement":
-        return `<img src="/icons/insurance/products.svg" alt="Product Management icon" />`; // Reuse products icon
-
-      // Matilda icons
-      case "behaviorAnalysis":
-        return `<img src="/icons/alaiza/behaviorAnalysis.svg" alt="Behavior Analysis icon" />`;
-      case "smartSupportChat":
-        return `<img src="/icons/alaiza/smartSupportChat.svg" alt="Smart Support Chat icon" />`;
-      case "contentMarketing":
-        return `<img src="/icons/alaiza/contentMarketing.svg" alt="Content Marketing icon" />`;
-      case "personalFinance":
-        return `<img src="/icons/alaiza/personalFinance.svg" alt="Personal Finance icon" />`;
-      case "promptBasedReporting":
-        return `<img src="/icons/alaiza/promptBasedReporting.svg" alt="Prompt-Based Reporting icon" />`;
-
-      default:
-        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg>`;
-    }
-  }
-
-  // Render del contenido según pestaña
-  function render(key) {
-    const section = DATA[key] ?? DATA.register;
-
-    // Crear el enlace del título principal si tiene ruta
-    if (KEY_TO_ROUTE[key]) {
-      titleEl.innerHTML = `<a href="${KEY_TO_ROUTE[key]}" class="pp-title-link">${section.title} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;"><path d="M7 17L17 7M7 7h10v10"/></svg></a>`;
-    } else {
-      titleEl.textContent = section.title;
-    }
-    subEl.textContent = section.sub;
-
-    // Aplicar clase grid si corresponde (para la mayoría de los módulos con muchos items)
-    if (section.features.length > 4) {
-      listEl.classList.add("cards-grid");
-    } else {
-      listEl.classList.remove("cards-grid");
-    }
-
-    listEl.innerHTML = section.features
-      .map((f, idx) => {
-        const icon = iconSVG(f.icon);
-        const cardContent = `
-        <span class="pp-icon">${icon}</span>
-        <div>
-          <h4 class="pp-ft-title">${f.t}</h4>
-          <p class="pp-ft-desc">${f.d}</p>
-        </div>
-      `;
-
-        // Si tiene href, es un enlace
-        if (f.href) {
-          return `<a class="pp-feature" href="${f.href}" target="_blank" rel="noopener noreferrer">${cardContent}</a>`;
-        } else {
-          // Fallback para items sin enlace (aunque ahora todos tienen)
-          return `<li class="pp-feature">${cardContent}</li>`;
-        }
-      })
-      .join("");
-  }
-
-  // Click en la barra izquierda
-  sidebar.addEventListener("click", (e) => {
-    const btn = e.target.closest(".pp-item");
-    if (!btn) return;
-    sidebar.querySelector(".is-active")?.classList.remove("is-active");
-    btn.classList.add("is-active");
-    render(btn.dataset.key);
-  });
-
-  // Estado inicial
-  render("register");
 </script>
