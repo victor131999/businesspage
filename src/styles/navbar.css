@@ -170,11 +170,11 @@
 }
 
 .products-panel.products-panel--modules .pp-item:hover .pp-module-title {
-  color: #95ff0b;
+  color: #79d60a;
 }
 
 .products-panel.products-panel--modules .pp-item:hover .pp-module-desc {
-  color: rgba(149, 255, 11, 0.72);
+  color: rgba(121, 214, 10, 0.78);
 }
 
 /* En modo módulos: sin "cuadro" en hover/active, solo tipografía */

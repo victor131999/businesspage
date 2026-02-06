@@ -2,28 +2,62 @@
 import "../styles/navbar.css";
 ---
 
-<div id="products-panel" class="products-panel hidden">
-  <aside class="pp-sidebar" role="tablist" aria-label="Products">
-    <button role="tab" class="pp-item is-active" data-key="register"
-      >Auth</button
-    >
-    <button role="tab" class="pp-item" data-key="identity">Identity</button>
-    <button role="tab" class="pp-item" data-key="aml">AML</button>
-    <button role="tab" class="pp-item" data-key="linking">Connect</button>
-    <button role="tab" class="pp-item" data-key="cards">Cards</button>
-    <button role="tab" class="pp-item" data-key="international">TX</button>
-    <button role="tab" class="pp-item" data-key="paymentsTransfers"
-      >Payments and Transfers</button
-    >
-    <button role="tab" class="pp-item" data-key="biz"
-      >Discounts & Coupons</button
-    >
-    <button role="tab" class="pp-item" data-key="matilda"
-      >Alaiza AI Fintech Core</button
-    >
-    <!-- Insurance comentado - ya no se ofrece este servicio
-    <button role="tab" class="pp-item" data-key="insurance">Insurance</button>
-    -->
+<div id="products-panel" class="products-panel products-panel--modules hidden">
+  <aside class="pp-sidebar" aria-label="Products">
+    <a class="pp-item pp-module" href="/auth">
+      <span class="pp-module-title">Auth</span>
+      <span class="pp-module-desc">
+        Registro con biometría y 2FA para prevenir fraude.
+      </span>
+    </a>
+    <a class="pp-item pp-module" href="/identity">
+      <span class="pp-module-title">Identity</span>
+      <span class="pp-module-desc">
+        Verificación (OCR + biometría) para reducir fraude.
+      </span>
+    </a>
+    <a class="pp-item pp-module" href="/aml">
+      <span class="pp-module-title">AML</span>
+      <span class="pp-module-desc">
+        Monitoreo y validaciones AML contra listas.
+      </span>
+    </a>
+    <a class="pp-item pp-module" href="/connect">
+      <span class="pp-module-title">Connect</span>
+      <span class="pp-module-desc">
+        Vinculación bancaria y cuentas digitales.
+      </span>
+    </a>
+    <a class="pp-item pp-module" href="/cards">
+      <span class="pp-module-title">Cards</span>
+      <span class="pp-module-desc">
+        Emisión y gestión de tarjetas físicas/virtuales.
+      </span>
+    </a>
+    <a class="pp-item pp-module" href="/tx">
+      <span class="pp-module-title">TX</span>
+      <span class="pp-module-desc">
+        Transferencias internacionales con FX y seguimiento.
+      </span>
+    </a>
+    <a class="pp-item pp-module" href="/transfers">
+      <span class="pp-module-title">Payments and Transfers</span>
+      <span class="pp-module-desc">
+        Pagos y transferencias con notificaciones y límites.
+      </span>
+    </a>
+    <a class="pp-item pp-module" href="/discounts">
+      <span class="pp-module-title">Discounts & Coupons</span>
+      <span class="pp-module-desc">
+        Campañas, geolocalización y reportes.
+      </span>
+    </a>
+    <a class="pp-item pp-module" href="/alaiza">
+      <span class="pp-module-title">Alaiza AI Fintech Core</span>
+      <span class="pp-module-desc">
+        IA para finanzas: análisis y smart support chat.
+      </span>
+    </a>
   </aside>
 </div>
 
