@@ -48,77 +48,11 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
           <div
             class="relative w-full max-w-[320px] shadow-2xl rounded-3xl overflow-hidden"
           >
-            <!-- Simulated Card Image -->
-            <div
-              class="w-full aspect-[1.586/1] relative bg-[#001E3C] rounded-2xl p-6 text-white flex flex-col justify-between overflow-hidden"
-            >
-              <!-- Background Pattern -->
-              <div
-                class="absolute inset-0 opacity-20 pointer-events-none"
-                style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 20px 20px;"
-              >
-              </div>
-
-              <div class="flex justify-between items-start z-10">
-                <!-- Chip -->
-                <div class="flex items-center gap-3">
-                  <svg
-                    width="40"
-                    height="30"
-                    viewBox="0 0 40 30"
-                    fill="none"
-                    stroke="#FFFFFF"
-                    stroke-opacity="0.6"
-                    stroke-width="1.5"
-                  >
-                    <rect x="0.75" y="0.75" width="38.5" height="28.5" rx="4.25"
-                    ></rect>
-                    <path d="M12 1V29"></path>
-                    <path d="M28 1V29"></path>
-                    <path d="M0 15H40"></path>
-                    <path d="M12 10C12 10 16 10 16 14C16 18 12 18 12 18"></path>
-                  </svg>
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#4ade80"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
-                    <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
-                    <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
-                  </svg>
-                </div>
-                <!-- Brand -->
-                <div class="flex items-center gap-2">
-                  <span class="text-[#84cc16] font-bold text-xl">7</span>
-                  <span class="font-semibold text-lg tracking-wide">Zelify</span
-                  >
-                </div>
-              </div>
-
-              <div class="z-10 mt-auto">
-                <p class="text-xs text-gray-300 font-medium mb-1">
-                  Valentina Duarte
-                </p>
-                <div class="flex justify-between items-end">
-                  <p class="font-mono text-lg tracking-widest opacity-90">
-                    **** **** **** 1234
-                  </p>
-                  <!-- Mastercard Logo -->
-                  <div class="flex -space-x-4">
-                    <div class="w-8 h-8 rounded-full bg-[#EB001B] opacity-80">
-                    </div>
-                    <div class="w-8 h-8 rounded-full bg-[#F79E1B] opacity-80">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <img
+              src="/images/cards/card.svg"
+              alt="Zelify Digital Card"
+              class="w-full aspect-[1.586/1] object-cover"
+            />
           </div>
         </div>
 
