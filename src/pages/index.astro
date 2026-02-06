@@ -3718,7 +3718,7 @@ const modulesList = [
       const icon = btn.querySelector("img");
 
       const updateState = () => {
-        if (video.paused) {
+        if (video instanceof HTMLVideoElement && video.paused) {
           if (icon) icon.src = "/icons/play.svg";
           btn.setAttribute("aria-label", "Reproducir");
         } else {
@@ -3728,19 +3728,21 @@ const modulesList = [
       };
 
       btn.addEventListener("click", () => {
-        if (video.muted) video.muted = false;
-        if (video.paused) {
-          video.play();
-        } else {
-          video.pause();
+        if (video instanceof HTMLVideoElement) {
+          if (video.muted) video.muted = false;
+          if (video.paused) {
+            video.play();
+          } else {
+            video.pause();
+          }
         }
       });
 
-      video.addEventListener("play", updateState);
-      video.addEventListener("pause", updateState);
-
-      // Initialize state
-      updateState();
+      if (video instanceof HTMLVideoElement) {
+        video.addEventListener("play", updateState);
+        video.addEventListener("pause", updateState);
+        updateState();
+      }
     };
 
     setupVideoControl("how-it-works-play-btn", "how-it-works-video");
