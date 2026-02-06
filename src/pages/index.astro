@@ -851,7 +851,7 @@ const modulesList = [
         muted
         loop
         playsinline
-        preload="metadata" 
+        preload="metadata"
         style="object-fit: cover;"
       >
         <source
@@ -1068,9 +1068,11 @@ const modulesList = [
 
   @media (max-width: 768px) {
     .product-showcase {
+      display: block;
       height: auto;
       min-height: unset;
       overflow: visible;
+      padding-bottom: 5rem;
     }
   }
 
@@ -1131,7 +1133,11 @@ const modulesList = [
 
   @media (max-width: 768px) {
     .product-showcase__grid {
-      padding-bottom: 100px; /* Más espacio en móvil para evitar corte abrupto */
+      display: block;
+      width: 100%;
+      height: auto !important;
+      padding-bottom: 2rem;
+      position: relative;
     }
   }
 
@@ -1164,6 +1170,10 @@ const modulesList = [
       height: 100% !important;
       min-height: unset !important;
       position: absolute !important;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
     }
   }
 
@@ -1698,8 +1708,10 @@ const modulesList = [
 
   @media (max-width: 768px) {
     .how-it-works-section {
-      margin-top: 400px !important;
-      padding-top: 3rem;
+      margin-top: 100px !important;
+      padding-top: 2rem;
+      position: relative;
+      z-index: 10;
     }
   }
 
@@ -2545,9 +2557,9 @@ const modulesList = [
   @media (max-width: 768px) {
     .product-showcase {
       padding: 0 1.25rem;
-      height: 520px;
-      min-height: 520px;
-      max-height: 520px;
+      height: auto;
+      min-height: unset;
+      max-height: none;
     }
 
     .product-showcase__grid {
@@ -2724,9 +2736,9 @@ const modulesList = [
   @media (max-width: 480px) {
     .product-showcase {
       padding: 0 1rem;
-      height: 400px;
-      min-height: 400px;
-      max-height: 400px;
+      height: auto;
+      min-height: unset;
+      max-height: none;
     }
 
     .product-showcase__grid {

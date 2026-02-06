@@ -1,0 +1,89 @@
+---
+import Layout from "./Layout.astro";
+import Sidebar from "../components/design-system/structure/Sidebar.astro";
+import "../components/design-system/tokens.css";
+
+interface Props {
+    title: string;
+    description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<Layout title={title} description={description}>
+    <div class="ds-layout">
+        <Sidebar />
+        <main class="ds-content">
+            <div class="ds-content-inner">
+                <slot />
+            </div>
+        </main>
+    </div>
+</Layout>
+
+<style>
+    html {
+        scroll-behavior: smooth;
+    }
+
+    .ds-layout {
+        display: flex;
+        min-height: 100vh;
+        background: #fdfdfd;
+        font-family: var(--font-primary, sans-serif);
+    }
+
+    .ds-content {
+        flex: 1;
+        min-width: 0;
+        padding: 3rem 4rem;
+    }
+
+    .ds-content-inner {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    /* Global typography for DS content */
+    .ds-content :global(h1) {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        color: #102137;
+        line-height: 1.1;
+    }
+
+    .ds-content :global(p.ds-lead) {
+        font-size: 1.25rem;
+        color: #64748b;
+        margin-bottom: 3rem;
+        line-height: 1.6;
+        max-width: 800px;
+    }
+
+    .ds-content :global(h2) {
+        font-size: 2rem;
+        font-weight: 600;
+        margin: 3rem 0 1.5rem;
+        color: #1e293b;
+        border-bottom: 1px solid #f1f5f9;
+        padding-bottom: 0.5rem;
+    }
+
+    .ds-content :global(h3) {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 2rem 0 1rem;
+        color: #334155;
+    }
+
+    @media (max-width: 1024px) {
+        .ds-layout {
+            flex-direction: column;
+        }
+        .ds-content {
+            padding: 1.5rem;
+        }
+    }
+</style>

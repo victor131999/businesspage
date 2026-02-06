@@ -1,0 +1,186 @@
+---
+import DSLayout from "../../layouts/DSLayout.astro";
+
+// Design System components to show
+import ComponentPreview from "../../components/design-system/structure/ComponentPreview.astro";
+---
+
+<DSLayout
+    title="Overview - Zelify Design System"
+    description="Introduction to the Zelify design system, tokens, and phone frame."
+>
+    <h1>Overview</h1>
+    <p class="ds-lead">
+        Zelify's Design System is built on atomic design principles, providing a
+        collection of reusable components and tokens to ensure consistency
+        across the platform.
+    </p>
+
+    <section id="phone-frame">
+        <h2>iPhone Frame</h2>
+        <p>
+            The core visual element of the Product Showcase on the homepage. It
+            mimics an iPhone interface with dynamic island, status bars, and
+            bezel.
+        </p>
+
+        <ComponentPreview
+            title="Structure"
+            description="The frame is a CSS-based container with absolute positioning for internal elements."
+            code={`<div class="product-showcase__phone-frame">
+  <div class="phone-frame__notch"></div>
+  <div class="phone-frame__screen">
+    <!-- Screen content goes here -->
+  </div>
+</div>`}
+        >
+            <div
+                style="position: relative; width: 300px; height: 600px; border: 8px solid #1a1a1a; border-radius: 40px; background: #fff; margin: 0 auto; box-shadow: 0 20px 40px rgba(0,0,0,0.1);"
+            >
+                <div
+                    style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 100px; height: 25px; background: #000; border-radius: 20px;"
+                >
+                </div>
+                <div
+                    style="display: flex; align-items: center; justify-content: center; height: 100%; color: #94a3b8;"
+                >
+                    Screen Content
+                </div>
+            </div>
+        </ComponentPreview>
+
+        <h3>Measurements</h3>
+        <table
+            style="width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem;"
+        >
+            <thead>
+                <tr style="text-align: left; background: #f8fafc;">
+                    <th
+                        style="padding: 0.75rem; border-bottom: 2px solid #e2e8f0;"
+                        >Property</th
+                    >
+                    <th
+                        style="padding: 0.75rem; border-bottom: 2px solid #e2e8f0;"
+                        >Value</th
+                    >
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td
+                        style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;"
+                        >Width</td
+                    >
+                    <td
+                        style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;"
+                        ><code>clamp(260px, 25vw, 350px)</code></td
+                    >
+                </tr>
+                <tr>
+                    <td
+                        style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;"
+                        >Height</td
+                    >
+                    <td
+                        style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0;"
+                        ><code>680px</code></td
+                    >
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="breakpoints">
+        <h2>Breakpoints</h2>
+        <div
+            style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));"
+        >
+            <div
+                style="padding: 1rem; border: 1px solid #e2e8f0; border-radius: 8px; background: #fff;"
+            >
+                <strong
+                    style="display: block; font-size: 1.25rem; margin-bottom: 0.5rem; color: #3b82f6;"
+                    >xs</strong
+                >
+                <span style="color: #64748b;">0px — 479px</span>
+            </div>
+            <div
+                style="padding: 1rem; border: 1px solid #e2e8f0; border-radius: 8px; background: #fff;"
+            >
+                <strong
+                    style="display: block; font-size: 1.25rem; margin-bottom: 0.5rem; color: #3b82f6;"
+                    >sm</strong
+                >
+                <span style="color: #64748b;">480px — 639px</span>
+            </div>
+            <div
+                style="padding: 1rem; border: 1px solid #e2e8f0; border-radius: 8px; background: #fff;"
+            >
+                <strong
+                    style="display: block; font-size: 1.25rem; margin-bottom: 0.5rem; color: #3b82f6;"
+                    >md</strong
+                >
+                <span style="color: #64748b;">640px — 767px</span>
+            </div>
+            <div
+                style="padding: 1rem; border: 1px solid #e2e8f0; border-radius: 8px; background: #fff;"
+            >
+                <strong
+                    style="display: block; font-size: 1.25rem; margin-bottom: 0.5rem; color: #3b82f6;"
+                    >lg</strong
+                >
+                <span style="color: #64748b;">768px — 1023px</span>
+            </div>
+            <div
+                style="padding: 1rem; border: 1px solid #e2e8f0; border-radius: 8px; background: #fff;"
+            >
+                <strong
+                    style="display: block; font-size: 1.25rem; margin-bottom: 0.5rem; color: #3b82f6;"
+                    >xl</strong
+                >
+                <span style="color: #64748b;">1024px+</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="tokens">
+        <h2>Design Tokens</h2>
+        <p>Defined in <code>src/components/design-system/tokens.css</code>.</p>
+
+        <h3>Colors</h3>
+        <div
+            style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem;"
+        >
+            <div style="width: 100px;">
+                <div
+                    style="height: 60px; background: var(--ds-color-primary, #102137); border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);"
+                >
+                </div>
+                <code
+                    style="font-size: 0.75rem; display: block; margin-top: 0.5rem;"
+                    >primary</code
+                >
+            </div>
+            <div style="width: 100px;">
+                <div
+                    style="height: 60px; background: var(--ds-color-accent, #93fb4d); border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);"
+                >
+                </div>
+                <code
+                    style="font-size: 0.75rem; display: block; margin-top: 0.5rem;"
+                    >accent</code
+                >
+            </div>
+            <div style="width: 100px;">
+                <div
+                    style="height: 60px; background: var(--ds-color-text-body, #334155); border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);"
+                >
+                </div>
+                <code
+                    style="font-size: 0.75rem; display: block; margin-top: 0.5rem;"
+                    >text-body</code
+                >
+            </div>
+        </div>
+    </section>
+</DSLayout>

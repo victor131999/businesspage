@@ -1,0 +1,148 @@
+---
+interface Props {
+    title: string;
+    description?: string;
+    code?: string;
+}
+
+const { title, description, code } = Astro.props;
+---
+
+<div class="ds-preview-card">
+    <div class="ds-preview-header">
+        <h3 class="ds-preview-title">{title}</h3>
+        {description && <p class="ds-preview-desc">{description}</p>}
+    </div>
+
+    <div class="ds-preview-tabs">
+        <button class="ds-tab is-active" data-tab="preview">Preview</button>
+        <button class="ds-tab" data-tab="code">Code</button>
+    </div>
+
+    <div class="ds-preview-content">
+        <div class="ds-panel is-visible" data-panel="preview">
+            <div class="ds-canvas">
+                <slot />
+            </div>
+        </div>
+        <div class="ds-panel" data-panel="code">
+            <pre class="ds-code-block"><code>{code}</code></pre>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Simple tab logic for multiple instances on page
+    document.addEventListener("DOMContentLoaded", () => {
+        const cards = document.querySelectorAll(".ds-preview-card");
+
+        cards.forEach((card) => {
+            const tabs = card.querySelectorAll(".ds-tab");
+            const panels = card.querySelectorAll(".ds-panel");
+
+            tabs.forEach((tab) => {
+                tab.addEventListener("click", () => {
+                    // Deactivate all
+                    tabs.forEach((t) => t.classList.remove("is-active"));
+                    panels.forEach((p) => p.classList.remove("is-visible"));
+
+                    // Activate clicked
+                    tab.classList.add("is-active");
+                    const target = tab.getAttribute("data-tab");
+                    const panel = card.querySelector(
+                        `[data-panel="${target}"]`,
+                    );
+                    if (panel) panel.classList.add("is-visible");
+                });
+            });
+        });
+    });
+</script>
+
+<style>
+    .ds-preview-card {
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        background: #fff;
+        overflow: hidden;
+        margin-bottom: 2rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .ds-preview-header {
+        padding: 1.5rem;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .ds-preview-title {
+        margin: 0;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #1e293b;
+    }
+
+    .ds-preview-desc {
+        margin: 0.5rem 0 0;
+        color: #64748b;
+        font-size: 0.95rem;
+    }
+
+    .ds-preview-tabs {
+        display: flex;
+        background: #f8fafc;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .ds-tab {
+        padding: 0.75rem 1.5rem;
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid transparent;
+        color: #64748b;
+        font-weight: 500;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: all 0.2s;
+    }
+
+    .ds-tab:hover {
+        color: #1e293b;
+    }
+
+    .ds-tab.is-active {
+        color: #3b82f6;
+        border-bottom-color: #3b82f6;
+        background: #fff;
+    }
+
+    .ds-canvas {
+        padding: 2rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        align-items: center;
+        justify-content: center;
+        background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+        background-size: 20px 20px;
+        min-height: 150px;
+    }
+
+    .ds-code-block {
+        margin: 0;
+        padding: 1.5rem;
+        background: #1e293b;
+        color: #e2e8f0;
+        font-family: monospace;
+        font-size: 0.85rem;
+        overflow-x: auto;
+        white-space: pre-wrap;
+    }
+
+    .ds-panel {
+        display: none;
+    }
+
+    .ds-panel.is-visible {
+        display: block;
+    }
+</style>

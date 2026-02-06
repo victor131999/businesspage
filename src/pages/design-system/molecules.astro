@@ -1,0 +1,157 @@
+---
+import DSLayout from "../../layouts/DSLayout.astro";
+import ComponentPreview from "../../components/design-system/structure/ComponentPreview.astro";
+
+// Molecules
+import EmailQuoteForm from "../../components/design-system/molecules/EmailQuoteForm.astro";
+import CtaGroup from "../../components/design-system/molecules/CtaGroup.astro";
+import LoginFormCard from "../../components/design-system/molecules/LoginFormCard.astro";
+import Modal from "../../components/design-system/molecules/Modal.astro";
+import TabList from "../../components/design-system/molecules/TabList.astro";
+import UnderlineTabs from "../../components/design-system/molecules/UnderlineTabs.astro";
+import Title from "../../components/design-system/atoms/Title.astro";
+---
+
+<DSLayout
+    title="Molecules - Zelify Design System"
+    description="Combinations of atoms that form functional units."
+>
+    <h1>Molecules</h1>
+    <p class="ds-lead">
+        Molecules are groups of two or more atoms bonded together to be the
+        smallest fundamental unit of a compound that can take part in a chemical
+        reaction.
+    </p>
+
+    <section id="forms">
+        <h2>Forms & CTAs</h2>
+        <ComponentPreview
+            title="EmailQuoteForm"
+            description="Email capture form typically wrapped in a CTA group."
+            code={`<CtaGroup>
+  <EmailQuoteForm buttonLabel="Let's talk" />
+</CtaGroup>`}
+        >
+            <div
+                style="background: #f8f9fa; padding: 2rem; border-radius: 12px; display: flex; justify-content: center;"
+            >
+                <CtaGroup>
+                    <EmailQuoteForm buttonLabel="Let's talk" />
+                </CtaGroup>
+            </div>
+        </ComponentPreview>
+
+        <br />
+
+        <ComponentPreview
+            title="LoginFormCard"
+            description="Authentication card card with title, subtitle, and input fields."
+            code={`<LoginFormCard
+  title="Iniciar Sesión"
+  subtitle="Accede a tu cuenta"
+  submitLabel="Ingresa"
+  createAccountText="O crea una nueva cuenta"
+/>`}
+        >
+            <div style="max-width: 380px; margin: 0 auto;">
+                <LoginFormCard
+                    title="Iniciar Sesión"
+                    subtitle="Accede a tu cuenta"
+                    submitLabel="Ingresa"
+                    createAccountText="O crea una nueva cuenta"
+                />
+            </div>
+        </ComponentPreview>
+    </section>
+
+    <section id="navigation">
+        <h2>Navigation</h2>
+        <ComponentPreview
+            title="TabList"
+            description="Pill-style tabs for switching content views."
+            code={`<TabList
+  tabs={[
+    { value: "tab1", label: "Pestaña 1", active: true },
+    { value: "tab2", label: "Pestaña 2" }
+  ]}
+  dataAttr="data-demo-tab"
+/>`}
+        >
+            <TabList
+                tabs={[
+                    { value: "tab1", label: "Pestaña 1", active: true },
+                    { value: "tab2", label: "Pestaña 2" },
+                    { value: "tab3", label: "Pestaña 3" },
+                ]}
+                dataAttr="data-demo-tab"
+            />
+        </ComponentPreview>
+
+        <br />
+
+        <ComponentPreview
+            title="UnderlineTabs"
+            description="Minimalist tabs with an active underline indicator."
+            code={`<UnderlineTabs
+  name="demo-underline"
+  tabs={[
+    { value: "u1", label: "Bench 1", active: true },
+    { value: "u2", label: "Bench 2" }
+  ]}
+/>`}
+        >
+            <UnderlineTabs
+                name="demo-underline"
+                tabs={[
+                    { value: "u1", label: "Bench 1", active: true },
+                    { value: "u2", label: "Bench 2" },
+                    { value: "u3", label: "Bench 3" },
+                ]}
+            />
+        </ComponentPreview>
+    </section>
+
+    <section id="overlays">
+        <h2>Overlays</h2>
+        <ComponentPreview
+            title="Modal"
+            description="Dialog window that overlays the page content."
+            code={`<Modal id="demo-modal" ariaLabel="Demo">
+  <Title level={2} variant="card">Hello World</Title>
+</Modal>`}
+        >
+            <div>
+                <button
+                    onclick="document.getElementById('demo-modal').classList.add('is-active')"
+                    class="ds-button ds-button--primary"
+                >
+                    Open Demo Modal
+                </button>
+                <Modal
+                    id="demo-modal"
+                    ariaLabel="Demo Modal"
+                    closeAriaLabel="Cerrar modal"
+                >
+                    <div style="text-align: center;">
+                        <Title level={2} variant="card"
+                            >Hola desde el Modal</Title
+                        >
+                        <p
+                            style="color: var(--ds-color-text-muted); margin: 1rem 0;"
+                        >
+                            Este es un componente modal reutilizable. Interactúa
+                            con el botón de cerrar.
+                        </p>
+                        <div style="margin-top: 1.5rem;">
+                            <button
+                                class="ds-button ds-button--secondary"
+                                onclick="document.getElementById('close-button-demo-modal').click()"
+                                >Entendido</button
+                            >
+                        </div>
+                    </div>
+                </Modal>
+            </div>
+        </ComponentPreview>
+    </section>
+</DSLayout>
