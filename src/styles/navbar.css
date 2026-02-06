@@ -118,6 +118,7 @@
   grid-template-columns: 1fr;
   width: max-content;
   max-width: calc(100vw - 24px);
+  height: min(420px, calc(100vh - 120px));
 }
 
 .products-panel.products-panel--modules.hidden {
@@ -127,6 +128,9 @@
 .products-panel.products-panel--modules .pp-sidebar {
   border-top-right-radius: 22px;
   border-bottom-right-radius: 22px;
+  padding: 12px 10px;
+  gap: 4px;
+  height: 100%;
 }
 
 .products-panel.products-panel--modules .pp-content {
@@ -135,11 +139,56 @@
 
 .products-panel.products-panel--modules .pp-item {
   white-space: nowrap;
+  padding: 8px 14px;
+}
+
+.products-panel.products-panel--modules .pp-item.pp-module {
+  white-space: normal;
+  padding: 12px 16px;
+}
+
+.products-panel.products-panel--modules .pp-module-title {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #000;
+}
+
+.products-panel.products-panel--modules .pp-module-desc {
+  display: block;
+  margin-top: 4px;
+  max-width: 34ch;
+  font-size: 0.85rem;
+  line-height: 1.2rem;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.65);
 }
 
 .pp-item:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(149, 255, 11, 0.12);
   transform: translateX(4px);
+}
+
+.products-panel.products-panel--modules .pp-item:hover .pp-module-title {
+  color: #95ff0b;
+}
+
+.products-panel.products-panel--modules .pp-item:hover .pp-module-desc {
+  color: rgba(149, 255, 11, 0.72);
+}
+
+/* En modo módulos: sin "cuadro" en hover/active, solo tipografía */
+.products-panel.products-panel--modules .pp-item:hover {
+  background: transparent;
+}
+
+.products-panel.products-panel--modules .pp-item.is-active {
+  background: transparent;
+  color: inherit;
+}
+
+.products-panel.products-panel--modules .pp-item.is-active::after {
+  display: none;
 }
 
 .pp-item.is-active {
