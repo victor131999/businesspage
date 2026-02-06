@@ -56,12 +56,12 @@ const { class: className, tall = false } = Astro.props;
     padding: 0;
   }
 
-  /* Pantalla del dispositivo: altura fija */
+  /* Pantalla del dispositivo: misma altura que auth (660px) */
   .device-screen {
     position: relative;
-    height: 720px;
-    min-height: 720px;
-    max-height: 720px;
+    height: 660px;
+    min-height: 660px;
+    max-height: 660px;
     overflow: hidden;
     background: #ffffff;
     margin: 0;
@@ -69,11 +69,10 @@ const { class: className, tall = false } = Astro.props;
     flex-direction: column;
   }
 
-  /* Páginas de producto: dispositivo un poco más alto */
   .device-container--tall .device-screen {
-    height: 740px;
-    min-height: 740px;
-    max-height: 740px;
+    height: 660px;
+    min-height: 660px;
+    max-height: 660px;
   }
 
   /* Contenido Content Area */
