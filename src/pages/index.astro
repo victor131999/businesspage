@@ -699,7 +699,7 @@ const modulesList = [
       title="¿Cómo <br /> Funciona <br /> Zelify?"
       description="Zelify integra en una sola plataforma digital: autenticación y validación de identidad, cumplimiento AML, digitalización de cuentas, emisión y procesamiento de tarjetas, transferencias locales e internacionales, pagos múltiples, programas de descuentos y cupones."
       ctaHref="https://www.zelify.com/clips/"
-      ctaLabel="Demo"
+      ctaLabel="Demo Tour"
       mediaOnLeft={false}
       showPlayPause={true}
       playPauseId="how-it-works-play-btn"
@@ -730,7 +730,7 @@ const modulesList = [
       title="Cada producto,<br />potenciado<br />por IA."
       description="Operamos como un stack tecnológico neobancario con modelos entrenados para el sector financiero. Desde el monitoreo continuo hasta la optimización operativa, la IA es el núcleo con el cual revolucionamos los servicios financieros."
       ctaHref="https://www.zelify.com/clips/"
-      ctaLabel="Demo"
+      ctaLabel="Demo Tour"
       mediaOnLeft={true}
       showPlayPause={true}
       playPauseId="why-zelify-play-btn"
@@ -841,10 +841,10 @@ const modulesList = [
     </section>
 
     <TokensPanel
-      title="Tokens"
+      title="ZCoins"
       description="Zelify integra en una sola plataforma digital: autenticación y validación de identidad, cumplimiento AML, digitalización de cuentas, emisión y procesamiento de tarjetas, transferencias locales e internacionales, pagos múltiples, programas de descuentos y cupones."
       ctaHref="https://www.zelify.com/clips/"
-      ctaLabel="Demo"
+      ctaLabel="Demo Tour"
       showPlayPause={true}
       playPauseId="tokens-play-pause-btn"
       dataI18nTitle="home.tokens.title"
@@ -931,8 +931,13 @@ const modulesList = [
           Construye la banca del futuro,<br />
           potenciada por IA.
         </h2>
-        <Button href="/hablemos" variant="secondary" dataI18n="home.ai.quote">
-          hablemos
+        <Button
+          variant="secondary"
+          type="button"
+          dataI18n="home.ai.quote"
+          data-open-quote-modal
+        >
+          Hablemos
         </Button>
       </div>
     </section>
@@ -1154,19 +1159,21 @@ const modulesList = [
     }
   }
 
-  /* Posicionamiento del marco de teléfono (el bezel lo maneja DeviceFrame) */
+  /* Posicionamiento del marco de teléfono (tamaño fijo del DeviceFrame: 320×660) */
   .product-showcase__overlay-card.product-showcase__phone-frame {
     position: absolute;
     left: 50%;
     top: 45%;
-    height: 680px;
-    min-height: 680px;
+    width: 330px;
+    min-width: 330px;
+    height: 670px;
+    min-height: 670px;
     transform: translate(-50%, -50%);
-    width: clamp(260px, 25vw, 350px);
     z-index: 10;
     pointer-events: auto;
     display: flex;
     flex-direction: column;
+    align-items: center;
     overflow: visible;
   }
 
@@ -1587,7 +1594,7 @@ const modulesList = [
     margin-bottom: 1.5rem;
   }
 
-  /* Modal Cotizar (vacío) */
+  /* Modal Hablemos (vacío) */
   .quote-modal {
     position: fixed;
     inset: 0;
@@ -1739,7 +1746,7 @@ const modulesList = [
     opacity: 0.9;
   }
 
-  /* Solo overrides para el botón Cotizar dentro del form (átomo Button en EmailQuoteForm) */
+  /* Solo overrides para el botón Hablemos dentro del form (átomo Button en EmailQuoteForm) */
   .welcome-quote-button {
     margin: 1px;
     border-radius: 0 14px 14px 0;
@@ -3140,10 +3147,10 @@ const modulesList = [
         "home.bench.button": "Cards",
         "home.bench.tabLabel": "Borderless",
         "home.bench.cta": "Borderless",
-        "home.tokens.title": "Tokens",
+        "home.tokens.title": "ZCoins",
         "home.tokens.description":
-          "Controla el consumo y tus costos con total visibilidad. Monitorea tokens por usuario y por servicio, detecta picos y optimiza presupuesto con métricas claras y trazabilidad.",
-        "home.tokens.demo": "Demo",
+          "Créditos prepago que se consumen por uso real de la plataforma, permitiendo un modelo flexible, transparente y controlado.",
+        "home.tokens.demo": "Demo Tour",
         "home.action.products.title": "Our products in action",
         "home.action.products.auth": "Auth",
         "home.action.products.identity": "Identity",
@@ -3156,7 +3163,7 @@ const modulesList = [
         "home.how.title": "How Does<br />Zelify Work?",
         "home.how.description":
           "Zelify brings together an all-in-one financial platform that integrates digital identity, regulatory compliance, accounts, cards, local and international transfers, and payments. It also incorporates an AI-powered assistant that drives financial education and intelligent data analysis, enabling better and more informed decision-making.",
-        "home.how.demo": "Demo",
+        "home.how.demo": "Demo Tour",
         "home.how.login.title": "Login",
         "home.how.login.subtitle": "Welcome back",
         "home.how.login.email.label": "Email",
@@ -3170,7 +3177,7 @@ const modulesList = [
         "home.why.title": "Every product, powered <br />by AI.",
         "home.why.description":
           "We operate as a neobanking technology stack built with models trained specifically for the financial sector. From continuous monitoring to operational optimization, AI is the core engine through which we transform and modernize financial services.",
-        "home.why.demo": "Demo",
+        "home.why.demo": "Demo Tour",
 
         // Footer
         "footer.quicklinks": "Quick links",
@@ -3256,10 +3263,10 @@ const modulesList = [
         "home.bench.button": "Tarjetas",
         "home.bench.tabLabel": "Sin fronteras",
         "home.bench.cta": "Sin fronteras",
-        "home.tokens.title": "Tokens",
+        "home.tokens.title": "ZCoins",
         "home.tokens.description":
-          "Controla el consumo y tus costos con total visibilidad. Monitorea tokens por usuario y por servicio, detecta picos y optimiza presupuesto con métricas claras y trazabilidad.",
-        "home.tokens.demo": "Demo",
+          "Créditos prepago que se consumen por uso real de la plataforma, permitiendo un modelo flexible, transparente y controlado.",
+        "home.tokens.demo": "Demo Tour",
         "home.action.products.title": "Nuestros productos en acción",
         "home.action.products.auth": "Auth",
         "home.action.products.identity": "Identity",
@@ -3272,7 +3279,7 @@ const modulesList = [
         "home.how.title": "¿Cómo Funciona<br />Zelify?",
         "home.how.description":
           "Zelify integra en una plataforma financiera todo-en-uno: Identidad digital, cumplimiento normativo, cuentas, tarjetas, transferencias locales e internacionales y pagos. Además incorpora un asistente de IA que impulsa la educación financiera y el análisis inteligente de datos para una mejor toma de decisiones",
-        "home.how.demo": "Demo",
+        "home.how.demo": "Demo Tour",
         "home.how.login.title": "Ingreso",
         "home.how.login.subtitle": "Bienvenido de regreso",
         "home.how.login.email.label": "Correo",
@@ -3286,7 +3293,7 @@ const modulesList = [
         "home.why.title": "Cada producto, potenciado <br />por IA.",
         "home.why.description":
           "Operamos como un stack tecnológico neobancario con modelos entrenados para el sector financiero. Desde el monitoreo continuo hasta la optimización operativa, la IA es el núcleo con el cual revolucionamos los servicios financieros.",
-        "home.why.demo": "Demo",
+        "home.why.demo": "Demo Tour",
 
         // Footer
         "footer.quicklinks": "Enlaces rápidos",
@@ -3581,11 +3588,19 @@ const modulesList = [
       quoteModalOverlay.addEventListener("click", closeQuoteModal);
     }
 
-    if (!form) return;
+    if (form) {
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        openQuoteModal();
+      });
+    }
 
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      openQuoteModal();
+    // Botones "Hablemos" que abren el modal de cotización (ej. sección AI)
+    document.querySelectorAll("[data-open-quote-modal]").forEach((el) => {
+      el.addEventListener("click", (e) => {
+        e.preventDefault();
+        openQuoteModal();
+      });
     });
   })();
 </script>
