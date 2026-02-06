@@ -68,7 +68,7 @@ export const translations = {
     "products.register.sub": "Un producto que permite el registro inicial mediante correo electrónico y contraseña, garantizando la seguridad de acceso, trazabilidad y captura de datos del dispositivo para prevenir fraudes y conectar al usuario a un entorno confiable.",
     "products.identity.title": "Identidad",
     "products.identity.sub": "Verificación de identidad, prueba de vida y verificación de documentos para reducir el fraude y la fricción.",
-    "products.aml.title": "Cumplimiento AML",
+    "products.aml.title": "Prevención del lavado",
     "products.aml.sub": "Monitoreo en tiempo real, puntuación de riesgo y flujos de trabajo que ayudan a cumplir con las regulaciones.",
     "products.linking.title": "Open Banking / Conexión",
     "products.linking.sub": "Conecte cuentas de usuario de forma segura para habilitar el acceso a datos y la iniciación de pagos."
