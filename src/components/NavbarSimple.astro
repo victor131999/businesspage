@@ -500,28 +500,60 @@ import Button from "./design-system/atoms/Button.astro";
     const productsTrigger = document.querySelectorAll(
       "[data-products-trigger]",
     );
-    const productsPanel = document.getElementById("products-panel");
+	    const productsPanel = document.getElementById("products-panel");
 
-    if (productsTrigger.length > 0 && productsPanel) {
-      // Abrir panel (handle multiple triggers)
-      productsTrigger.forEach((trigger) => {
-        trigger.addEventListener("click", (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          productsPanel.classList.remove("hidden");
+	    if (productsTrigger.length > 0 && productsPanel) {
+	      const positionProductsPanel = (trigger) => {
+	        if (!trigger) return;
 
-          // Close mobile menu if open
-          const mobileMenu = document.getElementById("mobile-menu");
-          if (mobileMenu && mobileMenu.classList.contains("is-active")) {
-            mobileMenu.classList.remove("is-active");
-          }
-        });
-      });
+	        const rect = trigger.getBoundingClientRect();
+	        const gap = 10;
+	        const padding = 12;
 
-      // Cerrar panel al hacer clic fuera
-      document.addEventListener("click", (e) => {
-        const target = e.target;
-        // Check if click is inside panel or triggers
+	        productsPanel.style.position = "fixed";
+	        productsPanel.style.transform = "none";
+	        productsPanel.style.left = `${Math.round(rect.left)}px`;
+	        productsPanel.style.top = `${Math.round(rect.bottom + gap)}px`;
+
+	        // Clamp within viewport (needs dimensions after positioning)
+	        const panelRect = productsPanel.getBoundingClientRect();
+	        const maxLeft = window.innerWidth - panelRect.width - padding;
+	        const clampedLeft = Math.max(
+	          padding,
+	          Math.min(Math.round(rect.left), Math.round(maxLeft)),
+	        );
+	        productsPanel.style.left = `${clampedLeft}px`;
+	      };
+
+	      // Abrir panel (handle multiple triggers)
+	      productsTrigger.forEach((trigger) => {
+	        trigger.addEventListener("click", (e) => {
+	          e.preventDefault();
+	          e.stopPropagation();
+	          productsPanel.classList.remove("hidden");
+	          positionProductsPanel(trigger);
+
+	          // Close mobile menu if open
+	          const mobileMenu = document.getElementById("mobile-menu");
+	          if (mobileMenu && mobileMenu.classList.contains("is-active")) {
+	            mobileMenu.classList.remove("is-active");
+	          }
+	        });
+	      });
+
+	      // Reposicionar si cambia el viewport mientras está abierto
+	      const repositionIfOpen = () => {
+	        if (productsPanel.classList.contains("hidden")) return;
+	        const firstTrigger = productsTrigger[0];
+	        positionProductsPanel(firstTrigger);
+	      };
+
+	      window.addEventListener("resize", repositionIfOpen, { passive: true });
+
+	      // Cerrar panel al hacer clic fuera
+	      document.addEventListener("click", (e) => {
+	        const target = e.target;
+	        // Check if click is inside panel or triggers
         let isTrigger = false;
         productsTrigger.forEach((t) => {
           if (t.contains(target)) isTrigger = true;
@@ -534,21 +566,21 @@ import Button from "./design-system/atoms/Button.astro";
           !isTrigger &&
           !productsPanel.classList.contains("hidden")
         ) {
-          productsPanel.classList.add("hidden");
-        }
-      });
+	          productsPanel.classList.add("hidden");
+	        }
+	      });
 
-      // Cerrar panel con ESC
+	      // Cerrar panel con ESC
       document.addEventListener("keydown", (e) => {
         if (
           e.key === "Escape" &&
           productsPanel &&
           !productsPanel.classList.contains("hidden")
         ) {
-          productsPanel.classList.add("hidden");
-        }
-      });
-    }
+	          productsPanel.classList.add("hidden");
+	        }
+	      });
+	    }
 
     // Mobile Menu Logic
     const mobileToggle = document.getElementById("mobile-menu-toggle");
