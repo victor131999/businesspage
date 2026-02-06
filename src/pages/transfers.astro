@@ -3181,10 +3181,17 @@ import "../components/design-system/tokens.css";
         ctaButton: "Hablemos",
         demoButton: "Demo",
       },
+<<<<<<< Updated upstream
       viewSwitcher: {
         basicService: "Servicio Básico",
         transfers: "Transferencias",
         customKeys: "Claves Personalizadas",
+=======
+      navigation: {
+        basicService: "Servicios Básicos",
+        transfers: "Transferencias",
+        customKeys: "Llaves Personalizadas",
+>>>>>>> Stashed changes
       },
       security: {
         title: "Infraestructura de pagos<br />robusta e inteligente.",
@@ -3338,7 +3345,11 @@ import "../components/design-system/tokens.css";
         ctaButton: "Quote",
         demoButton: "Demo",
       },
+<<<<<<< Updated upstream
       viewSwitcher: {
+=======
+      navigation: {
+>>>>>>> Stashed changes
         basicService: "Basic Service",
         transfers: "Transfers",
         customKeys: "Custom Keys",
@@ -3512,6 +3523,7 @@ import "../components/design-system/tokens.css";
     const demoBtn = document.querySelector(".welcome-demo-button");
     if (demoBtn) demoBtn.textContent = t.hero.demoButton;
 
+<<<<<<< Updated upstream
     // View switcher (pestañas Basic Service / Transferencias / Custom Keys)
     const viewSwitcherBtns = document.querySelectorAll(".view-btn");
     if (t.viewSwitcher && viewSwitcherBtns.length >= 3) {
@@ -3521,6 +3533,17 @@ import "../components/design-system/tokens.css";
         if (t.viewSwitcher[key]) btn.textContent = t.viewSwitcher[key];
       });
     }
+=======
+    // Navigation Buttons
+    const navBasic = document.querySelector('.view-btn[data-target="basic-service"]');
+    if (navBasic) navBasic.textContent = t.navigation.basicService;
+
+    const navTransfers = document.querySelector('.view-btn[data-target="transfers"]');
+    if (navTransfers) navTransfers.textContent = t.navigation.transfers;
+
+    const navCustomKeys = document.querySelector('.view-btn[data-target="custom-keys"]');
+    if (navCustomKeys) navCustomKeys.textContent = t.navigation.customKeys;
+>>>>>>> Stashed changes
 
     // Security Section
     const secTitle = document.querySelector(".security-title");
