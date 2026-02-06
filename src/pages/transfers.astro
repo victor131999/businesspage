@@ -75,11 +75,9 @@ import "../components/design-system/tokens.css";
 
       <!-- Botones de Navegación (Transparentes) -->
       <div class="view-switcher">
-        <button class="view-btn active" data-target="basic-service"
-          >Basic Service</button
-        >
-        <button class="view-btn" data-target="transfers">Transfers</button>
-        <button class="view-btn" data-target="custom-keys">Custom Keys</button>
+        <button class="view-btn active" data-target="basic-service">Servicio Básico</button>
+        <button class="view-btn" data-target="transfers">Transferencias</button>
+        <button class="view-btn" data-target="custom-keys">Claves Personalizadas</button>
       </div>
 
       <!-- Contenedor de Vistas -->
@@ -182,8 +180,10 @@ import "../components/design-system/tokens.css";
             </div>
             <h3 class="feature-title">Conectividad Global</h3>
             <p class="feature-description">
-              Integración con SWIFT, ACH, SEPA y redes locales para
-              transferencias internacionales eficientes.
+              Es posible realizar transferencias interbancarias por mecanismos
+              como ACH, SPEI en México y SPI en Ecuador, además de integración
+              con SWIFT, ACH, SEPA y redes locales para transferencias
+              nacionales e internacionales eficientes.
             </p>
           </div>
 
@@ -301,7 +301,7 @@ import "../components/design-system/tokens.css";
                 </h3>
                 <ul class="control-feature-benefits">
                   <li>Cotización y tasas en tiempo real</li>
-                  <li>Conexión SWIFT, ACH, SEPA y local</li>
+                  <li>Transferencias interbancarias por ACH, SPEI (México), SPI (Ecuador), SWIFT, ACH, SEPA y redes locales</li>
                   <li>Liquidación instantánea interna</li>
                   <li>Validación previa de fondos (Quote)</li>
                   <li>Conciliación automática</li>
@@ -570,7 +570,7 @@ import "../components/design-system/tokens.css";
               <p>
                 Zelify Transfers & Payments permite realizar transferencias
                 internas instantáneas, envíos interbancarios nacionales e
-                internacionales (SWIFT, ACH, SEPA), pagos de servicios básicos y
+                internacionales (SWIFT, ACH, SEPA, SPEI en México, SPI en Ecuador), pagos de servicios básicos y
                 digitales, cobros mediante códigos QR dinámicos y la
                 automatización de pagos recurrentes para suscripciones.
               </p>
@@ -1072,12 +1072,16 @@ import "../components/design-system/tokens.css";
 
   .view-switcher {
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 0.75rem;
     z-index: 20;
     background: rgba(230, 230, 230, 0.3);
     padding: 0.25rem;
     border-radius: 999px;
     backdrop-filter: blur(8px);
+    width: 100%;
+    max-width: 100%;
   }
 
   .view-btn {
@@ -1090,6 +1094,9 @@ import "../components/design-system/tokens.css";
     color: #6b7280;
     cursor: pointer;
     transition: all 0.2s ease;
+    white-space: nowrap;
+    text-align: center;
+    flex: 0 1 auto;
   }
 
   .view-btn:hover {
@@ -3174,6 +3181,11 @@ import "../components/design-system/tokens.css";
         ctaButton: "Hablemos",
         demoButton: "Demo",
       },
+      viewSwitcher: {
+        basicService: "Servicio Básico",
+        transfers: "Transferencias",
+        customKeys: "Claves Personalizadas",
+      },
       security: {
         title: "Infraestructura de pagos<br />robusta e inteligente.",
         features: [
@@ -3187,7 +3199,7 @@ import "../components/design-system/tokens.css";
           },
           {
             title: "Conectividad Global",
-            desc: "Integración con SWIFT, ACH, SEPA y redes locales para transferencias internacionales eficientes.",
+            desc: "Es posible realizar transferencias interbancarias por mecanismos como ACH, SPEI en México y SPI en Ecuador.",
           },
           {
             title: "Pagos de Servicios",
@@ -3195,11 +3207,11 @@ import "../components/design-system/tokens.css";
           },
           {
             title: "Pagos con QR",
-            desc: "Generación y cobro inmediato mediante estándares QR estáticos y dinámicos (EMV).",
+            desc: "Conecta pagos y transferencias con códigos QRs estáticos y dinámicos.",
           },
           {
             title: "Control y Seguridad",
-            desc: "Límites transaccionales configurables, tokenización de llaves y notificaciones automáticas.",
+            desc: "Límites transaccionales configurables, configuración de medio pago como contactos.",
           },
         ],
       },
@@ -3212,7 +3224,7 @@ import "../components/design-system/tokens.css";
             backTitle: "Beneficios de Transferencias",
             benefits: [
               "Cotización y tasas en tiempo real",
-              "Conexión SWIFT, ACH, SEPA y local",
+              "Transferencias interbancarias por ACH, SPEI (México), SPI (Ecuador), SWIFT, ACH, SEPA y redes locales",
               "Liquidación instantánea interna",
               "Validación previa de fondos (Quote)",
               "Conciliación automática",
@@ -3280,7 +3292,7 @@ import "../components/design-system/tokens.css";
         items: [
           {
             q: "¿Qué tipos de movimientos financieros puedo realizar?",
-            a: "Zelify Transfers & Payments permite realizar transferencias internas instantáneas, envíos interbancarios nacionales e internacionales (SWIFT, ACH, SEPA), pagos de servicios básicos y digitales, cobros mediante códigos QR dinámicos y la automatización de pagos recurrentes para suscripciones.",
+            a: "Zelify Transfers & Payments permite realizar transferencias internas instantáneas, envíos interbancarios nacionales e internacionales (SWIFT, ACH, SEPA, SPEI en México, SPI en Ecuador), pagos de servicios básicos y digitales, cobros mediante códigos QR dinámicos y la automatización de pagos recurrentes para suscripciones.",
           },
           {
             q: "¿Cómo se aseguran de que una transferencia no falle?",
@@ -3326,6 +3338,11 @@ import "../components/design-system/tokens.css";
         ctaButton: "Quote",
         demoButton: "Demo",
       },
+      viewSwitcher: {
+        basicService: "Basic Service",
+        transfers: "Transfers",
+        customKeys: "Custom Keys",
+      },
       security: {
         title: "Robust and intelligent<br />payment infrastructure.",
         features: [
@@ -3339,7 +3356,7 @@ import "../components/design-system/tokens.css";
           },
           {
             title: "Global Connectivity",
-            desc: "Integration with SWIFT, ACH, SEPA and local networks for efficient international transfers.",
+            desc: "Interbank transfers via ACH, SPEI in Mexico, SPI in Ecuador, plus integration with SWIFT, ACH, SEPA and local networks for efficient national and international transfers.",
           },
           {
             title: "Service Payments",
@@ -3364,7 +3381,7 @@ import "../components/design-system/tokens.css";
             backTitle: "Transfer Benefits",
             benefits: [
               "Real-time quotes and rates",
-              "SWIFT, ACH, SEPA and local connection",
+              "Interbank transfers via ACH, SPEI (Mexico), SPI (Ecuador), SWIFT, ACH, SEPA and local networks",
               "Instant internal settlement",
               "Pre-validation of funds (Quote)",
               "Automatic reconciliation",
@@ -3432,7 +3449,7 @@ import "../components/design-system/tokens.css";
         items: [
           {
             q: "What types of financial movements can I make?",
-            a: "Zelify Transfers & Payments allows you to make instant internal transfers, national and international interbank transfers (SWIFT, ACH, SEPA), basic and digital service payments, collections through dynamic QR codes, and automation of recurring payments for subscriptions.",
+            a: "Zelify Transfers & Payments allows you to make instant internal transfers, national and international interbank transfers (SWIFT, ACH, SEPA, SPEI in Mexico, SPI in Ecuador), basic and digital service payments, collections through dynamic QR codes, and automation of recurring payments for subscriptions.",
           },
           {
             q: "How do you ensure that a transfer doesn't fail?",
@@ -3494,6 +3511,16 @@ import "../components/design-system/tokens.css";
 
     const demoBtn = document.querySelector(".welcome-demo-button");
     if (demoBtn) demoBtn.textContent = t.hero.demoButton;
+
+    // View switcher (pestañas Basic Service / Transferencias / Custom Keys)
+    const viewSwitcherBtns = document.querySelectorAll(".view-btn");
+    if (t.viewSwitcher && viewSwitcherBtns.length >= 3) {
+      const targets = ["basic-service", "transfers", "custom-keys"];
+      viewSwitcherBtns.forEach((btn, i) => {
+        const key = i === 0 ? "basicService" : i === 1 ? "transfers" : "customKeys";
+        if (t.viewSwitcher[key]) btn.textContent = t.viewSwitcher[key];
+      });
+    }
 
     // Security Section
     const secTitle = document.querySelector(".security-title");
