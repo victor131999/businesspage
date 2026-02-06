@@ -50,45 +50,70 @@ const {
 } = Astro.props;
 ---
 
-<section class:list={["ds-side-by-side-panel", sectionGap, className, mediaOnLeft && "ds-side-by-side-panel--media-left"]}>
-  <div class="ds-side-by-side-panel__divider" aria-hidden="true" />
+<section
+  class:list={[
+    "ds-side-by-side-panel",
+    sectionGap,
+    className,
+    mediaOnLeft && "ds-side-by-side-panel--media-left",
+  ]}
+>
+  <!-- Absolute divider removed -->
   <div class="ds-side-by-side-panel__grid">
     <div class="ds-side-by-side-panel__copy">
-      <Title level={2} variant="section" class="ds-side-by-side-panel__title" dataI18n={dataI18nTitle}>
+      <Title
+        level={2}
+        variant="section"
+        class="ds-side-by-side-panel__title"
+        dataI18n={dataI18nTitle}
+      >
         <span set:html={title} />
       </Title>
-      <div class="ds-side-by-side-panel__line" aria-hidden="true" />
-      <Text variant="body" class="ds-side-by-side-panel__description" dataI18n={dataI18nDescription}>
+
+      <!-- Flow-based divider wrapper (preserves vertical space, isolates horizontal width) -->
+      <div class="ds-side-by-side-panel__line-wrapper" aria-hidden="true">
+        <div class="ds-side-by-side-panel__line"></div>
+      </div>
+
+      <Text
+        variant="body"
+        class="ds-side-by-side-panel__description"
+        dataI18n={dataI18nDescription}
+      >
         {description}
       </Text>
-      {ctaHref && (
-        <Button
-          href={ctaHref}
-          variant="secondary"
-          class="ds-side-by-side-panel__cta"
-          dataI18n={dataI18nCta}
-        >
-          {ctaLabel}
-        </Button>
-      )}
+      {
+        ctaHref && (
+          <Button
+            href={ctaHref}
+            variant="secondary"
+            class="ds-side-by-side-panel__cta"
+            dataI18n={dataI18nCta}
+          >
+            {ctaLabel}
+          </Button>
+        )
+      }
     </div>
     <div class="ds-side-by-side-panel__media">
       <div class="ds-side-by-side-panel__placeholder">
         <div class="ds-side-by-side-panel__card">
           <slot />
         </div>
-        {showPlayPause && (
-          <Button
-            type="button"
-            variant="icon"
-            id={playPauseId}
-            class="ds-side-by-side-panel__play"
-            ariaLabel="Reproducir"
-            title="Reproducir / Pausar"
-          >
-            <img src="/icons/play.svg" alt="" width="32" height="32" />
-          </Button>
-        )}
+        {
+          showPlayPause && (
+            <Button
+              type="button"
+              variant="icon"
+              id={playPauseId}
+              class="ds-side-by-side-panel__play"
+              ariaLabel="Reproducir"
+              title="Reproducir / Pausar"
+            >
+              <img src="/icons/play.svg" alt="" width="32" height="32" />
+            </Button>
+          )
+        }
       </div>
     </div>
   </div>
@@ -103,21 +128,10 @@ const {
     display: flex;
     justify-content: center;
     position: relative;
-    overflow: hidden;
+    overflow: hidden; /* Clips the super-wide line */
   }
 
-  .ds-side-by-side-panel__divider {
-    position: absolute;
-    top: 46.5%;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background-color: #154091;
-    z-index: 1;
-    transform: translateY(-50%);
-    margin-left: 140px;
-    margin-right: 140px;
-  }
+  /* .ds-side-by-side-panel__divider removed */
 
   .ds-side-by-side-panel__grid {
     max-width: 1300px;
@@ -150,7 +164,7 @@ const {
   .ds-side-by-side-panel__copy {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    /* gap removed to handle spacing via margins on the line-wrapper */
     align-items: flex-start;
   }
 
@@ -164,6 +178,36 @@ const {
     max-width: 520px;
   }
 
+  /* Flow-based line wrapper */
+  .ds-side-by-side-panel__line-wrapper {
+    position: relative;
+    width: 100%;
+    height: 1px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  /* The actual line: absolute so it doesn't force parent width expansion */
+  .ds-side-by-side-panel__line {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200vw; /* Spans "infinitely" */
+    height: 100%;
+    background-color: #154091;
+    opacity: 1;
+  }
+
+  /* Adjust line for Right Aligned copy */
+  .ds-side-by-side-panel--media-left .ds-side-by-side-panel__line-wrapper {
+    /* With absolute positioning, the line itself is centered.
+       The wrapper's alignment within the flex container (ds-side-by-side-panel__copy)
+       will determine its position.
+       Since ds-side-by-side-panel__copy has alignItems: flex-end for media-left,
+       the wrapper will align to the right.
+    */
+  }
 
   .ds-side-by-side-panel__description {
     font-size: clamp(1rem, 1.4vw, 1.25rem);
@@ -173,7 +217,7 @@ const {
     max-width: 440px;
     font-weight: 300;
     opacity: 0.9;
-    margin-top: 1rem;
+    /* margin-top managed by line-wrapper margin-bottom */
   }
 
   .ds-side-by-side-panel__media {
@@ -196,6 +240,7 @@ const {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    z-index: 5; /* Ensure media sits ON TOP of the line if it crosses */
   }
 
   .ds-side-by-side-panel__placeholder :global(.ds-login-card),
@@ -244,10 +289,7 @@ const {
   }
 
   @media (max-width: 900px) {
-    .ds-side-by-side-panel__divider {
-      margin-left: 2rem;
-      margin-right: 2rem;
-    }
+    /* Divider removed, so no media query needed for it */
 
     .ds-side-by-side-panel__grid {
       grid-template-columns: 1fr;
@@ -274,6 +316,18 @@ const {
     .ds-side-by-side-panel__line {
       margin-left: auto;
       margin-right: auto;
+      width: 100%; /* In mobile, just span the container or a bit more if needed */
+      max-width: 300px; /* Optional: limit width on mobile for cleaner look? User didn't specify, but full width looks weird on center align. */
+      /* User said "cross to the other side" which usually implies desktop. 
+         For mobile, a small centered divider is usually better. 
+         Let's try a fixed width or percentage for mobile.
+      */
+      width: 100vw;
+      margin-left: -50vw;
+      /* Actually center it relative to the flex center */
+      left: 50%;
+      transform: translateX(-50%);
+      margin-left: 0;
     }
 
     .ds-side-by-side-panel__description {
