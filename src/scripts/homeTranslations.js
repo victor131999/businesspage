@@ -45,7 +45,7 @@ export const homeTranslations = {
     "home.welcome.subtitle": "Digitalizamos servicios a instituciones financieras,<br />construyendo stacks neobancarios con una sola línea de código.",
     "home.welcome.email.placeholder": "Ingresa tu correo",
     "home.welcome.email.aria": "Ingresa tu correo",
-    "home.welcome.quote": "Cotizar",
+    "home.welcome.quote": "Hablemos",
     "home.welcome.demo": "Demo",
     "home.welcome.quote.aria": "Solicitar cotización",
 
@@ -68,7 +68,7 @@ export const homeTranslations = {
     // AI Section
     "home.ai.title.line1": "Construye la banca del futuro,",
     "home.ai.title.line2": "potenciada por IA.",
-    "home.ai.quote": "Cotizar",
+    "home.ai.quote": "Hablemos",
   }
 };
 
