@@ -34,6 +34,7 @@ export function AuthCard({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) 
     const [registerStep, setRegisterStep] = useState(1);
     const [otpStatus, setOtpStatus] = useState<'idle' | 'verifying' | 'success' | 'error'>('idle');
     const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
+    const [showLoginError, setShowLoginError] = useState(false);
 
     // Theme configuration (matches the blue theme from config)
     const themeColor = "#004492";
@@ -396,7 +397,7 @@ export function AuthCard({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) 
                             placeholder={t.preview.emailPlaceholder}
                             className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm outline-none focus:border-[#004492] focus:ring-1 focus:ring-[#004492]/20"
                             value={formData.email}
-                            readOnly
+                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         />
                     </div>
                     <div>
@@ -408,15 +409,17 @@ export function AuthCard({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) 
                             placeholder="••••••••"
                             className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm outline-none focus:border-[#004492] focus:ring-1 focus:ring-[#004492]/20"
                             value={formData.password}
-                            readOnly
+                            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                         />
                     </div>
 
                     <button
+                        type="button"
                         className="group relative w-full overflow-hidden rounded-xl px-4 py-3 text-sm font-medium text-white transition-all hover:opacity-90 active:scale-[0.98]"
                         style={{
                             background: `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
                         }}
+                        onClick={() => setShowLoginError(true)}
                     >
                         <span className="relative z-10 flex items-center justify-center gap-2">
                             {t.preview.signInButton}
@@ -425,6 +428,12 @@ export function AuthCard({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) 
                             </svg>
                         </span>
                     </button>
+
+                    {showLoginError && (
+                        <p className="text-center text-sm font-medium text-red-500 mt-1.5">
+                            {t.preview.accountNotRegistered}
+                        </p>
+                    )}
 
                     <div className="pt-2">
                         <div className="relative mb-3 flex items-center justify-center">
