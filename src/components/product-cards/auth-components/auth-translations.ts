@@ -14,6 +14,7 @@ export const AUTH_TRANSLATIONS = {
             emailPlaceholder: "email@example.com",
             passwordLabel: "Password",
             signInButton: "Sign In",
+            accountNotRegistered: "Account not registered",
             registerTitle: "Create Account",
             registerButton: "Create Account",
             // Registration flow
@@ -78,6 +79,7 @@ export const AUTH_TRANSLATIONS = {
             emailPlaceholder: "correo@ejemplo.com",
             passwordLabel: "Contraseña",
             signInButton: "Iniciar sesión",
+            accountNotRegistered: "Cuenta no registrada",
             registerTitle: "Crear cuenta",
             registerButton: "Crear cuenta",
             // Registration flow
