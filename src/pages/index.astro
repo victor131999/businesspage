@@ -114,7 +114,7 @@ const modulesList = [
     label: "Discounts",
     titleStrong: "Descuentos y Beneficios",
     titleAccent: "",
-    copy: "Reglas de beneficios y promociones. Gestiona campañas de lealtad y cupones.",
+    copy: "Gestión de descuentos en una sola plataforma.",
     cta: "Explorar Discounts",
     href: "/discounts",
   },
@@ -123,7 +123,7 @@ const modulesList = [
     label: "Alaiza Fintech AI Core",
     titleStrong: "IA Financiera",
     titleAccent: "",
-    copy: "Inteligencia artificial para decisiones rápidas, prevención de fraudes y análisis de datos.",
+    copy: "Inteligencia artificial para atención al cliente, notificaciones y recomendaciones del comportamiento transaccional y educación financiera. ",
     cta: "Explora Alaiza",
     href: "/alaiza",
   },
@@ -788,7 +788,7 @@ const modulesList = [
                 >Tarjetas internacionales al instante</Title
               >
               <Text variant="body" class="bench-panel-text">
-                Emite tarjetas y personalízalas de forma inmediata y sin
+                Emite, procesa tarjetas y personalízalas de forma inmediata y sin
                 fronteras, listas para usarse en compras y pagos a nivel global.
               </Text>
             </div>
@@ -3138,6 +3138,8 @@ const modulesList = [
         "home.bench.subtitle":
           "and scale without friction with the lowest prices in the market.",
         "home.bench.button": "Cards",
+        "home.bench.tabLabel": "Borderless",
+        "home.bench.cta": "Borderless",
         "home.tokens.title": "Tokens",
         "home.tokens.description":
           "Controla el consumo y tus costos con total visibilidad. Monitorea tokens por usuario y por servicio, detecta picos y optimiza presupuesto con métricas claras y trazabilidad.",
@@ -3228,7 +3230,7 @@ const modulesList = [
         "modules.discounts.titleStrong": "Discounts and",
         "modules.discounts.titleAccent": "<br />Benefits",
         "modules.discounts.copy":
-          "Reglas de beneficios y promociones. Gestiona campañas de lealtad y cupones.",
+          "Gestión de descuentos en una sola plataforma.",
         "modules.discounts.cta": "View Discounts",
         "modules.alaiza.label": "Alaiza Fintech AI Core",
         "modules.alaiza.titleStrong": "Financial AI",
@@ -3252,6 +3254,8 @@ const modulesList = [
         "home.bench.subtitle":
           "y escala sin fricción con los precios más bajos del mercado.",
         "home.bench.button": "Tarjetas",
+        "home.bench.tabLabel": "Sin fronteras",
+        "home.bench.cta": "Sin fronteras",
         "home.tokens.title": "Tokens",
         "home.tokens.description":
           "Controla el consumo y tus costos con total visibilidad. Monitorea tokens por usuario y por servicio, detecta picos y optimiza presupuesto con métricas claras y trazabilidad.",
@@ -3342,13 +3346,13 @@ const modulesList = [
         "modules.discounts.titleStrong": "Descuentos y",
         "modules.discounts.titleAccent": "<br />Beneficios",
         "modules.discounts.copy":
-          "Reglas de beneficios y promociones. Gestiona campañas de lealtad y cupones.",
+          "Gestión de descuentos en una sola plataforma.",
         "modules.discounts.cta": "Explorar Discounts",
         "modules.alaiza.label": "Alaiza Fintech AI Core",
         "modules.alaiza.titleStrong": "IA Financiera",
         "modules.alaiza.titleAccent": "",
         "modules.alaiza.copy":
-          "Inteligencia artificial para decisiones rápidas, prevención de fraudes y análisis de datos.",
+          "Inteligencia artificial para atención al cliente, notificaciones y recomendaciones del comportamiento transaccional y educación financiera. ",
         "modules.alaiza.cta": "Explora Alaiza",
       },
     };
@@ -3457,6 +3461,22 @@ const modulesList = [
           }
         }
       });
+
+      // Sección bench (tarjetas): pestaña y botón CTA "Borderless" / "Sin fronteras"
+      const benchSection = document.querySelector(".bench-section .ds-card-tabs");
+      if (benchSection) {
+        const tabLabel = translations["home.bench.tabLabel"];
+        const ctaLabel = translations["home.bench.cta"];
+        if (tabLabel) {
+          benchSection.querySelectorAll('[role="tab"]').forEach((tab) => {
+            tab.textContent = tabLabel;
+          });
+        }
+        if (ctaLabel) {
+          const ctaBtn = benchSection.querySelector(".ds-card-tabs__cta");
+          if (ctaBtn) ctaBtn.textContent = ctaLabel;
+        }
+      }
     }
 
     // Función para aplicar traducciones
