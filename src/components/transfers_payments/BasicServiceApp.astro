@@ -217,7 +217,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
     min-height: 0;
     background: #ffffff;
     padding: 1rem 1.25rem;
-    overflow-y: auto;
+    overflow-y: hidden; /* Changed from auto to hidden */
     overflow-x: hidden;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
@@ -438,7 +438,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
 
   /* Bottom Sheet Stacking */
   .bs-bottom-sheet-container {
-    height: 144px; /* Significantly increased to match fan effect */
+    height: 120px; /* Reduced from 144px to prevent scrollbar */
     position: relative;
     width: 100%;
     margin-top: auto;
