@@ -19,7 +19,7 @@ export const homeTranslations = {
     // Tokens Section
     "home.tokens.title": "Tokens",
     "home.tokens.description": "Zelify integrates into a single digital platform: authentication and identity validation, AML compliance, account digitization, card issuance and processing, local and international transfers, multiple payments, discount and coupon programs.",
-    "home.tokens.demo": "Demo",
+    "home.tokens.demo": "Demo Tour",
 
     // Action Products Section
     "home.action.products.title": "Our products in action",
@@ -57,7 +57,7 @@ export const homeTranslations = {
     // Tokens Section
     "home.tokens.title": "Tokens",
     "home.tokens.description": "Zelify integra en una sola plataforma digital: autenticación y validación de identidad, cumplimiento AML, digitalización de cuentas, emisión y procesamiento de tarjetas, transferencias locales e internacionales, pagos múltiples, programas de descuentos y cupones.",
-    "home.tokens.demo": "Demo",
+    "home.tokens.demo": "Demo Tour",
 
     // Action Products Section
     "home.action.products.title": "Nuestros productos en acción",
