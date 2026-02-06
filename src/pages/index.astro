@@ -709,7 +709,21 @@ const modulesList = [
       dataI18nDescription="home.how.description"
       dataI18nCta="home.how.demo"
     >
-      <!-- Contenido dentro de la tarjeta blanca: video, formulario, imagen, etc. -->
+      <div class="how-it-works-video-wrap">
+        <video
+          id="how-it-works-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+        >
+          <source
+            src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/HowZelifyWorks.mp4"
+            type="video/mp4"
+          />
+        </video>
+      </div>
     </SideBySidePanel>
 
     <SideBySidePanel
@@ -1687,6 +1701,22 @@ const modulesList = [
       margin-top: 400px !important;
       padding-top: 3rem;
     }
+  }
+
+  /* Recorta el video a esquinas redondeadas (evita esquinas negras) */
+  .how-it-works-video-wrap {
+    width: 100%;
+    min-height: 320px;
+    border-radius: 5px;
+    overflow: hidden;
+    display: block;
+  }
+  .how-it-works-video-wrap video {
+    width: 100%;
+    height: 100%;
+    min-height: 320px;
+    object-fit: cover;
+    display: block;
   }
 
   .how-it-works-divider {
