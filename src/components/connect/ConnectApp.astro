@@ -63,8 +63,8 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
               <!-- Bank Stack -->
               <div
                 id="banks-stack-container"
-                class="relative flex flex-col items-center justify-center flex-1 w-full"
-                style="isolation: isolate; min-height: 400px;"
+                class="relative flex flex-col items-center justify-start w-full mt-2"
+                style="isolation: isolate;"
               >
                 <!-- BBVA -->
                 <div
@@ -432,57 +432,94 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
             id="screen-transfer-loading"
             class="connect-screen hidden-screen"
           >
-             <!-- Using Step10Launching design -->
-             <div class="flex-1 px-6 pb-6 pt-2 flex flex-col items-center justify-center min-h-0 h-full">
-                <!-- Card Container -->
-                <div class="relative w-full h-[80%] rounded-[2.5rem] overflow-hidden shadow-xl bg-[#001a33]">
-                   
-                   <!-- Base Layer -->
-                   <div class="absolute inset-0 z-10 flex flex-col items-center justify-center h-full px-6 text-center w-full">
-                      <h2 class="text-2xl font-bold mb-2 text-[#003366]">Transferring funds</h2>
-                      <p class="text-xs text-gray-400">Please wait</p>
-                      <div class="w-64 h-2 rounded-full mt-8 overflow-hidden bg-gray-200">
-                         <!-- Empty bar base -->
-                      </div>
-                   </div>
-
-                   <!-- Overlay Layer (Clipped) -->
-                   <div id="transfer-loading-overlay" class="absolute inset-0 z-20 overflow-hidden" 
-                        style="clip-path: inset(0 100% 0 0); transition: clip-path 3s linear;">
-                      <div class="w-full h-full flex flex-col items-center justify-center px-6 text-center"
-                           style="background: linear-gradient(to right, #004492 0%, #000b1e 100%);">
-                         <h2 class="text-2xl font-bold mb-2 text-white">Transferring funds</h2>
-                         <p class="text-xs text-white/80">Please wait</p>
-                         <div class="w-64 h-2 rounded-full mt-8 overflow-hidden bg-white/20">
-                            <div class="h-full w-full bg-white"></div>
-                         </div>
-                      </div>
-                   </div>
-
-                   <!-- Flush Edge Effect -->
-                   <div id="transfer-flush-effect" class="absolute top-0 bottom-0 w-20 z-20 pointer-events-none"
-                        style="left: 0%; background: linear-gradient(to right, transparent, rgba(255,255,255,0.5), transparent); transform: translateX(-50%); transition: left 3s linear;">
-                   </div>
-
+            <!-- Using Step10Launching design -->
+            <div
+              class="flex-1 px-6 pb-6 pt-2 flex flex-col items-center justify-center min-h-0 h-full"
+            >
+              <!-- Card Container -->
+              <div
+                class="relative w-full h-[80%] rounded-[2.5rem] overflow-hidden shadow-xl bg-[#001a33]"
+              >
+                <!-- Base Layer -->
+                <div
+                  class="absolute inset-0 z-10 flex flex-col items-center justify-center h-full px-6 text-center w-full"
+                >
+                  <h2 class="text-2xl font-bold mb-2 text-[#003366]">
+                    Transferring funds
+                  </h2>
+                  <p class="text-xs text-gray-400">Please wait</p>
+                  <div
+                    class="w-64 h-2 rounded-full mt-8 overflow-hidden bg-gray-200"
+                  >
+                    <!-- Empty bar base -->
+                  </div>
                 </div>
-             </div>
+
+                <!-- Overlay Layer (Clipped) -->
+                <div
+                  id="transfer-loading-overlay"
+                  class="absolute inset-0 z-20 overflow-hidden"
+                  style="clip-path: inset(0 100% 0 0); transition: clip-path 3s linear;"
+                >
+                  <div
+                    class="w-full h-full flex flex-col items-center justify-center px-6 text-center"
+                    style="background: linear-gradient(to right, #004492 0%, #000b1e 100%);"
+                  >
+                    <h2 class="text-2xl font-bold mb-2 text-white">
+                      Transferring funds
+                    </h2>
+                    <p class="text-xs text-white/80">Please wait</p>
+                    <div
+                      class="w-64 h-2 rounded-full mt-8 overflow-hidden bg-white/20"
+                    >
+                      <div class="h-full w-full bg-white"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Flush Edge Effect -->
+                <div
+                  id="transfer-flush-effect"
+                  class="absolute top-0 bottom-0 w-20 z-20 pointer-events-none"
+                  style="left: 0%; background: linear-gradient(to right, transparent, rgba(255,255,255,0.5), transparent); transform: translateX(-50%); transition: left 3s linear;"
+                >
+                </div>
+              </div>
+            </div>
           </div>
 
           <!-- SCREEN 7: SUCCESS -->
           <div id="screen-success" class="connect-screen hidden-screen">
-             <!-- Using Step11Success design -->
-             <div class="flex-1 px-6 pb-6 pt-2 flex flex-col items-center justify-center min-h-0 h-full">
-                <div class="w-full h-[80%] rounded-[2.5rem] flex flex-col items-center justify-center p-6 text-center shadow-xl"
-                     style="background: linear-gradient(to bottom, #004492, #000b1e);">
-                   <div class="mb-6">
-                      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-                         <polyline points="20 6 9 17 4 12"></polyline>
-                      </svg>
-                   </div>
-                   <h2 class="text-2xl font-bold text-white mb-2">Funds Deposited</h2>
-                   <p class="text-gray-300 text-xs">Your transfer was successful</p>
+            <!-- Using Step11Success design -->
+            <div
+              class="flex-1 px-6 pb-6 pt-2 flex flex-col items-center justify-center min-h-0 h-full"
+            >
+              <div
+                class="w-full h-[80%] rounded-[2.5rem] flex flex-col items-center justify-center p-6 text-center shadow-xl"
+                style="background: linear-gradient(to bottom, #004492, #000b1e);"
+              >
+                <div class="mb-6">
+                  <svg
+                    width="64"
+                    height="64"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
                 </div>
-             </div>
+                <h2 class="text-2xl font-bold text-white mb-2">
+                  Funds Deposited
+                </h2>
+                <p class="text-gray-300 text-xs">
+                  Your transfer was successful
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -519,8 +556,8 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
     flex: 1;
     min-height: 0;
     background: #ffffff;
-    padding: 1rem 1.25rem;
-    overflow-y: auto;
+    padding: 0;
+    overflow-y: hidden;
     overflow-x: hidden;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
