@@ -868,7 +868,9 @@ import "../styles/navbar.css";
 
   const detectBrowserLanguage = () => {
     const locale =
-      (navigator.languages && navigator.languages[0]) || navigator.language || "";
+      (navigator.languages && navigator.languages[0]) ||
+      navigator.language ||
+      "";
     return locale.toLowerCase().startsWith("es") ? "ES" : "EN";
   };
 
@@ -1038,15 +1040,15 @@ import "../styles/navbar.css";
 
       // Matilda icons
       case "behaviorAnalysis":
-        return `<img src="/icons/matilda/behaviorAnalysis.svg" alt="Behavior Analysis icon" />`;
+        return `<img src="/icons/alaiza/behaviorAnalysis.svg" alt="Behavior Analysis icon" />`;
       case "smartSupportChat":
-        return `<img src="/icons/matilda/smartSupportChat.svg" alt="Smart Support Chat icon" />`;
+        return `<img src="/icons/alaiza/smartSupportChat.svg" alt="Smart Support Chat icon" />`;
       case "contentMarketing":
-        return `<img src="/icons/matilda/contentMarketing.svg" alt="Content Marketing icon" />`;
+        return `<img src="/icons/alaiza/contentMarketing.svg" alt="Content Marketing icon" />`;
       case "personalFinance":
-        return `<img src="/icons/matilda/personalFinance.svg" alt="Personal Finance icon" />`;
+        return `<img src="/icons/alaiza/personalFinance.svg" alt="Personal Finance icon" />`;
       case "promptBasedReporting":
-        return `<img src="/icons/matilda/promptBasedReporting.svg" alt="Prompt-Based Reporting icon" />`;
+        return `<img src="/icons/alaiza/promptBasedReporting.svg" alt="Prompt-Based Reporting icon" />`;
 
       default:
         return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg>`;

@@ -1,0 +1,88 @@
+---
+interface Props {
+    size?: "sm" | "md" | "lg";
+    color?: "primary" | "accent" | "white" | "current";
+    class?: string;
+}
+
+const { size = "md", color = "primary", class: className } = Astro.props;
+---
+
+<div
+    class:list={[
+        "ds-spinner",
+        `ds-spinner--${size}`,
+        `ds-spinner--${color}`,
+        className,
+    ]}
+    role="status"
+    aria-label="Cargando"
+>
+    <span class="sr-only">Cargando...</span>
+</div>
+
+<style>
+    .ds-spinner {
+        display: inline-block;
+        border-radius: 50%;
+        border-style: solid;
+        border-color: transparent;
+        border-top-color: currentColor;
+        border-right-color: currentColor;
+        animation: ds-spin 0.75s linear infinite;
+    }
+
+    @keyframes ds-spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    /* Sizes */
+    .ds-spinner--sm {
+        width: 1rem;
+        height: 1rem;
+        border-width: 2px;
+    }
+
+    .ds-spinner--md {
+        width: 1.5rem;
+        height: 1.5rem;
+        border-width: 2px;
+    }
+
+    .ds-spinner--lg {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-width: 3px;
+    }
+
+    /* Colors */
+    .ds-spinner--primary {
+        color: var(--ds-color-primary, #102137);
+    }
+
+    .ds-spinner--accent {
+        color: var(--ds-color-accent, #93fb4d);
+    }
+
+    .ds-spinner--white {
+        color: #ffffff;
+    }
+
+    .ds-spinner--current {
+        color: currentColor;
+    }
+
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+    }
+</style>

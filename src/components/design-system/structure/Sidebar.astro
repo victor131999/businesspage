@@ -1,0 +1,143 @@
+---
+const pathname = new URL(Astro.request.url).pathname;
+
+const navGroups = [
+    {
+        title: "Getting Started",
+        items: [
+            { label: "Overview", href: "/design-system" },
+            { label: "Phone Frame", href: "/design-system#phone-frame" },
+            { label: "Breakpoints", href: "/design-system#breakpoints" },
+            { label: "Design Tokens", href: "/design-system#tokens" },
+        ],
+    },
+    {
+        title: "Components",
+        items: [
+            { label: "Atoms", href: "/design-system/atoms" },
+            { label: "Molecules", href: "/design-system/molecules" },
+            { label: "Organisms", href: "/design-system/organisms" },
+        ],
+    },
+];
+
+const isCurrent = (href: string) => {
+    if (href === "/design-system") {
+        return pathname === "/design-system" || pathname === "/design-system/";
+    }
+    return pathname.startsWith(href);
+};
+---
+
+<aside class="ds-sidebar">
+    <div class="ds-sidebar__header">
+        <a href="/design-system" class="ds-sidebar__logo">
+            Design System Zelify</a
+        >
+    </div>
+
+    <nav class="ds-sidebar__nav">
+        {
+            navGroups.map((group) => (
+                <div class="ds-nav-group">
+                    <h3 class="ds-nav-group__title">{group.title}</h3>
+                    <ul class="ds-nav-list">
+                        {group.items.map((item) => (
+                            <li>
+                                <a
+                                    href={item.href}
+                                    class:list={[
+                                        "ds-nav-link",
+                                        { "is-active": isCurrent(item.href) },
+                                    ]}
+                                >
+                                    {item.label}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            ))
+        }
+    </nav>
+</aside>
+
+<style>
+    .ds-sidebar {
+        width: 280px;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+        overflow-y: auto;
+        border-right: 1px solid rgba(0, 0, 0, 0.1);
+        background: #fdfdfd;
+        padding: 2rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .ds-sidebar__header {
+        padding-bottom: 1rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .ds-sidebar__logo {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #102137;
+        text-decoration: none;
+        font-family: var(--font-primary, sans-serif);
+    }
+
+    .ds-nav-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .ds-nav-group__title {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #64748b;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    .ds-nav-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .ds-nav-link {
+        display: block;
+        padding: 0.5rem 0.75rem;
+        border-radius: 8px;
+        color: #334155;
+        text-decoration: none;
+        font-size: 0.95rem;
+        transition: all 0.2s ease;
+    }
+
+    .ds-nav-link:hover {
+        background: rgba(0, 0, 0, 0.03);
+        color: #102137;
+    }
+
+    .ds-nav-link.is-active {
+        background: #e0e7ff;
+        color: #3730a3;
+        font-weight: 500;
+    }
+
+    @media (max-width: 1024px) {
+        .ds-sidebar {
+            display: none; /* Mobile handling handled by layout usually, or simplified */
+        }
+    }
+</style>

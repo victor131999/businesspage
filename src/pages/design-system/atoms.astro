@@ -1,0 +1,576 @@
+---
+import DSLayout from "../../layouts/DSLayout.astro";
+import ComponentPreview from "../../components/design-system/structure/ComponentPreview.astro";
+
+// Atoms
+import Button from "../../components/design-system/atoms/Button.astro";
+import Input from "../../components/design-system/atoms/Input.astro";
+import Textarea from "../../components/design-system/atoms/Textarea.astro";
+import Select from "../../components/design-system/atoms/Select.astro";
+import Title from "../../components/design-system/atoms/Title.astro";
+import Text from "../../components/design-system/atoms/Text.astro";
+import IconButton from "../../components/design-system/atoms/IconButton.astro";
+import Divider from "../../components/design-system/atoms/Divider.astro";
+import Badge from "../../components/design-system/atoms/Badge.astro";
+import Spinner from "../../components/design-system/atoms/Spinner.astro";
+import Skeleton from "../../components/design-system/atoms/Skeleton.astro";
+import Link from "../../components/design-system/atoms/Link.astro";
+import Avatar from "../../components/design-system/atoms/Avatar.astro";
+import Checkbox from "../../components/design-system/atoms/Checkbox.astro";
+import Radio from "../../components/design-system/atoms/Radio.astro";
+import Switch from "../../components/design-system/atoms/Switch.astro";
+---
+
+<DSLayout
+    title="Atoms - Zelify Design System"
+    description="Core building blocks: buttons, inputs, typography, and icons."
+>
+    <h1>Atoms</h1>
+    <p class="ds-lead">
+        Atoms are the basic building blocks of matter. Applied to web
+        interfaces, atoms are our HTML tags, such as a form label, an input or a
+        button.
+    </p>
+
+    <section id="buttons">
+        <h2>Buttons</h2>
+        <ComponentPreview
+            title="Button"
+            description="Primary call to action, secondary actions, and ghost buttons."
+            code={`<Button variant="primary">Primary</Button>
+<Button variant="secondary">Secondary</Button>
+<Button variant="outline">Outline</Button>
+<Button variant="ghost">Ghost</Button>
+<Button variant="primary" size="sm">Small</Button>`}
+        >
+            <div
+                style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;"
+            >
+                <Button variant="primary">Primary</Button>
+                <Button variant="secondary">Secondary</Button>
+                <Button variant="outline">Outline</Button>
+                <Button variant="ghost">Ghost</Button>
+            </div>
+            <div
+                style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-top: 1rem;"
+            >
+                <Button variant="primary" size="sm">Small</Button>
+                <Button variant="primary" size="md">Medium</Button>
+                <Button variant="primary" size="lg">Large</Button>
+            </div>
+        </ComponentPreview>
+
+        <br />
+
+        <ComponentPreview
+            title="Button States & Variants"
+            description="Extended functionality including destructive actions, loading states, and icon support."
+            code={`<!-- Destructive & Loading -->
+<Button variant="destructive">Delete Account</Button>
+<Button loading>Loading...</Button>
+<Button variant="outline" loading>Processing</Button>
+<Button disabled>Disabled</Button>
+
+<!-- Icons -->
+<Button>
+  <svg slot="icon-left" ...>...</svg>
+  Next Step
+</Button>
+<Button variant="secondary">
+  Download
+  <svg slot="icon-right" ...>...</svg>
+</Button>
+
+<!-- Full Width -->
+<Button fullWidth>Full Width Button</Button>
+
+<!-- Tabs -->
+<Button variant="tab" class="active">Active Tab</Button>
+<Button variant="tab">Inactive Tab</Button>`}
+        >
+            <div
+                style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-bottom: 1rem;"
+            >
+                <Button variant="destructive">Delete Account</Button>
+                <Button loading>Loading...</Button>
+                <Button variant="outline" loading>Processing</Button>
+                <Button disabled>Disabled</Button>
+            </div>
+
+            <div
+                style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-bottom: 1rem;"
+            >
+                <Button>
+                    <svg
+                        slot="icon-left"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                    </svg>
+                    Next Step
+                </Button>
+                <Button variant="secondary">
+                    Download
+                    <svg
+                        slot="icon-right"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <path
+                            d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"
+                        ></path>
+                    </svg>
+                </Button>
+            </div>
+
+            <div
+                style="width: 100%; max-width: 320px; display: flex; flex-direction: column; gap: 1rem;"
+            >
+                <Button fullWidth>Full Width Button</Button>
+                <!-- Tab variant example -->
+                <div
+                    style="border-bottom: 1px solid #e2e8f0; display: flex; gap: 1rem;"
+                >
+                    <Button variant="tab" class="active">Active Tab</Button>
+                    <Button variant="tab">Inactive Tab</Button>
+                </div>
+            </div>
+        </ComponentPreview>
+    </section>
+
+    <section id="links">
+        <h2>Links</h2>
+        <ComponentPreview
+            title="Link"
+            description="Hyperlinks with standardized styling."
+            code={`<Link href="#">Primary Link</Link>
+<Link href="#" variant="muted">Muted Link</Link>
+<Link href="#" variant="underline">Underline Link</Link>
+<Link href="https://example.com" external={true}>External Link</Link>`}
+        >
+            <div
+                style="display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center;"
+            >
+                <Link href="#">Primary Link</Link>
+                <Link href="#" variant="muted">Muted Link</Link>
+                <Link href="#" variant="underline">Underline Link</Link>
+                <Link href="https://google.com" external={true}
+                    >External Link</Link
+                >
+            </div>
+        </ComponentPreview>
+    </section>
+
+    <section id="form-controls">
+        <h2>Form Controls</h2>
+
+        <ComponentPreview
+            title="Input Fields"
+            description="Text inputs, textareas, and selects."
+            code={`<Input name="demo-text" placeholder="Text input placeholder" />
+<Input name="demo-email" type="email" placeholder="Email input" value="user@example.com" />
+<Input name="demo-error" placeholder="Error state" invalid={true} />
+
+<Textarea name="demo-textarea" placeholder="Textarea for longer comments..." />
+
+<Select 
+  name="demo-select" 
+  value=""
+  options={[
+    { value: "", label: "Select an option", disabled: true },
+    { value: "opt1", label: "Option 1" },
+    { value: "opt2", label: "Option 2" },
+    { value: "opt3", label: "Option 3" },
+  ]} 
+/>`}
+        >
+            <div
+                style="display: flex; flex-direction: column; gap: 1rem; width: 100%; max-width: 400px;"
+            >
+                <Input name="demo-text" placeholder="Text input placeholder" />
+                <Input
+                    name="demo-email"
+                    type="email"
+                    placeholder="Email input"
+                    value="user@example.com"
+                />
+                <Input
+                    name="demo-error"
+                    placeholder="Error state"
+                    invalid={true}
+                />
+                <Textarea
+                    name="demo-textarea"
+                    placeholder="Textarea for longer comments..."
+                />
+                <Select
+                    name="demo-select"
+                    options={[
+                        {
+                            value: "",
+                            label: "Select an option",
+                            disabled: true,
+                        },
+                        { value: "opt1", label: "Option 1" },
+                        { value: "opt2", label: "Option 2" },
+                        { value: "opt3", label: "Option 3" },
+                    ]}
+                    value=""
+                />
+            </div>
+        </ComponentPreview>
+
+        <br />
+
+        <ComponentPreview
+            title="Selection Controls"
+            description="Checkboxes, Radio buttons, and Switches."
+            code={`<!-- Checkbox -->
+<Checkbox label="Remember me" name="demo-c1" />
+<Checkbox label="Checked state" name="demo-c2" checked={true} />
+
+<!-- Radio -->
+<Radio label="Option 1" name="demo-r1" value="1" />
+<Radio label="Option 2" name="demo-r1" value="2" checked={true} />
+
+<!-- Switch -->
+<Switch label="Enable Notifications" name="demo-s1" />
+<Switch label="Dark Mode" name="demo-s2" checked={true} />`}
+        >
+            <div
+                style="display: flex; flex-direction: column; gap: 1.5rem; max-width: 400px;"
+            >
+                <div
+                    style="display: flex; flex-direction: column; gap: 0.75rem;"
+                >
+                    <strong>Checkbox</strong>
+                    <Checkbox label="Remember me" name="demo-c1" />
+                    <Checkbox
+                        label="Checked state"
+                        name="demo-c2"
+                        checked={true}
+                    />
+                </div>
+
+                <div
+                    style="display: flex; flex-direction: column; gap: 0.75rem;"
+                >
+                    <strong>Radio</strong>
+                    <Radio label="Option 1" name="demo-r1" value="1" />
+                    <Radio
+                        label="Option 2"
+                        name="demo-r1"
+                        value="2"
+                        checked={true}
+                    />
+                </div>
+
+                <div
+                    style="display: flex; flex-direction: column; gap: 0.75rem;"
+                >
+                    <strong>Switch</strong>
+                    <Switch label="Enable Notifications" name="demo-s1" />
+                    <Switch label="Dark Mode" name="demo-s2" checked={true} />
+                </div>
+            </div>
+        </ComponentPreview>
+    </section>
+
+    <section id="typography">
+        <h2>Typography</h2>
+        <ComponentPreview
+            title="Title"
+            description="Heading levels with semantic hierarchy."
+            code={`<Title level={1} variant="hero">Hero Title (h1)</Title>
+<Title level={2} variant="section">Section Title (h2)</Title>
+<Title level={3} variant="card">Card Title (h3)</Title>`}
+        >
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <Title level={1} variant="hero">Hero Title (h1)</Title>
+                <Title level={2} variant="section">Section Title (h2)</Title>
+                <Title level={3} variant="card">Card Title (h3)</Title>
+            </div>
+        </ComponentPreview>
+
+        <br />
+
+        <ComponentPreview
+            title="Text"
+            description="Body text variations for different contexts."
+            code={`<Text variant="body">Body text.</Text>
+<Text variant="subtitle">Subtitle or lead.</Text>
+<Text variant="caption">Caption or metadata.</Text>
+<Text variant="muted">Muted text.</Text>`}
+        >
+            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <Text variant="body"
+                    >Body: The quick brown fox jumps over the lazy dog.</Text
+                >
+                <Text variant="subtitle"
+                    >Subtitle: A brief description or lead.</Text
+                >
+                <Text variant="caption">Caption: Small text for details.</Text>
+                <Text variant="muted">Muted: Less prominent text.</Text>
+            </div>
+        </ComponentPreview>
+    </section>
+
+    <section id="data-display">
+        <h2>Data Display</h2>
+        <ComponentPreview
+            title="Avatar"
+            description="User profile image with fallback initials."
+            code={`<Avatar src="..." alt="User" />
+<Avatar initials="JD" />
+<Avatar initials="AB" size="sm" />`}
+        >
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <Avatar src="https://i.pravatar.cc/150?img=32" alt="User 1" />
+                <Avatar initials="JD" />
+                <Avatar initials="AB" size="sm" />
+                <Avatar initials="XY" size="lg" />
+            </div>
+        </ComponentPreview>
+    </section>
+
+    <section id="status-feedback">
+        <h2>Status & Feedback</h2>
+        <ComponentPreview
+            title="Badge"
+            description="Status indicators for labels or states."
+            code={`<Badge variant="success">Success</Badge>
+<Badge variant="warning">Warning</Badge>
+<Badge variant="error" size="sm">Error</Badge>`}
+        >
+            <div
+                style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;"
+            >
+                <Badge variant="neutral">Neutral</Badge>
+                <Badge variant="success">Success</Badge>
+                <Badge variant="warning">Warning</Badge>
+                <Badge variant="error">Error</Badge>
+                <Badge variant="info">Info</Badge>
+                <Badge variant="success" size="sm">Small</Badge>
+            </div>
+        </ComponentPreview>
+
+        <br />
+
+        <ComponentPreview
+            title="Spinner"
+            description="Loading indicator state."
+            code={`<Spinner />
+<Spinner size="lg" color="accent" />`}
+        >
+            <div
+                style="display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center;"
+            >
+                <Spinner size="sm" />
+                <Spinner size="md" />
+                <Spinner size="lg" />
+                <Spinner size="md" color="accent" />
+            </div>
+        </ComponentPreview>
+
+        <br />
+
+        <ComponentPreview
+            title="Skeleton"
+            description="Loading placeholders for content."
+            code={`<div style="display: flex; gap: 1rem; align-items: center;">
+  <Skeleton width="48px" height="48px" circle={true} />
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 0.5rem;">
+    <Skeleton width="100%" height="16px" />
+    <Skeleton width="60%" height="16px" />
+  </div>
+</div>
+<Skeleton width="100%" height="100px" />`}
+        >
+            <div
+                style="display: flex; flex-direction: column; gap: 1rem; width: 100%; max-width: 400px;"
+            >
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                    <Skeleton width="48px" height="48px" circle={true} />
+                    <div
+                        style="flex: 1; display: flex; flex-direction: column; gap: 0.5rem;"
+                    >
+                        <Skeleton width="100%" height="16px" />
+                        <Skeleton width="60%" height="16px" />
+                    </div>
+                </div>
+                <Skeleton width="100%" height="100px" />
+            </div>
+        </ComponentPreview>
+    </section>
+
+    <section id="icon-button">
+        <h2>Icon Button</h2>
+        <ComponentPreview
+            title="Icon Button"
+            description="Circular buttons used for icon-only actions (like play/pause)."
+            code={`<IconButton ariaLabel="Play">
+  <svg>...</svg>
+</IconButton>`}
+        >
+            <div style="display: flex; gap: 1rem;">
+                <IconButton ariaLabel="Play">
+                    <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"><path d="M8 5v14l11-7z"></path></svg
+                    >
+                </IconButton>
+                <IconButton ariaLabel="Settings">
+                    <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        ><path d="M12 15a3 3 0 100-6 3 3 0 000 6z"></path><path
+                            d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"
+                        ></path></svg
+                    >
+                </IconButton>
+            </div>
+        </ComponentPreview>
+    </section>
+
+    <section id="divider">
+        <h2>Divider</h2>
+        <ComponentPreview
+            title="Divider"
+            description="Visual separators for content grouping."
+            code={`<Divider />
+<Divider vertical={true} />`}
+        >
+            <div
+                style="display: flex; flex-direction: column; gap: 1rem; width: 100%;"
+            >
+                <p>Content above</p>
+                <Divider />
+                <p>Content below</p>
+                <div
+                    style="display: flex; height: 30px; align-items: center; gap: 1rem;"
+                >
+                    <span>Left</span>
+                    <Divider vertical={true} />
+                    <span>Right</span>
+                </div>
+            </div>
+        </ComponentPreview>
+    </section>
+    <section id="icons-library">
+        <h2>Icons Library</h2>
+        <p>
+            Complete collection of SVG icons available in <code
+                >public/icons/</code
+            >. Use them with the <code>&lt;img&gt;</code> tag or inline SVG.
+        </p>
+
+        <ComponentPreview
+            title="How to use"
+            description="Reference icons by their absolute path from the public directory."
+            code={`<!-- Usage example -->
+<img src="/icons/play.svg" alt="Play" width="24" height="24" />`}
+        >
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <img src="/icons/play.svg" alt="Play" width="24" height="24" />
+                <span style="font-size: 0.9rem; color: #64748b;"
+                    >/icons/play.svg</span
+                >
+            </div>
+        </ComponentPreview>
+
+        <h3>Gallery</h3>
+        <div class="icon-gallery">
+            {
+                /* Getting all icons from public/icons recursively */
+                Object.keys(import.meta.glob("/public/icons/**/*.svg")).map(
+                    (path) => {
+                        const publicPath = path.replace("/public", "");
+                        const name = publicPath.split("/").pop();
+
+                        return (
+                            <div class="icon-item" title={publicPath}>
+                                <div class="icon-preview">
+                                    <img
+                                        src={publicPath}
+                                        alt={name}
+                                        loading="lazy"
+                                    />
+                                </div>
+                                <code class="icon-name">
+                                    {publicPath.replace("/icons/", "")}
+                                </code>
+                            </div>
+                        );
+                    },
+                )
+            }
+        </div>
+    </section>
+
+    <style>
+        .icon-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .icon-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background: #fff;
+            transition: all 0.2s;
+        }
+
+        .icon-item:hover {
+            border-color: #93fb4d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .icon-preview {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .icon-name {
+            font-size: 0.75rem;
+            color: #64748b;
+            word-break: break-word;
+            text-align: center;
+            line-height: 1.4;
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+    </style>
+</DSLayout>

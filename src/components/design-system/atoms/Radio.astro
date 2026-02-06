@@ -1,0 +1,102 @@
+---
+interface Props {
+    name?: string;
+    value?: string;
+    label?: string;
+    checked?: boolean;
+    disabled?: boolean;
+    class?: string;
+}
+
+const {
+    name,
+    value,
+    label,
+    checked = false,
+    disabled = false,
+    class: className,
+} = Astro.props;
+---
+
+<label class:list={["ds-radio", { "is-disabled": disabled }, className]}>
+    <input
+        type="radio"
+        name={name}
+        value={value}
+        checked={checked}
+        disabled={disabled}
+        class="ds-radio__input"
+    />
+    <span class="ds-radio__circle"></span>
+    {label && <span class="ds-radio__label">{label}</span>}
+</label>
+
+<style>
+    .ds-radio {
+        display: inline-flex;
+        align-items: center;
+        cursor: pointer;
+        font-family: var(--font-primary, sans-serif);
+        gap: 0.5rem;
+    }
+
+    .ds-radio.is-disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+
+    .ds-radio__input {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .ds-radio__circle {
+        width: 1.25rem;
+        height: 1.25rem;
+        background-color: #fff;
+        border: 2px solid #cbd5e1;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        transition: all 0.2s ease;
+    }
+
+    .ds-radio__circle::after {
+        content: "";
+        width: 0.625rem;
+        height: 0.625rem;
+        background-color: #fff;
+        border-radius: 50%;
+        opacity: 0;
+        transform: scale(0);
+        transition: all 0.2s ease;
+    }
+
+    /* Checked State */
+    .ds-radio__input:checked + .ds-radio__circle {
+        background-color: var(--ds-color-primary, #102137);
+        border-color: var(--ds-color-primary, #102137);
+    }
+
+    .ds-radio__input:checked + .ds-radio__circle::after {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    /* Focus State */
+    .ds-radio__input:focus-visible + .ds-radio__circle {
+        box-shadow:
+            0 0 0 2px #fff,
+            0 0 0 4px var(--ds-color-primary, #102137);
+    }
+
+    .ds-radio__label {
+        font-size: 0.95rem;
+        color: #334155;
+        user-select: none;
+    }
+</style>

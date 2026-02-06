@@ -709,7 +709,20 @@ const modulesList = [
       dataI18nDescription="home.how.description"
       dataI18nCta="home.how.demo"
     >
-      <!-- Contenido dentro de la tarjeta blanca: video, formulario, imagen, etc. -->
+      <div class="how-it-works-video-wrap">
+        <video
+          id="how-it-works-video"
+          muted
+          loop
+          playsinline
+          preload="metadata"
+        >
+          <source
+            src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/HowZelifyWorks.mp4"
+            type="video/mp4"
+          />
+        </video>
+      </div>
     </SideBySidePanel>
 
     <SideBySidePanel
@@ -726,7 +739,14 @@ const modulesList = [
       dataI18nDescription="home.why.description"
       dataI18nCta="home.why.demo"
     >
-      <!-- Contenido dentro de la tarjeta blanca: video, formulario, imagen, etc. -->
+      <div class="how-it-works-video-wrap">
+        <video id="why-zelify-video" muted loop playsinline preload="metadata">
+          <source
+            src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/AIPoweredProductsv2.mp4"
+            type="video/mp4"
+          />
+        </video>
+      </div>
     </SideBySidePanel>
 
     <section class="bench-section section-gap-200">
@@ -1054,6 +1074,7 @@ const modulesList = [
 
   @media (max-width: 768px) {
     .product-showcase {
+      display: block;
       height: auto;
       min-height: unset;
       overflow: visible;
@@ -1124,13 +1145,11 @@ const modulesList = [
 
   @media (max-width: 768px) {
     .product-showcase__grid {
-      padding-bottom: clamp(8rem, 20vw, 15rem);
-    }
-  }
-
-  @media (max-width: 480px) {
-    .product-showcase__grid {
-      padding-bottom: 400px;
+      display: block;
+      width: 100%;
+      height: auto !important;
+      padding-bottom: 2rem;
+      position: relative;
     }
   }
 
@@ -1163,6 +1182,10 @@ const modulesList = [
       height: 100% !important;
       min-height: unset !important;
       position: absolute !important;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
     }
   }
 
@@ -1731,34 +1754,29 @@ const modulesList = [
     overflow: hidden;
   }
 
-  /* Tablet and medium screens - reduced margin since menu has bottom margin */
-  @media (max-width: 1024px) and (min-width: 769px) {
-    .how-it-works-section.ds-side-by-side-panel {
-      margin-top: 0 !important;
-      padding-top: clamp(2rem, 4vw, 3rem);
+  @media (max-width: 768px) {
+    .how-it-works-section {
+      margin-top: 100px !important;
+      padding-top: 2rem;
+      position: relative;
+      z-index: 10;
     }
   }
 
-  /* Mobile phones - reduced margin since menu has bottom margin */
-  @media (max-width: 480px) {
-    .how-it-works-section.ds-side-by-side-panel {
-      margin-top: 0 !important;
-      padding-top: clamp(2rem, 5vw, 3rem);
-    }
+  /* Recorta el video a esquinas redondeadas (evita esquinas negras) */
+  .how-it-works-video-wrap {
+    width: 100%;
+    min-height: 320px;
+    border-radius: 5px;
+    overflow: hidden;
+    display: block;
   }
-
-  @media (max-width: 768px) and (min-width: 481px) {
-    .how-it-works-section.ds-side-by-side-panel {
-      margin-top: 0 !important;
-      padding-top: clamp(2rem, 4vw, 3rem);
-    }
-  }
-
-  /* Reset margin for other SideBySidePanel instances in mobile */
-  @media (max-width: 1024px) {
-    .ds-side-by-side-panel:not(.how-it-works-section) {
-      margin-top: clamp(4rem, 8vw, 6rem) !important;
-    }
+  .how-it-works-video-wrap video {
+    width: 100%;
+    height: 100%;
+    min-height: 320px;
+    object-fit: cover;
+    display: block;
   }
 
   .how-it-works-divider {
@@ -2582,9 +2600,9 @@ const modulesList = [
   @media (max-width: 768px) {
     .product-showcase {
       padding: 0 1.25rem;
-      height: 520px;
-      min-height: 520px;
-      max-height: 520px;
+      height: auto;
+      min-height: unset;
+      max-height: none;
     }
 
     .product-showcase__grid {
@@ -2761,9 +2779,9 @@ const modulesList = [
   @media (max-width: 480px) {
     .product-showcase {
       padding: 0 1rem;
-      height: 400px;
-      min-height: 400px;
-      max-height: 400px;
+      height: auto;
+      min-height: unset;
+      max-height: none;
     }
 
     .product-showcase__grid {
@@ -3246,7 +3264,7 @@ const modulesList = [
         // How it works section
         "home.how.title": "¿Cómo Funciona<br />Zelify?",
         "home.how.description":
-          "Zelify integra en una plataforma financiera todo-en-uno: Identidad digital, cumplimiento normativo, cuentas, tarjetas, transferencias locales e internacionales y pagos. Además incorpora un asistente de IA que impulsa la educación financiera y el análisis inteligente de datos para una mejor toma de decisiones.",
+          "Zelify integra en una plataforma financiera todo-en-uno: Identidad digital, cumplimiento normativo, cuentas, tarjetas, transferencias locales e internacionales y pagos. Además incorpora un asistente de IA que impulsa la educación financiera y el análisis inteligente de datos para una mejor toma de decisiones",
         "home.how.demo": "Demo",
         "home.how.login.title": "Ingreso",
         "home.how.login.subtitle": "Bienvenido de regreso",
@@ -3687,5 +3705,45 @@ const modulesList = [
         }
       });
     });
+  });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const setupVideoControl = (btnId: string, videoId: string) => {
+      const btn = document.getElementById(btnId);
+      const video = document.getElementById(videoId);
+      if (!btn || !video) return;
+
+      const icon = btn.querySelector("img");
+
+      const updateState = () => {
+        if (video.paused) {
+          if (icon) icon.src = "/icons/play.svg";
+          btn.setAttribute("aria-label", "Reproducir");
+        } else {
+          if (icon) icon.src = "/icons/pause.svg";
+          btn.setAttribute("aria-label", "Pausar");
+        }
+      };
+
+      btn.addEventListener("click", () => {
+        if (video.muted) video.muted = false;
+        if (video.paused) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      });
+
+      video.addEventListener("play", updateState);
+      video.addEventListener("pause", updateState);
+
+      // Initialize state
+      updateState();
+    };
+
+    setupVideoControl("how-it-works-play-btn", "how-it-works-video");
+    setupVideoControl("why-zelify-play-btn", "why-zelify-video");
   });
 </script>

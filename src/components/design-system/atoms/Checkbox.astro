@@ -1,0 +1,109 @@
+---
+interface Props {
+    name?: string;
+    label?: string;
+    checked?: boolean;
+    disabled?: boolean;
+    class?: string;
+}
+
+const {
+    name,
+    label,
+    checked = false,
+    disabled = false,
+    class: className,
+} = Astro.props;
+---
+
+<label class:list={["ds-checkbox", { "is-disabled": disabled }, className]}>
+    <input
+        type="checkbox"
+        name={name}
+        checked={checked}
+        disabled={disabled}
+        class="ds-checkbox__input"
+    />
+    <span class="ds-checkbox__box">
+        <svg
+            class="ds-checkbox__icon"
+            width="12"
+            height="12"
+            viewBox="0 0 12 12"
+            fill="none"
+            stroke="currentColor"
+        >
+            <path
+                d="M10 3L4.5 8.5L2 6"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+        </svg>
+    </span>
+    {label && <span class="ds-checkbox__label">{label}</span>}
+</label>
+
+<style>
+    .ds-checkbox {
+        display: inline-flex;
+        align-items: center;
+        cursor: pointer;
+        font-family: var(--font-primary, sans-serif);
+        gap: 0.5rem;
+    }
+
+    .ds-checkbox.is-disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+
+    .ds-checkbox__input {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .ds-checkbox__box {
+        width: 1.25rem;
+        height: 1.25rem;
+        background-color: #fff;
+        border: 2px solid #cbd5e1;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+    }
+
+    .ds-checkbox__icon {
+        opacity: 0;
+        color: #fff;
+        transform: scale(0.5);
+        transition: all 0.2s ease;
+    }
+
+    /* Checked State */
+    .ds-checkbox__input:checked + .ds-checkbox__box {
+        background-color: var(--ds-color-primary, #102137);
+        border-color: var(--ds-color-primary, #102137);
+    }
+
+    .ds-checkbox__input:checked + .ds-checkbox__box .ds-checkbox__icon {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    /* Focus State */
+    .ds-checkbox__input:focus-visible + .ds-checkbox__box {
+        box-shadow:
+            0 0 0 2px #fff,
+            0 0 0 4px var(--ds-color-primary, #102137);
+    }
+
+    .ds-checkbox__label {
+        font-size: 0.95rem;
+        color: #334155;
+        user-select: none;
+    }
+</style>

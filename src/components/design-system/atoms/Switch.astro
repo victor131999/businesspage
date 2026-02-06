@@ -1,0 +1,95 @@
+---
+interface Props {
+    name?: string;
+    label?: string;
+    checked?: boolean;
+    disabled?: boolean;
+    class?: string;
+}
+
+const {
+    name,
+    label,
+    checked = false,
+    disabled = false,
+    class: className,
+} = Astro.props;
+---
+
+<label class:list={["ds-switch", { "is-disabled": disabled }, className]}>
+    <input
+        type="checkbox"
+        name={name}
+        checked={checked}
+        disabled={disabled}
+        class="ds-switch__input"
+    />
+    <span class="ds-switch__toggle"></span>
+    {label && <span class="ds-switch__label">{label}</span>}
+</label>
+
+<style>
+    .ds-switch {
+        display: inline-flex;
+        align-items: center;
+        cursor: pointer;
+        font-family: var(--font-primary, sans-serif);
+        gap: 0.75rem;
+    }
+
+    .ds-switch.is-disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+
+    .ds-switch__input {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .ds-switch__toggle {
+        width: 2.75rem;
+        height: 1.5rem;
+        background-color: #cbd5e1;
+        border-radius: 9999px;
+        position: relative;
+        transition: background-color 0.2s ease;
+    }
+
+    .ds-switch__toggle::after {
+        content: "";
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: calc(1.5rem - 4px);
+        height: calc(1.5rem - 4px);
+        background-color: #fff;
+        border-radius: 50%;
+        transition: transform 0.2s ease;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Checked State */
+    .ds-switch__input:checked + .ds-switch__toggle {
+        background-color: var(--ds-color-primary, #102137);
+    }
+
+    .ds-switch__input:checked + .ds-switch__toggle::after {
+        transform: translateX(1.25rem);
+    }
+
+    /* Focus State */
+    .ds-switch__input:focus-visible + .ds-switch__toggle {
+        box-shadow:
+            0 0 0 2px #fff,
+            0 0 0 4px var(--ds-color-primary, #102137);
+    }
+
+    .ds-switch__label {
+        font-size: 0.95rem;
+        color: #334155;
+        user-select: none;
+    }
+</style>

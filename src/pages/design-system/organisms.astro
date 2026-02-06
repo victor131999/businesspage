@@ -1,0 +1,136 @@
+---
+import DSLayout from "../../layouts/DSLayout.astro";
+import ComponentPreview from "../../components/design-system/structure/ComponentPreview.astro";
+
+// Organisms
+import WelcomeHero from "../../components/design-system/organisms/WelcomeHero.astro";
+import SectionTwoCol from "../../components/design-system/organisms/SectionTwoCol.astro";
+import CardTabs from "../../components/design-system/organisms/CardTabs.astro";
+import HighlightPanel from "../../components/design-system/molecules/HighlightPanel.astro";
+import LoginFormCard from "../../components/design-system/molecules/LoginFormCard.astro";
+import IconButton from "../../components/design-system/atoms/IconButton.astro";
+import Title from "../../components/design-system/atoms/Title.astro";
+import Text from "../../components/design-system/atoms/Text.astro";
+import Button from "../../components/design-system/atoms/Button.astro";
+---
+
+<DSLayout
+    title="Organisms - Zelify Design System"
+    description="Complex components composed of groups of molecules and/or atoms."
+>
+    <h1>Organisms</h1>
+    <p class="ds-lead">
+        Organisms are distinct sections of an interface formed by joining groups
+        of molecules together to form relatively complex, distinct sections of
+        an interface.
+    </p>
+
+    <section id="heroes">
+        <h2>Heroes</h2>
+        <ComponentPreview
+            title="WelcomeHero"
+            description="The main hero section of the landing page. (Scaled down for preview)"
+            code={`<WelcomeHero />`}
+        >
+            <div
+                style="position: relative; overflow: hidden; height: 550px; border-radius: 12px; border: 1px solid #e2e8f0;"
+            >
+                <!-- Scaling transformation to fit the hero in the preview box -->
+                <div
+                    style="transform: scale(0.65); transform-origin: top center; width: 100%;"
+                >
+                    <WelcomeHero />
+                </div>
+            </div>
+        </ComponentPreview>
+    </section>
+
+    <section id="sections">
+        <h2>Layout Sections</h2>
+        <ComponentPreview
+            title="SectionTwoCol"
+            description="Versatile two-column layout component with optional divider."
+            code={`<SectionTwoCol divider={true}>
+  <div slot="left">...</div>
+  <div slot="right">...</div>
+</SectionTwoCol>`}
+        >
+            <div
+                style="border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;"
+            >
+                <SectionTwoCol divider={true} sectionClass="my-ds-section">
+                    <div
+                        slot="left"
+                        style="display: flex; flex-direction: column; gap: 1rem; align-items: flex-start;"
+                    >
+                        <Title
+                            level={2}
+                            variant="hero"
+                            style="font-size: 2.5rem; line-height: 1.1;"
+                        >
+                            ¿Cómo <br /> Funciona?
+                        </Title>
+                        <Text variant="body" style="max-width: 400px;">
+                            Integración completa en una sola plataforma digital.
+                        </Text>
+                        <Button variant="secondary">Demo</Button>
+                    </div>
+                    <div
+                        slot="right"
+                        style="display: flex; justify-content: flex-end;"
+                    >
+                        <HighlightPanel>
+                            <LoginFormCard
+                                title="Ingreso"
+                                subtitle="Bienvenido"
+                            />
+                            <IconButton ariaLabel="Play" slot="action">
+                                <svg
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                    ><path d="M8 5v14l11-7z"></path></svg
+                                >
+                            </IconButton>
+                        </HighlightPanel>
+                    </div>
+                </SectionTwoCol>
+            </div>
+        </ComponentPreview>
+    </section>
+
+    <section id="complex-interactions">
+        <h2>Complex Interactions</h2>
+        <ComponentPreview
+            title="CardTabs"
+            description="Tabbed interface that switches content displayed within a card-like container."
+            code={`<CardTabs
+  id="demo-card-tabs"
+  tabs={[...]}
+>
+  <div data-card-content="c1">Content 1</div>
+  <div data-card-content="c2" style="display:none">Content 2</div>
+</CardTabs>`}
+        >
+            <CardTabs
+                id="demo-card-tabs"
+                tabs={[
+                    { value: "c1", label: "Tab 1", active: true },
+                    { value: "c2", label: "Tab 2" },
+                ]}
+            >
+                <div data-card-content="c1" class="p-8">
+                    <Title level={3} variant="section">Content for Tab 1</Title>
+                    <Text>This content is visible by default.</Text>
+                </div>
+                <div data-card-content="c2" style="display: none;" class="p-8">
+                    <Title level={3} variant="section">Content for Tab 2</Title>
+                    <Text
+                        >This content appears when the second tab is clicked.</Text
+                    >
+                </div>
+            </CardTabs>
+        </ComponentPreview>
+    </section>
+</DSLayout>
