@@ -163,59 +163,59 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
 
           <!-- SCREEN 2: CREDENTIALS -->
           <div id="screen-credentials" class="connect-screen hidden-screen">
-            <div class="screen-content flex flex-col h-full pt-4">
-              <!-- Animation Container (Centered, Natural Flow) -->
-              <div
-                class="flex-shrink-0 flex justify-center items-center mb-4 mt-2"
-              >
+            <div
+              class="screen-content flex flex-col h-full px-6 justify-center pb-4"
+            >
+              <!-- Animation Container -->
+              <div class="flex-shrink-0 flex justify-center items-center mb-4">
                 <img
                   src="/gift/ANIMACION%201.gif"
                   alt="Connecting Animation"
-                  class="h-32 w-32 object-contain mix-blend-multiply opacity-80"
+                  class="h-24 w-24 object-contain mix-blend-multiply opacity-80"
                 />
               </div>
 
               <!-- Header Text -->
               <div class="text-center mb-6">
                 <h2
-                  class="text-xl font-bold text-[#004492] mb-2"
+                  class="text-xl font-bold text-[#004492] mb-1"
                   id="cred-bank-name"
                 >
                   Scotiabank México
                 </h2>
-                <p class="text-[13px] text-gray-400 px-8 leading-snug">
+                <p class="text-[13px] text-gray-400 leading-snug">
                   Please provide your credentials to connect your bank account
                 </p>
               </div>
 
               <!-- Form Fields -->
-              <div class="w-full space-y-5 flex-grow">
+              <div class="w-full space-y-4">
                 <div class="input-group">
                   <label
-                    class="block text-[#000b1e] font-bold text-sm mb-2 pl-1"
+                    class="block text-[#000b1e] font-bold text-sm mb-1.5 pl-1"
                     >Username</label
                   >
                   <input
                     type="text"
-                    class="w-full bg-[#dce5f2] rounded-xl px-4 py-3.5 text-sm outline-none border-none text-slate-700 placeholder-slate-400 transition-shadow focus:ring-2 focus:ring-blue-100"
+                    class="w-full bg-[#dce5f2] rounded-xl px-4 py-3 placeholder-slate-400 text-sm outline-none border-none text-slate-700 transition-shadow focus:ring-2 focus:ring-blue-100"
                     placeholder="Enter your username"
                   />
                 </div>
 
                 <div class="input-group">
                   <label
-                    class="block text-[#000b1e] font-bold text-sm mb-2 pl-1"
+                    class="block text-[#000b1e] font-bold text-sm mb-1.5 pl-1"
                     >Password</label
                   >
                   <input
                     type="password"
-                    class="w-full bg-[#dce5f2] rounded-xl px-4 py-3.5 text-sm outline-none border-none text-slate-700 placeholder-slate-400 transition-shadow focus:ring-2 focus:ring-blue-100"
+                    class="w-full bg-[#dce5f2] rounded-xl px-4 py-3 placeholder-slate-400 text-sm outline-none border-none text-slate-700 transition-shadow focus:ring-2 focus:ring-blue-100"
                     placeholder="Enter your password"
                   />
                 </div>
 
                 <!-- Login Button -->
-                <div class="pt-2">
+                <div class="pt-4">
                   <button
                     class="w-full text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-transform active:scale-95 btn-gradient shadow-lg shadow-blue-900/10"
                     id="btn-login"
@@ -282,9 +282,11 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
 
           <!-- SCREEN 4: WALLET -->
           <div id="screen-wallet" class="connect-screen hidden-screen">
-            <div class="screen-content pt-4">
+            <div
+              class="screen-content flex flex-col h-full px-6 justify-center pb-4"
+            >
               <div
-                class="h-[120px] w-full flex justify-center items-center mb-0"
+                class="h-[100px] w-full flex justify-center items-center mb-0"
               >
                 <img
                   src="/gift/ANIMACION%201.gif"
@@ -296,56 +298,65 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
               <h2 class="text-center text-[#000b1e] text-2xl font-bold mb-1">
                 Wallet
               </h2>
-              <p class="text-center text-gray-400 text-xs mb-8">
+              <p class="text-center text-gray-400 text-xs mb-6">
                 Manage your funds
               </p>
 
-              <div class="px-2">
-                <p class="text-[#000b1e] font-semibold text-sm mb-2">
-                  Total Balance
-                </p>
-                <div
-                  class="bg-[#e2e8f0] rounded-xl px-4 py-3 flex justify-between items-center mb-6"
-                >
-                  <span class="text-2xl font-normal text-slate-800">$0.00</span>
-                  <span
-                    class="bg-[#000b1e] text-white text-xs font-bold px-3 py-1 rounded-full"
-                    >MXN</span
+              <div
+                class="relative z-10 flex-1 w-full overflow-hidden rounded-2xl p-5 backdrop-blur-sm flex flex-col justify-center"
+                style="background-color: rgba(255, 255, 255, 0.35); border: 1px solid rgba(255, 255, 255, 0.5);"
+              >
+                <div class="flex-1 flex flex-col justify-center">
+                  <p class="text-[#000b1e] font-semibold text-sm mb-2">
+                    Total Balance
+                  </p>
+                  <div
+                    class="bg-[#e2e8f0] rounded-xl px-4 py-3 flex justify-between items-center mb-6"
                   >
-                </div>
+                    <span class="text-2xl font-normal text-slate-800"
+                      >$0.00</span
+                    >
+                    <span
+                      class="bg-[#000b1e] text-white text-xs font-bold px-3 py-1 rounded-full"
+                      >MXN</span
+                    >
+                  </div>
 
-                <!-- Deposit Button (Connected Gradient) -->
-                <button
-                  class="w-full text-white py-4 rounded-xl flex items-center justify-between px-6 shadow-lg shadow-blue-900/20 mb-6 btn-gradient text-left"
-                  onclick="window.connectNavigate('deposit')"
-                >
-                  <span class="font-bold">Deposit Funds</span>
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg
+                  <!-- Deposit Button -->
+                  <button
+                    class="w-full text-white py-4 rounded-xl flex items-center justify-between px-6 shadow-lg shadow-blue-900/20 mb-6 btn-gradient text-left"
+                    onclick="window.connectNavigate('deposit')"
                   >
-                </button>
-
-                <!-- Connected Bank Card -->
-                <div
-                  class="bg-[#000b1e] rounded-xl p-6 text-center text-white relative overflow-hidden"
-                >
-                  <div class="absolute top-2 left-1/2 -translate-x-1/2">
+                    <span class="font-bold">Deposit Funds</span>
                     <svg
                       width="20"
                       height="20"
                       viewBox="0 0 24 24"
                       fill="none"
-                      stroke="white"
-                      stroke-width="2"><path d="M18 15l-6-6-6 6"></path></svg
+                      stroke="currentColor"
+                      stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg
                     >
+                  </button>
+
+                  <!-- Connected Bank Card -->
+                  <div
+                    class="bg-[#000b1e] rounded-xl p-6 text-center text-white relative overflow-hidden"
+                  >
+                    <div class="absolute top-2 left-1/2 -translate-x-1/2">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="white"
+                        stroke-width="2"><path d="M18 15l-6-6-6 6"></path></svg
+                      >
+                    </div>
+                    <h3 class="font-bold text-lg mt-4 mb-1">
+                      SCOTIABANK MÉXICO
+                    </h3>
+                    <p class="text-xs text-slate-400">Connected Bank</p>
                   </div>
-                  <h3 class="font-bold text-lg mt-4 mb-1">SCOTIABANK MÉXICO</h3>
-                  <p class="text-xs text-slate-400">Connected Bank</p>
                 </div>
               </div>
             </div>
@@ -353,10 +364,10 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
 
           <!-- SCREEN 5: DEPOSIT FUNDS -->
           <div id="screen-deposit" class="connect-screen hidden-screen">
-            <div class="screen-content px-4">
-              <div
-                class="h-[100px] w-full flex justify-center items-center mb-4"
-              >
+            <div
+              class="screen-content flex flex-col h-full px-6 justify-between pb-6 pt-2"
+            >
+              <div class="h-[80px] w-full flex justify-center items-center">
                 <img
                   src="/gift/ANIMACION%201.gif"
                   alt="Deposit Animation"
@@ -364,32 +375,34 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                 />
               </div>
 
-              <h2 class="text-center text-[#000b1e] text-xl font-bold mb-1">
-                Deposit Funds
-              </h2>
-              <p class="text-center text-gray-500 text-xs mb-6">
-                Select an account and enter amount
-              </p>
+              <div>
+                <h2 class="text-center text-[#000b1e] text-xl font-bold mb-1">
+                  Deposit Funds
+                </h2>
+                <p class="text-center text-gray-500 text-xs mb-4">
+                  Select an account and enter amount
+                </p>
 
-              <p class="text-[#000b1e] text-sm font-semibold mb-3">
-                Select Account
-              </p>
+                <p class="text-[#000b1e] text-sm font-semibold mb-2">
+                  Select Account
+                </p>
 
-              <!-- Accounts Container -->
-              <div id="accounts-list-container" class="mb-4 space-y-2">
-                <!-- Generated by JS -->
-              </div>
+                <!-- Accounts Container -->
+                <div id="accounts-list-container" class="mb-4 space-y-2">
+                  <!-- Generated by JS -->
+                </div>
 
-              <p class="text-[#000b1e] text-sm font-semibold mb-2">Amount</p>
-              <div
-                class="bg-[#e2e8f0] rounded-xl px-4 py-4 mb-8 text-center flex items-center justify-center"
-              >
-                <input
-                  id="deposit-amount-input"
-                  type="number"
-                  placeholder="0.00"
-                  class="bg-transparent text-center w-full outline-none border-none text-2xl font-normal text-[#000b1e] placeholder-slate-400"
-                />
+                <p class="text-[#000b1e] text-sm font-semibold mb-2">Amount</p>
+                <div
+                  class="bg-[#e2e8f0] rounded-xl px-4 py-3 mb-6 text-center flex items-center justify-center"
+                >
+                  <input
+                    id="deposit-amount-input"
+                    type="number"
+                    placeholder="0.00"
+                    class="bg-transparent text-center w-full outline-none border-none text-2xl font-normal text-[#000b1e] placeholder-slate-400"
+                  />
+                </div>
               </div>
 
               <!-- Slider Button -->
