@@ -25,7 +25,7 @@ import { ALAIZA_CONTEXT } from "../config/alaiza-context";
 import { ALAIZA_TRANSLATIONS } from "../config/alaiza-translations";
 
 export const AlaizaAssistant = () => {
-    const linkChat = "https://mailing-production.up.railway.app/ai/process-question";
+    const linkChat = "https://mailing-production-431c.up.railway.app/ai/process-question";
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([]);
     const [inputText, setInputText] = useState('');
