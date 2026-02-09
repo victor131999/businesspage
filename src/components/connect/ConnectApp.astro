@@ -11,7 +11,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
           <!-- HEADER -->
           <div class="connect-header" id="connect-header">
             <button
-              class="connect-back-btn pl-6 pt-6 text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors"
+              class="connect-back-btn device-back-btn pl-6 pt-6 text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors"
               id="btn-back"
             >
               &lt; back
@@ -28,10 +28,12 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
               class="screen-content flex flex-col h-full !p-0 !overflow-visible"
             >
               <div class="text-center mb-1">
-                <h2 class="text-sm font-bold text-[#004492]">
+                <h2 class="bank-link-title text-sm font-bold text-[#004492]">
                   Bank Account Linking
                 </h2>
-                <p class="text-xs text-gray-500">Let's link your account</p>
+                <p class="bank-link-subtitle text-xs text-gray-500">
+                  Let's link your account
+                </p>
               </div>
 
               <!-- Search -->
@@ -55,7 +57,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                 <input
                   id="bank-search-input"
                   type="text"
-                  class="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl leading-5 bg-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                  class="bank-search-input block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl leading-5 bg-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 text-sm"
                   placeholder="Search banks..."
                 />
               </div>
@@ -145,7 +147,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                   disabled
                   onclick="connectProceedFromBanks()"
                 >
-                  Continue
+                  <span class="continue-banks-label">Continue</span>
                   <svg
                     width="16"
                     height="16"
@@ -177,13 +179,16 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
 
               <!-- Header Text -->
               <div class="text-center mb-6">
+                <h2 class="bank-auth-title text-sm font-semibold text-[#004492]">
+                  Bank authentication
+                </h2>
                 <h2
                   class="text-xl font-bold text-[#004492] mb-1"
                   id="cred-bank-name"
                 >
                   Scotiabank México
                 </h2>
-                <p class="text-[13px] text-gray-400 leading-snug">
+                <p class="bank-auth-subtitle text-[13px] text-gray-400 leading-snug">
                   Please provide your credentials to connect your bank account
                 </p>
               </div>
@@ -196,6 +201,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                     >Username</label
                   >
                   <input
+                    id="cred-username"
                     type="text"
                     class="w-full bg-[#dce5f2] rounded-xl px-4 py-3 placeholder-slate-400 text-sm outline-none border-none text-slate-700 transition-shadow focus:ring-2 focus:ring-blue-100"
                     placeholder="Enter your username"
@@ -208,6 +214,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                     >Password</label
                   >
                   <input
+                    id="cred-password"
                     type="password"
                     class="w-full bg-[#dce5f2] rounded-xl px-4 py-3 placeholder-slate-400 text-sm outline-none border-none text-slate-700 transition-shadow focus:ring-2 focus:ring-blue-100"
                     placeholder="Enter your password"
@@ -218,7 +225,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                 <div class="pt-4">
                   <button
                     class="w-full text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-transform active:scale-95 btn-gradient shadow-lg shadow-blue-900/10"
-                    id="btn-login"
+                    id="btn-submit-credentials"
                     onclick="window.connectLogin()"
                   >
                     <span>Login</span>
@@ -260,10 +267,18 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                 <div
                   class="absolute inset-0 flex flex-col items-center justify-center px-6 text-center"
                 >
-                  <h2 class="text-2xl font-bold text-white mb-2">
+                  <h2
+                    id="loading-text-container"
+                    class="text-2xl font-bold text-white mb-2"
+                  >
                     Connecting<span class="opacity-90"> your account</span>
                   </h2>
-                  <p class="text-sm text-white/70 mb-10">Please wait</p>
+                  <p
+                    id="loading-subtext-container"
+                    class="text-sm text-white/70 mb-10"
+                  >
+                    Please wait
+                  </p>
 
                   <!-- Loading Bar -->
                   <div
@@ -295,10 +310,10 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                 />
               </div>
 
-              <h2 class="text-center text-[#000b1e] text-2xl font-bold mb-1">
+              <h2 class="wallet-title text-center text-[#000b1e] text-2xl font-bold mb-1">
                 Wallet
               </h2>
-              <p class="text-center text-gray-400 text-xs mb-6">
+              <p class="wallet-subtitle text-center text-gray-400 text-xs mb-6">
                 Manage your funds
               </p>
 
@@ -307,7 +322,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                 style="background-color: rgba(255, 255, 255, 0.35); border: 1px solid rgba(255, 255, 255, 0.5);"
               >
                 <div class="flex-1 flex flex-col justify-center">
-                  <p class="text-[#000b1e] font-semibold text-sm mb-2">
+                  <p class="wallet-balance-label text-[#000b1e] font-semibold text-sm mb-2">
                     Total Balance
                   </p>
                   <div
@@ -324,6 +339,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
 
                   <!-- Deposit Button -->
                   <button
+                    id="btn-go-deposit"
                     class="w-full text-white py-4 rounded-xl flex items-center justify-between px-6 shadow-lg shadow-blue-900/20 mb-6 btn-gradient text-left"
                     onclick="window.connectNavigate('deposit')"
                   >
@@ -355,7 +371,9 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                     <h3 class="font-bold text-lg mt-4 mb-1">
                       SCOTIABANK MÉXICO
                     </h3>
-                    <p class="text-xs text-slate-400">Connected Bank</p>
+                    <p class="wallet-bank-subtitle text-xs text-slate-400">
+                      Connected Bank
+                    </p>
                   </div>
                 </div>
               </div>
@@ -376,14 +394,14 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
               </div>
 
               <div>
-                <h2 class="text-center text-[#000b1e] text-xl font-bold mb-1">
+                <h2 class="deposit-title text-center text-[#000b1e] text-xl font-bold mb-1">
                   Deposit Funds
                 </h2>
-                <p class="text-center text-gray-500 text-xs mb-4">
+                <p class="deposit-subtitle text-center text-gray-500 text-xs mb-4">
                   Select an account and enter amount
                 </p>
 
-                <p class="text-[#000b1e] text-sm font-semibold mb-2">
+                <p class="deposit-section-label text-[#000b1e] text-sm font-semibold mb-2">
                   Select Account
                 </p>
 
@@ -392,7 +410,9 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                   <!-- Generated by JS -->
                 </div>
 
-                <p class="text-[#000b1e] text-sm font-semibold mb-2">Amount</p>
+                <p class="deposit-amount-label text-[#000b1e] text-sm font-semibold mb-2">
+                  Amount
+                </p>
                 <div
                   class="bg-[#e2e8f0] rounded-xl px-4 py-3 mb-6 text-center flex items-center justify-center"
                 >
@@ -400,7 +420,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                     id="deposit-amount-input"
                     type="number"
                     placeholder="0.00"
-                    class="bg-transparent text-center w-full outline-none border-none text-2xl font-normal text-[#000b1e] placeholder-slate-400"
+                    class="deposit-amount-input bg-transparent text-center w-full outline-none border-none text-2xl font-normal text-[#000b1e] placeholder-slate-400"
                   />
                 </div>
               </div>
@@ -412,7 +432,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                   style="background: linear-gradient(90deg, #1e3a8a 0%, #000080 100%);"
                 >
                   <span
-                    class="text-white font-semibold text-[15px] pointer-events-none z-0 tracking-wide"
+                    class="deposit-slide-text text-white font-semibold text-[15px] pointer-events-none z-0 tracking-wide"
                   >
                     Slide to confirm
                   </span>
@@ -457,10 +477,10 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                 <div
                   class="absolute inset-0 z-10 flex flex-col items-center justify-center h-full px-6 text-center w-full"
                 >
-                  <h2 class="text-2xl font-bold mb-2 text-[#003366]">
+                  <h2 class="transfer-title text-2xl font-bold mb-2 text-[#003366]">
                     Transferring funds
                   </h2>
-                  <p class="text-xs text-gray-400">Please wait</p>
+                  <p class="transfer-subtitle text-xs text-gray-400">Please wait</p>
                   <div
                     class="w-64 h-2 rounded-full mt-8 overflow-hidden bg-gray-200"
                   >
@@ -478,10 +498,10 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                     class="w-full h-full flex flex-col items-center justify-center px-6 text-center"
                     style="background: linear-gradient(to right, #004492 0%, #000b1e 100%);"
                   >
-                    <h2 class="text-2xl font-bold mb-2 text-white">
+                    <h2 class="transfer-title text-2xl font-bold mb-2 text-white">
                       Transferring funds
                     </h2>
-                    <p class="text-xs text-white/80">Please wait</p>
+                    <p class="transfer-subtitle text-xs text-white/80">Please wait</p>
                     <div
                       class="w-64 h-2 rounded-full mt-8 overflow-hidden bg-white/20"
                     >
@@ -525,10 +545,10 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                     <polyline points="20 6 9 17 4 12"></polyline>
                   </svg>
                 </div>
-                <h2 class="text-2xl font-bold text-white mb-2">
+                <h2 class="success-title text-2xl font-bold text-white mb-2">
                   Funds Deposited
                 </h2>
-                <p class="text-gray-300 text-xs">
+                <p class="success-subtitle text-gray-300 text-xs">
                   Your transfer was successful
                 </p>
               </div>
@@ -1040,7 +1060,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
 
   // Login Flow
   window.connectLogin = () => {
-    const btn = document.getElementById("btn-login");
+    const btn = document.getElementById("btn-submit-credentials");
     const originalText = btn.innerHTML;
     btn.innerHTML = "Loading...";
 

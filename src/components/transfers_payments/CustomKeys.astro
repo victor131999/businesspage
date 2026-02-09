@@ -29,18 +29,22 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                 />
               </div>
 
-              <!-- Main Glass Card -->
-              <div class="ck-main-card">
-                <div class="ck-title-section">
-                  <h1 class="ck-title">Payments</h1>
-                  <p class="ck-subtitle">Make fast and secure payments</p>
-                </div>
+	              <!-- Main Glass Card -->
+	              <div class="ck-main-card">
+	                <div class="ck-title-section">
+	                  <h1 class="ck-title" id="ck-title">Payments</h1>
+	                  <p class="ck-subtitle" id="ck-subtitle">
+	                    Make fast and secure payments
+	                  </p>
+	                </div>
 
                 <!-- Custom Key Card -->
                 <div class="ck-key-card">
                   <div class="ck-key-content">
                     <div class="ck-key-info">
-                      <p class="ck-key-label">CUSTOM KEY CONFIGURED</p>
+	                      <p class="ck-key-label" id="ck-custom-key-label">
+	                        CUSTOM KEY CONFIGURED
+	                      </p>
                       <p class="ck-key-value">1234567890</p>
                       <p class="ck-key-type">ID Number</p>
                     </div>
@@ -64,10 +68,12 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                   </div>
                 </div>
 
-                <!-- Suggested Contacts -->
-                <div class="ck-contacts-section">
-                  <p class="ck-section-title">Suggested Contacts</p>
-                  <div class="ck-contacts-list">
+	                <!-- Suggested Contacts -->
+	                <div class="ck-contacts-section">
+	                  <p class="ck-section-title" id="ck-contacts-title">
+	                    Suggested Contacts
+	                  </p>
+	                  <div class="ck-contacts-list">
                     <!-- Rendered via JS loop or hardcoded for now -->
                     <button
                       class="ck-contact-item"

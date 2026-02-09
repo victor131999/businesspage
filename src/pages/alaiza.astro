@@ -3353,6 +3353,116 @@ import "../components/design-system/tokens.css";
     const demoBtn = document.querySelector(".welcome-demo-button");
     if (demoBtn) demoBtn.textContent = t.hero.demoButton;
 
+    // Device previews text (AlaizaApp / AlaizaChatApp)
+    const deviceText = {
+      en: {
+        scoreLabel: "Your Zelify Score",
+        cards: {
+          stability: {
+            title: "Stability",
+            desc: "Turning your spending data into clear insights for smarter decisions.",
+            meta: "Confidence 85%",
+          },
+          intelligence: {
+            title: "Intelligence",
+            desc: "Turn data into clear insights to optimize your spending.",
+            meta: "Intelligence 85%",
+          },
+          discipline: {
+            title: "Discipline",
+            desc: "Evaluate consistency in managing finances and meeting goals.",
+            meta: "Habit 75%",
+          },
+        },
+        pills: {
+          streak: "Streak",
+          graph: "Graph",
+          rewards: "Discounts",
+          learn: "Learn",
+        },
+        scoreSystem: "Score System",
+        scoreModalSubtitle: "Zelify Score Criteria",
+        scoreModalDesc: "Your Zelify score is calculated based on the following criteria:",
+        close: "Close",
+        chatBack: "< Back",
+        chatSubtitle: "AI Financial Assistant",
+        chatInitial: "Hi! I'm Alaiza, your AI financial assistant. How can I help you today?",
+        chatPlaceholder: "Type your message...",
+      },
+      es: {
+        scoreLabel: "Tu Puntuación Zelify",
+        cards: {
+          stability: {
+            title: "Estabilidad",
+            desc: "Transformando tus datos de gastos en ideas claras para mejores decisiones.",
+            meta: "Confianza 85%",
+          },
+          intelligence: {
+            title: "Inteligencia",
+            desc: "Transforma tus datos en insights claros para optimizar tu consumo.",
+            meta: "Inteligencia 85%",
+          },
+          discipline: {
+            title: "Disciplina",
+            desc: "Evalúa tu consistencia en el manejo de finanzas y el cumplimiento de tus metas.",
+            meta: "Hábito 75%",
+          },
+        },
+        pills: {
+          streak: "Racha",
+          graph: "Gráfico",
+          rewards: "Descuentos",
+          learn: "Aprender",
+        },
+        scoreSystem: "Sistema de Puntuación",
+        scoreModalSubtitle: "Criterios de Puntuación Zelify",
+        scoreModalDesc: "Tu puntuación Zelify se calcula con base en los siguientes criterios:",
+        close: "Cerrar",
+        chatBack: "< Atrás",
+        chatSubtitle: "AI Financial Assistant",
+        chatInitial: "¡Hola! Soy Alaiza, tu asistente financiero IA. ¿En qué puedo ayudarte hoy?",
+        chatPlaceholder: "Escribe tu mensaje...",
+      },
+    }[langKey];
+
+    if (deviceText) {
+      const setTextById = (id, value) => {
+        const el = document.getElementById(id);
+        if (el && typeof value === "string") el.textContent = value;
+      };
+
+      setTextById("alaiza-score-label", deviceText.scoreLabel);
+      setTextById("alaiza-card-stability-title", deviceText.cards.stability.title);
+      setTextById("alaiza-card-stability-title-inactive", deviceText.cards.stability.title);
+      setTextById("alaiza-card-stability-desc", deviceText.cards.stability.desc);
+      setTextById("alaiza-card-stability-meta", deviceText.cards.stability.meta);
+
+      setTextById("alaiza-card-intelligence-title", deviceText.cards.intelligence.title);
+      setTextById("alaiza-card-intelligence-title-inactive", deviceText.cards.intelligence.title);
+      setTextById("alaiza-card-intelligence-desc", deviceText.cards.intelligence.desc);
+      setTextById("alaiza-card-intelligence-meta", deviceText.cards.intelligence.meta);
+
+      setTextById("alaiza-card-discipline-title", deviceText.cards.discipline.title);
+      setTextById("alaiza-card-discipline-title-inactive", deviceText.cards.discipline.title);
+      setTextById("alaiza-card-discipline-desc", deviceText.cards.discipline.desc);
+      setTextById("alaiza-card-discipline-meta", deviceText.cards.discipline.meta);
+
+      setTextById("alaiza-pill-streak", deviceText.pills.streak);
+      setTextById("alaiza-pill-graph", deviceText.pills.graph);
+      setTextById("alaiza-pill-rewards", deviceText.pills.rewards);
+      setTextById("alaiza-pill-learn", deviceText.pills.learn);
+      setTextById("alaiza-score-system-label", deviceText.scoreSystem);
+      setTextById("alaiza-score-modal-subtitle", deviceText.scoreModalSubtitle);
+      setTextById("alaiza-score-modal-desc", deviceText.scoreModalDesc);
+      setTextById("alaiza-score-modal-close", deviceText.close);
+
+      setTextById("alaiza-chat-back", deviceText.chatBack);
+      setTextById("alaiza-chat-subtitle", deviceText.chatSubtitle);
+      setTextById("alaiza-chat-initial", deviceText.chatInitial);
+      const chatInput = document.getElementById("chat-input");
+      if (chatInput) chatInput.setAttribute("placeholder", deviceText.chatPlaceholder);
+    }
+
     // View Switcher buttons
     const viewButtons = document.querySelectorAll(".view-btn");
     if (viewButtons.length >= 3) {

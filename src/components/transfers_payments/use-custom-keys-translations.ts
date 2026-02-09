@@ -90,7 +90,7 @@ type CustomKeysTranslations = {
   };
 };
 
-const CUSTOM_KEYS_TRANSLATIONS: Record<Language, CustomKeysTranslations> = {
+export const CUSTOM_KEYS_TRANSLATIONS: Record<Language, CustomKeysTranslations> = {
   en: {
     breadcrumb: "Custom Keys",
     preview: {

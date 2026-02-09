@@ -63,80 +63,173 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
             visibleCount: 3,
           };
 
-          const notificationsData = {
-            expenses: [
-              {
-                title: "Gasto inusual",
-                message:
-                  "$250 en restaurantes esta semana, 60% más que tu promedio.",
-                color: "#10B981",
-                iconPath:
-                  "M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6",
-              },
-              {
-                title: "Suscripción detectada",
-                message:
-                  "Nuevo cargo recurrente de $14.99 identificado para 'Streaming Plus'.",
-                color: "#10B981",
-                iconPath: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z",
-              },
-            ],
-            income: [
-              {
-                title: "Ingreso recibido",
-                message:
-                  "Tu salario de $3,200 ha sido depositado exitosamente.",
-                color: "#3B82F6",
-                iconPath:
-                  "M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6 M7 12h10",
-              },
-              {
-                title: "Pago de bono",
-                message: "Recibiste un bono por desempeño de $500.",
-                color: "#3B82F6",
-                iconPath:
-                  "M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6 M7 12h10",
-              },
-            ],
-            savings: [
-              {
-                title: "¡Meta alcanzada!",
-                message:
-                  "¡Llegaste al 50% de tu meta de ahorro 'Vacaciones'. Sigue así!",
-                color: "#8B5CF6",
-                iconPath: "M3 10h18 M8 4v6 M16 4v6 M3 4h18v18H3z",
-              },
-              {
-                title: "Ahorro Potencial",
-                message: "Reduce entretenimiento 20% y ahorra $120 este mes.",
-                color: "#8B5CF6",
-                iconPath: "M3 10h18 M8 4v6 M16 4v6 M3 4h18v18H3z",
-              },
-            ],
-            budget: [
-              {
-                title: "Alerta de presupuesto",
-                message: "Has usado 85% de tu presupuesto de Compras este mes.",
-                color: "#F59E0B",
-                iconPath: "M18 20V10 M12 20V4 M6 20V14",
-              },
-              {
-                title: "Riesgo de sobregasto",
-                message:
-                  "Se proyecta que excederás tu presupuesto de Cenas para el viernes.",
-                color: "#F59E0B",
-                iconPath: "M18 20V10 M12 20V4 M6 20V14",
-              },
-            ],
-          };
+	          const NOTIFICATIONS_BY_LANG = {
+	            es: {
+	              expenses: [
+	                {
+	                  title: "Gasto inusual",
+	                  message:
+	                    "$250 en restaurantes esta semana, 60% más que tu promedio.",
+	                  color: "#10B981",
+	                  iconPath:
+	                    "M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6",
+	                },
+	                {
+	                  title: "Suscripción detectada",
+	                  message:
+	                    "Nuevo cargo recurrente de $14.99 identificado para 'Streaming Plus'.",
+	                  color: "#10B981",
+	                  iconPath: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z",
+	                },
+	              ],
+	              income: [
+	                {
+	                  title: "Ingreso recibido",
+	                  message:
+	                    "Tu salario de $3,200 ha sido depositado exitosamente.",
+	                  color: "#3B82F6",
+	                  iconPath:
+	                    "M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6 M7 12h10",
+	                },
+	                {
+	                  title: "Pago de bono",
+	                  message: "Recibiste un bono por desempeño de $500.",
+	                  color: "#3B82F6",
+	                  iconPath:
+	                    "M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6 M7 12h10",
+	                },
+	              ],
+	              savings: [
+	                {
+	                  title: "¡Meta alcanzada!",
+	                  message:
+	                    "¡Llegaste al 50% de tu meta de ahorro 'Vacaciones'. Sigue así!",
+	                  color: "#8B5CF6",
+	                  iconPath: "M3 10h18 M8 4v6 M16 4v6 M3 4h18v18H3z",
+	                },
+	                {
+	                  title: "Ahorro Potencial",
+	                  message: "Reduce entretenimiento 20% y ahorra $120 este mes.",
+	                  color: "#8B5CF6",
+	                  iconPath: "M3 10h18 M8 4v6 M16 4v6 M3 4h18v18H3z",
+	                },
+	              ],
+	              budget: [
+	                {
+	                  title: "Alerta de presupuesto",
+	                  message:
+	                    "Has usado 85% de tu presupuesto de Compras este mes.",
+	                  color: "#F59E0B",
+	                  iconPath: "M18 20V10 M12 20V4 M6 20V14",
+	                },
+	                {
+	                  title: "Riesgo de sobregasto",
+	                  message:
+	                    "Se proyecta que excederás tu presupuesto de Cenas para el viernes.",
+	                  color: "#F59E0B",
+	                  iconPath: "M18 20V10 M12 20V4 M6 20V14",
+	                },
+	              ],
+	            },
+	            en: {
+	              expenses: [
+	                {
+	                  title: "Unusual spend",
+	                  message:
+	                    "$250 in restaurants this week, 60% above your average.",
+	                  color: "#10B981",
+	                  iconPath:
+	                    "M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6",
+	                },
+	                {
+	                  title: "Subscription detected",
+	                  message:
+	                    "New recurring charge of $14.99 identified for “Streaming Plus”.",
+	                  color: "#10B981",
+	                  iconPath: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z",
+	                },
+	              ],
+	              income: [
+	                {
+	                  title: "Income received",
+	                  message:
+	                    "Your salary of $3,200 has been successfully deposited.",
+	                  color: "#3B82F6",
+	                  iconPath:
+	                    "M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6 M7 12h10",
+	                },
+	                {
+	                  title: "Bonus paid",
+	                  message: "You received a performance bonus of $500.",
+	                  color: "#3B82F6",
+	                  iconPath:
+	                    "M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6 M7 12h10",
+	                },
+	              ],
+	              savings: [
+	                {
+	                  title: "Goal reached!",
+	                  message:
+	                    "You're at 50% of your “Vacation” savings goal. Keep it up!",
+	                  color: "#8B5CF6",
+	                  iconPath: "M3 10h18 M8 4v6 M16 4v6 M3 4h18v18H3z",
+	                },
+	                {
+	                  title: "Potential savings",
+	                  message: "Cut entertainment by 20% and save $120 this month.",
+	                  color: "#8B5CF6",
+	                  iconPath: "M3 10h18 M8 4v6 M16 4v6 M3 4h18v18H3z",
+	                },
+	              ],
+	              budget: [
+	                {
+	                  title: "Budget alert",
+	                  message:
+	                    "You've used 85% of your Shopping budget this month.",
+	                  color: "#F59E0B",
+	                  iconPath: "M18 20V10 M12 20V4 M6 20V14",
+	                },
+	                {
+	                  title: "Overspending risk",
+	                  message:
+	                    "You're projected to exceed your Dining budget by Friday.",
+	                  color: "#F59E0B",
+	                  iconPath: "M18 20V10 M12 20V4 M6 20V14",
+	                },
+	              ],
+	            },
+	          };
 
-          // Create a pool of notifications
-          const allTemplates = [
-            ...notificationsData.expenses,
-            ...notificationsData.income,
-            ...notificationsData.savings,
-            ...notificationsData.budget,
-          ];
+	          const detectLangKey = () => {
+	            const stored = localStorage.getItem("ui-language");
+	            if (stored && stored.toUpperCase() === "EN") return "en";
+	            if (
+	              window.__uiLanguage &&
+	              String(window.__uiLanguage).toUpperCase() === "EN"
+	            )
+	              return "en";
+	            const locale =
+	              (navigator.languages && navigator.languages[0]) ||
+	              navigator.language ||
+	              "";
+	            return locale.toLowerCase().startsWith("es") ? "es" : "en";
+	          };
+
+	          let currentLangKey = detectLangKey();
+	          let notificationsData = NOTIFICATIONS_BY_LANG[currentLangKey];
+	          let allTemplates = [];
+
+	          const rebuildTemplates = () => {
+	            notificationsData = NOTIFICATIONS_BY_LANG[currentLangKey];
+	            allTemplates = [
+	              ...notificationsData.expenses,
+	              ...notificationsData.income,
+	              ...notificationsData.savings,
+	              ...notificationsData.budget,
+	            ];
+	          };
+
+	          rebuildTemplates();
 
           // State
           let activeNotifications = []; // Array of objects { id, template, timestampStr }
@@ -200,9 +293,12 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
               month: "long",
               day: "numeric",
             };
-            if (dateEl)
-              dateEl.textContent = now.toLocaleDateString("es-ES", dateOptions);
-          }
+	            if (dateEl)
+	              dateEl.textContent = now.toLocaleDateString(
+	                currentLangKey === "en" ? "en-US" : "es-ES",
+	                dateOptions,
+	              );
+	          }
 
           // --- Notification Logic ---
 
@@ -234,7 +330,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
             renderStack();
           }
 
-          function renderStack() {
+	          function renderStack() {
             const container = document.getElementById("aba-stack-container");
             if (!container) return;
 
@@ -352,7 +448,21 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                   card.style.zIndex = total - index; // 0 is front
                   card.style.opacity = index === 0 ? 1 : 1 - index * 0.15;
                   card.style.pointerEvents = index === 0 ? "auto" : "none";
-                }
+	          }
+
+	          // Language changes
+	          window.addEventListener("ui:languagechange", (event) => {
+	            const next =
+	              event?.detail?.language &&
+	              String(event.detail.language).toUpperCase() === "EN"
+	                ? "en"
+	                : "es";
+	            if (next === currentLangKey) return;
+	            currentLangKey = next;
+	            rebuildTemplates();
+	            updateTime();
+	            renderStack();
+	          });
               }
 
               card.addEventListener("click", (e) => {

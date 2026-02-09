@@ -84,12 +84,13 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                     >
                   </div>
 
-                  <!-- Label -->
-                  <div
-                    class="mb-2 text-xs font-light tracking-wide text-[#213f8c] opacity-80 pl-2"
-                  >
-                    Tu Puntuación Zelify
-                  </div>
+	                  <!-- Label -->
+	                  <div
+	                    class="mb-2 text-xs font-light tracking-wide text-[#213f8c] opacity-80 pl-2"
+	                    id="alaiza-score-label"
+	                  >
+	                    Tu Puntuación Zelify
+	                  </div>
 
                   <!-- Secondary Progress Bar -->
                   <div
@@ -131,37 +132,47 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                   </svg>
                 </div>
                 <div class="card-content flex-1 overflow-hidden">
-                  <div class="active-content hidden">
-                    <div class="mb-1 flex items-baseline gap-1.5">
-                      <h3
-                        class="text-[11px] font-semibold leading-tight text-gray-900"
-                      >
-                        Estabilidad
-                      </h3>
-                      <span class="text-xs font-bold text-gray-900">85%</span>
-                    </div>
+	                  <div class="active-content hidden">
+	                    <div class="mb-1 flex items-baseline gap-1.5">
+	                      <h3
+	                        class="text-[11px] font-semibold leading-tight text-gray-900"
+	                        id="alaiza-card-stability-title"
+	                      >
+	                        Estabilidad
+	                      </h3>
+	                      <span class="text-xs font-bold text-gray-900">85%</span>
+	                    </div>
                     <div
                       class="mb-1.5 h-1 w-full overflow-hidden rounded-full bg-gray-200"
                     >
                       <div class="h-full bg-[#10B981] w-[85%] rounded-full">
                       </div>
                     </div>
-                    <p class="text-[9px] leading-snug text-gray-700">
-                      Transformando tus datos de gastos en ideas claras,
-                      permitiendo decisiones más inteligentes y mejores
-                      resultados.
-                    </p>
-                  </div>
-                  <div class="inactive-content block">
-                    <p class="text-xs font-medium leading-tight text-gray-700">
-                      Estabilidad
-                    </p>
-                    <p class="mt-0.5 text-[10px] text-gray-500">
-                      Confianza 85%
-                    </p>
-                  </div>
-                </div>
-              </div>
+	                    <p
+	                      class="text-[9px] leading-snug text-gray-700"
+	                      id="alaiza-card-stability-desc"
+	                    >
+	                      Transformando tus datos de gastos en ideas claras,
+	                      permitiendo decisiones más inteligentes y mejores
+	                      resultados.
+	                    </p>
+	                  </div>
+	                  <div class="inactive-content block">
+	                    <p
+	                      class="text-xs font-medium leading-tight text-gray-700"
+	                      id="alaiza-card-stability-title-inactive"
+	                    >
+	                      Estabilidad
+	                    </p>
+	                    <p
+	                      class="mt-0.5 text-[10px] text-gray-500"
+	                      id="alaiza-card-stability-meta"
+	                    >
+	                      Confianza 85%
+	                    </p>
+	                  </div>
+	                </div>
+	              </div>
 
               <!-- Card 1: Intelligence -->
               <div
@@ -190,36 +201,43 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                   </svg>
                 </div>
                 <div class="card-content flex-1 overflow-hidden">
-                  <div class="active-content hidden">
-                    <div class="mb-1 flex items-baseline gap-1.5">
-                      <h3
-                        class="text-[11px] font-semibold leading-tight text-gray-900"
-                      >
-                        Inteligencia
-                      </h3>
-                      <span class="text-xs font-bold text-gray-900">85%</span>
-                    </div>
+	                  <div class="active-content hidden">
+	                    <div class="mb-1 flex items-baseline gap-1.5">
+	                      <h3
+	                        class="text-[11px] font-semibold leading-tight text-gray-900"
+	                        id="alaiza-card-intelligence-title"
+	                      >
+	                        Inteligencia
+	                      </h3>
+	                      <span class="text-xs font-bold text-gray-900">85%</span>
+	                    </div>
                     <div
                       class="mb-1.5 h-1 w-full overflow-hidden rounded-full bg-gray-200"
                     >
                       <div class="h-full bg-[#10B981] w-[85%] rounded-full">
                       </div>
                     </div>
-                    <p class="text-[9px] leading-snug text-gray-700">
-                      Transforma tus datos en insights claros para optimizar tu
-                      consumo.
-                    </p>
-                  </div>
-                  <div class="inactive-content block">
-                    <p class="text-xs font-medium leading-tight text-gray-700">
-                      Inteligencia
-                    </p>
-                    <p class="mt-0.5 text-[10px] text-gray-500">
-                      Inteligencia 85%
-                    </p>
-                  </div>
-                </div>
-              </div>
+	                    <p
+	                      class="text-[9px] leading-snug text-gray-700"
+	                      id="alaiza-card-intelligence-desc"
+	                    >
+	                      Transforma tus datos en insights claros para optimizar tu
+	                      consumo.
+	                    </p>
+	                  </div>
+	                  <div class="inactive-content block">
+	                    <p
+	                      class="text-xs font-medium leading-tight text-gray-700"
+	                      id="alaiza-card-intelligence-title-inactive"
+	                    >
+	                      Inteligencia
+	                    </p>
+	                    <p class="mt-0.5 text-[10px] text-gray-500">
+	                      <span id="alaiza-card-intelligence-meta">Inteligencia 85%</span>
+	                    </p>
+	                  </div>
+	                </div>
+	              </div>
 
               <!-- Card 2: Discipline -->
               <div
@@ -244,34 +262,43 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                   </svg>
                 </div>
                 <div class="card-content flex-1 overflow-hidden">
-                  <div class="active-content hidden">
-                    <div class="mb-1 flex items-baseline gap-1.5">
-                      <h3
-                        class="text-[11px] font-semibold leading-tight text-gray-900"
-                      >
-                        Disciplina
-                      </h3>
-                      <span class="text-xs font-bold text-gray-900">75%</span>
-                    </div>
+	                  <div class="active-content hidden">
+	                    <div class="mb-1 flex items-baseline gap-1.5">
+	                      <h3
+	                        class="text-[11px] font-semibold leading-tight text-gray-900"
+	                        id="alaiza-card-discipline-title"
+	                      >
+	                        Disciplina
+	                      </h3>
+	                      <span class="text-xs font-bold text-gray-900">75%</span>
+	                    </div>
                     <div
                       class="mb-1.5 h-1 w-full overflow-hidden rounded-full bg-gray-200"
                     >
                       <div class="h-full bg-[#10B981] w-[75%] rounded-full">
                       </div>
                     </div>
-                    <p class="text-[9px] leading-snug text-gray-700">
-                      Evalúa tu consistencia en el manejo de finanzas y el
-                      cumplimiento de tus metas financieras.
-                    </p>
-                  </div>
-                  <div class="inactive-content block">
-                    <p class="text-xs font-medium leading-tight text-gray-700">
-                      Disciplina
-                    </p>
-                    <p class="mt-0.5 text-[10px] text-gray-500">Hábito 75%</p>
-                  </div>
-                </div>
-              </div>
+	                    <p
+	                      class="text-[9px] leading-snug text-gray-700"
+	                      id="alaiza-card-discipline-desc"
+	                    >
+	                      Evalúa tu consistencia en el manejo de finanzas y el
+	                      cumplimiento de tus metas financieras.
+	                    </p>
+	                  </div>
+	                  <div class="inactive-content block">
+	                    <p
+	                      class="text-xs font-medium leading-tight text-gray-700"
+	                      id="alaiza-card-discipline-title-inactive"
+	                    >
+	                      Disciplina
+	                    </p>
+	                    <p class="mt-0.5 text-[10px] text-gray-500">
+	                      <span id="alaiza-card-discipline-meta">Hábito 75%</span>
+	                    </p>
+	                  </div>
+	                </div>
+	              </div>
             </div>
           </div>
 
@@ -280,14 +307,14 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
             class="flex-shrink-0 bg-white border-t border-gray-200 px-6 py-3 space-y-2.5"
           >
             <!-- Action Pills -->
-            <div
-              class="flex justify-between gap-2 overflow-x-auto pb-1 scrollbar-hide"
-            >
-              <button class="nav-pill" data-screen="streak">Racha</button>
-              <button class="nav-pill" data-screen="graph">Gráfico</button>
-              <button class="nav-pill" data-screen="rewards">Descuentos</button>
-              <button class="nav-pill" data-screen="learn">Aprender</button>
-            </div>
+	            <div
+	              class="flex justify-between gap-2 overflow-x-auto pb-1 scrollbar-hide"
+	            >
+	              <button class="nav-pill" data-screen="streak" id="alaiza-pill-streak">Racha</button>
+	              <button class="nav-pill" data-screen="graph" id="alaiza-pill-graph">Gráfico</button>
+	              <button class="nav-pill" data-screen="rewards" id="alaiza-pill-rewards">Descuentos</button>
+	              <button class="nav-pill" data-screen="learn" id="alaiza-pill-learn">Aprender</button>
+	            </div>
 
             <!-- Score System Button -->
             <button
@@ -299,7 +326,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
               <div class="absolute top-0 left-0 right-0 h-[1px] bg-white/20">
               </div>
 
-              <div class="flex flex-col items-center gap-0.5 relative z-10">
+	              <div class="flex flex-col items-center gap-0.5 relative z-10">
                 <svg
                   width="16"
                   height="16"
@@ -313,11 +340,13 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                 >
                   <path d="M18 15L12 9L6 15"></path>
                 </svg>
-                <span class="text-[13px] font-semibold tracking-wide"
-                  >Sistema de Puntuación</span
-                >
-              </div>
-            </button>
+	                <span
+	                  class="text-[13px] font-semibold tracking-wide"
+	                  id="alaiza-score-system-label"
+	                  >Sistema de Puntuación</span
+	                >
+	              </div>
+	            </button>
           </div>
         </div>
 
@@ -357,13 +386,19 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
             <h2 class="text-xl font-bold text-gray-900 mb-2">
               Zelify Score Criteria
             </h2>
-            <p class="text-xs text-gray-500 mb-6 leading-relaxed">
-              Criterios de Puntuación Zelify
-            </p>
-            <p class="text-xs text-gray-500 mb-6 leading-relaxed">
-              Tu puntuación Zelify se calcula con base en los siguientes
-              criterios:
-            </p>
+	            <p
+	              class="text-xs text-gray-500 mb-6 leading-relaxed"
+	              id="alaiza-score-modal-subtitle"
+	            >
+	              Criterios de Puntuación Zelify
+	            </p>
+	            <p
+	              class="text-xs text-gray-500 mb-6 leading-relaxed"
+	              id="alaiza-score-modal-desc"
+	            >
+	              Tu puntuación Zelify se calcula con base en los siguientes
+	              criterios:
+	            </p>
 
             <div class="space-y-3">
               <!-- Item 1 -->
@@ -398,12 +433,12 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
               </div>
             </div>
 
-            <button
-              id="close-modal-btn"
-              class="mt-6 w-full rounded-xl bg-[#213f8c] py-3 text-sm font-bold text-white shadow-lg shadow-blue-900/20 active:scale-[0.98] transition-transform"
-            >
-              Cerrar
-            </button>
+	            <button
+	              id="close-modal-btn"
+	              class="mt-6 w-full rounded-xl bg-[#213f8c] py-3 text-sm font-bold text-white shadow-lg shadow-blue-900/20 active:scale-[0.98] transition-transform"
+	            >
+	              <span id="alaiza-score-modal-close">Cerrar</span>
+	            </button>
           </div>
         </div>
       </div>

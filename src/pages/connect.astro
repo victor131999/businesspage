@@ -3845,6 +3845,7 @@ import ConnectApp from "../components/connect/ConnectApp.astro";
               title: "Vinculación de cuenta bancaria",
               subtitle: "Vamos a vincular tu cuenta",
               searchPlaceholder: "Buscar bancos...",
+              continueBtn: "Continuar",
               authTitle:
                 "Por favor ingrese sus credenciales para conectar su cuenta bancaria",
               usernameLabel: "Usuario",
@@ -4022,6 +4023,7 @@ import ConnectApp from "../components/connect/ConnectApp.astro";
               title: "Bank account linking",
               subtitle: "Let's link your account",
               searchPlaceholder: "Search banks...",
+              continueBtn: "Continue",
               authTitle:
                 "Please enter your credentials to connect your bank account",
               usernameLabel: "Username",
@@ -4226,6 +4228,12 @@ import ConnectApp from "../components/connect/ConnectApp.astro";
         if (bankSearchInput)
           bankSearchInput.placeholder = t.device.bankLinking.searchPlaceholder;
 
+        const continueBtn = document.getElementById("btn-continue-banks");
+        if (continueBtn) {
+          const label = continueBtn.querySelector(".continue-banks-label");
+          if (label) label.textContent = t.device.bankLinking.continueBtn;
+        }
+
         // Auth Form
         const authTitle = document.querySelector(".bank-auth-title");
         if (
@@ -4259,7 +4267,11 @@ import ConnectApp from "../components/connect/ConnectApp.astro";
         }
 
         const submitBtn = document.getElementById("btn-submit-credentials");
-        if (submitBtn) submitBtn.textContent = t.device.bankLinking.submitBtn;
+        if (submitBtn) {
+          const span = submitBtn.querySelector("span");
+          if (span) span.textContent = t.device.bankLinking.submitBtn;
+          else submitBtn.textContent = t.device.bankLinking.submitBtn;
+        }
 
         // Loading/Success Screens
         const loadingTitle = document.getElementById("loading-text-container");
@@ -4273,12 +4285,11 @@ import ConnectApp from "../components/connect/ConnectApp.astro";
           loadingSubtitle.textContent = t.device.bankLinking.loadingSubtitle;
 
         const successTitle = document.querySelector(".success-title");
-        if (successTitle)
-          successTitle.textContent = t.device.bankLinking.successTitle;
+        if (successTitle) successTitle.textContent = t.device.deposit.successTitle;
 
         const successSubtitle = document.querySelector(".success-subtitle");
         if (successSubtitle)
-          successSubtitle.textContent = t.device.bankLinking.successSubtitle;
+          successSubtitle.textContent = t.device.deposit.successSubtitle;
 
         // Wallet Screen
         const walletTitle = document.querySelector(".wallet-title");
@@ -4322,6 +4333,19 @@ import ConnectApp from "../components/connect/ConnectApp.astro";
         const amountInput = document.querySelector(".deposit-amount-input");
         if (amountInput)
           amountInput.placeholder = t.device.deposit.amountPlaceholder;
+
+        const slideText = document.querySelector(".deposit-slide-text");
+        if (slideText) slideText.textContent = t.device.deposit.slideText;
+
+        const transferTitles = document.querySelectorAll(".transfer-title");
+        transferTitles.forEach((el) => {
+          el.textContent = t.device.deposit.transferTitle;
+        });
+
+        const transferSubtitles = document.querySelectorAll(".transfer-subtitle");
+        transferSubtitles.forEach((el) => {
+          el.textContent = t.device.deposit.transferSubtitle;
+        });
 
         // Security Section
         const secTitle = document.querySelector(".security-title");
