@@ -5,8 +5,10 @@ import ProductsPanel from "../components/productsPanel.astro";
 import { AlaizaAssistant } from "../components/AlaizaAssistant"; 
 
 
-const demoVideoUrl =
+const demoVideoUrlEs =
   "https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/demo_zelify.mp4";
+const demoVideoUrlEn =
+  "https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/demo_zelify_en.mp4";
 const demoVideoPoster = "";
 ---
 
@@ -24,16 +26,24 @@ const demoVideoPoster = "";
     <ProductsPanel />
     <section class="video-section">
       <div class="video-container">
-        {demoVideoUrl ? (
+        {demoVideoUrlEs ? (
           <div class="video-player" data-video-player>
             <video
               class="demo-video"
-              src={demoVideoUrl}
+              src={demoVideoUrlEs}
               poster={demoVideoPoster || undefined}
               preload="metadata"
               controls
               playsinline
+              data-video-es={demoVideoUrlEs}
+              data-video-en={demoVideoUrlEn}
             ></video>
+          </div>
+          <div class="video-note" role="note" data-video-note>
+            <span class="video-note__label">Consejo</span>
+            <span class="video-note__text">
+              Para ver el video en otro idioma, usa el switch del navbar y cambia a Español o Inglés.
+            </span>
           </div>
         ) : (
           <div class="video-placeholder">
@@ -44,6 +54,51 @@ const demoVideoPoster = "";
     </section>
   </body>
   <AlaizaAssistant client:load />
+  <script>
+    const resolveInitialLang = () => {
+      try {
+        const stored = localStorage.getItem("ui-language");
+        if (stored) return stored.toUpperCase() === "ES" ? "ES" : "EN";
+      } catch (error) {
+        console.warn("Unable to read stored language preference.", error);
+      }
+      return "EN";
+    };
+
+    const updateVideoByLanguage = (lang) => {
+      const video = document.querySelector(".demo-video");
+      const noteText = document.querySelector("[data-video-note] .video-note__text");
+      const noteLabel = document.querySelector("[data-video-note] .video-note__label");
+      if (!video) return;
+      const nextLang = lang === "ES" ? "ES" : "EN";
+      const src =
+        nextLang === "ES"
+          ? video.dataset.videoEs
+          : video.dataset.videoEn || video.dataset.videoEs;
+
+      if (noteText) {
+        noteText.textContent =
+          nextLang === "ES"
+            ? "Para ver el video en otro idioma, usa el switch del navbar y cambia a Español o Inglés."
+            : "To watch the video in another language, use the navbar switch and toggle to Spanish or English.";
+      }
+      if (noteLabel) {
+        noteLabel.textContent = nextLang === "ES" ? "Consejo" : "Tip";
+      }
+
+      if (!src || video.getAttribute("src") === src) return;
+      video.setAttribute("src", src);
+      video.load();
+    };
+
+    updateVideoByLanguage(resolveInitialLang());
+
+    window.addEventListener("ui:languagechange", (event) => {
+      const customEvent = event;
+      const lang = customEvent?.detail?.language || "EN";
+      updateVideoByLanguage(lang);
+    });
+  </script>
 </html>
 
 <style>
@@ -92,6 +147,7 @@ const demoVideoPoster = "";
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+    position: relative;
   }
 
   .demo-video {
@@ -119,6 +175,35 @@ const demoVideoPoster = "";
     font-family: monospace;
   }
 
+  .video-note {
+    margin: 1rem auto 0;
+    padding: 0.45rem 0.9rem;
+    font-size: 0.85rem;
+    color: #475569;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 999px;
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+    width: max-content;
+    max-width: min(92%, 960px);
+  }
+
+  .video-note__label {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #1f2937;
+    background: #e2e8f0;
+    border-radius: 999px;
+    padding: 0.2rem 0.5rem;
+    font-weight: 700;
+  }
+
   /* Responsive */
   @media (max-width: 768px) {
     .video-section {
@@ -130,6 +215,11 @@ const demoVideoPoster = "";
       padding: 2rem 1rem;
       font-size: 0.9rem;
     }
+
+    .video-note {
+      font-size: 0.85rem;
+      margin-top: 0.75rem;
+    }
   }
 
   @media (max-width: 480px) {
@@ -138,5 +228,3 @@ const demoVideoPoster = "";
     }
   }
 </style>
-
-
