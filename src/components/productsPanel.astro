@@ -65,7 +65,7 @@ import "../styles/navbar.css";
   const panel = document.getElementById("products-panel");
   const links = Array.from(panel.querySelectorAll(".pp-item"));
 
-  const normalizePath = (path) => (path || "/").replace(/\\/+$/, "") || "/";
+  const normalizePath = (path) => (path || "/").replace(/\/+$/, "") || "/";
 
   // Catálogo de contenidos por pestaña - Versión en Español
   const DATA_ES = {

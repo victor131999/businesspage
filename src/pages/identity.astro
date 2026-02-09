@@ -5,6 +5,7 @@ import IdentityApp from "../components/identity/IdentityApp.astro";
 import EmailQuoteForm from "../components/design-system/molecules/EmailQuoteForm.astro";
 import CtaGroup from "../components/design-system/molecules/CtaGroup.astro";
 import Button from "../components/design-system/atoms/Button.astro";
+import ContactFormHubSpot from "../components/design-system/organisms/ContactFormHubSpot.astro";
 import "../components/design-system/tokens.css";
 import { AlaizaAssistant } from "../components/AlaizaAssistant";
 ---
@@ -71,6 +72,9 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
         <IdentityApp />
       </div>
     </div>
+    <!-- Start of HubSpot Embed Code -->
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/50894304.js"></script>
+    <!-- End of HubSpot Embed Code -->
   </body>
 
   <!-- Sección de Control Total -->
@@ -209,107 +213,7 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
     </div>
   </section>
 
-  <!-- Sección de Contacto -->
-  <section class="contact-section">
-    <div class="contact-container">
-      <div class="contact-content">
-        <!-- Texto izquierdo -->
-        <div class="contact-text">
-          <h2 class="contact-title">
-            Comienza a construir el banco del futuro, hoy.
-          </h2>
-        </div>
-
-        <!-- Formulario derecho -->
-        <div class="contact-form-wrapper">
-          <div class="contact-form-card">
-            <h3 class="contact-form-title">Habla con nuestro equipo</h3>
-
-            <form class="contact-form" id="contactForm">
-              <div class="form-row">
-                <div class="form-group">
-                  <input
-                    type="text"
-                    id="nombres"
-                    placeholder="Nombres"
-                    required
-                  />
-                </div>
-                <div class="form-group">
-                  <input
-                    type="text"
-                    id="apellidos"
-                    placeholder="Apellidos"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="form-group">
-                  <input
-                    type="text"
-                    id="compania"
-                    placeholder="Nombre de la compañía"
-                    required
-                  />
-                </div>
-                <div class="form-group">
-                  <input
-                    type="email"
-                    id="email"
-                    placeholder="Email de la compañía"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="form-group">
-                  <select id="pais" required>
-                    <option value="">País</option>
-                    <option value="mx">México</option>
-                    <option value="co">Colombia</option>
-                    <option value="ar">Argentina</option>
-                    <option value="cl">Chile</option>
-                    <option value="pe">Perú</option>
-                    <option value="es">España</option>
-                    <option value="us">Estados Unidos</option>
-                  </select>
-                  <svg
-                    class="select-arrow"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <polyline points="6 9 12 15 18 9"></polyline>
-                  </svg>
-                </div>
-                <div class="form-group">
-                  <input
-                    type="tel"
-                    id="telefono"
-                    placeholder="Teléfono (opcional)"
-                  />
-                </div>
-              </div>
-
-              <p class="contact-legal">
-                Al enviar este formulario, aceptas nuestros <a href="#"
-                  >Términos de Servicio</a
-                > y <a href="#">Política de Privacidad</a>.
-              </p>
-
-              <button type="submit" class="contact-submit-btn">
-                Hablemos
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <ContactFormHubSpot headline="Comienza a construir el banco del futuro, hoy." formTitle="Habla con nuestro equipo" />
 
   <!-- Sección de FAQ -->
   <section class="faq-section">
@@ -1714,210 +1618,6 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
     }
   }
 
-  /* Sección de Contacto */
-  .contact-section {
-    width: 100%;
-    background: #ffffff;
-    padding: 5rem 2rem;
-  }
-
-  .contact-container {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .contact-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-  }
-
-  .contact-text {
-    display: flex;
-    align-items: center;
-  }
-
-  .contact-title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    line-height: 1.2;
-    color: #0a203f;
-    margin: 0;
-    font-weight: 400;
-    text-align: left;
-  }
-
-  .contact-title br {
-    display: block;
-  }
-
-  .contact-form-wrapper {
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  .contact-form-card {
-    background: #f3f4f6;
-    border-radius: 24px;
-    padding: 3rem;
-    max-width: 600px;
-    width: 100%;
-  }
-
-  .contact-form-title {
-    font-size: 1.75rem;
-    font-weight: 600;
-    color: #0a203f;
-    margin: 0 0 2rem 0;
-  }
-
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-
-  .form-group {
-    position: relative;
-  }
-
-  .contact-form input,
-  .contact-form select {
-    width: 100%;
-    padding: 0.875rem 1rem;
-    border: none;
-    border-radius: 12px;
-    background: #ffffff;
-    font-size: 0.95rem;
-    color: #0a203f;
-    font-family: inherit;
-    outline: none;
-    transition: all 0.2s ease;
-  }
-
-  .contact-form input::placeholder {
-    color: #9ca3af;
-  }
-
-  .contact-form input:focus,
-  .contact-form select:focus {
-    box-shadow: 0 0 0 3px rgba(33, 63, 140, 0.1);
-  }
-
-  .contact-form select {
-    appearance: none;
-    cursor: pointer;
-    padding-right: 2.5rem;
-  }
-
-  .select-arrow {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 16px;
-    height: 16px;
-    color: #6b7280;
-    pointer-events: none;
-  }
-
-  .contact-legal {
-    font-size: 0.85rem;
-    color: #6b7280;
-    line-height: 1.5;
-    margin: 0.5rem 0 0 0;
-  }
-
-  .contact-legal a {
-    color: #6b7280;
-    text-decoration: underline;
-    transition: color 0.2s ease;
-  }
-
-  .contact-legal a:hover {
-    color: #213f8c;
-  }
-
-  .contact-submit-btn {
-    width: 100%;
-    padding: 1rem 2rem;
-    background: #8dff2b;
-    color: #082436;
-    border: none;
-    border-radius: 12px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    margin-top: 1rem;
-    box-shadow: 0 10px 20px rgba(141, 255, 43, 0.45);
-  }
-
-  .contact-submit-btn:hover {
-    background: #a5ff4d;
-    transform: translateY(-2px);
-    box-shadow: 0 12px 24px rgba(141, 255, 43, 0.5);
-  }
-
-  .contact-submit-btn:active {
-    transform: translateY(0);
-  }
-
-  /* Tablet */
-  @media (max-width: 1024px) {
-    .contact-section {
-      padding: 4rem 2rem;
-    }
-
-    .contact-content {
-      gap: 3rem;
-    }
-
-    .contact-form-card {
-      padding: 2.5rem;
-    }
-  }
-
-  /* Mobile */
-  @media (max-width: 768px) {
-    .contact-section {
-      padding: 3rem 1.5rem;
-    }
-
-    .contact-content {
-      grid-template-columns: 1fr;
-      gap: 3rem;
-    }
-
-    .contact-title {
-      font-size: 2.5rem;
-      text-align: center;
-    }
-
-    .contact-form-wrapper {
-      justify-content: center;
-    }
-
-    .contact-form-card {
-      padding: 2rem;
-    }
-
-    .form-row {
-      grid-template-columns: 1fr;
-    }
-
-    .contact-form-title {
-      font-size: 1.5rem;
-      text-align: center;
-    }
-  }
-
   /* Sección de FAQ */
   .faq-section {
     width: 100%;
@@ -2300,7 +2000,7 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
           surnames: "Apellidos",
           company: "Nombre de la compañía",
           email: "Email de la compañía",
-          phone: "Teléfono (opcional)",
+          phone: "Teléfono",
         },
         countryDefault: "País",
         legal:
@@ -2430,7 +2130,7 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
           surnames: "Last Name",
           company: "Company Name",
           email: "Company Email",
-          phone: "Phone (optional)",
+          phone: "Phone",
         },
         countryDefault: "Country",
         legal:
@@ -2512,7 +2212,7 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
     },
   };
 
-  function updateIdentityContent(lang) {
+  function updateIdentityContent(lang: keyof typeof identityTranslations) {
     const t = identityTranslations[lang] || identityTranslations.es;
     currentLang = lang;
 
@@ -2598,9 +2298,9 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
         phone.placeholder = t.contact.placeholders.phone;
 
       const submitBtn = contactForm.querySelector(".contact-submit-btn");
-      if (submitBtn) submitBtn.textContent = t.contact.submit;
+      if (submitBtn instanceof HTMLInputElement) submitBtn.value = t.contact.submit;
 
-      const legal = contactForm.querySelector(".contact-legal");
+      const legal = contactForm.querySelector(".contact-legal-terms");
       if (legal) legal.innerHTML = t.contact.legal;
 
       const countrySelect = contactForm.querySelector("#pais");
@@ -2673,9 +2373,9 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
   });
 
   document.addEventListener("DOMContentLoaded", () => {
-    const stored = localStorage.getItem("ui-language") || "es";
+    const stored = (localStorage.getItem("ui-language") === "en") ? "en" : "es";
     // Delay slightly to ensure elements exist
-    setTimeout(() => updateIdentityContent(stored.toLowerCase()), 100);
+    setTimeout(() => updateIdentityContent(stored), 100);
   });
 
   let currentStep = 1;
@@ -2784,7 +2484,7 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
     const loginLink = document.getElementById("login-link");
     if (!titleEl || !descEl || !loginLink) return;
 
-    const t = identityTranslations[currentLang] || identityTranslations.es;
+    const t = identityTranslations[currentLang as keyof typeof identityTranslations] || identityTranslations.es;
 
     if (step === 1) {
       titleEl.textContent = t.steps.step1.title;
@@ -2890,7 +2590,7 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
 
     let hasErrors = false;
 
-    const t = identityTranslations[currentLang] || identityTranslations.es;
+    const t = identityTranslations[currentLang as keyof typeof identityTranslations] || identityTranslations.es;
 
     if (!validateFullName(fullName)) {
       showFieldError("fullName", t.steps.step1.errorName);
@@ -2989,7 +2689,7 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
     const phone = phoneEl.value.trim();
 
     if (!validatePhone(phone)) {
-      const t = identityTranslations[currentLang] || identityTranslations.es;
+      const t = identityTranslations[currentLang as keyof typeof identityTranslations] || identityTranslations.es;
       showFieldError("phone", t.steps.step3.errorPhone);
       return;
     }
@@ -3066,7 +2766,7 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
 
     let hasErrors = false;
 
-    const t = identityTranslations[currentLang] || identityTranslations.es;
+    const t = identityTranslations[currentLang as keyof typeof identityTranslations] || identityTranslations.es;
 
     if (!validatePassword(password)) {
       showFieldError("password", t.steps.step5.errorPass);
@@ -3124,23 +2824,6 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
         card.classList.toggle("flipped");
       }
     });
-  });
-
-  // Formulario de contacto
-  document.getElementById("contactForm")?.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const formData = {
-      nombres: getInputValue("nombres"),
-      apellidos: getInputValue("apellidos"),
-      compania: getInputValue("compania"),
-      email: getInputValue("email"),
-      pais: getInputValue("pais"),
-      telefono: getInputValue("telefono"),
-    };
-
-    console.log("Formulario enviado:", formData);
-    // Aquí podrías hacer una llamada a la API para enviar el formulario
   });
 
   // FAQ Accordion

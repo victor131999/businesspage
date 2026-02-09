@@ -9,6 +9,7 @@ import AuthApp from "../components/auth/AuthApp.astro";
 import EmailQuoteForm from "../components/design-system/molecules/EmailQuoteForm.astro";
 import CtaGroup from "../components/design-system/molecules/CtaGroup.astro";
 import Button from "../components/design-system/atoms/Button.astro";
+import ContactFormHubSpot from "../components/design-system/organisms/ContactFormHubSpot.astro";
 ---
 
 <html lang="es">
@@ -431,29 +432,7 @@ import Button from "../components/design-system/atoms/Button.astro";
     </section>
 
     <!-- Sección de Contacto -->
-    <section class="contact-section">
-      <div class="contact-inner">
-        <div class="contact-grid">
-          <div class="contact-headline">
-            <h2 class="contact-title">
-              Empieza hoy<br />
-              y protege<br />
-              tu plataforma.
-            </h2>
-          </div>
-          <div class="contact-form-card">
-            <h3 class="contact-form-title">Habla con nuestro equipo</h3>
-            <div
-              class="hs-form-frame"
-              data-region="na1"
-              data-form-id="c2a86711-5b88-4cf7-9fbf-0d5c25a73d96"
-              data-portal-id="50894304"
-            >
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <ContactFormHubSpot headline="Empieza hoy y protege tu plataforma." formTitle="Habla con nuestro equipo" />
 
     <!-- Sección de FAQ -->
     <section class="faq-section">
@@ -689,6 +668,9 @@ import Button from "../components/design-system/atoms/Button.astro";
         </div>
       </div>
     </footer>
+    <!-- Start of HubSpot Embed Code -->
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/50894304.js"></script>
+    <!-- End of HubSpot Embed Code -->
   </body>
 </html>
 
@@ -1613,68 +1595,35 @@ import Button from "../components/design-system/atoms/Button.astro";
 
   .contact-form-card {
     background: #f3f4f6;
-    border-radius: 24px;
+    border-radius: 28px;
     width: 100%;
     justify-self: end;
+    padding: 2.5rem 2.5rem 2rem;
+    overflow: hidden;
   }
 
   .contact-form-title {
     font-size: 1.75rem;
     font-weight: 600;
     color: #0a203f;
-    margin: 0 0 2rem 0;
-    text-align: center;
+    margin: 0;
+    padding: 0 0.5rem 1.5rem;
+    text-align: left;
   }
 
   .contact-form-card .hs-form-frame {
     min-height: 280px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #fff;
   }
 
-  .contact-form-card .hs-form input[type="text"],
-  .contact-form-card .hs-form input[type="email"],
-  .contact-form-card .hs-form input[type="tel"],
-  .contact-form-card .hs-form select,
-  .contact-form-card .hs-form textarea {
-    width: 100%;
-    padding: 0.875rem 1rem;
-    border: 1px solid #e5e7eb;
-    border-radius: 10px;
-    background: #ffffff;
-    font-size: 0.95rem;
-    color: #0a203f;
-    font-family: inherit;
-    outline: none;
-    transition:
-      border-color 0.2s ease,
-      box-shadow 0.2s ease;
+  .contact-form-card .hs-form-frame iframe {
+    border-radius: 20px;
   }
 
-  .contact-form-card .hs-form input:focus,
-  .contact-form-card .hs-form select:focus,
-  .contact-form-card .hs-form textarea:focus {
-    border-color: #213f8c;
-    box-shadow: 0 0 0 3px rgba(33, 63, 140, 0.1);
-  }
-
-  .contact-form-card .hs-form .hs-button {
-    width: 100%;
-    background: #8dff2b !important;
-    color: #082436 !important;
-    border: none !important;
-    border-radius: 10px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition:
-      background 0.2s ease,
-      transform 0.2s ease;
-    margin-top: 1rem;
-  }
-
-  .contact-form-card .hs-form .hs-button:hover {
-    background: #a5ff4d !important;
-    transform: translateY(-1px);
-  }
+  /* El contenido del formulario (inputs, botón) lo controla HubSpot dentro del iframe;
+     no podemos estilizarlo desde nuestra CSS. Solo estilizamos el contenedor. */
 
   @media (max-width: 1024px) {
     .contact-section {
@@ -2321,7 +2270,7 @@ import Button from "../components/design-system/atoms/Button.astro";
           surnames: "Apellidos",
           company: "Nombre de la compañía",
           email: "Email de la compañía",
-          phone: "Teléfono (opcional)",
+          phone: "Teléfono",
         },
         countryDefault: "País",
         legal:
@@ -2522,7 +2471,7 @@ import Button from "../components/design-system/atoms/Button.astro";
           surnames: "Last Name",
           company: "Company Name",
           email: "Company Email",
-          phone: "Phone (optional)",
+          phone: "Phone",
         },
         countryDefault: "Country",
         legal:

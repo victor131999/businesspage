@@ -8,6 +8,7 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
 import EmailQuoteForm from "../components/design-system/molecules/EmailQuoteForm.astro";
 import CtaGroup from "../components/design-system/molecules/CtaGroup.astro";
 import Button from "../components/design-system/atoms/Button.astro";
+import ContactFormHubSpot from "../components/design-system/organisms/ContactFormHubSpot.astro";
 import "../components/design-system/tokens.css";
 ---
 
@@ -432,106 +433,7 @@ import "../components/design-system/tokens.css";
     </section>
 
     <!-- Sección de Contacto -->
-    <section class="contact-section">
-      <div class="contact-container">
-        <div class="contact-content">
-          <!-- Texto izquierdo -->
-          <div class="contact-text">
-            <h2 class="contact-title">
-              Comienza a construir el banco del futuro, hoy.
-            </h2>
-          </div>
-
-          <!-- Formulario derecho -->
-          <div class="contact-form-wrapper">
-            <div class="contact-form-card">
-              <h3 class="contact-form-title">Habla con nuestro equipo</h3>
-
-              <form class="contact-form" id="contactForm">
-                <div class="form-row">
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      id="nombres"
-                      placeholder="Nombres"
-                      required
-                    />
-                  </div>
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      id="apellidos"
-                      placeholder="Apellidos"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div class="form-row">
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      id="compania"
-                      placeholder="Nombre de la compañía"
-                      required
-                    />
-                  </div>
-                  <div class="form-group">
-                    <input
-                      type="email"
-                      id="email"
-                      placeholder="Email de la compañía"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div class="form-row">
-                  <div class="form-group">
-                    <select id="pais" required>
-                      <option value="">País</option>
-                      <option value="mx">México</option>
-                      <option value="co">Colombia</option>
-                      <option value="ar">Argentina</option>
-                      <option value="cl">Chile</option>
-                      <option value="pe">Perú</option>
-                      <option value="es">España</option>
-                      <option value="us">Estados Unidos</option>
-                    </select>
-                    <svg
-                      class="select-arrow"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                  </div>
-                  <div class="form-group">
-                    <input
-                      type="tel"
-                      id="telefono"
-                      placeholder="Teléfono (opcional)"
-                    />
-                  </div>
-                </div>
-
-                <p class="contact-legal">
-                  Al enviar este formulario, aceptas nuestros <a href="#"
-                    >Términos de Servicio</a
-                  > y <a href="#">Política de Privacidad</a>.
-                </p>
-
-                <button type="submit" class="contact-submit-btn">
-                  Hablemos
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <ContactFormHubSpot headline="Comienza a construir el banco del futuro, hoy." formTitle="Habla con nuestro equipo" />
 
     <!-- Sección de FAQ -->
     <section class="faq-section">
@@ -764,6 +666,9 @@ import "../components/design-system/tokens.css";
       </div>
     </footer>
     <AlaizaAssistant client:load />
+    <!-- Start of HubSpot Embed Code -->
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/50894304.js"></script>
+    <!-- End of HubSpot Embed Code -->
   </body>
 </html>
 
@@ -3207,7 +3112,7 @@ import "../components/design-system/tokens.css";
           apellidos: "Apellidos",
           compania: "Nombre de la compañía",
           email: "Email de la compañía",
-          telefono: "Teléfono (opcional)",
+          telefono: "Teléfono",
         },
         countryDefault: "País",
         legal:
@@ -3372,7 +3277,7 @@ import "../components/design-system/tokens.css";
           apellidos: "Last Name",
           compania: "Company Name",
           email: "Company Email",
-          telefono: "Phone (optional)",
+          telefono: "Phone",
         },
         countryDefault: "Country",
         legal:
