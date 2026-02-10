@@ -173,7 +173,7 @@ export const ALAIZA_TRANSLATIONS = {
             identityDeep: [
                 "/audios/en/26-identity.wav",
                 "/audios/en/27-what-is-identity.wav",
-                "/audios/en/28-how-does-identity-work.wav"
+                "/audios/en/28-how-does-it-work-identity.wav"
             ],
 
             // AML

@@ -72,48 +72,6 @@ export const AlaizaAssistant = () => {
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [isOpen]);
 
-    // Listener de cambio de idioma
-    useEffect(() => {
-        const handleLanguageChange = (e: any) => {
-            if (e.detail && e.detail.language) {
-                const newLang = e.detail.language.toLowerCase() === 'en' ? 'en' : 'es';
-                const langChanged = newLang !== currentLang;
-
-                setCurrentLang(newLang);
-                langRef.current = newLang;
-
-                // Si el idioma cambió, reiniciar estado
-                if (langChanged) {
-                    // Stop any playing audio
-                    if (audioRef.current) {
-                        audioRef.current.pause();
-                        audioRef.current.currentTime = 0;
-                    }
-
-                    setIsTyping(false);
-                    setIsPlaying(false);
-                    setMessages([]);
-
-                    // Si el chatbot está abierto, cerrarlo
-                    if (isOpen) {
-                        setIsOpen(false);
-                    }
-                }
-            }
-        };
-
-        // Check initial lang
-        const storedLang = localStorage.getItem("ui-language");
-        if (storedLang) {
-            const initLang = storedLang.toLowerCase() === 'en' ? 'en' : 'es';
-            setCurrentLang(initLang);
-            langRef.current = initLang;
-        }
-
-        window.addEventListener('ui:languagechange', handleLanguageChange);
-        return () => window.removeEventListener('ui:languagechange', handleLanguageChange);
-    }, [isOpen, currentLang]);
-
     const playAudio = (srcOrPlaylist: string | string[], onEnded?: () => void) => {
         if (audioRef.current) {
             const playlist = Array.isArray(srcOrPlaylist) ? srcOrPlaylist : [srcOrPlaylist];
@@ -146,9 +104,6 @@ export const AlaizaAssistant = () => {
                             .catch(e => {
                                 console.error("Error playing audio:", e);
                                 setIsPlaying(false);
-                                // If error, try next? Or stop?
-                                // For now, let's stop but maybe we should trigger ended to continue flow?
-                                // handleEnded(); 
                             });
                     };
 
@@ -179,22 +134,23 @@ export const AlaizaAssistant = () => {
         }]);
     };
 
-    const handleOpen = () => {
-        setIsOpen(true);
-        if (messages.length === 0) {
-            // Mensaje inicial
-            addBotMessage(t.welcomeMessage);
+    const startConversation = () => {
+        // Prevent duplicate welcome sequences if already running or if messages exist
+        if (isWelcomeSequenceRunning.current || messages.length > 0) return;
 
-            // Iniciar experiencia de audio
-            triggerWelcomeSequence();
-        }
+        const t = ALAIZA_TRANSLATIONS[langRef.current];
+
+        // Mensaje inicial
+        addBotMessage(t.welcomeMessage);
+
+        // Iniciar experiencia de audio
+        triggerWelcomeSequence();
     };
 
     const triggerWelcomeSequence = () => {
-        // Prevenir llamadas duplicadas
-        if (isWelcomeSequenceRunning.current) return;
-
         isWelcomeSequenceRunning.current = true;
+
+        const t = ALAIZA_TRANSLATIONS[langRef.current];
 
         // 1. Audio Bienvenido
         playSoundMessage(t.audios.welcome, () => {
@@ -202,6 +158,56 @@ export const AlaizaAssistant = () => {
             showMainOptions();
             isWelcomeSequenceRunning.current = false;
         });
+    };
+
+    // Auto-start conversation when open and empty
+    useEffect(() => {
+        if (isOpen && messages.length === 0) {
+            startConversation();
+        }
+    }, [isOpen, messages.length]);
+
+    // Listener de cambio de idioma
+    useEffect(() => {
+        const handleLanguageChange = (e: any) => {
+            if (e.detail && e.detail.language) {
+                const newLang = e.detail.language.toLowerCase() === 'en' ? 'en' : 'es';
+                const langChanged = newLang !== currentLang;
+
+                if (langChanged) {
+                    setCurrentLang(newLang);
+                    langRef.current = newLang; // Update ref immediately
+
+                    // Stop any playing audio
+                    if (audioRef.current) {
+                        audioRef.current.pause();
+                        audioRef.current.currentTime = 0;
+                    }
+
+                    // Reset state
+                    setIsTyping(false);
+                    setIsPlaying(false);
+                    isWelcomeSequenceRunning.current = false;
+                    setMessages([]); // This clears messages, triggering the auto-start useEffect
+                }
+            }
+        };
+
+        // Check initial lang
+        const storedLang = localStorage.getItem("ui-language");
+        if (storedLang) {
+            const initLang = storedLang.toLowerCase() === 'en' ? 'en' : 'es';
+            setCurrentLang(initLang);
+            langRef.current = initLang;
+        }
+
+        window.addEventListener('ui:languagechange', handleLanguageChange);
+        return () => window.removeEventListener('ui:languagechange', handleLanguageChange);
+    }, [currentLang]); // Removed isOpen dependency as we don't need it inside
+
+    const handleOpen = () => {
+        setIsOpen(true);
+        // Initialization is now handled by useEffect
     };
 
     // Helper to add options
