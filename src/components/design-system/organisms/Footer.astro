@@ -1,0 +1,245 @@
+---
+/**
+ * Organism: Footer
+ * Footer unificado: logo Zelify, enlaces rápidos, disclaimer legal y copyright.
+ * Responsive: grid 2 columnas → flex row → columna centrada en móvil.
+ */
+export interface FooterLink {
+  href: string;
+  label: string;
+  dataI18n?: string;
+}
+
+interface Props {
+  quickLinksTitle?: string;
+  links?: FooterLink[];
+  legalText?: string;
+  copyrightText?: string;
+  /** Claves data-i18n para traducción (ej. index) */
+  dataI18n?: {
+    quicklinks?: string;
+    legal?: string;
+    copyright?: string;
+  };
+}
+
+const defaultLinks: FooterLink[] = [
+  { href: "/products", label: "Products" },
+  { href: "/nosotros", label: "About us" },
+  { href: "/desarrollo", label: "Developers" },
+  { href: "/otros", label: "Others" },
+];
+
+const defaultLegal =
+  "Zelify is a technology platform currently in a development phase, not yet deployed or operational, and does not provide or process financial services directly; all financial operations are conducted exclusively through regulated third-party partners.";
+
+const {
+  quickLinksTitle = "Quick links",
+  links = defaultLinks,
+  legalText = defaultLegal,
+  copyrightText = "© 2025 Zelify. All rights reserved.",
+  dataI18n,
+} = Astro.props;
+---
+
+<footer class="footer-section">
+  <div class="footer-container">
+    <div class="footer-top">
+      <div class="footer-logo">
+        <img
+          src="/images/zelify_logo2.png"
+          alt="Zelify"
+        />
+      </div>
+      <div class="footer-quick-links">
+        <h3
+          class="quick-links-title"
+          {...(dataI18n?.quicklinks && { "data-i18n": dataI18n.quicklinks })}
+        >
+          {quickLinksTitle}
+        </h3>
+        <ul class="quick-links-list">
+          {
+            links.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  {...(link.dataI18n && { "data-i18n": link.dataI18n })}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p
+        class="footer-legal"
+        {...(dataI18n?.legal && { "data-i18n": dataI18n.legal })}
+      >
+        {legalText}
+      </p>
+      <p
+        class="footer-copyright"
+        {...(dataI18n?.copyright && { "data-i18n": dataI18n.copyright })}
+      >
+        {copyrightText}
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style is:global>
+  /* ---- Footer: bloque principal ---- */
+  .footer-section {
+    width: 100%;
+    background: #0a203f;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+    overflow: visible;
+    padding-top: 4rem;
+    padding-bottom: 3rem;
+  }
+
+  .footer-container {
+    padding-left: 4.5rem;
+    padding-right: 4.5rem;
+  }
+
+  /* ---- Parte superior: logo + enlaces (flex, sin columnas iguales) ---- */
+  .footer-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 2rem;
+    width: 100%;
+  }
+
+  .footer-logo {
+    flex-shrink: 0;
+  }
+
+  .footer-logo img {
+    display: block;
+    height: 40px;
+    width: auto;
+  }
+
+  .footer-quick-links {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .quick-links-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+  }
+
+  .quick-links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+
+  .quick-links-list li {
+    margin: 0;
+  }
+
+  .quick-links-list a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    transition: color 0.2s ease;
+  }
+
+  .quick-links-list a:hover {
+    color: #93fb4d;
+  }
+
+  /* ---- Parte inferior: legal + copyright ---- */
+  .footer-bottom {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    text-align: center;
+  }
+
+  .footer-legal {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.55;
+    margin: 0;
+    max-width: 720px;
+  }
+
+  .footer-copyright {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+  }
+
+  /* ---- Tablet ---- */
+  @media (max-width: 1024px) {
+    .footer-section {
+      padding: 3rem 0 2.5rem;
+    }
+    .footer-container {
+      padding: 0 0.75rem;
+    }
+    .footer-top {
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+  }
+
+  /* ---- Móvil: logo y enlaces en columna centrados ---- */
+  @media (max-width: 640px) {
+    .footer-section {
+      padding: 2.5rem 0 2rem;
+    }
+    .footer-container {
+      padding: 0 0.5rem;
+    }
+    .footer-top {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1.5rem;
+    }
+    .footer-quick-links {
+      align-items: center;
+    }
+    .quick-links-list {
+      align-items: center;
+    }
+    .footer-bottom {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+    }
+    .footer-legal {
+      font-size: 0.75rem;
+    }
+    .footer-copyright {
+      font-size: 0.75rem;
+    }
+  }
+</style>

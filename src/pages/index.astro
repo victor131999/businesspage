@@ -5,6 +5,7 @@ import Navbar3 from "../components/NavbarSimple.astro";
 import ProductsPanel from "../components/productsPanel.astro";
 import WelcomeHero from "../components/design-system/organisms/WelcomeHero.astro";
 import QuoteModalHubSpot from "../components/design-system/organisms/QuoteModalHubSpot.astro";
+import Footer from "../components/design-system/organisms/Footer.astro";
 import Button from "../components/design-system/atoms/Button.astro";
 import Title from "../components/design-system/atoms/Title.astro";
 import Text from "../components/design-system/atoms/Text.astro";
@@ -520,14 +521,7 @@ const modulesList = [
     if (pricingDesc) pricingDesc.textContent = content.pricing.description;
     if (pricingCta) pricingCta.textContent = content.pricing.cta;
 
-    // Footer
-    const footerProducts = document.querySelector(".footer-products-title");
-    const footerAbout = document.querySelector(".footer-about-title");
-    const footerDevelopers = document.querySelector(".footer-developers-title");
-    if (footerProducts) footerProducts.textContent = content.footer.products;
-    if (footerAbout) footerAbout.textContent = content.footer.about;
-    if (footerDevelopers)
-      footerDevelopers.textContent = content.footer.developers;
+    // Footer: se actualiza por data-i18n vía applyHomeTranslations
   }
 
   // Escuchar cambios de idioma
@@ -943,48 +937,18 @@ const modulesList = [
     </section>
 
     <!-- Footer -->
-    <footer class="footer-section">
-      <div class="footer-container">
-        <div class="footer-top">
-          <!-- Logo -->
-          <div class="footer-logo">
-            <img
-              src="/images/zelify_logo2.png"
-              alt="Zelify"
-              style="height: 40px;"
-            />
-          </div>
-
-          <!-- Quick Links -->
-          <div class="footer-quick-links">
-            <h3 class="quick-links-title" data-i18n="footer.quicklinks">
-              Quick links
-            </h3>
-            <ul class="quick-links-list">
-              <li><a href="/products" data-i18n="footer.products">Products</a></li>
-              <li><a href="/nosotros" data-i18n="footer.about">About us</a></li>
-              <li><a href="/desarrollo" data-i18n="footer.developers">Developers</a></li>
-              <li><a href="/otros" data-i18n="footer.others">Others</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="footer-bottom">
-          <!-- Disclaimer -->
-          <p class="footer-legal" data-i18n="footer.legal">
-            Zelify is a technology platform currently in a development phase, not
-            yet deployed or operational, and does not provide or process financial
-            services directly; all financial operations are conducted exclusively
-            through regulated third-party partners.
-          </p>
-
-          <!-- Copyright -->
-          <p class="footer-copyright" data-i18n="footer.copyright">
-            © 2025 Zelify. All rights reserved.
-          </p>
-        </div>
-      </div>
-    </footer>
+    <Footer
+      quickLinksTitle="Quick links"
+      links={[
+        { href: "/products", label: "Products", dataI18n: "footer.products" },
+        { href: "/nosotros", label: "About us", dataI18n: "footer.about" },
+        { href: "/desarrollo", label: "Developers", dataI18n: "footer.developers" },
+        { href: "/otros", label: "Others", dataI18n: "footer.others" },
+      ]}
+      legalText="Zelify is a technology platform currently in a development phase, not yet deployed or operational, and does not provide or process financial services directly; all financial operations are conducted exclusively through regulated third-party partners."
+      copyrightText="© 2025 Zelify. All rights reserved."
+      dataI18n={{ quicklinks: "footer.quicklinks", legal: "footer.legal", copyright: "footer.copyright" }}
+    />
     <!-- Start of HubSpot Embed Code -->
     <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/50894304.js"></script>
     <!-- End of HubSpot Embed Code -->
@@ -2510,109 +2474,6 @@ const modulesList = [
 
   /* ai-section-button: átomo Button secondary */
 
-  /* Footer */
-  .footer-section {
-    width: 100%;
-    padding-top: 100px;
-    padding-bottom: 100px;
-    background: #0a203f;
-    position: relative;
-    z-index: 1;
-    color: #ffffff;
-  }
-
-  .footer-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-  }
-
-  .footer-top {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    align-items: start;
-  }
-
-  .footer-logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .logo-z {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #93fb4d;
-  }
-
-  .logo-text {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #ffffff;
-  }
-
-  .footer-quick-links {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 1rem;
-  }
-
-  .quick-links-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #ffffff;
-    margin: 0;
-  }
-
-  .quick-links-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 0.5rem;
-  }
-
-  .quick-links-list li a {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 1rem;
-    transition: color 0.2s ease;
-  }
-
-  .quick-links-list li a:hover {
-    color: #93fb4d;
-  }
-
-  .footer-bottom {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    text-align: center;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .footer-legal {
-    font-size: 0.85rem;
-    color: #ffffff;
-    line-height: 1.6;
-    margin: 0;
-    max-width: 900px;
-  }
-
-  .footer-copyright {
-    font-size: 0.85rem;
-    color: #ffffff;
-    margin: 0;
-  }
-
   /* Responsive */
   @media (max-width: 1024px) {
     .hero-title {
@@ -2797,17 +2658,6 @@ const modulesList = [
       min-height: 70vh;
       width: 90vw;
     }
-
-    .footer-top {
-      display: flex;
-      justify-content: space-between;
-      width: 90%;
-      margin: 0 auto;
-    }
-
-    .footer-quick-links {
-      text-align: right;
-    }
   }
 
   @media (max-width: 480px) {
@@ -2975,17 +2825,6 @@ const modulesList = [
       height: auto;
       min-height: 70vh;
       width: 90vw;
-    }
-
-    .footer-top {
-      display: flex;
-      justify-content: space-between;
-      width: 90%;
-      margin: 0 auto;
-    }
-
-    .footer-quick-links {
-      text-align: right;
     }
   }
 </style>

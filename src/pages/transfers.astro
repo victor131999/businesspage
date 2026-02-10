@@ -13,6 +13,7 @@ import CtaGroup from "../components/design-system/molecules/CtaGroup.astro";
 import Button from "../components/design-system/atoms/Button.astro";
 import ContactFormHubSpot from "../components/design-system/organisms/ContactFormHubSpot.astro";
 import QuoteModalHubSpot from "../components/design-system/organisms/QuoteModalHubSpot.astro";
+import Footer from "../components/design-system/organisms/Footer.astro";
 import "../components/design-system/tokens.css";
 ---
 
@@ -638,45 +639,7 @@ import "../components/design-system/tokens.css";
     </section>
 
     <!-- Footer -->
-    <!-- Footer -->
-    <footer class="footer-section">
-      <div class="footer-container">
-        <div class="footer-top">
-          <!-- Logo -->
-          <div class="footer-logo">
-            <img
-              src="/images/zelify_logo2.png"
-              alt="Zelify"
-              style="height: 40px;"
-            />
-          </div>
-
-          <!-- Quick Links -->
-          <div class="footer-quick-links">
-            <h3 class="quick-links-title">Quick links</h3>
-            <ul class="quick-links-list">
-              <li><a href="/products">Products</a></li>
-              <li><a href="/nosotros">About us</a></li>
-              <li><a href="/desarrollo">Developers</a></li>
-              <li><a href="/otros">Others</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="footer-bottom">
-          <!-- Disclaimer -->
-          <p class="footer-legal">
-            Zelify is a technology platform currently in a development phase,
-            not yet deployed or operational, and does not provide or process
-            financial services directly; all financial operations are conducted
-            exclusively through regulated third-party partners.
-          </p>
-
-          <!-- Copyright -->
-          <p class="footer-copyright">© 2025 Zelify. All rights reserved.</p>
-        </div>
-      </div>
-    </footer>
+    <Footer />
     <QuoteModalHubSpot />
     <script is:inline>
       function initQuoteModal() {
@@ -2551,121 +2514,6 @@ import "../components/design-system/tokens.css";
     padding-bottom: 2rem;
   }
 
-  /* Footer Styles - Index Match */
-  .footer-section {
-    background-color: #0a203f;
-    padding: 4rem 2rem;
-    color: #ffffff;
-    margin-top: auto;
-  }
-
-  .footer-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-  }
-
-  .footer-top {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    align-items: start;
-  }
-
-  .footer-logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .footer-quick-links {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 1rem;
-  }
-
-  .quick-links-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #ffffff;
-    margin: 0;
-  }
-
-  .quick-links-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 0.5rem;
-  }
-
-  .quick-links-list li a {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 1rem;
-    transition: color 0.2s ease;
-  }
-
-  .quick-links-list li a:hover {
-    color: #93fb4d;
-  }
-
-  .footer-bottom {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    text-align: center;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .footer-legal {
-    font-size: 0.85rem;
-    color: #ffffff;
-    line-height: 1.6;
-    margin: 0;
-    max-width: 900px;
-  }
-
-  .footer-copyright {
-    font-size: 0.85rem;
-    color: #ffffff;
-    margin: 0;
-  }
-
-  /* Footer Responsive */
-  @media (max-width: 768px) {
-    .footer-section {
-      padding: 3rem 1rem;
-    }
-    .footer-top {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-    }
-    .footer-quick-links {
-      text-align: right;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .footer-top {
-      flex-direction: row;
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      margin: 0 auto;
-    }
-    .footer-quick-links {
-      text-align: right;
-    }
-  }
 </style>
 
 <script
