@@ -1575,35 +1575,60 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
 
       // 1. Calculate Left Offset
       let leftOffset = "0px";
-
+      const totalWidth = 332; // Approx container width
+      
       if (isActive) {
         if (activeIndex === 0) leftOffset = "0px";
         else if (activeIndex === 1)
-          leftOffset = `calc((100% - ${activeCardWidth}px) / 2)`;
+          leftOffset = `calc(50% - ${activeCardWidth / 2}px)`;
         else if (activeIndex === 2)
           leftOffset = `calc(100% - ${activeCardWidth}px)`;
       } else if (index < activeIndex) {
         // Left of active
-        const cardsBefore = activeIndex - index;
         if (activeIndex === 1) {
-          const centerX = `calc((100% - ${activeCardWidth}px) / 2)`;
-          leftOffset = `calc(${centerX} - ${(inactiveCardWidth - visiblePart) * cardsBefore}px)`;
+          // Centered Mode: Left card
+          // Active starts at 50% - 110. Left card needs to peek 20px.
+          // So Left Card Start = Active Start - 20px
+          // But wait, Left Card Width is 60.
+          // If it starts at ActiveStart - 20, it ends at ActiveStart + 40.
+          // Visible part is 20px ("before" the active card starts? No, active card is on top).
+          // Active card z-index 30, Left z-index 15.
+          // So Left Card is BEHIND.
+          // If Left Card starts at ActiveStart - 20, the exposed part is from ActiveStart-20 to ActiveStart. (20px).
+          // The rest (40px) is under the Active Card.
+          leftOffset = `calc(50% - ${activeCardWidth / 2}px - 20px)`;
         } else if (activeIndex === 2) {
-          const rightX = `calc(100% - ${activeCardWidth}px)`;
-          leftOffset = `calc(${rightX} - ${(inactiveCardWidth - visiblePart) * cardsBefore}px)`;
+           // Right Mode: Middle card (index 1) and Left card (index 0) are to the left.
+           // Active starts at Right Edge - 220.
+           // Card 1 (Index 1) should be at ActiveStart - 20.
+           // Card 0 (Index 0) should be at Card1Start - 20.
+           const rightEdgeOffset = `calc(100% - ${activeCardWidth}px)`;
+           const cardsAway = activeIndex - index; // 1 or 2
+           leftOffset = `calc(${rightEdgeOffset} - ${20 * cardsAway}px)`;
         }
       } else {
         // Right of active
-        const cardsAfter = index - activeIndex;
         if (activeIndex === 0) {
-          leftOffset = `${activeCardWidth + (inactiveCardWidth - visiblePart) * (cardsAfter - 1) - (cardsAfter === 1 ? 20 : 0)}px`;
-          if (cardsAfter === 1)
-            leftOffset = `${activeCardWidth - visiblePart}px`;
-          else if (cardsAfter === 2)
-            leftOffset = `${activeCardWidth + inactiveCardWidth - visiblePart * 2}px`;
+           // Left Mode.
+           // Active ends at 220.
+           // Card 1 starts at 220 - 40 (Overlap) = 180?
+           // We want 20px visible. Card 1 starts at 220 - 40? No.
+           // If Card 1 is BEHIND Active.
+           // Active (0 to 220).
+           // Card 1 (Starts at 220 - 40 = 180). Ends at 240.
+           // Exposed 220-240 (20px).
+           const cardsAway = index - activeIndex; // 1 or 2
+           // Card 1: 220 - 40 = 180. (ActiveWidth - Overlap)
+           // Card 2: 180 + 20 = 200. (Card1Start + Visible)
+           leftOffset = `${activeCardWidth - 40 + (cardsAway - 1) * 20}px`;
         } else if (activeIndex === 1) {
-          const centerX = `calc((100% - ${activeCardWidth}px) / 2)`;
-          leftOffset = `calc(${centerX} + ${activeCardWidth}px - ${overlapAmount * cardsAfter}px)`;
+          // Centered Mode: Right card
+          // Active Ends at 50% + 110.
+          // Right Card is BEHIND.
+          // We want it to be exposed 20px on the right.
+          // So Right Card Ends at ActiveEnd + 20.
+          // Right Card Start = ActiveEnd + 20 - 60 = ActiveEnd - 40.
+          leftOffset = `calc(50% + ${activeCardWidth / 2}px - 40px)`;
         }
       }
 
