@@ -8,7 +8,7 @@ const subtitle = "Tu transacción está siendo procesada";
     <div class="processing-bg" id="processing-bg"></div>
 
     <div class="processing-content" id="processing-content">
-      <h2 class="processing-title">
+      <h2 class="processing-title" id="processing-title-container" data-text={title}>
         {
           title.split("").map((char, index) => (
             <span class="char-title" data-index={index}>
@@ -17,7 +17,7 @@ const subtitle = "Tu transacción está siendo procesada";
           ))
         }
       </h2>
-      <p class="processing-subtitle">
+      <p class="processing-subtitle" id="processing-subtitle-container" data-text={subtitle}>
         {
           subtitle.split("").map((char, index) => (
             <span class="char-subtitle" data-index={index}>
