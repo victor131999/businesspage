@@ -7,15 +7,15 @@ const { showBack = false } = Astro.props;
 ---
 
 <div
-  class="pt-6 px-6 text-center shrink-0 relative flex items-center justify-center z-50"
+  class="pt-6 px-4 text-center shrink-0 relative flex items-center justify-center z-50"
 >
   {
     showBack && (
       <button
-        class="absolute left-6 text-xs text-gray-500 hover:text-dark flex items-center back-btn"
+        class="discounts-back-btn absolute left-6 text-xs text-gray-500 hover:text-dark flex items-center back-btn"
         id="header-back-btn"
       >
-        &lt; Atrás
+        &lt; <span class="discounts-back-label">Atrás</span>
       </button>
     )
   }

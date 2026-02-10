@@ -10,7 +10,7 @@ const customColor = "#004492";
   <DiscountHeader showBack={true} />
 
   <div
-    class="flex-1 px-6 pb-6 pt-2 flex flex-col items-center justify-center min-h-0"
+    class="flex-1 px-4 pb-6 pt-2 flex flex-col items-center justify-center min-h-0"
   >
     <!-- Card Container -->
     <div
@@ -20,10 +20,12 @@ const customColor = "#004492";
       <div
         class="absolute inset-0 z-10 flex flex-col items-center justify-center h-full px-6 text-center w-full"
       >
-        <h2 class="text-2xl font-bold mb-2 text-[#003366]">
+        <h2 class="discounts-launching-title text-2xl font-bold mb-2 text-[#003366]">
           Launching your promo
         </h2>
-        <p class="text-xs text-gray-400">Esto solo tomará unos segundos</p>
+        <p class="discounts-launching-subtitle text-xs text-gray-400">
+          Esto solo tomará unos segundos
+        </p>
         <div class="w-64 h-2 rounded-full mt-8 overflow-hidden bg-gray-200">
           <!-- Empty bar base -->
         </div>
@@ -38,10 +40,12 @@ const customColor = "#004492";
           class="w-full h-full flex flex-col items-center justify-center px-6 text-center"
           style={`background: linear-gradient(to right, ${customColor} 0%, #000b1e 100%);`}
         >
-          <h2 class="text-2xl font-bold mb-2 text-white">
+          <h2 class="discounts-launching-title text-2xl font-bold mb-2 text-white">
             Lanzando tu promoción
           </h2>
-          <p class="text-xs text-white/80">Esto solo tomará unos segundos</p>
+          <p class="discounts-launching-subtitle text-xs text-white/80">
+            Esto solo tomará unos segundos
+          </p>
           <div class="w-64 h-2 rounded-full mt-8 overflow-hidden bg-white/20">
             <div class="h-full w-full bg-white"></div>
           </div>

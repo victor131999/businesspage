@@ -752,10 +752,10 @@ const modulesList = [
 
     <section class="bench-section section-gap-200">
       <div class="bench-section-2-content">
-        <CardTabs
-          id="home-bench-tabs"
-          cta={{ label: "Borderless", href: "/cards" }}
-          tabs={[
+      <CardTabs
+        id="home-bench-tabs"
+        cta={{ label: "Borderless", href: "/cards", dataI18n: "home.bench.cta" }}
+        tabs={[
             { value: "bench1", label: "Borderless", active: true },
             // { value: "bench2", label: "Plug & Play" },
             // { value: "bench3", label: "Custom Made" },
@@ -784,10 +784,10 @@ const modulesList = [
               </video>
             </div>
             <div class="bench-panel-copy">
-              <Title level={3} variant="card" class="bench-panel-title"
+              <Title level={3} variant="card" class="bench-panel-title" data-i18n="home.bench.cards.title"
                 >Tarjetas internacionales al instante</Title
               >
-              <Text variant="body" class="bench-panel-text">
+              <Text variant="body" class="bench-panel-text" data-i18n="home.bench.cards.description">
                 Emite, procesa tarjetas y personalízalas de forma inmediata y sin
                 fronteras, listas para usarse en compras y pagos a nivel global.
               </Text>
@@ -3150,9 +3150,11 @@ const modulesList = [
         "home.bench.button": "Cards",
         "home.bench.tabLabel": "Borderless",
         "home.bench.cta": "Borderless",
+        "home.bench.cards.title": "International cards instantly",
+        "home.bench.cards.description": "Issue and process cards, personalize them immediately and without borders, ready to use for purchases and payments globally.",
         "home.tokens.title": "ZCoins",
         "home.tokens.description":
-          "Créditos prepago que se consumen por uso real de la plataforma, permitiendo un modelo flexible, transparente y controlado.",
+          "Prepaid credits consumed based on actual platform usage, enabling a flexible, transparent, and controlled model.",
         "home.tokens.demo": "Demo Tour",
         "home.action.products.title": "Our products in action",
         "home.action.products.auth": "Auth",
@@ -3264,8 +3266,9 @@ const modulesList = [
         "home.bench.subtitle":
           "y escala sin fricción con los precios más bajos del mercado.",
         "home.bench.button": "Tarjetas",
-        "home.bench.tabLabel": "Sin fronteras",
         "home.bench.cta": "Sin fronteras",
+        "home.bench.cards.title": "Tarjetas internacionales al instante",
+        "home.bench.cards.description": "Emite, procesa tarjetas y personalízalas de forma inmediata y sin fronteras, listas para usarse en compras y pagos a nivel global.",
         "home.tokens.title": "ZCoins",
         "home.tokens.description":
           "Créditos prepago que se consumen por uso real de la plataforma, permitiendo un modelo flexible, transparente y controlado.",

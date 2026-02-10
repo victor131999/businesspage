@@ -4,6 +4,7 @@ import BasicServiceApp from "@/components/transfers_payments/BasicServiceApp.ast
 import CustomKeys from "@/components/transfers_payments/CustomKeys.astro";
 import TransfersViewApp from "@/components/transfers_payments/TransfersViewApp.astro";
 import { BASIC_SERVICES_TRANSLATIONS } from "@/components/transfers_payments/use-basic-services-translations";
+import { CUSTOM_KEYS_TRANSLATIONS } from "@/components/transfers_payments/use-custom-keys-translations";
 import Navbar3 from "../components/NavbarSimple.astro";
 import ProductsPanel from "../components/productsPanel.astro";
 import { AlaizaAssistant } from "../components/AlaizaAssistant";
@@ -2625,7 +2626,12 @@ import "../components/design-system/tokens.css";
   }
 </style>
 
-<script>
+<script
+  define:vars={{
+    BASIC_SERVICES: BASIC_SERVICES_TRANSLATIONS,
+    CUSTOM_KEYS: CUSTOM_KEYS_TRANSLATIONS,
+  }}
+>
   let currentStep = 1;
   const formData = {
     fullName: "",
@@ -3398,6 +3404,7 @@ import "../components/design-system/tokens.css";
     const t =
       transfersTranslations[lang.toLowerCase()] || transfersTranslations.es;
     document.documentElement.lang = lang.toLowerCase();
+    const langKey = lang.toLowerCase().startsWith("en") ? "en" : "es";
 
     // Hero
     const heroTitle = document.querySelector(".auth-title");
@@ -3416,6 +3423,77 @@ import "../components/design-system/tokens.css";
 
     const demoBtn = document.querySelector(".welcome-demo-button");
     if (demoBtn) demoBtn.textContent = t.hero.demoButton;
+
+    // --- Mobile device previews (BasicServiceApp / TransfersViewApp / CustomKeys) ---
+    try {
+      const BASIC = BASIC_SERVICES?.[langKey] || BASIC_SERVICES?.es;
+      if (BASIC) {
+        const setText = (id, value) => {
+          const el = document.getElementById(id);
+          if (el) el.textContent = value;
+        };
+
+        setText("bs-title", BASIC.screen1?.title);
+        setText("bs-subtitle", BASIC.screen1?.subtitle);
+        const bsSearch = document.getElementById("bs-search-input");
+        if (bsSearch) bsSearch.setAttribute("placeholder", BASIC.screen1?.searchPlaceholder || "");
+        setText("bs-back-label", BASIC.backLabel);
+        setText("bs-provider-subtitle", langKey === "en" ? "Enter payment details" : "Ingresa los detalles de pago");
+        setText("bs-option-1-title", BASIC.paymentMethods?.["phone-my-number"]?.title || (langKey === "en" ? "My phone number" : "Mi número de teléfono"));
+        setText("bs-option-1-desc", BASIC.paymentMethods?.["phone-my-number"]?.description || (langKey === "en" ? "Use your registered phone number." : "Usa tu número registrado"));
+        setText("bs-option-2-title", BASIC.paymentMethods?.phone?.title || (langKey === "en" ? "Enter phone number" : "Ingresar número de teléfono"));
+        setText("bs-option-2-desc", BASIC.paymentMethods?.phone?.description || (langKey === "en" ? "Enter the phone number associated with the account." : "Ingresa el número asociado a la cuenta"));
+
+        const catMap = {
+          telecom: BASIC.categories?.telecom,
+          electricity: BASIC.categories?.electricity,
+          favorites: BASIC.favoritesLabel,
+          popular: BASIC.popularLabel,
+        };
+        document.querySelectorAll("[data-bs-cat]").forEach((el) => {
+          const key = el.getAttribute("data-bs-cat");
+          if (key && catMap[key]) el.textContent = catMap[key];
+        });
+      }
+
+      const CK = CUSTOM_KEYS?.[langKey] || CUSTOM_KEYS?.es;
+      if (CK?.preview?.header) {
+        const setText = (id, value) => {
+          const el = document.getElementById(id);
+          if (el) el.textContent = value;
+        };
+        setText("ck-title", CK.preview.header.title);
+        setText("ck-subtitle", CK.preview.header.subtitle);
+        setText("ck-custom-key-label", CK.preview.customKey?.label?.toUpperCase?.() || CK.preview.customKey?.label);
+        setText("ck-contacts-title", CK.preview.contacts?.title);
+      }
+
+      // Minimal translations for TransfersViewApp preview
+      const TV = {
+        en: {
+          subtitle: "How much do you want to transfer?",
+          caption: "Select the currency based on the destination country.",
+          amount: "Amount",
+        },
+        es: {
+          subtitle: "¿Cuánto quieres transferir?",
+          caption: "Selecciona la moneda según el país de destino.",
+          amount: "Monto",
+        },
+      };
+      const tv = TV[langKey];
+      if (tv) {
+        const setText = (id, value) => {
+          const el = document.getElementById(id);
+          if (el) el.textContent = value;
+        };
+        setText("tv-subtitle", tv.subtitle);
+        setText("tv-caption", tv.caption);
+        setText("tv-amount-label", tv.amount);
+      }
+    } catch (e) {
+      // no-op: previews are optional
+    }
 
     // View switcher (pestañas Basic Service / Transferencias / Custom Keys)
     const viewSwitcherBtns = document.querySelectorAll(".view-btn");

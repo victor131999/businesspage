@@ -39,13 +39,11 @@ const promos = [1, 2, 3]; // Default count
 
      <!-- Text and Carousel -->
     <div class="flex-1 w-full flex flex-col items-center justify-center z-20 px-6 pb-4">
-        <h2 class="text-2xl mb-0 text-[#003366] text-center mt-4">
-            <span class="font-light">
-            Aquí
-            </span>{" "}
-            <span class="font-bold">Vamos</span>
+        <h2 class="discounts-promo-title text-2xl mb-0 text-[#003366] text-center mt-4">
+            <span class="discounts-promo-title-light font-light">Aquí</span>{" "}
+            <span class="discounts-promo-title-bold font-bold">Vamos</span>
         </h2>
-        <p class="text-gray-400 text-xs text-center mb-6">
+        <p class="discounts-promo-subtitle text-gray-400 text-xs text-center mb-6">
             Nuestras promociones personalizadas para ti
         </p>
 
@@ -77,10 +75,10 @@ const promos = [1, 2, 3]; // Default count
                         <span class="text-[9px] font-bold uppercase tracking-widest opacity-70 mb-0.5">
                             PROMO {index + 1}
                         </span>
-                         <span class="text-[10px] text-blue-200">
+                        <span class="discounts-promo-brand text-[10px] text-blue-200">
                             Go Green
                         </span>
-                        <span class="text-sm font-bold leading-tight">
+                        <span class="discounts-promo-offer text-sm font-bold leading-tight">
                             2x1 en Veggie Bowls
                         </span>
                      </div>
@@ -104,7 +102,7 @@ const promos = [1, 2, 3]; // Default count
         style={`background: linear-gradient(to right, ${customColor}, #000b1e);`}
         data-next="9"
     >
-        <span class="mr-0">Continuar</span>
+        <span class="discounts-continue-label mr-0">Continuar</span>
         <span class="absolute right-6 transition-transform group-hover:translate-x-1">
         &gt;
         </span>

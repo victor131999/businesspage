@@ -3000,20 +3000,44 @@ import "../components/design-system/tokens.css";
 
   // Discounts Translation System
   const discountsTranslations = {
-    es: {
-      hero: {
-        title: "Gestión integral de<br />descuentos y beneficios",
-        description:
-          "Centraliza la gestión de comercios y beneficios en una sola plataforma. Zelify permite crear descuentos y campañas, mostrar establecimientos en un mapa interactivo y gestionar pagos con liquidación posterior, con reportes claros de ventas y redenciones.",
-        inputPlaceholder: "Ingresa tu correo",
-        inputAria: "Ingresa tu correo",
-        quoteButton: "Hablemos",
-        demoButton: "Demo",
-      },
-      security: {
-        title: "Registro de comercios<br />y gestión operativa",
-        features: [
-          {
+	    es: {
+	      hero: {
+	        title: "Gestión integral de<br />descuentos y beneficios",
+	        description:
+	          "Centraliza la gestión de comercios y beneficios en una sola plataforma. Zelify permite crear descuentos y campañas, mostrar establecimientos en un mapa interactivo y gestionar pagos con liquidación posterior, con reportes claros de ventas y redenciones.",
+	        inputPlaceholder: "Ingresa tu correo",
+	        inputAria: "Ingresa tu correo",
+	        quoteButton: "Hablemos",
+	        demoButton: "Demo",
+	      },
+	      device: {
+	        back: "Atrás",
+	        continue: "Continuar",
+	        categoryNo: "No, intentar de nuevo",
+	        categoryYes: "Sí, continuar",
+	        launch: "Lanzar",
+	        promoTitleLight: "Aquí",
+	        promoTitleBold: "Vamos",
+	        promoSubtitle: "Nuestras promociones personalizadas para ti",
+	        promoBrand: "Go Green",
+	        promoOffer: "2x1 en Veggie Bowls",
+	        configureTitleLight: "Configura tu",
+	        configureTitleBold: "Promoción",
+	        configureSubtitle: "Define la duración de tu promoción",
+	        startDateLabel: "Fecha de Inicio",
+	        endDateLabel: "Fecha de Fin",
+	        dateParts: ["Día", "Mes", "Año"],
+	        hour: "Hora",
+	        launchingTitle: "Lanzando tu promoción",
+	        launchingSubtitle: "Esto solo tomará unos segundos",
+	        successTitle: "Tu Promoción está activa",
+	        successSubtitle: "Revisa tus promociones en tu panel",
+	        reset: "Volver al Inicio",
+	      },
+	      security: {
+	        title: "Registro de comercios<br />y gestión operativa",
+	        features: [
+	          {
             title: "Gestión de Comercios",
             description:
               "Registro y administración integral de identidad del negocio, catálogos, productos y categorías para mantener la oferta actualizada y visible.",
@@ -3153,20 +3177,44 @@ import "../components/design-system/tokens.css";
         copyright: "© 2025 Zelify. All rights reserved.",
       },
     },
-    en: {
-      hero: {
-        title: "Comprehensive management of<br />discounts and benefits",
-        description:
-          "Centralize merchant and benefits management in a single platform. Zelify enables the creation of discounts and campaigns, interactive merchant mapping, post-settlement payments, and clear reporting on sales and redemptions.",
-        inputPlaceholder: "enter your email",
-        inputAria: "Enter your email",
-        quoteButton: "Quote",
-        demoButton: "Demo",
-      },
-      security: {
-        title: "Merchant registration<br />and operational management",
-        features: [
-          {
+	    en: {
+	      hero: {
+	        title: "Comprehensive management of<br />discounts and benefits",
+	        description:
+	          "Centralize merchant and benefits management in a single platform. Zelify enables the creation of discounts and campaigns, interactive merchant mapping, post-settlement payments, and clear reporting on sales and redemptions.",
+	        inputPlaceholder: "enter your email",
+	        inputAria: "Enter your email",
+	        quoteButton: "Quote",
+	        demoButton: "Demo",
+	      },
+	      device: {
+	        back: "Back",
+	        continue: "Continue",
+	        categoryNo: "No, try again",
+	        categoryYes: "Yes, continue",
+	        launch: "Launch",
+	        promoTitleLight: "Here",
+	        promoTitleBold: "we go",
+	        promoSubtitle: "Our personalized promos for you",
+	        promoBrand: "Go Green",
+	        promoOffer: "2x1 Veggie Bowls",
+	        configureTitleLight: "Set up your",
+	        configureTitleBold: "Promo",
+	        configureSubtitle: "Define your promo duration",
+	        startDateLabel: "Start date",
+	        endDateLabel: "End date",
+	        dateParts: ["Day", "Month", "Year"],
+	        hour: "Hour",
+	        launchingTitle: "Launching your promo",
+	        launchingSubtitle: "This will only take a few seconds",
+	        successTitle: "Your promo is live",
+	        successSubtitle: "Review your promos in your dashboard",
+	        reset: "Back to start",
+	      },
+	      security: {
+	        title: "Merchant registration<br />and operational management",
+	        features: [
+	          {
             title: "Merchant Management",
             description:
               "Comprehensive registration and administration of business identity, catalogs, products, and categories to keep your offering updated and visible.",
@@ -3329,12 +3377,99 @@ import "../components/design-system/tokens.css";
     const quoteBtn = document.querySelector(".welcome-quote-button");
     if (quoteBtn) quoteBtn.textContent = t.hero.quoteButton;
 
-    const demoBtn = document.querySelector(".welcome-demo-button");
-    if (demoBtn) demoBtn.textContent = t.hero.demoButton;
+	    const demoBtn = document.querySelector(".welcome-demo-button");
+	    if (demoBtn) demoBtn.textContent = t.hero.demoButton;
 
-    // Security section
-    const securityTitle = document.querySelector(".security-title");
-    if (securityTitle) securityTitle.innerHTML = t.security.title;
+	    // Device preview
+	    document.querySelectorAll(".discounts-back-label").forEach((el) => {
+	      el.textContent = t.device.back;
+	    });
+	    document.querySelectorAll(".discounts-continue-label").forEach((el) => {
+	      el.textContent = t.device.continue;
+	    });
+
+	    const categoryNo = document.querySelector(".discounts-cat-no");
+	    if (categoryNo) categoryNo.textContent = t.device.categoryNo;
+
+	    const categoryYes = document.querySelector(".discounts-cat-yes");
+	    if (categoryYes) categoryYes.textContent = t.device.categoryYes;
+
+	    const launchBtn = document.querySelector(".discounts-launch-label");
+	    if (launchBtn) launchBtn.textContent = t.device.launch;
+
+	    document.querySelectorAll(".discounts-launching-title").forEach((el) => {
+	      el.textContent = t.device.launchingTitle;
+	    });
+	    document
+	      .querySelectorAll(".discounts-launching-subtitle")
+	      .forEach((el) => {
+	        el.textContent = t.device.launchingSubtitle;
+	      });
+
+	    const successTitle = document.querySelector(".discounts-success-title");
+	    if (successTitle) successTitle.textContent = t.device.successTitle;
+	    const successSubtitle = document.querySelector(
+	      ".discounts-success-subtitle",
+	    );
+	    if (successSubtitle) successSubtitle.textContent = t.device.successSubtitle;
+
+	    const resetBtn = document.querySelector(".discounts-reset-label");
+	    if (resetBtn) resetBtn.textContent = t.device.reset;
+
+	    const promoTitleLight = document.querySelector(
+	      ".discounts-promo-title-light",
+	    );
+	    if (promoTitleLight) promoTitleLight.textContent = t.device.promoTitleLight;
+	    const promoTitleBold = document.querySelector(".discounts-promo-title-bold");
+	    if (promoTitleBold) promoTitleBold.textContent = t.device.promoTitleBold;
+	    const promoSubtitle = document.querySelector(".discounts-promo-subtitle");
+	    if (promoSubtitle) promoSubtitle.textContent = t.device.promoSubtitle;
+
+	    document.querySelectorAll(".discounts-promo-brand").forEach((el) => {
+	      el.textContent = t.device.promoBrand;
+	    });
+	    document.querySelectorAll(".discounts-promo-offer").forEach((el) => {
+	      el.textContent = t.device.promoOffer;
+	    });
+
+	    const configureTitleLight = document.querySelector(
+	      ".discounts-configure-title-light",
+	    );
+	    if (configureTitleLight)
+	      configureTitleLight.textContent = t.device.configureTitleLight;
+	    const configureTitleBold = document.querySelector(
+	      ".discounts-configure-title-bold",
+	    );
+	    if (configureTitleBold)
+	      configureTitleBold.textContent = t.device.configureTitleBold;
+	    const configureSubtitle = document.querySelector(
+	      ".discounts-configure-subtitle",
+	    );
+	    if (configureSubtitle)
+	      configureSubtitle.textContent = t.device.configureSubtitle;
+
+	    const startDateLabel = document.querySelector(".discounts-start-date-label");
+	    if (startDateLabel) startDateLabel.textContent = t.device.startDateLabel;
+	    const endDateLabel = document.querySelector(".discounts-end-date-label");
+	    if (endDateLabel) endDateLabel.textContent = t.device.endDateLabel;
+
+	    const dateParts = Array.isArray(t.device.dateParts)
+	      ? t.device.dateParts
+	      : [];
+	    if (dateParts.length) {
+	      document.querySelectorAll(".discounts-date-part").forEach((el, idx) => {
+	        const value = dateParts[idx % dateParts.length];
+	        if (value) el.textContent = value;
+	      });
+	    }
+
+	    document.querySelectorAll(".discounts-hour-label").forEach((el) => {
+	      el.textContent = t.device.hour;
+	    });
+
+	    // Security section
+	    const securityTitle = document.querySelector(".security-title");
+	    if (securityTitle) securityTitle.innerHTML = t.security.title;
 
     const securityFeatures = document.querySelectorAll(".security-feature");
     securityFeatures.forEach((feature, index) => {

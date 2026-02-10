@@ -33,16 +33,18 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
             class="relative z-10 flex-1 flex flex-col overflow-hidden rounded-t-2xl backdrop-blur-sm mt-40 mb-0"
             style="background-color: rgba(255, 255, 255, 0.35);"
           >
-            <div class="tv-instructions">
-              <p class="tv-subtitle">¿Cuánto quieres transferir?</p>
-              <p class="tv-caption">
-                Selecciona la moneda según el país de destino.
-              </p>
-            </div>
+	            <div class="tv-instructions">
+	              <p class="tv-subtitle" id="tv-subtitle">
+	                ¿Cuánto quieres transferir?
+	              </p>
+	              <p class="tv-caption" id="tv-caption">
+	                Selecciona la moneda según el país de destino.
+	              </p>
+	            </div>
 
             <!-- Amount Input Card -->
-            <div class="tv-input-section">
-              <label class="tv-input-label">Monto</label>
+	            <div class="tv-input-section">
+	              <label class="tv-input-label" id="tv-amount-label">Monto</label>
               <div class="tv-input-card">
                 <input
                   type="text"

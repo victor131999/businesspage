@@ -31,12 +31,14 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                 />
               </div>
 
-              <!-- Main Glass Card -->
-              <div class="bs-main-card">
-                <div class="bs-title-section">
-                  <h1 class="bs-title">Pago de Servicios</h1>
-                  <p class="bs-subtitle">¿Qué servicio te gustaría pagar?</p>
-                </div>
+	              <!-- Main Glass Card -->
+	              <div class="bs-main-card">
+	                <div class="bs-title-section">
+	                  <h1 class="bs-title" id="bs-title">Pago de Servicios</h1>
+	                  <p class="bs-subtitle" id="bs-subtitle">
+	                    ¿Qué servicio te gustaría pagar?
+	                  </p>
+	                </div>
 
                 <!-- Search Bar -->
                 <div class="bs-search-container">
@@ -52,11 +54,12 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                     <circle cx="11" cy="11" r="8"></circle>
                     <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                   </svg>
-                  <input
-                    type="text"
-                    class="bs-search-input"
-                    placeholder="Buscar bancos..."
-                  />
+	                  <input
+	                    type="text"
+	                    class="bs-search-input"
+	                    id="bs-search-input"
+	                    placeholder="Buscar bancos..."
+	                  />
                 </div>
 
                 <!-- Providers Grid -->
@@ -101,19 +104,33 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                   class="bs-bottom-sheet-container"
                   onclick="window.bsRotateSheet()"
                 >
-                  <!-- Telecom (Active) -->
-                  <div class="bs-sheet-item active">Telecom & Internet</div>
+	                  <!-- Telecom (Active) -->
+	                  <div class="bs-sheet-item active" data-bs-cat="telecom">
+	                    Telefonía e internet
+	                  </div>
 
-                  <!-- Electricity (Behind) -->
-                  <div class="bs-sheet-item stacked stacked-1">Electricity</div>
+	                  <!-- Electricity (Behind) -->
+	                  <div
+	                    class="bs-sheet-item stacked stacked-1"
+	                    data-bs-cat="electricity"
+	                  >
+	                    Luz
+	                  </div>
 
-                  <!-- Favorites (Behind) -->
-                  <div class="bs-sheet-item stacked stacked-2">Favorites</div>
+	                  <!-- Favorites (Behind) -->
+	                  <div
+	                    class="bs-sheet-item stacked stacked-2"
+	                    data-bs-cat="favorites"
+	                  >
+	                    Favoritos
+	                  </div>
 
-                  <!-- Most Popular (Hidden) -->
-                  <div class="bs-sheet-item hidden-sheet">Most popular</div>
-                </div>
-              </div>
+	                  <!-- Most Popular (Hidden) -->
+	                  <div class="bs-sheet-item hidden-sheet" data-bs-cat="popular">
+	                    Más buscados
+	                  </div>
+	                </div>
+	              </div>
             </div>
           </div>
 
@@ -138,7 +155,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
 
               <div class="bs-main-card">
                 <!-- Back Button -->
-                <button class="bs-back-btn" onclick="window.bsBack()">
+	                <button class="bs-back-btn" onclick="window.bsBack()">
                   <svg
                     width="20"
                     height="20"
@@ -151,32 +168,38 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                   >
                     <path d="M15 18l-6-6 6-6"></path>
                   </svg>
-                  Atrás
-                </button>
+	                  <span id="bs-back-label">Atrás</span>
+	                </button>
 
                 <!-- Provider Title -->
-                <div class="bs-title-section compact">
-                  <h1 class="bs-title-sm" id="bs-provider-title">Proveedor</h1>
-                  <p class="bs-subtitle-sm">Ingresa los detalles de pago</p>
-                </div>
+	                <div class="bs-title-section compact">
+	                  <h1 class="bs-title-sm" id="bs-provider-title">Proveedor</h1>
+	                  <p class="bs-subtitle-sm" id="bs-provider-subtitle">
+	                    Ingresa los detalles de pago
+	                  </p>
+	                </div>
 
-                <div class="bs-options-list">
-                  <!-- Option 1 -->
-                  <div class="bs-option-card">
-                    <div class="bs-option-title">Mi Número de Teléfono</div>
-                    <div class="bs-option-desc">Usa tu número registrado</div>
-                  </div>
+	                <div class="bs-options-list">
+	                  <!-- Option 1 -->
+	                  <div class="bs-option-card">
+	                    <div class="bs-option-title" id="bs-option-1-title">
+	                      Mi Número de Teléfono
+	                    </div>
+	                    <div class="bs-option-desc" id="bs-option-1-desc">
+	                      Usa tu número registrado
+	                    </div>
+	                  </div>
 
                   <!-- Option 2 -->
-                  <div class="bs-option-card">
-                    <div class="bs-option-title">
-                      Ingresar Número de Teléfono
-                    </div>
-                    <div class="bs-option-desc">
-                      Ingresa el número asociado a la cuenta
-                    </div>
-                  </div>
-                </div>
+	                  <div class="bs-option-card">
+	                    <div class="bs-option-title" id="bs-option-2-title">
+	                      Ingresar Número de Teléfono
+	                    </div>
+	                    <div class="bs-option-desc" id="bs-option-2-desc">
+	                      Ingresa el número asociado a la cuenta
+	                    </div>
+	                  </div>
+	                </div>
               </div>
             </div>
           </div>
@@ -438,11 +461,11 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
 
   /* Bottom Sheet Stacking */
   .bs-bottom-sheet-container {
-    height: 120px; /* Reduced from 144px to prevent scrollbar */
+    height: 140px;
     position: relative;
     width: 100%;
     margin-top: auto;
-    margin-bottom: 0px;
+    margin-bottom: 50px;
     cursor: pointer;
   }
 
@@ -462,7 +485,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
   }
 
   .bs-sheet-item.active {
-    bottom: 0;
+    bottom: 28px;
     width: 100%;
     height: 64px;
     z-index: 30;
@@ -473,7 +496,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
   }
 
   .bs-sheet-item.stacked-1 {
-    bottom: 30px; /* Stronger offset */
+    bottom: 58px;
     width: 90%;
     height: 56px;
     z-index: 20;
@@ -483,7 +506,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
   }
 
   .bs-sheet-item.stacked-2 {
-    bottom: 60px; /* Stronger offset */
+    bottom: 88px;
     width: 82%;
     height: 56px;
     z-index: 10;
@@ -493,7 +516,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
   }
 
   .bs-sheet-item.hidden-sheet {
-    bottom: 60px;
+    bottom: 88px;
     width: 80%;
     height: 56px;
     z-index: 0;
