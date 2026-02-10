@@ -62,7 +62,7 @@ const parseReward = (reward) => {
       class="text-sm font-medium text-gray-400 hover:text-gray-600 transition-colors flex items-center gap-1"
     >
       <span>&lt;</span>
-      {translations.back}
+      <span id="streak-back-text">{translations.back}</span>
     </button>
   </div>
 
@@ -95,7 +95,10 @@ const parseReward = (reward) => {
             <div class="text-6xl font-bold text-white drop-shadow-sm">
               {config.streakDays}
             </div>
-            <div class="mt-1 text-sm font-medium text-white/95 drop-shadow-sm">
+            <div
+              class="mt-1 text-sm font-medium text-white/95 drop-shadow-sm"
+              id="streak-days-label"
+            >
               {translations.dayStreak}
             </div>
           </div>
@@ -110,10 +113,13 @@ const parseReward = (reward) => {
     >
       <div class="flex items-center justify-between">
         <div class="flex flex-col gap-2">
-          <span class="text-xs font-medium text-gray-600">
+          <span
+            class="text-xs font-medium text-gray-600"
+            id="streak-started-label"
+          >
             {translations.streakStarted}
           </span>
-          <span class="text-xs font-medium text-gray-600">
+          <span class="text-xs font-medium text-gray-600" id="streak-max-label">
             {translations.maxStreak}
           </span>
         </div>
@@ -130,7 +136,10 @@ const parseReward = (reward) => {
 
     <!-- This Week Progress -->
     <div class="text-center shrink-0">
-      <h3 class="mb-4 text-sm font-semibold text-[#004492]">
+      <h3
+        class="mb-4 text-sm font-semibold text-[#004492]"
+        id="streak-week-label"
+      >
         {translations.thisWeek}
       </h3>
       <div class="flex justify-center gap-2">
@@ -151,7 +160,12 @@ const parseReward = (reward) => {
                   class="flex h-8 w-8 items-center justify-center rounded-full transition-all"
                   style={style}
                 />
-                <span class="text-[10px] font-medium text-gray-600">{day}</span>
+                <span
+                  class="text-[10px] font-medium text-gray-600 day-label"
+                  data-index={index}
+                >
+                  {day}
+                </span>
               </div>
             );
           })
@@ -177,7 +191,7 @@ const parseReward = (reward) => {
         <div class="flex-1">
           <div class="mb-2 text-center text-xs font-semibold text-gray-900">
             {remainingDays}
-            {translations.moreDays}
+            <span id="streak-more-days-label">{translations.moreDays}</span>
           </div>
           <div class="h-2.5 w-full overflow-hidden rounded-full bg-gray-200">
             <div
@@ -186,7 +200,10 @@ const parseReward = (reward) => {
             >
             </div>
           </div>
-          <div class="mt-2 text-center text-[10px] font-medium text-gray-600">
+          <div
+            class="mt-2 text-center text-[10px] font-medium text-gray-600"
+            id="streak-unlock-label"
+          >
             {translations.toUnlock}
           </div>
         </div>
@@ -203,7 +220,10 @@ const parseReward = (reward) => {
 
     <!-- Active Rewards -->
     <div class="text-center pb-4">
-      <h3 class="mb-4 text-sm font-semibold text-[#004492]">
+      <h3
+        class="mb-4 text-sm font-semibold text-[#004492]"
+        id="streak-active-rewards-label"
+      >
         {translations.activeRewards}
       </h3>
       <div class="flex justify-center gap-2.5 px-2">
@@ -230,6 +250,7 @@ const parseReward = (reward) => {
       </div>
       <button
         class="mt-3 text-xs font-semibold transition-opacity hover:opacity-80 text-[#004492]"
+        id="streak-view-all-label"
       >
         {translations.viewAll}
       </button>
@@ -240,9 +261,93 @@ const parseReward = (reward) => {
       class="mx-auto w-full max-w-[300px] rounded-2xl bg-gray-50 p-5 text-center shadow-sm mb-4"
       style="border: 1px solid rgba(229, 231, 235, 0.5);"
     >
-      <span class="text-xs font-semibold text-gray-900">
+      <span
+        class="text-xs font-semibold text-gray-900"
+        id="streak-future-rewards-label"
+      >
         {translations.futureRewards}
       </span>
     </div>
   </div>
 </div>
+
+<script>
+  const streakTranslations = {
+    es: {
+      back: "Atrás",
+      dayStreak: "días de racha",
+      streakStarted: "Racha Iniciada",
+      maxStreak: "Racha Máxima",
+      thisWeek: "Esta Semana",
+      moreDays: "días más",
+      toUnlock: "Para desbloquear tu próxima recompensa",
+      activeRewards: "Tus recompensas activas",
+      viewAll: "Ver todo",
+      futureRewards: "Tus futuras recompensas",
+      days: ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"],
+    },
+    en: {
+      back: "Back",
+      dayStreak: "day streak",
+      streakStarted: "Streak Started",
+      maxStreak: "Max Streak",
+      thisWeek: "This Week",
+      moreDays: "more days",
+      toUnlock: "To unlock your next reward",
+      activeRewards: "Your active rewards",
+      viewAll: "View all",
+      futureRewards: "Your future rewards",
+      days: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    },
+  };
+
+  function updateStreakContent(lang) {
+    const t = streakTranslations[lang.toLowerCase() === "en" ? "en" : "es"];
+
+    const setText = (id, text) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = text;
+    };
+
+    setText("streak-back-text", t.back);
+    setText("streak-days-label", t.dayStreak);
+    setText("streak-started-label", t.streakStarted);
+    setText("streak-max-label", t.maxStreak);
+    setText("streak-week-label", t.thisWeek);
+    setText("streak-more-days-label", t.moreDays);
+    setText("streak-unlock-label", t.toUnlock);
+    setText("streak-active-rewards-label", t.activeRewards);
+    setText("streak-view-all-label", t.viewAll);
+    setText("streak-future-rewards-label", t.futureRewards);
+
+    // Update days
+    const dayLabels = document.querySelectorAll(".day-label");
+    dayLabels.forEach((el) => {
+      const index = parseInt(el.getAttribute("data-index"));
+      if (!isNaN(index) && t.days[index]) {
+        el.textContent = t.days[index];
+      }
+    });
+  }
+
+  // Listen for language change
+  window.addEventListener("ui:languagechange", (event) => {
+    const customEvent = event as CustomEvent;
+    const lang = customEvent.detail?.language || "es";
+    updateStreakContent(lang);
+  });
+
+  // Initial check
+  const storedLang = localStorage.getItem("ui-language") || "es";
+  updateStreakContent(storedLang);
+</script>
+
+<style>
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>

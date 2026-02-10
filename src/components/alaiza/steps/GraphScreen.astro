@@ -14,7 +14,7 @@
       class="mb-4 text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors flex items-center gap-1"
     >
       <span>&lt;</span>
-      <span>Atrás</span>
+      <span id="graph-back-text">Atrás</span>
     </button>
 
     <!-- Logo -->
@@ -33,7 +33,7 @@
       <button
         class="rounded-full bg-[#004492] px-4 py-1.5 text-xs font-medium text-white shadow-sm"
       >
-        Hoy 09-01-26
+        <span id="graph-today-label">Hoy</span> 09-01-26
       </button>
     </div>
 
@@ -57,21 +57,25 @@
     <div class="mb-4 flex gap-2 overflow-x-auto scrollbar-hide">
       <button
         class="rounded-full px-3 py-1 text-xs font-medium bg-[#004492] text-white shadow-sm"
+        id="graph-filter-all"
       >
         Todo
       </button>
       <button
         class="rounded-full px-3 py-1 text-xs font-medium bg-gray-100 text-gray-600 border border-gray-200"
+        id="graph-filter-increase"
       >
         Incremento
       </button>
       <button
         class="rounded-full px-3 py-1 text-xs font-medium bg-gray-100 text-gray-600 border border-gray-200"
+        id="graph-filter-expenses"
       >
         Gastos
       </button>
       <button
         class="rounded-full px-3 py-1 text-xs font-medium bg-gray-100 text-gray-600 border border-gray-200"
+        id="graph-filter-savings"
       >
         Ahorros
       </button>
@@ -114,7 +118,7 @@
       >
       <button
         class="rounded-lg px-2 py-1.5 text-[10px] font-medium bg-[#004492] text-white shadow-sm"
-        >1S</button
+        id="graph-time-1w">1S</button
       >
       <button
         class="rounded-lg px-2 py-1.5 text-[10px] font-medium bg-gray-100 text-gray-600"
@@ -130,11 +134,11 @@
       >
       <button
         class="rounded-lg px-2 py-1.5 text-[10px] font-medium bg-gray-100 text-gray-600"
-        >1A</button
+        id="graph-time-1y">1A</button
       >
       <button
         class="rounded-lg px-2 py-1.5 text-[10px] font-medium bg-gray-100 text-gray-600"
-        >Todo</button
+        id="graph-time-all">Todo</button
       >
     </div>
   </div>
@@ -145,11 +149,86 @@
   >
     <button
       class="w-full rounded-2xl bg-[#004492] py-4 text-sm font-bold text-white shadow-lg shadow-blue-900/20 active:scale-[0.98] transition-transform"
+      id="graph-discover-more-btn"
     >
       Descubrir Más
     </button>
   </div>
 </div>
+
+<script>
+  const graphTranslations = {
+    es: {
+      back: "Atrás",
+      today: "Hoy",
+      filters: {
+        all: "Todo",
+        increase: "Incremento",
+        expenses: "Gastos",
+        savings: "Ahorros",
+      },
+      time: {
+        w1: "1S",
+        y1: "1A",
+        all: "Todo",
+      },
+      discover: "Descubrir Más",
+    },
+    en: {
+      back: "Back",
+      today: "Today",
+      filters: {
+        all: "All",
+        increase: "Increase",
+        expenses: "Expenses",
+        savings: "Savings",
+      },
+      time: {
+        w1: "1W",
+        y1: "1Y",
+        all: "All",
+      },
+      discover: "Discover More",
+    },
+  };
+
+  function updateGraphContent(lang) {
+    const t = graphTranslations[lang.toLowerCase() === "en" ? "en" : "es"];
+
+    const setText = (id, text) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = text;
+    };
+
+    setText("graph-back-text", t.back);
+    setText("graph-today-label", t.today);
+
+    // Filters
+    setText("graph-filter-all", t.filters.all);
+    setText("graph-filter-increase", t.filters.increase);
+    setText("graph-filter-expenses", t.filters.expenses);
+    setText("graph-filter-savings", t.filters.savings);
+
+    // Time
+    setText("graph-time-1w", t.time.w1);
+    setText("graph-time-1y", t.time.y1);
+    setText("graph-time-all", t.time.all);
+
+    // CTA
+    setText("graph-discover-more-btn", t.discover);
+  }
+
+  // Listen for language change
+  window.addEventListener("ui:languagechange", (event) => {
+    const customEvent = event as CustomEvent;
+    const lang = customEvent.detail?.language || "es";
+    updateGraphContent(lang);
+  });
+
+  // Initial check
+  const storedLang = localStorage.getItem("ui-language") || "es";
+  updateGraphContent(storedLang);
+</script>
 
 <style>
   .scrollbar-hide::-webkit-scrollbar {
