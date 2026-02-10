@@ -102,6 +102,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
           <div class="flex items-center gap-2">
             <!-- Smiley Button -->
             <button
+              type="button"
               class="flex h-8 w-8 shrink-0 items-center justify-center text-white opacity-80 hover:opacity-100 transition"
             >
               <svg
@@ -132,6 +133,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
 
             <!-- Send Button -->
             <button
+              type="button"
               id="send-btn"
               class="flex h-8 w-8 shrink-0 items-center justify-center text-white opacity-80 hover:opacity-100 transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
@@ -187,82 +189,146 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
         }
       </style>
 
-      <script lang="ts">
+      <script>
         // Chat Logic
-        const chatInput = document.getElementById(
-          "chat-input",
-        ) as HTMLInputElement | null;
+        const chatInput = document.getElementById("chat-input");
         const sendBtn = document.getElementById("send-btn");
         const messagesContainer = document.getElementById("messages-container");
         const endRef = document.getElementById("messages-end");
         const introHeader = document.getElementById("alaiza-intro");
 
+        let currentLang = "es";
+
+        // Static translations for UI elements
+        const STATIC_TRANSLATIONS = {
+          es: {
+            back: "< Atrás",
+            subtitle: "Asistente Financiero IA",
+            placeholder: "Escribe tu mensaje...",
+            initialString:
+              "¡Hola! Soy Alaiza, tu asistente financiero IA. ¿En qué puedo ayudarte hoy?",
+          },
+          en: {
+            back: "< Back",
+            subtitle: "AI Financial Assistant",
+            placeholder: "Type your message...",
+            initialString:
+              "Hello! I'm Alaiza, your AI financial assistant. How can I help you today?",
+          },
+        };
+
         // Responses Database (Keyword based)
-        const RESPONSES: {
-          greeting: string;
-          default: string;
-          keywords: Record<string, string>;
-        } = {
-          greeting:
-            "¡Hola! Soy Alaiza, tu asistente financiero IA. ¿En qué puedo ayudarte hoy?",
-          default:
-            "Disculpa, no entendí tu mensaje. ¿Podrías reformularlo de otra manera?",
-          keywords: {
-            hola: "¡Hola! Soy Alaiza, tu asistente financiero. ¿En qué puedo ayudarte hoy?",
-            "buenos dias": "¡Buenos días! ¿En qué puedo ayudarte hoy?",
-            "buenas tardes": "¡Buenas tardes! ¿En qué puedo ayudarte hoy?",
-            saldo:
-              "Para consultar tu saldo, ve a la sección de Cuentas. Tu saldo actual se mostrará allí. ¿Necesitas ayuda para acceder?",
-            balance:
-              "Puedo ayudarte a revisar tu saldo. ¿Quieres ver el saldo actual o el historial de movimientos?",
-            transferencia:
-              "Para hacer una transferencia, ve a Pagos > Transferencias. Necesitarás el número de cuenta destino y el monto. ¿Quieres que te guíe paso a paso?",
-            transferir:
-              "Para realizar una transferencia, ve a la sección de Pagos. ¿Es una transferencia a otra cuenta tuya o a un tercero?",
-            pagar:
-              "Para realizar un pago, ve a la sección de Pagos. ¿Es un pago de servicios, tarjeta o factura?",
-            pago: "Para realizar un pago, ve a la sección de Pagos. ¿Es un pago de servicios, tarjeta o factura?",
-            tarjeta:
-              "Para gestionar tu tarjeta, ve a Tarjetas en el menú principal. ¿Qué necesitas hacer con tu tarjeta?",
-            bloquear:
-              "Para bloquear tu tarjeta, ve a Tarjetas > Gestionar tarjeta > Bloquear. También puedes llamar al servicio al cliente. ¿Tu tarjeta fue perdida o robada?",
-            activar:
-              "Para activar una nueva tarjeta, ve a Tarjetas > Activar tarjeta. Ingresa los datos de la tarjeta cuando la recibas. ¿Ya la recibiste?",
-            limite:
-              "Para consultar el límite de tu tarjeta, ve a Tarjetas > Detalles. Allí verás tu límite disponible y utilizado. ¿Quieres aumentar tu límite?",
-            movimientos:
-              "Para ver tus movimientos, ve a Cuentas > Historial de transacciones. Puedes filtrar por fecha, tipo o monto. ¿Qué período quieres revisar?",
-            transacciones:
-              "Para ver tus movimientos, ve a Cuentas > Historial de transacciones. Puedes filtrar por fecha, tipo o monto. ¿Qué período quieres revisar?",
-            configuracion:
-              "Puedo ayudarte con la configuración. ¿Qué quieres configurar? Notificaciones, seguridad, límites de transacción, u otra cosa?",
-            seguridad:
-              "Para cambiar tu contraseña o PIN, ve a Configuración > Seguridad. También puedes activar la autenticación de dos factores allí. ¿Qué aspecto de seguridad necesitas?",
-            ayuda:
-              "Claro, estoy aquí para ayudarte. Puedo ayudarte con transacciones, consultas de saldo, tarjetas, configuración y más. ¿Con qué necesitas asistencia?",
-            problema:
-              "Lamento escuchar que tienes un problema. ¿Podrías contarme más detalles? ¿Es con una transacción, acceso a la cuenta, o algo más?",
-            adios:
-              "¡De nada! Si necesitas algo más, estaré aquí para ayudarte. ¡Que tengas un buen día!",
+        const RESPONSES = {
+          es: {
+            greeting:
+              "¡Hola! Soy Alaiza, tu asistente financiero IA. ¿En qué puedo ayudarte hoy?",
+            default:
+              "Disculpa, no entendí tu mensaje. ¿Podrías reformularlo de otra manera?",
+            keywords: {
+              hola: "¡Hola! Soy Alaiza, tu asistente financiero. ¿En qué puedo ayudarte hoy?",
+              "buenos dias": "¡Buenos días! ¿En qué puedo ayudarte hoy?",
+              "buenas tardes": "¡Buenas tardes! ¿En qué puedo ayudarte hoy?",
+              saldo:
+                "Para consultar tu saldo, ve a la sección de Cuentas. Tu saldo actual se mostrará allí. ¿Necesitas ayuda para acceder?",
+              balance:
+                "Puedo ayudarte a revisar tu saldo. ¿Quieres ver el saldo actual o el historial de movimientos?",
+              transferencia:
+                "Para hacer una transferencia, ve a Pagos > Transferencias. Necesitarás el número de cuenta destino y el monto. ¿Quieres que te guíe paso a paso?",
+              transferir:
+                "Para realizar una transferencia, ve a la sección de Pagos. ¿Es una transferencia a otra cuenta tuya o a un tercero?",
+              pagar:
+                "Para realizar un pago, ve a la sección de Pagos. ¿Es un pago de servicios, tarjeta o factura?",
+              pago: "Para realizar un pago, ve a la sección de Pagos. ¿Es un pago de servicios, tarjeta o factura?",
+              tarjeta:
+                "Para gestionar tu tarjeta, ve a Tarjetas en el menú principal. ¿Qué necesitas hacer con tu tarjeta?",
+              bloquear:
+                "Para bloquear tu tarjeta, ve a Tarjetas > Gestionar tarjeta > Bloquear. También puedes llamar al servicio al cliente. ¿Tu tarjeta fue perdida o robada?",
+              activar:
+                "Para activar una nueva tarjeta, ve a Tarjetas > Activar tarjeta. Ingresa los datos de la tarjeta cuando la recibas. ¿Ya la recibiste?",
+              limite:
+                "Para consultar el límite de tu tarjeta, ve a Tarjetas > Detalles. Allí verás tu límite disponible y utilizado. ¿Quieres aumentar tu límite?",
+              movimientos:
+                "Para ver tus movimientos, ve a Cuentas > Historial de transacciones. Puedes filtrar por fecha, tipo o monto. ¿Qué período quieres revisar?",
+              transacciones:
+                "Para ver tus movimientos, ve a Cuentas > Historial de transacciones. Puedes filtrar por fecha, tipo o monto. ¿Qué período quieres revisar?",
+              configuracion:
+                "Puedo ayudarte con la configuración. ¿Qué quieres configurar? Notificaciones, seguridad, límites de transacción, u otra cosa?",
+              seguridad:
+                "Para cambiar tu contraseña o PIN, ve a Configuración > Seguridad. También puedes activar la autenticación de dos factores allí. ¿Qué aspecto de seguridad necesitas?",
+              ayuda:
+                "Claro, estoy aquí para ayudarte. Puedo ayudarte con transacciones, consultas de saldo, tarjetas, configuración y más. ¿Con qué necesitas asistencia?",
+              problema:
+                "Lamento escuchar que tienes un problema. ¿Podrías contarme más detalles? ¿Es con una transacción, acceso a la cuenta, o algo más?",
+              adios:
+                "¡De nada! Si necesitas algo más, estaré aquí para ayudarte. ¡Que tengas un buen día!",
+            },
+          },
+          en: {
+            greeting:
+              "Hello! I'm Alaiza, your AI financial assistant. How can I help you today?",
+            default:
+              "Sorry, I didn't understand your message. Could you rephrase it?",
+            keywords: {
+              hello:
+                "Hello! I'm Alaiza, your financial assistant. How can I help you today?",
+              hi: "Hello! I'm Alaiza, your financial assistant. How can I help you today?",
+              "good morning": "Good morning! How can I help you today?",
+              "good afternoon": "Good afternoon! How can I help you today?",
+              balance:
+                "I can help you check your balance. Do you want to see the current balance or transaction history?",
+              transfer:
+                "To make a transfer, go to Payments > Transfers. You will need the destination account number and amount. Do you want me to guide you step by step?",
+              pay: "To make a payment, go to the Payments section. Is it a service payment, card, or bill?",
+              payment:
+                "To make a payment, go to the Payments section. Is it a service payment, card, or bill?",
+              card: "To manage your card, go to Cards in the main menu. What do you need to do with your card?",
+              block:
+                "To block your card, go to Cards > Manage Card > Block. You can also call customer service. Was your card lost or stolen?",
+              activate:
+                "To activate a new card, go to Cards > Activate Card. Enter the card details when you receive it. Have you received it yet?",
+              limit:
+                "To check your card limit, go to Cards > Details. There you will see your available and used limit. Do you want to increase your limit?",
+              transactions:
+                "To see your transactions, go to Accounts > Transaction History. You can filter by date, type, or amount. What period do you want to review?",
+              movements:
+                "To see your movements, go to Accounts > Transaction History. You can filter by date, type, or amount. What period do you want to review?",
+              settings:
+                "I can help you with settings. What do you want to configure? Notifications, security, transaction limits, or something else?",
+              configuration:
+                "I can help you with settings. What do you want to configure? Notifications, security, transaction limits, or something else?",
+              security:
+                "To change your password or PIN, go to Settings > Security. You can also enable two-factor authentication there. What security aspect do you need?",
+              help: "Sure, I'm here to help. I can assist with transactions, balance inquiries, cards, settings, and more. What do you need assistance with?",
+              problem:
+                "I'm sorry to hear you have a problem. Could you tell me more details? Is it with a transaction, account access, or something else?",
+              issue:
+                "I'm sorry to hear you have an issue. Could you tell me more details? Is it with a transaction, account access, or something else?",
+              bye: "You're welcome! If you need anything else, I'll be here to help. Have a good day!",
+              goodbye:
+                "You're welcome! If you need anything else, I'll be here to help. Have a good day!",
+            },
           },
         };
 
         // Helper to get response
-        function getBotResponse(text: string) {
+        function getBotResponse(text) {
           const lowerText = text.toLowerCase();
+          const langResponses = RESPONSES[currentLang] || RESPONSES["es"];
 
           // Check for keywords
-          for (const [key, response] of Object.entries(RESPONSES.keywords)) {
+          for (const [key, response] of Object.entries(
+            langResponses.keywords,
+          )) {
             if (lowerText.includes(key)) {
               return response;
             }
           }
 
-          return RESPONSES.default;
+          return langResponses.default;
         }
 
         // Helper to create message element
-        function createMessageElement(text: string, sender: string) {
+        function createMessageElement(text, sender) {
           const wrapper = document.createElement("div");
           wrapper.className = `flex items-start gap-2.5 fade-in-up ${sender === "user" ? "justify-end" : ""}`;
 
@@ -310,7 +376,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
         }
 
         // Helper for typewriter effect
-        function typeWriter(text: string, element: HTMLElement) {
+        function typeWriter(text, element) {
           let i = 0;
           const speed = 20;
 
@@ -325,7 +391,8 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
           type();
         }
 
-        function handleSend() {
+        function handleSend(e) {
+          if (e) e.preventDefault();
           if (!chatInput) return;
           const text = chatInput.value.trim();
           if (!text) return;
@@ -354,9 +421,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
             }
 
             // Find the text element to type into
-            const textElement = botMsg.querySelector(
-              ".text-gray-900",
-            ) as HTMLElement;
+            const textElement = botMsg.querySelector(".text-gray-900");
             if (textElement) {
               typeWriter(responseText, textElement);
             }
@@ -365,12 +430,54 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
           }, 1000);
         }
 
+        // Initial language setup
+        function updateStaticText() {
+          const content =
+            STATIC_TRANSLATIONS[currentLang] || STATIC_TRANSLATIONS["es"];
+
+          const backBtn = document.getElementById("alaiza-chat-back");
+          if (backBtn) backBtn.textContent = content.back;
+
+          const subtitle = document.getElementById("alaiza-chat-subtitle");
+          if (subtitle) subtitle.textContent = content.subtitle;
+
+          if (chatInput) chatInput.placeholder = content.placeholder;
+
+          // Update initial message if it exists (and hasn't been removed/replaced in a way that makes this invalid)
+          const initialMsg = document.getElementById("alaiza-chat-initial");
+          // Only update if it is the initial load or the user hasn't chatted yet (simplification)
+          // or just always update the initial message element even if hidden (it might be hidden by logic, but text should match)
+          if (initialMsg) {
+            initialMsg.textContent = content.initialString;
+          }
+        }
+
+        // Initialize state
+        const storedLang = localStorage.getItem("ui-language");
+        if (
+          storedLang &&
+          (storedLang.toLowerCase() === "en" ||
+            storedLang.toLowerCase() === "es")
+        ) {
+          currentLang = storedLang.toLowerCase();
+          updateStaticText();
+        }
+
+        // Listen for language changes
+        window.addEventListener("ui:languagechange", (event) => {
+          const newLang = event.detail?.language?.toLowerCase();
+          if (newLang && (newLang === "en" || newLang === "es")) {
+            currentLang = newLang;
+            updateStaticText();
+          }
+        });
+
         if (sendBtn && chatInput) {
           sendBtn.addEventListener("click", handleSend);
 
           chatInput.addEventListener("keypress", (e) => {
             if (e.key === "Enter") {
-              handleSend();
+              handleSend(e);
             }
           });
         }
