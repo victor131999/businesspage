@@ -1055,11 +1055,24 @@ const modulesList = [
   /* Override: welcome-section siempre debe tener su propio margin-top para el navbar */
   .welcome-section {
     margin-top: 110px !important;
+    position: relative;
+    z-index: 1;
   }
 
   @media (max-width: 768px) {
     .welcome-section {
       margin-top: 120px !important;
+    }
+  }
+
+  /* Más espacio entre hero y product-showcase para que el DeviceFrame no quede tapado */
+  .welcome-section + .product-showcase {
+    margin-top: 160px;
+  }
+
+  @media (max-width: 768px) {
+    .welcome-section + .product-showcase {
+      margin-top: 120px;
     }
   }
 
@@ -1081,6 +1094,7 @@ const modulesList = [
     display: flex;
     justify-content: center;
     position: relative;
+    z-index: 2; /* Por encima del WelcomeHero para que el dispositivo no se corte */
     /* Altura dinámica para contenido extenso */
     height: auto;
     min-height: clamp(40rem, 80vh, 52.5rem);
