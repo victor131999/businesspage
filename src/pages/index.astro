@@ -943,36 +943,42 @@ const modulesList = [
     </section>
 
     <!-- Footer -->
-    <footer class="demo-footer">
+    <footer class="footer-section">
       <div class="footer-container">
         <div class="footer-top">
+          <!-- Logo -->
           <div class="footer-logo">
-            <span class="logo-z">Z</span>
-            <span class="logo-text">Zelify</span>
+            <img
+              src="/images/zelify_logo2.png"
+              alt="Zelify"
+              style="height: 40px;"
+            />
           </div>
+
+          <!-- Quick Links -->
           <div class="footer-quick-links">
-            <h4 class="quick-links-title" data-i18n="footer.quicklinks">
+            <h3 class="quick-links-title" data-i18n="footer.quicklinks">
               Quick links
-            </h4>
+            </h3>
             <ul class="quick-links-list">
-              <li><a href="/" data-i18n="footer.products">Products</a></li>
-              <li><a href="/" data-i18n="footer.about">About us</a></li>
-              <li>
-                <a href="https://docs.zelify.com" data-i18n="footer.developers"
-                  >Developers</a
-                >
-              </li>
-              <li><a href="/" data-i18n="footer.others">Others</a></li>
+              <li><a href="/products" data-i18n="footer.products">Products</a></li>
+              <li><a href="/nosotros" data-i18n="footer.about">About us</a></li>
+              <li><a href="/desarrollo" data-i18n="footer.developers">Developers</a></li>
+              <li><a href="/otros" data-i18n="footer.others">Others</a></li>
             </ul>
           </div>
         </div>
+
         <div class="footer-bottom">
+          <!-- Disclaimer -->
           <p class="footer-legal" data-i18n="footer.legal">
-            Zelify is a technology platform currently in a development phase,
-            not yet deployed or operational, and does not provide or process
-            financial services directly; all financial operations are conducted
-            exclusively through regulated third-party partners.
+            Zelify is a technology platform currently in a development phase, not
+            yet deployed or operational, and does not provide or process financial
+            services directly; all financial operations are conducted exclusively
+            through regulated third-party partners.
           </p>
+
+          <!-- Copyright -->
           <p class="footer-copyright" data-i18n="footer.copyright">
             © 2025 Zelify. All rights reserved.
           </p>
@@ -2491,13 +2497,14 @@ const modulesList = [
   /* ai-section-button: átomo Button secondary */
 
   /* Footer */
-  .demo-footer {
+  .footer-section {
     width: 100%;
     padding-top: 100px;
     padding-bottom: 100px;
-    background: #102137;
+    background: #0a203f;
     position: relative;
     z-index: 1;
+    color: #ffffff;
   }
 
   .footer-container {
