@@ -381,19 +381,28 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
             <div id="content-wallet" class="w-full space-y-4 hidden">
               <div class="space-y-3">
                 <div class="flex justify-between items-center py-2">
-                  <span class="text-xs text-gray-500">Gastado hoy</span>
+                  <span
+                    class="text-xs text-gray-500"
+                    id="cards-wallet-spent-label">Gastado hoy</span
+                  >
                   <span class="text-sm font-semibold text-gray-900"
                     >$450.00</span
                   >
                 </div>
                 <div class="flex justify-between items-center py-2">
-                  <span class="text-xs text-gray-500">Límite diario</span>
+                  <span
+                    class="text-xs text-gray-500"
+                    id="cards-wallet-limit-label">Límite diario</span
+                  >
                   <span class="text-sm font-semibold text-gray-900"
                     >$1,000.00</span
                   >
                 </div>
                 <div class="flex justify-between items-center py-2">
-                  <span class="text-xs text-gray-500">Disponible</span>
+                  <span
+                    class="text-xs text-gray-500"
+                    id="cards-wallet-available-label">Disponible</span
+                  >
                   <span class="text-sm font-semibold text-gray-900"
                     >$550.00</span
                   >
@@ -404,18 +413,34 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
             <div id="content-freeze" class="w-full space-y-4 hidden">
               <div class="space-y-3">
                 <div class="flex justify-between items-center py-2">
-                  <span class="text-xs text-gray-500">Estado</span>
-                  <span class="text-sm font-semibold text-green-500"
-                    >Activa</span
+                  <span
+                    class="text-xs text-gray-500"
+                    id="cards-freeze-status-label">Estado</span
+                  >
+                  <span
+                    class="text-sm font-semibold text-green-500"
+                    id="cards-freeze-active-value">Activa</span
                   >
                 </div>
                 <div class="flex justify-between items-center py-2">
-                  <span class="text-xs text-gray-500">Última congelación</span>
-                  <span class="text-sm font-semibold text-gray-900">Nunca</span>
+                  <span
+                    class="text-xs text-gray-500"
+                    id="cards-freeze-last-label">Última congelación</span
+                  >
+                  <span
+                    class="text-sm font-semibold text-gray-900"
+                    id="cards-freeze-never-value">Nunca</span
+                  >
                 </div>
                 <div class="flex justify-between items-center py-2">
-                  <span class="text-xs text-gray-500">Puede congelar</span>
-                  <span class="text-sm font-semibold text-gray-900">Sí</span>
+                  <span
+                    class="text-xs text-gray-500"
+                    id="cards-freeze-can-label">Puede congelar</span
+                  >
+                  <span
+                    class="text-sm font-semibold text-gray-900"
+                    id="cards-freeze-yes-value">Sí</span
+                  >
                 </div>
               </div>
             </div>
@@ -423,21 +448,33 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
             <div id="content-security" class="w-full space-y-4 hidden">
               <div class="space-y-3">
                 <div class="flex justify-between items-center py-2">
-                  <span class="text-xs text-gray-500">Verificación 2FA</span>
-                  <span class="text-sm font-semibold text-green-500"
-                    >Activada</span
+                  <span
+                    class="text-xs text-gray-500"
+                    id="cards-security-2fa-label">Verificación 2FA</span
+                  >
+                  <span
+                    class="text-sm font-semibold text-green-500"
+                    id="cards-security-enabled-value">Activada</span
                   >
                 </div>
                 <div class="flex justify-between items-center py-2">
-                  <span class="text-xs text-gray-500">Notificaciones</span>
-                  <span class="text-sm font-semibold text-gray-900"
-                    >Activada</span
+                  <span
+                    class="text-xs text-gray-500"
+                    id="cards-security-notif-label">Notificaciones</span
+                  >
+                  <span
+                    class="text-sm font-semibold text-gray-900"
+                    id="cards-security-notif-value">Activada</span
                   >
                 </div>
                 <div class="flex justify-between items-center py-2">
-                  <span class="text-xs text-gray-500">Último acceso</span>
-                  <span class="text-sm font-semibold text-gray-900"
-                    >Hace 2 horas</span
+                  <span
+                    class="text-xs text-gray-500"
+                    id="cards-security-access-label">Último acceso</span
+                  >
+                  <span
+                    class="text-sm font-semibold text-gray-900"
+                    id="cards-security-access-value">Hace 2 horas</span
                   >
                 </div>
               </div>
@@ -446,21 +483,33 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
             <div id="content-more" class="w-full space-y-4 hidden">
               <div class="space-y-3">
                 <div class="flex justify-between items-center py-2">
-                  <span class="text-xs text-gray-500">Configuración</span>
-                  <span class="text-sm font-semibold text-gray-900"
-                    >Disponible</span
+                  <span
+                    class="text-xs text-gray-500"
+                    id="cards-more-config-label">Configuración</span
+                  >
+                  <span
+                    class="text-sm font-semibold text-gray-900"
+                    id="cards-more-available-value">Disponible</span
                   >
                 </div>
                 <div class="flex justify-between items-center py-2">
-                  <span class="text-xs text-gray-500">Historial</span>
-                  <span class="text-sm font-semibold text-gray-900"
-                    >Ver todo</span
+                  <span
+                    class="text-xs text-gray-500"
+                    id="cards-more-history-label">Historial</span
+                  >
+                  <span
+                    class="text-sm font-semibold text-gray-900"
+                    id="cards-more-seeall-value">Ver todo</span
                   >
                 </div>
                 <div class="flex justify-between items-center py-2">
-                  <span class="text-xs text-gray-500">Soporte</span>
-                  <span class="text-sm font-semibold text-gray-900"
-                    >Contactar</span
+                  <span
+                    class="text-xs text-gray-500"
+                    id="cards-more-support-label">Soporte</span
+                  >
+                  <span
+                    class="text-sm font-semibold text-gray-900"
+                    id="cards-more-contact-value">Contactar</span
                   >
                 </div>
               </div>
@@ -470,15 +519,22 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
               <div class="space-y-3">
                 <!-- Current Status -->
                 <div class="flex justify-between items-center py-2">
-                  <span class="text-xs text-gray-500">Estado actual</span>
-                  <span class="text-sm font-semibold text-green-500"
-                    >Desbloqueada</span
+                  <span
+                    class="text-xs text-gray-500"
+                    id="cards-lock-status-label">Estado actual</span
+                  >
+                  <span
+                    class="text-sm font-semibold text-green-500"
+                    id="cards-lock-unlocked-value">Desbloqueada</span
                   >
                 </div>
 
                 <!-- Info Box -->
                 <div class="bg-gray-50 rounded-2xl p-4 space-y-3 mb-4">
-                  <p class="text-xs text-gray-500 leading-relaxed">
+                  <p
+                    class="text-xs text-gray-500 leading-relaxed"
+                    id="cards-lock-desc"
+                  >
                     Al bloquear tu tarjeta, se desactivarán todas las
                     transacciones hasta que la desbloquees nuevamente.
                   </p>
@@ -498,7 +554,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                           d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                         ></path>
                       </svg>
-                      <span class="text-xs text-gray-500"
+                      <span class="text-xs text-gray-500" id="cards-lock-item-1"
                         >Las transacciones pendientes se completarán</span
                       >
                     </div>
@@ -516,7 +572,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                           d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                         ></path>
                       </svg>
-                      <span class="text-xs text-gray-500"
+                      <span class="text-xs text-gray-500" id="cards-lock-item-2"
                         >Puedes desbloquearla en cualquier momento</span
                       >
                     </div>
@@ -534,7 +590,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                           d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                         ></path>
                       </svg>
-                      <span class="text-xs text-gray-500"
+                      <span class="text-xs text-gray-500" id="cards-lock-item-3"
                         >No se generarán cargos adicionales</span
                       >
                     </div>
@@ -543,6 +599,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
 
                 <!-- Button -->
                 <button
+                  id="cards-lock-button"
                   class="w-full bg-[#E11D48] hover:bg-[#BE123C] text-white font-bold py-3 rounded-xl shadow-lg shadow-red-200/50 active:scale-95 transition-all text-sm mt-2"
                 >
                   Bloquear tarjeta
@@ -669,6 +726,17 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
       lock: "Bloquear tarjeta",
     };
 
+    const titlesEN: TitlesMap = {
+      number: "Card Details",
+      wallet: "Daily Consumption Details",
+      freeze: "Freeze Status",
+      security: "Security Settings",
+      more: "More Options",
+      lock: "Lock Card",
+    };
+
+    let currentLang = "es";
+
     function updateActionUI(selectedId: string) {
       activeId = selectedId;
       const selectedIndex = Array.from(actions).findIndex(
@@ -723,7 +791,8 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
       if (currentContent) currentContent.classList.remove("hidden");
 
       if (sheetTitle) {
-        sheetTitle.innerText = titlesES[selectedId] || "Detalle de tarjeta";
+        const titles = currentLang === "en" ? titlesEN : titlesES;
+        sheetTitle.innerText = titles[selectedId] || titles.number;
       }
     }
 
@@ -740,16 +809,9 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
           sheetContentArea.style.pointerEvents = "auto";
         }
 
-        const titlesES: TitlesMap = {
-          number: "Detalle de tarjeta",
-          wallet: "Detalle de consumo diario",
-          freeze: "Estado de congelación",
-          security: "Configuración de seguridad",
-          more: "Mas opciones",
-          lock: "Bloquear tarjeta",
-        };
+        const titles = currentLang === "en" ? titlesEN : titlesES;
         if (sheetTitle)
-          sheetTitle.innerText = titlesES[activeId] || "Detalle de tarjeta";
+          sheetTitle.innerText = titles[activeId] || titles.number;
       } else {
         if (sheet)
           sheet.style.transform = `translateY(${SHEET_COLLAPSED_TRANSLATE})`;
@@ -869,6 +931,43 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
           label: "Cuenta",
           value: "Crédito",
         },
+        wallet: {
+          spent: "Gastado hoy",
+          limit: "Límite diario",
+          available: "Disponible",
+        },
+        freeze: {
+          status: "Estado",
+          active: "Activa",
+          last: "Última congelación",
+          never: "Nunca",
+          can: "Puede congelar",
+          yes: "Sí",
+        },
+        security: {
+          twofa: "Verificación 2FA",
+          enabled: "Activada",
+          notif: "Notificaciones",
+          access: "Último acceso",
+          time: "Hace 2 horas",
+        },
+        more: {
+          config: "Configuración",
+          available: "Disponible",
+          history: "Historial",
+          seeAll: "Ver todo",
+          support: "Soporte",
+          contact: "Contactar",
+        },
+        lock: {
+          status: "Estado actual",
+          unlocked: "Desbloqueada",
+          desc: "Al bloquear tu tarjeta, se desactivarán todas las transacciones hasta que la desbloquees nuevamente.",
+          item1: "Las transacciones pendientes se completarán",
+          item2: "Puedes desbloquearla en cualquier momento",
+          item3: "No se generarán cargos adicionales",
+          button: "Bloquear tarjeta",
+        },
         sheetTitle: "Detalle de tarjeta",
         cardNumber: "Número de tarjeta",
         expiry: "Fecha de expiración",
@@ -892,6 +991,43 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
           label: "Account",
           value: "Credit",
         },
+        wallet: {
+          spent: "Spent Today",
+          limit: "Daily Limit",
+          available: "Available",
+        },
+        freeze: {
+          status: "Status",
+          active: "Active",
+          last: "Last Freeze",
+          never: "Never",
+          can: "Can Freeze",
+          yes: "Yes",
+        },
+        security: {
+          twofa: "2FA Verification",
+          enabled: "Enabled",
+          notif: "Notifications",
+          access: "Last Access",
+          time: "2 hours ago",
+        },
+        more: {
+          config: "Configuration",
+          available: "Available",
+          history: "History",
+          seeAll: "See all",
+          support: "Support",
+          contact: "Contact",
+        },
+        lock: {
+          status: "Current Status",
+          unlocked: "Unlocked",
+          desc: "Blocking your card will disable all transactions until you unblock it again.",
+          item1: "Pending transactions will be completed",
+          item2: "You can unblock it at any time",
+          item3: "No additional charges will be generated",
+          button: "Lock Card",
+        },
         sheetTitle: "Card Details",
         cardNumber: "Card Number",
         expiry: "Expiration Date",
@@ -901,7 +1037,14 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
 
     function updateCardsContent(langRaw: string) {
       const lang = langRaw.toLowerCase() === "en" ? "en" : "es";
+      currentLang = lang;
       const t = cardsTranslations[lang];
+
+      // Update sheet title immediately
+      const titles = currentLang === "en" ? titlesEN : titlesES;
+      if (sheetTitle) {
+        sheetTitle.innerText = titles[activeId] || titles.number;
+      }
 
       // Back button
       const backText = document.getElementById("cards-back-text");
@@ -952,6 +1095,78 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
 
       const cvvNote = document.getElementById("cards-cvv-note");
       if (cvvNote) cvvNote.textContent = t.cvvNote;
+
+      // Update Wallet
+      const walletSpent = document.getElementById("cards-wallet-spent-label");
+      if (walletSpent) walletSpent.textContent = t.wallet.spent;
+      const walletLimit = document.getElementById("cards-wallet-limit-label");
+      if (walletLimit) walletLimit.textContent = t.wallet.limit;
+      const walletAvailable = document.getElementById(
+        "cards-wallet-available-label",
+      );
+      if (walletAvailable) walletAvailable.textContent = t.wallet.available;
+
+      // Update Freeze
+      const freezeStatus = document.getElementById("cards-freeze-status-label");
+      if (freezeStatus) freezeStatus.textContent = t.freeze.status;
+      const freezeActive = document.getElementById("cards-freeze-active-value");
+      if (freezeActive) freezeActive.textContent = t.freeze.active;
+      const freezeLast = document.getElementById("cards-freeze-last-label");
+      if (freezeLast) freezeLast.textContent = t.freeze.last;
+      const freezeNever = document.getElementById("cards-freeze-never-value");
+      if (freezeNever) freezeNever.textContent = t.freeze.never;
+      const freezeCan = document.getElementById("cards-freeze-can-label");
+      if (freezeCan) freezeCan.textContent = t.freeze.can;
+      const freezeYes = document.getElementById("cards-freeze-yes-value");
+      if (freezeYes) freezeYes.textContent = t.freeze.yes;
+
+      // Update Security
+      const sec2fa = document.getElementById("cards-security-2fa-label");
+      if (sec2fa) sec2fa.textContent = t.security.twofa;
+      const secEnabled = document.getElementById(
+        "cards-security-enabled-value",
+      );
+      if (secEnabled) secEnabled.textContent = t.security.enabled;
+      const secNotif = document.getElementById("cards-security-notif-label");
+      if (secNotif) secNotif.textContent = t.security.notif;
+      const secNotifVal = document.getElementById("cards-security-notif-value");
+      if (secNotifVal) secNotifVal.textContent = t.security.enabled;
+      const secAccess = document.getElementById("cards-security-access-label");
+      if (secAccess) secAccess.textContent = t.security.access;
+      const secTime = document.getElementById("cards-security-access-value");
+      if (secTime) secTime.textContent = t.security.time;
+
+      // Update More
+      const moreConfig = document.getElementById("cards-more-config-label");
+      if (moreConfig) moreConfig.textContent = t.more.config;
+      const moreAvailable = document.getElementById(
+        "cards-more-available-value",
+      );
+      if (moreAvailable) moreAvailable.textContent = t.more.available;
+      const moreHistory = document.getElementById("cards-more-history-label");
+      if (moreHistory) moreHistory.textContent = t.more.history;
+      const moreSeeAll = document.getElementById("cards-more-seeall-value");
+      if (moreSeeAll) moreSeeAll.textContent = t.more.seeAll;
+      const moreSupport = document.getElementById("cards-more-support-label");
+      if (moreSupport) moreSupport.textContent = t.more.support;
+      const moreContact = document.getElementById("cards-more-contact-value");
+      if (moreContact) moreContact.textContent = t.more.contact;
+
+      // Update Lock
+      const lockStatus = document.getElementById("cards-lock-status-label");
+      if (lockStatus) lockStatus.textContent = t.lock.status;
+      const lockUnlocked = document.getElementById("cards-lock-unlocked-value");
+      if (lockUnlocked) lockUnlocked.textContent = t.lock.unlocked;
+      const lockDesc = document.getElementById("cards-lock-desc");
+      if (lockDesc) lockDesc.textContent = t.lock.desc;
+      const lockItem1 = document.getElementById("cards-lock-item-1");
+      if (lockItem1) lockItem1.textContent = t.lock.item1;
+      const lockItem2 = document.getElementById("cards-lock-item-2");
+      if (lockItem2) lockItem2.textContent = t.lock.item2;
+      const lockItem3 = document.getElementById("cards-lock-item-3");
+      if (lockItem3) lockItem3.textContent = t.lock.item3;
+      const lockButton = document.getElementById("cards-lock-button");
+      if (lockButton) lockButton.textContent = t.lock.button;
     }
 
     // Listen for language change
