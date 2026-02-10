@@ -115,12 +115,6 @@ export const AlaizaAssistant = () => {
     }, [isOpen, currentLang]);
 
     const playAudio = (srcOrPlaylist: string | string[], onEnded?: () => void) => {
-        // Skip audio playback if language is English
-        if (langRef.current === 'en') {
-            if (onEnded) onEnded();
-            return;
-        }
-
         if (audioRef.current) {
             const playlist = Array.isArray(srcOrPlaylist) ? srcOrPlaylist : [srcOrPlaylist];
             let currentIndex = 0;
@@ -133,22 +127,33 @@ export const AlaizaAssistant = () => {
                 }
 
                 if (audioRef.current) {
-                    audioRef.current.src = playlist[currentIndex];
-                    setIsPlaying(true);
+                    const audio = audioRef.current;
+                    audio.src = playlist[currentIndex];
+                    audio.load(); // Force load
 
                     const handleEnded = () => {
-                        audioRef.current?.removeEventListener('ended', handleEnded);
+                        audio.removeEventListener('ended', handleEnded);
                         currentIndex++;
                         playNext();
                     };
 
-                    audioRef.current.addEventListener('ended', handleEnded);
+                    const handleCanPlay = () => {
+                        audio.removeEventListener('canplay', handleCanPlay);
+                        audio.play()
+                            .then(() => {
+                                setIsPlaying(true);
+                            })
+                            .catch(e => {
+                                console.error("Error playing audio:", e);
+                                setIsPlaying(false);
+                                // If error, try next? Or stop?
+                                // For now, let's stop but maybe we should trigger ended to continue flow?
+                                // handleEnded(); 
+                            });
+                    };
 
-                    audioRef.current.play().catch(e => {
-                        console.error("Error playing audio:", e);
-                        setIsPlaying(false);
-                        // If one fails, try next or stop? Let's stop to be safe
-                    });
+                    audio.addEventListener('ended', handleEnded);
+                    audio.addEventListener('canplay', handleCanPlay);
                 }
             };
 
@@ -192,7 +197,7 @@ export const AlaizaAssistant = () => {
         isWelcomeSequenceRunning.current = true;
 
         // 1. Audio Bienvenido
-        playSoundMessage('/audios/01-Bienvenidos.wav', () => {
+        playSoundMessage(t.audios.welcome, () => {
             // 2. Mostrar opciones al terminar
             showMainOptions();
             isWelcomeSequenceRunning.current = false;
@@ -222,8 +227,8 @@ export const AlaizaAssistant = () => {
     function showMainOptions() {
         const t = ALAIZA_TRANSLATIONS[langRef.current];
         addOptionsMessage([
-            { label: t.options['Quiénes somos'], labelKey: 'Quiénes somos', id: 'quienes-somos', action: () => handleOptionClick('Quiénes somos', '/audios/02-Quienes somos.wav', showMainOptions) },
-            { label: t.options['Quién es Alaiza'], labelKey: 'Quién es Alaiza', id: 'quien-es-alaiza', action: () => handleOptionClick('Quién es Alaiza', '/audios/03-Alaiza.wav', showMainOptions) },
+            { label: t.options['Quiénes somos'], labelKey: 'Quiénes somos', id: 'quienes-somos', action: () => handleOptionClick('Quiénes somos', t.audios.whoAreWe, showMainOptions) },
+            { label: t.options['Quién es Alaiza'], labelKey: 'Quién es Alaiza', id: 'quien-es-alaiza', action: () => handleOptionClick('Quién es Alaiza', t.audios.whoIsAlaiza, showMainOptions) },
             { label: t.options['Tour productos'], labelKey: 'Tour productos', id: 'tour-productos', action: () => handleTourClick() },
         ]);
     }
@@ -246,7 +251,7 @@ export const AlaizaAssistant = () => {
     function showAuthOptions() {
         const t = ALAIZA_TRANSLATIONS[currentLang];
         addOptionsMessage([
-            { label: t.options['Qué es Auth'], labelKey: 'Qué es Auth', id: 'que-es-auth', action: () => handleOptionClick('Qué es Auth', '/audios/07-OauthQuees.wav', showAuthDeepOptions) },
+            { label: t.options['Qué es Auth'], labelKey: 'Qué es Auth', id: 'que-es-auth', action: () => handleOptionClick('Qué es Auth', t.audios.authWhatIs, showAuthDeepOptions) },
         ]);
     }
 
@@ -261,15 +266,7 @@ export const AlaizaAssistant = () => {
     function handleAuthDeepExplanationClick(): void {
         addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['Quiero más información de Auth']);
 
-        const audioPlaylist = [
-            '/audios/22-comenzarauth.wav',
-            '/audios/23-quehacerconauth.wav',
-            '/audios/24-visualizarpantallasweb.wav',
-            '/audios/25-personalizacionmarca.wav',
-            '/audios/26-personalizacionregistros.wav',
-            '/audios/27-validarcorreocodigotemporal.wav',
-            '/audios/28-geolocalizacionparadispositivo.wav'
-        ];
+        const audioPlaylist = t.audios.authDeep;
 
         playAudio(audioPlaylist, () => {
             showAuthDeepOptions();
@@ -283,7 +280,7 @@ export const AlaizaAssistant = () => {
 
     function handleTourClick() {
         addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['Tour productos']);
-        playAudio('/audios/05-Servicios.wav', () => {
+        playAudio(t.audios.productsTour, () => {
             showTourOptions();
         });
     }
@@ -291,8 +288,8 @@ export const AlaizaAssistant = () => {
     function handleAuthClick() {
         addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['Auth']);
         // Chain 06 then 07 directly
-        playAudio('/audios/06-AuthOauth.wav', () => {
-            playAudio('/audios/07-OauthQuees.wav', () => {
+        playAudio(t.audios.authIntro, () => {
+            playAudio(t.audios.authWhatIs, () => {
                 showAuthDeepOptions();
             });
         });
@@ -300,8 +297,8 @@ export const AlaizaAssistant = () => {
 
     function handleIdentityClick() {
         addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['Identity']);
-        playAudio('/audios/10-identidad.wav', () => {
-            playAudio('/audios/11-queesidentidad.wav', () => {
+        playAudio(t.audios.identityIntro, () => {
+            playAudio(t.audios.identityWhatIs, () => {
                 showIdentityDeepOptions();
             });
         });
@@ -319,12 +316,7 @@ export const AlaizaAssistant = () => {
         addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['Quiero más información de Identity']);
 
         // Playlist inferida para Identity basada en los archivos disponibles
-        const audioPlaylist = [
-            '/audios/32-IDENTITY.wav',
-            '/audios/33-quehaceIdentity.wav',
-            '/audios/34-comofuncionapregunta.wav',
-            '/audios/35-pruebavidaidentity.wav'
-        ];
+        const audioPlaylist = t.audios.identityDeep;
 
         playAudio(audioPlaylist, () => {
             showIdentityDeepOptions();
@@ -333,8 +325,8 @@ export const AlaizaAssistant = () => {
 
     function handleCardsClick() {
         addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['Cards']);
-        playAudio('/audios/14-cards.wav', () => {
-            playAudio('/audios/15-quehacecards.wav', () => {
+        playAudio(t.audios.cardsIntro, () => {
+            playAudio(t.audios.cardsWhatIs, () => {
                 showCardsDeepOptions();
             });
         });
@@ -351,10 +343,7 @@ export const AlaizaAssistant = () => {
     function handleCardsDeepExplanationClick() {
         addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['Quiero más información de Cards']);
 
-        const audioPlaylist = [
-            '/audios/38-cards.wav',
-            '/audios/39-quehacecards.wav'
-        ];
+        const audioPlaylist = t.audios.cardsDeep;
 
         playAudio(audioPlaylist, () => {
             showCardsDeepOptions();
@@ -363,8 +352,8 @@ export const AlaizaAssistant = () => {
 
     function handleTXClick() {
         addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['TX']);
-        playAudio('/audios/18-TX.wav', () => {
-            playAudio('/audios/17-quehaceTX.wav', () => {
+        playAudio(t.audios.txIntro, () => {
+            playAudio(t.audios.txWhatIs, () => {
                 showTXDeepOptions();
             });
         });
@@ -381,9 +370,7 @@ export const AlaizaAssistant = () => {
     function handleTXDeepExplanationClick() {
         addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['Quiero más información de TX']);
 
-        const audioPlaylist = [
-            '/audios/42-quehacetx.wav'
-        ];
+        const audioPlaylist = t.audios.txDeep;
 
         playAudio(audioPlaylist, () => {
             showTXDeepOptions();
@@ -392,8 +379,8 @@ export const AlaizaAssistant = () => {
 
     function handleConnectClick() {
         addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['Connect']);
-        playAudio('/audios/13-connect.wav', () => {
-            playAudio('/audios/12-quehacevinculacion.wav', () => {
+        playAudio(t.audios.connectIntro, () => {
+            playAudio(t.audios.connectWhatIs, () => {
                 showConnectDeepOptions();
             });
         });
@@ -410,10 +397,7 @@ export const AlaizaAssistant = () => {
     function handleConnectDeepExplanationClick() {
         addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['Quiero más información de Connect']);
 
-        const audioPlaylist = [
-            '/audios/36-connect.wav',
-            '/audios/37-quehaceconnect.wav'
-        ];
+        const audioPlaylist = t.audios.connectDeep;
 
         playAudio(audioPlaylist, () => {
             showConnectDeepOptions();
@@ -422,8 +406,8 @@ export const AlaizaAssistant = () => {
 
     function handleAMLClick() {
         addUserMessage('AML');
-        playAudio('/audios/08-AML.wav', () => {
-            playAudio('/audios/09-queesAML.wav', () => {
+        playAudio(t.audios.amlIntro, () => {
+            playAudio(t.audios.amlWhatIs, () => {
                 showAMLDeepOptions();
             });
         });
@@ -439,10 +423,7 @@ export const AlaizaAssistant = () => {
     function handleAMLDeepExplanationClick() {
         addUserMessage('Quiero más información de AML');
 
-        const audioPlaylist = [
-            '/audios/30-productoAML.wav',
-            '/audios/31-quehaceAML.wav'
-        ];
+        const audioPlaylist = t.audios.amlDeep;
 
         playAudio(audioPlaylist, () => {
             showAMLDeepOptions();
@@ -451,7 +432,7 @@ export const AlaizaAssistant = () => {
 
     function handleDiscountsClick() {
         addUserMessage('Descuentos y cupones');
-        playAudio('/audios/21-descuentosycupones.wav', () => {
+        playAudio(t.audios.discountsIntro, () => {
             showDiscountsDeepOptions();
         });
     }
@@ -466,10 +447,7 @@ export const AlaizaAssistant = () => {
     function handleDiscountsDeepExplanationClick() {
         addUserMessage('Quiero más información de Descuentos');
 
-        const audioPlaylist = [
-            '/audios/44-cuponesydescuentos.wav',
-            '/audios/45-quehacecuponesydescuentos.wav'
-        ];
+        const audioPlaylist = t.audios.discountsDeep;
 
         playAudio(audioPlaylist, () => {
             showDiscountsDeepOptions();
@@ -478,7 +456,7 @@ export const AlaizaAssistant = () => {
 
     function handlePaymentsClick() {
         addUserMessage('Pagos y transferencias');
-        playAudio('/audios/16-pagostransfLocales.wav', () => {
+        playAudio(t.audios.paymentsIntro, () => {
             showPaymentsDeepOptions();
         });
     }
@@ -493,10 +471,7 @@ export const AlaizaAssistant = () => {
     function handlePaymentsDeepExplanationClick() {
         addUserMessage('Quiero más información de Pagos');
 
-        const audioPlaylist = [
-            '/audios/40-paymentsandtransfers.wav',
-            '/audios/41-quehacepaymentstransfers.wav'
-        ];
+        const audioPlaylist = t.audios.paymentsDeep;
 
         playAudio(audioPlaylist, () => {
             showPaymentsDeepOptions();
@@ -506,10 +481,7 @@ export const AlaizaAssistant = () => {
     function handleAlaizaProductClick() {
         addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['Alaiza']);
 
-        const audioPlaylist = [
-            '/audios/43-alaiza2.wav',
-            '/audios/46-vendemasconzelify.wav'
-        ];
+        const audioPlaylist = t.audios.alaizaProductDeep;
         playAudio(audioPlaylist, () => {
             showTourOptions();
         });
@@ -563,7 +535,7 @@ export const AlaizaAssistant = () => {
 
     return (
         <>
-            <audio ref={audioRef} className="hidden" />
+            <audio ref={audioRef} className="hidden" preload="auto" />
 
             {!isOpen ? (
                 <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
@@ -641,8 +613,8 @@ export const AlaizaAssistant = () => {
                                         </div>
                                     )}
 
-                                    {/* Option Buttons - Only show in Spanish */}
-                                    {msg.type === 'options' && currentLang === 'es' && (
+                                    {/* Option Buttons - Show in both languages now */}
+                                    {msg.type === 'options' && (
                                         <div className="grid grid-cols-2 gap-2 mt-2 animate-in fade-in slide-in-from-left-2 duration-300">
                                             {msg.options?.map((opt) => (
                                                 <button
