@@ -10,6 +10,7 @@ import EmailQuoteForm from "../components/design-system/molecules/EmailQuoteForm
 import CtaGroup from "../components/design-system/molecules/CtaGroup.astro";
 import Button from "../components/design-system/atoms/Button.astro";
 import ContactFormHubSpot from "../components/design-system/organisms/ContactFormHubSpot.astro";
+import QuoteModalHubSpot from "../components/design-system/organisms/QuoteModalHubSpot.astro";
 ---
 
 <html lang="es">
@@ -619,12 +620,9 @@ import ContactFormHubSpot from "../components/design-system/organisms/ContactFor
           Comienza hoy y<br />
           asegura cada acceso.
         </h2>
-        <a
-          href="https://alaiza.zelify.com"
-          class="cta-button"
-          target="_blank"
-          rel="noopener noreferrer">Let's talk</a
-        >
+        <button type="button" class="cta-button" data-open-quote-modal>
+          Let's talk
+        </button>
       </div>
     </section>
 
@@ -668,6 +666,50 @@ import ContactFormHubSpot from "../components/design-system/organisms/ContactFor
         </div>
       </div>
     </footer>
+    <QuoteModalHubSpot />
+    <script is:inline>
+      function initQuoteModal() {
+        var form = document.querySelector(".welcome-input-group");
+        var quoteModal = document.querySelector("#quote-modal");
+        var closeQuoteBtn = document.querySelector("#close-quote-modal");
+        var quoteModalOverlay = document.querySelector("[data-close-quote-modal]");
+        var MEETINGS_BASE_URL = "https://meetings.hubspot.com/gmantilla?embed=true";
+        function openQuoteModal() {
+          if (!quoteModal) return;
+          var emailInput = document.querySelector(".welcome-input");
+          var email = emailInput && emailInput.value ? emailInput.value.trim() : "";
+          var embedUrl = email ? MEETINGS_BASE_URL + "&email=" + encodeURIComponent(email) : MEETINGS_BASE_URL;
+          var container = document.querySelector(".meetings-iframe-container");
+          if (container) {
+            container.setAttribute("data-src", embedUrl);
+            var iframe = container.querySelector("iframe");
+            if (iframe) iframe.src = embedUrl;
+            else setTimeout(function() { var iframeLater = container.querySelector("iframe"); if (iframeLater) iframeLater.src = embedUrl; }, 500);
+          }
+          quoteModal.classList.add("is-active");
+          quoteModal.setAttribute("aria-hidden", "false");
+          document.body.style.overflow = "hidden";
+        }
+        function closeQuoteModal() {
+          if (!quoteModal) return;
+          quoteModal.classList.remove("is-active");
+          quoteModal.setAttribute("aria-hidden", "true");
+          document.body.style.overflow = "";
+        }
+        if (closeQuoteBtn) closeQuoteBtn.addEventListener("click", closeQuoteModal);
+        if (quoteModalOverlay) quoteModalOverlay.addEventListener("click", closeQuoteModal);
+        if (form) form.addEventListener("submit", function(e) { e.preventDefault(); openQuoteModal(); });
+        var openBtns = document.querySelectorAll("[data-open-quote-modal]");
+        for (var i = 0; i < openBtns.length; i++) {
+          openBtns[i].addEventListener("click", function(e) { e.preventDefault(); openQuoteModal(); });
+        }
+      }
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initQuoteModal);
+      } else {
+        initQuoteModal();
+      }
+    </script>
     <!-- Start of HubSpot Embed Code -->
     <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/50894304.js"></script>
     <!-- End of HubSpot Embed Code -->
@@ -1820,7 +1862,7 @@ import ContactFormHubSpot from "../components/design-system/organisms/ContactFor
   .cta-button {
     padding: 1rem 3rem;
     background: #b2ff66;
-    color: #ffffff;
+    color: #00223e;
     border: none;
     border-radius: 12px;
     font-size: 1.1rem;
@@ -2308,7 +2350,7 @@ import ContactFormHubSpot from "../components/design-system/organisms/ContactFor
       },
       cta: {
         title: "Comienza a construir el banco del futuro, hoy.",
-        button: "cotizar",
+        button: "Hablemos",
       },
       footer: {
         quickLinks: "Enlaces rápidos",
@@ -2516,7 +2558,7 @@ import ContactFormHubSpot from "../components/design-system/organisms/ContactFor
       },
       cta: {
         title: "Start today and<br />secure every access.",
-        button: "Quote",
+        button: "Let's talk",
       },
       footer: {
         quickLinks: "Quick links",
