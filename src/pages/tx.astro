@@ -37,7 +37,8 @@ import "../components/design-system/tokens.css";
         </h1>
         <p class="auth-description">
           Mecanismo integral que permite generar y obtener cotizaciones precisas
-          en tiempo real,<br />        </p>
+          en tiempo real,<br />
+        </p>
         <CtaGroup class="auth-cta">
           <EmailQuoteForm
             dataI18nPlaceholder="home.welcome.email.placeholder"
@@ -455,7 +456,10 @@ import "../components/design-system/tokens.css";
     </section>
 
     <!-- Sección de Contacto -->
-    <ContactFormHubSpot headline="Comienza a construir el banco del futuro, hoy." formTitle="Habla con nuestro equipo" />
+    <ContactFormHubSpot
+      headline="Comienza a construir el banco del futuro, hoy."
+      formTitle="Habla con nuestro equipo"
+    />
 
     <section class="faq-section">
       <div class="faq-container">
@@ -680,19 +684,29 @@ import "../components/design-system/tokens.css";
         var form = document.querySelector(".welcome-input-group");
         var quoteModal = document.querySelector("#quote-modal");
         var closeQuoteBtn = document.querySelector("#close-quote-modal");
-        var quoteModalOverlay = document.querySelector("[data-close-quote-modal]");
-        var MEETINGS_BASE_URL = "https://meetings.hubspot.com/gmantilla?embed=true";
+        var quoteModalOverlay = document.querySelector(
+          "[data-close-quote-modal]",
+        );
+        var MEETINGS_BASE_URL =
+          "https://meetings.hubspot.com/gmantilla?embed=true";
         function openQuoteModal() {
           if (!quoteModal) return;
           var emailInput = document.querySelector(".welcome-input");
-          var email = emailInput && emailInput.value ? emailInput.value.trim() : "";
-          var embedUrl = email ? MEETINGS_BASE_URL + "&email=" + encodeURIComponent(email) : MEETINGS_BASE_URL;
+          var email =
+            emailInput && emailInput.value ? emailInput.value.trim() : "";
+          var embedUrl = email
+            ? MEETINGS_BASE_URL + "&email=" + encodeURIComponent(email)
+            : MEETINGS_BASE_URL;
           var container = document.querySelector(".meetings-iframe-container");
           if (container) {
             container.setAttribute("data-src", embedUrl);
             var iframe = container.querySelector("iframe");
             if (iframe) iframe.src = embedUrl;
-            else setTimeout(function() { var iframeLater = container.querySelector("iframe"); if (iframeLater) iframeLater.src = embedUrl; }, 500);
+            else
+              setTimeout(function () {
+                var iframeLater = container.querySelector("iframe");
+                if (iframeLater) iframeLater.src = embedUrl;
+              }, 500);
           }
           quoteModal.classList.add("is-active");
           quoteModal.setAttribute("aria-hidden", "false");
@@ -704,12 +718,21 @@ import "../components/design-system/tokens.css";
           quoteModal.setAttribute("aria-hidden", "true");
           document.body.style.overflow = "";
         }
-        if (closeQuoteBtn) closeQuoteBtn.addEventListener("click", closeQuoteModal);
-        if (quoteModalOverlay) quoteModalOverlay.addEventListener("click", closeQuoteModal);
-        if (form) form.addEventListener("submit", function(e) { e.preventDefault(); openQuoteModal(); });
+        if (closeQuoteBtn)
+          closeQuoteBtn.addEventListener("click", closeQuoteModal);
+        if (quoteModalOverlay)
+          quoteModalOverlay.addEventListener("click", closeQuoteModal);
+        if (form)
+          form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            openQuoteModal();
+          });
         var openBtns = document.querySelectorAll("[data-open-quote-modal]");
         for (var i = 0; i < openBtns.length; i++) {
-          openBtns[i].addEventListener("click", function(e) { e.preventDefault(); openQuoteModal(); });
+          openBtns[i].addEventListener("click", function (e) {
+            e.preventDefault();
+            openQuoteModal();
+          });
         }
       }
       if (document.readyState === "loading") {
@@ -719,7 +742,12 @@ import "../components/design-system/tokens.css";
       }
     </script>
     <!-- Start of HubSpot Embed Code -->
-    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/50894304.js"></script>
+    <script
+      type="text/javascript"
+      id="hs-script-loader"
+      async
+      defer
+      src="//js.hs-scripts.com/50894304.js"></script>
     <!-- End of HubSpot Embed Code -->
   </body>
 </html>
@@ -3039,6 +3067,32 @@ import "../components/design-system/tokens.css";
         ctaButton: "Hablemos",
         demoButton: "Demo",
       },
+      device: {
+        back: "Atrás",
+        titleMain: "Transferencias",
+        titleLight: "Internacionales",
+        subtitle: "¿Cuánto deseas transferir?",
+        caption: "Selecciona la moneda según el país",
+        amountLabel: "Monto",
+        latestTransfers: "Transferencias recientes",
+        history: "Historial",
+        statusCompleted: "Completado",
+        contactsTitle: "Contactos",
+        contactsSubtitle: "Selecciona al destinatario",
+        confirmTitle: "Confirmar la transferencia",
+        confirmSubtitle: "Revisa los detalles antes de enviar.",
+        recipientLabel: "Destinatario",
+        confirmAmountLabel: "Monto",
+        youSend: "Envías",
+        exchangeRate: "Tipo de cambio",
+        total: "Total",
+        slideToConfirm: "Desliza para confirmar",
+        processingTitle: "Procesando",
+        processingSubtitle: "Tu transacción está siendo procesada",
+        successTitle: "Transferencia Exitosa",
+        successSubtitle: "Tu dinero está en camino",
+        done: "Listo",
+      },
       security: {
         title: "Ciclo de vida<br />de la transacción",
         features: [
@@ -3187,9 +3241,35 @@ import "../components/design-system/tokens.css";
         title: "Quote and currency<br />conversion",
         description:
           "Comprehensive mechanism that allows you to generate and obtain accurate quotes in real-time,<br />facilitating access to dynamic exchange rates for a wide variety of supported currencies.<br />This process ensures transparency in the conversion, applying configurable<br />margins and commissions before starting any operation.",
-        ctaInputPlaceholder: "Enter your email",
+        ctaInputPlaceholder: "enter your email",
         ctaButton: "Let's talk",
         demoButton: "Demo",
+      },
+      device: {
+        back: "Back",
+        titleMain: "International",
+        titleLight: "Transfers",
+        subtitle: "How much do you want to transfer?",
+        caption: "Select the currency by country",
+        amountLabel: "Amount",
+        latestTransfers: "Latest transfers",
+        history: "History",
+        statusCompleted: "Completed",
+        contactsTitle: "Contacts",
+        contactsSubtitle: "Select the recipient",
+        confirmTitle: "Confirm transfer",
+        confirmSubtitle: "Review the details before sending.",
+        recipientLabel: "Recipient",
+        confirmAmountLabel: "Amount",
+        youSend: "You send",
+        exchangeRate: "Exchange rate",
+        total: "Total",
+        slideToConfirm: "Slide to confirm",
+        processingTitle: "Processing",
+        processingSubtitle: "Your transaction is being processed",
+        successTitle: "Transfer successful",
+        successSubtitle: "Your money is on the way",
+        done: "Done",
       },
       security: {
         title: "Transaction<br />lifecycle",
@@ -3340,6 +3420,7 @@ import "../components/design-system/tokens.css";
   function updateTxContent(lang) {
     const t = txTranslations[lang.toLowerCase()] || txTranslations.es;
     document.documentElement.lang = lang.toLowerCase();
+    const device = t.device || txTranslations.es.device;
 
     // Hero
     const heroTitle = document.querySelector(".auth-title");
@@ -3358,6 +3439,138 @@ import "../components/design-system/tokens.css";
 
     const demoBtn = document.querySelector(".welcome-demo-button");
     if (demoBtn) demoBtn.textContent = t.hero.demoButton;
+
+    // Device preview
+    const deviceBackBtn = document.querySelector(
+      ".device-container .device-back-btn",
+    );
+    if (deviceBackBtn) deviceBackBtn.textContent = `< ${device.back}`;
+
+    const deviceTitleMain = document.querySelector(
+      ".device-container .tx-title-main",
+    );
+    if (deviceTitleMain) deviceTitleMain.textContent = device.titleMain;
+
+    const deviceTitleLight = document.querySelector(
+      ".device-container .tx-title-light",
+    );
+    if (deviceTitleLight) deviceTitleLight.textContent = device.titleLight;
+
+    const deviceSubtitle = document.querySelector(
+      ".device-container .app-subtitle",
+    );
+    if (deviceSubtitle) deviceSubtitle.textContent = device.subtitle;
+
+    const deviceCaption = document.querySelector(
+      ".device-container .app-caption",
+    );
+    if (deviceCaption) deviceCaption.textContent = device.caption;
+
+    const amountLabel = document.querySelector(
+      ".device-container .amount-label",
+    );
+    if (amountLabel) amountLabel.textContent = device.amountLabel;
+
+    // Latest transfers sheet
+    document
+      .querySelectorAll(".device-container .tv-sheet-title-text")
+      .forEach((el) => {
+        el.textContent = device.latestTransfers;
+      });
+    const historySubtitle = document.querySelector(
+      ".device-container .tv-sheet-subtitle",
+    );
+    if (historySubtitle) historySubtitle.textContent = device.history;
+    const historyTitle = document.querySelector(
+      ".device-container .tv-sheet-main-title",
+    );
+    if (historyTitle) historyTitle.textContent = device.latestTransfers;
+    document
+      .querySelectorAll(".device-container .tv-history-status")
+      .forEach((el) => {
+        el.textContent = device.statusCompleted;
+      });
+
+    // Contacts
+    const contactsTitle = document.querySelector(
+      ".device-container #step-contacts .section-title",
+    );
+    if (contactsTitle) contactsTitle.textContent = device.contactsTitle;
+    const contactsSubtitle = document.querySelector(
+      ".device-container #step-contacts .section-subtitle",
+    );
+    if (contactsSubtitle)
+      contactsSubtitle.textContent = device.contactsSubtitle;
+
+    // Confirm
+    const confirmTitle = document.querySelector(
+      ".device-container #step-confirm .confirm-title",
+    );
+    if (confirmTitle) confirmTitle.textContent = device.confirmTitle;
+    const confirmSubtitle = document.querySelector(
+      ".device-container #step-confirm .confirm-subtitle",
+    );
+    if (confirmSubtitle) confirmSubtitle.textContent = device.confirmSubtitle;
+    const recipientLabel = document.querySelector(
+      ".device-container #step-confirm .confirm-recipient-label",
+    );
+    if (recipientLabel) recipientLabel.textContent = device.recipientLabel;
+    const confirmAmountLabel = document.querySelector(
+      ".device-container #step-confirm .confirm-amount-label",
+    );
+    if (confirmAmountLabel)
+      confirmAmountLabel.textContent = device.confirmAmountLabel;
+    const youSend = document.querySelector(
+      ".device-container #step-confirm .confirm-you-send",
+    );
+    if (youSend) youSend.textContent = device.youSend;
+    const exchangeRate = document.querySelector(
+      ".device-container #step-confirm .confirm-exchange-rate",
+    );
+    if (exchangeRate) exchangeRate.textContent = device.exchangeRate;
+    const totalLabel = document.querySelector(
+      ".device-container #step-confirm .confirm-total-label",
+    );
+    if (totalLabel) totalLabel.textContent = device.total;
+    const sliderText = document.querySelector(
+      ".device-container #step-confirm .slider-text",
+    );
+    if (sliderText) sliderText.textContent = device.slideToConfirm;
+
+    // Processing (re-render chars)
+    const titleContainer = document.getElementById(
+      "processing-title-container",
+    );
+    const subtitleContainer = document.getElementById(
+      "processing-subtitle-container",
+    );
+    const renderChars = (container, text, className) => {
+      if (!(container instanceof HTMLElement)) return;
+      container.dataset.text = text;
+      container.innerHTML = text
+        .split("")
+        .map(
+          (char, index) =>
+            `<span class="${className}" data-index="${index}">${
+              char === " " ? "&nbsp;" : char
+            }</span>`,
+        )
+        .join("");
+    };
+    renderChars(titleContainer, device.processingTitle, "char-title");
+    renderChars(subtitleContainer, device.processingSubtitle, "char-subtitle");
+
+    // Success
+    const successTitle = document.querySelector(
+      ".device-container #step-success .success-title",
+    );
+    if (successTitle) successTitle.textContent = device.successTitle;
+    const successSubtitle = document.querySelector(
+      ".device-container #step-success .success-subtitle",
+    );
+    if (successSubtitle) successSubtitle.textContent = device.successSubtitle;
+    const doneBtn = document.querySelector(".device-container #btn-finish");
+    if (doneBtn) doneBtn.textContent = device.done;
 
     // Security Section
     const secTitle = document.querySelector(".security-title");
