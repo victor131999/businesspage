@@ -4,59 +4,41 @@ import "../styles/navbar.css";
 
 <div id="products-panel" class="products-panel products-panel--modules hidden">
   <aside class="pp-sidebar" aria-label="Products">
-    <a class="pp-item pp-module" href="/auth">
+    <a class="pp-item pp-module" href="/auth" data-module="auth">
       <span class="pp-module-title">Auth</span>
-      <span class="pp-module-desc">
-        Registro con biometría y 2FA para prevenir fraude.
-      </span>
+      <span class="pp-module-desc" data-i18n-desc="auth"></span>
     </a>
-    <a class="pp-item pp-module" href="/identity">
+    <a class="pp-item pp-module" href="/identity" data-module="identity">
       <span class="pp-module-title">Identity</span>
-      <span class="pp-module-desc">
-        Verificación (OCR + biometría) para reducir fraude.
-      </span>
+      <span class="pp-module-desc" data-i18n-desc="identity"></span>
     </a>
-    <a class="pp-item pp-module" href="/aml">
+    <a class="pp-item pp-module" href="/aml" data-module="aml">
       <span class="pp-module-title">AML</span>
-      <span class="pp-module-desc">
-        Monitoreo y validaciones AML contra listas.
-      </span>
+      <span class="pp-module-desc" data-i18n-desc="aml"></span>
     </a>
-    <a class="pp-item pp-module" href="/connect">
+    <a class="pp-item pp-module" href="/connect" data-module="connect">
       <span class="pp-module-title">Connect</span>
-      <span class="pp-module-desc">
-        Vinculación bancaria y cuentas digitales.
-      </span>
+      <span class="pp-module-desc" data-i18n-desc="connect"></span>
     </a>
-    <a class="pp-item pp-module" href="/cards">
+    <a class="pp-item pp-module" href="/cards" data-module="cards">
       <span class="pp-module-title">Cards</span>
-      <span class="pp-module-desc">
-        Emisión y gestión de tarjetas físicas/virtuales.
-      </span>
+      <span class="pp-module-desc" data-i18n-desc="cards"></span>
     </a>
-    <a class="pp-item pp-module" href="/tx">
+    <a class="pp-item pp-module" href="/tx" data-module="tx">
       <span class="pp-module-title">TX</span>
-      <span class="pp-module-desc">
-        Transferencias internacionales con FX y seguimiento.
-      </span>
+      <span class="pp-module-desc" data-i18n-desc="tx"></span>
     </a>
-    <a class="pp-item pp-module" href="/transfers">
+    <a class="pp-item pp-module" href="/transfers" data-module="transfers">
       <span class="pp-module-title">Payments and Transfers</span>
-      <span class="pp-module-desc">
-        Pagos y transferencias con notificaciones y límites.
-      </span>
+      <span class="pp-module-desc" data-i18n-desc="transfers"></span>
     </a>
-    <a class="pp-item pp-module" href="/discounts">
+    <a class="pp-item pp-module" href="/discounts" data-module="discounts">
       <span class="pp-module-title">Discounts & Coupons</span>
-      <span class="pp-module-desc">
-        Campañas, geolocalización y reportes.
-      </span>
+      <span class="pp-module-desc" data-i18n-desc="discounts"></span>
     </a>
-    <a class="pp-item pp-module" href="/alaiza">
+    <a class="pp-item pp-module" href="/alaiza" data-module="alaiza">
       <span class="pp-module-title">Alaiza AI Fintech Core</span>
-      <span class="pp-module-desc">
-        IA para finanzas: análisis y smart support chat.
-      </span>
+      <span class="pp-module-desc" data-i18n-desc="alaiza"></span>
     </a>
   </aside>
 </div>
@@ -66,6 +48,46 @@ import "../styles/navbar.css";
   const links = Array.from(panel.querySelectorAll(".pp-item"));
 
   const normalizePath = (path) => (path || "/").replace(/\/+$/, "") || "/";
+
+  // Traducciones del sidebar (lista de módulos) — ES/EN según botón del navbar
+  const SIDEBAR = {
+    es: {
+      auth: { title: "Auth", desc: "Registro con biometría y 2FA para prevenir fraude." },
+      identity: { title: "Identity", desc: "Verificación (OCR + biometría) para reducir fraude." },
+      aml: { title: "AML", desc: "Monitoreo y validaciones AML contra listas." },
+      connect: { title: "Connect", desc: "Vinculación bancaria y cuentas digitales." },
+      cards: { title: "Cards", desc: "Emisión y gestión de tarjetas físicas/virtuales." },
+      tx: { title: "TX", desc: "Transferencias internacionales con FX y seguimiento." },
+      transfers: { title: "Payments and Transfers", desc: "Pagos y transferencias con notificaciones y límites." },
+      discounts: { title: "Discounts & Coupons", desc: "Campañas, geolocalización y reportes." },
+      alaiza: { title: "Alaiza AI Fintech Core", desc: "IA para finanzas: análisis y smart support chat." },
+    },
+    en: {
+      auth: { title: "Auth", desc: "Registration with biometrics and 2FA to prevent fraud." },
+      identity: { title: "Identity", desc: "Verification (OCR + biometrics) to reduce fraud." },
+      aml: { title: "AML", desc: "AML monitoring and validations against lists." },
+      connect: { title: "Connect", desc: "Bank linking and digital accounts." },
+      cards: { title: "Cards", desc: "Issuance and management of physical/virtual cards." },
+      tx: { title: "TX", desc: "International transfers with FX and tracking." },
+      transfers: { title: "Payments and Transfers", desc: "Payments and transfers with notifications and limits." },
+      discounts: { title: "Discounts & Coupons", desc: "Campaigns, geolocation and reports." },
+      alaiza: { title: "Alaiza AI Fintech Core", desc: "AI for finance: analytics and smart support chat." },
+    },
+  };
+
+  function updateSidebarLabels(lang) {
+    const key = (lang || localStorage.getItem("ui-language") || "ES").toUpperCase() === "ES" ? "es" : "en";
+    const t = SIDEBAR[key];
+    if (!t) return;
+    links.forEach((link) => {
+      const module = link.dataset.module;
+      if (!module || !t[module]) return;
+      const titleEl = link.querySelector(".pp-module-title");
+      const descEl = link.querySelector(".pp-module-desc");
+      if (titleEl) titleEl.textContent = t[module].title;
+      if (descEl) descEl.textContent = t[module].desc;
+    });
+  }
 
   // Catálogo de contenidos por pestaña - Versión en Español
   const DATA_ES = {
@@ -811,10 +833,11 @@ import "../styles/navbar.css";
   let currentLanguage = "ES";
   let DATA = DATA_ES;
 
-  // Función para cambiar el idioma del panel
+  // Función para cambiar el idioma del panel (contenido + sidebar)
   function updateLanguage(lang) {
     currentLanguage = lang.toUpperCase() === "ES" ? "ES" : "EN";
     DATA = currentLanguage === "ES" ? DATA_ES : DATA_EN;
+    updateSidebarLabels(currentLanguage);
 
     // Re-renderizar el contenido actual con el nuevo idioma
     const activeBtn = panel.querySelector(".pp-item.is-active");
@@ -836,6 +859,14 @@ import "../styles/navbar.css";
 
   updateActive();
   window.addEventListener("popstate", updateActive);
+
+  // Inicializar idioma del sidebar según ES/EN del navbar
+  updateSidebarLabels();
+
+  window.addEventListener("ui:languagechange", (event) => {
+    const lang = event.detail?.language || localStorage.getItem("ui-language") || "ES";
+    updateLanguage(lang);
+  });
 
   panel.addEventListener("click", (e) => {
     const link = e.target.closest("a.pp-item");

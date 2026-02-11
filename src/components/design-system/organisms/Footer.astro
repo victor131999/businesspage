@@ -23,11 +23,15 @@ interface Props {
   };
 }
 
-const defaultLinks: FooterLink[] = [
-  { href: "/products", label: "Products" },
-  { href: "/nosotros", label: "About us" },
-  { href: "/desarrollo", label: "Developers" },
-  { href: "/otros", label: "Others" },
+export interface FooterLinkWithKey extends FooterLink {
+  key?: string;
+}
+
+const defaultLinks: FooterLinkWithKey[] = [
+  { href: "/products", label: "Products", key: "products" },
+  { href: "/nosotros", label: "About us", key: "about" },
+  { href: "/desarrollo", label: "Developers", key: "developers" },
+  { href: "/otros", label: "Others", key: "others" },
 ];
 
 const defaultLegal =
@@ -40,6 +44,28 @@ const {
   copyrightText = "© 2025 Zelify. All rights reserved.",
   dataI18n,
 } = Astro.props;
+
+const FOOTER_T = {
+  es: {
+    quickLinks: "Enlaces rápidos",
+    products: "Productos",
+    about: "Nosotros",
+    developers: "Desarrolladores",
+    others: "Otros",
+    legal:
+      "Zelify es una plataforma tecnológica actualmente en fase de desarrollo, aún no desplegada u operativa, y no proporciona ni procesa servicios financieros directamente; todas las operaciones financieras se realizan exclusivamente a través de socios terceros regulados.",
+    copyright: "© 2025 Zelify. Todos los derechos reservados.",
+  },
+  en: {
+    quickLinks: "Quick links",
+    products: "Products",
+    about: "About us",
+    developers: "Developers",
+    others: "Others",
+    legal: defaultLegal,
+    copyright: "© 2025 Zelify. All rights reserved.",
+  },
+};
 ---
 
 <footer class="footer-section">
@@ -54,6 +80,7 @@ const {
       <div class="footer-quick-links">
         <h3
           class="quick-links-title"
+          data-footer-i18n="quickLinks"
           {...(dataI18n?.quicklinks && { "data-i18n": dataI18n.quicklinks })}
         >
           {quickLinksTitle}
@@ -64,6 +91,9 @@ const {
               <li>
                 <a
                   href={link.href}
+                  {...((link as FooterLinkWithKey).key && {
+                    "data-footer-key": (link as FooterLinkWithKey).key,
+                  })}
                   {...(link.dataI18n && { "data-i18n": link.dataI18n })}
                 >
                   {link.label}
@@ -77,12 +107,14 @@ const {
     <div class="footer-bottom">
       <p
         class="footer-legal"
+        data-footer-i18n="legal"
         {...(dataI18n?.legal && { "data-i18n": dataI18n.legal })}
       >
         {legalText}
       </p>
       <p
         class="footer-copyright"
+        data-footer-i18n="copyright"
         {...(dataI18n?.copyright && { "data-i18n": dataI18n.copyright })}
       >
         {copyrightText}
@@ -243,3 +275,44 @@ const {
     }
   }
 </style>
+
+<script define:vars={{ FOOTER_T }}>
+  function getFooterLang() {
+    try {
+      const stored = localStorage.getItem("ui-language");
+      return (stored && stored.toUpperCase() === "ES") ? "es" : "en";
+    } catch {
+      return "en";
+    }
+  }
+
+  function applyFooterTranslations() {
+    const lang = getFooterLang();
+    const t = FOOTER_T[lang] || FOOTER_T.en;
+
+    const titleEl = document.querySelector(".footer-section .quick-links-title");
+    if (titleEl && titleEl.hasAttribute("data-footer-i18n")) {
+      titleEl.textContent = t.quickLinks;
+    }
+
+    const legalEl = document.querySelector(".footer-section .footer-legal");
+    if (legalEl && legalEl.hasAttribute("data-footer-i18n")) {
+      legalEl.textContent = t.legal;
+    }
+
+    const copyrightEl = document.querySelector(".footer-section .footer-copyright");
+    if (copyrightEl && copyrightEl.hasAttribute("data-footer-i18n")) {
+      copyrightEl.textContent = t.copyright;
+    }
+
+    document.querySelectorAll(".footer-section .quick-links-list a[data-footer-key]").forEach((a) => {
+      const key = a.getAttribute("data-footer-key");
+      if (key && t[key]) a.textContent = t[key];
+    });
+  }
+
+  if (typeof document !== "undefined") {
+    applyFooterTranslations();
+    window.addEventListener("ui:languagechange", applyFooterTranslations);
+  }
+</script>

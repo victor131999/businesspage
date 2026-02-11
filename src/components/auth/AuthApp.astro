@@ -771,7 +771,10 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
     flex: 1;
     min-height: 600px;
     background: #ffffff;
-    padding: 1rem 1.25rem;
+    padding-top: 1rem; /* menos padding lateral para que no se corte el contenido (OTP, etc.) */
+    padding-bottom: 1rem;
+    padding-left: 0px;
+    padding-right: 0px;
     overflow-y: auto;
     overflow-x: hidden;
     -ms-overflow-style: none; /* IE and Edge */
@@ -1925,7 +1928,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
     emailOTPStatus = "verifying";
     updateOTPStatus("otp-email", "verifying");
 
-    const isValid = otp === "202601";
+    const isValid = otp.length === 6; /* aceptar cualquier código de 6 dígitos */
 
     setTimeout(() => {
       if (isValid) {
@@ -2132,7 +2135,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
     phoneOTPStatus = "verifying";
     updateOTPStatus("otp-phone", "verifying");
 
-    const isValid = otp === "202601";
+    const isValid = otp.length === 6; /* aceptar cualquier código de 6 dígitos */
 
     setTimeout(() => {
       if (isValid) {
