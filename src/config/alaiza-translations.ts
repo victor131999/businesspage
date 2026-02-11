@@ -96,7 +96,7 @@ export const ALAIZA_TRANSLATIONS = {
             // Payments
             paymentsIntro: "/audios/es/16-pagostransfLocales.wav",
             paymentsDeep: [
-                "/audios/es/40-paymentsandtransfers.wav",
+                "/audios/es/16-pagostransfLocales.wav",
                 "/audios/es/41-quehacepaymentstransfers.wav"
             ],
 

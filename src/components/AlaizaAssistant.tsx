@@ -40,6 +40,8 @@ export const AlaizaAssistant = () => {
 
     // Referencia al elemento de audio actual
     const audioRef = useRef<HTMLAudioElement | null>(null);
+    // Referencia para abortar la reproducción (skip)
+    const abortAudioRef = useRef(false);
     // Referencia al final del chat para scroll automático
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -74,10 +76,21 @@ export const AlaizaAssistant = () => {
 
     const playAudio = (srcOrPlaylist: string | string[], onEnded?: () => void) => {
         if (audioRef.current) {
+            // Skip reinicia el estado iniciando una nueva reproducción
+            abortAudioRef.current = false;
+
             const playlist = Array.isArray(srcOrPlaylist) ? srcOrPlaylist : [srcOrPlaylist];
             let currentIndex = 0;
 
             const playNext = () => {
+                // comprobar si se skipeo la reproducción
+                if (abortAudioRef.current) {
+                    setIsPlaying(false);
+                    // Si se skipea, muestra las opciones
+                    if (onEnded) onEnded();
+                    return;
+                }
+
                 if (currentIndex >= playlist.length) {
                     setIsPlaying(false);
                     if (onEnded) onEnded();
@@ -293,20 +306,16 @@ export const AlaizaAssistant = () => {
 
     function handleAuthClick() {
         addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['Auth']);
-        // Chain 06 then 07 directly
-        playAudio(t.audios.authIntro, () => {
-            playAudio(t.audios.authWhatIs, () => {
-                showAuthDeepOptions();
-            });
+        // usar playlist array en vez de callbacks
+        playAudio([t.audios.authIntro, t.audios.authWhatIs], () => {
+            showAuthDeepOptions();
         });
     }
 
     function handleIdentityClick() {
         addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['Identity']);
-        playAudio(t.audios.identityIntro, () => {
-            playAudio(t.audios.identityWhatIs, () => {
-                showIdentityDeepOptions();
-            });
+        playAudio([t.audios.identityIntro, t.audios.identityWhatIs], () => {
+            showIdentityDeepOptions();
         });
     }
 
@@ -331,10 +340,8 @@ export const AlaizaAssistant = () => {
 
     function handleCardsClick() {
         addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['Cards']);
-        playAudio(t.audios.cardsIntro, () => {
-            playAudio(t.audios.cardsWhatIs, () => {
-                showCardsDeepOptions();
-            });
+        playAudio([t.audios.cardsIntro, t.audios.cardsWhatIs], () => {
+            showCardsDeepOptions();
         });
     }
 
@@ -358,10 +365,8 @@ export const AlaizaAssistant = () => {
 
     function handleTXClick() {
         addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['TX']);
-        playAudio(t.audios.txIntro, () => {
-            playAudio(t.audios.txWhatIs, () => {
-                showTXDeepOptions();
-            });
+        playAudio([t.audios.txIntro, t.audios.txWhatIs], () => {
+            showTXDeepOptions();
         });
     }
 
@@ -385,10 +390,8 @@ export const AlaizaAssistant = () => {
 
     function handleConnectClick() {
         addUserMessage(ALAIZA_TRANSLATIONS[langRef.current].options['Connect']);
-        playAudio(t.audios.connectIntro, () => {
-            playAudio(t.audios.connectWhatIs, () => {
-                showConnectDeepOptions();
-            });
+        playAudio([t.audios.connectIntro, t.audios.connectWhatIs], () => {
+            showConnectDeepOptions();
         });
     }
 
@@ -412,10 +415,8 @@ export const AlaizaAssistant = () => {
 
     function handleAMLClick() {
         addUserMessage('AML');
-        playAudio(t.audios.amlIntro, () => {
-            playAudio(t.audios.amlWhatIs, () => {
-                showAMLDeepOptions();
-            });
+        playAudio([t.audios.amlIntro, t.audios.amlWhatIs], () => {
+            showAMLDeepOptions();
         });
     }
 
@@ -534,6 +535,7 @@ export const AlaizaAssistant = () => {
 
     const handleSkip = () => {
         if (audioRef.current && isPlaying) {
+            abortAudioRef.current = true; // señal para skipear payload
             audioRef.current.pause();
             audioRef.current.dispatchEvent(new Event('ended'));
         }
