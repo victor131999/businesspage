@@ -711,9 +711,11 @@ const modulesList = [
           autoplay
           playsinline
           preload="metadata"
+          data-src-es="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/HowZelifyWorksEs.mp4"
+          data-src-en="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/HowZelifyWorksEn.mp4"
         >
           <source
-            src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/HowZelifyWorks.mp4"
+            src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/HowZelifyWorksEs.mp4"
             type="video/mp4"
           />
         </video>
@@ -3353,12 +3355,31 @@ const modulesList = [
       }
     }
 
+    // Actualiza el src del video "How it works" según el idioma (navbar)
+    function updateHowItWorksVideoSrc(langKey) {
+      requestAnimationFrame(() => {
+        const video = document.getElementById("how-it-works-video");
+        if (!video) return;
+        const src = video.dataset.srcEn && video.dataset.srcEs
+          ? (langKey === "en" ? video.dataset.srcEn : video.dataset.srcEs)
+          : null;
+        if (src) {
+          const source = video.querySelector("source");
+          if (source && source.getAttribute("src") !== src) {
+            source.src = src;
+            video.load();
+          }
+        }
+      });
+    }
+
     // Función para aplicar traducciones
     function applyTranslations(lang) {
       const langKey = lang === "EN" ? "en" : "es";
       // Usar requestAnimationFrame para asegurar que el DOM esté listo
       requestAnimationFrame(() => {
         applyHomeTranslations(langKey);
+        updateHowItWorksVideoSrc(langKey);
       });
     }
 
