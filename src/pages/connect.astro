@@ -4393,19 +4393,33 @@ import Footer from "../components/design-system/organisms/Footer.astro";
 
         const contactForm = document.getElementById("contactForm");
         if (contactForm) {
-          contactForm.querySelector("#nombres").placeholder =
-            t.contact.placeholders.names;
-          contactForm.querySelector("#apellidos").placeholder =
-            t.contact.placeholders.surnames;
-          contactForm.querySelector("#compania").placeholder =
-            t.contact.placeholders.company;
-          contactForm.querySelector("#email").placeholder =
-            t.contact.placeholders.email;
-          contactForm.querySelector("#telefono").placeholder =
-            t.contact.placeholders.phone;
-          const submitBtn = contactForm.querySelector(".contact-submit-btn");
-          if (submitBtn) submitBtn.textContent = t.contact.submit;
-          const legalText = contactForm.querySelector(".contact-legal");
+          const nombres = contactForm.querySelector("#nombres");
+          if (nombres) nombres.placeholder = t.contact.placeholders.names;
+
+          const apellidos = contactForm.querySelector("#apellidos");
+          if (apellidos) apellidos.placeholder = t.contact.placeholders.surnames;
+
+          const compania = contactForm.querySelector("#compania");
+          if (compania) compania.placeholder = t.contact.placeholders.company;
+
+          const email = contactForm.querySelector("#email");
+          if (email) email.placeholder = t.contact.placeholders.email;
+
+          const telefono = contactForm.querySelector("#telefono");
+          if (telefono) telefono.placeholder = t.contact.placeholders.phone;
+
+          const submitBtn = contactForm.querySelector(
+            ".contact-submit-btn, .hubspot-contact-submit-btn",
+          );
+          if (submitBtn instanceof HTMLInputElement) {
+            submitBtn.value = t.contact.submit;
+          } else if (submitBtn) {
+            submitBtn.textContent = t.contact.submit;
+          }
+
+          const legalText = contactForm.querySelector(
+            ".contact-legal, .hubspot-contact-legal",
+          );
           if (legalText) legalText.innerHTML = t.contact.legal;
 
           const countrySelect = contactForm.querySelector("#pais");

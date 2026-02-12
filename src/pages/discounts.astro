@@ -3452,10 +3452,18 @@ import "../components/design-system/tokens.css";
         countrySelect.options[0].textContent = t.contact.countryDefault;
       }
 
-      const submitBtn = contactForm.querySelector(".contact-submit-btn");
-      if (submitBtn) submitBtn.textContent = t.contact.submitButton;
+      const submitBtn = contactForm.querySelector(
+        ".contact-submit-btn, .hubspot-contact-submit-btn",
+      );
+      if (submitBtn instanceof HTMLInputElement) {
+        submitBtn.value = t.contact.submitButton;
+      } else if (submitBtn) {
+        submitBtn.textContent = t.contact.submitButton;
+      }
 
-      const legalText = contactForm.querySelector(".contact-legal");
+      const legalText = contactForm.querySelector(
+        ".contact-legal, .hubspot-contact-legal",
+      );
       if (legalText) legalText.innerHTML = t.contact.legal;
     }
 

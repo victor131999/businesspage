@@ -2169,10 +2169,18 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
       if (phone instanceof HTMLInputElement)
         phone.placeholder = t.contact.placeholders.phone;
 
-      const submitBtn = contactForm.querySelector(".contact-submit-btn");
-      if (submitBtn instanceof HTMLInputElement) submitBtn.value = t.contact.submit;
+      const submitBtn = contactForm.querySelector(
+        ".contact-submit-btn, .hubspot-contact-submit-btn",
+      );
+      if (submitBtn instanceof HTMLInputElement) {
+        submitBtn.value = t.contact.submit;
+      } else if (submitBtn) {
+        submitBtn.textContent = t.contact.submit;
+      }
 
-      const legal = contactForm.querySelector(".contact-legal-terms");
+      const legal = contactForm.querySelector(
+        ".contact-legal, .contact-legal-terms, .hubspot-contact-legal",
+      );
       if (legal) legal.innerHTML = t.contact.legal;
 
       const countrySelect = contactForm.querySelector("#pais");

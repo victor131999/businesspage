@@ -3458,8 +3458,12 @@ import Footer from "../components/design-system/organisms/Footer.astro";
     const emailContactInput = document.querySelector(".contact-form #email");
     const paisSelect = document.querySelector("#pais");
     const telefonoInput = document.querySelector("#telefono");
-    const contactLegal = document.querySelector(".contact-legal");
-    const submitBtn = document.querySelector(".contact-submit-btn");
+    const contactLegal = document.querySelector(
+      ".contact-legal, .hubspot-contact-legal",
+    );
+    const submitBtn = document.querySelector(
+      ".contact-submit-btn, .hubspot-contact-submit-btn",
+    );
 
     if (contactTitle) contactTitle.innerHTML = t.contact.title;
     if (formTitle) formTitle.textContent = t.contact.formTitle;
@@ -3489,7 +3493,11 @@ import Footer from "../components/design-system/organisms/Footer.astro";
         ${t.contact.legal} <a href="#">${t.contact.terms}</a> y <a href="#">${t.contact.privacy}</a>.
       `;
     }
-    if (submitBtn) submitBtn.textContent = t.contact.submit;
+    if (submitBtn instanceof HTMLInputElement) {
+      submitBtn.value = t.contact.submit;
+    } else if (submitBtn) {
+      submitBtn.textContent = t.contact.submit;
+    }
 
     // CTA section
     const ctaTitle = document.querySelector(".cta-title");
