@@ -1031,14 +1031,14 @@ const modulesList = [
     }
   }
 
-  /* Más espacio entre hero y product-showcase para que el DeviceFrame no quede tapado */
+  /* Más espacio entre hero y product-showcase para que el DeviceFrame no quede tapado ni recortado */
   .welcome-section + .product-showcase {
-    margin-top: 160px;
+    margin-top: 220px;
   }
 
   @media (max-width: 768px) {
     .welcome-section + .product-showcase {
-      margin-top: 120px;
+      margin-top: 140px;
     }
   }
 
@@ -1056,15 +1056,15 @@ const modulesList = [
   }
 
   .product-showcase {
-    padding: 0 clamp(0.09rem, 0.2vw, 0.25rem);
+    padding: clamp(6rem, 14vw, 10rem) clamp(0.09rem, 0.2vw, 0.25rem) 0;
     display: flex;
     justify-content: center;
     position: relative;
     z-index: 2; /* Por encima del WelcomeHero para que el dispositivo no se corte */
-    /* Altura dinámica para contenido extenso */
+    /* Altura dinámica para contenido extenso; min-height alto para que el DeviceFrame (top:45%) no se recorte */
     height: auto;
-    min-height: clamp(40rem, 80vh, 52.5rem);
-    overflow: hidden;
+    min-height: clamp(48rem, 85vh, 55rem);
+    overflow: visible; /* Evita que el marco del dispositivo se corte por el borde de la sección */
   }
 
   @media (max-width: 768px) {
@@ -1152,7 +1152,7 @@ const modulesList = [
   .product-showcase__overlay-card.product-showcase__phone-frame {
     position: absolute;
     left: 50%;
-    top: 45%;
+    top: 48%;
     width: 330px;
     min-width: 330px;
     height: 670px;
