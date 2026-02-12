@@ -4,15 +4,19 @@
  * Footer unificado: logo Zelify, enlaces rápidos, disclaimer legal y copyright.
  * Responsive: grid 2 columnas → flex row → columna centrada en móvil.
  */
+
+
 export interface FooterLink {
   href: string;
   label: string;
   dataI18n?: string;
+  /** Si es true, abre en nueva pestaña (target="_blank" rel="noopener noreferrer") */
+  openInNewTab?: boolean;
 }
 
 interface Props {
   quickLinksTitle?: string;
-  links?: FooterLink[];
+  links?: FooterLinkWithKey[];
   legalText?: string;
   copyrightText?: string;
   /** Claves data-i18n para traducción (ej. index) */
@@ -28,10 +32,22 @@ export interface FooterLinkWithKey extends FooterLink {
 }
 
 const defaultLinks: FooterLinkWithKey[] = [
-  { href: "/products", label: "Products", key: "products" },
-  { href: "/nosotros", label: "About us", key: "about" },
-  { href: "/desarrollo", label: "Developers", key: "developers" },
-  { href: "/otros", label: "Others", key: "others" },
+  { href: "", label: "Products", key: "products" },
+  { href: "https://docs.zelify.com", label: "Developers", key: "developers", openInNewTab: true },
+  { href: "/blog", label: "Blog", key: "blog" },
+];
+
+/** Enlaces a productos que se muestran al expandir "Products" en el footer */
+const productLinks: { href: string; labelKey: string }[] = [
+  { href: "/auth", labelKey: "auth" },
+  { href: "/identity", labelKey: "identity" },
+  { href: "/aml", labelKey: "aml" },
+  { href: "/connect", labelKey: "connect" },
+  { href: "/cards", labelKey: "cards" },
+  { href: "/tx", labelKey: "tx" },
+  { href: "/transfers", labelKey: "paymentsTransfers" },
+  { href: "/discounts", labelKey: "discounts" },
+  { href: "/alaiza", labelKey: "alaiza" },
 ];
 
 const defaultLegal =
@@ -49,9 +65,17 @@ const FOOTER_T = {
   es: {
     quickLinks: "Enlaces rápidos",
     products: "Productos",
-    about: "Nosotros",
     developers: "Desarrolladores",
-    others: "blog",
+    blog: "Blog",
+    auth: "Auth",
+    identity: "Identity",
+    aml: "AML",
+    connect: "Connect",
+    cards: "Cards",
+    tx: "TX",
+    paymentsTransfers: "Pagos y Transferencias",
+    discounts: "Descuentos y Cupones",
+    alaiza: "Alaiza AI Fintech Core",
     legal:
       "Zelify es una plataforma tecnológica actualmente en fase de desarrollo, aún no desplegada u operativa, y no proporciona ni procesa servicios financieros directamente; todas las operaciones financieras se realizan exclusivamente a través de socios terceros regulados.",
     copyright: "© 2025 Zelify. Todos los derechos reservados.",
@@ -59,9 +83,17 @@ const FOOTER_T = {
   en: {
     quickLinks: "Quick links",
     products: "Products",
-    about: "About us",
     developers: "Developers",
-    others: "Blog",
+    blog: "Blog",
+    auth: "Auth",
+    identity: "Identity",
+    aml: "AML",
+    connect: "Connect",
+    cards: "Cards",
+    tx: "TX",
+    paymentsTransfers: "Payments and Transfers",
+    discounts: "Discounts & Coupons",
+    alaiza: "Alaiza AI Fintech Core",
     legal: defaultLegal,
     copyright: "© 2025 Zelify. All rights reserved.",
   },
@@ -87,19 +119,100 @@ const FOOTER_T = {
         </h3>
         <ul class="quick-links-list">
           {
-            links.map((link) => (
-              <li>
-                <a
-                  href={link.href}
-                  {...((link as FooterLinkWithKey).key && {
-                    "data-footer-key": (link as FooterLinkWithKey).key,
-                  })}
-                  {...(link.dataI18n && { "data-i18n": link.dataI18n })}
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))
+            links.map((link) => {
+              const isProducts = (link as FooterLinkWithKey).key === "products";
+              return (
+                <>
+                  {isProducts && (
+                    <li>
+                      <button
+                        type="button"
+                        class="footer-link-button footer-products-trigger"
+                        data-footer-key="products"
+                        aria-expanded="false"
+                        aria-controls="footer-products-panel"
+                        {...(link.dataI18n && { "data-i18n": link.dataI18n })}
+                      >
+                        <span class="footer-products-trigger__text">{link.label}</span>
+                        <span class="footer-products-trigger__chevron" aria-hidden="true">‹</span>
+                      </button>
+                    </li>
+                  )}
+                  {isProducts && (
+                    <li class="footer-products-panel-li">
+                      <div
+                        id="footer-products-panel"
+                        class="footer-products-panel"
+                        role="region"
+                        aria-label="Productos"
+                        aria-hidden="true"
+                      >
+                        <div class="footer-products-panel__inner">
+                          <div class="footer-products-panel__grid">
+                            <div class="footer-products-panel__col">
+                              {
+                                productLinks.slice(0, 3).map((item) => (
+                                  <a
+                                    href={item.href}
+                                    class="footer-products-panel__link"
+                                    data-footer-product={item.labelKey}
+                                  >
+                                    {FOOTER_T.en[item.labelKey as keyof typeof FOOTER_T.en] ?? item.labelKey}
+                                  </a>
+                                ))
+                              }
+                            </div>
+                            <div class="footer-products-panel__col">
+                              {
+                                productLinks.slice(3, 6).map((item) => (
+                                  <a
+                                    href={item.href}
+                                    class="footer-products-panel__link"
+                                    data-footer-product={item.labelKey}
+                                  >
+                                    {FOOTER_T.en[item.labelKey as keyof typeof FOOTER_T.en] ?? item.labelKey}
+                                  </a>
+                                ))
+                              }
+                            </div>
+                            <div class="footer-products-panel__col">
+                              {
+                                productLinks.slice(6, 9).map((item) => (
+                                  <a
+                                    href={item.href}
+                                    class="footer-products-panel__link"
+                                    data-footer-product={item.labelKey}
+                                  >
+                                    {FOOTER_T.en[item.labelKey as keyof typeof FOOTER_T.en] ?? item.labelKey}
+                                  </a>
+                                ))
+                              }
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  )}
+                  {!isProducts && (
+                    <li>
+                      <a
+                        href={link.href}
+                        {...(link.openInNewTab && {
+                          target: "_blank",
+                          rel: "noopener noreferrer",
+                        })}
+                        {...((link as FooterLinkWithKey).key && {
+                          "data-footer-key": (link as FooterLinkWithKey).key,
+                        })}
+                        {...(link.dataI18n && { "data-i18n": link.dataI18n })}
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  )}
+                </>
+              );
+            })
           }
         </ul>
       </div>
@@ -150,6 +263,7 @@ const FOOTER_T = {
     flex-wrap: wrap;
     gap: 2rem;
     width: 100%;
+    position: relative;
   }
 
   .footer-logo {
@@ -191,6 +305,29 @@ const FOOTER_T = {
     margin: 0;
   }
 
+  /* Panel entre Products y el siguiente enlace: en desktop se posiciona en el centro */
+  .footer-products-panel-li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  @media (min-width: 769px) {
+    .footer-products-panel-li {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: fit-content;
+      max-width: min(560px, 48vw);
+      top: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .footer-products-panel-li .footer-products-panel {
+      pointer-events: auto;
+    }
+  }
+
   .quick-links-list a {
     color: #fff;
     text-decoration: none;
@@ -199,7 +336,102 @@ const FOOTER_T = {
     transition: color 0.2s ease;
   }
 
+  .quick-links-list .footer-link-button {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    transition: color 0.2s ease;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
   .quick-links-list a:hover {
+    color: #93fb4d;
+  }
+
+  .quick-links-list .footer-link-button:hover {
+    color: #93fb4d;
+  }
+
+  .footer-products-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .footer-products-trigger__chevron {
+    font-size: 0.6em;
+    opacity: 0.85;
+    transition: transform 0.2s ease;
+  }
+
+  .footer-section.is-products-expanded .footer-products-trigger__chevron {
+    transform: rotate(180deg);
+  }
+
+  /* Panel expandible de productos: ocupa el espacio central, se expande hacia la izquierda desde "Products" */
+  .footer-products-panel {
+    flex: 0 0 auto;
+    max-width: 0;
+    max-height: 100vh; /* no colapsar altura en desktop (solo ancho) */
+    overflow: hidden;
+    align-self: stretch;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    transition: max-width 0.35s ease-out, max-height 0.3s ease-out;
+    min-width: 0;
+  }
+
+  .footer-products-panel.footer-products-panel--open {
+    max-width: min(560px, 48vw);
+  }
+
+  .footer-products-panel__inner {
+    width: 100%;
+    min-width: 0;
+    padding: 0.25rem 0 0;
+    box-sizing: border-box;
+  }
+
+  .footer-products-panel--open .footer-products-panel__inner {
+    padding-left: 0.5rem;
+    padding-right: 1rem;
+  }
+
+  /* 3 columnas: 3 + 3 + 3 ítems; espaciado uniforme */
+  .footer-products-panel__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem 1.25rem;
+    align-items: start;
+    justify-items: start;
+  }
+
+  .footer-products-panel__col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .footer-products-panel__link {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-size: 0.9rem;
+    line-height: 1.45;
+    transition: color 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .footer-products-panel__link:hover {
     color: #93fb4d;
   }
 
@@ -241,6 +473,32 @@ const FOOTER_T = {
       justify-content: space-between;
       gap: 1.5rem;
     }
+    .footer-products-panel.footer-products-panel--open {
+      max-width: min(480px, 55vw);
+    }
+    .footer-products-panel__grid {
+      gap: 0.45rem 1rem;
+    }
+    .footer-products-panel__link {
+      font-size: 0.875rem;
+    }
+  }
+
+  /* ---- Tablet: reducir espacio y colapsar panel cerrado ---- */
+  @media (max-width: 768px) {
+    .footer-top {
+      gap: 1rem;
+    }
+    .footer-products-panel:not(.footer-products-panel--open) {
+      max-height: 0;
+      min-height: 0;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    .footer-products-panel.footer-products-panel--open {
+      max-width: 100%;
+    }
   }
 
   /* ---- Móvil: logo y enlaces en columna centrados ---- */
@@ -255,13 +513,47 @@ const FOOTER_T = {
       flex-direction: column;
       align-items: center;
       text-align: center;
-      gap: 1.5rem;
+      gap: 1rem;
+    }
+    .footer-products-panel:not(.footer-products-panel--open) {
+      max-height: 0;
+      min-height: 0;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    .footer-products-panel.footer-products-panel--open {
+      max-width: 100%;
     }
     .footer-quick-links {
       align-items: center;
     }
     .quick-links-list {
       align-items: center;
+    }
+    .footer-products-panel {
+      justify-content: center;
+      width: 100%;
+    }
+    .footer-products-panel.footer-products-panel--open {
+      max-width: 100%;
+    }
+    .footer-products-panel__inner {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+      width: 100%;
+    }
+    .footer-products-panel__grid {
+      grid-template-columns: 1fr;
+      gap: 1rem 0;
+      justify-items: center;
+    }
+    .footer-products-panel__col {
+      align-items: center;
+      width: auto;
+    }
+    .footer-products-panel__link {
+      font-size: 0.9rem;
     }
     .footer-bottom {
       margin-top: 2rem;
@@ -286,8 +578,10 @@ const FOOTER_T = {
     }
   }
 
-  function applyFooterTranslations() {
-    const lang = getFooterLang();
+  function applyFooterTranslations(overrideLang) {
+    const lang = overrideLang !== undefined
+      ? (overrideLang === "es" || overrideLang === "ES" ? "es" : "en")
+      : getFooterLang();
     const t = FOOTER_T[lang] || FOOTER_T.en;
 
     const titleEl = document.querySelector(".footer-section .quick-links-title");
@@ -305,14 +599,70 @@ const FOOTER_T = {
       copyrightEl.textContent = t.copyright;
     }
 
-    document.querySelectorAll(".footer-section .quick-links-list a[data-footer-key]").forEach((a) => {
-      const key = a.getAttribute("data-footer-key");
-      if (key && t[key]) a.textContent = t[key];
+    document.querySelectorAll(".footer-section .quick-links-list [data-footer-key]").forEach((el) => {
+      const key = el.getAttribute("data-footer-key");
+      if (key && t[key]) {
+        const textSpan = el.querySelector(".footer-products-trigger__text");
+        if (textSpan) textSpan.textContent = t[key];
+        else el.textContent = t[key];
+      }
+    });
+
+    document.querySelectorAll(".footer-section [data-footer-product]").forEach((el) => {
+      const key = el.getAttribute("data-footer-product");
+      if (key && t[key]) el.textContent = t[key];
     });
   }
 
   if (typeof document !== "undefined") {
     applyFooterTranslations();
-    window.addEventListener("ui:languagechange", applyFooterTranslations);
+    window.addEventListener("ui:languagechange", (e) => {
+      const lang = e.detail?.language;
+      applyFooterTranslations(lang);
+    });
+
+    const productsTrigger = document.querySelector(
+      ".footer-section .footer-products-trigger",
+    );
+    const footerProductsPanel = document.getElementById("footer-products-panel");
+
+    if (productsTrigger && footerProductsPanel) {
+      const footerSection = document.querySelector(".footer-section");
+      const toggleExpanded = (expanded) => {
+        if (expanded) {
+          footerProductsPanel.classList.add("footer-products-panel--open");
+          footerProductsPanel.setAttribute("aria-hidden", "false");
+        } else {
+          footerProductsPanel.classList.remove("footer-products-panel--open");
+          footerProductsPanel.setAttribute("aria-hidden", "true");
+        }
+        productsTrigger.setAttribute("aria-expanded", String(expanded));
+        footerSection?.classList.toggle("is-products-expanded", expanded);
+      };
+
+      productsTrigger.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const isOpen = footerProductsPanel.classList.contains("footer-products-panel--open");
+        toggleExpanded(!isOpen);
+      });
+
+      document.addEventListener("click", (e) => {
+        const target = e.target;
+        if (
+          target instanceof Node &&
+          !footerProductsPanel.contains(target) &&
+          !productsTrigger.contains(target)
+        ) {
+          toggleExpanded(false);
+        }
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && footerProductsPanel.classList.contains("footer-products-panel--open")) {
+          toggleExpanded(false);
+        }
+      });
+    }
   }
 </script>

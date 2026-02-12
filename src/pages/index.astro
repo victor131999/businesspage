@@ -938,14 +938,13 @@ const modulesList = [
       </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Footer: el ítem con key "products" se renderiza como botón que abre el panel de enlaces a productos -->
     <Footer
       quickLinksTitle="Quick links"
       links={[
-        { href: "/products", label: "Products", dataI18n: "footer.products" },
-        { href: "/nosotros", label: "About us", dataI18n: "footer.about" },
-        { href: "/desarrollo", label: "Developers", dataI18n: "footer.developers" },
-        { href: "/otros", label: "Others", dataI18n: "footer.others" },
+        { href: "", label: "Products", key: "products", dataI18n: "footer.products" },
+        { href: "https://docs.zelify.com", label: "Developers", key: "developers", dataI18n: "footer.developers", openInNewTab: true },
+        { href: "/blog", label: "Blog", key: "blog", dataI18n: "footer.blog" },
       ]}
       legalText="Zelify is a technology platform currently in a development phase, not yet deployed or operational, and does not provide or process financial services directly; all financial operations are conducted exclusively through regulated third-party partners."
       copyrightText="© 2025 Zelify. All rights reserved."
@@ -3049,9 +3048,8 @@ const modulesList = [
         // Footer
         "footer.quicklinks": "Quick links",
         "footer.products": "Products",
-        "footer.about": "About us",
         "footer.developers": "Developers",
-        "footer.others": "Others",
+        "footer.blog": "Blog",
         "footer.legal":
           "Zelify is a technology platform currently in a development phase, not yet deployed or operational, and does not provide or process financial services directly; all financial operations are conducted exclusively through regulated third-party partners.",
         "footer.copyright": "© 2025 Zelify. All rights reserved.",
@@ -3167,9 +3165,8 @@ const modulesList = [
         // Footer
         "footer.quicklinks": "Enlaces rápidos",
         "footer.products": "Productos",
-        "footer.about": "Nosotros",
         "footer.developers": "Desarrolladores",
-        "footer.others": "Otros",
+        "footer.blog": "Blog",
         "footer.legal":
           "Zelify es una plataforma tecnológica actualmente en fase de desarrollo, aún no desplegada u operativa, y no proporciona ni procesa servicios financieros directamente; todas las operaciones financieras se realizan exclusivamente a través de socios terceros regulados.",
         "footer.copyright": "© 2025 Zelify. Todos los derechos reservados.",

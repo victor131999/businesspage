@@ -9,6 +9,7 @@ import Button from "../components/design-system/atoms/Button.astro";
 import ContactFormHubSpot from "../components/design-system/organisms/ContactFormHubSpot.astro";
 import QuoteModalHubSpot from "../components/design-system/organisms/QuoteModalHubSpot.astro";
 import ConnectApp from "../components/connect/ConnectApp.astro";
+import Footer from "../components/design-system/organisms/Footer.astro";
 ---
 
 <html lang="es">
@@ -675,39 +676,18 @@ import ConnectApp from "../components/connect/ConnectApp.astro";
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="auth-footer">
-      <div class="footer-container">
-        <div class="footer-content">
-          <!-- Logo -->
-          <div class="footer-logo">
-            <img src="/images/zelify_logo2.png" alt="Zelify" />
-          </div>
-
-          <!-- Quick Links -->
-          <div class="footer-links">
-            <h3 class="footer-links-title">Quick links</h3>
-            <nav class="footer-nav">
-              <a href="/products">Products</a>
-              <a href="/nosotros">About us</a>
-              <a href="/desarrollo">Developers</a>
-              <a href="/otros">Others</a>
-            </nav>
-          </div>
-        </div>
-
-        <!-- Disclaimer -->
-        <p class="footer-disclaimer">
-          Zelify is a technology platform currently in a development phase, not
-          yet deployed or operational, and does not provide or process financial
-          services directly; all financial operations are conducted exclusively
-          through regulated third-party partners.
-        </p>
-
-        <!-- Copyright -->
-        <p class="footer-copyright">© 2025 Zelify. All rights reserved.</p>
-      </div>
-    </footer>
+    <!-- Footer (mismo que index) -->
+    <Footer
+      quickLinksTitle="Quick links"
+      links={[
+        { href: "", label: "Products", key: "products", dataI18n: "footer.products" },
+        { href: "https://docs.zelify.com", label: "Developers", key: "developers", dataI18n: "footer.developers", openInNewTab: true },
+        { href: "/blog", label: "Blog", key: "blog", dataI18n: "footer.blog" },
+      ]}
+      legalText="Zelify is a technology platform currently in a development phase, not yet deployed or operational, and does not provide or process financial services directly; all financial operations are conducted exclusively through regulated third-party partners."
+      copyrightText="© 2025 Zelify. All rights reserved."
+      dataI18n={{ quicklinks: "footer.quicklinks", legal: "footer.legal", copyright: "footer.copyright" }}
+    />
 
     <style>
       @font-face {

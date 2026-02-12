@@ -1,6 +1,7 @@
 ---
 import Navbar from "../components/NavbarSimple.astro";
 import ProductsPanel from "../components/productsPanel.astro";
+import Footer from "../components/design-system/organisms/Footer.astro";
 import "../styles/navbar.css";
 ---
 
@@ -392,6 +393,19 @@ import "../styles/navbar.css";
 
       <!-- Products Panel Component -->
       <ProductsPanel />
+
+      <!-- Footer (mismo que index) -->
+      <Footer
+        quickLinksTitle="Quick links"
+        links={[
+          { href: "", label: "Products", key: "products", dataI18n: "footer.products" },
+          { href: "https://docs.zelify.com", label: "Developers", key: "developers", dataI18n: "footer.developers", openInNewTab: true },
+          { href: "/blog", label: "Blog", key: "blog", dataI18n: "footer.blog" },
+        ]}
+        legalText="Zelify is a technology platform currently in a development phase, not yet deployed or operational, and does not provide or process financial services directly; all financial operations are conducted exclusively through regulated third-party partners."
+        copyrightText="© 2025 Zelify. All rights reserved."
+        dataI18n={{ quicklinks: "footer.quicklinks", legal: "footer.legal", copyright: "footer.copyright" }}
+      />
     </main>
   </body>
 </html>

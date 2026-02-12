@@ -625,8 +625,18 @@ import "../components/design-system/tokens.css";
       </div>
     </section>
 
-    <!-- Footer -->
-    <Footer />
+    <!-- Footer (mismo que index) -->
+    <Footer
+      quickLinksTitle="Quick links"
+      links={[
+        { href: "", label: "Products", key: "products", dataI18n: "footer.products" },
+        { href: "https://docs.zelify.com", label: "Developers", key: "developers", dataI18n: "footer.developers", openInNewTab: true },
+        { href: "/blog", label: "Blog", key: "blog", dataI18n: "footer.blog" },
+      ]}
+      legalText="Zelify is a technology platform currently in a development phase, not yet deployed or operational, and does not provide or process financial services directly; all financial operations are conducted exclusively through regulated third-party partners."
+      copyrightText="© 2025 Zelify. All rights reserved."
+      dataI18n={{ quicklinks: "footer.quicklinks", legal: "footer.legal", copyright: "footer.copyright" }}
+    />
     <AlaizaAssistant client:load />
     <QuoteModalHubSpot />
     <script is:inline>
@@ -3043,18 +3053,6 @@ import "../components/design-system/tokens.css";
           },
         ],
       },
-      footer: {
-        quickLinks: "Enlaces rápidos",
-        links: [
-          { text: "Productos", href: "/products" },
-          { text: "Nosotros", href: "/nosotros" },
-          { text: "Desarrollo", href: "/desarrollo" },
-          { text: "Otros", href: "/otros" },
-        ],
-        disclaimer:
-          "Zelify is a technology platform currently in a development phase, not yet deployed or operational, and does not provide or process financial services directly; all financial operations are conducted exclusively through regulated third-party partners.",
-        copyright: "© 2025 Zelify. All rights reserved.",
-      },
     },
     en: {
       hero: {
@@ -3207,18 +3205,6 @@ import "../components/design-system/tokens.css";
             a: "The Alaiza SDK is designed for fast native integration on both web and mobile platforms. It allows deploying all AI capabilities and support chat without adding friction to existing user flows, ensuring a smooth experience from day one.",
           },
         ],
-      },
-      footer: {
-        quickLinks: "Quick links",
-        links: [
-          { text: "Products", href: "/products" },
-          { text: "About us", href: "/nosotros" },
-          { text: "Developers", href: "/desarrollo" },
-          { text: "Others", href: "/otros" },
-        ],
-        disclaimer:
-          "Zelify is a technology platform currently in a development phase, not yet deployed or operational, and does not provide or process financial services directly; all financial operations are conducted exclusively through regulated third-party partners.",
-        copyright: "© 2025 Zelify. All rights reserved.",
       },
     },
   };
@@ -3470,23 +3456,7 @@ import "../components/design-system/tokens.css";
       }
     });
 
-    // Footer
-    // Footer
-    const footerLinksTitle = document.querySelector(".quick-links-title");
-    if (footerLinksTitle) footerLinksTitle.textContent = t.footer.quickLinks;
-
-    const footerQuickLinksList = document.querySelector(".quick-links-list");
-    if (footerQuickLinksList) {
-      footerQuickLinksList.innerHTML = t.footer.links
-        .map((link) => `<li><a href="${link.href}">${link.text}</a></li>`)
-        .join("");
-    }
-
-    const footerDisclaimer = document.querySelector(".footer-legal");
-    if (footerDisclaimer) footerDisclaimer.textContent = t.footer.disclaimer;
-
-    const footerCopyright = document.querySelector(".footer-copyright");
-    if (footerCopyright) footerCopyright.textContent = t.footer.copyright;
+    // Footer: lo gestiona el componente Footer.astro (applyFooterTranslations)
   }
 
   const detectBrowserLanguage = () => {
