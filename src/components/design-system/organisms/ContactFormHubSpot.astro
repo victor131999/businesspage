@@ -203,14 +203,20 @@ const {
     color: #6b7280;
     pointer-events: none;
   }
-  .hubspot-contact-legal {
+  :global(.hubspot-contact-legal) {
     font-size: 0.85rem;
     color: #6b7280;
     line-height: 1.5;
     margin: 0.5rem 0 0 0;
   }
-  .hubspot-contact-legal a { color: #6b7280; text-decoration: underline; transition: color 0.2s ease; }
-  .hubspot-contact-legal a:hover { color: #213f8c; }
+  :global(.hubspot-contact-legal a) {
+    color: #6b7280;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    transition: color 0.2s ease;
+  }
+  :global(.hubspot-contact-legal a:hover) { color: #213f8c; }
   .hubspot-turnstile-wrap { margin-bottom: -0.5rem; }
   .hubspot-turnstile-wrap .hubspot-field-error { margin-top: 1px; }
   .hubspot-turnstile-wrap #contactFormTurnstile,
