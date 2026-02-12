@@ -2100,20 +2100,23 @@ import "../components/design-system/tokens.css";
     pointer-events: none;
   }
 
-  .contact-legal {
+  .contact-legal,
+  .hubspot-contact-legal {
     font-size: 0.85rem;
     color: #6b7280;
     line-height: 1.5;
     margin: 0.5rem 0 0 0;
   }
 
-  .contact-legal a {
+  .contact-legal a,
+  .hubspot-contact-legal a {
     color: #6b7280;
     text-decoration: underline;
     transition: color 0.2s ease;
   }
 
-  .contact-legal a:hover {
+  .contact-legal a:hover,
+  .hubspot-contact-legal a:hover {
     color: #213f8c;
   }
 
@@ -3157,7 +3160,7 @@ import "../components/design-system/tokens.css";
           },
           {
             title: "Global Connectivity",
-            desc: "Interbank transfers via ACH, SPEI in Mexico, SPI in Ecuador, plus integration with SWIFT, ACH, SEPA and local networks for efficient national and international transfers.",
+            desc: "Interbank transfers can be made using mechanisms such as ACH, SPEI in Mexico, and SPI in Ecuador.",
           },
           {
             title: "Service Payments",
@@ -3165,11 +3168,11 @@ import "../components/design-system/tokens.css";
           },
           {
             title: "QR Payments",
-            desc: "Immediate generation and collection through static and dynamic QR standards (EMV).",
+            desc: "Connect payments and transfers with static and dynamic QR codes.",
           },
           {
             title: "Control and Security",
-            desc: "Configurable transaction limits, key tokenization and automatic notifications.",
+            desc: "Configurable transaction limits, configuration of partial payment as contacts.",
           },
         ],
       },
@@ -3452,7 +3455,14 @@ import "../components/design-system/tokens.css";
         t.contact.placeholders.phone;
       const submitBtn = contactForm.querySelector(".contact-submit-btn");
       if (submitBtn) submitBtn.textContent = t.contact.submit;
-      const legalText = contactForm.querySelector(".contact-legal");
+      const hubspotSubmit = contactForm.querySelector(".hubspot-contact-submit-btn");
+      if (hubspotSubmit instanceof HTMLInputElement) {
+        hubspotSubmit.value = t.contact.submit;
+      }
+
+      const legalText = contactForm.querySelector(
+        ".contact-legal, .hubspot-contact-legal",
+      );
       if (legalText) legalText.innerHTML = t.contact.legal;
 
       const countrySelect = contactForm.querySelector("#pais");
