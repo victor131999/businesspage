@@ -308,17 +308,61 @@ const {
     const messageEl = document.getElementById("contactFormMessage");
     if (!form || !submitBtn || !messageEl) return;
 
+    let isEnUi = false;
+    const COPY = {
+      ES: {
+        requiredField: "Completa este campo.",
+        invalidEmail: "Ingresa un email válido.",
+        turnstileRequired: "Completa la verificación de seguridad antes de enviar.",
+        turnstileRequiredLong:
+          "Completa la verificación de seguridad (captcha) antes de enviar.",
+        requiredFieldsSummary:
+          "Completa todos los campos obligatorios marcados en rojo.",
+        submitting: "Enviando…",
+        consent:
+          "Al enviar este formulario, aceptas nuestros Términos de Servicio y Política de Privacidad.",
+        success: "Gracias. Te responderemos pronto.",
+        sendFailed: "No se pudo enviar. Intenta de nuevo.",
+        connectionError:
+          "Error de conexión. Revisa tu internet e intenta de nuevo.",
+        turnstileAria: "Verificación de seguridad",
+        submitFallback: "Hablemos",
+      },
+      EN: {
+        requiredField: "Please complete this field.",
+        invalidEmail: "Enter a valid email.",
+        turnstileRequired: "Complete the security verification before sending.",
+        turnstileRequiredLong:
+          "Complete the security verification (captcha) before sending.",
+        requiredFieldsSummary:
+          "Complete all required fields marked in red.",
+        submitting: "Sending…",
+        consent:
+          "By submitting this form, you agree to our Terms of Service and Privacy Policy.",
+        success: "Thanks. We'll get back to you soon.",
+        sendFailed: "Couldn't send. Please try again.",
+        connectionError:
+          "Connection error. Check your internet and try again.",
+        turnstileAria: "Security verification",
+        submitFallback: "Let's Talk",
+      },
+    };
+    const t = () => (isEnUi ? COPY.EN : COPY.ES);
+
     // i18n: headline, formTitle, submit (reacciona a ui:languagechange)
     const section = document.querySelector("[data-contact-i18n]") as HTMLElement | null;
     function applyContactI18n(lang: string | undefined) {
       const L = (lang || "").toString().toLowerCase();
       const isEn = L === "en";
+      isEnUi = isEn;
       if (!section?.dataset) return;
       const titleEl = section.querySelector(".hubspot-contact-title");
       const formTitleEl = section.querySelector(".hubspot-contact-form-title");
       if (titleEl) titleEl.textContent = isEn ? (section.dataset.headlineEn || "Start building the bank of the future, today.") : (section.dataset.headlineEs || "Comienza a construir el banco del futuro, hoy.");
       if (formTitleEl) formTitleEl.textContent = isEn ? (section.dataset.formtitleEn || "Talk to our team") : (section.dataset.formtitleEs || "Habla con nuestro equipo");
       if (submitBtn && submitBtn instanceof HTMLInputElement) submitBtn.value = isEn ? (section.dataset.submitEn || "Let's Talk") : (section.dataset.submitEs || "Hablemos");
+      const turnstileEl = document.getElementById("contactFormTurnstile");
+      if (turnstileEl) turnstileEl.setAttribute("aria-label", t().turnstileAria);
     }
     window.addEventListener("ui:languagechange", (event: Event) => {
       const lang = (event as CustomEvent<{ language?: string }>).detail?.language;
@@ -387,11 +431,11 @@ const {
       const config = REQUIRED_FIELDS.find((f) => f.name === name);
       if (!config) return true;
       if (!value) {
-        setFieldError(name, "Completa este campo.");
+        setFieldError(name, t().requiredField);
         return false;
       }
       if (name === "email" && !isValidEmail(value)) {
-        setFieldError(name, "Ingresa un email válido.");
+        setFieldError(name, t().invalidEmail);
         return false;
       }
       clearFieldError(name);
@@ -404,10 +448,10 @@ const {
         const field = getFieldEl(config.name);
         const value = (field && field.value != null ? field.value : "").trim();
         if (!value) {
-          setFieldError(config.name, "Completa este campo.");
+          setFieldError(config.name, t().requiredField);
           valid = false;
         } else if (config.name === "email" && !isValidEmail(value)) {
-          setFieldError(config.name, "Ingresa un email válido.");
+          setFieldError(config.name, t().invalidEmail);
           valid = false;
         }
       }
@@ -471,13 +515,13 @@ const {
       hideMessage();
 
       if (!getTurnstileToken()) {
-        setTurnstileError("Completa la verificación de seguridad antes de enviar.");
-        showMessage("Completa la verificación de seguridad (captcha) antes de enviar.", true);
+        setTurnstileError(t().turnstileRequired);
+        showMessage(t().turnstileRequiredLong, true);
         scrollToTurnstile();
         return;
       }
       if (!validateAll()) {
-        showMessage("Completa todos los campos obligatorios marcados en rojo.", true);
+        showMessage(t().requiredFieldsSummary, true);
         const firstError = form.querySelector(".hubspot-form-group.has-error");
         if (firstError) {
           const input = firstError.querySelector("input, select");
@@ -487,8 +531,8 @@ const {
       }
 
       submitBtn.disabled = true;
-      const originalValue = submitBtn.value || "Hablemos";
-      submitBtn.value = "Enviando…";
+      const originalValue = submitBtn.value || t().submitFallback;
+      submitBtn.value = t().submitting;
       clearAllFieldErrors();
 
       const firstname = (form.querySelector("[name=firstname]")?.value || "").trim();
@@ -515,7 +559,7 @@ const {
         legalConsentOptions: {
           consent: {
             consentToProcess: true,
-            text: "Al enviar este formulario, aceptas nuestros Términos de Servicio y Política de Privacidad.",
+            text: t().consent,
           },
         },
       };
@@ -529,7 +573,7 @@ const {
         const data = await res.json().catch(() => ({}));
 
         if (res.ok) {
-          showMessage("Gracias. Te responderemos pronto.", false);
+          showMessage(t().success, false);
           form.reset();
           clearAllFieldErrors();
           REQUIRED_FIELDS.forEach((f) => {
@@ -540,13 +584,13 @@ const {
             try { window.turnstile.reset(turnstileWidgetId); } catch (_) {}
           }
         } else {
-          const msg = data.message || data.errors?.[0]?.message || "No se pudo enviar. Intenta de nuevo.";
+          const msg = data.message || data.errors?.[0]?.message || t().sendFailed;
           showMessage(msg, true);
           submitBtn.disabled = false;
           submitBtn.value = originalValue;
         }
       } catch (err) {
-        showMessage("Error de conexión. Revisa tu internet e intenta de nuevo.", true);
+        showMessage(t().connectionError, true);
         submitBtn.disabled = false;
         submitBtn.value = originalValue;
       }

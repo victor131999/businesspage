@@ -310,7 +310,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
           >
             <!-- Action Pills -->
             <div
-              class="flex justify-between gap-2 overflow-x-auto pb-1 scrollbar-hide"
+              class="flex justify-center gap-2 pb-1"
             >
               <button
                 class="nav-pill"
@@ -487,14 +487,14 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
         }
 
         .nav-pill {
-          flex: 1;
-          min-width: 70px;
+          flex: 1 1 0;
+          min-width: 0;
           height: 40px;
           display: flex;
           align-items: center;
           justify-content: center;
           border-radius: 9999px;
-          font-size: 11px;
+          font-size: 10px;
           font-weight: 600;
           color: white;
           background: linear-gradient(to right, #000b1e, #044a95);
@@ -505,6 +505,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
           white-space: nowrap;
           position: relative;
           overflow: hidden;
+          padding: 0 10px;
         }
 
         /* Shared Shimmer Effect */
