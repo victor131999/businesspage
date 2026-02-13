@@ -90,7 +90,7 @@ const {
                 <span class="hubspot-field-error" id="error-country" data-field="country" role="alert"></span>
               </div>
               <div class="hubspot-form-group">
-                <input type="tel" id="telefono" name="phone" placeholder="Teléfono" required aria-describedby="error-phone" aria-invalid="false" />
+                <input type="tel" id="telefono" name="phone" placeholder="Teléfono" inputmode="numeric" pattern="[0-9+\s\-]*" maxlength="20" required aria-describedby="error-phone" aria-invalid="false" autocomplete="tel" />
                 <span class="hubspot-field-error" id="error-phone" data-field="phone" role="alert"></span>
               </div>
             </div>
@@ -313,6 +313,7 @@ const {
       ES: {
         requiredField: "Completa este campo.",
         invalidEmail: "Ingresa un email válido.",
+        invalidPhone: "Solo se permiten números (y opcionalmente + al inicio).",
         turnstileRequired: "Completa la verificación de seguridad antes de enviar.",
         turnstileRequiredLong:
           "Completa la verificación de seguridad (captcha) antes de enviar.",
@@ -331,6 +332,7 @@ const {
       EN: {
         requiredField: "Please complete this field.",
         invalidEmail: "Enter a valid email.",
+        invalidPhone: "Only numbers allowed (optional + at the start).",
         turnstileRequired: "Complete the security verification before sending.",
         turnstileRequiredLong:
           "Complete the security verification (captcha) before sending.",
@@ -425,6 +427,10 @@ const {
     function isValidEmail(value) {
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value || "");
     }
+    function isValidPhone(value) {
+      const v = (value || "").trim();
+      return /^\+?\d+$/.test(v.replace(/[\s\-]/g, ""));
+    }
     function validateField(name) {
       const field = getFieldEl(name);
       const value = (field && field.value != null ? field.value : "").trim();
@@ -436,6 +442,10 @@ const {
       }
       if (name === "email" && !isValidEmail(value)) {
         setFieldError(name, t().invalidEmail);
+        return false;
+      }
+      if (name === "phone" && !isValidPhone(value)) {
+        setFieldError(name, t().invalidPhone);
         return false;
       }
       clearFieldError(name);
@@ -453,9 +463,24 @@ const {
         } else if (config.name === "email" && !isValidEmail(value)) {
           setFieldError(config.name, t().invalidEmail);
           valid = false;
+        } else if (config.name === "phone" && !isValidPhone(value)) {
+          setFieldError(config.name, t().invalidPhone);
+          valid = false;
         }
       }
       return valid;
+    }
+
+    const phoneInput = getFieldEl("phone");
+    if (phoneInput && phoneInput instanceof HTMLInputElement) {
+      phoneInput.addEventListener("input", () => {
+        let v = phoneInput.value;
+        const hasPlus = v.startsWith("+");
+        const digits = v.replace(/\D/g, "");
+        phoneInput.value = (hasPlus ? "+" : "") + digits;
+        clearFieldError("phone");
+        hideMessage();
+      });
     }
 
     REQUIRED_FIELDS.forEach((config) => {
