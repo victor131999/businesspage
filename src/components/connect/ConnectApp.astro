@@ -14,7 +14,20 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
               class="connect-back-btn device-back-btn pl-6 pt-6 text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors"
               id="btn-back"
             >
-              &lt; back
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                style="margin-right: 4px;"
+              >
+                <path d="M15 18l-6-6 6-6"></path>
+              </svg>
+              <span id="connect-back-text">Atrás</span>
             </button>
           </div>
 
@@ -27,6 +40,13 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
             <div
               class="screen-content flex flex-col h-full !p-0 !overflow-visible"
             >
+            <div class="flex justify-center mb-4">
+                <img
+                  src="/images/zelify_logo.png"
+                  alt="Zelify Logo"
+                  class="w-24 h-auto"
+                />
+              </div>
               <div class="text-center mb-1">
                 <h2 class="bank-link-title text-sm font-bold text-[#004492]">
                   Bank Account Linking
@@ -222,7 +242,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                 </div>
 
                 <!-- Login Button -->
-                <div class="pt-4">
+                <div class="pt-4 flex justify-center">
                   <button
                     class="w-full text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-transform active:scale-95 btn-gradient shadow-lg shadow-blue-900/10"
                     id="btn-submit-credentials"

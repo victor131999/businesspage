@@ -4018,7 +4018,7 @@ import Footer from "../components/design-system/organisms/Footer.astro";
             demoButton: "Demo",
           },
           device: {
-            back: "back",
+            back: "Back",
             bankLinking: {
               title: "Bank account linking",
               subtitle: "Let's link your account",
@@ -4212,8 +4212,8 @@ import Footer from "../components/design-system/organisms/Footer.astro";
         if (demoBtn) demoBtn.textContent = t.hero.demoButton;
 
         // Device Navigation
-        const deviceBack = document.querySelector(".device-back-btn");
-        if (deviceBack) deviceBack.textContent = t.device.back;
+        const deviceBackText = document.getElementById("connect-back-text");
+        if (deviceBackText) deviceBackText.textContent = t.device.back;
 
         // Bank Linking Screen
         const bankLinkTitle = document.querySelector(".bank-link-title");

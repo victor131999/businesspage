@@ -662,7 +662,7 @@ export function BankAccountPreviewPanel({
 
   // Helper functions for theme colors (similar to identity)
   const themeColor = currentBranding.customColorTheme || "#004492";
-  
+
   // Inicializar animaciones CTA
   useCTAButtonAnimations(themeColor);
 
@@ -1321,7 +1321,7 @@ export function BankAccountPreviewPanel({
                 className="group relative flex w-full items-center justify-between overflow-hidden rounded-xl border px-4 py-2.5 text-sm font-semibold text-white transition-all active:scale-[0.98] disabled:cursor-not-allowed"
                 style={{
                   background: !username || !password
-                    ? '#9BA2AF' 
+                    ? '#9BA2AF'
                     : `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
                   borderColor: !username || !password ? '#9BA2AF' : themeColor,
                   boxShadow: !username || !password ? 'none' : `0 4px 14px 0 ${themeColor}40`,
@@ -1332,24 +1332,24 @@ export function BankAccountPreviewPanel({
                 {(!username || !password) ? null : (
                   <>
                     {/* Resplandor animado alrededor del botón */}
-                    <span 
+                    <span
                       className="absolute inset-0 rounded-xl opacity-60 blur-md -z-10"
                       style={{
                         background: themeColor,
                         animation: 'cta-pulse-ring 2s ease-in-out infinite',
                       }}
                     ></span>
-                    
+
                     {/* Brillo que se mueve automáticamente */}
-                    <span 
+                    <span
                       className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -z-10"
                       style={{
                         animation: 'cta-shine-sweep 2.5s linear infinite',
                       }}
                     ></span>
-                    
+
                     {/* Capa de brillo adicional constante */}
-                    <span 
+                    <span
                       className="absolute inset-0 rounded-xl -z-10"
                       style={{
                         background: `radial-gradient(circle at center, ${themeColor}20 0%, transparent 70%)`,
@@ -1358,7 +1358,7 @@ export function BankAccountPreviewPanel({
                     ></span>
                   </>
                 )}
-                
+
                 <span className="relative z-10 flex items-center justify-center gap-2" style={{ animation: !username || !password ? 'none' : 'cta-glow-pulse 2s ease-in-out infinite' }}>
                   {t.credentials.loginButton}
                   <svg
@@ -1376,7 +1376,7 @@ export function BankAccountPreviewPanel({
                     />
                   </svg>
                 </span>
-                
+
                 {/* Efecto de brillo al hacer hover */}
                 <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full"></span>
               </button>
@@ -1440,7 +1440,7 @@ export function BankAccountPreviewPanel({
                   const wave =
                     Math.sin(
                       (adjustedProgress / 100) * Math.PI * 5 +
-                        (y / 100) * Math.PI * 3,
+                      (y / 100) * Math.PI * 3,
                     ) * 10;
                   const x = adjustedProgress + (wave / 100) * 12;
                   points += `${x}% ${y}%, `;
@@ -1813,31 +1813,31 @@ export function BankAccountPreviewPanel({
               }}
             >
               {/* Resplandor animado alrededor del botón */}
-              <span 
+              <span
                 className="absolute inset-0 rounded-xl opacity-60 blur-md -z-10"
                 style={{
                   background: themeColor,
                   animation: 'cta-pulse-ring 2s ease-in-out infinite',
                 }}
               ></span>
-              
+
               {/* Brillo que se mueve automáticamente */}
-              <span 
+              <span
                 className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -z-10"
                 style={{
                   animation: 'cta-shine-sweep 2.5s linear infinite',
                 }}
               ></span>
-              
+
               {/* Capa de brillo adicional constante */}
-              <span 
+              <span
                 className="absolute inset-0 rounded-xl -z-10"
                 style={{
                   background: `radial-gradient(circle at center, ${themeColor}20 0%, transparent 70%)`,
                   animation: 'cta-glow-pulse 2s ease-in-out infinite',
                 }}
               ></span>
-              
+
               <span className="relative z-10 flex items-center justify-center gap-2" style={{ animation: 'cta-glow-pulse 2s ease-in-out infinite' }}>
                 {t.wallet.depositButton}
                 <svg
@@ -1855,7 +1855,7 @@ export function BankAccountPreviewPanel({
                   />
                 </svg>
               </span>
-              
+
               {/* Efecto de brillo al hacer hover */}
               <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full"></span>
             </button>
@@ -2066,8 +2066,8 @@ export function BankAccountPreviewPanel({
                       transition: "all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)",
                       ...(isActive
                         ? {
-                            background: `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
-                          }
+                          background: `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
+                        }
                         : {}),
                     }}
                   >
@@ -2208,24 +2208,24 @@ export function BankAccountPreviewPanel({
                   }}
                 >
                   {/* Resplandor animado alrededor del slider */}
-                  <span 
+                  <span
                     className="absolute inset-0 rounded-full opacity-60 blur-md -z-10"
                     style={{
                       background: themeColor,
                       animation: 'cta-pulse-ring 2s ease-in-out infinite',
                     }}
                   ></span>
-                  
+
                   {/* Brillo que se mueve automáticamente */}
-                  <span 
+                  <span
                     className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -z-10"
                     style={{
                       animation: 'cta-shine-sweep 2.5s linear infinite',
                     }}
                   ></span>
-                  
+
                   {/* Capa de brillo adicional constante */}
-                  <span 
+                  <span
                     className="absolute inset-0 rounded-full -z-10"
                     style={{
                       background: `radial-gradient(circle at center, ${themeColor}20 0%, transparent 70%)`,
@@ -2294,7 +2294,7 @@ export function BankAccountPreviewPanel({
                   className="group relative flex w-full items-center justify-between overflow-hidden rounded-xl border px-4 py-3 text-sm font-semibold text-white transition-all active:scale-[0.98] disabled:cursor-not-allowed"
                   style={{
                     background: !depositAmount || isTransferring
-                      ? '#9BA2AF' 
+                      ? '#9BA2AF'
                       : `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
                     borderColor: !depositAmount || isTransferring ? '#9BA2AF' : themeColor,
                     boxShadow: !depositAmount || isTransferring ? 'none' : `0 4px 14px 0 ${themeColor}40`,
@@ -2305,24 +2305,24 @@ export function BankAccountPreviewPanel({
                   {(!depositAmount || isTransferring) ? null : (
                     <>
                       {/* Resplandor animado alrededor del botón */}
-                      <span 
+                      <span
                         className="absolute inset-0 rounded-xl opacity-60 blur-md -z-10"
                         style={{
                           background: themeColor,
                           animation: 'cta-pulse-ring 2s ease-in-out infinite',
                         }}
                       ></span>
-                      
+
                       {/* Brillo que se mueve automáticamente */}
-                      <span 
+                      <span
                         className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -z-10"
                         style={{
                           animation: 'cta-shine-sweep 2.5s linear infinite',
                         }}
                       ></span>
-                      
+
                       {/* Capa de brillo adicional constante */}
-                      <span 
+                      <span
                         className="absolute inset-0 rounded-xl -z-10"
                         style={{
                           background: `radial-gradient(circle at center, ${themeColor}20 0%, transparent 70%)`,
@@ -2331,7 +2331,7 @@ export function BankAccountPreviewPanel({
                       ></span>
                     </>
                   )}
-                  
+
                   <span className="relative z-10 flex items-center justify-center gap-2" style={{ animation: !depositAmount || isTransferring ? 'none' : 'cta-glow-pulse 2s ease-in-out infinite' }}>
                     {t.deposit.slideToConfirm}
                     <svg
@@ -2349,7 +2349,7 @@ export function BankAccountPreviewPanel({
                       />
                     </svg>
                   </span>
-                  
+
                   {/* Efecto de brillo al hacer hover */}
                   <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full"></span>
                 </button>
@@ -2440,9 +2440,8 @@ export function BankAccountPreviewPanel({
             return (
               <div
                 key={bank.id}
-                className={`relative w-full cursor-pointer flex items-center justify-center transition-all duration-500 ${
-                  isActive ? "shadow-lg" : ""
-                }`}
+                className={`relative w-full cursor-pointer flex items-center justify-center transition-all duration-500 ${isActive ? "shadow-lg" : ""
+                  }`}
                 onClick={() => {
                   setActiveBankCard(index);
                   setSelectedBank(bank);
@@ -2463,8 +2462,8 @@ export function BankAccountPreviewPanel({
                   transition: "all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)",
                   ...(isActive
                     ? {
-                        background: `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
-                      }
+                      background: `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
+                    }
                     : {}),
                 }}
               >
@@ -2516,7 +2515,7 @@ export function BankAccountPreviewPanel({
             className="group relative flex items-center justify-between overflow-hidden rounded-lg border px-6 py-3 text-sm font-semibold text-white transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
             style={{
               background: !selectedBank
-                ? '#9BA2AF' 
+                ? '#9BA2AF'
                 : `linear-gradient(to right, ${themeColor} 0%, ${darkThemeColor} 40%, ${almostBlackColor} 70%, ${blackColor} 100%)`,
               borderColor: !selectedBank ? '#9BA2AF' : themeColor,
               boxShadow: !selectedBank ? 'none' : `0 4px 14px 0 ${themeColor}40`,
@@ -2664,9 +2663,21 @@ export function BankAccountPreviewPanel({
                         onBankSelected?.(false);
                       }
                     }}
-                    className="text-sm font-medium text-gray-500 dark:text-gray-400"
+                    className="text-sm font-medium text-gray-500 dark:text-gray-400 flex items-center gap-1"
                   >
-                    &lt; {language === "es" ? "atrás" : "back"}
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M15 18l-6-6 6-6"></path>
+                    </svg>
+                    {language === "es" ? "Atrás" : "Back"}
                   </button>
                   {currentBranding.logo && (
                     <div className="absolute left-1/2 -translate-x-1/2">
