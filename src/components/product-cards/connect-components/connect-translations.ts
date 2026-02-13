@@ -25,7 +25,8 @@ export const CONNECT_TRANSLATIONS = {
         transferSubtitle: "Funds have been transferred successfully",
       },
       inProgress: {
-        linkingTitle: "Connecting your account",
+        linkingTitle: "Connecting your",
+        linkingSubtitle: "account",
         transferTitle: "Transferring funds",
         subtitle: "Please wait",
       },
@@ -33,6 +34,8 @@ export const CONNECT_TRANSLATIONS = {
     success: {
       title: "Linking successful",
       subtitle: "Your bank account has been linked successfully",
+      transferTitle: "Transfer Successful",
+      transferSubtitle: "Your funds have been transferred successfully",
     },
     wallet: {
       title: "Wallet",
@@ -79,7 +82,8 @@ export const CONNECT_TRANSLATIONS = {
         transferSubtitle: "Los fondos han sido transferidos exitosamente",
       },
       inProgress: {
-        linkingTitle: "Conectando tu cuenta",
+        linkingTitle: "Conectando tu",
+        linkingSubtitle: "cuenta",
         transferTitle: "Transfiriendo fondos",
         subtitle: "Espera por favor",
       },
@@ -87,6 +91,8 @@ export const CONNECT_TRANSLATIONS = {
     success: {
       title: "Vinculación Exitosa",
       subtitle: "Tu cuenta bancaria ha sido vinculada exitosamente",
+      transferTitle: "Transferencia Exitosa",
+      transferSubtitle: "Tus fondos han sido transferidos exitosamente",
     },
     wallet: {
       title: "Billetera",

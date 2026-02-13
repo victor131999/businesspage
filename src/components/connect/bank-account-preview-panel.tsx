@@ -626,7 +626,7 @@ export function BankAccountPreviewPanel({
   branding,
 }: BankAccountPreviewPanelProps) {
   const { language } = useLanguage();
-  const t = connectTranslations[language];
+  const t = connectTranslations[(language?.toLowerCase() as keyof typeof connectTranslations)] || connectTranslations.es;
   const { isTourActive, currentStep, steps } = useTour();
 
   // Get current branding based on dark mode
@@ -1499,12 +1499,8 @@ export function BankAccountPreviewPanel({
                 style={{ color: "white" }}
               >
                 {isTransferring
-                  ? language === "es"
-                    ? "Transferencia Completa"
-                    : "Transfer Complete"
-                  : language === "es"
-                    ? "Vinculación Completa"
-                    : "Linking Complete"}
+                  ? t.loading.complete.transferTitle
+                  : t.loading.complete.linkingTitle}
               </h2>
 
               {/* Subtítulo */}
@@ -1513,12 +1509,8 @@ export function BankAccountPreviewPanel({
                 style={{ color: "white", opacity: 0.9 }}
               >
                 {isTransferring
-                  ? language === "es"
-                    ? "Los fondos han sido transferidos exitosamente"
-                    : "Funds have been successfully transferred"
-                  : language === "es"
-                    ? "La cuenta bancaria ha sido vinculada exitosamente"
-                    : "The bank account has been successfully linked"}
+                  ? t.loading.complete.transferSubtitle
+                  : t.loading.complete.linkingSubtitle}
               </p>
             </div>
           )}
@@ -1527,38 +1519,52 @@ export function BankAccountPreviewPanel({
           {!isComplete && (
             <div className="flex flex-col items-center justify-center text-center space-y-4 relative z-10">
               {/* Título con cambio letra por letra */}
-              <h2 className="text-xl font-bold">
-                {(isTransferring
-                  ? language === "es"
-                    ? "Transfiriendo fondos"
-                    : "Transferring funds"
-                  : language === "es"
-                    ? "Conectando tu cuenta"
-                    : "Connecting your account"
-                )
-                  .split("")
-                  .map((char, index, array) => {
-                    const charProgress = (index / array.length) * 100;
-                    const isWhite = loadingProgress >= charProgress;
-                    return (
-                      <span
-                        key={index}
-                        style={{
-                          color: isWhite ? "white" : almostBlackColor,
-                          transition: "color 0.2s ease-out",
-                        }}
-                      >
-                        {char === " " ? "\u00A0" : char}
-                      </span>
-                    );
-                  })}
-              </h2>
+              <div className="flex flex-col items-center">
+                {(() => {
+                  const titleText = isTransferring
+                    ? t.loading.inProgress.transferTitle
+                    : t.loading.inProgress.linkingTitle;
+
+                  // Use linkingSubtitle only if not transferring (or add transferSubtitle key later if needed)
+                  const subtitleText = !isTransferring && t.loading.inProgress.linkingSubtitle
+                    ? t.loading.inProgress.linkingSubtitle
+                    : "";
+
+                  // If subtitle exists, treating as 2 lines. If not, just 1 line (transfer case)
+                  const lines = subtitleText ? [titleText, subtitleText] : [titleText];
+
+                  const totalChars = lines.join("").length;
+                  let globalIndex = 0;
+
+                  return lines.map((line, lineIndex) => (
+                    <h2 key={lineIndex} className="text-xl font-bold">
+                      {line.split("").map((char, charIndex) => {
+                        const charProgress = (globalIndex / totalChars) * 100;
+                        const isWhite = loadingProgress >= charProgress;
+                        globalIndex++;
+
+                        return (
+                          <span
+                            key={`${lineIndex}-${charIndex}`}
+                            style={{
+                              color: isWhite ? "white" : almostBlackColor,
+                              transition: "color 0.2s ease-out",
+                            }}
+                          >
+                            {char === " " ? "\u00A0" : char}
+                          </span>
+                        );
+                      })}
+                    </h2>
+                  ));
+                })()}
+              </div>
 
               {/* Subtítulo con cambio letra por letra */}
               <p className="text-sm">
-                {(language === "es" ? "Espera por favor" : "Please wait")
+                {t.loading.inProgress.subtitle
                   .split("")
-                  .map((char, index, array) => {
+                  .map((char: string, index: number, array: string[]) => {
                     const charProgress = (index / array.length) * 100;
                     const isWhite = loadingProgress >= charProgress;
                     return (
@@ -1671,9 +1677,9 @@ export function BankAccountPreviewPanel({
               style={{ color: "white" }}
             >
               {isApproved
-                ? language === "es"
-                  ? "Vinculación Exitosa"
-                  : "Successful Linking"
+                ? isTransferring
+                  ? t.success.transferTitle
+                  : t.loading.complete.linkingTitle
                 : language === "es"
                   ? "Vinculación Fallida"
                   : "Linking Failed"}
@@ -1686,9 +1692,9 @@ export function BankAccountPreviewPanel({
                 style={{ color: "white", opacity: 0.9 }}
               >
                 {isApproved
-                  ? language === "es"
-                    ? "Tu cuenta bancaria ha sido vinculada exitosamente"
-                    : "Your bank account has been successfully linked"
+                  ? isTransferring
+                    ? t.success.transferSubtitle
+                    : t.loading.complete.linkingSubtitle
                   : language === "es"
                     ? "No pudimos vincular tu cuenta bancaria"
                     : "We couldn't link your bank account"}

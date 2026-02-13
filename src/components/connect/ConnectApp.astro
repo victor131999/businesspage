@@ -289,15 +289,24 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                 >
                   <h2
                     id="loading-text-container"
-                    class="text-2xl font-bold text-white mb-2"
+                    class="text-2xl font-bold text-white mb-0 flex justify-center"
                   >
-                    Connecting<span class="opacity-90"> your account</span>
+                    <!-- Text will be injected by script as spans -->
+                    Conectando tu
+                  </h2>
+                  <h2
+                    id="loading-linking-subtitle-container"
+                    class="text-2xl font-bold text-white mb-2 flex justify-center"
+                  >
+                    <!-- Text will be injected by script as spans -->
+                    cuenta
                   </h2>
                   <p
                     id="loading-subtext-container"
-                    class="text-sm text-white/70 mb-10"
+                    class="text-sm text-white/70 mb-10 flex justify-center"
                   >
-                    Please wait
+                    <!-- Text will be injected by script as spans -->
+                    Espera por favor
                   </p>
 
                   <!-- Loading Bar -->
@@ -306,7 +315,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
                   >
                     <div
                       id="loading-bar"
-                      class="h-full bg-white w-0 transition-all duration-[3000ms] ease-out"
+                      class="h-full bg-white w-0"
                     >
                     </div>
                   </div>
@@ -823,6 +832,235 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
 </style>
 
 <script is:inline>
+  // Translations object (copied from connect-translations.ts to avoid build issues with inline scripts)
+  const connectTranslations = {
+    en: {
+      banks: {
+        title: "Bank account linking",
+        subtitle: "Let's link your account",
+        searchPlaceholder: "Search banks...",
+        continue: "Continue",
+      },
+      credentials: {
+        title: "Enter your credentials",
+        subtitle: "Please enter your credentials to connect your bank account",
+        usernameLabel: "Username",
+        usernamePlaceholder: "Enter your username",
+        passwordLabel: "Password",
+        passwordPlaceholder: "Enter your password",
+        submit: "Sign in",
+      },
+      loading: {
+        complete: {
+          linkingTitle: "Linking complete",
+          transferTitle: "Transfer complete",
+          linkingSubtitle: "The bank account has been linked successfully",
+          transferSubtitle: "Funds have been transferred successfully",
+        },
+        inProgress: {
+          linkingTitle: "Connecting your",
+          linkingSubtitle: "account",
+          transferTitle: "Transferring funds",
+          subtitle: "Please wait",
+        },
+      },
+      success: {
+        // Used for transfer success in valid flows
+        title: "Transfer Successful", 
+        subtitle: "Your funds have been transferred successfully",
+      },
+      wallet: {
+        title: "Wallet",
+        subtitle: "Manage your funds",
+        totalBalance: "Total balance",
+        depositFunds: "Deposit funds",
+        bankConnected: "Bank connected",
+      },
+      deposit: {
+        title: "Deposit funds",
+        subtitle: "Select an account and enter an amount",
+        selectAccount: "Select account",
+        amount: "Amount",
+        amountPlaceholder: "0.00",
+        slideToConfirm: "Slide to confirm",
+        confirming: "Confirming...",
+        accountNames: {
+          clabe: "CLABE account",
+          checking: "Checking account",
+        },
+      },
+    },
+    es: {
+      banks: {
+        title: "Vinculación de cuenta bancaria",
+        subtitle: "Vamos a vincular tu cuenta",
+        searchPlaceholder: "Buscar bancos...",
+        continue: "Continuar",
+      },
+      credentials: {
+        title: "Ingresa tus credenciales",
+        subtitle: "Por favor ingrese sus credenciales para conectar su cuenta bancaria",
+        usernameLabel: "Usuario",
+        usernamePlaceholder: "Ingrese su usuario",
+        passwordLabel: "Contraseña",
+        passwordPlaceholder: "Ingrese su contraseña",
+        submit: "Ingresar",
+      },
+      loading: {
+        complete: {
+          linkingTitle: "Vinculación Completa",
+          transferTitle: "Transferencia Completa",
+          linkingSubtitle: "La cuenta bancaria ha sido vinculada exitosamente",
+          transferSubtitle: "Los fondos han sido transferidos exitosamente",
+        },
+        inProgress: {
+          linkingTitle: "Conectando tu",
+          linkingSubtitle: "cuenta",
+          transferTitle: "Transfiriendo fondos",
+          subtitle: "Espera por favor",
+        },
+      },
+      success: {
+        title: "Transferencia Exitosa",
+        subtitle: "Tus fondos han sido transferidos exitosamente",
+      },
+      wallet: {
+        title: "Billetera",
+        subtitle: "Administra tus fondos",
+        totalBalance: "Balance total",
+        depositFunds: "Depositar fondos",
+        bankConnected: "Banco conectado",
+      },
+      deposit: {
+        title: "Depositar fondos",
+        subtitle: "Seleccione una cuenta e ingrese el monto",
+        selectAccount: "Seleccionar cuenta",
+        amount: "Monto",
+        amountPlaceholder: "0.00",
+        slideToConfirm: "Desliza para confirmar",
+        confirming: "Confirmando...",
+        accountNames: {
+          clabe: "Cuenta CLABE",
+          checking: "Chequera",
+        },
+      },
+    },
+  };
+
+  // Function to apply translations
+  function applyConnectTranslations(lang) {
+    const t = connectTranslations[lang.toLowerCase()] || connectTranslations.es;
+
+    // --- BANKS SCREEN ---
+    const bankTitle = document.querySelector('.bank-link-title');
+    if (bankTitle) bankTitle.textContent = t.banks.title;
+
+    const bankSubtitle = document.querySelector('.bank-link-subtitle');
+    if (bankSubtitle) bankSubtitle.textContent = t.banks.subtitle;
+
+    const bankSearch = document.getElementById('bank-search-input');
+    if (bankSearch) bankSearch.placeholder = t.banks.searchPlaceholder;
+
+    const continueBtn = document.querySelector('.continue-banks-label');
+    if (continueBtn) continueBtn.textContent = t.banks.continue;
+
+    // --- CREDENTIALS SCREEN ---
+    const credTitle = document.querySelector('.bank-auth-title');
+    if(credTitle) credTitle.textContent = t.credentials.title;
+
+    const credSubtitle = document.querySelector('.bank-auth-subtitle');
+    if(credSubtitle) credSubtitle.textContent = t.credentials.subtitle;
+    
+    const labels = document.querySelectorAll('#screen-credentials label');
+    if(labels.length >= 2) {
+      labels[0].textContent = t.credentials.usernameLabel;
+      labels[1].textContent = t.credentials.passwordLabel;
+    }
+    const userInput = document.getElementById('cred-username');
+    if(userInput) userInput.placeholder = t.credentials.usernamePlaceholder;
+    
+    const passInput = document.getElementById('cred-password');
+    if(passInput) passInput.placeholder = t.credentials.passwordPlaceholder;
+    
+    const loginBtnSpan = document.querySelector('#btn-submit-credentials span');
+    if(loginBtnSpan && loginBtnSpan.textContent !== "Loading...") { 
+        loginBtnSpan.textContent = t.credentials.submit;
+    }
+
+    // --- LOADING SCREEN ---
+    // Update the spans even if static to correct language
+    if(document.getElementById('loading-text-container') && typeof renderLoadingSpans === 'function') {
+        renderLoadingSpans();
+    }
+
+    // --- WALLET SCREEN ---
+    const walletTitle = document.querySelector('.wallet-title');
+    if(walletTitle) walletTitle.textContent = t.wallet.title;
+    
+    const walletSubtitle = document.querySelector('.wallet-subtitle');
+    if(walletSubtitle) walletSubtitle.textContent = t.wallet.subtitle;
+    
+    const balanceLabel = document.querySelector('.wallet-balance-label');
+    if(balanceLabel) balanceLabel.textContent = t.wallet.totalBalance;
+    
+    const depositBtnTitle = document.querySelector('#btn-go-deposit span.font-bold');
+    if(depositBtnTitle) depositBtnTitle.textContent = t.wallet.depositFunds;
+    
+    const bankConnectedSubtitle = document.querySelector('.wallet-bank-subtitle');
+    if(bankConnectedSubtitle) bankConnectedSubtitle.textContent = t.wallet.bankConnected;
+
+    // --- DEPOSIT SCREEN ---
+    const depositTitle = document.querySelector('.deposit-title');
+    if(depositTitle) depositTitle.textContent = t.deposit.title;
+    
+    const depositSubtitle = document.querySelector('.deposit-subtitle');
+    if(depositSubtitle) depositSubtitle.textContent = t.deposit.subtitle;
+    
+    const selectAccountLabel = document.querySelector('.deposit-section-label');
+    if(selectAccountLabel) selectAccountLabel.textContent = t.deposit.selectAccount;
+    
+    const amountLabel = document.querySelector('.deposit-amount-label');
+    if(amountLabel) amountLabel.textContent = t.deposit.amount;
+
+    const slideText = document.querySelector('.deposit-slide-text');
+    if(slideText) slideText.textContent = t.deposit.slideToConfirm;
+    
+    if(window.renderDepositAccounts) {
+       window.renderDepositAccounts();
+    }
+
+    // --- TRANSFER LOADING SCREEN ---
+    const transferTitle = document.querySelector('#screen-transfer-loading .transfer-title');
+    if(transferTitle) transferTitle.textContent = t.loading.inProgress.transferTitle;
+    
+    const transferTitleOverlay = document.querySelector('#transfer-loading-overlay .transfer-title');
+    if(transferTitleOverlay) transferTitleOverlay.textContent = t.loading.inProgress.transferTitle;
+
+    const transferSubtitle = document.querySelector('#screen-transfer-loading .transfer-subtitle');
+    if(transferSubtitle) transferSubtitle.textContent = t.loading.inProgress.subtitle;
+    
+    const transferSubtitleOverlay = document.querySelector('#transfer-loading-overlay .transfer-subtitle');
+    if(transferSubtitleOverlay) transferSubtitleOverlay.textContent = t.loading.inProgress.subtitle;
+
+    // --- SUCCESS SCREEN (TRANSFER) ---
+    const successTitle = document.querySelector('.success-title');
+    if(successTitle) successTitle.textContent = t.success.title;
+    
+    const successSubtitle = document.querySelector('.success-subtitle');
+    if(successSubtitle) successSubtitle.textContent = t.success.subtitle;
+  }
+
+  // Initial Language Detection
+  function getStoredLanguage() {
+    if (typeof localStorage !== 'undefined') {
+      const stored = localStorage.getItem('ui-language');
+      if (stored === 'EN' || stored === 'ES') return stored;
+    }
+    // Fallback to browser
+    const browserLang = typeof navigator !== 'undefined' && navigator.language.startsWith('es') ? 'ES' : 'EN';
+    return browserLang;
+  }
+
   // State for Bank Stack
   let activeBankIndex = 3; // Default HSBC
   const bankData = [
@@ -893,7 +1131,6 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
         btnContinue.removeAttribute("disabled");
         btnContinue.style.background =
           "linear-gradient(to right, #000b1e, #044a95, #000b1e)";
-        // Add animations classes if needed
       } else {
         btnContinue.setAttribute("disabled", "true");
         btnContinue.style.background = "#9BA2AF";
@@ -915,30 +1152,36 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
 
   // --- DEPOSIT SCREEN LOGIC ---
   let selectedDepositAccountIndex = 0;
-  const depositAccounts = [
+  
+  // Storing translation keys
+  const depositAccountsData = [
     {
-      name: "Cuenta CLABE",
+      typeKey: "clabe", 
       number: "012345678901234567",
       balance: "$12,345.67",
       currency: "MXN",
     },
     {
-      name: "Chequera",
+      typeKey: "checking",
       number: "**** **** **** 1234",
       balance: "$45,678.90",
       currency: "MXN",
     },
   ];
 
-  function renderDepositAccounts() {
+  window.renderDepositAccounts = () => {
     const container = document.getElementById("accounts-list-container");
     if (!container) return;
 
-    container.innerHTML = depositAccounts
+    const currentLang = getStoredLanguage();
+    const t = connectTranslations[currentLang.toLowerCase()] || connectTranslations.es;
+
+    container.innerHTML = depositAccountsData
       .map((acc, index) => {
         const isActive = index === selectedDepositAccountIndex;
+        // Translate name
+        const accountName = t.deposit.accountNames[acc.typeKey] || acc.typeKey;
 
-        // Active: gradient classes. Inactive: light gray.
         let cardClass = isActive
           ? "relative w-full rounded-2xl p-4 text-white flex justify-between items-center shadow-lg active-deposit-card transition-all duration-300 transform scale-[1.02]"
           : "relative w-full bg-[#f1f5f9] rounded-2xl p-4 text-[#000b1e] flex justify-between items-center opacity-70 hover:opacity-100 transition-all duration-300 cursor-pointer border border-transparent hover:border-slate-200";
@@ -973,7 +1216,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
             >
                 ${indicator}
                 <div class="${isActive ? "pl-2" : ""}">
-                  <p class="${textColors.name}">${acc.name}</p>
+                  <p class="${textColors.name}">${accountName}</p>
                   <p class="${textColors.number}">${acc.number}</p>
                 </div>
                 <div class="text-right">
@@ -988,15 +1231,24 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
 
   window.selectDepositAccount = (index) => {
     selectedDepositAccountIndex = index;
-    renderDepositAccounts();
+    window.renderDepositAccounts();
   };
 
   // Init
   setTimeout(() => {
+    const initialLang = getStoredLanguage();
+    applyConnectTranslations(initialLang);
+
     updateBankStackVisuals();
-    renderDepositAccounts();
+    window.renderDepositAccounts();
     initBankSearch();
-  }, 100); // Small delay to ensure DOM is ready in Astro island architecture if any
+  }, 100);
+
+  // LANGUAGE LISTENER
+  window.addEventListener("ui:languagechange", (event) => {
+      const lang = event.detail?.language || "ES";
+      applyConnectTranslations(lang);
+  }, true);
 
   // Bank Search Functionality
   function initBankSearch() {
@@ -1030,16 +1282,13 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
       }
     });
 
-    // If we're filtering and there are visible banks, auto-select the first one
     if (normalizedSearch !== "" && firstVisibleIndex !== null) {
       activeBankIndex = firstVisibleIndex;
       updateBankStackVisuals();
     } else if (normalizedSearch === "") {
-      // Reset to default when search is cleared
-      activeBankIndex = 3; // Default HSBC
+      activeBankIndex = 3; 
       updateBankStackVisuals();
     } else if (visibleCount === 0) {
-      // No banks match - disable continue button
       activeBankIndex = null;
       updateBankStackVisuals();
     }
@@ -1066,9 +1315,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
     const backBtn = document.getElementById("btn-back");
     if (screenId === "banks") {
       backBtn.style.opacity = "1";
-      backBtn.onclick = () => {
-        /* Exit */
-      };
+      backBtn.onclick = () => { /* Exit */ };
     } else if (screenId === "credentials") {
       backBtn.onclick = () => window.connectNavigate("banks");
     } else if (screenId === "wallet") {
@@ -1078,7 +1325,59 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
     }
   };
 
-  // Login Flow
+  // Animation State
+  let loadingAnimationId = null;
+  let currentLoadingProgress = 0;
+
+  // Render Text Spans for Animation
+  function renderLoadingSpans() {
+    const lang = getStoredLanguage();
+    const t = connectTranslations[lang.toLowerCase()] || connectTranslations.es;
+    
+    // We assume the titles might contain \n for splitting
+    const titleText = t.loading.inProgress.linkingTitle; 
+    const linkingSubtitleText = t.loading.inProgress.linkingSubtitle || "";
+    const subtitleText = t.loading.inProgress.subtitle;
+
+    // Calculate total length for sequential animation
+    const totalChars = titleText.replace(/\n/g, '').length + linkingSubtitleText.replace(/\n/g, '').length;
+    let globalIndex = 0;
+    
+    // Animate Title
+    globalIndex = updateSpansMultiline("loading-text-container", titleText, currentLoadingProgress, "text-white", "text-white/40", globalIndex, totalChars);
+    
+    // Animate Linking Subtitle
+    globalIndex = updateSpansMultiline("loading-linking-subtitle-container", linkingSubtitleText, currentLoadingProgress, "text-white", "text-white/40", globalIndex, totalChars);
+    
+    // Subtitle (Please Wait) - separate animation logic (local progress)
+    updateSpansMultiline("loading-subtext-container", subtitleText, currentLoadingProgress, "text-white", "text-white/40", 0, subtitleText.length);
+  }
+
+  function updateSpansMultiline(elementId, text, progress, activeClass, inactiveClass, startIndex, totalChars) {
+    const el = document.getElementById(elementId);
+    if (!el) return startIndex;
+
+    const lines = text.split('\n');
+    let currentIndex = startIndex;
+
+    const html = lines.map(line => {
+      const lineHtml = line.split('').map((char) => {
+          // Calculate progress based on GLOBAL total length of title + subtitle
+          const charProgress = (currentIndex / totalChars) * 100;
+          const isActive = progress >= charProgress;
+          const colorClass = isActive ? activeClass : inactiveClass;
+          currentIndex++;
+          return `<span class="${colorClass}">${char === ' ' ? '&nbsp;' : char}</span>`;
+      }).join('');
+      
+      return `<div class="flex justify-center">${lineHtml}</div>`;
+    }).join('');
+
+    el.innerHTML = html;
+    return currentIndex;
+  }
+
+  // Login Flow with JS Animation
   window.connectLogin = () => {
     const btn = document.getElementById("btn-submit-credentials");
     const originalText = btn.innerHTML;
@@ -1089,24 +1388,38 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
 
       const bar = document.getElementById("loading-bar");
       if (bar) {
-        bar.style.width = "0%";
-        bar.style.transition = "none";
-        void bar.offsetHeight;
-
-        bar.style.transition = "width 3s ease-out";
-        bar.style.width = "100%";
-
-        setTimeout(() => {
-          // Instead of going straight to wallet, maybe show success linking?
-          // Re-reading user request: "realices la pantalla de carga de la segunda imagen... successful linking"
-          // The image 3 says "Successful Linking". Login flow -> Successful Linking -> Wallet is logical.
-          // Let's verify if user meant Transfer or Login.
-          // User said: "despues de Slide to Confirm realices la pantalla de carga... mira como esta en la segunda y tercera imagen"
-          // So the SLIDER triggers the Transferring (Image 2) and Successful (Image 3).
-          // Login flow stays as before (Loading -> Wallet).
-          window.connectNavigate("wallet");
-          btn.innerHTML = originalText;
-        }, 3000);
+        // Reset
+        bar.style.transition = 'none';
+        bar.style.width = '0%';
+        currentLoadingProgress = 0;
+        
+        // Start JS Animation Loop
+        const duration = 3000;
+        const startTime = performance.now();
+        
+        function animate(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            currentLoadingProgress = progress * 100;
+            
+            // Update Bar
+            bar.style.width = `${currentLoadingProgress}%`;
+            
+            // Update Text Color
+            renderLoadingSpans();
+            
+            if (progress < 1) {
+                loadingAnimationId = requestAnimationFrame(animate);
+            } else {
+                // Done
+                setTimeout(() => {
+                    window.connectNavigate("wallet");
+                    btn.innerHTML = originalText;
+                }, 500); // Small delay after 100%
+            }
+        }
+        
+        loadingAnimationId = requestAnimationFrame(animate);
       }
     }, 500);
   };
@@ -1135,13 +1448,10 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
       if (newLeft >= trackRect.width - 60) {
         isDragging = false;
 
-        // Success Action -> Transfer Loading
         window.connectNavigate("transfer-loading");
 
-        // Reset slider visually
         slider.style.left = "4px";
 
-        // Start bar animation
         setTimeout(() => {
           const tBar = document.getElementById("transfer-loading-bar");
           if (tBar) {
@@ -1152,11 +1462,25 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
             tBar.style.width = "100%";
           }
 
-          // After loading -> Success Screen
+          const overlay = document.getElementById("transfer-loading-overlay");
+          const flush = document.getElementById("transfer-flush-effect");
+          if (overlay) {
+            overlay.style.transition = "none";
+            overlay.style.clipPath = "inset(0 100% 0 0)";
+            void overlay.offsetHeight;
+            overlay.style.transition = "clip-path 3s linear";
+            overlay.style.clipPath = "inset(0 0 0 0)";
+          }
+          if (flush) {
+             flush.style.transition = "none";
+             flush.style.left = "0%";
+             void flush.offsetHeight;
+             flush.style.transition = "left 3s linear";
+             flush.style.left = "100%";
+          }
+
           setTimeout(() => {
             window.connectNavigate("success");
-
-            // After Success -> Wallet
             setTimeout(() => {
               window.connectNavigate("wallet");
             }, 2500);
@@ -1175,7 +1499,6 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
       }
     });
 
-    // Touch events for mobile support
     slider.addEventListener(
       "touchstart",
       (e) => {
@@ -1209,14 +1532,6 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
               overlay.style.clipPath = "inset(0 100% 0 0)";
               void overlay.offsetHeight;
               overlay.style.transition = "clip-path 3s linear";
-              overlay.style.clipPath = "inset(0 0 0 0)";
-            }
-            if (flush) {
-              flush.style.transition = "none";
-              flush.style.left = "0%";
-              void flush.offsetHeight;
-              flush.style.transition = "left 3s linear";
-              flush.style.leftansition = "clip-path 3s linear";
               overlay.style.clipPath = "inset(0 0 0 0)";
             }
             if (flush) {

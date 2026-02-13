@@ -4490,10 +4490,12 @@ import Footer from "../components/design-system/organisms/Footer.astro";
       });
 
       document.addEventListener("DOMContentLoaded", () => {
-        const stored = localStorage.getItem("ui-language");
-        const initialLang =
-          window.__uiLanguage || stored || detectBrowserLanguage();
-        updateConnectContent(initialLang);
+        // Wait a bit for navbar to initialize, then read its language
+        setTimeout(() => {
+          const navbarLangButton = document.querySelector(".simple-navbar__lang");
+          const initialLang = navbarLangButton?.dataset?.lang || "ES";
+          updateConnectContent(initialLang);
+        }, 100);
 
         // Control feature cards: flip on plus button, close on close button
         document.querySelectorAll(".control-feature-btn").forEach((btn) => {
