@@ -163,7 +163,7 @@ export function DiscountsPreviewPanel({
   const AnimatedGraphic = () => (
     <div className="relative w-48 h-48 flex items-center justify-center mb-0 shrink-0 z-10">
       <img
-        src="/gift/ANIMACION 1.gif"
+        src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
         alt={t.preview.map.heroAlt}
         className="w-full h-full object-contain opacity-80"
       />

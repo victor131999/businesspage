@@ -400,7 +400,7 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
       {currentScreen === "amount" && (
         <div className="px-6 pt-2">
           <img
-            src="/gift/ANIMACION 1.gif"
+            src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
             alt="Animación"
             className="w-full h-auto max-w-full object-contain"
           />
@@ -411,7 +411,7 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
       {currentScreen === "currency-selector" && (
         <div className="  pt-2 absolute inset-0 z-0">
           <img
-            src="/gift/ANIMACION 1.gif"
+            src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
             alt="Animación"
             className="w-full h-auto max-w-full object-contain"
           />
@@ -422,7 +422,7 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
       {currentScreen === "summary" && (
         <div className="px-6 pt-2 absolute inset-0 z-0">
           <img
-            src="/gift/ANIMACION 1.gif"
+            src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
             alt="Animación"
             className="w-full h-auto max-w-full object-contain"
           />
@@ -635,7 +635,7 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
       {(currentScreen === "processing" || currentScreen === "success") && (
         <div className="px-6 pt-2 absolute inset-0 z-0">
           <img
-            src="/gift/ANIMACION 1.gif"
+            src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
             alt="Animación"
             className="w-full h-auto max-w-full object-contain"
           />
