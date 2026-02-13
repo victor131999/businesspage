@@ -50,7 +50,7 @@ const customColor = "#004492";
         class="relative z-10 w-full h-full px-6 flex flex-col text-white pt-14"
       >
         <h2
-          class="text-sm font-normal mb-8 text-center text-white shrink-0 tracking-wide"
+          class="discounts-step04-title text-sm font-normal mb-8 text-center text-white shrink-0 tracking-wide"
         >
           Confirmar Detalles
         </h2>
@@ -60,7 +60,7 @@ const customColor = "#004492";
           style="scrollbar-width: none; -ms-overflow-style: none;"
         >
           <div class="mb-6">
-            <label class="text-white/70 text-xs block mb-1"> Teléfono </label>
+            <label class="discounts-step04-phone-label text-white/70 text-xs block mb-1"> Teléfono </label>
             <div
               class="w-full bg-transparent border-b border-white/20 py-2 flex justify-between items-center cursor-pointer"
             >
@@ -86,10 +86,10 @@ const customColor = "#004492";
               </svg>
             </div>
             <div>
-              <p class="font-medium text-sm text-white leading-tight">
+              <p class="discounts-step04-office-name font-medium text-sm text-white leading-tight">
                 Oficina Matriz
               </p>
-              <p class="text-[10px] text-white/60 mt-0.5">
+              <p class="discounts-step04-office-address text-[10px] text-white/60 mt-0.5">
                 Av. De Los Shyris 1154, Quito
               </p>
             </div>
@@ -97,28 +97,28 @@ const customColor = "#004492";
 
           <div class="grid grid-cols-2 gap-4 mb-5">
             <div>
-              <label class="text-white/70 text-xs block mb-2"> Edificio </label>
+              <label class="discounts-step04-building-label text-white/70 text-xs block mb-2"> Edificio </label>
               <input
                 type="text"
                 placeholder="Nombre"
-                class="w-full bg-black/20 rounded-lg p-3 text-xs placeholder:text-white/30 text-white focus:ring-0 transition-colors outline-none backdrop-blur-sm h-10"
+                class="discounts-step04-building-placeholder w-full bg-black/20 rounded-lg p-3 text-xs placeholder:text-white/30 text-white focus:ring-0 transition-colors outline-none backdrop-blur-sm h-10"
               />
             </div>
             <div>
-              <label class="text-white/70 text-xs block mb-2"> Piso </label>
+              <label class="discounts-step04-floor-label text-white/70 text-xs block mb-2"> Piso </label>
               <input
                 type="text"
                 placeholder="Número"
-                class="w-full bg-black/20 rounded-lg p-3 text-xs placeholder:text-white/30 text-white focus:ring-0 transition-colors outline-none backdrop-blur-sm h-10"
+                class="discounts-step04-floor-placeholder w-full bg-black/20 rounded-lg p-3 text-xs placeholder:text-white/30 text-white focus:ring-0 transition-colors outline-none backdrop-blur-sm h-10"
               />
             </div>
           </div>
 
           <div class="mb-4">
-            <label class="text-white/70 text-xs block mb-2"> Referencia </label>
+            <label class="discounts-step04-reference-label text-white/70 text-xs block mb-2"> Referencia </label>
             <textarea
               placeholder="Cerca del parque..."
-              class="w-full bg-black/20 rounded-lg p-3 text-xs placeholder:text-white/30 text-white resize-none focus:ring-0 transition-colors outline-none backdrop-blur-sm h-32"
+              class="discounts-step04-reference-placeholder w-full bg-black/20 rounded-lg p-3 text-xs placeholder:text-white/30 text-white resize-none focus:ring-0 transition-colors outline-none backdrop-blur-sm h-32"
             ></textarea>
           </div>
         </div>
@@ -128,7 +128,7 @@ const customColor = "#004492";
             class="w-full bg-white text-[#003366] rounded-xl py-3.5 font-bold text-sm shadow-lg hover:bg-gray-50 transition-colors step-next-btn"
             data-next="5"
           >
-            Continuar
+            <span class="discounts-continue-label">Continuar</span>
           </button>
         </div>
       </div>

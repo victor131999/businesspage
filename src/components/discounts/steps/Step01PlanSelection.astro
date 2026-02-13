@@ -48,10 +48,10 @@ const customColor = "#004492";
     <div
       class="absolute top-[135px] z-50 flex flex-col items-center justify-center w-full pointer-events-none"
     >
-      <h2 class="text-2xl font-bold" style={`color: ${customColor}`}>
+      <h2 class="discounts-step01-title text-2xl font-bold" style={`color: ${customColor}`}>
         Selecciona tu plan
       </h2>
-      <p class="text-gray-500 font-medium tracking-wide text-xs">
+      <p class="discounts-step01-subtitle text-gray-500 font-medium tracking-wide text-xs">
         Elige el mejor plan para ti
       </p>
     </div>
@@ -89,15 +89,15 @@ const customColor = "#004492";
           <div
             class="expanded-content w-full flex flex-col items-center transition-opacity duration-300 px-4 opacity-100 delay-150"
           >
-            <h3 class="text-xs text-white mb-0">{plans[0].title}</h3>
+            <h3 class="discounts-plan-basic-title text-xs text-white mb-0">{plans[0].title}</h3>
             <div class="flex items-center justify-center gap-1 mb-5">
-              <span class="text-xl text-white">{plans[0].price}</span>
-              <span class="text-xs text-white/70">/mes</span>
+              <span class="discounts-plan-basic-price text-xl text-white">{plans[0].price}</span>
+              <span class="discounts-plan-permonth text-xs text-white/70">/mes</span>
             </div>
             <div class="space-y-1.5 text-center w-full">
               {
-                plans[0].features.map((feature) => (
-                  <p class="text-[9px] text-white/70 leading-tight">
+                plans[0].features.map((feature, i) => (
+                  <p class="discounts-plan-basic-feature text-[9px] text-white/70 leading-tight" data-index={i}>
                     {feature}
                   </p>
                 ))
@@ -108,7 +108,7 @@ const customColor = "#004492";
           <div
             class="collapsed-content absolute inset-0 flex items-center justify-center transition-opacity duration-300 opacity-0 pointer-events-none"
           >
-            <span class="text-white text-base tracking-wide mb-3"
+            <span class="discounts-plan-basic-title text-white text-base tracking-wide mb-3"
               >{plans[0].title}</span
             >
           </div>
@@ -124,15 +124,15 @@ const customColor = "#004492";
           <div
             class="expanded-content w-full flex flex-col items-center transition-opacity duration-300 px-4 opacity-0 absolute pointer-events-none"
           >
-            <h3 class="text-xs text-white mb-0">{plans[1].title}</h3>
+            <h3 class="discounts-plan-premium-title text-xs text-white mb-0">{plans[1].title}</h3>
             <div class="flex items-center justify-center gap-1 mb-5">
-              <span class="text-xl text-white">{plans[1].price}</span>
-              <span class="text-xs text-white/70">/mes</span>
+              <span class="discounts-plan-premium-price text-xl text-white">{plans[1].price}</span>
+              <span class="discounts-plan-permonth text-xs text-white/70">/mes</span>
             </div>
             <div class="space-y-1.5 text-center w-full">
               {
-                plans[1].features.map((feature) => (
-                  <p class="text-[9px] text-white/70 leading-tight">
+                plans[1].features.map((feature, i) => (
+                  <p class="discounts-plan-premium-feature text-[9px] text-white/70 leading-tight" data-index={i}>
                     {feature}
                   </p>
                 ))
@@ -143,7 +143,7 @@ const customColor = "#004492";
           <div
             class="collapsed-content absolute inset-0 flex items-center justify-center transition-opacity duration-300 opacity-100 delay-150"
           >
-            <span class="text-white text-base tracking-wide mt-6"
+            <span class="discounts-plan-premium-title text-white text-base tracking-wide mt-6"
               >{plans[1].title}</span
             >
           </div>

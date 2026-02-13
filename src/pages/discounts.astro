@@ -2942,7 +2942,7 @@ import "../components/design-system/tokens.css";
 	        promoSubtitle: "Nuestras promociones personalizadas para ti",
 	        promoBrand: "Go Green",
 	        promoOffer: "2x1 en Veggie Bowls",
-	        configureTitleLight: "Configura tu",
+	        configureTitleLight: "Configura tu ",
 	        configureTitleBold: "Promoción",
 	        configureSubtitle: "Define la duración de tu promoción",
 	        startDateLabel: "Fecha de Inicio",
@@ -2954,6 +2954,44 @@ import "../components/design-system/tokens.css";
 	        successTitle: "Tu Promoción está activa",
 	        successSubtitle: "Revisa tus promociones en tu panel",
 	        reset: "Volver al Inicio",
+	        step01Title: "Selecciona tu plan",
+	        step01Subtitle: "Elige el mejor plan para ti",
+	        planBasicTitle: "Básico",
+	        planBasicPrice: "$0",
+	        planPremiumTitle: "Premium",
+	        planPremiumPrice: "$29",
+	        perMonth: "/mes",
+	        planBasicFeatures: ["Acceso Básico", "Promoción Limitada", "Soporte Estándar", "Acceso a la comunidad"],
+	        planPremiumFeatures: ["Acceso Ilimitado", "Promociones Ilimitadas", "Soporte Prioritario", "Analíticas"],
+	        step02Title: "Información Básica",
+	        step02Subtitle: "Cuéntanos sobre tu negocio",
+	        step02BusinessNameLabel: "Nombre del Negocio",
+	        step02BusinessNamePlaceholder: "ej. Mi Gran Negocio",
+	        step02RucLabel: "RUC o ID",
+	        step02RucPlaceholder: "ej. 123-456-789",
+	        step03SearchPlaceholder: "Buscar dirección del negocio...",
+	        step04Title: "Confirmar Detalles",
+	        step04PhoneLabel: "Teléfono",
+	        step04OfficeName: "Oficina Matriz",
+	        step04OfficeAddress: "Av. De Los Shyris 1154, Quito",
+	        step04BuildingLabel: "Edificio",
+	        step04BuildingPlaceholder: "Nombre",
+	        step04FloorLabel: "Piso",
+	        step04FloorPlaceholder: "Número",
+	        step04ReferenceLabel: "Referencia",
+	        step04ReferencePlaceholder: "Cerca del parque...",
+	        step05Title: "Descripción",
+	        step05Subtitle: "Describe tu negocio en pocas palabras",
+	        step05DescriptionLabel: "Descripción del Negocio",
+	        step05DescriptionPlaceholder: "Ingresa la descripción aquí...",
+	        step05CharCount: "0/180",
+	        step06Subtitle: "Detectamos la categoría de tu negocio",
+	        step06CategoryName: "Restaurante",
+	        step07Title: "Crear Promoción",
+	        step07Subtitle: "Define los detalles de tu promoción",
+	        step07ProductNameLabel: "Nombre del Producto",
+	        step07PriceLabel: "Precio",
+	        step07CustomerProfileLabel: "Perfil del Cliente",
 	      },
 	      security: {
 	        title: "Registro de comercios<br />y gestión operativa",
@@ -3119,7 +3157,7 @@ import "../components/design-system/tokens.css";
 	        promoSubtitle: "Our personalized promos for you",
 	        promoBrand: "Go Green",
 	        promoOffer: "2x1 Veggie Bowls",
-	        configureTitleLight: "Set up your",
+	        configureTitleLight: "Set up your ",
 	        configureTitleBold: "Promo",
 	        configureSubtitle: "Define your promo duration",
 	        startDateLabel: "Start date",
@@ -3131,6 +3169,44 @@ import "../components/design-system/tokens.css";
 	        successTitle: "Your promo is live",
 	        successSubtitle: "Review your promos in your dashboard",
 	        reset: "Back to start",
+	        step01Title: "Select your plan",
+	        step01Subtitle: "Choose the best plan for you",
+	        planBasicTitle: "Basic",
+	        planBasicPrice: "$0",
+	        planPremiumTitle: "Premium",
+	        planPremiumPrice: "$29",
+	        perMonth: "/mo",
+	        planBasicFeatures: ["Basic access", "Limited promotions", "Standard support", "Community access"],
+	        planPremiumFeatures: ["Unlimited access", "Unlimited promotions", "Priority support", "Analytics"],
+	        step02Title: "Basic Information",
+	        step02Subtitle: "Tell us about your business",
+	        step02BusinessNameLabel: "Business Name",
+	        step02BusinessNamePlaceholder: "e.g. My Great Business",
+	        step02RucLabel: "RUC or ID",
+	        step02RucPlaceholder: "e.g. 123-456-789",
+	        step03SearchPlaceholder: "Search business address...",
+	        step04Title: "Confirm Details",
+	        step04PhoneLabel: "Phone",
+	        step04OfficeName: "Head Office",
+	        step04OfficeAddress: "Av. De Los Shyris 1154, Quito",
+	        step04BuildingLabel: "Building",
+	        step04BuildingPlaceholder: "Name",
+	        step04FloorLabel: "Floor",
+	        step04FloorPlaceholder: "Number",
+	        step04ReferenceLabel: "Reference",
+	        step04ReferencePlaceholder: "Near the park...",
+	        step05Title: "Description",
+	        step05Subtitle: "Describe your business in a few words",
+	        step05DescriptionLabel: "Business Description",
+	        step05DescriptionPlaceholder: "Enter the description here...",
+	        step05CharCount: "0/180",
+	        step06Subtitle: "We detected your business category",
+	        step06CategoryName: "Restaurant",
+	        step07Title: "Create Promotion",
+	        step07Subtitle: "Define your promotion details",
+	        step07ProductNameLabel: "Product Name",
+	        step07PriceLabel: "Price",
+	        step07CustomerProfileLabel: "Customer Profile",
 	      },
 	      security: {
 	        title: "Merchant registration<br />and operational management",
@@ -3387,6 +3463,88 @@ import "../components/design-system/tokens.css";
 	    document.querySelectorAll(".discounts-hour-label").forEach((el) => {
 	      el.textContent = t.device.hour;
 	    });
+
+	    const step01Title = document.querySelector(".discounts-step01-title");
+	    if (step01Title) step01Title.textContent = t.device.step01Title;
+	    const step01Subtitle = document.querySelector(".discounts-step01-subtitle");
+	    if (step01Subtitle) step01Subtitle.textContent = t.device.step01Subtitle;
+	    const planBasicTitle = document.querySelectorAll(".discounts-plan-basic-title");
+	    planBasicTitle.forEach((el) => { el.textContent = t.device.planBasicTitle; });
+	    const planBasicPrice = document.querySelector(".discounts-plan-basic-price");
+	    if (planBasicPrice) planBasicPrice.textContent = t.device.planBasicPrice;
+	    const planPremiumTitle = document.querySelectorAll(".discounts-plan-premium-title");
+	    planPremiumTitle.forEach((el) => { el.textContent = t.device.planPremiumTitle; });
+	    const planPremiumPrice = document.querySelector(".discounts-plan-premium-price");
+	    if (planPremiumPrice) planPremiumPrice.textContent = t.device.planPremiumPrice;
+	    document.querySelectorAll(".discounts-plan-permonth").forEach((el) => { el.textContent = t.device.perMonth; });
+	    const planBasicFeatures = document.querySelectorAll(".discounts-plan-basic-feature");
+	    (t.device.planBasicFeatures || []).forEach((val, i) => { if (planBasicFeatures[i]) planBasicFeatures[i].textContent = val; });
+	    const planPremiumFeatures = document.querySelectorAll(".discounts-plan-premium-feature");
+	    (t.device.planPremiumFeatures || []).forEach((val, i) => { if (planPremiumFeatures[i]) planPremiumFeatures[i].textContent = val; });
+
+	    const step02Title = document.querySelector(".discounts-step02-title");
+	    if (step02Title) step02Title.textContent = t.device.step02Title;
+	    const step02Subtitle = document.querySelector(".discounts-step02-subtitle");
+	    if (step02Subtitle) step02Subtitle.textContent = t.device.step02Subtitle;
+	    const step02BusinessNameLabel = document.querySelector(".discounts-step02-business-name-label");
+	    if (step02BusinessNameLabel) step02BusinessNameLabel.textContent = t.device.step02BusinessNameLabel;
+	    const step02BusinessNamePh = document.querySelector(".discounts-step02-business-name-placeholder");
+	    if (step02BusinessNamePh && step02BusinessNamePh instanceof HTMLInputElement) step02BusinessNamePh.placeholder = t.device.step02BusinessNamePlaceholder;
+	    const step02RucLabel = document.querySelector(".discounts-step02-ruc-label");
+	    if (step02RucLabel) step02RucLabel.textContent = t.device.step02RucLabel;
+	    const step02RucPh = document.querySelector(".discounts-step02-ruc-placeholder");
+	    if (step02RucPh && step02RucPh instanceof HTMLInputElement) step02RucPh.placeholder = t.device.step02RucPlaceholder;
+
+	    const step03SearchPh = document.querySelector(".discounts-step03-search-placeholder");
+	    if (step03SearchPh) step03SearchPh.textContent = t.device.step03SearchPlaceholder;
+
+	    const step04Title = document.querySelector(".discounts-step04-title");
+	    if (step04Title) step04Title.textContent = t.device.step04Title;
+	    const step04PhoneLabel = document.querySelector(".discounts-step04-phone-label");
+	    if (step04PhoneLabel) step04PhoneLabel.textContent = t.device.step04PhoneLabel;
+	    const step04OfficeName = document.querySelector(".discounts-step04-office-name");
+	    if (step04OfficeName) step04OfficeName.textContent = t.device.step04OfficeName;
+	    const step04OfficeAddress = document.querySelector(".discounts-step04-office-address");
+	    if (step04OfficeAddress) step04OfficeAddress.textContent = t.device.step04OfficeAddress;
+	    const step04BuildingLabel = document.querySelector(".discounts-step04-building-label");
+	    if (step04BuildingLabel) step04BuildingLabel.textContent = t.device.step04BuildingLabel;
+	    const step04BuildingPh = document.querySelector(".discounts-step04-building-placeholder");
+	    if (step04BuildingPh && step04BuildingPh instanceof HTMLInputElement) step04BuildingPh.placeholder = t.device.step04BuildingPlaceholder;
+	    const step04FloorLabel = document.querySelector(".discounts-step04-floor-label");
+	    if (step04FloorLabel) step04FloorLabel.textContent = t.device.step04FloorLabel;
+	    const step04FloorPh = document.querySelector(".discounts-step04-floor-placeholder");
+	    if (step04FloorPh && step04FloorPh instanceof HTMLInputElement) step04FloorPh.placeholder = t.device.step04FloorPlaceholder;
+	    const step04RefLabel = document.querySelector(".discounts-step04-reference-label");
+	    if (step04RefLabel) step04RefLabel.textContent = t.device.step04ReferenceLabel;
+	    const step04RefPh = document.querySelector(".discounts-step04-reference-placeholder");
+	    if (step04RefPh && step04RefPh instanceof HTMLTextAreaElement) step04RefPh.placeholder = t.device.step04ReferencePlaceholder;
+
+	    const step05Title = document.querySelector(".discounts-step05-title");
+	    if (step05Title) step05Title.textContent = t.device.step05Title;
+	    const step05Subtitle = document.querySelector(".discounts-step05-subtitle");
+	    if (step05Subtitle) step05Subtitle.textContent = t.device.step05Subtitle;
+	    const step05DescLabel = document.querySelector(".discounts-step05-description-label");
+	    if (step05DescLabel) step05DescLabel.textContent = t.device.step05DescriptionLabel;
+	    const step05DescPh = document.querySelector(".discounts-step05-description-placeholder");
+	    if (step05DescPh && step05DescPh instanceof HTMLTextAreaElement) step05DescPh.placeholder = t.device.step05DescriptionPlaceholder;
+	    const step05CharCount = document.querySelector(".discounts-step05-char-count");
+	    if (step05CharCount) step05CharCount.textContent = t.device.step05CharCount;
+
+	    const step06Subtitle = document.querySelector(".discounts-step06-subtitle");
+	    if (step06Subtitle) step06Subtitle.textContent = t.device.step06Subtitle;
+	    const step06CategoryName = document.querySelector(".discounts-step06-category-name");
+	    if (step06CategoryName) step06CategoryName.textContent = t.device.step06CategoryName;
+
+	    const step07Title = document.querySelector(".discounts-step07-title");
+	    if (step07Title) step07Title.textContent = t.device.step07Title;
+	    const step07Subtitle = document.querySelector(".discounts-step07-subtitle");
+	    if (step07Subtitle) step07Subtitle.textContent = t.device.step07Subtitle;
+	    const step07ProductLabel = document.querySelector(".discounts-step07-product-label");
+	    if (step07ProductLabel) step07ProductLabel.textContent = t.device.step07ProductNameLabel;
+	    const step07PriceLabel = document.querySelector(".discounts-step07-price-label");
+	    if (step07PriceLabel) step07PriceLabel.textContent = t.device.step07PriceLabel;
+	    const step07ProfileLabel = document.querySelector(".discounts-step07-profile-label");
+	    if (step07ProfileLabel) step07ProfileLabel.textContent = t.device.step07CustomerProfileLabel;
 
 	    // Security section
 	    const securityTitle = document.querySelector(".security-title");
