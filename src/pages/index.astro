@@ -521,6 +521,20 @@ const modulesList = [
     if (pricingDesc) pricingDesc.textContent = content.pricing.description;
     if (pricingCta) pricingCta.textContent = content.pricing.cta;
 
+    // Video Why Zelify
+    const videoWhy = document.getElementById("why-zelify-video") as HTMLVideoElement;
+    if (videoWhy) {
+      const newSrc = videoWhy.getAttribute(`data-src-${lang}`);
+      if (newSrc) {
+        const source = videoWhy.querySelector("source");
+        if (source && source.getAttribute("src") !== newSrc) {
+          source.src = newSrc;
+          videoWhy.load();
+          videoWhy.play().catch((e) => console.log("Autoplay prevented", e));
+        }
+      }
+    }
+
     // Footer: se actualiza por data-i18n vía applyHomeTranslations
   }
 
@@ -737,12 +751,12 @@ const modulesList = [
       dataI18nCta="home.why.demo"
     >
       <div class="how-it-works-video-wrap">
-        <video
-          id="why-zelify-video"
-          muted
-          loop
-          autoplay
-          playsinline
+        <video 
+          id="why-zelify-video" 
+          muted 
+          loop 
+          autoplay 
+          playsinline 
           preload="metadata"
           data-src-es="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/AIPoweredServicesEs.mp4"
           data-src-en="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/AIPoweredServicesEn.mp4"
