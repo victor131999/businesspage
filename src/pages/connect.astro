@@ -49,7 +49,7 @@ import Footer from "../components/design-system/organisms/Footer.astro";
             buttonLabel="Let's talk"
           />
           <Button
-            href="https://www.zelify.com/clips"
+            href="https://demo.zelify.com"
             variant="secondary"
             class="welcome-demo-button"
             target="_blank"
@@ -3967,7 +3967,7 @@ import Footer from "../components/design-system/organisms/Footer.astro";
           },
           cta: {
             title: "Comienza a construir el banco del futuro, hoy.",
-            button: "cotizar",
+            button: "Hablemos",
           },
           faq: {
             title: "Preguntas frecuentes",
@@ -4063,19 +4063,19 @@ import Footer from "../components/design-system/organisms/Footer.astro";
             features: [
               {
                 title: "Bank account linking",
-                desc: "For Colombia and Mexico, it enables secure electronic fund transfers between banks, merchants, and digital accounts. In the United States, it connects accounts under an informational scheme without executing transfers.",
+                desc: "Allows users to link their bank accounts from other banks within the platform.",
               },
               {
                 title: "Account verification and ownership",
-                desc: "Verifies account number, issuing bank, and matching the account holder with registered identity.",
+                desc: "Verifies account number, issuing bank, balance, and other custom rules before a transfer.",
               },
               {
                 title: "Digital accounts",
-                desc: "Enables operational accounts with their own number after completing onboarding (AML + Auth + KYC) to receive, send, and manage funds in your wallet or app.",
+                desc: "Enables digital accounts through integration with your core to complete onboarding (AML + Auth + KYC) with our products.",
               },
               {
                 title: "CLABE account creation",
-                desc: "Generates CLABE accounts in Mexico to enable operational accounts and facilitate fund transfers within the local financial system.",
+                desc: "Generates CLABE accounts in Mexico to enable operational accounts and facilitate receiving and sending funds within the local financial system.",
               },
             ],
           },
@@ -4473,6 +4473,21 @@ import Footer from "../components/design-system/organisms/Footer.astro";
         const initialLang =
           window.__uiLanguage || stored || detectBrowserLanguage();
         updateConnectContent(initialLang);
+
+        // Control feature cards: flip on plus button, close on close button
+        document.querySelectorAll(".control-feature-btn").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const card = btn.closest(".control-feature-card");
+            if (card) {
+              if (btn.classList.contains("control-feature-btn-close")) {
+                card.classList.remove("flipped");
+              } else {
+                card.classList.toggle("flipped");
+              }
+            }
+          });
+        });
       });
     </script>
     <AlaizaAssistant client:load />
