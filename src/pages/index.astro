@@ -737,9 +737,18 @@ const modulesList = [
       dataI18nCta="home.why.demo"
     >
       <div class="how-it-works-video-wrap">
-        <video id="why-zelify-video" muted loop autoplay playsinline preload="metadata">
+        <video
+          id="why-zelify-video"
+          muted
+          loop
+          autoplay
+          playsinline
+          preload="metadata"
+          data-src-es="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/AIPoweredServicesEs.mp4"
+          data-src-en="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/AIPoweredServicesEn.mp4"
+        >
           <source
-            src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/AIPoweredProductsv2.mp4"
+            src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/AIPoweredServicesEs.mp4"
             type="video/mp4"
           />
         </video>
@@ -3352,21 +3361,25 @@ const modulesList = [
       }
     }
 
-    // Actualiza el src del video "How it works" según el idioma (navbar)
+    // Actualiza el src de los videos con data-src-es/data-src-en según el idioma (navbar)
+    function updateVideoSrcByLang(videoId, langKey) {
+      const video = document.getElementById(videoId);
+      if (!video) return;
+      const src = video.dataset.srcEn && video.dataset.srcEs
+        ? (langKey === "en" ? video.dataset.srcEn : video.dataset.srcEs)
+        : null;
+      if (src) {
+        const source = video.querySelector("source");
+        if (source && source.getAttribute("src") !== src) {
+          source.src = src;
+          video.load();
+        }
+      }
+    }
     function updateHowItWorksVideoSrc(langKey) {
       requestAnimationFrame(() => {
-        const video = document.getElementById("how-it-works-video");
-        if (!video) return;
-        const src = video.dataset.srcEn && video.dataset.srcEs
-          ? (langKey === "en" ? video.dataset.srcEn : video.dataset.srcEs)
-          : null;
-        if (src) {
-          const source = video.querySelector("source");
-          if (source && source.getAttribute("src") !== src) {
-            source.src = src;
-            video.load();
-          }
-        }
+        updateVideoSrcByLang("how-it-works-video", langKey);
+        updateVideoSrcByLang("why-zelify-video", langKey);
       });
     }
 
