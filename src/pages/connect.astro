@@ -276,7 +276,7 @@ import Footer from "../components/design-system/organisms/Footer.astro";
               <div class="control-feature-front">
                 <div class="control-feature-image">
                   <video
-                    src="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/image-products/connect/CONNECT+02.mp4"
+                    src="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/image-products/connect/CONNECT+03.mp4"
                     alt="Verificación de cuenta y titularidad"
                     autoplay
                     loop
@@ -344,7 +344,7 @@ import Footer from "../components/design-system/organisms/Footer.astro";
               <div class="control-feature-front">
                 <div class="control-feature-image">
                   <video
-                    src="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/image-products/connect/CONNECT+03.mp4"
+                    src="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/image-products/connect/CONNECT+02.mp4"
                     alt="Cuentas digitales"
                     autoplay
                     loop
@@ -3521,12 +3521,40 @@ import Footer from "../components/design-system/organisms/Footer.astro";
         animationFrameId = requestAnimationFrame(frame);
       }
 
+      function getCurrentLang() {
+        const stored =
+          typeof localStorage !== "undefined"
+            ? localStorage.getItem("ui-language")
+            : null;
+        if (stored === "EN" || stored === "ES") return stored;
+
+        const navbarLangButton = document.querySelector(
+          ".simple-navbar__lang",
+        );
+        const navbarLang = navbarLangButton?.dataset?.lang;
+        if (navbarLang === "EN" || navbarLang === "ES") return navbarLang;
+
+        if (typeof navigator !== "undefined") {
+          return navigator.language.toLowerCase().startsWith("es")
+            ? "ES"
+            : "EN";
+        }
+
+        return "ES";
+      }
+
+      function getDeviceTranslations() {
+        const lang = getCurrentLang();
+        return connectTranslations[lang.toLowerCase()] || connectTranslations.es;
+      }
+
       function startConnectFlow() {
+        const t = getDeviceTranslations();
         startLoadingFlow({
-          titleText: "Conectando tu cuenta",
-          subtitleText: "Espera por favor",
-          successTitle: "Vinculación Exitosa",
-          successSubtitle: "Tu cuenta bancaria ha sido vinculada exitosamente",
+          titleText: t.device.bankLinking.loadingTitle,
+          subtitleText: t.device.bankLinking.loadingSubtitle,
+          successTitle: t.device.bankLinking.successTitle,
+          successSubtitle: t.device.bankLinking.successSubtitle,
           onComplete: () => {
             const walletBankName = document.getElementById("wallet-bank-name");
             if (walletBankName) walletBankName.textContent = selectedBankName;
@@ -3697,13 +3725,14 @@ import Footer from "../components/design-system/organisms/Footer.astro";
         };
 
         const resetSlider = () => {
+          const t = getDeviceTranslations();
           slideTrack.classList.remove("success");
           slideThumb.style.transition = "transform 0.3s ease";
           slideFill.style.transition = "width 0.3s ease";
           slideThumb.style.transform = `translateX(0px)`;
           slideFill.style.width = `0px`;
           currentX = 0;
-          if (slideText) slideText.textContent = "Desliza para confirmar";
+          if (slideText) slideText.textContent = t.device.deposit.slideText;
         };
 
         const startDrag = (e) => {
@@ -3750,16 +3779,17 @@ import Footer from "../components/design-system/organisms/Footer.astro";
         };
 
         const completeSlide = () => {
+          const t = getDeviceTranslations();
           isDragging = false;
           slideTrack.classList.add("success");
-          if (slideText) slideText.textContent = "Confirmando...";
+          if (slideText) slideText.textContent = t.device.deposit.confirmText;
           // Simulate processing
           setTimeout(() => {
             startLoadingFlow({
-              titleText: "Transfiriendo fondos",
-              subtitleText: "Espera por favor",
-              successTitle: "Transferencia Exitosa",
-              successSubtitle: "Los fondos han sido acreditados",
+              titleText: t.device.deposit.transferTitle,
+              subtitleText: t.device.deposit.transferSubtitle,
+              successTitle: t.device.deposit.successTitle,
+              successSubtitle: t.device.deposit.successSubtitle,
               onComplete: () => {
                 showScreen("wallet");
                 updateBalance(walletBalance + 500); // Simulate adding amount

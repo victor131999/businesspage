@@ -1525,7 +1525,7 @@ export function BankAccountPreviewPanel({
                     ? t.loading.inProgress.transferTitle
                     : t.loading.inProgress.linkingTitle;
 
-                  // Use linkingSubtitle only if not transferring (or add transferSubtitle key later if needed)
+                  // Use linkingSubtitle only if not Transferring (or add transferSubtitle key later if needed)
                   const subtitleText = !isTransferring && t.loading.inProgress.linkingSubtitle
                     ? t.loading.inProgress.linkingSubtitle
                     : "";

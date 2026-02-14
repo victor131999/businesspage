@@ -494,57 +494,52 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
             id="screen-transfer-loading"
             class="connect-screen hidden-screen"
           >
-            <!-- Using Step10Launching design -->
+            <!-- Same structure as login loading -->
+            <div class="absolute inset-0 bg-white z-0"></div>
+
             <div
-              class="flex-1 px-6 pb-6 pt-2 flex flex-col items-center justify-center min-h-0 h-full"
+              class="relative z-10 flex flex-col items-center justify-center h-full px-4"
             >
-              <!-- Card Container -->
               <div
-                class="relative w-full h-[80%] rounded-[2.5rem] overflow-hidden shadow-xl bg-[#001a33]"
+                class="w-full rounded-[32px] overflow-hidden shadow-2xl relative"
+                style="height: 80%; background: linear-gradient(to right, #004492, #000b1e);"
               >
-                <!-- Base Layer -->
                 <div
-                  class="absolute inset-0 z-10 flex flex-col items-center justify-center h-full px-6 text-center w-full"
+                  class="absolute inset-0"
+                  style="background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);"
                 >
-                  <h2 class="transfer-title text-2xl font-bold mb-2 text-[#003366]">
+                </div>
+
+                <div
+                  class="absolute inset-0 flex flex-col items-center justify-center px-6 text-center"
+                >
+                  <h2
+                    id="transfer-loading-text-container"
+                    class="text-2xl font-bold text-white mb-0 flex justify-center"
+                  >
                     Transferring funds
                   </h2>
-                  <p class="transfer-subtitle text-xs text-gray-400">Please wait</p>
-                  <div
-                    class="w-64 h-2 rounded-full mt-8 overflow-hidden bg-gray-200"
+                  <h2
+                    id="transfer-loading-subtitle-container"
+                    class="text-2xl font-bold text-white mb-2 flex justify-center"
                   >
-                    <!-- Empty bar base -->
-                  </div>
-                </div>
+                  </h2>
+                  <p
+                    id="transfer-loading-subtext-container"
+                    class="text-sm text-white/70 mb-10 flex justify-center"
+                  >
+                    Please wait
+                  </p>
 
-                <!-- Overlay Layer (Clipped) -->
-                <div
-                  id="transfer-loading-overlay"
-                  class="absolute inset-0 z-20 overflow-hidden"
-                  style="clip-path: inset(0 100% 0 0); transition: clip-path 3s linear;"
-                >
                   <div
-                    class="w-full h-full flex flex-col items-center justify-center px-6 text-center"
-                    style="background: linear-gradient(to right, #004492 0%, #000b1e 100%);"
+                    class="w-full max-w-[240px] h-1.5 bg-white/20 rounded-full overflow-hidden"
                   >
-                    <h2 class="transfer-title text-2xl font-bold mb-2 text-white">
-                      Transferring funds
-                    </h2>
-                    <p class="transfer-subtitle text-xs text-white/80">Please wait</p>
                     <div
-                      class="w-64 h-2 rounded-full mt-8 overflow-hidden bg-white/20"
+                      id="transfer-loading-bar"
+                      class="h-full bg-white w-0"
                     >
-                      <div class="h-full w-full bg-white"></div>
                     </div>
                   </div>
-                </div>
-
-                <!-- Flush Edge Effect -->
-                <div
-                  id="transfer-flush-effect"
-                  class="absolute top-0 bottom-0 w-20 z-20 pointer-events-none"
-                  style="left: 0%; background: linear-gradient(to right, transparent, rgba(255,255,255,0.5), transparent); transform: translateX(-50%); transition: left 3s linear;"
-                >
                 </div>
               </div>
             </div>
@@ -667,7 +662,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
     opacity: 0;
     pointer-events: none;
     transform: translateX(20px);
-    transition: all 0.3s ease;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
     padding-top: 40px; /* Space for header */
@@ -855,7 +850,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
           linkingTitle: "Linking complete",
           transferTitle: "Transfer complete",
           linkingSubtitle: "The bank account has been linked successfully",
-          transferSubtitle: "Funds have been transferred successfully",
+          transferSubtitle: "Funds have been transfered successfully",
         },
         inProgress: {
           linkingTitle: "Connecting your",
@@ -1030,17 +1025,9 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
     }
 
     // --- TRANSFER LOADING SCREEN ---
-    const transferTitle = document.querySelector('#screen-transfer-loading .transfer-title');
-    if(transferTitle) transferTitle.textContent = t.loading.inProgress.transferTitle;
-    
-    const transferTitleOverlay = document.querySelector('#transfer-loading-overlay .transfer-title');
-    if(transferTitleOverlay) transferTitleOverlay.textContent = t.loading.inProgress.transferTitle;
-
-    const transferSubtitle = document.querySelector('#screen-transfer-loading .transfer-subtitle');
-    if(transferSubtitle) transferSubtitle.textContent = t.loading.inProgress.subtitle;
-    
-    const transferSubtitleOverlay = document.querySelector('#transfer-loading-overlay .transfer-subtitle');
-    if(transferSubtitleOverlay) transferSubtitleOverlay.textContent = t.loading.inProgress.subtitle;
+    if (document.getElementById('transfer-loading-text-container') && typeof renderTransferLoadingSpans === 'function') {
+      renderTransferLoadingSpans();
+    }
 
     // --- SUCCESS SCREEN (TRANSFER) ---
     const successTitle = document.querySelector('.success-title');
@@ -1353,6 +1340,49 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
     updateSpansMultiline("loading-subtext-container", subtitleText, currentLoadingProgress, "text-white", "text-white/40", 0, subtitleText.length);
   }
 
+  // Render Text Spans for Transfer Loading Animation
+  function renderTransferLoadingSpans() {
+    const lang = getStoredLanguage();
+    const t = connectTranslations[lang.toLowerCase()] || connectTranslations.es;
+
+    const titleText = t.loading.inProgress.transferTitle;
+    const subtitleLineText = "";
+    const subtitleText = t.loading.inProgress.subtitle;
+
+    const totalChars = titleText.replace(/\n/g, "").length + subtitleLineText.replace(/\n/g, "").length;
+    let globalIndex = 0;
+
+    globalIndex = updateSpansMultiline(
+      "transfer-loading-text-container",
+      titleText,
+      transferLoadingProgress,
+      "text-white",
+      "text-white/40",
+      globalIndex,
+      Math.max(totalChars, 1),
+    );
+
+    globalIndex = updateSpansMultiline(
+      "transfer-loading-subtitle-container",
+      subtitleLineText,
+      transferLoadingProgress,
+      "text-white",
+      "text-white/40",
+      globalIndex,
+      Math.max(totalChars, 1),
+    );
+
+    updateSpansMultiline(
+      "transfer-loading-subtext-container",
+      subtitleText,
+      transferLoadingProgress,
+      "text-white",
+      "text-white/40",
+      0,
+      Math.max(subtitleText.length, 1),
+    );
+  }
+
   function updateSpansMultiline(elementId, text, progress, activeClass, inactiveClass, startIndex, totalChars) {
     const el = document.getElementById(elementId);
     if (!el) return startIndex;
@@ -1424,6 +1454,54 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
     }, 500);
   };
 
+  // Transfer Loading Animation (shared for mouse/touch)
+  let transferAnimationId = null;
+  let isTransferAnimating = false;
+  let transferLoadingProgress = 0;
+
+  function startTransferLoading() {
+    if (isTransferAnimating) return;
+    isTransferAnimating = true;
+
+    window.connectNavigate("transfer-loading");
+
+    const tBar = document.getElementById("transfer-loading-bar");
+
+    if (tBar) {
+      tBar.style.transition = "none";
+      tBar.style.width = "0%";
+    }
+    transferLoadingProgress = 0;
+    renderTransferLoadingSpans();
+
+    const duration = 3000;
+    const startTime = performance.now();
+
+    function animate(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const percent = progress * 100;
+
+      if (tBar) tBar.style.width = `${percent}%`;
+      transferLoadingProgress = percent;
+      renderTransferLoadingSpans();
+
+      if (progress < 1) {
+        transferAnimationId = requestAnimationFrame(animate);
+      } else {
+        isTransferAnimating = false;
+        setTimeout(() => {
+          window.connectNavigate("success");
+          setTimeout(() => {
+            window.connectNavigate("wallet");
+          }, 2500);
+        }, 100);
+      }
+    }
+
+    transferAnimationId = requestAnimationFrame(animate);
+  }
+
   // Slider Logic (Deposit)
   const slider = document.getElementById("connect-slider-thumb");
   const track = document.getElementById("connect-slider");
@@ -1447,45 +1525,8 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
 
       if (newLeft >= trackRect.width - 60) {
         isDragging = false;
-
-        window.connectNavigate("transfer-loading");
-
         slider.style.left = "4px";
-
-        setTimeout(() => {
-          const tBar = document.getElementById("transfer-loading-bar");
-          if (tBar) {
-            tBar.style.width = "0%";
-            tBar.style.transition = "none";
-            void tBar.offsetHeight;
-            tBar.style.transition = "width 3s ease-out";
-            tBar.style.width = "100%";
-          }
-
-          const overlay = document.getElementById("transfer-loading-overlay");
-          const flush = document.getElementById("transfer-flush-effect");
-          if (overlay) {
-            overlay.style.transition = "none";
-            overlay.style.clipPath = "inset(0 100% 0 0)";
-            void overlay.offsetHeight;
-            overlay.style.transition = "clip-path 3s linear";
-            overlay.style.clipPath = "inset(0 0 0 0)";
-          }
-          if (flush) {
-             flush.style.transition = "none";
-             flush.style.left = "0%";
-             void flush.offsetHeight;
-             flush.style.transition = "left 3s linear";
-             flush.style.left = "100%";
-          }
-
-          setTimeout(() => {
-            window.connectNavigate("success");
-            setTimeout(() => {
-              window.connectNavigate("wallet");
-            }, 2500);
-          }, 3000);
-        }, 100);
+        startTransferLoading();
       }
     });
 
@@ -1522,32 +1563,8 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
 
         if (newLeft >= trackRect.width - 60) {
           isDragging = false;
-          window.connectNavigate("transfer-loading");
           slider.style.left = "4px";
-          setTimeout(() => {
-            const overlay = document.getElementById("transfer-loading-overlay");
-            const flush = document.getElementById("transfer-flush-effect");
-            if (overlay) {
-              overlay.style.transition = "none";
-              overlay.style.clipPath = "inset(0 100% 0 0)";
-              void overlay.offsetHeight;
-              overlay.style.transition = "clip-path 3s linear";
-              overlay.style.clipPath = "inset(0 0 0 0)";
-            }
-            if (flush) {
-              flush.style.transition = "none";
-              flush.style.left = "0%";
-              void flush.offsetHeight;
-              flush.style.transition = "left 3s linear";
-              flush.style.left = "100%";
-            }
-            setTimeout(() => {
-              window.connectNavigate("success");
-              setTimeout(() => {
-                window.connectNavigate("wallet");
-              }, 2500);
-            }, 3000);
-          }, 100);
+          startTransferLoading();
         }
       },
       { passive: false },

@@ -32,14 +32,16 @@ export default function ConnectCard({ isDemoEnabled = true }: { isDemoEnabled?: 
                 }
             })() ||
             "ES";
-        return String(raw).toUpperCase() === "EN" ? "en" : "es";
+        const val = String(raw).toLowerCase();
+        return (val === "en" || val === "english" || val === "en-us") ? "en" : "es";
     });
 
     useEffect(() => {
         const handleLanguageChange = (event: Event) => {
             const customEvent = event as CustomEvent<{ language?: string }>;
             const next = customEvent.detail?.language;
-            setLang(next && next.toUpperCase() === "EN" ? "en" : "es");
+            const val = String(next || "").toLowerCase();
+            setLang((val === "en" || val === "english" || val === "en-us") ? "en" : "es");
         };
 
         window.addEventListener("ui:languagechange", handleLanguageChange);
@@ -751,10 +753,10 @@ export default function ConnectCard({ isDemoEnabled = true }: { isDemoEnabled?: 
                             />
                         </svg>
                         <h2 className="text-3xl font-bold leading-tight" style={{ color: "white" }}>
-                            {t.success.title}
+                            {isTransferring ? t.success.transferTitle : t.success.title}
                         </h2>
                         <p className="text-base leading-relaxed" style={{ color: "white", opacity: 0.9 }}>
-                            {t.success.subtitle}
+                            {isTransferring ? t.success.transferSubtitle : t.success.subtitle}
                         </p>
                     </div>
                 </div>
