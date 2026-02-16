@@ -35,25 +35,44 @@ const customColor = "#004492";
     </div>
   </div>
 
-  <div class="flex-1 flex flex-col items-center px-6 z-20 pt-[220px]">
+  <div class="flex-1 flex flex-col items-center px-6 z-20 pt-24 overflow-y-auto min-h-0 w-full [&::-webkit-scrollbar]:hidden" style="scrollbar-width: none;">
     <h2 class="discounts-step07-title text-2xl font-bold text-[#003366] mb-1">Crear Promoción</h2>
     <p class="discounts-step07-subtitle text-gray-400 text-xs text-center mb-8">
       Define los detalles de tu promoción
     </p>
 
     <div class="w-full space-y-4 flex-1">
-      <div class="bg-gray-100 rounded-xl p-4 shadow-sm">
-        <span class="discounts-step07-product-label text-[#004492] text-sm font-medium block">
+      <div class="space-y-2">
+        <label class="discounts-step07-product-label text-[#003366] text-sm font-medium ml-1">
           Nombre del Producto
-        </span>
+        </label>
+        <input
+          type="text"
+          placeholder="Ej. Promo Veggie"
+          class="discounts-step07-product-placeholder w-full p-3 rounded-xl bg-gray-100 border-none text-sm placeholder:text-gray-400 focus:ring-1 focus:ring-[#003366] outline-none shadow-sm text-gray-700"
+        />
       </div>
-      <div class="bg-gray-100 rounded-xl p-4 shadow-sm">
-        <span class="discounts-step07-price-label text-[#004492] text-sm font-medium block"> Precio </span>
+
+      <div class="space-y-2">
+        <label class="discounts-step07-price-label text-[#003366] text-sm font-medium ml-1">
+          Precio
+        </label>
+        <input
+          type="text"
+          placeholder="$0.00"
+          class="discounts-step07-price-placeholder w-full p-3 rounded-xl bg-gray-100 border-none text-sm placeholder:text-gray-400 focus:ring-1 focus:ring-[#003366] outline-none shadow-sm text-gray-700"
+        />
       </div>
-      <div class="bg-gray-100 rounded-xl p-4 shadow-sm">
-        <span class="discounts-step07-profile-label text-[#004492] text-sm font-medium block">
+
+      <div class="space-y-2">
+        <label class="discounts-step07-profile-label text-[#003366] text-sm font-medium ml-1">
           Perfil del Cliente
-        </span>
+        </label>
+        <input
+          type="text"
+          placeholder="Ej. Estudiantes, Familias"
+          class="discounts-step07-profile-placeholder w-full p-3 rounded-xl bg-gray-100 border-none text-sm placeholder:text-gray-400 focus:ring-1 focus:ring-[#003366] outline-none shadow-sm text-gray-700"
+        />
       </div>
     </div>
   </div>

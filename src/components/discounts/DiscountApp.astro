@@ -100,7 +100,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
   // State Management using closure patterns to avoid global pollution if possible,
   // but Astro scripts are modules by default.
 
-  let currentStep = 8;
+  let currentStep = 1;
 
   // Map step IDs
   const steps = [
@@ -118,7 +118,7 @@ import DeviceFrame from "../design-system/organisms/device-frame/DeviceFrame.ast
   ];
 
   function init() {
-    showStep(8);
+    showStep(1);
     setupEventListeners();
     setupPlanSelection();
     setupPromoStack();
