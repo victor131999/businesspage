@@ -1,0 +1,200 @@
+---
+/**
+ * About us — Página institucional. Sistema de diseño, espaciado uniforme, ES/EN.
+ */
+import "../styles/navbar.css";
+import "../components/design-system/tokens.css";
+import Navbar3 from "../components/NavbarSimple.astro";
+import ProductsPanel from "../components/productsPanel.astro";
+import Footer from "../components/design-system/organisms/Footer.astro";
+import Title from "../components/design-system/atoms/Title.astro";
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/ISO-ZELIFY-2025.png" />
+    <title>Nosotros — Zelify</title>
+  </head>
+  <body class="about-page">
+    <Navbar3 />
+    <ProductsPanel />
+
+    <main class="about-main">
+      <section class="about-hero">
+        <div class="about-hero__inner">
+          <Title level={1} variant="hero" class="about-title" id="about-hero-title">Nosotros</Title>
+          <p class="about-lead" id="about-hero-lead">Construimos la infraestructura que impulsa los productos financieros modernos.</p>
+        </div>
+      </section>
+
+      <section class="about-content ds-content">
+        <div class="about-content__inner">
+          <Title level={2} variant="section" class="about-content__heading" data-about-section-1-title>Nuestra misión</Title>
+          <p class="about-body" data-about-section-1-p1>
+            En Zelify estamos redefiniendo la forma en que el mundo interactúa con las finanzas. Nuestra misión es construir una infraestructura financiera más inteligente, transparente y accesible, impulsada por tecnología avanzada e inteligencia artificial. Diseñamos experiencias que eliminan la complejidad operativa, fortalecen la seguridad y permiten que personas y empresas tomen decisiones financieras con confianza y visión estratégica.
+          </p>
+
+          <Title level={2} variant="section" class="about-content__heading" data-about-section-2-title>Quiénes somos</Title>
+          <p class="about-body" data-about-section-2-p1>
+            Zelify es una plataforma fintech de nueva generación que integra identidad digital, cumplimiento normativo, cuentas, tarjetas, pagos y transferencias en un ecosistema unificado. Combinamos innovación tecnológica con un enfoque global para desarrollar soluciones escalables que se adaptan a la evolución del sector financiero. Nuestro equipo está formado por especialistas en tecnología, finanzas y experiencia de usuario, comprometidos con construir productos que conectan eficiencia operativa, diseño sofisticado y una visión centrada en el futuro.
+          </p>
+
+          <Title level={2} variant="section" class="about-content__heading" data-about-section-3-title>Contacto</Title>
+          <p class="about-body" data-about-section-3-p1>
+            Estamos abiertos a nuevas oportunidades, alianzas estratégicas y conversaciones que impulsen la innovación financiera. Si deseas conocer más sobre Zelify o explorar cómo podemos colaborar, te invitamos a comunicarte con nuestro equipo a través de nuestros canales oficiales. Estaremos encantados de acompañarte en el siguiente paso hacia una experiencia financiera más inteligente.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <Footer
+      quickLinksTitle="Quick links"
+      links={[
+        { href: "", label: "Products", key: "products", dataI18n: "footer.products" },
+        { href: "https://docs.zelify.com", label: "Developers", key: "developers", dataI18n: "footer.developers", openInNewTab: true },
+        { href: "/blog", label: "Blog", key: "blog", dataI18n: "footer.blog" },
+        { href: "/jobs", label: "Work with us", key: "workWithUs", dataI18n: "footer.workWithUs" },
+        { href: "/about", label: "About us", key: "aboutUs", dataI18n: "footer.aboutUs" },
+        { href: "/privacy", label: "Privacy policy", key: "privacyPolicy", dataI18n: "footer.privacyPolicy" },
+      ]}
+      legalText="Zelify is a technology platform currently in a development phase, not yet deployed or operational, and does not provide or process financial services directly; all financial operations are conducted exclusively through regulated third-party partners."
+      copyrightText="© 2025 Zelify. All rights reserved."
+      dataI18n={{ quicklinks: "footer.quicklinks", legal: "footer.legal", copyright: "footer.copyright" }}
+    />
+  </body>
+</html>
+
+<script>
+  const ABOUT_T = {
+    es: {
+      heroTitle: "Nosotros",
+      heroLead: "Construimos la infraestructura que impulsa los productos financieros modernos.",
+      section1Title: "Nuestra misión",
+      section1P1: "En Zelify estamos redefiniendo la forma en que el mundo interactúa con las finanzas. Nuestra misión es construir una infraestructura financiera más inteligente, transparente y accesible, impulsada por tecnología avanzada e inteligencia artificial. Diseñamos experiencias que eliminan la complejidad operativa, fortalecen la seguridad y permiten que personas y empresas tomen decisiones financieras con confianza y visión estratégica.",
+      section2Title: "Quiénes somos",
+      section2P1: "Zelify es una plataforma fintech de nueva generación que integra identidad digital, cumplimiento normativo, cuentas, tarjetas, pagos y transferencias en un ecosistema unificado. Combinamos innovación tecnológica con un enfoque global para desarrollar soluciones escalables que se adaptan a la evolución del sector financiero. Nuestro equipo está formado por especialistas en tecnología, finanzas y experiencia de usuario, comprometidos con construir productos que conectan eficiencia operativa, diseño sofisticado y una visión centrada en el futuro.",
+      section3Title: "Contacto",
+      section3P1: "Estamos abiertos a nuevas oportunidades, alianzas estratégicas y conversaciones que impulsen la innovación financiera. Si deseas conocer más sobre Zelify o explorar cómo podemos colaborar, te invitamos a comunicarte con nuestro equipo a través de nuestros canales oficiales. Estaremos encantados de acompañarte en el siguiente paso hacia una experiencia financiera más inteligente.",
+    },
+    en: {
+      heroTitle: "About us",
+      heroLead: "We build the infrastructure that powers modern financial products.",
+      section1Title: "Our mission",
+      section1P1: "At Zelify we are redefining how the world interacts with finance. Our mission is to build a smarter, more transparent and accessible financial infrastructure, powered by advanced technology and artificial intelligence. We design experiences that remove operational complexity, strengthen security and enable people and businesses to make financial decisions with confidence and strategic vision.",
+      section2Title: "Who we are",
+      section2P1: "Zelify is a next-generation fintech platform that integrates digital identity, regulatory compliance, accounts, cards, payments and transfers in a unified ecosystem. We combine technological innovation with a global approach to develop scalable solutions that adapt to the evolution of the financial sector. Our team is made up of specialists in technology, finance and user experience, committed to building products that connect operational efficiency, sophisticated design and a future-focused vision.",
+      section3Title: "Contact",
+      section3P1: "We are open to new opportunities, strategic alliances and conversations that drive financial innovation. If you would like to learn more about Zelify or explore how we can work together, we invite you to get in touch with our team through our official channels. We will be delighted to support you in the next step towards a smarter financial experience.",
+    },
+  };
+  function getLang() {
+    try {
+      const stored = localStorage.getItem("ui-language");
+      return (stored && stored.toUpperCase() === "ES") ? "es" : "en";
+    } catch { return "en"; }
+  }
+  function applyAboutTranslations(lang: string) {
+    const t = (ABOUT_T as Record<string, typeof ABOUT_T.en>)[lang] || ABOUT_T.en;
+    const set = (sel: string, text: string) => {
+      const el = document.querySelector(sel);
+      if (el) el.textContent = text;
+    };
+    const titleEl = document.getElementById("about-hero-title");
+    const leadEl = document.getElementById("about-hero-lead");
+    if (titleEl) titleEl.textContent = t.heroTitle;
+    if (leadEl) leadEl.textContent = t.heroLead;
+    set("[data-about-section-1-title]", t.section1Title);
+    set("[data-about-section-1-p1]", t.section1P1);
+    set("[data-about-section-2-title]", t.section2Title);
+    set("[data-about-section-2-p1]", t.section2P1);
+    set("[data-about-section-3-title]", t.section3Title);
+    set("[data-about-section-3-p1]", t.section3P1);
+    document.documentElement.lang = lang === "es" ? "es" : "en";
+  }
+  if (typeof document !== "undefined") {
+    document.addEventListener("DOMContentLoaded", () => applyAboutTranslations(getLang()));
+    window.addEventListener("ui:languagechange", (e: Event) => {
+      const d = (e as CustomEvent<{ language?: string }>).detail?.language;
+      const next = d ? (d.toUpperCase() === "ES" ? "es" : "en") : getLang();
+      applyAboutTranslations(next);
+    });
+  }
+</script>
+
+<style>
+  /* --- Espaciado coherente y uniforme (mismo criterio que privacy) --- */
+  .about-page {
+    font-family: var(--ds-font-family);
+    color: var(--ds-color-text);
+    background: var(--ds-color-bg);
+    margin: 0;
+    min-height: 100vh;
+  }
+
+  .about-main {
+    padding-top: var(--ds-space-16);
+    padding-bottom: var(--ds-section-gap-md);
+  }
+
+  .about-hero {
+    padding: var(--ds-space-12) var(--ds-space-8) var(--ds-space-12);
+    text-align: center;
+    background: var(--ds-color-bg-subtle);
+  }
+  .about-hero__inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .about-title {
+    color: var(--ds-color-primary);
+    margin: 0 0 var(--ds-space-4);
+  }
+  .about-lead {
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    color: var(--ds-color-text-muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .about-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 var(--ds-space-8);
+  }
+  .about-content__inner {
+    padding: var(--ds-space-12) 0 var(--ds-space-16);
+  }
+
+  .about-content__heading {
+    color: var(--ds-color-primary);
+    margin: var(--ds-space-12) 0 var(--ds-space-5);
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  }
+  .about-content__heading:first-of-type {
+    margin-top: 0;
+  }
+
+  .about-body {
+    font-size: clamp(1rem, 1.4vw, 1.15rem);
+    line-height: 1.65;
+    color: var(--ds-color-text);
+    margin: 0 0 var(--ds-space-6);
+  }
+
+  @media (max-width: 639px) {
+    .about-main {
+      padding-top: var(--ds-space-12);
+    }
+    .about-hero,
+    .about-content {
+      padding-left: var(--ds-space-4);
+      padding-right: var(--ds-space-4);
+    }
+    .about-content__inner {
+      padding-top: var(--ds-space-10);
+      padding-bottom: var(--ds-space-12);
+    }
+  }
+</style>
