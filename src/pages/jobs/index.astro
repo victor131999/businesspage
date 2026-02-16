@@ -1,9 +1,12 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Navbar from '../../components/navbar.astro';
-import ProductsPanel from '../../components/productsPanel.astro';
-import '../../styles/global.css';
+import NavbarSimple from '../../components/NavbarSimple.astro';
+import Footer from '../../components/design-system/organisms/Footer.astro';
+import Title from '../../components/design-system/atoms/Title.astro';
+import Text from '../../components/design-system/atoms/Text.astro';
+import Button from '../../components/design-system/atoms/Button.astro';
+import '../../components/design-system/tokens.css';
 import '../../styles/navbar.css';
+import { AlaizaAssistant } from "../../components/AlaizaAssistant";
 
 const defaultLanguage = 'en';
 
@@ -35,7 +38,7 @@ const jobOpenings = [
     slug: "semi-senior-software-engineer",
     title: {
       en: "Semi Senior Software Engineer",
-      es: "Semi Senior Software Engineer",
+      es: "Ingeniero de Software Semi Senior",
     },
     summary: {
       en: "Scale our microservices platform, connecting institutions and users across Latin America.",
@@ -58,7 +61,7 @@ const jobOpenings = [
     slug: "senior-frontend",
     title: {
       en: "Senior Frontend Developer",
-      es: "Senior Frontend Developer",
+      es: "Desarrollador Frontend Senior",
     },
     summary: {
       en: "Lead the experiences that make finance simple, fast, and beautiful for businesses.",
@@ -245,8 +248,7 @@ const jobPageCopy = {
   const JOB_PAGE_COPY = JSON.parse(document.getElementById('jobs-page-copy')?.textContent ?? '{}');
   const fallbackLang = 'en';
   const supportedLangs = ['en', 'es'];
-  const tagClass =
-    'rounded-full border border-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white/70';
+  const tagClass = 'job-tag';
 
   const resolveLang = (rawLang) => {
     const normalized = (rawLang || fallbackLang).toLowerCase();
@@ -365,208 +367,457 @@ const jobPageCopy = {
 
   document.addEventListener('DOMContentLoaded', () => {
     const storedLang = localStorage.getItem('ui-language') || fallbackLang;
-    updateJobsPage(storedLang);
+    const initialLang = (storedLang === 'EN' || storedLang === 'ES' || storedLang === 'en' || storedLang === 'es') ? storedLang : 'en';
+    updateJobsPage(initialLang);
   });
 </script>
 
-<Layout
-  title="Work with us | Zelify"
-  description="Join Zelify and help us build the financial operating system that connects payments, credit, and compliance across Latin America."
->
-  <div class="relative min-h-screen overflow-hidden bg-[#020b18] text-white">
-    <div class="jobs-bg" aria-hidden="true"></div>
 
-    <div class="relative z-10 flex min-h-screen flex-col">
-      <Navbar
-        logoSrc="/images/zelify_logo2.png"
-        buttons={{
-          first: { label: 'Work with us', href: '/jobs' },
-          second: { label: 'Business access', href: 'https://www.zelify.io/' },
-          third: { label: 'EN', href: '/' },
-        }}
-      />
-      <ProductsPanel />
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/ISO-ZELIFY-2025.png"
+    />
+    <title>Work with us | Zelify</title>
+    <meta name="description" content="Join Zelify and help us build the financial operating system that connects payments, credit, and compliance across Latin America." />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css"
+    />
+  </head>
+  <body class="demo-page">
+    <NavbarSimple/>
 
-      <main class="flex-1">
-        <section class="px-6 pt-24 pb-16">
-          <div class="mx-auto max-w-5xl text-center sm:text-left">
-            <p class="text-xs font-semibold uppercase tracking-[0.4em] text-[#95FF0B]" data-i18n="hero.badge">
-              {heroCopy.badge[defaultLanguage]}
-            </p>
-            <h1
-              class="mt-6 text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl"
-              data-i18n="hero.title"
-              set:html={heroCopy.title[defaultLanguage]}
-            ></h1>
-            <p class="mt-6 text-base text-white/80 sm:text-lg lg:text-xl" data-i18n="hero.description">
-              {heroCopy.description[defaultLanguage]}
-            </p>
+    <main class="jobs-main">
+      <!-- Hero Section -->
+      <section class="jobs-hero">
+        <div class="jobs-container text-center">
+          <Text variant="subtitle" class="hero-badge" data-i18n="hero.badge">
+            {heroCopy.badge[defaultLanguage]}
+          </Text>
+          <Title level={1} variant="hero" class="hero-title text-balance" data-i18n="hero.title" set:html={heroCopy.title[defaultLanguage]} />
+          <Text variant="subtitle" class="hero-description text-balance" data-i18n="hero.description">
+            {heroCopy.description[defaultLanguage]}
+          </Text>
 
-            <div class="mt-10 flex flex-col gap-4 text-sm sm:flex-row">
-              <a
-                href="#jobs-list"
-                class="inline-flex items-center justify-center rounded-2xl bg-[#95FF0B] px-6 py-3 font-semibold text-[#031005] transition hover:translate-y-[-2px]"
-                data-i18n="hero.primaryCta"
-              >
-                {heroCopy.primaryCta[defaultLanguage]}
-              </a>
-              <a
-                href="/jobs/apply"
-                class="inline-flex items-center justify-center rounded-2xl border border-white/30 px-6 py-3 font-semibold text-white transition hover:border-[#95FF0B] hover:text-[#95FF0B]"
-                data-i18n="hero.secondaryCta"
-              >
-                {heroCopy.secondaryCta[defaultLanguage]}
-              </a>
+          <div class="hero-actions">
+            <Button
+              href="#jobs-list"
+              variant="primary"
+              dataI18n="hero.primaryCta"
+            >
+              {heroCopy.primaryCta[defaultLanguage]}
+            </Button>
+            <Button
+              href="mailto:jobs@zelify.com"
+              variant="secondary"
+              dataI18n="hero.secondaryCta"
+            >
+              {heroCopy.secondaryCta[defaultLanguage]}
+            </Button>
+          </div>
+        </div>
+
+        <div class="jobs-container hero-stats-grid">
+          {heroHighlights.map((item, index) => (
+            <div class="stat-item">
+              <p class="stat-value">{item.value}</p>
+              <Text variant="caption" class="stat-label" data-stat-label-index={index}>
+                {item.label[defaultLanguage]}
+              </Text>
             </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Open Roles Section -->
+      <section id="jobs-list" class="jobs-section bg-gray">
+        <div class="jobs-container">
+          <div class="section-header">
+            <Text variant="caption" class="section-badge" data-i18n="openRoles.label">
+              {openRolesCopy.label[defaultLanguage]}
+            </Text>
+            <Title level={2} variant="section" class="section-title" data-i18n="openRoles.title">
+              {openRolesCopy.title[defaultLanguage]}
+            </Title>
+            <Text variant="body" class="section-description text-balance" data-i18n="openRoles.description">
+              {openRolesCopy.description[defaultLanguage]}
+            </Text>
           </div>
 
-          <div class="mx-auto mt-12 grid max-w-4xl gap-6 sm:grid-cols-3">
-            {heroHighlights.map((item, index) => (
-              <div class="rounded-2xl border border-white/10 bg-white/5 p-6 text-center backdrop-blur">
-                <p class="text-3xl font-bold text-white">{item.value}</p>
-                <p class="mt-2 text-sm uppercase tracking-[0.2em] text-white/70" data-stat-label-index={index}>
-                  {item.label[defaultLanguage]}
-                </p>
+          <div class="jobs-grid">
+            {jobOpenings.map((job) => (
+              <a
+                href={`/jobs/${job.slug}`}
+                class="job-card group"
+                data-job-card={job.slug}
+                data-job-link
+              >
+                <div class="job-card-content">
+                  <div class="job-meta">
+                    <span class="meta-item">
+                       <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M17.657 16.657 13.414 20.9a2 2 0 0 1-2.828 0l-4.243-4.243a8 8 0 1 1 11.314 0Z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M15 11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                      </svg>
+                      <span data-job-field="location">{job.location[defaultLanguage]}</span>
+                    </span>
+                    <span class="meta-item">
+                      <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M2 7h20M2 12h20M2 17h20M5 7V5h14v2M5 17v2h14v-2" />
+                      </svg>
+                      <span data-job-field="type">{job.type[defaultLanguage]}</span>
+                    </span>
+                  </div>
+
+                  <Title level={3} variant="card" class="job-title" data-job-field="title">
+                    {job.title[defaultLanguage]}
+                  </Title>
+                  <Text variant="body" class="job-summary" data-job-field="summary">
+                    {job.summary[defaultLanguage]}
+                  </Text>
+
+                  <div class="job-tags" data-job-tags>
+                    {job.tags[defaultLanguage].map((tag) => (
+                      <span class="job-tag">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div class="job-cta">
+                  <span data-job-card-cta>{openRolesCopy.cardCta[defaultLanguage]}</span>
+                  <svg
+                    class="cta-icon"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    viewBox="0 0 24 24"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" />
+                  </svg>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- Culture Section -->
+      <section class="jobs-section">
+        <div class="jobs-container">
+          <div class="culture-grid">
+            {culturePillars.map((pillar, index) => (
+              <div class="culture-item">
+                <Text variant="caption" class="culture-title" data-culture-title={index}>
+                  {pillar.title[defaultLanguage]}
+                </Text>
+                <Text variant="body" data-culture-copy={index}>
+                  {pillar.copy[defaultLanguage]}
+                </Text>
               </div>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section id="jobs-list" class="px-6 pb-16">
-          <div class="mx-auto max-w-6xl">
-            <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-              <div>
-                <p class="text-sm uppercase tracking-[0.3em] text-white/70" data-i18n="openRoles.label">
-                  {openRolesCopy.label[defaultLanguage]}
-                </p>
-                <h2 class="mt-2 text-3xl font-semibold" data-i18n="openRoles.title">
-                  {openRolesCopy.title[defaultLanguage]}
-                </h2>
-                <p class="mt-3 text-base text-white/70" data-i18n="openRoles.description">
-                  {openRolesCopy.description[defaultLanguage]}
-                </p>
-              </div>
+      <!-- General Application -->
+      <section class="jobs-section pb-24">
+        <div class="jobs-container">
+            <div class="general-app-card text-center">
+              <Text variant="caption" class="section-badge" data-i18n="general.prompt">
+                {generalApplicationCopy.prompt[defaultLanguage]}
+              </Text>
+              <Title level={3} variant="section" class="general-title" data-i18n="general.title">
+                {generalApplicationCopy.title[defaultLanguage]}
+              </Title>
+              <Text variant="subtitle" class="general-description text-balance" data-i18n="general.description">
+                {generalApplicationCopy.description[defaultLanguage]}
+              </Text>
+              <Button
+                href="mailto:jobs@zelify.com"
+                variant="primary"
+                dataI18n="general.button"
+              >
+                {generalApplicationCopy.button[defaultLanguage]}
+              </Button>
             </div>
+        </div>
+      </section>
+    </main>
 
-            <div class="mt-10 grid gap-6 md:grid-cols-2">
-              {jobOpenings.map((job) => (
-                <a
-                  href={`/jobs/${job.slug}`}
-                  class="group flex h-full flex-col justify-between rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur transition hover:border-[#95FF0B] hover:bg-white/10"
-                  data-job-card={job.slug}
-                  data-job-link
-                >
-                  <div>
-                    <div class="flex flex-wrap items-center gap-4 text-sm text-white/70">
-                      <span class="inline-flex items-center gap-2">
-                        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M17.657 16.657 13.414 20.9a2 2 0 0 1-2.828 0l-4.243-4.243a8 8 0 1 1 11.314 0Z" />
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M15 11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                        </svg>
-                        <span data-job-field="location">{job.location[defaultLanguage]}</span>
-                      </span>
-                      <span class="inline-flex items-center gap-2">
-                        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M2 7h20M2 12h20M2 17h20M5 7V5h14v2M5 17v2h14v-2" />
-                        </svg>
-                        <span data-job-field="type">{job.type[defaultLanguage]}</span>
-                      </span>
-                    </div>
-
-                    <h3 class="mt-5 text-2xl font-semibold" data-job-field="title">
-                      {job.title[defaultLanguage]}
-                    </h3>
-                    <p class="mt-3 text-base text-white/80" data-job-field="summary">
-                      {job.summary[defaultLanguage]}
-                    </p>
-
-                    <div class="mt-4 flex flex-wrap gap-2" data-job-tags>
-                      {job.tags[defaultLanguage].map((tag) => (
-                        <span class="rounded-full border border-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white/70">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div class="mt-8 flex items-center gap-2 font-semibold text-[#95FF0B]">
-                    <span data-job-card-cta>{openRolesCopy.cardCta[defaultLanguage]}</span>
-                    <svg
-                      class="h-5 w-5 transition group-hover:translate-x-1"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.8"
-                      viewBox="0 0 24 24"
-                    >
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" />
-                    </svg>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section class="px-6 pb-12">
-          <div class="mx-auto max-w-6xl rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur">
-            <div class="grid gap-8 md:grid-cols-3">
-              {culturePillars.map((pillar, index) => (
-                <div>
-                  <p class="text-sm uppercase tracking-[0.3em] text-[#95FF0B]" data-culture-title={index}>
-                    {pillar.title[defaultLanguage]}
-                  </p>
-                  <p class="mt-4 text-base text-white/80" data-culture-copy={index}>
-                    {pillar.copy[defaultLanguage]}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section class="px-6 pb-24">
-          <div class="mx-auto max-w-4xl rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-8 text-center backdrop-blur">
-            <p class="text-sm font-semibold uppercase tracking-[0.3em] text-[#95FF0B]" data-i18n="general.prompt">
-              {generalApplicationCopy.prompt[defaultLanguage]}
-            </p>
-            <h3 class="mt-4 text-3xl font-semibold" data-i18n="general.title">
-              {generalApplicationCopy.title[defaultLanguage]}
-            </h3>
-            <p class="mt-3 text-base text-white/80" data-i18n="general.description">
-              {generalApplicationCopy.description[defaultLanguage]}
-            </p>
-            <a
-              href="/jobs/apply"
-              class="mt-8 inline-flex items-center justify-center rounded-2xl bg-[#95FF0B] px-8 py-3 font-semibold text-[#031005] transition hover:translate-y-[-2px]"
-              data-i18n="general.button"
-            >
-              {generalApplicationCopy.button[defaultLanguage]}
-            </a>
-          </div>
-        </section>
-      </main>
-    </div>
-  </div>
-</Layout>
+    <Footer />
+    <AlaizaAssistant client:load />
+  </body>
+</html>
 
 <style>
-  .jobs-bg {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(circle at 15% 20%, rgba(149, 255, 11, 0.18), transparent 55%),
-      radial-gradient(circle at 80% 0%, rgba(0, 166, 255, 0.15), transparent 55%),
-      linear-gradient(160deg, rgba(2, 9, 20, 1), rgba(1, 5, 14, 1));
-    opacity: 0.95;
-    pointer-events: none;
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: #0d1117;
+    background-color: #fff;
   }
 
-  .jobs-bg::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
-    background-size: 60px 60px;
-    opacity: 0.4;
+  .jobs-main {
+    width: 100%;
+  }
+
+  .jobs-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  /* Typography Utilities */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Hero Section */
+  .jobs-hero {
+    padding-top: 8rem;
+    padding-bottom: 4rem;
+  }
+
+  .hero-badge {
+    color: #0066cc;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+
+  .hero-title {
+    margin-bottom: 2rem;
+  }
+
+  .hero-description {
+    max-width: 48rem; /* 3xl */
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 3rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @media (min-width: 640px) {
+    .hero-actions {
+      flex-direction: row;
+    }
+  }
+
+  .hero-stats-grid {
+    margin-top: 5rem;
+    display: grid;
+    gap: 2rem;
+  }
+
+  @media (min-width: 640px) {
+    .hero-stats-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-value {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: #0d1117;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Sections General */
+  .jobs-section {
+    padding: 6rem 0;
+  }
+
+  .bg-gray {
+    background-color: #f9fafb;
+  }
+
+  .section-header {
+    margin-bottom: 3rem;
+  }
+
+  .section-badge {
+    color: #0066cc;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .section-title {
+    margin-bottom: 1rem;
+  }
+
+  .section-description {
+    max-width: 48rem;
+  }
+
+  /* Jobs Grid */
+  .jobs-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .jobs-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* Job Card */
+  .job-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    border: 1px solid #f3f4f6;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .job-card:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border-color: #0066cc;
+  }
+
+  .job-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-bottom: 1.5rem;
+  }
+
+  .meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .meta-icon {
+    height: 1rem;
+    width: 1rem;
+  }
+
+  .job-title {
+    margin-bottom: 1rem;
+  }
+
+  .job-summary {
+    margin-bottom: 1.5rem;
+  }
+
+  .job-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .job-tag {
+    background-color: #f3f4f6;
+    color: #4b5563;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+  }
+
+  .job-cta {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: #0066cc;
+  }
+
+  .cta-icon {
+    height: 1.25rem;
+    width: 1.25rem;
+    transition: transform 0.2s ease;
+  }
+
+  .job-card:hover .cta-icon {
+    transform: translateX(4px);
+  }
+
+  /* Culture Section */
+  .culture-grid {
+    display: grid;
+    gap: 3rem;
+  }
+
+  @media (min-width: 768px) {
+    .culture-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .culture-title {
+    color: #0066cc;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  /* General Application Card */
+  .general-app-card {
+    background-color: #f9fafb;
+    border: 1px solid #f3f4f6;
+    border-radius: 1.5rem;
+    padding: 3rem;
+  }
+
+  .general-title {
+    margin-bottom: 1.5rem;
+  }
+
+  .general-description {
+    max-width: 42rem; /* 2xl */
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2.5rem;
   }
 </style>
+</html>
