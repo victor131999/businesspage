@@ -81,13 +81,14 @@ import { AlaizaAssistant } from "../components/AlaizaAssistant";
         var quoteModal = document.querySelector("#quote-modal");
         var closeQuoteBtn = document.querySelector("#close-quote-modal");
         var quoteModalOverlay = document.querySelector("[data-close-quote-modal]");
-        var MEETINGS_BASE_URL = "https://meetings.hubspot.com/gmantilla?embed=true";
         function openQuoteModal() {
           if (!quoteModal) return;
+          var container = document.querySelector(".meetings-iframe-container");
+          var lang = (window.__uiLanguage || localStorage.getItem("ui-language") || "es").toLowerCase();
+          var baseUrl = (container && (lang === "en" ? container.getAttribute("data-src-en") : container.getAttribute("data-src-es"))) || "https://meetings.hubspot.com/gmantilla?embed=true";
           var emailInput = document.querySelector(".welcome-input");
           var email = emailInput && emailInput.value ? emailInput.value.trim() : "";
-          var embedUrl = email ? MEETINGS_BASE_URL + "&email=" + encodeURIComponent(email) : MEETINGS_BASE_URL;
-          var container = document.querySelector(".meetings-iframe-container");
+          var embedUrl = email ? baseUrl + "&email=" + encodeURIComponent(email) : baseUrl;
           if (container) {
             container.setAttribute("data-src", embedUrl);
             var iframe = container.querySelector("iframe");
