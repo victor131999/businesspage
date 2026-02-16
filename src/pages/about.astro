@@ -33,18 +33,35 @@ import Title from "../components/design-system/atoms/Title.astro";
         <div class="about-content__inner">
           <Title level={2} variant="section" class="about-content__heading" data-about-section-1-title>Nuestra misión</Title>
           <p class="about-body" data-about-section-1-p1>
-            En Zelify estamos redefiniendo la forma en que el mundo interactúa con las finanzas. Nuestra misión es construir una infraestructura financiera más inteligente, transparente y accesible, impulsada por tecnología avanzada e inteligencia artificial. Diseñamos experiencias que eliminan la complejidad operativa, fortalecen la seguridad y permiten que personas y empresas tomen decisiones financieras con confianza y visión estratégica.
+            Zelify digitaliza servicios a instituciones financieras reguladas en latinoamérica, construye tu stack neobancario con una sola línea de código; lo que significa romper con los modelos tradicionales que han limitado el acceso al sistema financiero.
+          </p>
+          <p class="about-body" data-about-section-1-p2>
+            Buscamos potenciar las instituciones financieras con inteligencia artificial accesible, democratizar los servicios financieros y simplificar las finanzas.
           </p>
 
           <Title level={2} variant="section" class="about-content__heading" data-about-section-2-title>Quiénes somos</Title>
           <p class="about-body" data-about-section-2-p1>
-            Zelify es una plataforma fintech de nueva generación que integra identidad digital, cumplimiento normativo, cuentas, tarjetas, pagos y transferencias en un ecosistema unificado. Combinamos innovación tecnológica con un enfoque global para desarrollar soluciones escalables que se adaptan a la evolución del sector financiero. Nuestro equipo está formado por especialistas en tecnología, finanzas y experiencia de usuario, comprometidos con construir productos que conectan eficiencia operativa, diseño sofisticado y una visión centrada en el futuro.
+            Zelify integra en una sola plataforma digital: autenticación y validación de identidad, cumplimiento AML, digitalización de cuentas, emisión y procesamiento de tarjetas, transferencias locales e internacionales, pagos múltiples, programas de descuentos y cupones.
+          </p>
+          <p class="about-body" data-about-section-2-p2>
+            Identificamos las necesidades de digitalización financiera y activamos los productos requeridos en una sola implementación a través de un onboarding simple y sin fricción.
+          </p>
+          <p class="about-body" data-about-section-2-p3>
+            Potenciados por IA, operamos como un stack tecnológico neobancario con modelos entrenados para el sector financiero. Desde el monitoreo continuo hasta la optimización operativa, la IA es el núcleo con el cual revolucionamos los servicios financieros.
+          </p>
+          <p class="about-body" data-about-section-2-p4>
+            Dividimos los servicios individualizados que se entregan en APIs o SDKs que facilitan una rápida integración sobre las tecnologías de nuestros clientes.
           </p>
 
-          <Title level={2} variant="section" class="about-content__heading" data-about-section-3-title>Contacto</Title>
-          <p class="about-body" data-about-section-3-p1>
-            Estamos abiertos a nuevas oportunidades, alianzas estratégicas y conversaciones que impulsen la innovación financiera. Si deseas conocer más sobre Zelify o explorar cómo podemos colaborar, te invitamos a comunicarte con nuestro equipo a través de nuestros canales oficiales. Estaremos encantados de acompañarte en el siguiente paso hacia una experiencia financiera más inteligente.
-          </p>
+          <Title level={2} variant="section" class="about-content__heading" data-about-section-3-title>Beneficios clave</Title>
+          <ul class="about-benefits" aria-label="Beneficios clave">
+            <li class="about-benefits__item" data-about-benefit="1">Paga solo lo que usas y escala sin fricción con los precios más bajos del mercado.</li>
+            <li class="about-benefits__item" data-about-benefit="2">Una sola integración, un solo proveedor de múltiples servicios.</li>
+            <li class="about-benefits__item" data-about-benefit="3">De diseño a producción con una sola línea de integración.</li>
+            <li class="about-benefits__item" data-about-benefit="4">Distintos mecanismos de entrega de servicios como SDKs o APIs.</li>
+            <li class="about-benefits__item" data-about-benefit="5">Servicios diseñados para que nuestros clientes moneticen y generen un retorno de inversión.</li>
+            <li class="about-benefits__item" data-about-benefit="6">Time to market reducido.</li>
+          </ul>
         </div>
       </section>
     </main>
@@ -61,7 +78,7 @@ import Title from "../components/design-system/atoms/Title.astro";
       ]}
       legalText="Zelify is a technology platform currently in a development phase, not yet deployed or operational, and does not provide or process financial services directly; all financial operations are conducted exclusively through regulated third-party partners."
       copyrightText="© 2025 Zelify. All rights reserved."
-      dataI18n={{ quicklinks: "footer.quicklinks", legal: "footer.legal", copyright: "footer.copyright" }}
+      dataI18n={{ legal: "footer.legal", copyright: "footer.copyright" }}
     />
   </body>
 </html>
@@ -72,21 +89,39 @@ import Title from "../components/design-system/atoms/Title.astro";
       heroTitle: "Nosotros",
       heroLead: "Construimos la infraestructura que impulsa los productos financieros modernos.",
       section1Title: "Nuestra misión",
-      section1P1: "En Zelify estamos redefiniendo la forma en que el mundo interactúa con las finanzas. Nuestra misión es construir una infraestructura financiera más inteligente, transparente y accesible, impulsada por tecnología avanzada e inteligencia artificial. Diseñamos experiencias que eliminan la complejidad operativa, fortalecen la seguridad y permiten que personas y empresas tomen decisiones financieras con confianza y visión estratégica.",
+      section1P1: "Zelify digitaliza servicios a instituciones financieras reguladas en latinoamérica, construye tu stack neobancario con una sola línea de código; lo que significa romper con los modelos tradicionales que han limitado el acceso al sistema financiero.",
+      section1P2: "Buscamos potenciar las instituciones financieras con inteligencia artificial accesible, democratizar los servicios financieros y simplificar las finanzas.",
       section2Title: "Quiénes somos",
-      section2P1: "Zelify es una plataforma fintech de nueva generación que integra identidad digital, cumplimiento normativo, cuentas, tarjetas, pagos y transferencias en un ecosistema unificado. Combinamos innovación tecnológica con un enfoque global para desarrollar soluciones escalables que se adaptan a la evolución del sector financiero. Nuestro equipo está formado por especialistas en tecnología, finanzas y experiencia de usuario, comprometidos con construir productos que conectan eficiencia operativa, diseño sofisticado y una visión centrada en el futuro.",
-      section3Title: "Contacto",
-      section3P1: "Estamos abiertos a nuevas oportunidades, alianzas estratégicas y conversaciones que impulsen la innovación financiera. Si deseas conocer más sobre Zelify o explorar cómo podemos colaborar, te invitamos a comunicarte con nuestro equipo a través de nuestros canales oficiales. Estaremos encantados de acompañarte en el siguiente paso hacia una experiencia financiera más inteligente.",
+      section2P1: "Zelify integra en una sola plataforma digital: autenticación y validación de identidad, cumplimiento AML, digitalización de cuentas, emisión y procesamiento de tarjetas, transferencias locales e internacionales, pagos múltiples, programas de descuentos y cupones.",
+      section2P2: "Identificamos las necesidades de digitalización financiera y activamos los productos requeridos en una sola implementación a través de un onboarding simple y sin fricción.",
+      section2P3: "Potenciados por IA, operamos como un stack tecnológico neobancario con modelos entrenados para el sector financiero. Desde el monitoreo continuo hasta la optimización operativa, la IA es el núcleo con el cual revolucionamos los servicios financieros.",
+      section2P4: "Dividimos los servicios individualizados que se entregan en APIs o SDKs que facilitan una rápida integración sobre las tecnologías de nuestros clientes.",
+      section3Title: "Beneficios clave",
+      benefit1: "Paga solo lo que usas y escala sin fricción con los precios más bajos del mercado.",
+      benefit2: "Una sola integración, un solo proveedor de múltiples servicios.",
+      benefit3: "De diseño a producción con una sola línea de integración.",
+      benefit4: "Distintos mecanismos de entrega de servicios como SDKs o APIs.",
+      benefit5: "Servicios diseñados para que nuestros clientes moneticen y generen un retorno de inversión.",
+      benefit6: "Time to market reducido.",
     },
     en: {
       heroTitle: "About us",
       heroLead: "We build the infrastructure that powers modern financial products.",
       section1Title: "Our mission",
-      section1P1: "At Zelify we are redefining how the world interacts with finance. Our mission is to build a smarter, more transparent and accessible financial infrastructure, powered by advanced technology and artificial intelligence. We design experiences that remove operational complexity, strengthen security and enable people and businesses to make financial decisions with confidence and strategic vision.",
+      section1P1: "Zelify digitizes services for regulated financial institutions in Latin America—build your neobanking stack with a single line of code; breaking away from traditional models that have limited access to the financial system.",
+      section1P2: "We aim to empower financial institutions with accessible artificial intelligence, democratize financial services, and simplify finance.",
       section2Title: "Who we are",
-      section2P1: "Zelify is a next-generation fintech platform that integrates digital identity, regulatory compliance, accounts, cards, payments and transfers in a unified ecosystem. We combine technological innovation with a global approach to develop scalable solutions that adapt to the evolution of the financial sector. Our team is made up of specialists in technology, finance and user experience, committed to building products that connect operational efficiency, sophisticated design and a future-focused vision.",
-      section3Title: "Contact",
-      section3P1: "We are open to new opportunities, strategic alliances and conversations that drive financial innovation. If you would like to learn more about Zelify or explore how we can work together, we invite you to get in touch with our team through our official channels. We will be delighted to support you in the next step towards a smarter financial experience.",
+      section2P1: "Zelify integrates into a single digital platform: authentication and identity verification, AML compliance, account digitization, card issuance and processing, local and international transfers, multiple payment methods, and discount and coupon programs.",
+      section2P2: "We identify financial digitalization needs and activate the required products in a single implementation through a simple, frictionless onboarding.",
+      section2P3: "Powered by AI, we operate as a neobanking technology stack with models trained for the financial sector. From continuous monitoring to operational optimization, AI is the core with which we are revolutionizing financial services.",
+      section2P4: "We deliver individualized services through APIs or SDKs that enable rapid integration with our clients' technologies.",
+      section3Title: "Key benefits",
+      benefit1: "Pay only for what you use and scale without friction with the lowest market prices.",
+      benefit2: "One integration, one provider for multiple services.",
+      benefit3: "From design to production with a single integration line.",
+      benefit4: "Different service delivery mechanisms such as SDKs or APIs.",
+      benefit5: "Services designed so our clients can monetize and generate a return on investment.",
+      benefit6: "Reduced time to market.",
     },
   };
   function getLang() {
@@ -107,10 +142,18 @@ import Title from "../components/design-system/atoms/Title.astro";
     if (leadEl) leadEl.textContent = t.heroLead;
     set("[data-about-section-1-title]", t.section1Title);
     set("[data-about-section-1-p1]", t.section1P1);
+    set("[data-about-section-1-p2]", t.section1P2);
     set("[data-about-section-2-title]", t.section2Title);
     set("[data-about-section-2-p1]", t.section2P1);
+    set("[data-about-section-2-p2]", t.section2P2);
+    set("[data-about-section-2-p3]", t.section2P3);
+    set("[data-about-section-2-p4]", t.section2P4);
     set("[data-about-section-3-title]", t.section3Title);
-    set("[data-about-section-3-p1]", t.section3P1);
+    for (let i = 1; i <= 6; i++) {
+      set(`[data-about-benefit="${i}"]`, (t as Record<string, string>)[`benefit${i}`] || "");
+    }
+    const list = document.querySelector(".about-benefits");
+    if (list) list.setAttribute("aria-label", lang === "es" ? "Beneficios clave" : "Key benefits");
     document.documentElement.lang = lang === "es" ? "es" : "en";
   }
   if (typeof document !== "undefined") {
@@ -181,6 +224,30 @@ import Title from "../components/design-system/atoms/Title.astro";
     line-height: 1.65;
     color: var(--ds-color-text);
     margin: 0 0 var(--ds-space-6);
+  }
+
+  .about-benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--ds-space-6);
+  }
+  .about-benefits__item {
+    font-size: clamp(1rem, 1.4vw, 1.15rem);
+    line-height: 1.65;
+    color: var(--ds-color-text);
+    margin: 0 0 var(--ds-space-3);
+    padding-left: 1.5rem;
+    position: relative;
+  }
+  .about-benefits__item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 0.4em;
+    height: 0.4em;
+    background: var(--ds-color-primary);
+    border-radius: 50%;
   }
 
   @media (max-width: 639px) {
