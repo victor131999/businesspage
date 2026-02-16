@@ -228,7 +228,7 @@ export default function IdentityCard({ isDemoEnabled = true }: { isDemoEnabled?:
             {/* Animation */}
             <div className="relative -mb-4 flex-shrink-0 z-0 flex justify-center mt-8">
                 <img
-                    src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+                    src="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/background_videos/animation1.gif"
                     alt="Identity Animation"
                     className="h-44 w-44 object-contain opacity-90 mix-blend-multiply"
                 />
@@ -365,7 +365,7 @@ export default function IdentityCard({ isDemoEnabled = true }: { isDemoEnabled?:
             {/* Animation */}
             <div className="relative -mb-12 flex-shrink-0 z-0 flex justify-center mt-8">
                 <img
-                    src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+                    src="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/background_videos/animation1.gif"
                     alt="Identity Animation"
                     className="h-44 w-44 object-contain opacity-90 mix-blend-multiply"
                 />
@@ -711,7 +711,7 @@ export default function IdentityCard({ isDemoEnabled = true }: { isDemoEnabled?:
                     {/* GIF Fondo */}
                     <div className="relative -mb-16 z-0 flex justify-center">
                         <img
-                            src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+                            src="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/background_videos/animation1.gif"
                             alt="Animation"
                             className="h-48 w-48 object-contain opacity-90 mix-blend-multiply"
                         />

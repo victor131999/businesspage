@@ -424,7 +424,7 @@ export function BasicServicesPreviewPanel({
         {showGifAndBlur && (
           <div className="absolute top-0 left-0 right-0 h-1/2 z-0 px-4 overflow-hidden flex items-center justify-center pt-4">
             <img
-              src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+              src="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/background_videos/animation1.gif"
               alt="Animación"
               className="w-[140%] h-auto object-contain"
             />

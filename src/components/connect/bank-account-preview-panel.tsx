@@ -1241,7 +1241,7 @@ export function BankAccountPreviewPanel({
         {/* SVG Geométrico Reemplazado por GIF Animado */}
         <div className="relative flex-shrink-0 z-0 mb-2 flex justify-center">
           <img
-            src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+            src="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/background_videos/animation1.gif"
             alt="Connecting Animation"
             className="h-32 w-32 object-contain opacity-90 mix-blend-multiply dark:mix-blend-normal"
           />
@@ -1735,7 +1735,7 @@ export function BankAccountPreviewPanel({
         {/* GIF Animado */}
         <div className="relative flex-shrink-0 z-0 mb-2 flex justify-center">
           <img
-            src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+            src="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/background_videos/animation1.gif"
             alt="Wallet Animation"
             className="h-64 w-64 object-contain opacity-90 mix-blend-multiply dark:mix-blend-normal"
           />
@@ -1989,7 +1989,7 @@ export function BankAccountPreviewPanel({
         {/* GIF Animado */}
         <div className="relative flex-shrink-0 z-0 mb-2 flex justify-center">
           <img
-            src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+            src="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/background_videos/animation1.gif"
             alt="Deposit Animation"
             className="h-48 w-48 object-contain opacity-90 mix-blend-multiply dark:mix-blend-normal"
           />

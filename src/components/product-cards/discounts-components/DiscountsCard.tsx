@@ -340,7 +340,7 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
 
                 <div className="relative w-40 h-40 flex items-center justify-center mt-8 mb-[-50px] shrink-0 z-0 mx-auto">
                     <img
-                        src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+                        src="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/background_videos/animation1.gif"
                         alt="Animación"
                         className="w-full h-full object-contain opacity-80"
                     />
@@ -377,7 +377,7 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
             <div className="flex-1 flex flex-col items-center pt-4 px-2 pb-12 z-10 min-h-0">
                 <div className="relative w-32 h-32 flex items-center justify-center min-h-[50px] mb-4 mt-8 shrink z-20">
                     <img
-                        src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+                        src="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/background_videos/animation1.gif"
                         alt="Animación"
                         className="w-full h-full object-contain opacity-80"
                     />
@@ -588,7 +588,7 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
             <div className="absolute top-10 left-0 right-0 flex justify-center z-0">
                 <div className="w-64 h-64 flex items-center justify-center">
                     <img
-                        src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+                        src="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/background_videos/animation1.gif"
                         alt="Animación"
                         className="w-full h-full object-contain opacity-80"
                     />
@@ -632,7 +632,7 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
             <div className="absolute top-10 left-0 right-0 flex justify-center z-0">
                 <div className="w-64 h-64 flex items-center justify-center">
                     <img
-                        src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+                        src="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/background_videos/animation1.gif"
                         alt="Animación"
                         className="w-full h-full object-contain opacity-80"
                     />
@@ -686,7 +686,7 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
             <div className="absolute top-10 left-0 right-0 flex justify-center z-0">
                 <div className="w-64 h-64 flex items-center justify-center">
                     <img
-                        src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+                        src="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/background_videos/animation1.gif"
                         alt="Animación"
                         className="w-full h-full object-contain opacity-80"
                     />
@@ -821,7 +821,7 @@ function DiscountsCardContent({ isDemoEnabled = true }: { isDemoEnabled?: boolea
                 <div className="flex-1 flex flex-col items-center relative z-10 min-h-0 pt-4">
                     <div className="relative w-64 h-64 flex items-center justify-center shrink min-h-[120px] -mb-16 z-0">
                         <img
-                            src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+                            src="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/background_videos/animation1.gif"
                             alt="Animación"
                             className="w-full h-full object-contain opacity-80"
                         />

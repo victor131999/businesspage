@@ -490,7 +490,7 @@ export default function ConnectCard({ isDemoEnabled = true }: { isDemoEnabled?: 
                 {/* Animated GIF - Behind the card */}
                 <div className="relative -mb-10 flex-shrink-0 z-0 flex justify-center mt-2">
                     <img
-                        src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+                        src="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/background_videos/animation1.gif"
                         alt="Security Animation"
                         className="h-40 w-40 object-contain opacity-90 mix-blend-multiply"
                     />
@@ -773,7 +773,7 @@ export default function ConnectCard({ isDemoEnabled = true }: { isDemoEnabled?: 
                 {/* GIF Animation - Top Centered - Reduced size */}
                 <div className="relative flex-shrink-0 z-0 flex justify-center -mb-6 mt-2">
                     <img
-                        src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+                        src="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/background_videos/animation1.gif"
                         alt="Wallet Animation"
                         className="h-48 w-48 object-contain opacity-90"
                     />
@@ -924,7 +924,7 @@ export default function ConnectCard({ isDemoEnabled = true }: { isDemoEnabled?: 
             <div className="flex h-full flex-col overflow-y-auto relative">
                 <div className="relative flex-shrink-0 z-0 mb-2 flex justify-center">
                     <img
-                        src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+                        src="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/background_videos/animation1.gif"
                         alt="Deposit Animation"
                         className="h-48 w-48 object-contain opacity-90"
                     />

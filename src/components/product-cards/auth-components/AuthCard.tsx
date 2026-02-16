@@ -370,7 +370,7 @@ export function AuthCard({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) 
             {/* Animated GIF */}
             <div className="relative -mb-12 flex-shrink-0 z-0 flex justify-center">
                 <img
-                    src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+                    src="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/background_videos/animation1.gif"
                     alt="Connecting Animation"
                     className="h-40 w-40 object-contain opacity-90 mix-blend-multiply"
                 />
@@ -722,7 +722,7 @@ export function AuthCard({ isDemoEnabled = true }: { isDemoEnabled?: boolean }) 
             {/* Animated GIF */}
             <div className="relative -mb-12 flex-shrink-0 z-0 flex justify-center mt-4">
                 <img
-                    src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+                    src="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/background_videos/animation1.gif"
                     alt="Connecting Animation"
                     className="h-40 w-40 object-contain opacity-90 mix-blend-multiply"
                 />

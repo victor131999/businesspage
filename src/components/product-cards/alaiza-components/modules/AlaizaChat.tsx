@@ -371,7 +371,7 @@ export default function AlaizaChat() {
             {/* GIF Animation - Background Layer */}
             <div className="absolute top-15 left-0 right-0 flex justify-center z-0 pointer-events-none">
                 <img
-                    src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+                    src="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/background_videos/animation1.gif"
                     alt="Connecting Animation"
                     className="h-48 w-48 object-contain opacity-90 mix-blend-multiply"
                 />

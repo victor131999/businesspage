@@ -827,7 +827,7 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
           {/* Animated GIF Hero - positioned to overlap */}
           <div className="relative -mb-16 z-0 flex justify-center">
             <img
-              src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+              src="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/background_videos/animation1.gif"
               alt={translations.preview.header.heroAlt}
               className="h-48 w-48 object-contain opacity-90 mix-blend-multiply dark:mix-blend-normal"
             />
@@ -971,7 +971,7 @@ export function PreviewPanel({ config, updateConfig }: PreviewPanelProps) {
         {/* Animated GIF Hero - positioned to overlap */}
         <div className="relative -mb-16 z-0 flex justify-center">
           <img
-            src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/animation1.gif"
+            src="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/background_videos/animation1.gif"
             alt={translations.preview.header.heroAlt}
             className="h-48 w-48 object-contain opacity-90 mix-blend-multiply dark:mix-blend-normal"
           />
