@@ -1,78 +1,88 @@
 ---
 /**
- * Organism: Footer
- * Footer unificado: logo Zelify, enlaces rápidos, disclaimer legal y copyright.
- * Responsive: grid 2 columnas → flex row → columna centrada en móvil.
+ * Organism: Mega-footer fintech/SaaS (estilo Plaid).
+ * Grid 4 columnas: Productos, Desarrolladores, Recursos, Empresa. Acordeón en mobile. Bottom bar: copyright | locale | privacy + social.
+ * Accesible, alto contraste, espaciado amplio.
  */
-
-
 export interface FooterLink {
   href: string;
   label: string;
   dataI18n?: string;
-  /** Si es true, abre en nueva pestaña (target="_blank" rel="noopener noreferrer") */
   openInNewTab?: boolean;
 }
-
-interface Props {
-  quickLinksTitle?: string;
-  links?: FooterLinkWithKey[];
-  legalText?: string;
-  copyrightText?: string;
-  /** Claves data-i18n para traducción (ej. index) */
-  dataI18n?: {
-    quicklinks?: string;
-    legal?: string;
-    copyright?: string;
-  };
-}
-
 export interface FooterLinkWithKey extends FooterLink {
   key?: string;
 }
 
-const defaultLinks: FooterLinkWithKey[] = [
-  { href: "", label: "Products", key: "products" },
-  { href: "https://docs.zelify.com", label: "Developers", key: "developers", openInNewTab: true },
-  { href: "/blog", label: "Blog", key: "blog" },
-  { href: "/jobs", label: "Work with us", key: "workWithUs" },
-  { href: "/about", label: "About us", key: "aboutUs" },
-  { href: "/privacy", label: "Privacy policy", key: "privacyPolicy" },
-];
-
-/** Enlaces a productos que se muestran al expandir "Products" en el footer */
-const productLinks: { href: string; labelKey: string }[] = [
-  { href: "/auth", labelKey: "auth" },
-  { href: "/identity", labelKey: "identity" },
-  { href: "/aml", labelKey: "aml" },
-  { href: "/connect", labelKey: "connect" },
-  { href: "/cards", labelKey: "cards" },
-  { href: "/tx", labelKey: "tx" },
-  { href: "/transfers", labelKey: "paymentsTransfers" },
-  { href: "/discounts", labelKey: "discounts" },
-  { href: "/alaiza", labelKey: "alaiza" },
-];
+interface Props {
+  /** @deprecated Mega-footer usa columnas internas; se ignora. */
+  quickLinksTitle?: string;
+  /** @deprecated Mega-footer usa FOOTER_COLUMNS; se ignora. */
+  links?: FooterLinkWithKey[];
+  legalText?: string;
+  copyrightText?: string;
+  dataI18n?: { legal?: string; copyright?: string };
+}
 
 const defaultLegal =
   "Zelify is a technology platform currently in a development phase, not yet deployed or operational, and does not provide or process financial services directly; all financial operations are conducted exclusively through regulated third-party partners.";
 
-const {
-  quickLinksTitle = "Quick links",
-  links = defaultLinks,
-  legalText = defaultLegal,
-  copyrightText = "© 2025 Zelify. All rights reserved.",
-  dataI18n,
-} = Astro.props;
+const { legalText = defaultLegal, copyrightText = "© 2025 Zelify. All rights reserved.", dataI18n } = Astro.props;
+
+/** Estructura de columnas del mega-footer. labelKey = clave en FOOTER_T */
+type ColLink = { href: string; labelKey: string; openInNewTab?: boolean };
+type Col = { id: string; titleKey: string; links: ColLink[] };
+
+const FOOTER_COLUMNS: Col[] = [
+  {
+    id: "products",
+    titleKey: "colProducts",
+    links: [
+      { href: "/auth", labelKey: "auth" },
+      { href: "/identity", labelKey: "identity" },
+      { href: "/aml", labelKey: "aml" },
+      { href: "/connect", labelKey: "connect" },
+      { href: "/cards", labelKey: "cards" },
+      { href: "/tx", labelKey: "tx" },
+      { href: "/transfers", labelKey: "paymentsTransfers" },
+      { href: "/discounts", labelKey: "discounts" },
+      { href: "/alaiza", labelKey: "alaiza" },
+    ],
+  },
+  {
+    id: "developers",
+    titleKey: "colDevelopers",
+    links: [
+      { href: "https://docs.zelify.com", labelKey: "devDocs", openInNewTab: true },
+      { href: "https://docs.zelify.com/api-reference", labelKey: "devApiDocs", openInNewTab: true },
+    ],
+  },
+  {
+    id: "resources",
+    titleKey: "colResources",
+    links: [
+      { href: "/blog", labelKey: "resBlog" },
+      { href: "https://demo.zelify.com/login", labelKey: "resDemo", openInNewTab: true },
+      { href: "/clips", labelKey: "resVideoDemo" },
+    ],
+  },
+  {
+    id: "company",
+    titleKey: "colCompany",
+    links: [
+      { href: "/about", labelKey: "aboutUs" },
+      { href: "/jobs", labelKey: "workWithUs" },
+      { href: "/privacy", labelKey: "privacyPolicy" },
+    ],
+  },
+];
 
 const FOOTER_T = {
   es: {
-    quickLinks: "Enlaces rápidos",
-    products: "Productos",
-    developers: "Desarrolladores",
-    blog: "Blog",
-    workWithUs: "Trabaja con nosotros",
-    aboutUs: "Nosotros",
-    privacyPolicy: "Política de privacidad",
+    colProducts: "Productos",
+    colDevelopers: "Desarrolladores",
+    colResources: "Recursos",
+    colCompany: "Empresa",
     auth: "Auth",
     identity: "Identity",
     aml: "AML",
@@ -82,18 +92,25 @@ const FOOTER_T = {
     paymentsTransfers: "Pagos y Transferencias",
     discounts: "Descuentos y Cupones",
     alaiza: "Alaiza AI Fintech Core",
-    legal:
-      "Zelify es una plataforma tecnológica actualmente en fase de desarrollo, aún no desplegada u operativa, y no proporciona ni procesa servicios financieros directamente; todas las operaciones financieras se realizan exclusivamente a través de socios terceros regulados.",
+    devDocs: "Documentación",
+    devApiDocs: "Documentación API",
+    resBlog: "Blog",
+    resDemo: "Demo Zelify",
+    resVideoDemo: "Video Demo tour",
+    aboutUs: "Nosotros",
+    workWithUs: "Trabaja con nosotros",
+    privacyPolicy: "Política de privacidad",
+    legal: "Zelify es una plataforma tecnológica actualmente en fase de desarrollo, aún no desplegada u operativa, y no proporciona ni procesa servicios financieros directamente; todas las operaciones financieras se realizan exclusivamente a través de socios terceros regulados.",
     copyright: "© 2025 Zelify. Todos los derechos reservados.",
+    language: "Idioma",
+    langEs: "Español",
+    langEn: "English",
   },
   en: {
-    quickLinks: "Quick links",
-    products: "Products",
-    developers: "Developers",
-    blog: "Blog",
-    workWithUs: "Work with us",
-    aboutUs: "About us",
-    privacyPolicy: "Privacy policy",
+    colProducts: "Products",
+    colDevelopers: "Developers",
+    colResources: "Resources",
+    colCompany: "Company",
     auth: "Auth",
     identity: "Identity",
     aml: "AML",
@@ -103,575 +120,614 @@ const FOOTER_T = {
     paymentsTransfers: "Payments and Transfers",
     discounts: "Discounts & Coupons",
     alaiza: "Alaiza AI Fintech Core",
+    devDocs: "Documentation",
+    devApiDocs: "API documentation",
+    resBlog: "Blog",
+    resDemo: "Demo Zelify",
+    resVideoDemo: "Video Demo tour",
+    aboutUs: "About us",
+    workWithUs: "Work with us",
+    privacyPolicy: "Privacy policy",
     legal: defaultLegal,
     copyright: "© 2025 Zelify. All rights reserved.",
+    language: "Language",
+    langEs: "Español",
+    langEn: "English",
   },
 };
+
+/** Redes sociales: href puede sustituirse por URLs reales */
+const SOCIAL_LINKS = [
+  { href: "https://www.linkedin.com/company/zelify", labelKey: "LinkedIn", icon: "linkedin", openInNewTab: true },
+];
 ---
 
-<footer class="footer-section">
-  <div class="footer-container">
-    <div class="footer-top">
-      <div class="footer-logo">
-        <img
-          src="/images/zelify_logo2.png"
-          alt="Zelify"
-        />
+
+<footer class="footer-mega" role="contentinfo">
+  <div class="footer-mega__container">
+    <div class="footer-mega__top" id="footer-mega-top">
+      <div class="footer-mega__logo">
+        <a href="/" class="footer-mega__logo-link" aria-label="Zelify home">
+          <img src="/images/zelify_logo2.png" alt="Zelify" width="120" height="40" />
+        </a>
       </div>
-      <div class="footer-quick-links">
-        <h3
-          class="quick-links-title"
-          data-footer-i18n="quickLinks"
-          {...(dataI18n?.quicklinks && { "data-i18n": dataI18n.quicklinks })}
-        >
-          {quickLinksTitle}
-        </h3>
-        <ul class="quick-links-list">
-          {
-            links.map((link) => {
-              const isProducts = (link as FooterLinkWithKey).key === "products";
-              return (
-                <>
-                  {isProducts && (
-                    <li>
-                      <button
-                        type="button"
-                        class="footer-link-button footer-products-trigger"
-                        data-footer-key="products"
-                        aria-expanded="false"
-                        aria-controls="footer-products-panel"
-                        {...(link.dataI18n && { "data-i18n": link.dataI18n })}
-                      >
-                        <span class="footer-products-trigger__text">{link.label}</span>
-                        <span class="footer-products-trigger__chevron" aria-hidden="true">‹</span>
-                      </button>
-                    </li>
-                  )}
-                  {isProducts && (
-                    <li class="footer-products-panel-li">
-                      <div
-                        id="footer-products-panel"
-                        class="footer-products-panel"
-                        role="region"
-                        aria-label="Productos"
-                        aria-hidden="true"
-                      >
-                        <div class="footer-products-panel__inner">
-                          <div class="footer-products-panel__grid">
-                            <div class="footer-products-panel__col">
-                              {
-                                productLinks.slice(0, 3).map((item) => (
-                                  <a
-                                    href={item.href}
-                                    class="footer-products-panel__link"
-                                    data-footer-product={item.labelKey}
-                                  >
-                                    {FOOTER_T.en[item.labelKey as keyof typeof FOOTER_T.en] ?? item.labelKey}
-                                  </a>
-                                ))
-                              }
-                            </div>
-                            <div class="footer-products-panel__col">
-                              {
-                                productLinks.slice(3, 6).map((item) => (
-                                  <a
-                                    href={item.href}
-                                    class="footer-products-panel__link"
-                                    data-footer-product={item.labelKey}
-                                  >
-                                    {FOOTER_T.en[item.labelKey as keyof typeof FOOTER_T.en] ?? item.labelKey}
-                                  </a>
-                                ))
-                              }
-                            </div>
-                            <div class="footer-products-panel__col">
-                              {
-                                productLinks.slice(6, 9).map((item) => (
-                                  <a
-                                    href={item.href}
-                                    class="footer-products-panel__link"
-                                    data-footer-product={item.labelKey}
-                                  >
-                                    {FOOTER_T.en[item.labelKey as keyof typeof FOOTER_T.en] ?? item.labelKey}
-                                  </a>
-                                ))
-                              }
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                  )}
-                  {!isProducts && (
-                    <li>
-                      <a
-                        href={link.href}
-                        {...(link.openInNewTab && {
-                          target: "_blank",
-                          rel: "noopener noreferrer",
-                        })}
-                        {...((link as FooterLinkWithKey).key && {
-                          "data-footer-key": (link as FooterLinkWithKey).key,
-                        })}
-                        {...(link.dataI18n && { "data-i18n": link.dataI18n })}
-                      >
-                        {link.label}
-                      </a>
-                    </li>
-                  )}
-                </>
-              );
-            })
-          }
-        </ul>
-      </div>
+      {
+        FOOTER_COLUMNS.map((col) => (
+          <nav class="footer-mega__col" data-col-id={col.id} aria-labelledby={`footer-heading-${col.id}`}>
+            <h3
+              id={`footer-heading-${col.id}`}
+              class="footer-mega__col-title"
+              data-footer-col-title={col.id}
+            >
+              {FOOTER_T.en[col.titleKey as keyof typeof FOOTER_T.en]}
+            </h3>
+            <ul class="footer-mega__col-list">
+              {col.links.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    class="footer-mega__link"
+                    data-footer-label={link.labelKey}
+                    {...(link.openInNewTab && { target: "_blank", rel: "noopener noreferrer" })}
+                  >
+                    {FOOTER_T.en[link.labelKey as keyof typeof FOOTER_T.en]}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ))
+      }
     </div>
-    <div class="footer-bottom">
-      <p
-        class="footer-legal"
-        data-footer-i18n="legal"
-        {...(dataI18n?.legal && { "data-i18n": dataI18n.legal })}
-      >
+
+    {legalText && (
+      <p class="footer-mega__legal" data-footer-i18n="legal">
         {legalText}
       </p>
-      <p
-        class="footer-copyright"
-        data-footer-i18n="copyright"
-        {...(dataI18n?.copyright && { "data-i18n": dataI18n.copyright })}
-      >
-        {copyrightText}
-      </p>
+    )}
+
+    <div class="footer-mega__bottom">
+      <div class="footer-mega__bottom-left">
+        <p class="footer-mega__copyright" data-footer-i18n="copyright">
+          {copyrightText}
+        </p>
+        <div class="footer-mega__social" aria-label="Redes sociales">
+          {SOCIAL_LINKS.map((s) => (
+            <a
+              href={s.href}
+              class="footer-mega__social-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={s.labelKey}
+            >
+              <span aria-hidden="true">{s.icon === "linkedin" ? "in" : "𝕏"}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+      <div class="footer-mega__bottom-center">
+        <div class="footer-mega__locale" role="group" aria-label="Language">
+          <span class="footer-mega__locale-label" data-footer-i18n="language">Language</span>
+          <button
+            type="button"
+            class="footer-mega__locale-btn"
+            id="footer-locale-btn"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            aria-labelledby="footer-locale-btn footer-locale-value"
+          >
+            <span id="footer-locale-value" data-footer-locale-value>English</span>
+            <span class="footer-mega__locale-chevron" aria-hidden="true">▼</span>
+          </button>
+          <div class="footer-mega__locale-dropdown" id="footer-locale-dropdown" role="listbox" aria-hidden="true">
+            <button type="button" role="option" data-locale="es" class="footer-mega__locale-option">Español</button>
+            <button type="button" role="option" data-locale="en" class="footer-mega__locale-option">English</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </footer>
 
 <style is:global>
-  /* ---- Footer: bloque principal ---- */
-  .footer-section {
+  /* ---- Mega-footer: variables y contenedor ---- */
+  .footer-mega {
+    --footer-bg: #0a203f;
+    --footer-text: #ffffff;
+    --footer-text-muted: rgba(255, 255, 255, 0.85);
+    --footer-text-dim: rgba(255, 255, 255, 0.7);
+    --footer-link-hover: #93fb4d;
+    --footer-border: rgba(255, 255, 255, 0.12);
+    --footer-focus-ring: 0 0 0 2px var(--footer-text) inset;
     width: 100%;
-    background: #0a203f;
-    color: #fff;
-    position: relative;
-    z-index: 1;
-    overflow: visible;
-    padding-top: 4rem;
+    background: var(--footer-bg);
+    color: var(--footer-text);
+    padding: 4rem 0 2rem;
+    font-family: var(--ds-font-family, system-ui, sans-serif);
+  }
+
+  .footer-mega__container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 var(--ds-space-8, 2rem);
+  }
+
+  /* ---- Top: logo + grid 7 columnas ---- */
+  .footer-mega__top {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) repeat(4, minmax(0, 1fr));
+    gap: 2rem 1.5rem;
+    align-items: start;
     padding-bottom: 3rem;
   }
 
-  .footer-container {
-    padding-left: 4.5rem;
-    padding-right: 4.5rem;
+  .footer-mega__logo {
+    grid-column: 1;
   }
 
-  /* ---- Parte superior: logo + enlaces (flex, sin columnas iguales) ---- */
-  .footer-top {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 2rem;
-    width: 100%;
-    position: relative;
+  .footer-mega__logo-link {
+    display: inline-block;
+    color: inherit;
+    text-decoration: none;
   }
-
-  .footer-logo {
-    flex-shrink: 0;
+  .footer-mega__logo-link:focus-visible {
+    outline: 2px solid var(--footer-text);
+    outline-offset: 4px;
   }
-
-  .footer-logo img {
+  .footer-mega__logo-link img {
     display: block;
     height: 40px;
     width: auto;
   }
 
-  .footer-quick-links {
-    flex-shrink: 0;
+  .footer-mega__col {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     gap: 0.75rem;
   }
 
-  .quick-links-title {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #fff;
+  .footer-mega__col-title {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--footer-text);
     margin: 0;
+    line-height: 1.3;
   }
 
-  .quick-links-list {
+  .footer-mega__col-list {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0.35rem;
+    gap: 0.5rem;
   }
 
-  .quick-links-list li {
-    margin: 0;
-  }
-
-  /* Panel entre Products y el siguiente enlace: en desktop se posiciona en el centro */
-  .footer-products-panel-li {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  @media (min-width: 769px) {
-    .footer-products-panel-li {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      width: fit-content;
-      max-width: min(560px, 48vw);
-      top: 0;
-      overflow: hidden;
-      pointer-events: none;
-    }
-    .footer-products-panel-li .footer-products-panel {
-      pointer-events: auto;
-    }
-  }
-
-  .quick-links-list a {
-    color: #fff;
+  .footer-mega__link {
+    font-size: 0.9375rem;
+    line-height: 1.45;
+    color: var(--footer-text-muted);
     text-decoration: none;
-    font-size: 0.95rem;
-    line-height: 1.4;
     transition: color 0.2s ease;
+    display: inline-block;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .footer-mega__link:hover {
+    color: var(--footer-link-hover);
+  }
+  .footer-mega__link:focus-visible {
+    outline: none;
+    box-shadow: var(--footer-focus-ring);
+    border-radius: 2px;
   }
 
-  .quick-links-list .footer-link-button {
-    appearance: none;
-    border: 0;
-    background: transparent;
-    padding: 0;
+  /* ---- Legal (opcional) ---- */
+  .footer-mega__legal {
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: var(--footer-text-dim);
+    width: 100%;
+    margin: 0 0 1.5rem;
+    padding-top: 0;
+  }
+
+  /* ---- Bottom bar ---- */
+  .footer-mega__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--footer-border);
+    padding-right: 4rem;
+  }
+
+  .footer-mega__bottom-left {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+  }
+
+  .footer-mega__bottom-left .footer-mega__social {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .footer-mega__copyright {
+    font-size: 0.8125rem;
+    color: var(--footer-text-dim);
     margin: 0;
-    color: #fff;
-    text-decoration: none;
-    font-size: 0.95rem;
-    line-height: 1.4;
-    transition: color 0.2s ease;
-    cursor: pointer;
-    font-family: inherit;
   }
 
-  .quick-links-list a:hover {
-    color: #93fb4d;
+  .footer-mega__bottom-center {
+    flex-shrink: 0;
   }
 
-  .quick-links-list .footer-link-button:hover {
-    color: #93fb4d;
+  .footer-mega__locale {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
-  .footer-products-trigger {
+  .footer-mega__locale-label {
+    font-size: 0.8125rem;
+    color: var(--footer-text-dim);
+  }
+
+  .footer-mega__locale-btn {
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
+    padding: 0.5rem 0.6rem;
+    min-height: 44px;
+    min-width: 44px;
+    font-size: 0.9375rem;
+    color: var(--footer-text);
+    background: transparent;
+    border: 1px solid var(--footer-border);
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .footer-mega__locale-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .footer-mega__locale-btn:focus-visible {
+    outline: none;
+    box-shadow: var(--footer-focus-ring);
   }
 
-  .footer-products-trigger__chevron {
+  .footer-mega__locale-chevron {
     font-size: 0.6em;
-    opacity: 0.85;
+    opacity: 0.8;
     transition: transform 0.2s ease;
   }
-
-  .footer-section.is-products-expanded .footer-products-trigger__chevron {
+  .footer-mega__locale.is-open .footer-mega__locale-chevron {
     transform: rotate(180deg);
   }
 
-  /* Panel expandible de productos: ocupa el espacio central, se expande hacia la izquierda desde "Products" */
-  .footer-products-panel {
-    flex: 0 0 auto;
-    max-width: 0;
-    max-height: 100vh; /* no colapsar altura en desktop (solo ancho) */
-    overflow: hidden;
-    align-self: stretch;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
-    transition: max-width 0.35s ease-out, max-height 0.3s ease-out;
-    min-width: 0;
+  .footer-mega__locale-dropdown {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    margin-bottom: 4px;
+    background: #0d2847;
+    border: 1px solid var(--footer-border);
+    border-radius: 8px;
+    padding: 0.25rem;
+    min-width: 140px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(4px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    z-index: 10;
+  }
+  .footer-mega__locale.is-open .footer-mega__locale-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
   }
 
-  .footer-products-panel.footer-products-panel--open {
-    max-width: min(560px, 48vw);
-  }
-
-  .footer-products-panel__inner {
+  .footer-mega__locale-option {
+    display: block;
     width: 100%;
-    min-width: 0;
-    padding: 0.25rem 0 0;
-    box-sizing: border-box;
+    padding: 0.6rem 0.75rem;
+    font-size: 0.9375rem;
+    color: var(--footer-text);
+    background: transparent;
+    border: 0;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+  }
+  .footer-mega__locale-option:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  .footer-mega__locale-option:focus-visible {
+    outline: none;
+    box-shadow: var(--footer-focus-ring);
   }
 
-  .footer-products-panel--open .footer-products-panel__inner {
-    padding-left: 0.5rem;
-    padding-right: 1rem;
-  }
-
-  /* 3 columnas: 3 + 3 + 3 ítems; espaciado uniforme */
-  .footer-products-panel__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.5rem 1.25rem;
-    align-items: start;
-    justify-items: start;
-  }
-
-  .footer-products-panel__col {
+  .footer-mega__bottom-right {
     display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-    align-items: flex-start;
-    width: 100%;
-  }
-
-  .footer-products-panel__link {
-    color: rgba(255, 255, 255, 0.9);
-    text-decoration: none;
-    font-size: 0.9rem;
-    line-height: 1.45;
-    transition: color 0.2s ease;
-    white-space: nowrap;
-  }
-
-  .footer-products-panel__link:hover {
-    color: #93fb4d;
-  }
-
-  /* ---- Parte inferior: legal + copyright ---- */
-  .footer-bottom {
-    margin-top: 2.5rem;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 0.75rem;
-    text-align: center;
+    gap: 1rem;
+    flex-wrap: wrap;
   }
 
-  .footer-legal {
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.95);
-    line-height: 1.55;
-    margin: 0;
-    max-width: 720px;
+  .footer-mega__social {
+    display: flex;
+    gap: 0.5rem;
   }
 
-  .footer-copyright {
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.9);
-    margin: 0;
+  .footer-mega__social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    color: var(--footer-text-muted);
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: color 0.2s ease, background 0.2s ease;
+  }
+  .footer-mega__social-link:hover {
+    color: var(--footer-link-hover);
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .footer-mega__social-link:focus-visible {
+    outline: none;
+    box-shadow: var(--footer-focus-ring);
   }
 
-  /* ---- Tablet ---- */
-  @media (max-width: 1024px) {
-    .footer-section {
-      padding: 3rem 0 2.5rem;
+  /* ---- Tablet: 3 columnas ---- */
+  @media (max-width: 1023px) {
+    .footer-mega__top {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem 1.25rem;
     }
-    .footer-container {
-      padding: 0 0.75rem;
+    .footer-mega__logo {
+      grid-column: 1 / -1;
     }
-    .footer-top {
-      justify-content: space-between;
-      gap: 1.5rem;
-    }
-    .footer-products-panel.footer-products-panel--open {
-      max-width: min(480px, 55vw);
-    }
-    .footer-products-panel__grid {
-      gap: 0.45rem 1rem;
-    }
-    .footer-products-panel__link {
-      font-size: 0.875rem;
-    }
-  }
-
-  /* ---- Tablet: reducir espacio y colapsar panel cerrado ---- */
-  @media (max-width: 768px) {
-    .footer-top {
-      gap: 1rem;
-    }
-    .footer-products-panel:not(.footer-products-panel--open) {
-      max-height: 0;
-      min-height: 0;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-    }
-    .footer-products-panel.footer-products-panel--open {
-      max-width: 100%;
+    .footer-mega__bottom {
+      justify-content: flex-start;
     }
   }
 
-  /* ---- Móvil: logo y enlaces en columna centrados ---- */
-  @media (max-width: 640px) {
-    .footer-section {
-      padding: 2.5rem 0 2rem;
+  /* ---- Mobile: acordeón ---- */
+  @media (max-width: 767px) {
+    .footer-mega {
+      padding: 3rem 0 1.5rem;
     }
-    .footer-container {
-      padding: 0 0.5rem;
+    .footer-mega__container {
+      padding: 0 var(--ds-space-4, 1rem);
     }
-    .footer-top {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 1rem;
-    }
-    .footer-products-panel:not(.footer-products-panel--open) {
-      max-height: 0;
-      min-height: 0;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-    }
-    .footer-products-panel.footer-products-panel--open {
-      max-width: 100%;
-    }
-    .footer-quick-links {
-      align-items: center;
-    }
-    .quick-links-list {
-      align-items: center;
-    }
-    .footer-products-panel {
-      justify-content: center;
-      width: 100%;
-    }
-    .footer-products-panel.footer-products-panel--open {
-      max-width: 100%;
-    }
-    .footer-products-panel__inner {
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
-      width: 100%;
-    }
-    .footer-products-panel__grid {
+    .footer-mega__top {
       grid-template-columns: 1fr;
-      gap: 1rem 0;
-      justify-items: center;
+      gap: 0;
+      padding-bottom: 2rem;
     }
-    .footer-products-panel__col {
+    .footer-mega__logo {
+      margin-bottom: 1rem;
+    }
+    .footer-mega__col {
+      border-bottom: 1px solid var(--footer-border);
+    }
+    .footer-mega__col-header {
+      display: flex;
       align-items: center;
-      width: auto;
+      justify-content: space-between;
+      width: 100%;
+      padding: 1rem 0;
+      min-height: 48px;
+      background: transparent;
+      border: 0;
+      font-family: inherit;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--footer-text);
+      cursor: pointer;
+      text-align: left;
     }
-    .footer-products-panel__link {
-      font-size: 0.9rem;
+    .footer-mega__col-header:hover {
+      color: var(--footer-text);
     }
-    .footer-bottom {
-      margin-top: 2rem;
+    .footer-mega__col-header:focus-visible {
+      outline: none;
+      box-shadow: var(--footer-focus-ring);
+      border-radius: 2px;
+    }
+    .footer-mega__col-header .footer-mega__col-title {
+      margin: 0;
+    }
+    .footer-mega__col-toggle {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      color: var(--footer-text-muted);
+      transition: transform 0.2s ease;
+    }
+    .footer-mega__col.is-open .footer-mega__col-toggle {
+      transform: rotate(180deg);
+    }
+    .footer-mega__col-content {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.25s ease-out;
+    }
+    .footer-mega__col.is-open .footer-mega__col-content {
+      max-height: 80vh;
+    }
+    .footer-mega__col-content .footer-mega__col-list {
+      padding-bottom: 1rem;
+    }
+    .footer-mega__col .footer-mega__col-title:not(.footer-mega__col-header .footer-mega__col-title) {
+      display: none;
+    }
+    .footer-mega__bottom {
+      flex-direction: column;
+      align-items: flex-start;
       padding-top: 1.5rem;
+      gap: 1rem;
     }
-    .footer-legal {
-      font-size: 0.75rem;
+    .footer-mega__bottom-center,
+    .footer-mega__bottom-right {
+      width: 100%;
     }
-    .footer-copyright {
-      font-size: 0.75rem;
+    .footer-mega__locale-dropdown {
+      bottom: auto;
+      top: 100%;
+      margin-bottom: 0;
+      margin-top: 4px;
+    }
+  }
+
+  /* Desktop: no mostrar botón acordeón ---- */
+  @media (min-width: 768px) {
+    .footer-mega__col-header {
+      display: none;
+    }
+    .footer-mega__col-content {
+      max-height: none;
+      overflow: visible;
     }
   }
 </style>
 
-<script define:vars={{ FOOTER_T }}>
-  function getFooterLang() {
-    try {
-      const stored = localStorage.getItem("ui-language");
-      return (stored && stored.toUpperCase() === "ES") ? "es" : "en";
-    } catch {
-      return "en";
-    }
-  }
-
-  function applyFooterTranslations(overrideLang) {
-    const lang = overrideLang !== undefined
-      ? (overrideLang === "es" || overrideLang === "ES" ? "es" : "en")
-      : getFooterLang();
-    const t = FOOTER_T[lang] || FOOTER_T.en;
-
-    const titleEl = document.querySelector(".footer-section .quick-links-title");
-    if (titleEl && titleEl.hasAttribute("data-footer-i18n")) {
-      titleEl.textContent = t.quickLinks;
-    }
-
-    const legalEl = document.querySelector(".footer-section .footer-legal");
-    if (legalEl && legalEl.hasAttribute("data-footer-i18n")) {
-      legalEl.textContent = t.legal;
-    }
-
-    const copyrightEl = document.querySelector(".footer-section .footer-copyright");
-    if (copyrightEl && copyrightEl.hasAttribute("data-footer-i18n")) {
-      copyrightEl.textContent = t.copyright;
-    }
-
-    document.querySelectorAll(".footer-section .quick-links-list [data-footer-key]").forEach((el) => {
-      const key = el.getAttribute("data-footer-key");
-      if (key && t[key]) {
-        const textSpan = el.querySelector(".footer-products-trigger__text");
-        if (textSpan) textSpan.textContent = t[key];
-        else el.textContent = t[key];
+<script define:vars={{ FOOTER_T, FOOTER_COLUMNS }}>
+  (function () {
+    function getLang() {
+      try {
+        const s = localStorage.getItem("ui-language");
+        return (s && s.toUpperCase() === "ES") ? "es" : "en";
+      } catch {
+        return "en";
       }
-    });
+    }
 
-    document.querySelectorAll(".footer-section [data-footer-product]").forEach((el) => {
-      const key = el.getAttribute("data-footer-product");
-      if (key && t[key]) el.textContent = t[key];
-    });
-  }
+    function applyFooterTranslations(lang) {
+      const t = FOOTER_T[lang] || FOOTER_T.en;
+      document.querySelectorAll("[data-footer-col-title]").forEach((el) => {
+        const id = el.getAttribute("data-footer-col-title");
+        const key = FOOTER_COLUMNS.find((c) => c.id === id)?.titleKey;
+        if (key && t[key]) el.textContent = t[key];
+      });
+      document.querySelectorAll("[data-footer-label]").forEach((el) => {
+        const key = el.getAttribute("data-footer-label");
+        if (key && t[key]) el.textContent = t[key];
+      });
+      document.querySelectorAll("[data-footer-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-footer-i18n");
+        if (key && t[key]) el.textContent = t[key];
+      });
+      const localeValue = document.getElementById("footer-locale-value");
+      if (localeValue) localeValue.textContent = lang === "es" ? t.langEs : t.langEn;
+    }
 
-  if (typeof document !== "undefined") {
-    applyFooterTranslations();
-    window.addEventListener("ui:languagechange", (e) => {
-      const lang = e.detail?.language;
-      applyFooterTranslations(lang);
-    });
+    function initLocale() {
+      const btn = document.getElementById("footer-locale-btn");
+      const dropdown = document.getElementById("footer-locale-dropdown");
+      const group = btn?.closest(".footer-mega__locale");
+      if (!btn || !dropdown || !group) return;
 
-    const productsTrigger = document.querySelector(
-      ".footer-section .footer-products-trigger",
-    );
-    const footerProductsPanel = document.getElementById("footer-products-panel");
-
-    if (productsTrigger && footerProductsPanel) {
-      const footerSection = document.querySelector(".footer-section");
-      const toggleExpanded = (expanded) => {
-        if (expanded) {
-          footerProductsPanel.classList.add("footer-products-panel--open");
-          footerProductsPanel.setAttribute("aria-hidden", "false");
-        } else {
-          footerProductsPanel.classList.remove("footer-products-panel--open");
-          footerProductsPanel.setAttribute("aria-hidden", "true");
-        }
-        productsTrigger.setAttribute("aria-expanded", String(expanded));
-        footerSection?.classList.toggle("is-products-expanded", expanded);
-      };
-
-      productsTrigger.addEventListener("click", (e) => {
-        e.preventDefault();
+      btn.addEventListener("click", (e) => {
         e.stopPropagation();
-        const isOpen = footerProductsPanel.classList.contains("footer-products-panel--open");
-        toggleExpanded(!isOpen);
+        group.classList.toggle("is-open");
+        const open = group.classList.contains("is-open");
+        btn.setAttribute("aria-expanded", String(open));
+        dropdown.setAttribute("aria-hidden", String(!open));
+        if (open) dropdown.querySelector("[data-locale]")?.focus();
       });
 
-      document.addEventListener("click", (e) => {
-        const target = e.target;
-        if (
-          target instanceof Node &&
-          !footerProductsPanel.contains(target) &&
-          !productsTrigger.contains(target)
-        ) {
-          toggleExpanded(false);
-        }
+      dropdown.querySelectorAll("[data-locale]").forEach((opt) => {
+        opt.addEventListener("click", () => {
+          const locale = opt.getAttribute("data-locale");
+          if (locale) {
+            try {
+              localStorage.setItem("ui-language", locale === "es" ? "ES" : "EN");
+            } catch (_) {}
+            applyFooterTranslations(locale);
+            group.classList.remove("is-open");
+            btn.setAttribute("aria-expanded", "false");
+            dropdown.setAttribute("aria-hidden", "true");
+            window.dispatchEvent(new CustomEvent("ui:languagechange", { detail: { language: locale === "es" ? "ES" : "EN" } }));
+          }
+        });
       });
 
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && footerProductsPanel.classList.contains("footer-products-panel--open")) {
-          toggleExpanded(false);
-        }
+      document.addEventListener("click", () => {
+        group.classList.remove("is-open");
+        btn.setAttribute("aria-expanded", "false");
+        dropdown.setAttribute("aria-hidden", "true");
       });
     }
-  }
+
+    function initAccordion() {
+      if (typeof window.matchMedia === "undefined" || window.matchMedia("(min-width: 768px)").matches) return;
+      const top = document.getElementById("footer-mega-top");
+      if (!top) return;
+      const cols = top.querySelectorAll(".footer-mega__col");
+      cols.forEach((col) => {
+        const title = col.querySelector(".footer-mega__col-title");
+        const list = col.querySelector(".footer-mega__col-list");
+        if (!title || !list) return;
+        const header = document.createElement("button");
+        header.type = "button";
+        header.className = "footer-mega__col-header";
+        const colId = col.getAttribute("data-col-id") || "";
+        header.setAttribute("aria-expanded", "false");
+        header.setAttribute("aria-controls", "footer-col-" + colId);
+        header.innerHTML = title.textContent + '<span class="footer-mega__col-toggle" aria-hidden="true">▼</span>';
+        const content = document.createElement("div");
+        content.className = "footer-mega__col-content";
+        content.id = "footer-col-" + colId;
+        content.appendChild(list);
+        col.insertBefore(header, col.firstChild);
+        col.appendChild(content);
+        header.addEventListener("click", () => {
+          const open = col.classList.toggle("is-open");
+          header.setAttribute("aria-expanded", String(open));
+        });
+      });
+    }
+
+    if (typeof document !== "undefined") {
+      document.addEventListener("DOMContentLoaded", () => {
+        applyFooterTranslations(getLang());
+        initLocale();
+        if (window.matchMedia("(max-width: 767px)").matches) {
+          initAccordion();
+        }
+        window.addEventListener("resize", () => {
+          if (window.matchMedia("(max-width: 767px)").matches) {
+            const top = document.getElementById("footer-mega-top");
+            if (top && !top.querySelector(".footer-mega__col-header")) initAccordion();
+          }
+        });
+      });
+      window.addEventListener("ui:languagechange", (e) => {
+        const lang = e.detail?.language;
+        applyFooterTranslations(lang ? (lang.toUpperCase() === "ES" ? "es" : "en") : getLang());
+      });
+    }
+  })();
 </script>
