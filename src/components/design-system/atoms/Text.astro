@@ -5,13 +5,15 @@
  * Responsive: font-size con clamp en body/subtitle.
  */
 interface Props extends astroHTML.JSX.HTMLAttributes {
-  variant?: "body" | "subtitle" | "caption" | "muted";
+  variant?: "body" | "subtitle" | "caption" | "muted" | "primary";
+  size?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl";
   as?: "p" | "span";
   class?: string;
   dataI18n?: string;
 }
 const {
   variant = "body",
+  size,
   as: Tag = "p",
   class: className = "",
   dataI18n,
@@ -20,7 +22,12 @@ const {
 ---
 
 <Tag
-  class:list={["ds-text", `ds-text--${variant}`, className]}
+  class:list={[
+    "ds-text", 
+    `ds-text--${variant}`, 
+    size && `ds-text--${size}`,
+    className
+  ]}
   data-i18n={dataI18n}
   {...rest}
 >
@@ -52,6 +59,20 @@ const {
     color: var(--ds-color-text-muted);
     opacity: 0.9;
   }
+  .ds-text--primary {
+    color: #0066cc; /* Brand blue used in jobs page */
+  }
+
+  /* Explicit Sizes */
+  .ds-text--xs { font-size: var(--ds-font-size-xs, 0.95rem); }
+  .ds-text--sm { font-size: var(--ds-font-size-sm, 1rem); }
+  .ds-text--md { font-size: var(--ds-font-size-md, 1.05rem); }
+  .ds-text--lg { font-size: var(--ds-font-size-lg, 1.1rem); }
+  .ds-text--xl { font-size: var(--ds-font-size-xl, 1.25rem); }
+  .ds-text--2xl { font-size: var(--ds-font-size-2xl, 1.45rem); }
+  .ds-text--3xl { font-size: var(--ds-font-size-3xl, 2rem); }
+  .ds-text--4xl { font-size: 2.5rem; }
+
   @media (max-width: 639px) {
     .ds-text--body,
     .ds-text--subtitle {

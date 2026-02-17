@@ -1,9 +1,11 @@
 ---
 import NavbarSimple from '../../components/NavbarSimple.astro';
+import ProductsPanel from '../../components/productsPanel.astro';
 import Footer from '../../components/design-system/organisms/Footer.astro';
 import Title from '../../components/design-system/atoms/Title.astro';
 import Text from '../../components/design-system/atoms/Text.astro';
 import Button from '../../components/design-system/atoms/Button.astro';
+import Divider from '../../components/design-system/atoms/Divider.astro';
 import '../../components/design-system/tokens.css';
 import '../../styles/navbar.css';
 import { AlaizaAssistant } from "../../components/AlaizaAssistant";
@@ -130,8 +132,8 @@ const jobOpenings = [
 
 const heroCopy = {
   badge: {
-    en: "Careers at Zelify",
-    es: "Carreras en Zelify",
+    en: "> Careers at Zelify",
+    es: "> Carreras en Zelify",
   },
   title: {
     en: "Build the infrastructure that powers instant money movement in Latin America.",
@@ -155,6 +157,11 @@ const heroHighlights = [
   { value: "2018", label: { en: "Founded", es: "Fundada" } },
   { value: "10+", label: { en: "Countries connected", es: "Países conectados" } },
   { value: jobOpenings.length.toString(), label: { en: "Open roles today", es: "Vacantes activas" } },
+];
+
+const infoCards = [
+  { value: "2018", label: { en: "FOUNDED", es: "FUNDADA" } },
+  { value: "10+", label: { en: "COUNTRIES CONNECTED", es: "PAÍSES CONECTADOS" } },
 ];
 
 const openRolesCopy = {
@@ -231,6 +238,7 @@ const generalApplicationCopy = {
 const jobPageCopy = {
   hero: heroCopy,
   stats: heroHighlights,
+  infoCards: infoCards,
   openRoles: openRolesCopy,
   culture: culturePillars,
   jobs: jobOpenings,
@@ -248,7 +256,7 @@ const jobPageCopy = {
   const JOB_PAGE_COPY = JSON.parse(document.getElementById('jobs-page-copy')?.textContent ?? '{}');
   const fallbackLang = 'en';
   const supportedLangs = ['en', 'es'];
-  const tagClass = 'job-tag';
+  const tagClass = 'job-tag-pill';
 
   const resolveLang = (rawLang) => {
     const normalized = (rawLang || fallbackLang).toLowerCase();
@@ -282,7 +290,7 @@ const jobPageCopy = {
 
   const updateJobsPage = (rawLang) => {
     const lang = resolveLang(rawLang);
-    const { hero, stats, openRoles, jobs, culture, general } = JOB_PAGE_COPY;
+    const { hero, stats, infoCards, openRoles, jobs, culture, general } = JOB_PAGE_COPY;
 
     const heroBadge = document.querySelector('[data-i18n="hero.badge"]');
     if (heroBadge) heroBadge.textContent = translate(hero.badge, lang);
@@ -304,15 +312,20 @@ const jobPageCopy = {
       if (label) label.textContent = translate(stat.label, lang);
     });
 
+    infoCards?.forEach((card, index) => {
+      const label = document.querySelector(`[data-info-card-index="${index}"]`);
+      if (label) label.textContent = translate(card.label, lang);
+    });
+
     const openRolesLabel = document.querySelector('[data-i18n="openRoles.label"]');
     if (openRolesLabel) openRolesLabel.textContent = translate(openRoles.label, lang);
 
-    const openRolesTitle = document.querySelector('[data-i18n="openRoles.title"]');
-    if (openRolesTitle) openRolesTitle.textContent = translate(openRoles.title, lang);
+    const openRolesCount = document.querySelector('[data-i18n="openRoles.count"]');
+    if (openRolesCount) {
+        openRolesCount.textContent = `${jobs.length} ${translate(openRoles.label, lang).toLowerCase()}`;
+    }
 
-    const openRolesDescription = document.querySelector('[data-i18n="openRoles.description"]');
-    if (openRolesDescription) openRolesDescription.textContent = translate(openRoles.description, lang);
-
+    // Update CTA buttons
     document.querySelectorAll('[data-job-card-cta]').forEach((node) => {
       node.textContent = translate(openRoles.cardCta, lang);
     });
@@ -390,138 +403,172 @@ const jobPageCopy = {
     />
   </head>
   <body class="demo-page">
-    <NavbarSimple/>
+    <NavbarSimple />
+    <ProductsPanel />
 
     <main class="jobs-main">
       <!-- Hero Section -->
       <section class="jobs-hero">
-        <div class="jobs-container text-center">
-          <Text variant="subtitle" class="hero-badge" data-i18n="hero.badge">
-            {heroCopy.badge[defaultLanguage]}
-          </Text>
-          <Title level={1} variant="hero" class="hero-title text-balance" data-i18n="hero.title" set:html={heroCopy.title[defaultLanguage]} />
-          <Text variant="subtitle" class="hero-description text-balance" data-i18n="hero.description">
-            {heroCopy.description[defaultLanguage]}
-          </Text>
-
-          <div class="hero-actions">
-            <Button
-              href="#jobs-list"
-              variant="primary"
-              dataI18n="hero.primaryCta"
-            >
-              {heroCopy.primaryCta[defaultLanguage]}
-            </Button>
-            <Button
-              href="mailto:jobs@zelify.com"
-              variant="secondary"
-              dataI18n="hero.secondaryCta"
-            >
-              {heroCopy.secondaryCta[defaultLanguage]}
-            </Button>
+        <div class="jobs-container">
+          <div class="hero-top-row">
+            <Text variant="subtitle" class="hero-badge" data-i18n="hero.badge">
+              {heroCopy.badge[defaultLanguage]}
+            </Text>
+            <Title level={1} variant="hero" class="hero-title text-balance" data-i18n="hero.title" set:html={heroCopy.title[defaultLanguage]} />
           </div>
         </div>
 
-        <div class="jobs-container hero-stats-grid">
-          {heroHighlights.map((item, index) => (
-            <div class="stat-item">
-              <p class="stat-value">{item.value}</p>
-              <Text variant="caption" class="stat-label" data-stat-label-index={index}>
-                {item.label[defaultLanguage]}
-              </Text>
-            </div>
-          ))}
+        <div class="hero-image-container">
+            <img src="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/background-images/jobs-background.png" alt="Zelify Team" class="hero-image" />
         </div>
+        
+        
+
+        <div class="jobs-container">
+          <div class="hero-bottom-row">
+            <Text variant="primary" size="2xl" class="hero-description text-balance" data-i18n="hero.description">
+              {heroCopy.description[defaultLanguage]}
+            </Text>
+
+            <div class="hero-actions">
+              <Button
+                href="#jobs-list"
+                variant="primary"
+                dataI18n="hero.primaryCta"
+              >
+                {heroCopy.primaryCta[defaultLanguage]}
+              </Button>
+              <Button
+                href="mailto:jobs@zelify.com"
+                variant="secondary"
+                dataI18n="hero.secondaryCta"
+              >
+                {heroCopy.secondaryCta[defaultLanguage]}
+              </Button>
+            </div>
+          </div>
+        </div>
+
+
+
+
       </section>
 
-      <!-- Open Roles Section -->
-      <section id="jobs-list" class="jobs-section bg-gray">
+      <!-- Info Cards Section -->
+      <section class="jobs-section bg-white">
         <div class="jobs-container">
-          <div class="section-header">
-            <Text variant="caption" class="section-badge" data-i18n="openRoles.label">
-              {openRolesCopy.label[defaultLanguage]}
-            </Text>
-            <Title level={2} variant="section" class="section-title" data-i18n="openRoles.title">
-              {openRolesCopy.title[defaultLanguage]}
-            </Title>
-            <Text variant="body" class="section-description text-balance" data-i18n="openRoles.description">
-              {openRolesCopy.description[defaultLanguage]}
-            </Text>
+          <div class="info-cards-grid">
+            {infoCards.map((card, index) => (
+              <div class="info-card">
+                <Title level={3} variant="card" class="info-card-title">{card.value}</Title>
+                <Text variant="caption" class="info-card-text" data-info-card-index={index}>
+                  {card.label[defaultLanguage]}
+                </Text>
+              </div>
+            ))}
           </div>
 
-          <div class="jobs-grid">
+        </div>
+      </section>
+      <section>
+        <Divider />
+        <Divider vertical={true} />
+      </section>
+      
+      <!-- Open Roles Section -->
+      <section id="jobs-list" class="jobs-section bg-white">
+        <div class="jobs-container">
+          <div class="section-header-row">
+            <Text variant="subtitle" class="hero-badge" data-i18n="openRoles.label">
+              {openRolesCopy.label[defaultLanguage]}
+            </Text>
+            <Title level={2} variant="section" class="section-count-title" data-i18n="openRoles.count">
+              {jobOpenings.length} {openRolesCopy.label[defaultLanguage].toLowerCase()}
+            </Title>
+          </div>
+
+          <div class="jobs-grid-list">
             {jobOpenings.map((job) => (
-              <a
-                href={`/jobs/${job.slug}`}
-                class="job-card group"
+              <div
+                class="job-listing-row group"
                 data-job-card={job.slug}
-                data-job-link
               >
-                <div class="job-card-content">
-                  <div class="job-meta">
-                    <span class="meta-item">
-                       <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M17.657 16.657 13.414 20.9a2 2 0 0 1-2.828 0l-4.243-4.243a8 8 0 1 1 11.314 0Z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M15 11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                      </svg>
-                      <span data-job-field="location">{job.location[defaultLanguage]}</span>
-                    </span>
-                    <span class="meta-item">
-                      <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M2 7h20M2 12h20M2 17h20M5 7V5h14v2M5 17v2h14v-2" />
-                      </svg>
-                      <span data-job-field="type">{job.type[defaultLanguage]}</span>
-                    </span>
-                  </div>
-
-                  <Title level={3} variant="card" class="job-title" data-job-field="title">
-                    {job.title[defaultLanguage]}
-                  </Title>
-                  <Text variant="body" class="job-summary" data-job-field="summary">
-                    {job.summary[defaultLanguage]}
-                  </Text>
-
-                  <div class="job-tags" data-job-tags>
-                    {job.tags[defaultLanguage].map((tag) => (
-                      <span class="job-tag">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                <div class="job-info-card">
+                    <div class="job-meta-top">
+                       <div class="meta-item">
+                         <img src="/icons/jobs/location.svg" alt="" class="meta-icon" />
+                         <Text variant="subtitle" class="job-meta-text">
+                           <span data-job-field="location">{job.location[defaultLanguage]}</span>
+                         </Text>
+                       </div>
+                       
+                       <div class="meta-item">
+                         <img src="/icons/jobs/clock.svg" alt="" class="meta-icon" />
+                         <Text variant="subtitle" class="job-meta-text">
+                           <span data-job-field="type">{job.type[defaultLanguage]}</span>
+                         </Text>
+                       </div>
+                    </div>
+                    
+                    <Title level={3} variant="card" class="job-title-row" data-job-field="title">
+                      {job.title[defaultLanguage]}
+                    </Title>
+                    
+                    <div class="job-tags-row" job-tags>
+                      {job.tags[defaultLanguage].map((tag) => (
+                        <span class="job-tag-pill">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                 </div>
-
-                <div class="job-cta">
-                  <span data-job-card-cta>{openRolesCopy.cardCta[defaultLanguage]}</span>
-                  <svg
-                    class="cta-icon"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.8"
-                    viewBox="0 0 24 24"
-                  >
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" />
-                  </svg>
+                  
+                <div class="job-description-side">
+                     <Text variant="subtitle" class="job-summary-row" data-job-field="summary">
+                      {job.summary[defaultLanguage]}
+                    </Text>
+                    <div class="job-cta-row">
+                      <Button 
+                        href={`/jobs/${job.slug}`} 
+                        variant="secondary" 
+                        size="md"
+                        data-job-link
+                      >
+                        <span data-job-card-cta>{openRolesCopy.cardCta[defaultLanguage]}</span>
+                      </Button>
+                    </div>
                 </div>
-              </a>
+              </div>
             ))}
           </div>
         </div>
       </section>
+
+      <Divider />
+      <Divider vertical={true} />
 
       <!-- Culture Section -->
       <section class="jobs-section">
         <div class="jobs-container">
           <div class="culture-grid">
-            {culturePillars.map((pillar, index) => (
-              <div class="culture-item">
-                <Text variant="caption" class="culture-title" data-culture-title={index}>
-                  {pillar.title[defaultLanguage]}
-                </Text>
-                <Text variant="body" data-culture-copy={index}>
-                  {pillar.copy[defaultLanguage]}
-                </Text>
-              </div>
-            ))}
+            {culturePillars.map((pillar, index) => {
+              const icons = [
+                '/icons/alaiza/behaviorAnalysis.svg',
+                '/icons/jobs/user-lapt.svg',
+                '/icons/jobs/book.svg'
+              ];
+              return (
+                <div class="culture-item">
+                  <img src={icons[index]} alt="" class="culture-icon" />
+                  <Title level={3} variant="card" class="culture-title" data-culture-title={index}>
+                    {pillar.title[defaultLanguage]}
+                  </Title>
+                  <Text variant="subtitle" class="hero-description" data-culture-copy={index}>
+                    {pillar.copy[defaultLanguage]}
+                  </Text>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -529,26 +576,29 @@ const jobPageCopy = {
       <!-- General Application -->
       <section class="jobs-section pb-24">
         <div class="jobs-container">
-            <div class="general-app-card text-center">
-              <Text variant="caption" class="section-badge" data-i18n="general.prompt">
-                {generalApplicationCopy.prompt[defaultLanguage]}
-              </Text>
-              <Title level={3} variant="section" class="general-title" data-i18n="general.title">
-                {generalApplicationCopy.title[defaultLanguage]}
-              </Title>
-              <Text variant="subtitle" class="general-description text-balance" data-i18n="general.description">
-                {generalApplicationCopy.description[defaultLanguage]}
-              </Text>
-              <Button
-                href="mailto:jobs@zelify.com"
-                variant="primary"
-                dataI18n="general.button"
-              >
-                {generalApplicationCopy.button[defaultLanguage]}
-              </Button>
+            <div class="general-app-card">
+              <div class="content-wrapper">
+                <Title level={2} variant="hero" class="general-prompt" data-i18n="general.prompt">
+                  {generalApplicationCopy.prompt[defaultLanguage]}
+                </Title>
+                <Title level={3} variant="card" class="general-title" data-i18n="general.title">
+                  {generalApplicationCopy.title[defaultLanguage]}
+                </Title>
+                <Text variant="primary" size="2xl" class="general-description" data-i18n="general.description">
+                  {generalApplicationCopy.description[defaultLanguage]}
+                </Text>
+                <Button
+                  href="mailto:jobs@zelify.com"
+                  variant="secondary"
+                  dataI18n="general.button"
+                >
+                  {generalApplicationCopy.button[defaultLanguage]}
+                </Button>
+              </div>
             </div>
         </div>
       </section>
+
     </main>
 
     <Footer />
@@ -556,13 +606,21 @@ const jobPageCopy = {
   </body>
 </html>
 
-<style>
+<style is:global>
+  @font-face {
+    font-family: "NataSans";
+    src: url("/fonts/NataSans-VariableFont_wght.ttf") format("truetype");
+    font-weight: 100 900;
+    font-display: swap;
+  }
+
   html, body {
     margin: 0;
     padding: 0;
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: "NataSans", system-ui, sans-serif;
     color: #0d1117;
     background-color: #fff;
+
   }
 
   .jobs-main {
@@ -588,6 +646,28 @@ const jobPageCopy = {
   .jobs-hero {
     padding-top: 8rem;
     padding-bottom: 4rem;
+    background-color: #f3f4f6;
+  }
+
+  .hero-top-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 4rem;
+  }
+
+  @media (min-width: 768px) {
+    .hero-top-row {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .hero-top-row .hero-title {
+        max-width: 50%;
+        text-align: left;
+        margin-left: auto;
+    }
   }
 
   .hero-badge {
@@ -595,32 +675,63 @@ const jobPageCopy = {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    margin-bottom: 1.5rem;
-    display: block;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
   }
 
   .hero-title {
-    margin-bottom: 2rem;
+    margin: 0;
+    font-size: 3.5em;
+  }
+
+  .hero-image-container {
+    width: 100%;
+    margin-bottom: 4rem;
+    overflow: hidden;
+  }
+
+  .hero-image {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .hero-bottom-row {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-left: auto;
+      max-width: 100%;
+      text-align: left;
+  }
+
+  @media (min-width: 768px) {
+      .hero-bottom-row {
+        align-items: flex-start;
+        max-width: 50%;
+        text-align: left;
+      }
   }
 
   .hero-description {
-    max-width: 48rem; /* 3xl */
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 3rem;
+    width: 100%;
+    margin-bottom: 2rem;
   }
+
 
   .hero-actions {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
   }
 
   @media (min-width: 640px) {
     .hero-actions {
-      flex-direction: row;
+        width: auto;
+        flex-direction: row;
     }
   }
 
@@ -654,7 +765,7 @@ const jobPageCopy = {
 
   /* Sections General */
   .jobs-section {
-    padding: 6rem 0;
+    padding: 2.5rem 0;
   }
 
   .bg-gray {
@@ -725,12 +836,6 @@ const jobPageCopy = {
     margin-bottom: 1.5rem;
   }
 
-  .meta-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
   .meta-icon {
     height: 1rem;
     width: 1rem;
@@ -748,6 +853,7 @@ const jobPageCopy = {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+    text-transform: lowercase;
   }
 
   .job-tag {
@@ -755,7 +861,7 @@ const jobPageCopy = {
     color: #4b5563;
     font-size: 0.75rem;
     font-weight: 600;
-    text-transform: uppercase;
+    text-transform: lowercase;
     letter-spacing: 0.025em;
     padding: 0.25rem 0.75rem;
     border-radius: 9999px;
@@ -780,20 +886,294 @@ const jobPageCopy = {
     transform: translateX(4px);
   }
 
+  .bg-white {
+    background-color: #fff;
+  }
+
+  .info-cards-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: flex-end; /* Align right on mobile */
+  }
+
+  @media (min-width: 768px) {
+    .info-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: fit-content;
+      margin-left: auto;
+    }
+  }
+
+  .info-card {
+    background: #f3f4f6; /* Subtle gray */
+    padding: 3.5rem;
+    border-radius: 14px;
+    border: none;
+    text-align: center; /* Center content */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* Fill grid cell */
+    box-sizing: border-box;
+  }
+
+  .info-card-title {
+    margin-bottom: 0.5rem;
+    color: var(--ds-color-text, #00223e);
+    font-weight: 600;
+    font-size: 4rem;
+  }
+  
+  .info-card-text {
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--ds-color-text-muted, #213f8c);
+  }
+
+  /* Open Roles List Layout */
+  .section-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end; /* Align bottom */
+      margin-bottom: 3rem;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 1rem;
+  }
+  
+  .section-count-title {
+      font-size: 3rem;
+      font-weight: 500;
+      color: #0b132b;
+      margin: 0;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      text-align: right;
+  }
+
+  .jobs-grid-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+  }
+
+  .job-listing-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-decoration: none;
+      width: 100%;
+      /* background: transparent; - explicit */
+  }
+
+  .job-info-card {
+      flex: 0 0 45%;
+      background: #f3f4f6;
+      border-radius: 25px;
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: background-color 0.2s ease;
+  }
+
+  .job-info-card:hover {
+      background: #e5e7eb;
+  }
+
+  .job-meta-top {
+      margin-bottom: 0px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem; /* Space between Location and Type groups */
+      align-items: center;
+  }
+
+  .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+  }
+
+  .meta-icon {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+      opacity: 0.8;
+  }
+
+  .job-meta-text {
+      color: #000000;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+  }
+  
+  /* .meta-separator removed */
+
+  .job-title-row {
+      font-size: 1.75rem; 
+      color: #00223e;
+      margin: 0;
+      display: block;
+      line-height: 1.2;
+  }
+
+  .job-tags-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+  }
+
+  .job-tag-pill {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      background-color: transparent;      
+      border: 1px solid #000;      
+      border-radius: 14px;
+      font-size: 0.75rem;
+      font-weight: 200;
+      color: #0066cc;
+      text-transform: capitalize;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+  }
+
+  .job-description-side {
+      flex: 1;
+      padding-left: 3rem;
+      padding-right: 1rem;
+      display: flex;
+      flex-direction: column; /* Stack text and button */
+      justify-content: center;
+      align-items: flex-start; /* Align left */
+      gap: 1.5rem; /* Space between text and button */
+      min-height: 100%;
+  }
+
+  .job-summary-row {
+      color: #0066cc;
+      line-height: 1.6;
+      font-size: 1.5rem;
+      font-weight: 400;
+      width: 100%; 
+  }
+
+  .job-cta-row {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start; /* Align button left */
+      padding-left: 0;
+      width: 100%;
+  }
+
+  .job-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 2rem;
+      background: #93fb4d; /* Green accent */
+      color: #00223e;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      white-space: nowrap;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .job-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+
   /* Culture Section */
   .culture-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+      margin-top: 3rem;
+  }
+
+  .culture-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      text-align: center;
+  }
+
+  .culture-icon {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      margin-bottom: 0.5rem;
+  }
+
+  /* No icon styles needed if using button component inside, 
+     but .cta-icon-row was removed from markup so we can remove CSS too or leave as dead code for now */
+
+  @media (max-width: 768px) {
+      .section-header-row {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 1rem;
+      }
+      
+      .job-listing-row {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 1.5rem;
+      }
+      
+      .job-info-card {
+          width: 100%;
+          flex: 0 0 auto;
+          box-sizing: border-box;
+      }
+      
+      .job-description-side {
+          padding-left: 0;
+          padding-right: 0;
+          width: 100%;
+          align-items: flex-start;
+      }
+      
+      .job-cta-row {
+          display: flex; /* Show on mobile */
+          justify-content: flex-start;
+          margin-top: 1rem;
+      }
+      
+      .section-count-title {
+          text-align: left;
+          font-size: 2.5rem;
+      }
+  }
+  
+  .culture-grid {
     display: grid;
-    gap: 3rem;
+    grid-template-columns: 1fr; /* Single column on mobile */
+    gap: 2rem;
   }
 
   @media (min-width: 768px) {
     .culture-grid {
       grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
     }
   }
 
   .culture-title {
-    color: #0066cc;
+    color: #00223e;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -801,12 +1181,32 @@ const jobPageCopy = {
     display: block;
   }
 
+
+
   /* General Application Card */
   .general-app-card {
     background-color: #f9fafb;
-    border: 1px solid #f3f4f6;
-    border-radius: 1.5rem;
-    padding: 3rem;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: 4rem 0;
+    border-top: 1px solid #f3f4f6;
+    border-bottom: 1px solid #f3f4f6;
+    text-align: left;
+  }
+
+  .content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    width: 100%;
+  }
+
+  .general-prompt {
+    margin-bottom: 1rem;
   }
 
   .general-title {
@@ -814,9 +1214,9 @@ const jobPageCopy = {
   }
 
   .general-description {
-    max-width: 42rem; /* 2xl */
-    margin-left: auto;
-    margin-right: auto;
+    max-width: 42rem;
+    margin-left: 0;
+    margin-right: 0;
     margin-bottom: 2.5rem;
   }
 </style>
