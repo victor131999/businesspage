@@ -926,7 +926,7 @@ export default function IdentityCard({ isDemoEnabled = true }: { isDemoEnabled?:
 
                                 {/* Video de Verificación Facial */}
                                 <video
-                                    src="https://zelify-proposals-pdf-prod.s3.us-east-1.amazonaws.com/video/faceverification.mp4"
+                                    src="https://flowchart-diagrams-zelify.s3.us-east-1.amazonaws.com/videos/faceverification.mp4"
                                     autoPlay
                                     playsInline
                                     muted
