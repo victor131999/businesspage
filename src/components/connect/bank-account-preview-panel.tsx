@@ -387,11 +387,6 @@ const banksByCountry: Record<BankAccountCountry, Bank[] | "coming_soon"> = {
       name: "Policía Nacional",
       logo: "https://www.cpn.fin.ec/frontend/web/images/logo_cpn.jpg",
     },
-    {
-      id: "ec-coop-cacpeco",
-      name: "CACPECO",
-      logo: "https://www.cacpeco.com/wp-content/uploads/2025/06/cacpecologo.png",
-    },
   ],
   mexico: [
     {
